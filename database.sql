@@ -78,31 +78,39 @@ drop sequence purchase_detail_seq;
 create sequence purchase_detail_seq;
 
 
-
-create table training_detail( ------훈련서비스 상세
+-- training_detail 훈련서비스 상세
+create table training_detail( 
 training_no references training(training_no) on delete cascade,
 training_detail_pet_no number not null
 ); 
 
-create table schedule(-------스케쥴
+-- 스케쥴
+drop table schedule;
+create table schedule(
 schedule_no number primary key,
 trainer_no references trainer(trainer_no) on delete cascade,
 schedule_date date
 );
 
+drop sequence schedule_seq;
 create sequence schedule_seq;
 
-create table linked_list(-------연결테이블
+-- linked_list 연결테이블
+drop table linked_list;
+create table linked_list(
 training_no references training(training_no) on delete cascade,
 trainer_no references trainer(trainer_no) on delete cascade
 );
 
-create table pet_img(-------반려동물 이미지
+-- pet_img 반려동물 이미지
+drop table pet_img;
+create table pet_img(
 files_no references files(files_no) on delete cascade,
 pet_no references pet(pet_no) on delete cascade
 );
 
-create table trainer(-------훈련사
+-- trainer 훈련사
+create table trainer(
 trainer_no number primary key,
 member_id references member(member_id) on delete cascade,
 apply_no references apply(apply_no) on delete cascade,
@@ -110,9 +118,12 @@ trainer_profile varchar2(90) not null,
 trainer_profile_content varchar2(4000) not null
 );
 
+drop sequence trainer_seq;
 create sequence trainer_seq;
 
-create table review(-------별점
+
+-- review 후기
+create table review(
 review_no number primary key,
 training_no references training(training_no) on delete cascade,
 trainer_no references trainer(trainer_no) on delete cascade,
@@ -124,14 +135,28 @@ review_updatetime date,
 review_good number not null
 );
 
-create sequence review_no;
+drop sequence review_seq;
+create sequence review_seq;
 
+-- admin 관리자
+drop table admin;
 create table admin(
-
 admin_id varchar2(20)  primary key,
 admin_pw varchar2(16)  not null
 );
 
+
+-- trainer_like 훈련사 찜
+drop table trainer_like;
+create table trainer_like(
+member_id references member(member_id) on delete cascade not null,
+trainer_no references trainer(trainer_no) on delete cascade not null,
+trainer_like_date date default sysdate,
+primary key(member_id, trainer_no)
+);
+
+-- apply 훈련사 지원
+drop table apply;
 create table apply(
 apply_no number primary key,
 member_id varchar2(20) not null,
@@ -144,6 +169,7 @@ apply_status char(6)not null
 );
 
 create sequence apply_seq;
+drop sequence apply_seq;
 
 
 
