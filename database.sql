@@ -1,3 +1,22 @@
+-- member 회원
+drop table member;
+create table member(
+member_id varchar2(20) primary key check(regexp_like(member_id,'^[a-z][a-zA-Z0-9!@#$-_]{4,19}$')),
+member_pw varchar2(16) not null check(regexp_like(member_pw, '^[a-zA-Z0-9!@#$]{8,16}$')),
+member_name varchar2(21) not null check(regexp_like(member_name, '^[a-zA-Z가-힣]{2,7}$')),
+member_email varchar2(30) not null check(regexp_like(member_email,'@')),
+member_tel char(11) not null check(regexp_like(member_tel,'^01[016789][1-9]\d{6,7}$')),
+member_post varchar2(6) not null check(regexp_like(member_post, '^\d{5,6}$')),
+member_base_address varchar2(150) not null,
+member_detail_address varchar2(150),
+member_birth date not null,
+member_gender char(6) not null check(member_gender in('남자','여자')),
+member_status char(1) default 'N' check(member_status in('Y','N')),
+member_point number default 0 check(member_point >=0),
+member_joindate date default sysdate,
+member_goodbye char(1) default 'N' check(member_goodbye in('Y','N')),
+member_goodbyedate date
+); 
 
 -- pet 반려동물
 drop table pet;
