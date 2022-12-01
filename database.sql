@@ -132,3 +132,18 @@ admin_id varchar2(20)  primary key,
 admin_pw varchar2(16)  not null
 );
 
+create table apply(
+apply_no number primary key,
+member_id varchar2(20) not null,
+apply_date date default sysdate not null,
+apply_motive varchar2(4000)not null,
+apply_smoke char(1)not null,
+apply_active varchar2(100) not null,
+apply_license varchar2(100),
+apply_status char(6)not null
+);
+
+create sequence apply_seq;
+
+
+
