@@ -6,7 +6,7 @@ pet_no number primary key,
 member_id references member(member_id) on delete cascade,
 pet_type char(9) not null,
 pet_name varchar2(30) not null,
-pet_gender char(1) not null check(pet_gender in('y','n')),
+pet_gender char(1) not null check(pet_gender in('Y','N')),
 pet_breed varchar2(90) not null,
 pet_birth date,
 pet_weight number
