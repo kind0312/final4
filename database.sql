@@ -132,3 +132,12 @@ admin_id varchar2(20)  primary key,
 admin_pw varchar2(16)  not null
 );
 
+-- trainer_like 훈련사 찜
+drop table trainer_like;
+create table trainer_like(
+member_id references member(member_id) on delete cascade not null,
+trainer_no references trainer(trainer_no) on delete cascade not null,
+trainer_like_date date default sysdate,
+primary key(member_id, trainer_no)
+);
+
