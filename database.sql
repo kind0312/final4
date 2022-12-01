@@ -215,7 +215,7 @@ files_size number not null,
 files_date date DEFAULT sysdate not null
 );
 
-drop SEQUENCE files;
+drop SEQUENCE files_seq;
 create SEQUENCE files_seq; --files테이블의 시퀀스번호
 
 --채팅 이미지 연결 테이블
@@ -232,3 +232,31 @@ create table member_img(
 files_no REFERENCES files(files_no) on DELETE CASCADE ,
 member_id REFERENCES member(member_id) on DELETE CASCADE
 );
+
+-- 포인트 사용내역 point
+drop table point;
+create table point(
+point_no number primary key,
+member_id references member(member_id) on delete cascade,
+point_status char(6) not null check(point_status in('구매','사용'),
+point_price number not null,
+point_date date default sysdate
+);
+
+drop sequence point_seq;
+create sequence point_seq;
+
+--항목 item
+drop table item;
+create table item(
+item_no number primary key,
+item_name varchar2(30) not null,
+item_price number not null,
+item_date date default sysdate not null,
+item_changedate date default sysdate not null,
+item_disabled char(1) not null
+);
+
+drop sequence item_seq;
+create sequence item_seq;
+ 
