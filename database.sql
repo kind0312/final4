@@ -171,5 +171,64 @@ apply_status char(6)not null
 create sequence apply_seq;
 drop sequence apply_seq;
 
+ --채팅유저 테이블
+drop table chat_user;
+create table chat_user(
+member_id REFERENCES member(member_id) ON DELETE SET NULL UNIQUE
+);
+
+--채팅방 테이블
+drop table room;
+create table room( 
+room_no number PRIMARY key,
+member_id REFERENCES member(member_id) ON DELETE SET NULL,
+room_create_at date DEFAULT sysdate not null,
+room_update_at date
+);
+
+drop SEQUENCE room_seq;
+create SEQUENCE room_seq;
 
 
+--채팅 테이블
+drop table chat;
+create table chat ( 
+chat_no number PRIMARY key,
+room_no REFERENCES room(room_no) on DELETE CASCADE,
+member_id REFERENCES chat_user(member_id) on DELETE CASCADE,
+chat_create_at date DEFAULT sysdate not null,
+chat_message VARCHAR2(3000) not null,
+chat_message_status CHAR(1) default null
+);
+
+drop SEQUENCE chat_seq;
+create SEQUENCE chat_seq;
+
+
+--첨부파일 테이블
+drop table files;
+create table files(
+files_no number PRIMARY KEY,
+files_original_name varchar2(256) not null,
+files_type varchar2(30) not null,
+files_size number not null,
+files_date date DEFAULT sysdate not null
+);
+
+drop SEQUENCE files;
+create SEQUENCE files_seq; --files테이블의 시퀀스번호
+
+--채팅 이미지 연결 테이블
+drop table chat_img;
+create table chat_img( 
+files_no REFERENCES files(files_no) on DELETE set null,
+chat_no REFERENCES chat(chat_no) on DELETE CASCADE
+);
+
+
+--회원 프로필 이미지 연결 테이블
+drop table member_img;
+create table member_img( 
+files_no REFERENCES files(files_no) on DELETE CASCADE ,
+member_id REFERENCES member(member_id) on DELETE CASCADE
+);
