@@ -260,3 +260,18 @@ item_disabled char(1) not null
 drop sequence item_seq;
 create sequence item_seq;
  
+-- 포인트 구매내역 point_purchase
+drop table point_purchase;
+create table point_purchase(
+point_purchase_no number primary key,
+member_id references member(member_id) on delete set null,
+item_no references item(item_no) on delete set null,
+point_purchase_price number not null check(point_purchase_price >= 0),
+point_purchase_date date default sysdate,
+point_purchase_payment char(15) not null check(point_purchase_payment in('카카오페이')),
+point_purchase_status char(6) not null check(point_purchase_status in ('승인', '취소')) ,
+tid varchar2(300) not null
+);
+
+drop sequence point_purchase_seq;
+create sequence point_purchase_seq;
