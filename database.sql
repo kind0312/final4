@@ -107,3 +107,9 @@ review_good number not null
 
 create sequence review_no;
 
+create table admin(
+
+admin_id varchar2(20)  primary key,
+admin_pw varchar2(16)  not null
+);
+
