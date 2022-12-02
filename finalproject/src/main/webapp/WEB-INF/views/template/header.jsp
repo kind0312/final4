@@ -135,7 +135,7 @@
 	                  <div class="dropdown-menu">
 	                    <a class="dropdown-item" href="#">예약하기</a>
 	                    <div class="dropdown-divider"></div><!-- 중간 중간 선으로 구분하는 것-->
-	                    <a class="dropdown-item" href="#">목록보기</a>
+	                    <a class="dropdown-item" href="/trainer/list">훈련사 프로필 보기</a>
 	                  </div>
 	                </li>
 	                <li class="nav-item">
