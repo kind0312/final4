@@ -100,6 +100,13 @@
 			    font-size: 1.1rem;
  			    font-weight: bold;
 			}
+			a {
+				color: #f8f9fa;
+				text-decoration: none;
+			}
+			a:hover {
+				color: #dfe6e9;
+			}
 		</style>
 		
 		<script type="text/javascript"> 
