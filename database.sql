@@ -87,6 +87,7 @@ pet_breed varchar2(90) not null,
 pet_birth date,
 pet_weight number
 );
+alter table pet add pet_neutralization varchar2(3)  not null;
 
 drop sequence pet_seq;
 create sequence pet_seq;
