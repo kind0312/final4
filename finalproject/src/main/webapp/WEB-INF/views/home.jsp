@@ -1,25 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<h1>test</h1>
-	<h1>test2</h1>
-	<h1>test3</h1>
-	<h1>test4</h1>
-	<h1>test5</h1>
-	<h1>test6</h1>
-	<h1>test7</h1>
-	<h1>test8</h1>
-	<h1>test9</h1>
-  <h1>test10</h1>
-  <h1>test11</h1>
-  <h1>민재 브랜치 테스트!</h1>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<jsp:include page="/WEB-INF/views/template/header.jsp">
+	<jsp:param value="CareMainPage" name="title"/>
+</jsp:include>
+
+<body>
+
+	<div class="container-fluid">
+
+        <div class="row mt-4">
+            <div class="col-md-10 offset-md-1">
+              <div class=" p-4 navbar-dark bg-primary rounded">
+                 <h1 class="text-center">메인</h1>
+                 <h2> 내용</h2>
+              </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-10 offset-md-1">
+                 <h1 class="text-center">내용</h1>
+            </div>
+        </div>
+        
+    </div>
 
 </body>
-</html>
+
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
