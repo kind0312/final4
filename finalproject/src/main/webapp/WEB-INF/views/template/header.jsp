@@ -84,21 +84,13 @@
 /* 			div{ */
 /*          		border: 1px dotted gray; */
 /*       		} */
-      		
+    		/* 태그 스타일 */
 		    body {
 		     	height:10000px;
-		    }
-		    
-		    .logo {
-		    	width:80px;
 		    }
 		    p {
 			  margin-top: 0;
 			  margin-bottom: 0;
-			}
-			.navbar {
-			    font-size: 1.1rem;
- 			    font-weight: bold;
 			}
 			a {
 				color: #f8f9fa;
@@ -106,6 +98,19 @@
 			}
 			a:hover {
 				color: #dfe6e9;
+			}
+
+			/* 클래스 스타일 */
+		    .logo {
+		    	width:80px;
+		    }
+			.navbar {
+			    font-size: 1.1rem;
+ 			    font-weight: bold;
+			}
+			.underline{
+				border:0;
+				border-bottom:2px solid rgba(0, 0, 0, 0.1);
 			}
 			
 			.btn-primary{
@@ -120,8 +125,7 @@
   				color:#303030;
   				font-weight: bolder;
   			}
-  			
-  			
+
 		</style>
 		
 		<script type="text/javascript"> 
@@ -185,7 +189,7 @@
 	                  <a class="nav-link" href="#">펫시터 지원</a>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link" href="#">회원가입</a>
+	                  <a class="nav-link" href="../member/insert">회원가입</a>
 	                </li>
 	                <li class="nav-item">
 	                  <a class="nav-link" href="#">로그인</a>
