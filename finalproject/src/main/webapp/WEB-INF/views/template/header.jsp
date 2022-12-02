@@ -99,7 +99,7 @@
 			a:hover {
 				color: #dfe6e9;
 			}
-			
+
 			/* 클래스 스타일 */
 		    .logo {
 		    	width:80px;
@@ -112,6 +112,20 @@
 				border:0;
 				border-bottom:2px solid rgba(0, 0, 0, 0.1);
 			}
+			
+			.btn-primary{
+  				background-color: #81BDF1;
+  				border-color:#81BDF1;
+  				font-weight: bolder;
+  			}
+  			
+  			.btn-warning{
+  				background-color: #FADE81;
+  				border-color:#FADE81;
+  				color:#303030;
+  				font-weight: bolder;
+  			}
+
 		</style>
 		
 		<script type="text/javascript"> 
