@@ -15,7 +15,6 @@
             <div class="col-md-10 offset-md-1">
               <div class=" p-4 navbar-dark bg-primary rounded">
                  <h1 class="text-center">메인</h1>
-                 <h2> 내용</h2>
               </div>
             </div>
         </div>

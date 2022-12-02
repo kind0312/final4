@@ -1,27 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    	</div>
-		<hr>
-		<!-- 정보 -->
-		<div align="center">
-			<h2>Final4</h2>
-			
-			<!--
-				사용자 세션과 관련된 정보 출력
-				- 세션 ID : 세션에 부여되는 고유번호(16진수 32자리)
-				- 신규 세션은 세션이 생성될 경우(신규 접속)만 true로 출력
-				
-				(참고) pageContext는 페이지 내에서 사용 가능한 도구를 제공한다.
-				 
-				세션 ID : ${pageContext.session.getId()} <br>
-				신규세션 : ${pageContext.session.isNew()} <br>
-			-->
-			loginId : ${sessionScope.loginId} <br>
-			로그인 : ${sessionScope.loginId != null} <br>
-			mg : ${sessionScope.mg} <br>
-			관리자 : ${sessionScope.mg == '관리자'} <br>
-			
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
+<div class="container-fluid text-light bg-dark">
+	<div class="row mt-4">
+		<div class="col-md-7 offset-md-1">
+			<p class="row mt-5">Final Four | 사업자등록번호 : 444-44-444444 | 서울 강남 제4444-04호</p>
+			<p class="row">조장 : 권정환 | 조원 : 고태림, 이승정, 정하나, 조민재</p>
+			<p class="row">위치 : 서울특별시 영등포구 선유동2로 57 이레빌딩(구관) 19F, 20F</p>
 		</div>
-		</main>
-	</body>
-</html>
+		<div class="col-md-2 offset-md-1">
+			<div class="row mt-5"><h5>자주하는 질문</h5></div>
+			<div class="row mt-5"><h5>고객센터</h5></div>
+		</div>
+	</div>
+	<div class="row mt-4">
+		<div class="col-md-10 offset-md-1">
+			<p>Copyright © ??? All rights reserved.</p>
+		</div>
+	</div>
+</div>
+	
