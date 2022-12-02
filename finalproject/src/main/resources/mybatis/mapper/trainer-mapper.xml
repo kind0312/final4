@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="trainer">
+	<select id="list" parameterType="TrainerListVO" resultType="TrainerListVO">
+      select R.cnt, CEIL(R.avg) avg, T.trainer_no, 
+      T.trainer_profile, T.trainer_profile_content,
+      M.member_name from trainer T
+      inner join member M on T.member_id = M.member_id inner join
+      (select trainer_no, count(*) cnt, avg(review_good) avg 
+      from review group by trainer_no)
+      R on R.trainer_no = T.trainer_no
+      </select>
+</mapper>
