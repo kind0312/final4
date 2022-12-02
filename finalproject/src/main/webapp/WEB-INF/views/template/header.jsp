@@ -84,21 +84,13 @@
 /* 			div{ */
 /*          		border: 1px dotted gray; */
 /*       		} */
-      		
+    		/* 태그 스타일 */
 		    body {
 		     	height:10000px;
-		    }
-		    
-		    .logo {
-		    	width:80px;
 		    }
 		    p {
 			  margin-top: 0;
 			  margin-bottom: 0;
-			}
-			.navbar {
-			    font-size: 1.1rem;
- 			    font-weight: bold;
 			}
 			a {
 				color: #f8f9fa;
@@ -107,6 +99,71 @@
 			a:hover {
 				color: #dfe6e9;
 			}
+
+			/* 클래스 스타일 */
+		    .logo {
+		    	width:80px;
+		    }
+			.navbar {
+			    font-size: 1.1rem;
+ 			    font-weight: bold;
+			}
+			.underline{
+				border:0;
+				border-bottom:2px solid rgba(0, 0, 0, 0.1);
+			}
+			
+			.btn-blue{
+  				background-color: #81BDF1;
+  				border:2px solid #81BDF1;
+  				font-weight: bolder;
+  				color:#fff;
+  			}
+  			
+  			.btn-blue:hover {
+			  color: #fff;
+			  background-color: #3b6fc9;
+			  border-color: #3768bd;
+			}
+  			
+  			.btn-yellow{
+  				background-color: #FADE81;
+  				border-color:#FADE81;
+  				color:#303030;
+  				font-weight: bolder;
+  			}
+  			
+  			.btn-yellow:hover {
+			  color: #fff;
+			  background-color: #cc9342;
+			  border-color: #c08a3e;
+			}
+			
+			.btn-outline-blue {
+			  color: #81BDF1;
+			  border:2px solid #81BDF1;
+			  font-weight: bolder;
+			}
+			
+			.btn-outline-blue:hover {
+			  color: #fff;
+			  background-color: #81BDF1;
+			  border-color: #81BDF1;
+			  font-weight: bolder;
+			}
+			
+			.btn-outline-yellow {
+			  color: #303030;
+			  border:2px solid #FADE81;
+			  font-weight: bolder;
+			}
+			
+			.btn-outline-yellow:hover {
+			  background-color: #FADE81;
+			  border-color: #FADE81;
+			  font-weight: bolder;
+			}
+
 		</style>
 		
 		<script type="text/javascript"> 
@@ -170,7 +227,7 @@
 	                  <a class="nav-link" href="#">펫시터 지원</a>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link" href="#">회원가입</a>
+	                  <a class="nav-link" href="../member/insert">회원가입</a>
 	                </li>
 	                <li class="nav-item">
 	                  <a class="nav-link" href="#">로그인</a>
