@@ -5,13 +5,41 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="trainer">
-	<select id="list" parameterType="TrainerListVO" resultType="TrainerListVO">
-      select R.cnt, CEIL(R.avg) avg, T.trainer_no, 
+
+	<select id="list" resultType="TrainerListVO">
+      select nvl(R.cnt,0) cnt , nvl(CEIL(R.avg),0) avg, T.trainer_no, 
       T.trainer_profile, T.trainer_profile_content,
       M.member_name from trainer T
-      inner join member M on T.member_id = M.member_id inner join
+      inner join member M on T.member_id = M.member_id left outer join
       (select trainer_no, count(*) cnt, avg(review_good) avg 
       from review group by trainer_no)
       R on R.trainer_no = T.trainer_no
       </select>
+      
+      <select id="listCount" resultType="int">
+      select count(*)
+      from(
+      select nvl(R.cnt,0) cnt , nvl(CEIL(R.avg),0) avg, T.trainer_no, 
+      T.trainer_profile, T.trainer_profile_content,
+      M.member_name from trainer T
+      inner join member M on T.member_id = M.member_id left outer join
+      (select trainer_no, count(*) cnt, avg(review_good) avg 
+      from review group by trainer_no)
+      R on R.trainer_no = T.trainer_no)
+      </select>
+      
+      
+      <select id="listCountAll" parameterType="TrainerListVO" resultType="TrainerListVO">
+      
+      select*from(select TMP.*, rownum rn from(
+      select nvl(R.cnt,0) cnt , nvl(CEIL(R.avg),0) avg, T.trainer_no, 
+      T.trainer_profile, T.trainer_profile_content,
+      M.member_name from trainer T
+      inner join member M on T.member_id = M.member_id left outer join
+      (select trainer_no, count(*) cnt, avg(review_good) avg 
+      from review group by trainer_no)
+      R on R.trainer_no = T.trainer_no)TMP)where rn between #{startRow} and #{endRow}
+      </select>
+      
+      
 </mapper>
