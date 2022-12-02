@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="login" value="${loginId != null}"></c:set>
 <c:set var="admin" value="${mg == '관리자'}"></c:set>
@@ -33,7 +34,7 @@
 	    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 	
 	    <!-- Bootswatch CDN-->
-	    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.0.2/Litera/bootstrap.min.css">
+	    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.0.2/litera/bootstrap.css">
 	
 	    <!-- 아이콘 -->
 	    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
@@ -79,9 +80,26 @@
 	    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94efcfc3a2fb279ab90052c1c24e8cc6"></script>
 	
 		<style>
+/* 			<!-- div 확인 점선 --> */
+/* 			div{ */
+/*          		border: 1px dotted gray; */
+/*       		} */
+      		
 		    body {
-		      height:10000px;
+		     	height:10000px;
 		    }
+		    
+		    .logo {
+		    	width:80px;
+		    }
+		    p {
+			  margin-top: 0;
+			  margin-bottom: 0;
+			}
+			.navbar {
+			    font-size: 1.1rem;
+ 			    font-weight: bold;
+			}
 		</style>
 		
 		<script type="text/javascript"> 
@@ -107,7 +125,12 @@
 	
 	            <!-- Brand : 로고 이미지와 대표 상호를 적는 공간 -->
 	            <a class="navbar-brand" href="/">
-	              CarePet
+	            <span class="visually-hidden">(current)</span>
+	            	<img class="logo" src="${pageContext.request.contextPath}/image/logo.png">
+	            </a>
+	            <a class="navbar-brand" href="/">
+	            <span class="visually-hidden">(current)</span>
+	            	CarePet
 	            </a>
 	
 	            <!-- 토글 버튼 -->
@@ -117,18 +140,13 @@
 	            </button>
 	
 	            <!-- 메뉴 영역 -->
-	            <div class="collapse navbar-collapse" id="menu-bar">
-	              <ul class="navbar-nav me-auto">
+	            <div class="collapse navbar-collapse justify-content-end" id="menu-bar">
+	              <ul class="navbar-nav me-5">
 	
 	                <!-- 
 	                    메뉴 항목
 	                    - .active는 활성화된 메뉴(현재 메뉴), 상황에 따라 맞는 메뉴에 추가
 	                -->
-	                <li class="nav-item">
-	                  <a class="nav-link active" href="#">Home
-	                    <span class="visually-hidden">(current)</span>
-	                  </a>
-	                </li>
 	                <li class="nav-item dropdown">
 	                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" 
 	                  role="button" aria-haspopup="true" aria-expanded="false" href="#">훈련서비스</a>
