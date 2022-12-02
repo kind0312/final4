@@ -25,8 +25,8 @@
 		            </c:forEach>
 		            <br>
 		            <input type="hidden" value="50000" name="itemPrice">
-		            <button class="btn btn-primary">구매</button>
-		            <a href="point_list" class="btn btn-warning">취소</a>
+		            <button class="btn btn-blue">구매</button>
+		            <a href="point_list" class="btn btn-yellow">취소</a>
 	            </form>
             </div>
         </div>

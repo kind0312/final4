@@ -21,8 +21,10 @@
             <div class="col-md-6 offset-md-3">
             	<i class="fa-solid fa-circle-check fa-2x" style="color:#FADE81;" ></i> 
             	<h3>포인트 구매가 완료되었습니다.</h3>
-            	<a href="point_list" class="btn btn-primary">구매내역 보기</a>
-            	<a href="/" class="btn btn-warning">메인으로 이동</a>
+            	<a href="point_list" class="btn btn-blue">구매내역 보기</a>
+            	<a href="/" class="btn btn-yellow">메인으로 이동</a>
+            	<button class="btn btn-outline-blue">아웃라인블루</button>
+            	<button class="btn btn-outline-yellow">아웃라인옐로우</button>
 			</div>
 		</div>
 
