@@ -9,10 +9,10 @@
 		insert into member
 		(member_id, member_pw, member_name, member_email, 
 		member_tel, member_post, member_base_address, member_detail_address, 
-		member_birth, member_gender, member_goodbyedate)
+		member_birth, member_gender)
 		values
 		(#{memberId}, #{memberPw}, #{memberName}, #{memberEmail}, 
 		#{memberTel}, #{memberPost}, #{memberBaseAddress}, #{memberDetailAddress},
-		#{memberBirth}, #{memberGender}, #{memberGoodbyeDate})
+		#{memberBirth}, #{memberGender})
 	</insert>
 </mapper>
