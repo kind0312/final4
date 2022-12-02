@@ -15,4 +15,20 @@
 		#{memberTel}, #{memberPost}, #{memberBaseAddress}, #{memberDetailAddress},
 		#{memberBirth}, #{memberGender})
 	</insert>
+	
+	<select id="list" resultType="MemberDto">
+	    select *from member
+	</select>    
+	
+     <select id="search" parameterType="map" resultType="memberDto">
+      select*from member
+      <if test="type !=null and keyword !=null">
+      where instr(${type),#{keyword}>0
+      </if>
+       
+ </select>
+	
+	
+	
+	
 </mapper>

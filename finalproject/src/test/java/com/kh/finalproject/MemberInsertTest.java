@@ -31,4 +31,6 @@ public class MemberInsertTest {
 						.memberGender("남자")
 				.build());
 	}
+	
+	
 }
