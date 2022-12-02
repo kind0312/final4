@@ -104,7 +104,7 @@ training_starttime date not null,
 training_basic_address varchar2(150) not null,
 training_detail_address varchar2(150) not null,
 training_memo varchar2(300) not null,
-training_status varchar2(12) not null check(training_status in('예약대기','예약확정','취소완료','이용완료')),
+training_status varchar2(12) not null check(training_status in('예약대기','예약확정','예약취소','이용완료')),
 training_changedate date default sysdate
 );
 
