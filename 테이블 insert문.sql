@@ -36,3 +36,6 @@ apply_no, member_id, apply_date, apply_motive,
 apply_smoke, apply_active, apply_license, apply_status)
 values(apply_seq.nextval, 'trainer1', sysdate, '열심히 할게요',
 'N', '평일', null, 'Y');
+
+--관리자
+insert into admin( admin_id, admin_pw) values('admin1','admin1');
