@@ -21,8 +21,8 @@ insert into member
 -- pet
 insert into pet(
 pet_no, member_id, pet_type, pet_name, 
-pet_gender, pet_breed, pet_birth, pet_weight) 
-values(pet_seq.nextval, 'test1233', '고양이', '테스트이름', '남', '품종', '2015-08-15', 4);
+pet_gender, pet_breed, pet_birth, pet_weight, pet_neutralization) 
+values(pet_seq.nextval, 'test1234', '고양이', '까미', '여', '카오스', '2017-08-05', 7, '유');
 
 --trainer
 insert into trainer
