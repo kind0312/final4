@@ -163,6 +163,10 @@
 			  border-color: #FADE81;
 			  font-weight: bolder;
 			}
+			
+			.bg-blue{
+				background-color: #81BDF1 !important;
+			}
 
 		</style>
 		
@@ -182,9 +186,9 @@
 	      <div class="col-md-10 offset-md-1">
 	
 	        <!-- navbar : 드롭다운 메뉴를 제공하는 상단 메뉴바 -->
-	        <div class="mt-4">&nbsp;</div>
+	        <!-- <div class="mt-4">&nbsp;</div> -->
 	
-	        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+	        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
 	          <div class="container-fluid">
 	
 	            <!-- Brand : 로고 이미지와 대표 상호를 적는 공간 -->
@@ -205,7 +209,7 @@
 	
 	            <!-- 메뉴 영역 -->
 	            <div class="collapse navbar-collapse justify-content-end" id="menu-bar">
-	              <ul class="navbar-nav me-5">
+	              <ul class="navbar-nav me-0">
 	
 	                <!-- 
 	                    메뉴 항목

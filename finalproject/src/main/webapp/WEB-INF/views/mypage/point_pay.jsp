@@ -7,27 +7,39 @@
 	<jsp:param value="포인트 구매" name="title"/>
 </jsp:include>
 
+<style>
+	.mt-150{
+		margin-top:150px;
+	}
+	.mt-50{
+		margin-top:50px;
+	}
+	.blue{
+		color:#81BDF1;
+	}
+	.blue-bolder{
+		font-weight:bolder;
+	}
+	
+</style>
+
 <body>
 	
 	<div class="container-fluid">
-	
-		<div class="row mt-4">
-            <div class="col-md-6 offset-md-3">
-            	<h1>카카오페이 결제화면(나중에 삭제)</h1>
-	            <h3><span>${itemPrice}</span>포인트를 구매합니다</h3>
-            </div>
-        </div>
-        
-        <div class="row mt-4">
+
+        <div class="row mt-150">
             <div class="col-md-6 offset-md-3">
             	<table class="table table-hover">
 					  <tbody>
+					  		<tr>
+					  			<th colspan="2"><h3><span class="blue">${itemPrice}</span> 포인트를 구매합니다</h3></th>
+					  		</tr>
 						    <tr>
 							      <th scope="col">
 							      		<p>현재 내 포인트</p>
 							      		<p>충전 예정 포인트</p>
 							      </th>
-							      <td scope="col">
+							      <td scope="col" class="text-end">
 							      		<p>?P</p>
 							      		<p>(+) <span>${itemPrice}</span>P</p>
 							      </td>
@@ -40,12 +52,12 @@
 		<div class="row mt-4">
          	<div class="col-md-6 offset-md-3">
 				<span>총 결제 금액</span>
-				<span>${itemPrice}원</span>
+				<span class="blue blue-bolder float-end">${itemPrice}원</span>
 			</div>
       	</div>
       	
       	<div class="row mt-4">
-         	<div class="col-md-6 offset-md-3">
+         	<div class="col-md-6 offset-md-3 text-center">
 				<img src="${pageContext.request.contextPath}/image/kakaopaylogo.png" width="80" height="35">
 			</div>
       	</div>

@@ -8,8 +8,8 @@
 </jsp:include>
 
 <style>
-	.mt-180{
-		margin-top:180px;
+	.mt-150{
+		margin-top:150px;
 	}
 	.mt-50{
 		margin-top:50px;
@@ -20,7 +20,7 @@
 	
 	<div class="container-fluid">
         
-        <div class="row text-center mt-180">
+        <div class="row text-center mt-150">
             <div class="col-md-6 offset-md-3">
             	<i class="fa-solid fa-circle-check fa-2x" style="color:#FADE81;" ></i> 
             	<h4 class="mt-50">포인트 구매가 완료되었습니다.</h4>

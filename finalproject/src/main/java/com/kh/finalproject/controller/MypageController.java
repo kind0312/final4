@@ -50,6 +50,7 @@ public class MypageController {
 		return "mypage/point_pay";
 	}
 	
+	
 	@GetMapping("/point_pay_success")
 	public String pay_success() {
 		return "mypage/point_pay_success";
