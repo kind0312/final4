@@ -16,16 +16,16 @@
 
 	<div class="container-fluid">
         <div class="row mt-4">
-            <div class="col-md-10 offset-md-1">
+            <div class="col-md-8 offset-md-2">
                  <h1>포인트 내역</h1>
             </div>
         </div>
 		
 		<div class="row mt-4">
-            <div class="col-md-10 offset-md-1">
+            <div class="col-md-8 offset-md-2">
 
                  보유포인트 : ?
-                 <a href="point_select" class="btn btn-primary">포인트 구매</a>
+                 <a href="point_select" class="btn btn-blue">포인트 구매</a>
                  <br>
                  
                  <table class="table table-hover">
