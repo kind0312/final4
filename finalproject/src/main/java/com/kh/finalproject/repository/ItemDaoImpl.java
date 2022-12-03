@@ -25,9 +25,14 @@ public class ItemDaoImpl implements ItemDao{
 	}
 
 	@Override
-	public ItemDto selectOnd(int itemNo) {
+	public ItemDto selectOne(int itemNo) {
 		return sqlSession.selectOne("item.selectone", itemNo);
 	}	
+	
+@Override
+	public ItemDto selectOne(String itemName) {
+	return sqlSession.selectOne("item.selectname", itemName);
+	}
 	
 	
 

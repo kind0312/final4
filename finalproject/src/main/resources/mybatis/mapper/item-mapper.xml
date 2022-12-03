@@ -18,4 +18,8 @@
 	<select id="selectone" resultType="ItemDto" parameterType="int">
 		select*from item where item_no=#{itemNo}
 	</select>
+	
+	<select id="selectname" resultType="ItemDto" parameterType="String">
+		select*from item where item_name=#{itemName}
+	</select>
 </mapper>

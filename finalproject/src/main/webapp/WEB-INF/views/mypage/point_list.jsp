@@ -52,7 +52,7 @@
 		<div class="row mt-4">
             <div class="col-md-4 offset-md-4">
                  <span class="float-left">보유포인트 : ?</span>
-                 <a href="point_select" class="btn btn-blue float-end">포인트 구매</a>
+                 <a href="${pageContext.request.contextPath}/pay/point_select" class="btn btn-blue float-end">포인트 구매</a>
                  <br>
             </div>
         </div>

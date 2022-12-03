@@ -55,13 +55,13 @@
 
 		<div class="row mt-5">
             <div class="col-md-10 offset-md-1 text-center">
-            	<form action="/mypage/point_pay" method="get">
+            	<form action="${pageContext.request.contextPath}/pay/point_pay" method="get">
 		            <c:forEach var="item" items="${item}">
 		            	<button type="submit" class="point-selectbox rounded-3" data-no="${item.itemNo}">${item.itemName}</button>
 		            </c:forEach>
 		            <br>
 		            <input type="hidden" value="" name="itemNo">
-		            <a href="point_list" class="btn btn-yellow btn-md mt-5 mb-5">취소</a>
+		            <a href="${pageContext.request.contextPath}/mypage/point_list" class="btn btn-yellow btn-md mt-5 mb-5">취소</a>
 	            </form>
             </div>
         </div>

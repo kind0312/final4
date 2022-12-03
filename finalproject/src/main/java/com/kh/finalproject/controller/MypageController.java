@@ -21,8 +21,6 @@ public class MypageController {
 	
 	@Autowired
 	private PointDao pointDao;
-	@Autowired
-	private ItemDao itemDao;
 	
 	@GetMapping("/point_list")
 	public String list(
@@ -34,27 +32,6 @@ public class MypageController {
 		return "mypage/point_list";
 	}
 	 
-	@GetMapping("/point_select")
-	public String selectPay(@ModelAttribute ItemDto itemDto, Model model) {
-		model.addAttribute("item", itemDao.selectList());
-		return "mypage/point_select";
-	}
 	
-	@GetMapping("/point_pay")
-	public String pay(@RequestParam int itemNo, 
-			HttpSession session, Model model) {
-		//String memberId = (String)session.getAttribute("loginId");
-		String memberId = "tmdwjd111";
-		//model.addAttribute("point", memberDao.selectOne(memberId));
-		ItemDto dto = itemDao.selectOnd(itemNo);
-		model.addAttribute("itemPrice", dto.getItemPrice());
-		return "mypage/point_pay";
-	}
-	
-	
-	@GetMapping("/point_pay_success")
-	public String pay_success() {
-		return "mypage/point_pay_success";
-	}
 
 }
