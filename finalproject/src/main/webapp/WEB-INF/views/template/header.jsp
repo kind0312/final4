@@ -222,6 +222,10 @@
 				display:inline-block;
 				justify-content: center;
 			}
+			.page-link .page-blue{
+				background-color:#81BDF1;
+				border-color: #81BDF1;
+			}
 			
 			
 
@@ -274,7 +278,7 @@
 	                -->
 	                <li class="nav-item dropdown">
 	                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" 
-	                  role="button" aria-haspopup="true" aria-expanded="false" href="#">훈련서비스</a>
+	                  role="button" aria-haspopup="true" aria-expanded="false" href="#" style="color:#303030">훈련서비스</a>
 	                  <div class="dropdown-menu">
 	                    <a class="dropdown-item" href="#">예약하기</a>
 	                    <div class="dropdown-divider"></div><!-- 중간 중간 선으로 구분하는 것-->
@@ -282,13 +286,13 @@
 	                  </div>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link" href="#">이용후기</a>
+	                  <a class="nav-link" href="#" style="color:#303030">이용후기</a>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link" href="#">펫시터 지원</a>
+	                  <a class="nav-link" href="#" style="color:#303030">펫시터 지원</a>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link" href="../member/insert">회원가입</a>
+	                  <a class="nav-link" href="../member/insert" style="color:#303030">회원가입</a>
 	                </li>
 	                <li class="nav-item">
 	                  <a class="nav-link" href="#">로그인</a>

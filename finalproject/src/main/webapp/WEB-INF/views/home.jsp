@@ -21,6 +21,7 @@
         <div class="row mt-4">
             <div class="col-md-10 offset-md-1">
                  <h1 class="text-center">내용</h1>
+                 <h5><a href="/mypage/point" style="color:black;">마이페이지(포인트) 테스트 링크</a></h5>
             </div>
         </div>
         

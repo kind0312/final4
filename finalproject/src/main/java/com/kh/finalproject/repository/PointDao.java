@@ -10,4 +10,7 @@ public interface PointDao {
 	//목록
 	List<PointDto> selectList(String memberId);
 	
+	//총 개수
+	public int count(String memberId);
+	
 }
