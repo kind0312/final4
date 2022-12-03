@@ -10,6 +10,8 @@ public interface ItemDao {
 	void insert(ItemDto itemDto);
 	//조회
 	List<ItemDto> selectList();
+	ItemDto selectOne(int itemNo);
+	ItemDto selectOne(String itemName);
 	//수정
 	//삭제
 }
