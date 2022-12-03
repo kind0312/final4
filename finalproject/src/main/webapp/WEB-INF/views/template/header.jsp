@@ -112,12 +112,59 @@
 				border:0;
 				border-bottom:2px solid rgba(0, 0, 0, 0.1);
 			}
+			.mypage-nav{
+				font-size:16px;
+				margin-left:10px;
+				margin-right:10px;
+			}
+			.navbar-expand-lg-re{
+				padding-left:12rem;
+				padding-right:12rem;
+			}
+			.navbar-brand-re {
+			  padding-top: 0.29375rem;
+			  padding-bottom: 0.29375rem;
+			  margin-left:10px;
+			  margin-right:10px;
+			  font-size: calc(1.2625rem + 0.15vw);
+			  text-decoration: none;
+			  white-space: nowrap;
+			}
+			
+			.mt-150{
+				margin-top:150px;
+			}
+			.mt-120{
+				margin-top:120px;
+			}
+			.mt-50{
+				margin-top:50px;
+			}
+			.mt-40{
+				margin-top:40px;
+			}
+			.mt-30{
+				margin-top:30px;
+			}
+			.mt-29{
+				margin-top:29px;
+			}
+			.mt-20{
+				margin-top:20px;
+			}
+			.blue{
+				color:#81BDF1;
+			}
+			.blue-bolder{
+				font-weight:bolder;
+			}
 			
 			.btn-blue{
   				background-color: #81BDF1;
   				border:2px solid #81BDF1;
   				font-weight: bolder;
   				color:#fff;
+  				font-size:15px;
   			}
   			
   			.btn-blue:hover {
@@ -128,9 +175,10 @@
   			
   			.btn-yellow{
   				background-color: #FADE81;
-  				border-color:#FADE81;
+  				border:2px solid #FADE81;
   				color:#303030;
   				font-weight: bolder;
+  				font-size:15px;
   			}
   			
   			.btn-yellow:hover {
@@ -167,6 +215,15 @@
 			.bg-blue{
 				background-color: #81BDF1 !important;
 			}
+			
+			.btn-md{
+				padding: 0.5rem 1rem;
+				width:400px;
+				display:inline-block;
+				justify-content: center;
+			}
+			
+			
 
 		</style>
 		

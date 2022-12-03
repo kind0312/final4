@@ -14,4 +14,8 @@
 	<select id="list" resultType="ItemDto">
 		select * from item
 	</select>
+	
+	<select id="selectone" resultType="ItemDto" parameterType="int">
+		select*from item where item_no=#{itemNo}
+	</select>
 </mapper>

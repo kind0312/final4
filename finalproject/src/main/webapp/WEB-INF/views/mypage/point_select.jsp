@@ -7,32 +7,67 @@
 	<jsp:param value="포인트 구매" name="title"/>
 </jsp:include>
 
+<style>
+	.point-selectbox{
+		width:150px;
+		height:140px;
+		font-size:20px;
+		border:1px solid #81BDF1;
+		background-color:#fff;
+		color:#81BDF1;
+		font-weight:bolder;
+	}
+	.point-selectbox:hover{
+		background-color:#81BDF1;
+		color:#fff;
+		font-weight:bolder;
+	}
+	
+	.explain{
+		color:#7B7B7B;
+		font-size:15px;
+	}
+</style>
+
+<script>
+	$(function(){
+		$(".point-selectbox").click(function(e){
+			var no = e.target.dataset.no;
+			if(no.length>0){
+				$("[name=itemNo]").val(no);
+			}else{
+				e.preventDefault();
+			}
+			
+		});
+	});
+</script>
+
 <body>
 	
 	<div class="container-fluid">
-        <div class="row mt-4">
-            <div class="col-md-10 offset-md-1">
-                 <h1>포인트 선택</h1>
-                 <p>포인트는 현금처럼 이용할 수 있으며 1포인트는 1원과 동일한 가치를 가집니다</p>
+        <div class="row mt-120">
+            <div class="col-md-10 offset-md-1 text-center">
+                 <h3>포인트 구매</h3>
+                 <p class="explain mt-4">포인트는 현금처럼 이용할 수 있으며 1포인트는 1원과 동일한 가치를 가집니다</p>
             </div>
         </div>
 
-		<div class="row mt-4">
-            <div class="col-md-10 offset-md-1">
+		<div class="row mt-5">
+            <div class="col-md-10 offset-md-1 text-center">
             	<form action="/mypage/point_pay" method="get">
 		            <c:forEach var="item" items="${item}">
-		            	<span class="badge bg-Light" data-value="${item.itemNo}" style="width:150; height:150; font-size:20px;">${item.itemName}</span>
+		            	<button type="submit" class="point-selectbox rounded-3" data-no="${item.itemNo}">${item.itemName}</button>
 		            </c:forEach>
 		            <br>
-		            <input type="hidden" value="50000" name="itemPrice">
-		            <button class="btn btn-blue">구매</button>
-		            <a href="point_list" class="btn btn-yellow">취소</a>
+		            <input type="hidden" value="" name="itemNo">
+		            <a href="point_list" class="btn btn-yellow btn-md mt-5 mb-5">취소</a>
 	            </form>
             </div>
         </div>
         
         <br><br>
-        출력 테스트 입력 : ${item}
+        테스트 출력 : ${item}
     </div>
 
 </body>

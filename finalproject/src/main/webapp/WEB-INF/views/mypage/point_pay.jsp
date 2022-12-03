@@ -7,21 +7,6 @@
 	<jsp:param value="포인트 구매" name="title"/>
 </jsp:include>
 
-<style>
-	.mt-150{
-		margin-top:150px;
-	}
-	.mt-50{
-		margin-top:50px;
-	}
-	.blue{
-		color:#81BDF1;
-	}
-	.blue-bolder{
-		font-weight:bolder;
-	}
-	
-</style>
 
 <body>
 	

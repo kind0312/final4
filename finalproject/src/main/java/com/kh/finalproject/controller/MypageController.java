@@ -35,18 +35,19 @@ public class MypageController {
 	}
 	 
 	@GetMapping("/point_select")
-	public String selectPay(@ModelAttribute ItemDto itemDto,
-			Model model
-			) {
+	public String selectPay(@ModelAttribute ItemDto itemDto, Model model) {
 		model.addAttribute("item", itemDao.selectList());
 		return "mypage/point_select";
 	}
 	
 	@GetMapping("/point_pay")
-	public String pay(@RequestParam int itemPrice, Model model) {
+	public String pay(@RequestParam int itemNo, 
+			HttpSession session, Model model) {
+		//String memberId = (String)session.getAttribute("loginId");
 		String memberId = "tmdwjd111";
 		//model.addAttribute("point", memberDao.selectOne(memberId));
-		model.addAttribute("itemPrice", itemPrice);
+		ItemDto dto = itemDao.selectOnd(itemNo);
+		model.addAttribute("itemPrice", dto.getItemPrice());
 		return "mypage/point_pay";
 	}
 	
