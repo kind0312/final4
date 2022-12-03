@@ -19,13 +19,16 @@ public class PetController {
 	}
 	
 	@RequestMapping("/pet_insert")
-	public String insert() {
+	public String insert(HttpSession session, Model model) {
+		//String memberId = (String)session.getAttribute("loginId");
+		String memberId = "test1234";
+		model.addAttribute("memberId", memberId);
 		return "mypage/pet_insert";
 	}
 	
-	@RequestMapping("/pet_edit")
-	public String edit() {
-		return "mypage/pet_edit";
+	@RequestMapping("/pet_detail")
+	public String detail() {
+		return "mypage/pet_detail";
 	}
 
 }

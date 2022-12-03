@@ -137,6 +137,12 @@
 			.mt-120{
 				margin-top:120px;
 			}
+			.mt-100{
+				margin-top:100px;
+			}
+			.mt-80{
+				margin-top:80px;
+			}
 			.mt-50{
 				margin-top:50px;
 			}

@@ -82,9 +82,9 @@
 </nav>
 
 	<div class="container-fluid">
-        <div class="row mt-120">
+        <div class="row mt-80">
             <div class="col-md-6 offset-md-3">
-                 <h3 class="text-center">포인트 내역</h3>
+                 <h4 class="text-center">포인트 내역</h4>
             </div>
         </div>
         
