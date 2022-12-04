@@ -39,18 +39,11 @@
 
 <script>
 	$(function(){
-		//입력창 태그 숨김
-		$(".tdType").hide();
-		$(".tdName").hide();
-		$(".tdGender").hide();
-		$(".tdBreed").hide();
-		$(".tdBirth").hide();
-		$(".tdWeight").hide();
-		$(".tdNeutralization").hide();
-		$("i").hide();
+		//입력창 태그 및 확인(수정)버튼 숨김
+		tdHide();
 		
 		//pet_no로 상세 불러오기
-		var petNo = $("[name=petNo]").val();;
+		var petNo = $("[name=petNo]").val();
 		$.ajax({
 			url:"http://localhost:8888/rest/pet_selectone/"+petNo,
 			method:"get",
@@ -121,7 +114,198 @@
 				trNeutralization.append(tdNeutralization);
 			}
 		});
+		
+		//수정버튼 클릭 시 새로운 input창 숨김 및 원래 input창 숨김해제
+		$(".edit-btn").click(function(){
+			//수정버튼 숨김 및 확인버튼 숨김해제
+			$(this).hide();
+			$(".confirm-btn").show();
+			
+			//숨김
+			newtdHide();
+			//숨김해제
+			tdShow();
+			
+			//정보 불러오기
+			var petNo = $("[name=petNo]").val();
+			$.ajax({
+				url:"http://localhost:8888/rest/pet_selectone/"+petNo,
+				method:"get",
+				dataType:"json",
+				data:petNo,
+				success:function(resp){
+					$("[name=petName]").val(resp.petName);
+					$("[name=petBreed]").val(resp.petBreed);
+					$("[name=petBirth]").val(resp.petBirth);
+					$("[name=petWeight]").val(resp.petWeight);
+					
+					//$("input[name='radio의 name'][value='선택할 값']").prop("checked", true);
+					$("[name=petType][value="+resp.petType+"]").prop("checked", true);
+					$("[name=petGender][value="+resp.petGender+"]").prop("checked", true);
+					$("[name=petNeutralization][value="+resp.petNeutralization+"]").prop("checked", true);
+				}
+			});
+		});
+		
+		//변경된 정보 비동기화 등록처리
+		//상태 판정
+		check={
+				petName:false,
+				petBreed:false,
+				petWeight:false, weightRegex:/^[0-9]{1,5}$/,
+				allValid:function(){
+					return this.petName && this.petBreed && this.petWeight
+				}
+		};
+		//이름검사
+		$("[name=petName]").blur(function(e){
+			$(this).removeClass("is-valid is-invalid");
+			if($(this).val().length>0){
+				$(this).addClass("is-valid");
+				check.petName=true;
+			}else{
+				$(this).addClass("is-invalid");
+				check.petName=false;
+			}	
+		});
+	
+		//품종검사
+		$("[name=petBreed]").blur(function(e){
+			$(this).removeClass("is-valid is-invalid");
+			if($(this).val().length>0){
+				$(this).addClass("is-valid");
+				check.petBreed=true;
+			}else{
+				$(this).addClass("is-invalid");
+				check.petBreed=false;
+			}	
+		});
+		
+		//몸무게 숫자만 입력 검사
+		$("[name=petWeight]").blur(function(e){
+			$(this).removeClass("is-valid is-invalid");
+			var value = $(this).val();
+			if(value.length==0){
+				check.petWeight=true;
+			}else{
+				var regex = check.weightRegex;
+				if(regex.test(value)){
+					$(this).addClass("is-valid");
+					check.petWeight=true;
+				}else{
+					$(this).addClass("is-invalid");
+					check.petWeight=false;
+				}
+			}
+		});
+		
+		$(".update-form").submit(function(e){
+			//기본이벤트 차단
+			e.preventDefault();
+			//필수항목 체크
+			$("[name=petName]").blur();
+			$("[name=petBreed]").blur();
+			$("[name=petWeight]").blur();
 
+			if(check.allValid()){//등록처리
+				//비동기화 데이터 준비
+				var no = $("[name=petNo]").val();
+				var type=$("[name=petType]:checked").val();
+				var name=$("[name=petName]").val();
+				var gender=$("[name=petGender]:checked").val();
+				var breed=$("[name=petBreed]").val();
+				var birth=$("[name=petBirth]").val();
+				var weight=$("[name=petWeight]").val();
+				var neutralization=$("[name=petNeutralization]:checked").val();
+				//data에 묶음
+				data={
+					petNo:no,
+					petType:type,
+					petName:name,
+					petGender:gender,
+					petBreed:breed,
+					petBirth:birth,
+					petWeight:weight,
+					petNeutralization:neutralization
+				}
+
+				$.ajax({
+					url:"http://localhost:8888/rest/pet_edit",
+					method:"put",
+					contentType:"application/json",
+					data:JSON.stringify(data),
+					success:function(resp){
+						$(".edit-btn").show();
+						tdHide();
+						newtdShow();
+						loadList();
+					}
+				});
+			}
+		});
+		
+		function loadList(){
+			var petNo = $("[name=petNo]").val();
+			$.ajax({
+				url:"http://localhost:8888/rest/pet_selectone/"+petNo,
+				method:"get",
+				dataType:"json",
+				data:petNo,
+				success:function(resp){
+					$("[name=petType]").val(resp.petType);
+					$("[name=petName]").val(resp.petName);
+					$("[name=petGender]").val(resp.petGender);
+					$("[name=petBreed]").val(resp.petBreed);
+					$("[name=petBirth]").val(resp.petBirth);
+					$("[name=petWeight]").val(resp.petWeight);
+					$("[name=petNeutralization]").val(resp.petNeutralization);
+				}
+			});
+		}
+		
+		function tdHide(){
+			$(".tdType").hide();
+			$(".tdName").hide();
+			$(".tdGender").hide();
+			$(".tdBreed").hide();
+			$(".tdBirth").hide();
+			$(".tdWeight").hide();
+			$(".tdNeutralization").hide();
+			$("i").hide();
+			$(".confirm-btn").hide();
+		}
+		
+		function tdShow(){
+			//숨김해제
+			$(".tdType").show();
+			$(".tdName").show();
+			$(".tdGender").show();
+			$(".tdBreed").show();
+			$(".tdBirth").show();
+			$(".tdWeight").show();
+			$(".tdNeutralization").show();
+			$("i").show();
+		}
+		
+		function newtdHide(){
+			$(".newtdType").hide();
+			$(".newtdName").hide();
+			$(".newtdGender").hide();
+			$(".newtdBreed").hide();
+			$(".newtdBirth").hide();
+			$(".newtdWeight").hide();
+			$(".newtdNeutralization").hide();
+		}
+		
+		function newtdShow(){
+			$(".newtdType").show();
+			$(".newtdName").show();
+			$(".newtdGender").show();
+			$(".newtdBreed").show();
+			$(".newtdBirth").show();
+			$(".newtdWeight").show();
+			$(".newtdNeutralization").show();
+		}
 	});
 </script>
 
@@ -179,7 +363,8 @@
                  		width="120" height="120" class="img-circle">
 			</div>
 		</div>
-
+		
+		<form class="update-form">
 		<div class="row text-center">
             <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">   
                  <table class="table">
@@ -255,11 +440,13 @@
 				<!-- 비동기 처리 위한 펫no -->
 				<input type="hidden" value="${petNo}" name="petNo">
 				
-	            <button type="submit" class="btn btn-blue text-center check-btn">수정</button>
-	            <a href="${pageContext.request.contextPath}/mypage/pet" class="btn btn-yellow">목록</a>
-				<a href="${pageContext.request.contextPath}/mypage/pet_delete?petNo=#" class="btn btn-danger">삭제</a>
+	            <button type="submit" class="btn btn-blue text-center edit-btn">수정</button>
+	            <button type="submit" class="btn btn-blue text-center confirm-btn">확인</button>
+	            <a href="${pageContext.request.contextPath}/mypage/pet" class="btn btn-yellow list-btn">목록</a>
+				<a href="${pageContext.request.contextPath}/mypage/pet_delete?petNo=#" class="btn btn-danger delete-btn">삭제</a>
 			</div>
 		</div>
+		</form>
     </div>
 </body>
 
