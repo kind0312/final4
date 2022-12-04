@@ -14,6 +14,11 @@
 	    background-color: #81BDF1;
 	    border-color: #81BDF1;
 	}
+	.price-font{
+		color:#81BDF1;
+		font-weight:bolder;
+		font-size:17px;
+	}
 </style>
 
 <script>
@@ -34,7 +39,15 @@
 						var tr = $("<tr>").attr("class","table-default");
 						var td1 = $("<td>").text(resp[i].pointDate);
 						var td2 = $("<td>").text(resp[i].pointStatus);
-						var td3 = $("<td>").text(resp[i].pointPrice);
+						
+						//구매, 사용에 따라 마이너스, 플러스 버튼 추가 후 td태그에 저장
+						var price="";
+						if(resp[i].pointStatus=="구매"){
+							price = "+"+resp[i].pointPrice;
+						}else if(resp[i].pointStatus=="사용"){
+							price = "-"+resp[i].pointPrice;
+						}
+						var td3 = $("<td>").text(price).attr("class","price-font");
 						tr.append(td1).append(td2).append(td3);
 						tbody.append(tr);
 					}
@@ -139,8 +152,6 @@
 			  	</ul>
 			</div>
 		</div>
-             <br><br>
-             테스트 출력 : ${point}
     </div>
 
 </body>
