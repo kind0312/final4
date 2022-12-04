@@ -17,6 +17,7 @@ import com.kh.finalproject.entity.ItemDto;
 import com.kh.finalproject.entity.PointDto;
 import com.kh.finalproject.entity.PointPurchaseDto;
 import com.kh.finalproject.repository.ItemDao;
+import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.PointDao;
 import com.kh.finalproject.repository.PointPurchaseDao;
 import com.kh.finalproject.service.PayService;
@@ -26,9 +27,6 @@ import com.kh.finalproject.vo.PayReadyRequestVO;
 import com.kh.finalproject.vo.PayReadyResponseVO;
 import com.kh.finalproject.vo.PayVO;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Controller
 @RequestMapping("/pay")
 public class PayController {
@@ -41,6 +39,8 @@ public class PayController {
 	private PointPurchaseDao pointPurchaseDao;
 	@Autowired
 	private PayService payService;
+	@Autowired
+	private MemberDao memberDao;
 	
 	//포인트 금액 선택 화면
 	@GetMapping("/point_select")
@@ -122,6 +122,8 @@ public class PayController {
 			.tid(tid)
 			.build();
 		pointPurchaseDao.insert(pointPurchaseDto);
+		
+		//회원테이블에 포인트 증가처리(회원 기능 구현완료되면 처리하기!!!)
 		
 		return "redirect:/pay/point_pay_success";
 	}
