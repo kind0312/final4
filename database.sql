@@ -265,6 +265,9 @@ drop table chat_user;
 create table chat_user(
 member_id REFERENCES member(member_id) ON DELETE SET NULL UNIQUE
 );
+alter table chat_user add member_name varchar2(21) not null;
+alter table chat_user add member_status char(1) not null;
+
 
 
 --채팅방 테이블
