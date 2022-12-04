@@ -64,7 +64,7 @@
 						//세번째 칸
 						var th3 = $("<th>").attr("width","30%");
 						var a = $("<a>").attr("class","btn btn-blue")
-										.attr("href","${pageContext.request.contextPath}/mypage/pet_detail")
+										.attr("href","${pageContext.request.contextPath}/mypage/pet_detail?petNo="+resp[i].petNo)
 										.text("상세");
 						th3.append(a);
 						//최종

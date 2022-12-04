@@ -5,11 +5,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kh.finalproject.entity.PetDto;
 import com.kh.finalproject.repository.PetDao;
 
 @Controller
@@ -44,7 +42,8 @@ public class PetController {
 //	}
 	
 	@RequestMapping("/pet_detail")
-	public String detail() {
+	public String detail(@RequestParam int petNo, Model model) {
+		model.addAttribute("petNo", petNo);
 		return "mypage/pet_detail";
 	}
 

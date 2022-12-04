@@ -25,6 +25,12 @@ public class PetDaoImpl implements PetDao{
 	public List<PetDto> selectList(String memberId) {
 		return sqlSession.selectList("pet.list", memberId);
 	}
+	
+	//단일조회
+	@Override
+	public PetDto selectOne(int petNo) {
+		return sqlSession.selectOne("pet.selectone",petNo);
+	}
 
 	//수정
 	@Override
@@ -37,6 +43,8 @@ public class PetDaoImpl implements PetDao{
 	public boolean delete(int petNo) {
 		return sqlSession.delete("pet.delete", petNo)>0;
 	}
+
+	
 	
 	
 	

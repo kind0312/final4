@@ -9,6 +9,7 @@ public interface PetDao {
 	void insert(PetDto petDto);
 	//조회
 	List<PetDto> selectList(String memberId);
+	PetDto selectOne(int petNo);
 	//수정
 	boolean update(PetDto petDto);
 	//삭제

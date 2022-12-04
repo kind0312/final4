@@ -36,6 +36,12 @@ public class PetRestController {
 		return dto;
 	}
 	
+	@GetMapping("/pet_selectone/{petNo}")
+	public PetDto selectone(@PathVariable int petNo){
+		PetDto dto = petDao.selectOne(petNo);
+		return dto;
+	}
+	
 	@PutMapping("/pet_edit")
 	public boolean edit(@RequestBody PetDto petDto) {
 		return petDao.update(petDto);

@@ -312,7 +312,7 @@
 	                  <a class="nav-link" href="../member/insert" style="color:#303030">회원가입</a>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link" href="#">로그인</a>
+	                  <a class="nav-link" href="#" style="color:#303030">로그인</a>
 	                </li>
 	
 	              </ul>
