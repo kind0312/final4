@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="point">
+	
+	<insert id="insert" parameterType="PointDto">
+		insert into point(point_no, member_id, point_status, 
+		point_price, point_date) 
+		values(point_seq.nextval, #{memberId}, #{pointStatus}, #{pointPrice}, #{pointDate})
+	</insert>
+	
+	<select id="list" resultType="PointDto" parameterType="String">
+		select * from point where member_id = #{memberId} order by point_date desc
+	</select>
+</mapper>
