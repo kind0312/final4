@@ -233,6 +233,17 @@
 				border-color: #81BDF1;
 			}
 			
+			.valid-feedback {
+			  color: #81BDF1;
+			}
+			.form-control.is-valid{
+				border-color:#81BDF1;
+			}
+			.form-control.is-valid:focus {
+				border-color: #81BDF1;
+				box-shadow: 0 0 0 0.25rem rgba(69, 130, 236, 0.25);
+			}
+			
 			
 
 		</style>

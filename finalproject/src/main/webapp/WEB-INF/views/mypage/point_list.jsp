@@ -96,20 +96,20 @@
 
 	<div class="container-fluid">
         <div class="row mt-80">
-            <div class="col-md-6 offset-md-3">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
                  <h4 class="text-center">포인트 내역</h4>
             </div>
         </div>
         
 		<div class="row mt-5">
-            <div class="col-md-6 offset-md-3">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
                  <span class="float-left">보유포인트 : ?</span>
                  <a href="${pageContext.request.contextPath}/pay/point_select" class="btn btn-blue float-end">포인트 구매</a>
                  <br>
             </div>
         </div>
         <div class="row mt-4">
-            <div class="col-md-6 offset-md-3">   
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">   
                  <table class="table table-hover text-center">
 					  <thead>
 					    <tr>
@@ -126,7 +126,7 @@
 		</div>
 		
 		<div class="row mt-5 text-center mb-5">
-            <div class="col-md-6 offset-md-3">  
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">  
 			  	<ul class="pagination justify-content-center">
 				    <li class="page-item disabled">
 				      <a class="page-link" href="#">&laquo;</a>

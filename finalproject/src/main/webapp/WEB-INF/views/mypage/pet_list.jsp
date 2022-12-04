@@ -51,18 +51,18 @@
 					for(var i=0; i<resp.length; i++){
 						var tr = $("<tr>").attr("class","table-default align-middle");
 						//첫번째 칸(펫 프로필 이미지)
-						var th1 = $("<th>");
+						var th1 = $("<th>").attr("width","30%");
 						var img = $("<img>").attr("src","#").attr("class","img-circle")
-											.attr("width","100").attr("height","100");
+											.attr("width","100").attr("height","100");				
 						th1.append(img);
 						//두번째 칸(펫 이름/성별)
-						var th2 = $("<th>");
+						var th2 = $("<th>").attr("width","40%");
 						var p1 = $("<p>").attr("class","name-font").text(resp[i].petName);
 						var p2 = $("<p>").attr("class","gender-font")
 										.text(resp[i].petType+" / "+resp[i].petGender+" / "+resp[i].petWeight+"kg");
 						th2.append(p1).append(p2);
 						//세번째 칸
-						var th3 = $("<th>")
+						var th3 = $("<th>").attr("width","30%");
 						var a = $("<a>").attr("class","btn btn-blue")
 										.attr("href","${pageContext.request.contextPath}/mypage/pet_detail")
 										.text("상세");
