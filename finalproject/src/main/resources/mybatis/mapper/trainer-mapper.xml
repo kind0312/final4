@@ -41,5 +41,12 @@
       R on R.trainer_no = T.trainer_no)TMP)where rn between #{startRow} and #{endRow}
       </select>
       
+      <insert id="trainerProfileInsert" parameterType="TrainerDto"> 
+      insert into trainer
+		(trainer_no, member_id, apply_no, trainer_profile, trainer_profile_content)
+		values(trainer_seq.nextval, '#{memberId}', #{applyNo},  #{trainerProfile},
+		#{trainerProfileContent})
+      </insert>
+      
       
 </mapper>
