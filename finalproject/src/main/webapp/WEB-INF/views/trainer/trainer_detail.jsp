@@ -6,8 +6,19 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="훈련사 상세" name="title"/>
 </jsp:include>
-<h1>훈련사를 소개합니다!</h1>
-<a type="button" href="#" class="btn btn-blue btn-md ">예약하기</a><br><br>
+<style>
+.img0{
+border-radius: 50%;
+width: 300px;
+height: 300px;
+}
+</style>
+
+<div class="row mt-4">
+         <div class="col-md-10 offset-md-1 mt-150 text-center">
+         <h1>훈련사를 소개합니다!</h1>
+         <img src="${pageContext.request.contextPath}/image/kang.png"  width="400" height="250" class="img0"><br>
+<a type="button" href="/trainer/conversation" class="btn btn-blue btn-md ">예약하기</a><br><br>
 <!-- 태림누나 추가 요망 -->
 <a type="button" href="#" class="btn btn-blue btn-md ">문의하기</a><br>
 ${list.getMemberName()} 훈련사님<br>
@@ -25,4 +36,7 @@ ${list.getMemberName()} 훈련사님<br>
 작성 시각 : ${review.getReviewWriteTime()}<br>
 평점 : ${review.getReviewGood()}점<br><br>
 </c:forEach>
+         </div>
+      </div>
+
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
