@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.PetDto;
+import com.kh.finalproject.entity.PetImgDto;
 
 @Repository
 public class PetDaoImpl implements PetDao{
@@ -43,6 +44,7 @@ public class PetDaoImpl implements PetDao{
 	public boolean delete(int petNo) {
 		return sqlSession.delete("pet.delete", petNo)>0;
 	}
+
 
 	
 	

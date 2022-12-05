@@ -3,6 +3,7 @@ package com.kh.finalproject.repository;
 import java.util.List;
 
 import com.kh.finalproject.entity.PetDto;
+import com.kh.finalproject.entity.PetImgDto;
 
 public interface PetDao {
 	//등록
@@ -14,4 +15,7 @@ public interface PetDao {
 	boolean update(PetDto petDto);
 	//삭제
 	boolean delete(int petNo);
+	
+	//펫, 첨부파일 연결테이블 등록 - vo만들어서 처리!!!
+	
 }

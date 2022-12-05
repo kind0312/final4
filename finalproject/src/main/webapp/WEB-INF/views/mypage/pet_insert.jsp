@@ -10,8 +10,6 @@
 <style>
 	.img-circle{
 		border-radius: 70%;
-    	border:none;
-    	background-color:#81BDF1;
     	/* overflow: hidden; 사진 첨부하고 주석풀기*/
 	}
 	.form-control{
@@ -32,6 +30,41 @@
 
 <script>
 	$(function(){
+		//프로필 클릭 시 첨부파일 버튼 실행
+		$(".img-circle").click(function(){
+			$(".input-file").click();
+		});
+		//프로필 파일 저장 및 미리보기
+		$(".input-file").change(function(){
+			//console.log($(".input-file").val()); //선택된 파일 경로와 이름이 나옴
+			//console.log(this.files); //선택한 파일들(배열)이 나옴
+			//console.log(this.files[0].name); //선택한 파일의 첫번째 값의 이름
+			var value = $(this).val();
+			if(value.length>0){ //파일 있음(비동기화로 파일 불러오기)
+				//서버에 전송할 formdate 만들기
+				var formData = new FormData();
+				formData.append("files", this.files[0]);
+                
+				$.ajax({
+					url:"http://localhost:8888/upload",
+					method:"post",
+					data:formData,
+					//multipart 요청을 위해 아래 2가지 꼭 보내줘야함
+					processData:false, 
+                    contentType:false,
+                    success:function(resp){
+                    	//console.log(resp); //이미지 경로 반환
+                    	$(".img-circle").attr("src",resp);
+                    	var check = resp.lastIndexOf("/"); //경로에서 /위치 찾기
+                    	var fileNo = resp.substr(check+1); //fileNo 꺼내기
+                    	$(".fileNo").val(fileNo); //하단 파일no input태그에 값 넣기
+                    }
+				});
+			}else{ //파일 없거나 있던 파일 삭제
+				$(".img-circle").attr("src","${pageContext.request.contextPath}/image/profile_basic.jpg");
+			}
+		});
+		
 		//상태 판정
 		check={
 				petName:false,
@@ -96,6 +129,7 @@
 			// 필수, 전체입력 다 받을 경우만 ajax로 전송 및 db저장 되는 상태..
 			if(check.allValid()){//등록처리
 				//비동기화 데이터 준비
+				var fileNo = $(".fileNo").val();
 				var memberId = $("[name=memberId]").val();
 				var type=$("[name=petType]:checked").val();
 				var name=$("[name=petName]").val();
@@ -106,6 +140,7 @@
 				var neutralization=$("[name=petNeutralization]:checked").val();
 				//data에 묶음
 				data={
+					fileNo:fileNo,
 					memberId:memberId,
 					petType:type,
 					petName:name,
@@ -182,8 +217,9 @@
 		
 		<div class="row text-center mt-3">
             <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">   
-                 <img src="${pageContext.request.contextPath}/#" 
+                 <img src="${pageContext.request.contextPath}/image/profile_basic.jpg" 
                  		width="120" height="120" class="img-circle">
+                 <input type="file" style="display:none;" class="input-file"  accept=".jpg, .png, .gif">
 			</div>
 		</div>
 		
@@ -260,8 +296,9 @@
 							</tr>
 						</tbody>
 					</table>
-					<!-- 비동기 처리 위한 회원id -->
+					<!-- 비동기 처리 위한 회원id + 파일no-->
 					<input type="hidden" value="${memberId}" name="memberId">
+					<input type="hidden" value="" name="fileNo">
 					
 		            <button type="submit" class="btn btn-blue text-center check-btn">등록</button>
 		            <a href="${pageContext.request.contextPath}/mypage/pet" class="btn btn-yellow">취소</a>
