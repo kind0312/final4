@@ -27,7 +27,9 @@
 	.unselect-btn{
 		color:#7B7B7B;
 	}
-
+	.btn{
+	  	pointer-events: none;
+	}
 </style>
 
 <script>

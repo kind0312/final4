@@ -193,7 +193,7 @@
 	                 <table class="table">
 						<tbody>
 							<tr class="table-default">
-								<th>종류<i class="fa-solid fa-asterisk text-danger"></i></th>
+								<th>종류<i class="fa-solid fa-asterisk text-danger blue"></i></th>
 								<td>
 									<input class="form-check-input mx-1" type="radio" name="petType" value="강아지" id="optionsRadios1" required>
 							        <label class="label" for="optionsRadios1">
@@ -206,14 +206,14 @@
 								</td>
 							</tr>
 							<tr>
-								<th>이름<i class="fa-solid fa-asterisk text-danger"></i></th>
+								<th>이름<i class="fa-solid fa-asterisk text-danger blue"></i></th>
 								<td>
 		  							<input type="text" name="petName" class="underline form-control" placeholder="이름" required>
 									<div class="invalid-feedback">필수 항목입니다.</div>
 								</td>
 							</tr>
 							<tr>
-								<th>성별<i class="fa-solid fa-asterisk text-danger"></i></th>
+								<th>성별<i class="fa-solid fa-asterisk text-danger blue"></i></th>
 								<td>
 									<input class="form-check-input mx-1" type="radio" name="petGender" value="남" id="optionsRadios3" required>
 							        <label class="label" for="optionsRadios3">
@@ -226,27 +226,27 @@
 								</td>
 							</tr>
 							<tr class="my-2">
-								<th>품종<i class="fa-solid fa-asterisk text-danger"></i></th>
+								<th>품종<i class="fa-solid fa-asterisk text-danger blue"></i></th>
 								<td>
 									<input type="text" name="petBreed" class="underline form-control" placeholder="예) 흰둥이" required>
 									<div class="invalid-feedback">필수 항목입니다.</div>
 								</td>
 							</tr>
 							<tr class="my-2">
-								<th>생일<i class="fa-solid fa-asterisk text-danger"></i></th>
+								<th>생일<i class="fa-solid fa-asterisk text-danger blue"></i></th>
 								<td>
 		  							<input type="date" name="petBirth" class="form-control underline" placeholder="생일" required>
 								</td>
 							</tr>
 							<tr class="my-2">
-								<th>몸무게<i class="fa-solid fa-asterisk text-danger"></i></th>
+								<th>몸무게<i class="fa-solid fa-asterisk text-danger blue"></i></th>
 								<td>
 									<input type="text" name="petWeight" class="underline form-control" placeholder="숫자만 입력해주세요" required>
 									<div class="invalid-feedback">숫자만 입력해주세요</div>
 								</td>
 							</tr>
 							<tr class="my-2">
-								<th>중성화<i class="fa-solid fa-asterisk text-danger"></i></th>
+								<th>중성화<i class="fa-solid fa-asterisk text-danger blue"></i></th>
 								<td>
 							        <input class="form-check-input mx-1" type="radio" name="petNeutralization" value="유" id="optionsRadios5" required>
 							        <label class="label" for="optionsRadios5">
