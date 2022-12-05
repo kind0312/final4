@@ -263,10 +263,11 @@ member_id REFERENCES member(member_id) on DELETE CASCADE
  --채팅유저 테이블
 drop table chat_user;
 create table chat_user(
-member_id REFERENCES member(member_id) ON DELETE SET NULL UNIQUE
+member_id REFERENCES member(member_id) on DELETE set null,
+room_no REFERENCES room(room_no) on DELETE CASCADE,
+member_name varchar2(21) not null,
+member_status char(1) not null
 );
-alter table chat_user add member_name varchar2(21) not null;
-alter table chat_user add member_status char(1) not null;
 
 
 
@@ -274,7 +275,6 @@ alter table chat_user add member_status char(1) not null;
 drop table room;
 create table room( 
 room_no number PRIMARY key,
-member_id REFERENCES member(member_id) ON DELETE SET NULL,
 room_create_at date DEFAULT sysdate not null,
 room_update_at date
 );
@@ -287,12 +287,13 @@ create SEQUENCE room_seq;
 drop table chat;
 create table chat ( 
 chat_no number PRIMARY key,
-room_no REFERENCES room(room_no) on DELETE CASCADE,
-member_id REFERENCES chat_user(member_id) on DELETE CASCADE,
+room_no REFERENCES room(room_no),
+member_id REFERENCES member(member_id) on DELETE set null,
 chat_create_at date DEFAULT sysdate not null,
 chat_message VARCHAR2(3000) not null,
 chat_message_status CHAR(1) default null
 );
+
 
 drop SEQUENCE chat_seq;
 create SEQUENCE chat_seq;
