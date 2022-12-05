@@ -310,7 +310,7 @@
 </script>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-expand-lg-re navbar-dark bg-blue">
+	<nav class="navbar navbar-expand-lg navbar-expand-lg-re navbar-dark bg-blue mypage-top-nav">
 	  <div class="container-fluid">
 	    <a class="navbar-brand-re" href="#">마이페이지</a>
 	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -440,7 +440,7 @@
 				<!-- 비동기 처리 위한 펫no -->
 				<input type="hidden" value="${petNo}" name="petNo">
 				
-	            <button type="submit" class="btn btn-blue text-center edit-btn">수정</button>
+	            <button type="button" class="btn btn-blue text-center edit-btn">수정</button>
 	            <button type="submit" class="btn btn-blue text-center confirm-btn">확인</button>
 	            <a href="${pageContext.request.contextPath}/mypage/pet" class="btn btn-yellow list-btn">목록</a>
 				<a href="${pageContext.request.contextPath}/mypage/pet_delete?petNo=#" class="btn btn-danger delete-btn">삭제</a>
