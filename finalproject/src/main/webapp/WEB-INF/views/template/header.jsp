@@ -99,7 +99,7 @@
 			a:hover {
 				color: #dfe6e9;
 			}
-			
+
 			/* 클래스 스타일 */
 		    .logo {
 		    	width:80px;
@@ -112,6 +112,140 @@
 				border:0;
 				border-bottom:2px solid rgba(0, 0, 0, 0.1);
 			}
+			.mypage-nav{
+				font-size:16px;
+				margin-left:10px;
+				margin-right:10px;
+			}
+			.navbar-expand-lg-re{
+				padding-left:12rem;
+				padding-right:12rem;
+			}
+			.navbar-brand-re {
+			  padding-top: 0.29375rem;
+			  padding-bottom: 0.29375rem;
+			  margin-left:10px;
+			  margin-right:10px;
+			  font-size: calc(1.2625rem + 0.15vw);
+			  text-decoration: none;
+			  white-space: nowrap;
+			}
+			
+			.mt-150{
+				margin-top:150px;
+			}
+			.mt-120{
+				margin-top:120px;
+			}
+			.mt-100{
+				margin-top:100px;
+			}
+			.mt-80{
+				margin-top:80px;
+			}
+			.mt-50{
+				margin-top:50px;
+			}
+			.mt-40{
+				margin-top:40px;
+			}
+			.mt-30{
+				margin-top:30px;
+			}
+			.mt-29{
+				margin-top:29px;
+			}
+			.mt-20{
+				margin-top:20px;
+			}
+			.blue{
+				color:#81BDF1;
+			}
+			.blue-bolder{
+				font-weight:bolder;
+			}
+			
+			.btn-blue{
+  				background-color: #81BDF1;
+  				border:2px solid #81BDF1;
+  				font-weight: bolder;
+  				color:#fff;
+  				font-size:15px;
+  			}
+  			
+  			.btn-blue:hover {
+			  color: #fff;
+			  background-color: #3b6fc9;
+			  border-color: #3768bd;
+			}
+  			
+  			.btn-yellow{
+  				background-color: #FADE81;
+  				border:2px solid #FADE81;
+  				color:#303030;
+  				font-weight: bolder;
+  				font-size:15px;
+  			}
+  			
+  			.btn-yellow:hover {
+			  color: #fff;
+			  background-color: #cc9342;
+			  border-color: #c08a3e;
+			}
+			
+			.btn-outline-blue {
+			  color: #81BDF1;
+			  border:2px solid #81BDF1;
+			  font-weight: bolder;
+			}
+			
+			.btn-outline-blue:hover {
+			  color: #fff;
+			  background-color: #81BDF1;
+			  border-color: #81BDF1;
+			  font-weight: bolder;
+			}
+			
+			.btn-outline-yellow {
+			  color: #303030;
+			  border:2px solid #FADE81;
+			  font-weight: bolder;
+			}
+			
+			.btn-outline-yellow:hover {
+			  background-color: #FADE81;
+			  border-color: #FADE81;
+			  font-weight: bolder;
+			}
+			
+			.bg-blue{
+				background-color: #81BDF1 !important;
+			}
+			
+			.btn-md{
+				padding: 0.5rem 1rem;
+				width:400px;
+				display:inline-block;
+				justify-content: center;
+			}
+			.page-link .page-blue{
+				background-color:#81BDF1;
+				border-color: #81BDF1;
+			}
+			
+			.valid-feedback {
+			  color: #81BDF1;
+			}
+			.form-control.is-valid{
+				border-color:#81BDF1;
+			}
+			.form-control.is-valid:focus {
+				border-color: #81BDF1;
+				box-shadow: 0 0 0 0.25rem rgba(69, 130, 236, 0.25);
+			}
+			
+			
+
 		</style>
 		
 		<script type="text/javascript"> 
@@ -130,9 +264,9 @@
 	      <div class="col-md-10 offset-md-1">
 	
 	        <!-- navbar : 드롭다운 메뉴를 제공하는 상단 메뉴바 -->
-	        <div class="mt-4">&nbsp;</div>
+	        <!-- <div class="mt-4">&nbsp;</div> -->
 	
-	        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+	        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
 	          <div class="container-fluid">
 	
 	            <!-- Brand : 로고 이미지와 대표 상호를 적는 공간 -->
@@ -153,7 +287,7 @@
 	
 	            <!-- 메뉴 영역 -->
 	            <div class="collapse navbar-collapse justify-content-end" id="menu-bar">
-	              <ul class="navbar-nav me-5">
+	              <ul class="navbar-nav me-0">
 	
 	                <!-- 
 	                    메뉴 항목
@@ -161,7 +295,7 @@
 	                -->
 	                <li class="nav-item dropdown">
 	                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" 
-	                  role="button" aria-haspopup="true" aria-expanded="false" href="#">훈련서비스</a>
+	                  role="button" aria-haspopup="true" aria-expanded="false" href="#" style="color:#303030">훈련서비스</a>
 	                  <div class="dropdown-menu">
 	                    <a class="dropdown-item" href="#">예약하기</a>
 	                    <div class="dropdown-divider"></div><!-- 중간 중간 선으로 구분하는 것-->
@@ -169,16 +303,16 @@
 	                  </div>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link" href="#">이용후기</a>
+	                  <a class="nav-link" href="#" style="color:#303030">이용후기</a>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link" href="#">펫시터 지원</a>
+	                  <a class="nav-link" href="#" style="color:#303030">펫시터 지원</a>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link" href="../member/insert">회원가입</a>
+	                  <a class="nav-link" href="../member/insert" style="color:#303030">회원가입</a>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link" href="#">로그인</a>
+	                  <a class="nav-link" href="#" style="color:#303030">로그인</a>
 	                </li>
 	
 	              </ul>

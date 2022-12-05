@@ -39,3 +39,8 @@ values(apply_seq.nextval, 'trainer1', sysdate, '열심히 할게요',
 
 --관리자
 insert into admin( admin_id, admin_pw) values('admin1','admin1');
+
+-- item 항목
+insert into item(item_no, item_name, item_price,
+item_date, item_changedate, item_disabled) 
+values(item_seq.nextval,'포인트 3만원',30000,sysdate,sysdate,'N');

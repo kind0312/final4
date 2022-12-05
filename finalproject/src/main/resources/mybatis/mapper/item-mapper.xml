@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="item">
+	<insert id="insert" parameterType="ItemDto">
+		insert into point(item_no, item_name, item_price,
+		item_date, item_changedate, item_disabled) 
+		values(item_seq.nextval, #{itemName}, #{ItemPrice}, 'N')
+	</insert>
+	
+	<select id="list" resultType="ItemDto">
+		select * from item
+	</select>
+	
+	<select id="selectone" resultType="ItemDto" parameterType="int">
+		select*from item where item_no=#{itemNo}
+	</select>
+	
+	<select id="selectname" resultType="ItemDto" parameterType="String">
+		select*from item where item_name=#{itemName}
+	</select>
+</mapper>
