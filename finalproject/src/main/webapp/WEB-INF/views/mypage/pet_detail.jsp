@@ -199,6 +199,7 @@
 			}
 		});
 		
+		//수정 폼 이벤트
 		$(".update-form").submit(function(e){
 			//기본이벤트 차단
 			e.preventDefault();
@@ -262,7 +263,7 @@
 				}
 			});
 		}
-		
+
 		function tdHide(){
 			$(".tdType").hide();
 			$(".tdName").hide();
@@ -443,7 +444,8 @@
 	            <button type="button" class="btn btn-blue text-center edit-btn">수정</button>
 	            <button type="submit" class="btn btn-blue text-center confirm-btn">확인</button>
 	            <a href="${pageContext.request.contextPath}/mypage/pet" class="btn btn-yellow list-btn">목록</a>
-				<a href="${pageContext.request.contextPath}/mypage/pet_delete?petNo=#" class="btn btn-danger delete-btn">삭제</a>
+				<a href="${pageContext.request.contextPath}/mypage/pet_delete?petNo=${petNo}" class="btn btn-danger delete-btn">삭제</a>
+				<!--<button type="button" class="btn btn-danger delete-btn">삭제</button> -->
 			</div>
 		</div>
 		</form>

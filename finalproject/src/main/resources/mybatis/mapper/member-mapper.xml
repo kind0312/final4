@@ -15,4 +15,9 @@
 		#{memberTel}, #{memberPost}, #{memberBaseAddress}, #{memberDetailAddress},
 		#{memberBirth}, #{memberGender})
 	</insert>
+	
+	<update id="plusPoint" parameterType="MemberDto">
+		update member set member_point=member_point+#{memberPoint} 
+		where member_id=#{memberId}
+	</update>
 </mapper>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalproject.entity.ItemDto;
+import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.PointDto;
 import com.kh.finalproject.entity.PointPurchaseDto;
 import com.kh.finalproject.repository.ItemDao;
@@ -123,7 +124,11 @@ public class PayController {
 			.build();
 		pointPurchaseDao.insert(pointPurchaseDto);
 		
-		//회원테이블에 포인트 증가처리(회원 기능 구현완료되면 처리하기!!!)
+		//회원테이블에 포인트 증가처리
+		MemberDto dto = new MemberDto();
+		dto.setMemberId(partner_user_id);
+		dto.setMemberPoint((long)response.getAmount().getTotal());
+		memberDao.pointPlus(dto);
 		
 		return "redirect:/pay/point_pay_success";
 	}
