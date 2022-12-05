@@ -11,8 +11,7 @@
 ${list.getMemberName()} 훈련사님<br>
 후기 : ${list.getCnt()}개<br>
 평점 : ${list.getAvg()}점<br>
-제목 : ${list.getTrainerProfile()}&nbsp; &nbsp;<a type="button" href="/trainer/detail" style="background-color: 81BDF1" class="btn">상세보기</a><br> 
-소개내용 : ${list.getTrainerProfileContent()}<br><br>
+제목 : ${list.getTrainerProfile()}&nbsp; &nbsp;<a type="button" href="/trainer/detail?memberId=${list.getMemberId()}&trainerNo=${list.getTrainerNo()}" style="background-color: 81BDF1" class="btn">상세보기</a><br> 
 
 </c:forEach>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

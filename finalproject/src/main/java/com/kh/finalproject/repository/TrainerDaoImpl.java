@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.TrainerDto;
 import com.kh.finalproject.entity.TrainingDto;
+import com.kh.finalproject.vo.ReviewVO;
 import com.kh.finalproject.vo.TrainerListVO;
 
 @Repository
@@ -32,6 +33,18 @@ public class TrainerDaoImpl implements TrainerDao {
 	public void insert(TrainerDto trainerDto) {
 		sqlSession.insert("trainer.trainerProfileInsert", trainerDto);
 		
+	}
+
+	@Override
+	public TrainerListVO selectOne(String memberId) {
+		
+		return sqlSession.selectOne("trainer.selectOne", memberId);
+		
+	}
+
+	@Override
+	public List<ReviewVO> selectTrainerReview(int trainerNo) {
+		return sqlSession.selectList("trainer.selectReviewOne", trainerNo);
 	}
 
 //	@Override
