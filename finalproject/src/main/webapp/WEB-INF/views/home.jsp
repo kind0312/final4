@@ -16,7 +16,7 @@
         </div>
         <div class="row mt-4">
             <div class="col-md-10 offset-md-1">
-                <h1 class="row">언제 어디서든 펫훈려사를 부르세요!</h1>
+                <h1 class="row">언제 어디서든 펫훈련사를 부르세요!</h1>
                 <div class="row mt-4">
 					<p class="lead mt-4">
 						혼자 남겨진 반려동물을 생각하며, 외출을 망설인 적이 있으신가요?

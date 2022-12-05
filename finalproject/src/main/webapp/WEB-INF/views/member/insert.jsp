@@ -15,20 +15,20 @@
                  <h1 class="text-center">회원가입</h1>
             </div>
         </div>
-        <form action="insert" method="post" enctype="multipart/form-data">
+        <form class="join-form" action="insert" method="post" enctype="multipart/form-data">
         <div class="row mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-				<div class="row form-group">
+				<div class="row form-group has-success">
 					<label>
 						아이디
 						<i class="fa-solid fa-asterisk blue"></i>
 					</label>
 					<div class="input-group">
-						<input type="text" name="memberId" class="form-control underline w-75" aria-describedby="memberId-button">
+						<input type="text" name="memberId" class="underline w-75 form-control" aria-describedby="memberId-button">
 	      				<button class="btn btn-outline-blue w-25" type="button" id="memberId-button">중복 확인</button>
 					</div>
 					<div class="valid-feedback">올바른 아이디 형식입니다</div>
-					<div class="invalid-feedback">영문 소문자로 시작하고 숫자가 포함된 8~20자로 작성하세요</div>
+					<div class="invalid-feedback">영문 소문자로 시작하고 5~20자의 대 소문자, 숫자와 특수기호(!@#$-_)만 사용 가능합니다.</div>
 				</div>
 			</div>
 		</div>
@@ -38,8 +38,10 @@
 					<label>
 						비밀번호
 						<i class="fa-solid fa-asterisk blue"></i>
-					<input type="password" name="memberPw" class="form-control underline">
+					<input type="password" name="memberPw" class="underline form-control">
 					</label>
+					<div class="valid-feedback">올바른 비밀번호 형식입니다</div>
+                    <div class="invalid-feedback">비밀번호는 8~16자 영문 대 소문자, 숫자, 특수문자(!@#$)를 사용하세요.</div>
 				</div>
 			</div>
 		</div>
@@ -49,8 +51,10 @@
 					<label>
 						비밀번호 재확인
 						<i class="fa-solid fa-asterisk blue"></i>
-					<input type="password" name="memberPwRe" class="form-control underline">
+					<input type="password" id="memberPwRe" class="form-control underline">
 					</label>
+					<div class="valid-feedback">비밀번호가 일치합니다</div>
+                    <div class="invalid-feedback">비밀번호가 일치하지 않습니다</div>
 				</div>
 			</div>
 		</div>
@@ -62,6 +66,8 @@
 						<i class="fa-solid fa-asterisk blue"></i>
 					<input type="text" name="memberName" class="form-control underline">
 					</label>
+					<div class="valid-feedback"></div>
+                    <div class="invalid-feedback">이름은 2~7자 한글 또는 대 소문자 작성하세요</div>
 				</div>
 			</div>
 		</div>
@@ -139,6 +145,59 @@
 		</div>
 		</form>
     </div>
+    
+	<script type="text/javascript">
+	$(function(){
+		var validChecker = {
+			memberIdValid : false, memberIdRegex : /^[a-z][a-zA-Z0-9!@#$-_]{4,19}$/,
+			memberPwValid : false, memberPwRegex : /^[a-zA-Z0-9!@#$]{8,16}$/,
+			memberPwReValid : false,
+			memberNameValid : false, memberNameRegex : /^[a-zA-Z가-힣]{2,7}$/,
+			isAllValid : function(){
+			return this.memberIdValid && this.memberPwValid && this.memberPwReValid && this.memberNameValid;
+			}
+		};
+		
+		$("[name]").blur(function(){ 
+            var name = $(this).attr("name");
+            var value = $(this).val();
+            var regex = validChecker[name+"Regex"];
+            if(regex.test(value)) {
+                //+비동기통신(중복검사)
+                validChecker[name+"Valid"] = true;
+                $(this).removeClass("is-valid is-invalid").addClass("is-valid");
+            }
+            else {
+                validChecker[name+"Valid"] = false;
+                $(this).removeClass("is-valid is-invalid").addClass("is-invalid");
+            }
+        });
+		
+		$("#memberPwRe").blur(function(){
+            var pwRe = $(this).val();
+            var pw = $("[name=memberPw]").val();
+
+            if(pwRe == pw){
+                validChecker.memberPwReValid = true;
+                $(this).removeClass("is-valid is-invalid").addClass("is-valid");
+            }
+            else {
+                validChecker.memberPwReValid = false;
+                $(this).removeClass("is-valid is-invalid").addClass("is-invalid");
+            }
+        });
+		
+		$(".join-form").submit(function(e){
+	        e.preventDefault();
 	
+	        $(this).find("input, textarea, select").blur();//모든 입력창
+// 	        $(this).find("[name]").blur();//name을 가진 입력창
+	
+	        if(validChecker.isAllValid()){
+	            this.submit();//전송
+	        }
+	    });
+	});
+	</script>
 </body>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
