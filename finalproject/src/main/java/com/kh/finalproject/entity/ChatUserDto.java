@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class ChatUserDto {
 
 	private String memberId;
+	private String roomNo; // 방번호 String으로 줌 
 	private String memberName;
 	private String memberStatus;
 }

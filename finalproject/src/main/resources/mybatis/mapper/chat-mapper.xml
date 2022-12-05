@@ -10,4 +10,27 @@
   select * from member where member_id = #{memberId}
   </select>
   
+  <insert id="roomCreate" parameterType="RoomDto">
+  insert into room values (room_seq.nextval, sysdate, null)
+  </insert>
+  
+  
+  <insert id="chatUserInsert" parameterType="ChatUserDto">
+  insert into chat_user values (#{memberId}, #{roomNo},#{memberName} , null)
+  </insert>
+  
+  <insert id="chatMessageInsert" parameterType="ChatDto">
+  insert into chat values (chat_seq.nextval, #{roomNo}, #{memberId}, sysdate, #{chatMessage}, null)
+  </insert>
+  
+  <select id="chatList" parameterType="String" resultType="ChatDto">
+  <!-- 번호(roomNo)랑 아이디(memberId)로 채팅 내역을 찾아야함/ 일단은 String (ChatSerchVO를 따로 만들어야하나?)-->
+  select * from chat where  room_no = #{roomNo}
+  </select>
+  
+  
+  
+  
+  
+  
   </mapper>

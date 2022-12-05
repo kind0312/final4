@@ -3,7 +3,7 @@ package com.kh.finalproject.websocket;
 import java.util.Date;
 import java.util.Map;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -12,6 +12,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.finalproject.entity.ChatDto;
+import com.kh.finalproject.repository.ChatDao;
 import com.kh.finalproject.vo.ReceiveVO;
 import com.kh.finalproject.vo.channel.Channel;
 import com.kh.finalproject.vo.channel.Room;
@@ -41,12 +42,18 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 		
 		//@Autowired
 		//디비에 저장하는 Dao를 만들어서 연결해야함
-		//채팅이 올때마다 insert 되게
+		//채팅이 올때마다 chat테이블에 chatDao에 있는 insert 메소드를 이용해서
 		
 		//채팅을 들어와서 시작하기 전에 이전에 있는 채팅 내역을 미리 찍어놔야 -> 채팅이 이어지게 보임
 		// Dao에서 해당 룸(Room_no) list를 가져와야겠고
 		
-		//디비를 왔다갔다하면 무리가 가니까 꼼수를 쓴다..?
+		
+		@Autowired
+		ChatDao chatDao;
+		
+		
+		
+		
 		
 		@Override
 		public void afterConnectionEstablished(WebSocketSession session)  {

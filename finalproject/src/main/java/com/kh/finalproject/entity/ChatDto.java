@@ -16,5 +16,5 @@ public class ChatDto {
 	private String memberId;
 	private Date chatCreateAt;
 	private String chatMessage;
-	private String chatMessageStatus;
+	private String chatMessageStatus; //읽음 상태 N.Y
 }
