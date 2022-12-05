@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.entity.ItemDto;
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.PointDto;
@@ -54,9 +55,8 @@ public class PayController {
 	@GetMapping("/point_pay")
 	public String pay(@RequestParam int itemNo, 
 			HttpSession session, Model model) {
-		//String memberId = (String)session.getAttribute("loginId");
-		String memberId = "test1234";
-		//model.addAttribute("point", memberDao.selectOne(memberId));
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("point", memberDao.selectOne(memberId));
 		ItemDto dto = itemDao.selectOne(itemNo);
 		model.addAttribute("item", dto);
 		return "pay/point_pay";
@@ -66,10 +66,11 @@ public class PayController {
 	@PostMapping("/point_pay")
 	public String payment(@ModelAttribute PayVO payVO, HttpSession session) throws URISyntaxException {		
 		//결제요청 request 데이터 준비
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
 		int pointPurchaseNo = pointPurchaseDao.sequence();
 		PayReadyRequestVO vo = PayReadyRequestVO.builder()
 							.partner_order_id(String.valueOf(pointPurchaseNo))
-							.partner_user_id(String.valueOf("test1234"))
+							.partner_user_id(String.valueOf(memberId))
 							.item_name(payVO.getItem_name())
 							.total_amount(payVO.getTotal_amount())
 							.build();

@@ -331,14 +331,14 @@
 		                </c:when>
 						<c:otherwise>
 							<li class="nav-item">
-								<a class="nav-link" href="${pageContext.request.contextPath}/#">포인트 구매</a>
+								<a class="nav-link" href="${pageContext.request.contextPath}/pay/point_select">포인트 구매</a>
 							</li>
 							<li class="nav-item dropdown">
 			                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" 
-			                  role="button" aria-haspopup="true" aria-expanded="false" href="#">마이페이지</a>
+			                  role="button" aria-haspopup="true" aria-expanded="false" href="${pageContext.request.contextPath}/mypage/training">마이페이지</a>
 			                  <div class="dropdown-menu">
-			                    <a class="dropdown-item" href="#">예약내역</a>
-			                    <a class="dropdown-item" href="#">반려동물 관리</a>
+			                    <a class="dropdown-item" href="${pageContext.request.contextPath}/mypage/training">예약내역</a>
+			                    <a class="dropdown-item" href="${pageContext.request.contextPath}/mypage/pet">반려동물 관리</a>
 			                    <div class="dropdown-divider"></div><!-- 중간 중간 선으로 구분하는 것-->
 			                    <a class="dropdown-item" href="${pageContext.request.contextPath}/mypage/point">포인트내역</a>
 			                  </div>

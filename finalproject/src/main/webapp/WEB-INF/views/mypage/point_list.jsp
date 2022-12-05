@@ -62,7 +62,7 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-expand-lg-re navbar-dark bg-blue mypage-top-nav">
 	  <div class="container-fluid">
-	    <a class="navbar-brand-re" href="#">마이페이지</a>
+	    <a class="navbar-brand-re footer-link" href="${pageContext.request.contextPath}/mypage/training">마이페이지</a>
 	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 	      <span class="navbar-toggler-icon"></span>
 	    </button>
@@ -103,7 +103,7 @@
         
 		<div class="row mt-5">
             <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
-                 <span class="float-left">보유포인트 : ?</span>
+                 <span class="float-left">보유포인트 : ${point.memberPoint}P</span>
                  <a href="${pageContext.request.contextPath}/pay/point_select" class="btn btn-blue float-end">포인트 구매</a>
                  <br>
             </div>
