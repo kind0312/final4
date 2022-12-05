@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.finalproject.entity.TrainerDto;
 import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.vo.TrainerListVO;
 
@@ -26,4 +27,18 @@ public class TrainerDaoImpl implements TrainerDao {
 		
 		return sqlSession.selectList("training.trainingRequestList", trainerNo);
 	}
+
+	@Override
+	public void insert(TrainerDto trainerDto) {
+		sqlSession.insert("trainer.trainerProfileInsert", trainerDto);
+		
+	}
+
+//	@Override
+//	public boolean update(TrainerDto trainerDto) {		
+//		int count =sqlSession.update("trainer.???", trainerDto);
+//		return count > 0;
+//	}
+	
+	
 }
