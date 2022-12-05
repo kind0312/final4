@@ -81,9 +81,9 @@
 	
 		<style>
 /* 			<!-- div 확인 점선 --> */
-/* 			div{ */
-/*          		border: 1px dotted gray; */
-/*       		} */
+/*   			div{ */
+/*            		border: 1px dotted gray; */
+/*         		} */
     		/* 태그 스타일 */
  		    body {
  		     	height:1000px;
@@ -93,7 +93,6 @@
 			  margin-bottom: 0;
 			}
 			a {
-				color: #f8f9fa;
 				text-decoration: none;
 			}
 			a:hover {
@@ -103,6 +102,9 @@
 			/* 클래스 스타일 */
 		    .logo {
 		    	width:80px;
+		    }
+		    .mainimg{
+		    	width:100%;
 		    }
 			.navbar {
 			    font-size: 1.1rem;
@@ -130,7 +132,9 @@
 			  text-decoration: none;
 			  white-space: nowrap;
 			}
-			
+			.footer-link{
+				color: #f8f9fa;
+			}
 			.mt-150{
 				margin-top:150px;
 			}
@@ -295,7 +299,7 @@
 	                -->
 	                <li class="nav-item dropdown">
 	                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" 
-	                  role="button" aria-haspopup="true" aria-expanded="false" href="#" style="color:#303030">훈련서비스</a>
+	                  role="button" aria-haspopup="true" aria-expanded="false" href="#">훈련서비스</a>
 	                  <div class="dropdown-menu">
 	                    <a class="dropdown-item" href="#">예약하기</a>
 	                    <div class="dropdown-divider"></div><!-- 중간 중간 선으로 구분하는 것-->
@@ -303,19 +307,43 @@
 	                  </div>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link" href="#" style="color:#303030">이용후기</a>
+	                  <a class="nav-link" href="#">이용후기</a>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link" href="#" style="color:#303030">펫시터 지원</a>
+	                  <a class="nav-link" href="#">펫시터 지원</a>
 	                </li>
-	                <li class="nav-item">
-	                  <a class="nav-link" href="../member/insert" style="color:#303030">회원가입</a>
-	                </li>
-	                <li class="nav-item">
-	                  <a class="nav-link" href="#" style="color:#303030">로그인</a>
-	                </li>
-	
+	                <c:choose>
+		                <c:when test="${loginId == null}">
+			                <li class="nav-item">
+			                	<a class="nav-link" href="${pageContext.request.contextPath}/member/insert">회원가입</a>
+			                </li>
+			                <li class="nav-item">
+			                	<a class="nav-link" href="${pageContext.request.contextPath}/member/login">로그인</a>
+			                </li>
+		                </c:when>
+						<c:otherwise>
+							<li class="nav-item">
+								<a class="nav-link" href="${pageContext.request.contextPath}/#">포인트 구매</a>
+							</li>
+							<li class="nav-item dropdown">
+			                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" 
+			                  role="button" aria-haspopup="true" aria-expanded="false" href="#">마이페이지</a>
+			                  <div class="dropdown-menu">
+			                    <a class="dropdown-item" href="#">예약내역</a>
+			                    <a class="dropdown-item" href="#">반려동물 관리</a>
+			                    <div class="dropdown-divider"></div><!-- 중간 중간 선으로 구분하는 것-->
+			                    <a class="dropdown-item" href="${pageContext.request.contextPath}/mypage/point">포인트내역</a>
+			                  </div>
+			                </li>
+							<li class="nav-item">
+								<a class="nav-link" href="${pageContext.request.contextPath}/member/logout">로그아웃</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
 	              </ul>
+	              
+		
+
 	
 	              <!-- 검색 form (혹시 모르니 주석 처리) -->
 <!-- 	              <form class="d-flex"> -->
@@ -328,4 +356,6 @@
 	      </div>
 	    </div>
 	
-  </div>
+  		</div>
+  		
+  		<main class="container-fluid">
