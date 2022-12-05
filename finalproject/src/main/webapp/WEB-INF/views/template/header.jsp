@@ -85,9 +85,9 @@
 /*          		border: 1px dotted gray; */
 /*       		} */
     		/* 태그 스타일 */
-		    body {
-		     	height:10000px;
-		    }
+ 		    body {
+ 		     	height:1000px;
+ 		    }
 		    p {
 			  margin-top: 0;
 			  margin-bottom: 0;
@@ -264,9 +264,9 @@
 	      <div class="col-md-10 offset-md-1">
 	
 	        <!-- navbar : 드롭다운 메뉴를 제공하는 상단 메뉴바 -->
-	        <!-- <div class="mt-4">&nbsp;</div> -->
+	        <div class="mt-4">&nbsp;</div>
 	
-	        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
+	        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 	          <div class="container-fluid">
 	
 	            <!-- Brand : 로고 이미지와 대표 상호를 적는 공간 -->
