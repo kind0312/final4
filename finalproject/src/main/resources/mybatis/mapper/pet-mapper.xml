@@ -13,7 +13,7 @@
 	</insert>
 	
 	<select id="list" resultType="PetDto">
-		select * from pet where member_id=#{memberId}
+		select * from pet where member_id=#{memberId} order by pet_no asc
 	</select>
 	
 	<select id="selectone" resultType="PetDto" parameterType="int">
@@ -27,7 +27,7 @@
 		where pet_no=#{petNo}
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="int">
 		delete pet where pet_no=#{petNo}
 	</delete>
 	

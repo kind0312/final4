@@ -112,15 +112,22 @@
 				border:0;
 				border-bottom:2px solid rgba(0, 0, 0, 0.1);
 			}
+			/* 마이페이지 navbar 메뉴별 좌우간격, 글자크기 설정 */
 			.mypage-nav{
 				font-size:16px;
 				margin-left:10px;
 				margin-right:10px;
 			}
-			.navbar-expand-lg-re{
-				padding-left:12rem;
-				padding-right:12rem;
+			/* 헤더크기에 맞춰 마이페이지 navbar 바깥으로 나오게 top 설정*/
+			.mypage-top-nav{
+				margin-top: 1.7rem !important;
 			}
+			/* 마이페이지 navbar 좌우 간격 수정 */
+			.navbar-expand-lg-re{
+				padding-left:5rem;
+				padding-right:5rem;
+			}
+			/* navbar 마이페이지(제일 왼쪽 제목) 설정 */
 			.navbar-brand-re {
 			  padding-top: 0.29375rem;
 			  padding-bottom: 0.29375rem;
@@ -233,6 +240,7 @@
 				border-color: #81BDF1;
 			}
 			
+			/* input창 메세지 색상 설정*/
 			.valid-feedback {
 			  color: #81BDF1;
 			}

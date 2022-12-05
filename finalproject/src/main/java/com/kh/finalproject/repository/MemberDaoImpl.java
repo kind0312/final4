@@ -16,4 +16,9 @@ public class MemberDaoImpl implements MemberDao {
 	public void insert(MemberDto memberDto) {
 		sqlSession.insert("member.insert", memberDto);
 	}
+
+	@Override
+	public boolean pointPlus(MemberDto memberDto) {
+		return sqlSession.update("member.plusPoint",memberDto)>0;
+	}
 }

@@ -19,8 +19,8 @@
 		</div>
 		<div class="row mt-50">
 			<div class="col-md-6 offset-md-3 text-center">
-				<a href="${pageContext.request.contextPath}/mypage/point_list" class="btn btn-blue btn-md">구매내역 보기</a><br>
-            	<a href="${pageContext.request.contextPath}/" class="btn btn-yellow btn-md mt-3">메인으로 이동</a>
+				<a href="${pageContext.request.contextPath}/mypage/point" class="btn btn-blue btn-md">구매내역 보기</a><br>
+            	<a href="${pageContext.request.contextPath}/" class="btn btn-yellow btn-md mt-3 mb-5">메인으로 이동</a>
 			</div>
 		</div>
 
