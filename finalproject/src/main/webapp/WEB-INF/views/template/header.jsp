@@ -81,19 +81,18 @@
 	
 		<style>
 /* 			<!-- div 확인 점선 --> */
-/* 			div{ */
-/*          		border: 1px dotted gray; */
-/*       		} */
+/*   			div{ */
+/*            		border: 1px dotted gray; */
+/*         		} */
     		/* 태그 스타일 */
-		    body {
-		     	height:10000px;
-		    }
+ 		    body {
+ 		     	height:1000px;
+ 		    }
 		    p {
 			  margin-top: 0;
 			  margin-bottom: 0;
 			}
 			a {
-				color: #f8f9fa;
 				text-decoration: none;
 			}
 			a:hover {
@@ -104,6 +103,9 @@
 		    .logo {
 		    	width:80px;
 		    }
+		    .mainimg{
+		    	width:100%;
+		    }
 			.navbar {
 			    font-size: 1.1rem;
  			    font-weight: bold;
@@ -112,15 +114,22 @@
 				border:0;
 				border-bottom:2px solid rgba(0, 0, 0, 0.1);
 			}
+			/* 마이페이지 navbar 메뉴별 좌우간격, 글자크기 설정 */
 			.mypage-nav{
 				font-size:16px;
 				margin-left:10px;
 				margin-right:10px;
 			}
-			.navbar-expand-lg-re{
-				padding-left:12rem;
-				padding-right:12rem;
+			/* 헤더크기에 맞춰 마이페이지 navbar 바깥으로 나오게 top 설정*/
+			.mypage-top-nav{
+				margin-top: 1.7rem !important;
 			}
+			/* 마이페이지 navbar 좌우 간격 수정 */
+			.navbar-expand-lg-re{
+				padding-left:5rem;
+				padding-right:5rem;
+			}
+			/* navbar 마이페이지(제일 왼쪽 제목) 설정 */
 			.navbar-brand-re {
 			  padding-top: 0.29375rem;
 			  padding-bottom: 0.29375rem;
@@ -130,7 +139,9 @@
 			  text-decoration: none;
 			  white-space: nowrap;
 			}
-			
+			.footer-link{
+				color: #f8f9fa;
+			}
 			.mt-150{
 				margin-top:150px;
 			}
@@ -233,6 +244,7 @@
 				border-color: #81BDF1;
 			}
 			
+			/* input창 메세지 색상 설정*/
 			.valid-feedback {
 			  color: #81BDF1;
 			}
@@ -264,9 +276,9 @@
 	      <div class="col-md-10 offset-md-1">
 	
 	        <!-- navbar : 드롭다운 메뉴를 제공하는 상단 메뉴바 -->
-	        <!-- <div class="mt-4">&nbsp;</div> -->
+	        <div class="mt-4">&nbsp;</div>
 	
-	        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
+	        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 	          <div class="container-fluid">
 	
 	            <!-- Brand : 로고 이미지와 대표 상호를 적는 공간 -->
@@ -295,7 +307,7 @@
 	                -->
 	                <li class="nav-item dropdown">
 	                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" 
-	                  role="button" aria-haspopup="true" aria-expanded="false" href="#" style="color:#303030">훈련서비스</a>
+	                  role="button" aria-haspopup="true" aria-expanded="false" href="#">훈련서비스</a>
 	                  <div class="dropdown-menu">
 	                    <a class="dropdown-item" href="#">예약하기</a>
 	                    <div class="dropdown-divider"></div><!-- 중간 중간 선으로 구분하는 것-->
@@ -303,19 +315,43 @@
 	                  </div>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link" href="#" style="color:#303030">이용후기</a>
+	                  <a class="nav-link" href="#">이용후기</a>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link" href="#" style="color:#303030">펫시터 지원</a>
+	                  <a class="nav-link" href="#">펫시터 지원</a>
 	                </li>
-	                <li class="nav-item">
-	                  <a class="nav-link" href="../member/insert" style="color:#303030">회원가입</a>
-	                </li>
-	                <li class="nav-item">
-	                  <a class="nav-link" href="#" style="color:#303030">로그인</a>
-	                </li>
-	
+	                <c:choose>
+		                <c:when test="${loginId == null}">
+			                <li class="nav-item">
+			                	<a class="nav-link" href="${pageContext.request.contextPath}/member/insert">회원가입</a>
+			                </li>
+			                <li class="nav-item">
+			                	<a class="nav-link" href="${pageContext.request.contextPath}/member/login">로그인</a>
+			                </li>
+		                </c:when>
+						<c:otherwise>
+							<li class="nav-item">
+								<a class="nav-link" href="${pageContext.request.contextPath}/pay/point_select">포인트 구매</a>
+							</li>
+							<li class="nav-item dropdown">
+			                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" 
+			                  role="button" aria-haspopup="true" aria-expanded="false" href="${pageContext.request.contextPath}/mypage/training">마이페이지</a>
+			                  <div class="dropdown-menu">
+			                    <a class="dropdown-item" href="${pageContext.request.contextPath}/mypage/training">예약내역</a>
+			                    <a class="dropdown-item" href="${pageContext.request.contextPath}/mypage/pet">반려동물 관리</a>
+			                    <div class="dropdown-divider"></div><!-- 중간 중간 선으로 구분하는 것-->
+			                    <a class="dropdown-item" href="${pageContext.request.contextPath}/mypage/point">포인트내역</a>
+			                  </div>
+			                </li>
+							<li class="nav-item">
+								<a class="nav-link" href="${pageContext.request.contextPath}/member/logout">로그아웃</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
 	              </ul>
+	              
+		
+
 	
 	              <!-- 검색 form (혹시 모르니 주석 처리) -->
 <!-- 	              <form class="d-flex"> -->
@@ -328,4 +364,6 @@
 	      </div>
 	    </div>
 	
-  </div>
+  		</div>
+  		
+  		<main class="container-fluid">

@@ -1,30 +1,26 @@
 package com.kh.finalproject.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.kh.finalproject.repository.PointDao;
+import com.kh.finalproject.constant.SessionConstant;
+import com.kh.finalproject.repository.MemberDao;
 
 @Controller
 @RequestMapping("/mypage")
 public class MypageController {
 	
 	@Autowired
-	private PointDao pointDao;
-	
-//	@GetMapping("/point_list")
-//	public String list(
-//			@ModelAttribute PointDto pointDto,
-//			HttpSession session, Model model) {
-//		//String memberId = (String)session.getAttribute("loginId");
-//		String memberId = "test1234";
-//		//model.addAttribute("point", pointDao.selectList(memberId));
-//		return "mypage/point_list";
-//	}
+	private MemberDao memberDao;
 	
 	@RequestMapping("/point")
-	public String list() {
+	public String list(HttpSession session, Model model) {
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("point", memberDao.selectOne(memberId));
 		return "mypage/point_list";
 	}
 	

@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.kh.finalproject.repository.TrainerDao;
+import com.kh.finalproject.vo.ReviewVO;
 import com.kh.finalproject.vo.TrainerListVO;
 
 @Controller
@@ -17,19 +19,27 @@ public class TrainerController {
 	@Autowired
 	private TrainerDao trainerDao;
 	
+	//훈련사 디테일(단일조회)
 	@GetMapping("/detail")
-	public String detail() {
+	public String detail(Model model,
+			@ModelAttribute TrainerListVO trainerListvo,
+			@ModelAttribute ReviewVO reviewVo
+			) {
+		
+		model.addAttribute("list", trainerDao.selectOne(trainerListvo.getMemberId()));	
+		model.addAttribute("review", trainerDao.selectTrainerReview(reviewVo.getTrainerNo()));
 		
 		return "trainer/trainer_detail";
 		
 	}
 	
 	@PostMapping("/detail")
-	public String detail(Model model) {
+	public String detail() {
 		
 		return "trainer/trainer_detail";
 	}
 	
+	//훈련사 목록 
 	@GetMapping("/list")
 	public String list(Model model) {
 		

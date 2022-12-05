@@ -34,6 +34,12 @@ public class PetTrainerController {
 		return "trainer/request_list";
 	}
 	
+	@GetMapping("/mypage_profile")
+	public String mypageProfile() {
+		
+		return "trainer/mypage_profile";
+	}
+	
 	
 //	@RequestMapping("/chat_list")
 //	public String chatlist() {
