@@ -31,7 +31,7 @@
 							      		<p>충전 예정 포인트</p>
 							      </th>
 							      <td scope="col" class="text-end">
-							      		<p>?P</p>
+							      		<p>${point.memberPoint}P</p>
 							      		<p>(+) <span>${item.itemPrice}</span>P</p>
 							      </td>
 						    </tr>
