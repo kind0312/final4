@@ -18,12 +18,12 @@
     <script type="text/javascript">
         $(function(){
             $(".star-score").score({
-                starColor:"red",//별 색상(기본 : 금색)
+                starColor:"#81BDF1",//별 색상(기본 : 금색)
                 integerOnly:false,
                 display: {
                     showNumber:true,//숫자 표시
                     placeLimit:2,//소수점 자리수
-                    textColor:"red",//숫자 색상(기본 : 금색)
+                    textColor:"#81BDF1",//숫자 색상(기본 : 금색)
                 }
             });
 
@@ -69,7 +69,8 @@ ${list.getMemberName()} 훈련사님<br>
 <div class="col-md-10 offset-md-1 text-center">
             <div class="star-score blue" data-max="5" data-rate="${list.getAvg()}" ></div>
         </div><br>
-소개 : ${list.getTrainerProfile()}<a type="button" href="/trainer/detail?memberId=${list.getMemberId()}&trainerNo=${list.getTrainerNo()}"class="btn4">상세보기</a><br> 
+소개 : ${list.getTrainerProfile()}<br> 
+<a type="button" href="/trainer/detail?memberId=${list.getMemberId()}&trainerNo=${list.getTrainerNo()}"class="btn btn-blue btn-md">상세보기</a><br> 
 </c:forEach>
          </div>
       </div>
