@@ -100,7 +100,7 @@ create table training(
 training_no number primary key,
 member_id references member(member_id) on delete set null,
 training_date date not null,
-training_starttime date not null,
+training_starttime varchar2(10) not null,
 training_basic_address varchar2(150) not null,
 training_detail_address varchar2(150) not null,
 training_memo varchar2(300) not null,
