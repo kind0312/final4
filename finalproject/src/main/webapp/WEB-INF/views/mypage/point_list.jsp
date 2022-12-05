@@ -60,7 +60,7 @@
 </script>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-expand-lg-re navbar-dark bg-blue">
+	<nav class="navbar navbar-expand-lg navbar-expand-lg-re navbar-dark bg-blue mypage-top-nav">
 	  <div class="container-fluid">
 	    <a class="navbar-brand-re" href="#">마이페이지</a>
 	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
