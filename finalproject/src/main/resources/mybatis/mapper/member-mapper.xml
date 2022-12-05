@@ -19,4 +19,10 @@
 	<select id="one" parameterType="String" resultType="MemberDto">
 		select * from member where member_id = #{memberId}
 	</select>
+	
+	<update id="plusPoint" parameterType="MemberDto">
+		update member set member_point=member_point+#{memberPoint} 
+		where member_id=#{memberId}
+	</update>
+	
 </mapper>

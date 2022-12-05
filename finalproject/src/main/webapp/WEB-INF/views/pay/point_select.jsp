@@ -65,9 +65,6 @@
 	            </form>
             </div>
         </div>
-        
-        <br><br>
-        테스트 출력 : ${item}
     </div>
 
 </body>

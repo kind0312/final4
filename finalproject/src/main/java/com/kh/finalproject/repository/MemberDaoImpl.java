@@ -21,4 +21,9 @@ public class MemberDaoImpl implements MemberDao {
 	public MemberDto selectOne(String memberId) {
 		return sqlSession.selectOne("member.one", memberId);
 	}
+	
+	@Override
+	public boolean pointPlus(MemberDto memberDto) {
+		return sqlSession.update("member.plusPoint",memberDto)>0;
+	}
 }
