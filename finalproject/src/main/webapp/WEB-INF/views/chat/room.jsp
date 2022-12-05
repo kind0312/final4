@@ -16,7 +16,7 @@
 
 <body>
 <h1>채팅</h1>
-<h2>방번호 : ${room}</h2>
+<h2>방번호 : ${roomNo}</h2>
 
 <input type="text" id="message-input">
 <button type="button" id="message-send">전송</button>
@@ -50,7 +50,7 @@ $(function(){
 		//접속하자마자 서버로 입장메세지를 보냄
 		var data = {
 				type :1,
-				room : "${room}"
+				room : "${roomNo}"
 		};
 		socket.send(JSON.stringify(data)); 		
 	};
@@ -64,14 +64,14 @@ $(function(){
 	socket.onmessage = function(e){
 		//수신된 e.data는 JSON 문자열
 		var data = JSON.parse(e.data);
-		//console.log(data);
+		console.log(data);  
 		
 		var p = $("<p>").addClass("chat-message");
-		var time = moment(data.time).format("YYYY-MM-DD hh:mm");
-		var w = $("<p>").text(data.nickname+"["+data.auth+"]");
+		var time = moment(data.time).format("hh:mm");
+		var w = $("<p>").text(data.memberId); //콘솔에 key로 들어오는 값을 찍어줘야 나옴
 		var t = $("<p>").text("("+time+")");
-		var c = $("<p>").text(data.text);
-		p.append(w).append(c).append(t);
+		var c = $("<p>").text(data.chatMessage);
+		p.append(w).append(c).append(t);  //작성자 내용 시간
 		$("#message-list").append(p);
 		
 		//스크롤 하단으로 이동
@@ -88,11 +88,13 @@ $(function(){
 	//3
 	$("#message-send").click(function(){
 		var text = $("#message-input").val();
-		if(text.length == 0) return;
+		
+		if(text.length == 0) return; //채팅 쓴거 없으면 return
 		
 		//JSON으로 변환해서 전송
 		//- JSON.stringify(객체) : 객체를 문자열로
 		//- JSON.parse(문자열) : 문자열을 객체로
+		
 		var data = {
 			type : 2,
 			text : text

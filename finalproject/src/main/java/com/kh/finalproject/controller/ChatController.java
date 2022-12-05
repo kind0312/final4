@@ -61,9 +61,9 @@ public class ChatController {
 	}
 	
 	//채팅방 {room 번호}
-	@GetMapping("/room/{room}")
-	public String chatRoom(@PathVariable String room, Model model) {
-		model.addAttribute("room", room);
+	@GetMapping("/room/{roomNo}")
+	public String chatRoom(@PathVariable String roomNo, Model model) {
+		model.addAttribute("roomNo", roomNo);
 		return "chat/room";
 	}
 }
