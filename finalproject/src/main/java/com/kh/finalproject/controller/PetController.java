@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.repository.PetDao;
 
 @Controller
@@ -19,16 +20,14 @@ public class PetController {
 	
 	@RequestMapping("/pet")
 	public String list(HttpSession session, Model model) {
-		//String memberId = (String)session.getAttribute("loginId");
-		String memberId = "test1234";
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
 		model.addAttribute("memberId", memberId);
 		return "mypage/pet_list";
 	}
 	
 	@RequestMapping("/pet_insert")
 	public String insert(HttpSession session, Model model) {
-		//String memberId = (String)session.getAttribute("loginId");
-		String memberId = "test1234";
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
 		model.addAttribute("memberId", memberId);
 		return "mypage/pet_insert";
 	}

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class ReceiveVO {
 
-	private int type;
+	private int type;  //1 or 2
 	private String room;
 	private String text;
 }

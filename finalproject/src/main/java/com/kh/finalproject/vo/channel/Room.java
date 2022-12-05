@@ -48,6 +48,7 @@ public class Room {
 		for(User user : users) {
 			user.send(message);
 		}
+		
 	}
 	
 	//유저 수

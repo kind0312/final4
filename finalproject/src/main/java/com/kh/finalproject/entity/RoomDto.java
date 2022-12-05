@@ -10,8 +10,7 @@ import lombok.NoArgsConstructor;
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class RoomDto {
 	
-	private int roomNo;
-	private String memberId;
+	private int roomNo;	
 	private Date roomCreateAt;
 	private Date roomUpdateAt;
 }
