@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.finalproject.entity.PetDto;
+import com.kh.finalproject.entity.PetImgDto;
 import com.kh.finalproject.repository.PetDao;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,6 +29,9 @@ public class PetRestController {
 	
 	@PostMapping("/pet_insert")
 	public void insert(@RequestBody PetDto petDto){
+		//펫, 첨부파일 연결테이블 db등록 - vo만들어서 처리!!!
+		
+		//펫 db등록
 		petDao.insert(petDto);
 	}
 	
