@@ -69,7 +69,21 @@ public class AdminController {
 //		
 //		
 //	}
-			
+	
+	//회원-상세
+	@GetMapping("/memberDetail")
+	public String memberDetail(Model model, @RequestParam String memberId) {
+		
+		//회원 정보
+		MemberDto memberDto=memberDao.selectOne(memberId);
+		model.addAttribute("memberDto",memberDto);
+		//pet정보
+		
+		
+		
+		
+		return "admin/memberDetail";
+	}
 			 
 
 }

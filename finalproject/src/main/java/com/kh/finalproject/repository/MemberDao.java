@@ -23,6 +23,9 @@ public interface MemberDao {
 	//List<MemberDto> seletList(String type,String keyword);
 	//정렬
 	//List<MemberDto> complexSearch(MemberSearchVO vo);
+	
+	//회원상세
+	MemberDto selectOne(String memeberId);
 
 	
 }
