@@ -26,7 +26,7 @@
 			</div>
 		</div>
 		<div class="row mt-4">
-			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
 			<button type="submit" class="btn btn-blue btn-md">로그인</button>
 			</div>
 		</div>
@@ -49,8 +49,8 @@
 			<hr>
 			</div>
 		</div>
-		<div class="row mt-4">
-			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+		<div class="row mt-4 mb-5">
+			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
 			<a href="../member/insert" class="btn btn-yellow btn-md">회원가입</a>
 			</div>
 		</div>

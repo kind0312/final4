@@ -53,7 +53,7 @@
 					</p>
             	</div>
             </div>
-            <div class="row mt-5">
+            <div class="row mt-5 mb-5">
             	<div class="col-md-10 offset-md-1 text-center">
             	<button type="button" class="btn btn-blue btn-md" >신청하기</button>
             	</div>

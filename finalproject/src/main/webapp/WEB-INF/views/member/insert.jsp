@@ -17,12 +17,19 @@
 	
 	<div class="container-fluid">
 
-        <div class="row mt-4">
+        <div class="row mt-100">
             <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
                  <h1 class="text-center">회원가입</h1>
             </div>
         </div>
         <form class="join-form" action="insert" method="post" enctype="multipart/form-data" autocomplete="off">
+        <div class="row mt-4 mb-5">
+        	<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
+        		<img src="${pageContext.request.contextPath}/image/profile_basic.jpg" 
+                 		width="120" height="120" class="img-circle">
+                <input type="file" style="display:none;" class="form-control input-file" name="memberImg" accept=".jpg, .png, .gif">
+        	</div>
+        </div>
         <div class="row mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 				<div class="row form-group">
@@ -181,7 +188,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row mt-4 text-center">
+		<div class="row mt-4 mb-5 text-center">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 				<button type="submit" class="btn btn-blue w-75">회원가입</button>
 			</div>
@@ -190,6 +197,12 @@
     </div>
 	<script type="text/javascript">
 	$(function(){
+		//프로필 클릭 시 첨부파일 버튼 실행
+		$(".img-circle").click(function(){
+			$(".input-file").click();
+		});
+		
+		//형식 검사를 위한 객체 생성
 		var validChecker = {
 			memberIdValid : false, memberIdRegex : /^[a-z][a-zA-Z0-9!@#$-_]{4,19}$/,
 			memberPwValid : false, memberPwRegex : /^[a-zA-Z0-9!@#$]{8,16}$/,
@@ -208,7 +221,8 @@
 			this.memberDetailAddressValid && this.memberBirthValid && this.memberGenderValid;
 			}
 		};
-				
+		
+		//형식 검사
 		$(".check-input").blur(function(){ 
             var name = $(this).attr("name");
             var value = $(this).val();
@@ -224,6 +238,7 @@
             }
         });
 		
+		//비밀번호 재확인
 		$("#memberPwRe").blur(function(){
             var pwRe = $(this).val();
             var pw = $("[name=memberPw]").val();
@@ -238,8 +253,10 @@
             }
         });
 		
+		//주소 검색
 		$("#address-button").click(findAddress);
 		
+		//date-picker
 		new Lightpick({
             //field는 datepicker 적용 대상을 설정하는 공간
             field:document.querySelector(".single-date-picker"),
@@ -255,6 +272,7 @@
 
         });
 		
+		//생일 검사
 		$("[name=memberBirth]").change(function(){
 			var birth = $("[name=memberBirth]").val();
 // 			console.log(birth);
@@ -270,6 +288,7 @@
             }
 		});
 		
+		//성별 검사
 		$("[name=memberGender]").click(function(){
 			var check = $(".form-check-input:checked").val();
 			if(check){
