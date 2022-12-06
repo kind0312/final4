@@ -40,6 +40,12 @@ public class PetController {
 	
 	@RequestMapping("/pet_detail")
 	public String detail(@RequestParam int petNo, Model model) {
+		//1. petNo로 petDto 값 꺼내기
+		//2. petNo로 pet_img의 filesNo 값 꺼내기
+		//3. 각각 model로 넘기기
+		//model.addAttribute("pet", petDao.selectOne(petNo));
+		
+		model.addAttribute("filesNo", petDao.selectFileNo(petNo));
 		model.addAttribute("petNo", petNo);
 		return "mypage/pet_detail";
 	}
