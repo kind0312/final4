@@ -12,6 +12,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.finalproject.entity.ChatDto;
+import com.kh.finalproject.entity.RoomDto;
 import com.kh.finalproject.repository.ChatDao;
 import com.kh.finalproject.vo.ReceiveVO;
 import com.kh.finalproject.vo.channel.Channel;
@@ -48,10 +49,14 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 		// Dao에서 해당 룸(Room_no) list를 가져와야겠고
 		
 		
-		@Autowired
-		ChatDao chatDao;
+		//@Autowired
+		//private ChatDao chatDao;
 		
-		
+		//ChatDao에 있는 insert 메소드를 생성해야 하는데
+		//훈련사 controller 에서 승인 버튼을 누르면 채팅방을 만들어야 함
+		//
+		// chatDao.createRoom();  //????? 방을 생성하고 방 번호를 줘야함 하....ㅠ모르겠어ㅠㅠ
+		 
 		
 		
 		

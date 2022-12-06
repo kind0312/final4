@@ -25,7 +25,7 @@ public class ChatDaoImpl implements ChatDao{
 	@Override
 	public void createRoom(RoomDto roomDto) {
 		//채팅방(room) 생성
-		sqlSession.insert("chat.roomCreate", roomDto);
+		sqlSession.insert("chat.roomCreate", roomDto);		
 	}
 	
 	@Override
@@ -45,6 +45,14 @@ public class ChatDaoImpl implements ChatDao{
 		// 특정 방에 대한 chat 내역 list로 뽑아와야함
 		return sqlSession.selectList("chat.chatList", roomNo);
 	}
+
+	@Override
+	public String createRoomSeq() {
+		// 룸 table 시퀀스 번호 생성
+		return sqlSession.selectOne("chat.roomSeqNo");
+	}
+
+
 
 
 	
