@@ -13,7 +13,7 @@ public class FilesDto {
 	private int filesNo;
 	private String filesOriginalName;
 	private String filesType;
-	private int filesSize;
+	private long filesSize;
 	private Date filesDate;
 
 }
