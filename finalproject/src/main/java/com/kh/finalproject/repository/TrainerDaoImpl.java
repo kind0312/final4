@@ -11,6 +11,7 @@ import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.vo.ReviewVO;
 import com.kh.finalproject.vo.TrainerListVO;
 
+
 @Repository
 public class TrainerDaoImpl implements TrainerDao {
 
@@ -46,6 +47,13 @@ public class TrainerDaoImpl implements TrainerDao {
 	public List<ReviewVO> selectTrainerReview(int trainerNo) {
 		return sqlSession.selectList("trainer.selectReviewOne", trainerNo);
 	}
+
+	@Override
+	public TrainerDto selectOnePro(String memberId) {		
+		return sqlSession.selectOne("trainer.selectOnePro", memberId);
+	}
+
+	
 
 //	@Override
 //	public boolean update(TrainerDto trainerDto) {		
