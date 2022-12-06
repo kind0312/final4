@@ -1,6 +1,7 @@
 package com.kh.finalproject.repository;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.MemberDto;
+import com.kh.finalproject.vo.MemberListSearchVO;
+import com.kh.finalproject.vo.MemberListVO;
 
 @Repository
 public class MemberDaoImpl implements MemberDao {
@@ -21,20 +24,21 @@ public class MemberDaoImpl implements MemberDao {
 		sqlSession.insert("member.insert", memberDto);
 	}
 
-	@Override
-	public List<MemberDto> selectList() {
-		return sqlSession.selectList("member.list");
-	}
+//	@Override
+//	public List<MemberDto> selectList() {
+//		
+//	sqlSession.selectList(null)
+//	}
 
 	@Override
-	public List<MemberDto> seletList(String type, String keyword) {
-	
-		//Map<String, String> param = new HashMap<>();
-		
-		//String sql="select *from member "
-		//		+"where instr(#1,?)>0";
-		//sql=sql.replace("#1",type);
-		Object[] param = {keyword};
-		return sqlSession.selectList("member.search",param);
+	public List<MemberListVO> selectList(MemberListSearchVO vo) {
+	if(vo.isSearch()) {
+		return sqlSession.selectList("member.search",vo);
 	}
+	else {
+		return sqlSession.selectList("member.list",vo);
+	}
+	}
+
+
 }
