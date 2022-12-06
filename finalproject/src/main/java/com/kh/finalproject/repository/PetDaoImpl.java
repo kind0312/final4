@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.PetDto;
 import com.kh.finalproject.entity.PetImgDto;
+import com.kh.finalproject.vo.PetInsertVO;
 
 @Repository
 public class PetDaoImpl implements PetDao{
@@ -15,6 +16,12 @@ public class PetDaoImpl implements PetDao{
 	@Autowired
 	private SqlSession sqlSession;
 
+	//시퀀스 발급
+	@Override
+	public int sequence() {
+		return sqlSession.selectOne("pet.sequence");
+	}
+	
 	//등록
 	@Override
 	public void insert(PetDto petDto) {
@@ -43,6 +50,11 @@ public class PetDaoImpl implements PetDao{
 	@Override
 	public boolean delete(int petNo) {
 		return sqlSession.delete("pet.delete", petNo)>0;
+	}
+
+	@Override
+	public void petProfileInsert(PetInsertVO petInsertVO) {
+		sqlSession.insert("pet.profileInsert", petInsertVO);
 	}
 
 

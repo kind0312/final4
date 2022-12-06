@@ -28,7 +28,9 @@ public class PetController {
 	@RequestMapping("/pet_insert")
 	public String insert(HttpSession session, Model model) {
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		int petNo = petDao.sequence();
 		model.addAttribute("memberId", memberId);
+		model.addAttribute("petNo", petNo);
 		return "mypage/pet_insert";
 	}
 	

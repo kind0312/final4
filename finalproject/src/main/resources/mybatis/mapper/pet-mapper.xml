@@ -5,10 +5,15 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="pet">
+
+	<select id="sequence" resultType="int">
+		select pet_seq.nextval from dual
+	</select>
+	
 	<insert id="insert" parameterType="PetDto">
 		insert into pet(pet_no, member_id, pet_type, pet_name,
 		pet_gender, pet_breed, pet_birth, pet_weight, pet_neutralization) 
-		values(pet_seq.nextval, #{memberId}, #{petType}, #{petName},
+		values(#{petNo}, #{memberId}, #{petType}, #{petName},
 		#{petGender}, #{petBreed}, #{petBirth}, #{petWeight}, #{petNeutralization})
 	</insert>
 	
@@ -30,6 +35,10 @@
 	<delete id="delete" parameterType="int">
 		delete pet where pet_no=#{petNo}
 	</delete>
+	
+	<insert id="profileInsert" parameterType="PetInsertVO">
+		insert into pet_img(files_no, pet_no) values(#{filesNo}, #{petNo})
+	</insert>
 	
 	
 </mapper>

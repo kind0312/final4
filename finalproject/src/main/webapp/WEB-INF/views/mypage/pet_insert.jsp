@@ -56,8 +56,8 @@
                     	//console.log(resp); //이미지 경로 반환
                     	$(".img-circle").attr("src",resp);
                     	var check = resp.lastIndexOf("/"); //경로에서 /위치 찾기
-                    	var fileNo = resp.substr(check+1); //fileNo 꺼내기
-                    	$(".fileNo").val(fileNo); //하단 파일no input태그에 값 넣기
+                    	var filesNo = resp.substr(check+1); //fileNo 꺼내기
+                    	$("[name=filesNo]").val(filesNo); //하단 파일no input태그에 값 넣기
                     }
 				});
 			}else{ //파일 없거나 있던 파일 삭제
@@ -129,7 +129,8 @@
 			// 필수, 전체입력 다 받을 경우만 ajax로 전송 및 db저장 되는 상태..
 			if(check.allValid()){//등록처리
 				//비동기화 데이터 준비
-				var fileNo = $(".fileNo").val();
+				var filesNo = $("[name=filesNo]").val();
+				var petNo = $("[name=petNo]").val();
 				var memberId = $("[name=memberId]").val();
 				var type=$("[name=petType]:checked").val();
 				var name=$("[name=petName]").val();
@@ -140,8 +141,9 @@
 				var neutralization=$("[name=petNeutralization]:checked").val();
 				//data에 묶음
 				data={
-					fileNo:fileNo,
+					filesNo:filesNo,
 					memberId:memberId,
+					petNo:petNo,
 					petType:type,
 					petName:name,
 					petGender:gender,
@@ -229,7 +231,7 @@
 	                 <table class="table">
 						<tbody>
 							<tr class="table-default">
-								<th>종류<i class="fa-solid fa-asterisk text-danger blue"></i></th>
+								<th>종류<i class="fa-solid fa-asterisk blue"></i></th>
 								<td>
 									<input class="form-check-input mx-1" type="radio" name="petType" value="강아지" id="optionsRadios1" required>
 							        <label class="label" for="optionsRadios1">
@@ -242,14 +244,14 @@
 								</td>
 							</tr>
 							<tr>
-								<th>이름<i class="fa-solid fa-asterisk text-danger blue"></i></th>
+								<th>이름<i class="fa-solid fa-asterisk blue"></i></th>
 								<td>
 		  							<input type="text" name="petName" class="underline form-control" placeholder="이름" required>
 									<div class="invalid-feedback">필수 항목입니다.</div>
 								</td>
 							</tr>
 							<tr>
-								<th>성별<i class="fa-solid fa-asterisk text-danger blue"></i></th>
+								<th>성별<i class="fa-solid fa-asterisk blue"></i></th>
 								<td>
 									<input class="form-check-input mx-1" type="radio" name="petGender" value="남" id="optionsRadios3" required>
 							        <label class="label" for="optionsRadios3">
@@ -262,27 +264,27 @@
 								</td>
 							</tr>
 							<tr class="my-2">
-								<th>품종<i class="fa-solid fa-asterisk text-danger blue"></i></th>
+								<th>품종<i class="fa-solid fa-asterisk blue"></i></th>
 								<td>
 									<input type="text" name="petBreed" class="underline form-control" placeholder="예) 흰둥이" required>
 									<div class="invalid-feedback">필수 항목입니다.</div>
 								</td>
 							</tr>
 							<tr class="my-2">
-								<th>생일<i class="fa-solid fa-asterisk text-danger blue"></i></th>
+								<th>생일<i class="fa-solid fa-asterisk blue"></i></th>
 								<td>
 		  							<input type="date" name="petBirth" class="form-control underline" placeholder="생일" required>
 								</td>
 							</tr>
 							<tr class="my-2">
-								<th>몸무게<i class="fa-solid fa-asterisk text-danger blue"></i></th>
+								<th>몸무게<i class="fa-solid fa-asterisk blue"></i></th>
 								<td>
 									<input type="text" name="petWeight" class="underline form-control" placeholder="숫자만 입력해주세요" required>
 									<div class="invalid-feedback">숫자만 입력해주세요</div>
 								</td>
 							</tr>
 							<tr class="my-2">
-								<th>중성화<i class="fa-solid fa-asterisk text-danger blue"></i></th>
+								<th>중성화<i class="fa-solid fa-asterisk blue"></i></th>
 								<td>
 							        <input class="form-check-input mx-1" type="radio" name="petNeutralization" value="유" id="optionsRadios5" required>
 							        <label class="label" for="optionsRadios5">
@@ -298,7 +300,8 @@
 					</table>
 					<!-- 비동기 처리 위한 회원id + 파일no-->
 					<input type="hidden" value="${memberId}" name="memberId">
-					<input type="hidden" value="" name="fileNo">
+					<input type="hidden" value="${petNo}" name="petNo">
+					<input type="hidden" value="" name="filesNo">
 					
 		            <button type="submit" class="btn btn-blue text-center check-btn">등록</button>
 		            <a href="${pageContext.request.contextPath}/mypage/pet" class="btn btn-yellow">취소</a>
