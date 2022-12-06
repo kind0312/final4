@@ -68,8 +68,23 @@ public class PetRestController {
 	}
 	
 	@PutMapping("/pet_edit")
-	public boolean edit(@RequestBody PetDto petDto) {
-		return petDao.update(petDto);
+	public void edit(@RequestBody PetInsertVO petInsertVO) {
+		//펫 db수정
+		PetDto dto = PetDto.builder()
+				.petNo(petInsertVO.getPetNo())
+				.memberId(petInsertVO.getMemberId())
+				.petType(petInsertVO.getPetType())
+				.petName(petInsertVO.getPetName())
+				.petGender(petInsertVO.getPetGender())
+				.petBreed(petInsertVO.getPetBreed())
+				.petBirth(petInsertVO.getPetBirth())
+				.petWeight(petInsertVO.getPetWeight())
+				.petNeutralization(petInsertVO.getPetNeutralization())
+				.build();
+		petDao.update(dto);
+				
+		//펫, 첨부파일 연결테이블 db수정
+		petDao.petProfileUpdate(petInsertVO);
 	}
 	
 	@DeleteMapping("/pet_delete/{petNo}")

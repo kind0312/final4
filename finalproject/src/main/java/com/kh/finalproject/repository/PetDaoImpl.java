@@ -62,11 +62,17 @@ public class PetDaoImpl implements PetDao{
 	public void petProfileInsert(PetInsertVO petInsertVO) {
 		sqlSession.insert("pet.profileInsert", petInsertVO);
 	}
+	
+	@Override
+	public void petProfileUpdate(PetInsertVO petInsertVO) {
+		sqlSession.update("pet.profileUpdate",petInsertVO);
+	}
 
 	@Override
 	public int selectFileNo(int petNo) {
 		return sqlSession.selectOne("pet.selectFileNo",petNo);
 	}
+	
 
 
 	
