@@ -23,9 +23,9 @@
 		<link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
 		<link href="//fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet">
 	
-	    <link rel="stylesheet" type="text/css" href="/css/reset.css">
-	    <!-- <link rel="stylesheet" type="text/css" href="/css/layout.css"> -->
-	    <link rel="stylesheet" type="text/css" href="/css/commons.css">
+<!-- 	    <link rel="stylesheet" type="text/css" href="/css/reset.css"> -->
+<!-- 	    <link rel="stylesheet" type="text/css" href="/css/layout.css"> -->
+<!-- 	    <link rel="stylesheet" type="text/css" href="/css/commons.css"> -->
 	
 	    <!-- 외곽 border 점선 -->
 <!-- 	    <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
@@ -68,13 +68,13 @@
 	
 	    <!-- 주소 검색 -->
 	    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	    <script src="./daum-post-api.js"></script>
+	    <script src="${pageContext.request.contextPath}/js/daum-post-api.js"></script>
 	
 	    <!-- 확인 창-->
-	    <script src="./confirm-link.js"></script><!-- 여기 사이에는 코드를 적으면 script를 고치는 것이다.-->
+	    <script src="${pageContext.request.contextPath}/js/confirm-link.js"></script><!-- 여기 사이에는 코드를 적으면 script를 고치는 것이다.-->
 	
 	    <!-- 체크박스-->
-	    <script src="./checkbox.js"></script>
+	    <script src="${pageContext.request.contextPath}/js/checkbox.js"></script>
 	    
 	    <!-- 카카오 지도-->
 	    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94efcfc3a2fb279ab90052c1c24e8cc6"></script>
@@ -86,7 +86,7 @@
 /*         		} */
     		/* 태그 스타일 */
  		    body {
- 		     	height:1000px;
+/*  		     	height:1000px; */
  		    }
 		    p {
 			  margin-top: 0;
