@@ -33,47 +33,7 @@
 
 <script>
 	$(function(){
-		//펫 목록 출력
-		var memberId = $("[name=memberId]").val();
-		$.ajax({
-			url:"http://localhost:8888/rest/pet_list/"+memberId,
-			method:"get",
-			dataType:"json",
-			data:memberId,
-			success:function(resp){
-				var thead = $("thead");
-				if(resp==null){
-					var tr = $("<tr>").attr("class","table-default");
-					var th = $("<th>").attr("scope", "col").attr("colspan","3").text("내역이 존재하지 않습니다!");
-					tr.append(th);
-					tbody.append(tr);
-				}else{
-					for(var i=0; i<resp.length; i++){
-						var tr = $("<tr>").attr("class","table-default align-middle");
-						//첫번째 칸(펫 프로필 이미지)
-						var th1 = $("<th>").attr("width","30%");
-						var img = $("<img>").attr("src","#").attr("class","img-circle")
-											.attr("width","100").attr("height","100");				
-						th1.append(img);
-						//두번째 칸(펫 이름/성별)
-						var th2 = $("<th>").attr("width","40%");
-						var p1 = $("<p>").attr("class","name-font").text(resp[i].petName);
-						var p2 = $("<p>").attr("class","gender-font")
-										.text(resp[i].petType+" / "+resp[i].petGender+" / "+resp[i].petWeight+"kg");
-						th2.append(p1).append(p2);
-						//세번째 칸
-						var th3 = $("<th>").attr("width","30%");
-						var a = $("<a>").attr("class","btn btn-blue")
-										.attr("href","${pageContext.request.contextPath}/mypage/pet_detail?petNo="+resp[i].petNo)
-										.text("상세");
-						th3.append(a);
-						//최종
-						tr.append(th1).append(th2).append(th3);
-						thead.append(tr);
-					}
-				}
-			}
-		});
+		
 	});
 </script>
 
@@ -118,12 +78,35 @@
                  <h4 class="text-center">반려동물</h4>
             </div>
         </div>
-        
+		
         <div class="row">
             <div class="col-md-6 offset-md-3">   
                  <table class="table table-hover pet-table text-center">
                  		<thead>
-                 			<!-- 비동기 처리(목록출력) -->
+                 			<c:choose>
+                 				<c:when test="${pet.size()==0}">
+									<tr class="table-default">
+		                 				<th scope="col" colspan="3">내역이 존재하지 않습니다!</th>                					
+			                 		</tr>
+                 				</c:when>
+                 				<c:otherwise>
+                 					<c:forEach var="pet" items="${pet}">
+		                 				<tr class="table-default align-middle">
+			                 				<th width="30%">
+			                 					<img src="http://localhost:8888/download/${pet.filesNo}" class="img-circle" width="100" height="100">
+			                 				</th>
+			                 				<th width="40%">
+			                 					<p class="name-font">${pet.petName}</p>
+			                 					<p class="gender-font">${pet.petType} / ${pet.petGender} / ${pet.petWeight}kg</p>
+			                 				</th>
+			                 				<th width="30%">
+			                 					<a href="${pageContext.request.contextPath}/mypage/pet_detail?petNo=${pet.petNo}" class="btn btn-blue">상세</a>
+			                 				</th>
+			                 			</tr>
+		                 			</c:forEach>
+                 				</c:otherwise>
+                 			</c:choose>
+                 			
                  		</thead>
 					  	<tbody>
 						    <tr class="table-default align-middle">
@@ -142,7 +125,6 @@
     </div>
     <!-- 비동기 처리 위한 회원id -->
     <input type="hidden" value="${memberId}" name="memberId">
-
 </body>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
