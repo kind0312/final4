@@ -28,6 +28,11 @@ public class FilesDaoImpl implements FilesDao{
 	public FilesDto find(int filesNo) {
 		return sqlSession.selectOne("files.petProfile",filesNo);
 	}
+
+	@Override
+	public boolean delete(int filesNo) {
+		return sqlSession.delete("files.delete",filesNo)>0;
+	}
 	
 	
 

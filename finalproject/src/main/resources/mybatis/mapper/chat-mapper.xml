@@ -11,12 +11,12 @@
   </select>
   
   <insert id="roomCreate" parameterType="RoomDto">
-  insert into room values (room_seq.nextval, sysdate, null)
+  insert into room values (#{roomNo}, sysdate, null)
   </insert>
   
   
   <insert id="chatUserInsert" parameterType="ChatUserDto">
-  insert into chat_user values (#{memberId}, #{roomNo},#{memberName} , null)
+  insert into chat_user values (#{memberId}, #{roomNo},#{memberName} , #{memberStatus})
   </insert>
   
   <insert id="chatMessageInsert" parameterType="ChatDto">
@@ -28,7 +28,9 @@
   select * from chat where  room_no = #{roomNo}
   </select>
   
-  
+  <select id="roomSeqNo" resultType="String" >
+	  select room_seq.nextval from dual
+	</select>
   
   
   

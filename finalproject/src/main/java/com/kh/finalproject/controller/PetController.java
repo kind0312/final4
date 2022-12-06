@@ -22,18 +22,28 @@ public class PetController {
 	public String list(HttpSession session, Model model) {
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
 		model.addAttribute("memberId", memberId);
+		
+		//방법1. pet, pet_img > left join 해서 petInsertVO에 저장 후 모델로 출력하기
+		model.addAttribute("pet", petDao.list(memberId));
+		
 		return "mypage/pet_list";
 	}
 	
 	@RequestMapping("/pet_insert")
 	public String insert(HttpSession session, Model model) {
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		int petNo = petDao.sequence();
 		model.addAttribute("memberId", memberId);
+		model.addAttribute("petNo", petNo);
 		return "mypage/pet_insert";
 	}
 	
 	@RequestMapping("/pet_detail")
-	public String detail(@RequestParam int petNo, Model model) {
+	public String detail(HttpSession session,
+			@RequestParam int petNo, Model model) {
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("memberId", memberId);
+		model.addAttribute("filesNo", petDao.selectFileNo(petNo));
 		model.addAttribute("petNo", petNo);
 		return "mypage/pet_detail";
 	}
