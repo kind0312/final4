@@ -77,8 +77,20 @@
 				}
 		};
 		
-		//사진검사
-		$("[name=petProfile]").change(function(e){
+		//사진검사 함수
+		function profileCheck(){
+			var value = $("[name=petProfile]").val();
+			$("[name=petProfile]").removeClass("is-valid is-invalid");
+			if(value.length>0){
+				$("[name=petProfile]").addClass("is-valid");
+				check.petProfile=true;
+			}else{
+				$("[name=petProfile]").addClass("is-invalid");
+				check.petProfile=false;
+			}
+		}
+		
+		/* $("[name=petProfile]").change(function(e){
 			$(this).removeClass("is-valid is-invalid");
 			if($(this).val().length>0){
 				$(this).addClass("is-valid");
@@ -87,7 +99,7 @@
 				$(this).addClass("is-invalid");
 				check.petProfile=false;
 			}	
-		});
+		}); */
 
 		//이름검사
 		$("[name=petName]").blur(function(e){
@@ -138,7 +150,7 @@
 			$("[name=petName]").blur();
 			$("[name=petBreed]").blur();
 			$("[name=petWeight]").blur();
-			$("[name=petProfile]").change();
+			profileCheck();
 
 			// 필수입력사항만 보낼경우 value값에 null이 들어가 db에 등록되지 않음
 			// 필수, 전체입력 다 받을 경우만 ajax로 전송 및 db저장 되는 상태..
@@ -178,9 +190,7 @@
 					}
 				});
 			}
-		}); 
-		
-
+		});
 	});
 </script>
 
