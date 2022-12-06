@@ -24,6 +24,10 @@ public class PointDaoImpl implements PointDao{
 		return sqlSession.selectList("point.list",memberId);
 	}
 	
+	@Override
+	public int count(String memberId) {
+		return sqlSession.selectOne("point.count",memberId);
+	}
 	
 	
 

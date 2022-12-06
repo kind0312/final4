@@ -15,4 +15,10 @@
 	<select id="list" resultType="PointDto" parameterType="String">
 		select * from point where member_id = #{memberId} order by point_date desc
 	</select>
+	
+	<select id="count" resultType="int" parameterType="String">
+		select count(*) from point where member_id=#{memberId}
+	</select>
+	
+	
 </mapper>

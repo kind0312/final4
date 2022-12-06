@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pet">
+	<insert id="insert" parameterType="PetDto">
+		insert into pet(pet_no, member_id, pet_type, pet_name,
+		pet_gender, pet_breed, pet_birth, pet_weight, pet_neutralization) 
+		values(pet_seq.nextval, #{memberId}, #{petType}, #{petName},
+		#{petGender}, #{petBreed}, #{petBirth}, #{petWeight}, #{petNeutralization})
+	</insert>
+	
+	<select id="list" resultType="PetDto">
+		select * from pet where member_id=#{memberId} order by pet_no asc
+	</select>
+	
+	<select id="selectone" resultType="PetDto" parameterType="int">
+		select * from pet where pet_no=#{petNo}
+	</select>
+	
+	<update id="update" parameterType="PetDto">
+		update pet set pet_type=#{petType}, pet_name=#{petName},
+		pet_gender=#{petGender}, pet_breed=#{petBreed}, pet_birth=#{petBirth},
+		pet_weight=#{petWeight}, pet_neutralization=#{petNeutralization} 
+		where pet_no=#{petNo}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete pet where pet_no=#{petNo}
+	</delete>
+	
+	
+</mapper>

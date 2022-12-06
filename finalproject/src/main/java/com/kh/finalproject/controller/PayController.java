@@ -13,10 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.entity.ItemDto;
+import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.PointDto;
 import com.kh.finalproject.entity.PointPurchaseDto;
 import com.kh.finalproject.repository.ItemDao;
+import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.PointDao;
 import com.kh.finalproject.repository.PointPurchaseDao;
 import com.kh.finalproject.service.PayService;
@@ -26,9 +29,6 @@ import com.kh.finalproject.vo.PayReadyRequestVO;
 import com.kh.finalproject.vo.PayReadyResponseVO;
 import com.kh.finalproject.vo.PayVO;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Controller
 @RequestMapping("/pay")
 public class PayController {
@@ -41,6 +41,8 @@ public class PayController {
 	private PointPurchaseDao pointPurchaseDao;
 	@Autowired
 	private PayService payService;
+	@Autowired
+	private MemberDao memberDao;
 	
 	//포인트 금액 선택 화면
 	@GetMapping("/point_select")
@@ -53,9 +55,8 @@ public class PayController {
 	@GetMapping("/point_pay")
 	public String pay(@RequestParam int itemNo, 
 			HttpSession session, Model model) {
-		//String memberId = (String)session.getAttribute("loginId");
-		String memberId = "test1234";
-		//model.addAttribute("point", memberDao.selectOne(memberId));
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("point", memberDao.selectOne(memberId));
 		ItemDto dto = itemDao.selectOne(itemNo);
 		model.addAttribute("item", dto);
 		return "pay/point_pay";
@@ -65,10 +66,11 @@ public class PayController {
 	@PostMapping("/point_pay")
 	public String payment(@ModelAttribute PayVO payVO, HttpSession session) throws URISyntaxException {		
 		//결제요청 request 데이터 준비
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
 		int pointPurchaseNo = pointPurchaseDao.sequence();
 		PayReadyRequestVO vo = PayReadyRequestVO.builder()
 							.partner_order_id(String.valueOf(pointPurchaseNo))
-							.partner_user_id(String.valueOf("test1234"))
+							.partner_user_id(String.valueOf(memberId))
 							.item_name(payVO.getItem_name())
 							.total_amount(payVO.getTotal_amount())
 							.build();
@@ -122,6 +124,12 @@ public class PayController {
 			.tid(tid)
 			.build();
 		pointPurchaseDao.insert(pointPurchaseDto);
+		
+		//회원테이블에 포인트 증가처리
+		MemberDto dto = new MemberDto();
+		dto.setMemberId(partner_user_id);
+		dto.setMemberPoint((long)response.getAmount().getTotal());
+		memberDao.pointPlus(dto);
 		
 		return "redirect:/pay/point_pay_success";
 	}

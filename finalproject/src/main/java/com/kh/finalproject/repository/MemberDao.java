@@ -13,6 +13,7 @@ public interface MemberDao {
 	//회원 등록
 	void insert(MemberDto memberDto);
 	
+
 	//회원 목록
 	//List<MemberDto> selectList();
 	
@@ -24,8 +25,14 @@ public interface MemberDao {
 	//정렬
 	//List<MemberDto> complexSearch(MemberSearchVO vo);
 	
-	//회원상세
-	MemberDto selectOne(String memeberId);
+
 
 	
+
+	//회원 조회
+	MemberDto selectOne(String memberId);
+	
+	//수정(결제 후 포인트 증가 처리)
+	boolean pointPlus(MemberDto memberDto);
+
 }

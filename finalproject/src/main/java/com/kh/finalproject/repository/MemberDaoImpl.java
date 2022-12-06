@@ -24,6 +24,7 @@ public class MemberDaoImpl implements MemberDao {
 		sqlSession.insert("member.insert", memberDto);
 	}
 
+
 //	@Override
 //	public List<MemberDto> selectList() {
 //		
@@ -40,11 +41,19 @@ public class MemberDaoImpl implements MemberDao {
 	}
 	}
 
-	@Override
-	public MemberDto selectOne(String memeberId) {
-	     return sqlSession.selectOne("member.one"); 
-		
-	}
+	
 
+
+
+	
+	@Override
+	public MemberDto selectOne(String memberId) {
+		return sqlSession.selectOne("member.one", memberId);
+	}
+	
+	@Override
+	public boolean pointPlus(MemberDto memberDto) {
+		return sqlSession.update("member.plusPoint",memberDto)>0;
+	}
 
 }

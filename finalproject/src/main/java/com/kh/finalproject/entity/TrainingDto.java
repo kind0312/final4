@@ -9,11 +9,10 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class TrainingDto {
-	
 	private int trainingNo;
 	private String memberId;
 	private Date trainingDate;
-	private Date trainingStartTime;
+	private String trainingStartTime;
 	private String trainingBasicAddress;
 	private String trainingDetailAddress;
 	private String trainingMemo;

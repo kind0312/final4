@@ -31,7 +31,7 @@
 							      		<p>충전 예정 포인트</p>
 							      </th>
 							      <td scope="col" class="text-end">
-							      		<p>?P</p>
+							      		<p>${point.memberPoint}P</p>
 							      		<p>(+) <span>${item.itemPrice}</span>P</p>
 							      </td>
 						    </tr>
@@ -51,7 +51,7 @@
       	<form action="${pageContext.request.contextPath}/pay/point_pay" method="post">
 	      	<div class="row mt-4">
 	         	<div class="col-md-6 offset-md-3 text-center">
-	         		<button type="submit" class="kakaoPayBtn"><img src="${pageContext.request.contextPath}/image/kakaopaylogo.png" width="80" height="35" alt=""></button>
+	         		<button type="submit" class="kakaoPayBtn mb-5"><img src="${pageContext.request.contextPath}/image/kakaopaylogo.png" width="80" height="35" alt=""></button>
 					<input type="hidden" value="${item.itemName}" name="item_name">
 					<input type="hidden" value="${item.itemPrice}" name="total_amount">
 				</div>
