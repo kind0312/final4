@@ -42,18 +42,8 @@
 		//입력창 태그 및 확인(수정)버튼 숨김
 		tdHide();
 		
-		var petNo = $("[name=petNo]").val();
-		//pet_no로 첨부파일 불러오기
-		$.ajax({
-			url:"http://localhost:8888/rest/pet_img/"+petNo,
-			method:"get",
-			data:petNo,
-			success:function(resp){
-				$(".img-circle").attr("src","http://localhost:8888/download/"+resp);
-			}
-		});
-		
 		//pet_no로 상세 불러오기
+		var petNo = $("[name=petNo]").val();
 		$.ajax({
 			url:"http://localhost:8888/rest/pet_selectone/"+petNo,
 			method:"get",
@@ -136,44 +126,6 @@
 			//숨김해제
 			tdShow();
 			
-			//프로필 클릭 시 첨부파일 버튼 실행
-			$(".img-circle").click(function(){
-				$(".input-file").click();
-			});
-			
-			//프로필 클릭 이벤트
-			$(".input-file").change(function(){
-				var value = $(this).val();
-				if(value.length>0){ //파일 있음
-					var formData = new FormData();
-					formData.append("files", this.files[0]);
-					//기존파일 삭제처리(첨부파일, 연결테이블 데이터 해당 파일번호로 삭제)
-					var filesNo = $("[name=filesNo]").val();
-					$.ajax({
-						url:"http://localhost:8888/delete/"+filesNo,
-						method:"delete",
-						data:filesNo,
-						success:function(resp){
-							if(resp){ //삭제 성공하면 새로 등록
-								$.ajax({
-									url:"http://localhost:8888/upload",
-									method:"post",
-									data:formData,
-									processData:false, 
-				                    contentType:false,
-				                    success:function(resp){
-				                    	$(".img-circle").attr("src",resp);
-				                    	var check = resp.lastIndexOf("/"); //경로에서 /위치 찾기
-				                    	var newFilesNo = resp.substr(check+1); //fileNo 꺼내기
-				                    	$("[name=filesNo]").val(newFilesNo); //하단 파일no input태그에 값 넣기
-				                    }
-								});
-							}
-						}
-					});
-				}
-			});
-			
 			//정보 불러오기
 			var petNo = $("[name=petNo]").val();
 			$.ajax({
@@ -198,28 +150,13 @@
 		//변경된 정보 비동기화 등록처리
 		//상태 판정
 		check={
-				petProfile:false,
 				petName:false,
 				petBreed:false,
 				petWeight:false, weightRegex:/^[0-9]{1,5}$/,
 				allValid:function(){
-					return this.petName && this.petBreed && 
-									this.petWeight && this.petProfile;
+					return this.petName && this.petBreed && this.petWeight
 				}
 		};
-		
-		//사진검사
-		$("[name=petProfile]").change(function(e){
-			$(this).removeClass("is-valid is-invalid");
-			if($(this).val().length>0){
-				$(this).addClass("is-valid");
-				check.petProfile=true;
-			}else{
-				$(this).addClass("is-invalid");
-				check.petProfile=false;
-			}	
-		});
-		
 		//이름검사
 		$("[name=petName]").blur(function(e){
 			$(this).removeClass("is-valid is-invalid");
@@ -270,7 +207,6 @@
 			$("[name=petName]").blur();
 			$("[name=petBreed]").blur();
 			$("[name=petWeight]").blur();
-			$("[name=petProfile]").change();
 
 			if(check.allValid()){//등록처리
 				//비동기화 데이터 준비
@@ -338,7 +274,6 @@
 			$(".tdNeutralization").hide();
 			$("i").hide();
 			$(".confirm-btn").hide();
-			$(".petProfile").hide();
 		}
 		
 		function tdShow(){
@@ -351,7 +286,6 @@
 			$(".tdWeight").show();
 			$(".tdNeutralization").show();
 			$("i").show();
-			$(".petProfile").show();
 		}
 		
 		function newtdHide(){
@@ -426,9 +360,8 @@
 		
 		<div class="row text-center mt-3">
             <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">   
-                 <img src="" 
+                 <img src="${pageContext.request.contextPath}/#" 
                  		width="120" height="120" class="img-circle">
-                 <input type="file" style="display:none;" class="input-file form-control" name="petProfile" accept=".jpg, .png, .gif">
 			</div>
 		</div>
 		
@@ -505,9 +438,8 @@
 						</tr>
 					</tbody>
 				</table>
-				<!-- 비동기 처리 위한 펫no + 파일no-->
+				<!-- 비동기 처리 위한 펫no -->
 				<input type="hidden" value="${petNo}" name="petNo">
-				<input type="hidden" value="${filesNo}" name="filesNo">
 				
 	            <button type="button" class="btn btn-blue text-center edit-btn">수정</button>
 	            <button type="submit" class="btn btn-blue text-center confirm-btn">확인</button>

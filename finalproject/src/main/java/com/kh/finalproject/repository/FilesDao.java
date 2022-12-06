@@ -11,4 +11,7 @@ public interface FilesDao {
 	//조회
 	FilesDto find(int filesNo);
 	
+	//삭제
+	boolean delete(int filesNo);
+	
 }
