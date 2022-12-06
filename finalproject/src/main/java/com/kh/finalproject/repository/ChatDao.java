@@ -7,8 +7,11 @@ import com.kh.finalproject.entity.ChatUserDto;
 import com.kh.finalproject.entity.RoomDto;
 
 
+
 public interface ChatDao {
 
+	String createRoomSeq(); //룸 번호 시퀀스 생성
+	
 	//room 생성 - room테이블 insert
 	void createRoom(RoomDto roomDto);
 	
