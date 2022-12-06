@@ -52,6 +52,11 @@
 		insert into pet_img(files_no, pet_no) values(#{filesNo}, #{petNo})
 	</insert>
 	
+	<!-- 펫, 첨부파일 연결테이블 수정 -->
+	<update id="profileUpdate" parameterType="PetInsertVO">
+		update pet_img set files_no=#{filesNo} where pet_no=#{petNo}
+	</update>
+	
 	<!-- 펫 번호로 첨부파일 번호 조회 -->
 	<select id="selectFileNo" resultType="int" parameterType="int">
 		select files_no from pet_img where pet_no=#{petNo}

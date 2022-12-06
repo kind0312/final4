@@ -26,6 +26,8 @@ public interface PetDao {
 	//삭제
 	boolean delete(int petNo);
 	
-	//펫, 첨부파일 연결테이블 등록 - vo만들어서 처리!!!
+	//펫, 첨부파일 연결테이블 등록 - petInsertVO
 	void petProfileInsert(PetInsertVO petInsertVO);
+	//펫, 첨부파일 연결테이블 수정 - petInsertVO
+	void petProfileUpdate(PetInsertVO petInsertVO);
 }
