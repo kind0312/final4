@@ -22,6 +22,10 @@ public class PetController {
 	public String list(HttpSession session, Model model) {
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
 		model.addAttribute("memberId", memberId);
+		
+		//방법1. pet, pet_img > left join 해서 petInsertVO에 저장 후 모델로 출력하기
+		model.addAttribute("pet", petDao.list(memberId));
+		
 		return "mypage/pet_list";
 	}
 	

@@ -9,13 +9,20 @@ import com.kh.finalproject.vo.PetInsertVO;
 public interface PetDao {
 	//시퀀스 선발급
 	int sequence();
+	
 	//등록
 	void insert(PetDto petDto);
+	
 	//조회
 	List<PetDto> selectList(String memberId);
 	PetDto selectOne(int petNo);
+	int selectFileNo(int petNo);
+	//펫목록 동기 출력위한 메소드
+	List<PetInsertVO> list(String memberId);
+	
 	//수정
 	boolean update(PetDto petDto);
+	
 	//삭제
 	boolean delete(int petNo);
 	

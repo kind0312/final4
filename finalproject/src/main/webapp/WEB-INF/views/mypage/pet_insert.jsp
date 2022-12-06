@@ -67,13 +67,27 @@
 		
 		//상태 판정
 		check={
+				petProfile:false,
 				petName:false,
 				petBreed:false,
 				petWeight:false, weightRegex:/^[0-9]{1,5}$/,
 				allValid:function(){
-					return this.petName && this.petBreed && this.petWeight
+					return this.petName && this.petBreed && 
+									this.petWeight && this.petProfile;
 				}
 		};
+		
+		//사진검사
+		$("[name=petProfile]").change(function(e){
+			$(this).removeClass("is-valid is-invalid");
+			if($(this).val().length>0){
+				$(this).addClass("is-valid");
+				check.petProfile=true;
+			}else{
+				$(this).addClass("is-invalid");
+				check.petProfile=false;
+			}	
+		});
 
 		//이름검사
 		$("[name=petName]").blur(function(e){
@@ -124,6 +138,7 @@
 			$("[name=petName]").blur();
 			$("[name=petBreed]").blur();
 			$("[name=petWeight]").blur();
+			$("[name=petProfile]").change();
 
 			// 필수입력사항만 보낼경우 value값에 null이 들어가 db에 등록되지 않음
 			// 필수, 전체입력 다 받을 경우만 ajax로 전송 및 db저장 되는 상태..
@@ -221,7 +236,8 @@
             <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">   
                  <img src="${pageContext.request.contextPath}/image/profile_basic.jpg" 
                  		width="120" height="120" class="img-circle">
-                 <input type="file" style="display:none;" class="input-file"  accept=".jpg, .png, .gif">
+                 <input type="file" style="display:none;" class="input-file form-control" name="petProfile" accept=".jpg, .png, .gif">
+                 <div class="invalid-feedback">사진을 등록해주세요!</div>
 			</div>
 		</div>
 		

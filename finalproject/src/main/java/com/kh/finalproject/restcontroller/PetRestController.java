@@ -47,16 +47,24 @@ public class PetRestController {
 		
 	}
 	
+	//한 명의 회원의 펫 목록 - 동기로 사용예정
 	@GetMapping("/pet_list/{memberId}")
 	public List<PetDto> list(@PathVariable String memberId){
 		List<PetDto> dto = petDao.selectList(memberId);
 		return dto;
 	}
 	
+	//펫번호로 조회
 	@GetMapping("/pet_selectone/{petNo}")
 	public PetDto selectone(@PathVariable int petNo){
 		PetDto dto = petDao.selectOne(petNo);
 		return dto;
+	}
+	
+	//펫번로 파일번호 조회
+	@GetMapping("/pet_img/{petNo}")
+	public int selectFileNo(@PathVariable int petNo){
+		return petDao.selectFileNo(petNo);
 	}
 	
 	@PutMapping("/pet_edit")

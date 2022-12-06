@@ -39,6 +39,12 @@ public class PetDaoImpl implements PetDao{
 	public PetDto selectOne(int petNo) {
 		return sqlSession.selectOne("pet.selectone",petNo);
 	}
+	
+	//동기로 펫 목록 출력
+	@Override
+	public List<PetInsertVO> list(String memberId) {
+		return sqlSession.selectList("pet.volist",memberId);
+	}
 
 	//수정
 	@Override
@@ -55,6 +61,11 @@ public class PetDaoImpl implements PetDao{
 	@Override
 	public void petProfileInsert(PetInsertVO petInsertVO) {
 		sqlSession.insert("pet.profileInsert", petInsertVO);
+	}
+
+	@Override
+	public int selectFileNo(int petNo) {
+		return sqlSession.selectOne("pet.selectFileNo",petNo);
 	}
 
 
