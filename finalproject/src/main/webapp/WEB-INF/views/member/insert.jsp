@@ -7,6 +7,9 @@
 	<jsp:param value="CareRegistration" name="title"/>
 </jsp:include>
 <style>
+	.btn{
+		border-radius: 10px !important;
+	}
 	.img-circle{
 		border-radius: 70%;
     	/* overflow: hidden; 사진 첨부하고 주석풀기*/
@@ -132,9 +135,15 @@
 						<i class="fa-solid fa-asterisk blue"></i>
 					</label>
 					<div class="input-group">
-						<input type="email" name="memberEmail" class="form-control underline check-input" required>
+						<input type="email" name="memberEmail" class="form-control underline check-input" aria-describedby="email-button" required>
 						<div class="valid-feedback"></div>
 	                    <div class="invalid-feedback">형식에 맞게 입력해주세요</div>
+					</div>
+					<div class="input-group mt-2">
+						<input type="text" class="form-control underline w-70" required>
+						<button class="btn btn-outline-blue w-30" type="button" id="email-button">인증코드발송</button>
+						<div class="valid-feedback"></div>
+	                    <div class="invalid-feedback"></div>
 					</div>
 				</div>
 			</div>
@@ -168,12 +177,12 @@
 						<div class="valid-feedback"></div>
 	                    <div class="invalid-feedback">우편번호를 입력해주세요</div>
 	                </div>
-	                <div class="input-group">
+	                <div class="input-group mt-2">
 						<input type="text" name="memberBaseAddress" class="form-control underline w-100 check-input" placeholder="기본주소" required>
 						<div class="valid-feedback"></div>
 	                    <div class="invalid-feedback">기본주소를 입력해주세요</div>
 					</div>
-					<div class="input-group">
+					<div class="input-group mt-2">
 						<input type="text" name="memberDetailAddress" class="form-control underline w-100 check-input" placeholder="상세주소" required>
 						<div class="valid-feedback"></div>
 	                    <div class="invalid-feedback">상세주소를 입력해주세요</div>

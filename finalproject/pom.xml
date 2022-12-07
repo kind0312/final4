@@ -103,6 +103,7 @@
 		    <artifactId>springdoc-openapi-ui</artifactId>
 		    <version>1.6.12</version>
 		</dependency>
+		<!-- properties custom을 쓰기 위해 추가 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
