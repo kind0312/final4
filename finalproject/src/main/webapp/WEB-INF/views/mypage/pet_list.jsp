@@ -86,7 +86,7 @@
                  			<c:choose>
                  				<c:when test="${pet.size()==0}">
 									<tr class="table-default">
-		                 				<th scope="col" colspan="3">내역이 존재하지 않습니다!</th>                					
+		                 				<th scope="col" colspan="3" height="130px">내역이 존재하지 않습니다!</th>                					
 			                 		</tr>
                  				</c:when>
                  				<c:otherwise>
