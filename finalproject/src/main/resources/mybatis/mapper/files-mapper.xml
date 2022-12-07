@@ -15,6 +15,10 @@
 		values(#{filesNo}, #{filesOriginalName}, #{filesType}, #{filesSize})
 	</insert>
 	
+	<select id="memberProfile" resultType="FilesDto" parameterType="int">
+		select * from files where files_no=#{filesNo}
+	</select>
+	
 	<select id="petProfile" resultType="FilesDto" parameterType="int">
 		select * from files where files_no=#{filesNo}
 	</select>	

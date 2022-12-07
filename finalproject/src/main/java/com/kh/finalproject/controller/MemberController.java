@@ -4,13 +4,17 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.entity.MemberDto;
+import com.kh.finalproject.entity.MemberImgDto;
+import com.kh.finalproject.repository.FilesDao;
 import com.kh.finalproject.repository.MemberDao;
 
 @Controller
@@ -20,6 +24,9 @@ public class MemberController {
 	@Autowired
 	private MemberDao memberDao;
 	
+	@Autowired
+	private FilesDao filesDao;
+	
 	//회원가입
 	@GetMapping("/insert")
 	public String insert() {
@@ -27,8 +34,10 @@ public class MemberController {
 	}
 	
 	@PostMapping("/insert")
-	public String insert(@ModelAttribute MemberDto memberDto) {
+	public String insert(@ModelAttribute MemberDto memberDto,
+						@ModelAttribute MemberImgDto memberImgDto) {
 		memberDao.insert(memberDto);
+		memberDao.memberProfileInsert(memberImgDto);
 		return "redirect:insert_success";
 	}
 	

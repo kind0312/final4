@@ -7,6 +7,10 @@
 	<jsp:param value="CareRegistration" name="title"/>
 </jsp:include>
 <style>
+	.img-circle{
+		border-radius: 70%;
+    	/* overflow: hidden; 사진 첨부하고 주석풀기*/
+	}
 	.form-check-input.is-valid:checked{
 		background-color:#4582ec;
 		border-color:#4582ec;
@@ -28,6 +32,7 @@
         		<img src="${pageContext.request.contextPath}/image/profile_basic.jpg" 
                  		width="120" height="120" class="img-circle">
                 <input type="file" style="display:none;" class="form-control input-file" name="memberImg" accept=".jpg, .png, .gif">
+                <input type="hidden" value="" name="filesNo">
         	</div>
         </div>
         <div class="row mt-4">
@@ -200,6 +205,37 @@
 		//프로필 클릭 시 첨부파일 버튼 실행
 		$(".img-circle").click(function(){
 			$(".input-file").click();
+		});
+		
+		//프로필 파일 저장 및 미리보기
+		$(".input-file").change(function(){
+			//console.log($(".input-file").val()); //선택된 파일 경로와 이름이 나옴
+			//console.log(this.files); //선택한 파일들(배열)이 나옴
+			//console.log(this.files[0].name); //선택한 파일의 첫번째 값의 이름
+			var value = $(this).val();
+			if(value.length>0){ //파일 있음(비동기화로 파일 불러오기)
+				//서버에 전송할 formdate 만들기
+				var formData = new FormData();
+				formData.append("files", this.files[0]);
+                
+				$.ajax({
+					url:"http://localhost:8888/upload",
+					method:"post",
+					data:formData,
+					//multipart 요청을 위해 아래 2가지 꼭 보내줘야함
+					processData:false, 
+                    contentType:false,
+                    success:function(resp){
+                    	//console.log(resp); //이미지 경로 반환
+                    	$(".img-circle").attr("src",resp);
+                    	var check = resp.lastIndexOf("/"); //경로에서 /위치 찾기
+                    	var filesNo = resp.substr(check+1); //fileNo 꺼내기
+                    	$("[name=filesNo]").val(filesNo); //filesNo input태그에 값 넣기
+                    }
+				});
+			}else{ //파일 없거나 있던 파일 삭제
+				$(".img-circle").attr("src","${pageContext.request.contextPath}/image/profile_basic.jpg");
+			}
 		});
 		
 		//형식 검사를 위한 객체 생성
