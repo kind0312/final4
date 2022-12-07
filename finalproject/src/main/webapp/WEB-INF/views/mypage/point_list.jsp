@@ -19,7 +19,6 @@
 		font-weight:bolder;
 		font-size:17px;
 	}
-
 </style>
 
 <script>

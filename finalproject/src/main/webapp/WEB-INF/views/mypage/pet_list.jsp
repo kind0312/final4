@@ -27,7 +27,7 @@
 		border-radius: 70%;
     	border:none;
     	background-color:#81BDF1;
-    	/* overflow: hidden; 사진 첨부하고 주석풀기*/
+    	overflow: hidden;
 	}
 </style>
 
