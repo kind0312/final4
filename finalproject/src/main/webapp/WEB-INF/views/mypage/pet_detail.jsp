@@ -11,8 +11,8 @@
 	.img-circle{
 		border-radius: 70%;
     	border:none;
-    	background-color:#81BDF1;
-    	/* overflow: hidden; 사진 첨부하고 주석풀기*/
+    	background-color:black;
+    	overflow: hidden;
 	}
 	.form-control{
 		display:inline;
@@ -65,7 +65,8 @@
 				var inputType=$("<input>").attr("name","petType").val(resp.petType)
 									.attr("type","text").attr("readonly","readonly")
 									.attr("style","border-color:rgba(0, 0, 0, 0.1); box-shadow:none;")
-									.attr("class","underline form-control text-center");
+									.attr("class","underline form-control text-center")
+									.attr("id","newType");
 				tdType.append(inputType);
 				trType.append(tdType);
 				
@@ -74,7 +75,8 @@
 				var inputName=$("<input>").attr("name","petName").val(resp.petName)
 											.attr("type","text").attr("readonly","readonly")
 											.attr("style","border-color:rgba(0, 0, 0, 0.1); box-shadow:none;")
-											.attr("class","underline form-control text-center");
+											.attr("class","underline form-control text-center")
+											.attr("id","newName");
 				tdName.append(inputName);
 				trName.append(tdName);
 				
@@ -83,7 +85,8 @@
 				var inputGender=$("<input>").attr("name","petGender").val(resp.petGender)
 											.attr("type","text").attr("readonly","readonly")
 											.attr("style","border-color:rgba(0, 0, 0, 0.1); box-shadow:none;")
-											.attr("class","underline form-control text-center");
+											.attr("class","underline form-control text-center")
+											.attr("id","newGender");
 				tdGender.append(inputGender);
 				trGender.append(tdGender);
 				
@@ -92,7 +95,8 @@
 				var inputBreed=$("<input>").attr("name","petBreed").val(resp.petBreed)
 											.attr("type","text").attr("readonly","readonly")
 											.attr("style","border-color:rgba(0, 0, 0, 0.1); box-shadow:none;")
-											.attr("class","underline form-control text-center");
+											.attr("class","underline form-control text-center")
+											.attr("id","newBreed");
 				tdBreed.append(inputBreed);
 				trBreed.append(tdBreed);
 				
@@ -101,7 +105,8 @@
 				var inputBirth=$("<input>").attr("name","petBirth").val(resp.petBirth)
 											.attr("type","text").attr("readonly","readonly")
 											.attr("style","border-color:rgba(0, 0, 0, 0.1); box-shadow:none;")
-											.attr("class","underline form-control text-center");
+											.attr("class","underline form-control text-center")
+											.attr("id","newBirth");
 				tdBirth.append(inputBirth);
 				trBirth.append(tdBirth);
 				
@@ -110,7 +115,8 @@
 				var inputWeight=$("<input>").attr("name","petWeight").val(resp.petWeight)
 											.attr("type","text").attr("readonly","readonly")
 											.attr("style","border-color:rgba(0, 0, 0, 0.1); box-shadow:none;")
-											.attr("class","underline form-control text-center");
+											.attr("class","underline form-control text-center")
+											.attr("id","newWeight");
 				tdWeight.append(inputWeight);
 				trWeight.append(tdWeight);
 				
@@ -119,7 +125,8 @@
 				var inputNeutralization=$("<input>").attr("name","petNeutralization").val(resp.petNeutralization)
 											.attr("type","text").attr("readonly","readonly")
 											.attr("style","border-color:rgba(0, 0, 0, 0.1); box-shadow:none;")
-											.attr("class","underline form-control text-center");
+											.attr("class","underline form-control text-center")
+											.attr("id","newNeutralization");
 				tdNeutralization.append(inputNeutralization);
 				trNeutralization.append(tdNeutralization);
 			}
@@ -135,7 +142,7 @@
 			//숨김해제
 			tdShow();
 			
-			//정보 불러오기
+			//정보 불러와서 찍기
 			updateInfo();
 			
 			//프로필 클릭 시 첨부파일 버튼 실행
@@ -274,6 +281,9 @@
 			var birth=$("[name=petBirth]").val();
 			var weight=$("[name=petWeight]").val();
 			var neutralization=$("[name=petNeutralization]:checked").val();
+			console.log(type);
+			console.log(gender);
+			console.log(neutralization);
 			
 			//data에 묶음
 			data={
@@ -288,21 +298,21 @@
 				petWeight:weight,
 				petNeutralization:neutralization
 			}
-			
 			if(check.allValid()){//수정처리
 				$.ajax({
 					url:"http://localhost:8888/rest/pet_edit",
 					method:"put",
+					async:false,
 					contentType:"application/json",
 					data:JSON.stringify(data),
 					success:function(resp){
 						$(".edit-btn").show();
 						tdHide();
 						newtdShow();
-						loadList();
 					}
 				});
 			}
+			loadList();
 		});
 		
 		//펫 정보 출력
@@ -314,13 +324,13 @@
 				dataType:"json",
 				data:petNo,
 				success:function(resp){
-					$("[name=petType]").val(resp.petType);
-					$("[name=petName]").val(resp.petName);
-					$("[name=petGender]").val(resp.petGender);
-					$("[name=petBreed]").val(resp.petBreed);
-					$("[name=petBirth]").val(resp.petBirth);
-					$("[name=petWeight]").val(resp.petWeight);
-					$("[name=petNeutralization]").val(resp.petNeutralization);
+					$("#newType").val(resp.petType);
+					$("#newName").val(resp.petName);
+					$("#newGender").val(resp.petGender);
+					$("#newBreed").val(resp.petBreed);
+					$("#newBirth").val(resp.petBirth);
+					$("#newWeight").val(resp.petWeight);
+					$("#newNeutralization").val(resp.petNeutralization);
 				}
 			});
 		}
@@ -334,6 +344,7 @@
 				dataType:"json",
 				data:petNo,
 				success:function(resp){
+					console.log(resp);
 					$("[name=petName]").val(resp.petName);
 					$("[name=petBreed]").val(resp.petBreed);
 					$("[name=petBirth]").val(resp.petBirth);
