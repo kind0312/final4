@@ -305,3 +305,11 @@ create table chat_img(
 files_no REFERENCES files(files_no) on DELETE set null,
 chat_no REFERENCES chat(chat_no) on DELETE CASCADE
 );
+
+-- emailcert 이메일인증
+drop table emailcert;
+create table emailcert(
+emailcert_email varchar2(60) primary key,
+emailcert_serial char(6) not null,
+emailcert_send date defalut sysdate not null
+);
