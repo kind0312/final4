@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.PetDto;
 import com.kh.finalproject.entity.PetImgDto;
+import com.kh.finalproject.vo.MemberDetailVO;
 
 @Repository
 public class PetDaoImpl implements PetDao{
@@ -45,6 +46,12 @@ public class PetDaoImpl implements PetDao{
 		return sqlSession.delete("pet.delete", petNo)>0;
 	}
 
+	
+	
+	
+	
+	
+	
 
 	
 	

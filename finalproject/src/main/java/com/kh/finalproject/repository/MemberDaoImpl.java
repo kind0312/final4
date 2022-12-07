@@ -13,6 +13,7 @@ import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.vo.MemberListSearchVO;
 import com.kh.finalproject.vo.MemberListVO;
 
+
 @Repository
 public class MemberDaoImpl implements MemberDao {
 
@@ -25,11 +26,6 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 
-//	@Override
-//	public List<MemberDto> selectList() {
-//		
-//	sqlSession.selectList(null)
-//	}
 
 	@Override
 	public List<MemberListVO> selectList(MemberListSearchVO vo) {
@@ -41,11 +37,7 @@ public class MemberDaoImpl implements MemberDao {
 	}
 	}
 
-	
 
-
-
-	
 	@Override
 	public MemberDto selectOne(String memberId) {
 		return sqlSession.selectOne("member.one", memberId);
@@ -55,5 +47,18 @@ public class MemberDaoImpl implements MemberDao {
 	public boolean pointPlus(MemberDto memberDto) {
 		return sqlSession.update("member.plusPoint",memberDto)>0;
 	}
+
+
+
+	
+
+
+
+	
+
+
+
+
+
 
 }

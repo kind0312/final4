@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.kh.finalproject.entity.PetDto;
 import com.kh.finalproject.entity.PetImgDto;
+import com.kh.finalproject.vo.MemberDetailVO;
+
 
 public interface PetDao {
 	//등록
@@ -16,6 +18,11 @@ public interface PetDao {
 	//삭제
 	boolean delete(int petNo);
 	
+	//
+	
 	//펫, 첨부파일 연결테이블 등록 - vo만들어서 처리!!!
+
+	
+	
 	
 }

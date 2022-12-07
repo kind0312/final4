@@ -16,48 +16,7 @@
 		#{memberBirth}, #{memberGender})
 	</insert>
 
-	<!--  
-	<select id="list" resultType="MemberDto">
-	    select *from member order by member_joindate asc
-	</select>    
 	
-     <select id="search" parameterType="map" resultType="memberDto">
-      select*from member order by member_joindate asc
-      <where>
-      <if test="type !=null and keyword !=null">
-     
-      where instr(${type),#{keyword}>0
-       
-        Map<String, String> map = new HashMap<>();
-      
-      </if>
-      
-     
-	<if test="sort !=null">
-	 order by
-	 <foreach collection="sort" item="s" separator=",">
-	 	${s}
-	 </foreach>
-	</if>
-	</where>
-       
-     </select>
-    
--->
-
-
- <!--
-    <select id="complex6" parameterType="map" resultType="MemberDto">
-	select*from member
-	정렬할 내용이 있다면 
-	<if test="sort !=null">
-	 order by
-	 <foreach collection="sort" item="s" separator=",">
-	 	${s}
-	 </foreach>
-	</if>
-    </select>
-    --> 
     	
 	<select id="list" resultType="MemberDto">
 	    select *from member order by member_joindate asc

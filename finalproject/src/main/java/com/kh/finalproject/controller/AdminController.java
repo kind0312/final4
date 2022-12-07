@@ -15,9 +15,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalproject.entity.AdminDto;
 import com.kh.finalproject.entity.MemberDto;
+import com.kh.finalproject.entity.PetDto;
 import com.kh.finalproject.repository.MemberDao;
-
+import com.kh.finalproject.repository.PetDao;
+import com.kh.finalproject.repository.TrainerDao;
+import com.kh.finalproject.vo.MemberDetailVO;
 import com.kh.finalproject.vo.MemberListSearchVO;
+import com.kh.finalproject.vo.TrainerListSearchVO;
+import com.kh.finalproject.vo.TrainerListVO;
+
 
 @Controller
 @RequestMapping("/admin")
@@ -26,6 +32,12 @@ public class AdminController {
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private PetDao petDao;
+	
+	@Autowired
+	private TrainerDao trainerDao;
 	
 
 	
@@ -48,41 +60,53 @@ public class AdminController {
 		model.addAttribute("memberList",memberDao.selectList(vo));
 		
 		
-//		
-//		boolean isSearch=type!=null& keyword!=null;
-//		if(isSearch) {
-//			model.addAttribute("memberList",memberDao.seletList(type,keyword));
-//			//model.addAttribtute("memberList", memberDao.complexSearch(MemberDto dto));
-//		}
-//		else {
-//			model.addAttribute("memberList",memberDao.selectList());
-//		}
-//		return "admin/memberList";
-//		}
+
 		return "admin/memberList";
 	}
-//	@RequestMapping("/memberList")
-//	public String memberList(@ModelAttribute MemberSearchVO vo, Model model) {
-//		List<MemberDto> list= memberDao.complexSearch(vo);
-//		model.addAttribute("memberList",list);
-//		return "admin/memberList";
-//		
-//		
-//	}
+	//관리자 훈련사 목록과 검색
+	@GetMapping("/trainerList")
+	public String trainerList(Model model,
+			@ModelAttribute(name="vo")  TrainerListSearchVO vo) {
+		
+		model.addAttribute("trainerList",trainerDao.selectList(vo));
+	
+		
+		return "admin/trainerList";
+	}
+			
+			
+			
+	
+
+	
+
 	
 	//회원-상세
 	@GetMapping("/memberDetail")
 	public String memberDetail(Model model, @RequestParam String memberId) {
 		
-		//회원 정보
-		MemberDto memberDto=memberDao.selectOne(memberId);
-		model.addAttribute("memberDto",memberDto);
 		//pet정보
+
+		List<PetDto> petDto= petDao.selectList(memberId);
+		model.addAttribute("petDto",petDto);
+	
+	    
+		//회원 정보
+	    MemberDto memberDto=memberDao.selectOne(memberId);
+		model.addAttribute("memberDto",memberDto);
+
+		 return "admin/memberDetail";
+	}
+	
+	//훈련사-상세
+	@GetMapping("/trainerDetail")
+	public String trainerDetail(Model model, @RequestParam String memberId) {
+		
+		TrainerListVO trainerListVO=trainerDao.selectOne(memberId);
+		model.addAttribute("trainerListVO",trainerListVO);
 		
 		
-		
-		
-		return "admin/memberDetail";
+		return "admin/trainerDetail";
 	}
 			 
 
