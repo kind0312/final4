@@ -6,8 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class TrainingDetailDto {
-
-	private int trainingNo;
-	private int trainingDetailPetNo;
+public class PurchaseDetailDto {
+	private int purchaseDetailNo;
+	private int trainingPurchaseNo;
+	private int purchaseDetailPetNo;
+	private int purchaseDetailPrice;
+	private String purchaseDetailStatus;
 }

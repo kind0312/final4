@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="training_purchase">
+
+ 	<!-- 훈련서비스 번호로 1건의 결제내역 조회 -->
+ 	<select id="selectOne" resultType="TrainingPurchaseDto" parameterType="int">
+ 		select * from training_purchase where training_no=#{trainingNo}
+ 	</select>
+ 	
+ 	<!-- 결제 고유번호로 결제 상세내역 조회 -->
+ 	<select id="detailSelectOne" resultType="PurchaseDetailDto" parameterType="int">
+ 		select * from purchase_detail where training_purchase_no=#{trainingPurchaseNo}
+ 	</select>
+ 	
+ 	
+  
+  </mapper>
+ 
