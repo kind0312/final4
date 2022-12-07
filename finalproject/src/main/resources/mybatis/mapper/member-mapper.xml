@@ -16,6 +16,35 @@
 		#{memberTel}, #{memberPost}, #{memberBaseAddress}, #{memberDetailAddress},
 		#{memberBirth}, #{memberGender})
 	</insert>
+
+	
+    	
+	<select id="list" resultType="MemberDto">
+	    select *from member order by member_joindate asc
+	    
+	 <!--  <if test="sort !=null">
+	 order by
+	 <foreach collection="sort" item="s" separator=",">
+	 	${s}
+	 </foreach>
+	</if>-->
+	</select> 
+	  
+	 <select id="search" parameterType="map" resultType="MemberDto">
+      select*from member
+      
+      <if test="type !=null and keyword !=null">
+     where instr(${type}, #{keyword}) > 0
+     order by ${type} asc
+       
+   
+       </if>
+       
+       
+       </select>
+       
+    
+
 	
 	<!-- 회원, 첨부파일 연결테이블 등록 -->
 	<insert id="profileInsert" parameterType="MemberImgDto">
@@ -30,6 +59,7 @@
 		update member set member_point=member_point+#{memberPoint} 
 		where member_id=#{memberId}
 	</update>
+
 	
 	<select id="findFileNo" parameterType="String">
 	select files_no from member_img where member_id = #{memberId}

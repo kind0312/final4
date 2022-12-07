@@ -16,4 +16,6 @@ public class TrainerListVO {
 	private String trainerProfileContent;
 	private String memberName;
 	private String memberId;
+	private String memberEmail;
+	private String memberTel;
 }

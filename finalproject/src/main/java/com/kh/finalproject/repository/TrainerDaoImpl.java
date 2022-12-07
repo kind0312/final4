@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.finalproject.entity.TrainerDto;
 import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.vo.ReviewVO;
+import com.kh.finalproject.vo.TrainerListSearchVO;
 import com.kh.finalproject.vo.TrainerListVO;
 
 
@@ -49,11 +50,23 @@ public class TrainerDaoImpl implements TrainerDao {
 	}
 
 	@Override
+	public List<TrainerListVO> selectList(TrainerListSearchVO vo) {
+		
+		if(vo.isSearch()) {
+		    return sqlSession.selectList("trainer.search",vo);
+		}
+		else {
+			return sqlSession.selectList("trainer.list",vo);
+		}
+		
+	}
+
 	public TrainerDto selectOnePro(String memberId) {		
 		return sqlSession.selectOne("trainer.selectOnePro", memberId);
 	}
 
 	
+
 
 //	@Override
 //	public boolean update(TrainerDto trainerDto) {		
