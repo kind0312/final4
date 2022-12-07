@@ -142,9 +142,9 @@
 			  					<tr class="table-default"><td colspan="2"></td></tr>
 						  			<tr class="table-default underline-out" height="60px">
 						  				<td class="title pt-sm-3" width="45%"><span class="ps-sm-4">날짜</span></td>
-						  				<td width="55%" class="content pe-sm-4 pt-sm-3">
+						  				<td width="55%" class="content pt-sm-3">
 						  					<fmt:formatDate value="${training.trainingDate}" pattern="yyyy-MM-dd (E)"/>
-						  					<span>${training.trainingStartTime}</span>
+						  					<span class="pe-sm-4">${training.trainingStartTime}</span>
 						  				</td>
 						  			</tr>
 						  			<tr class="table-default underline-out"  height="50px">
@@ -152,7 +152,7 @@
 						  				<td width="55%" class="content">
 						  				<span class="pe-sm-4 price-font">
 						  					<fmt:formatNumber value="${purchase.trainingPurchasePrice}" pattern="###,###"></fmt:formatNumber>
-						  				</span>
+						  				</span> 
 						  				</td>
 						  			</tr>
 						  			<tr class="table-default underline-out"  height="50px">
@@ -208,8 +208,12 @@
 						  			</tr>
 						  			<c:if test="${petCount > 1}">
 						  				<tr class="table-default align-middle underline-out"  height="50px">
-							  				<td class="title"  width="45%"><span class="ps-sm-4">추가 요금(+10,000)</span></td>
-							  				<td width="55%" class="content"><span class="pe-sm-4">10,000</span></td>
+							  				<td class="title"  width="45%"><span class="ps-sm-4">추가 요금(+${(petCount-1)*10000})</span></td>
+							  				<td width="55%" class="content">
+								  				<span class="pe-sm-4">
+								  					<fmt:formatNumber value="${(petCount-1)*10000}" pattern="###,###"></fmt:formatNumber>
+								  				</span>
+							  				</td>
 						  				</tr>
 						  			</c:if>
 						  			<tr class="table-default align-middle underline-out"  height="50px">
