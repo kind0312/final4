@@ -311,5 +311,5 @@ drop table emailcert;
 create table emailcert(
 emailcert_email varchar2(60) primary key,
 emailcert_serial char(6) not null,
-emailcert_send date defalut sysdate not null
+emailcert_send date default sysdate not null
 );
