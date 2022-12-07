@@ -15,10 +15,18 @@
 		values(#{filesNo}, #{filesOriginalName}, #{filesType}, #{filesSize})
 	</insert>
 	
-	<select id="petProfile" resultType="FilesDto" parameterType="int">
+	<select id="memberProfile" resultType="FilesDto" parameterType="int">
 		select * from files where files_no=#{filesNo}
 	</select>
-
 	
+	<select id="petProfile" resultType="FilesDto" parameterType="int">
+		select * from files where files_no=#{filesNo}
+	</select>	
+	
+	<delete id="delete" parameterType="int">
+		delete files where files_no=#{filesNo}
+	</delete>
+
+
 	
 </mapper>

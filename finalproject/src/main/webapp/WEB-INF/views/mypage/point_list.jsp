@@ -23,39 +23,7 @@
 
 <script>
 	$(function(){
-		$.ajax({
-			url:"http://localhost:8888/rest/point_list",
-			method:"get",
-			dataType:"json",
-			success:function(resp){
-				var tbody = $("tbody");
-				if(resp==null){
-					var tr = $("<tr>").attr("class","table-default");
-					var td = $("<td>").text("내역이 존재하지 않습니다!");
-					tr.append(td);
-					tbody.append(tr);
-				}else{
-					for(var i=0; i<resp.length; i++){
-						var tr = $("<tr>").attr("class","table-default");
-						var td1 = $("<td>").text(resp[i].pointDate);
-						var td2 = $("<td>").text(resp[i].pointStatus);
-						
-						//구매, 사용에 따라 마이너스, 플러스 버튼 추가 후 td태그에 저장
-						var price="";
-						if(resp[i].pointStatus=="구매"){
-							price = "+"+resp[i].pointPrice;
-						}else if(resp[i].pointStatus=="사용"){
-							price = "-"+resp[i].pointPrice;
-						}
-						var td3 = $("<td>").text(price).attr("class","price-font");
-						tr.append(td1).append(td2).append(td3);
-						tbody.append(tr);
-					}
-				}
-				
-				
-			}
-		});
+		
 	});
 </script>
 
@@ -102,15 +70,15 @@
         </div>
         
 		<div class="row mt-5">
-            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
                  <span class="float-left">보유포인트 : ${point.memberPoint}P</span>
                  <a href="${pageContext.request.contextPath}/pay/point_select" class="btn btn-blue float-end">포인트 구매</a>
                  <br>
             </div>
         </div>
-        <div class="row mt-4">
-            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">   
-                 <table class="table table-hover text-center">
+        <div class="row mt-5">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 ">   
+                 <table class="table table-hover point-table text-center">
 					  <thead>
 					    <tr>
 					      <th scope="col" width="35%">날짜</th>
@@ -119,7 +87,29 @@
 					    </tr>
 					  </thead>
 					  <tbody>
-					    <!-- 비동기화로 목록 처리 -->
+					  	<c:choose>
+					  		<c:when test="${list.size()==0}">
+					  			<tr class="table-default align-middle">
+					  				<td colspan="3" height="130px">내역이 존재하지 않습니다!</td>
+					  			</tr>
+					  		</c:when>
+					  		<c:otherwise>
+					  			<c:forEach var="list" items="${list}">
+					  				<tr class="table-default align-middle">
+						  				<td>${list.pointDate}</td>
+						  				<td>${list.pointStatus}</td>
+						  				<c:choose>
+						  					<c:when test="${list.pointStatus=='구매'}">
+						  						<td class="price-font">+${list.pointPrice}</td>
+						  					</c:when>
+						  					<c:otherwise>
+						  						<td class="price-font">-${list.pointPrice}</td>
+						  					</c:otherwise>
+						  				</c:choose>				  				
+						  			</tr>
+					  			</c:forEach>	
+					  		</c:otherwise>
+					  	</c:choose>
 					</tbody>
                  </table>
 			 </div>

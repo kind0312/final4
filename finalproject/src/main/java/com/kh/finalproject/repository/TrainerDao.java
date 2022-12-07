@@ -28,6 +28,10 @@ public interface TrainerDao {
 	//훈련사테이블(자기소개) insert 메소드
 	void insert(TrainerDto trainerDto);
 	
+	//훈련사테이블(자기소개) 디테일 메소드
+	TrainerDto selectOnePro(String memberId);
+	
+	
 	//훈련사테이블(자기소개) update 수정 메소드
 	//boolean update(TrainerDto trainerDto);
 	

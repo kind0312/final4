@@ -12,6 +12,7 @@ import com.kh.finalproject.vo.ReviewVO;
 import com.kh.finalproject.vo.TrainerListSearchVO;
 import com.kh.finalproject.vo.TrainerListVO;
 
+
 @Repository
 public class TrainerDaoImpl implements TrainerDao {
 
@@ -59,6 +60,13 @@ public class TrainerDaoImpl implements TrainerDao {
 		}
 		
 	}
+
+	public TrainerDto selectOnePro(String memberId) {		
+		return sqlSession.selectOne("trainer.selectOnePro", memberId);
+	}
+
+	
+
 
 //	@Override
 //	public boolean update(TrainerDto trainerDto) {		

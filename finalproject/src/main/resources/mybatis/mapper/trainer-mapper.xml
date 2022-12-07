@@ -46,6 +46,7 @@
 		#{trainerProfileContent})
       </insert>
       
+
       
         <!--parameterType="map" 관리자 훈련사 검색 --> 
         <select id="search"  parameterType="map" resultType="TrainerListVO">
@@ -64,4 +65,10 @@
          </if>
         </select>    
         
+
+      <!-- 트레이너 자기소개 단일조회 -->
+      <select id="selectOnePro" parameterType="String" resultType="TrainerDto">
+      select * from trainer where member_id = #{memberId}
+      </select>
+
 </mapper>

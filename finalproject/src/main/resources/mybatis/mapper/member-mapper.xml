@@ -5,6 +5,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="member">
+	<!-- 회원 등록 -->
 	<insert id="insert" parameterType="MemberDto">
 		insert into member
 		(member_id, member_pw, member_name, member_email, 
@@ -45,6 +46,11 @@
     
 
 	
+	<!-- 회원, 첨부파일 연결테이블 등록 -->
+	<insert id="profileInsert" parameterType="MemberImgDto">
+		insert into member_img(files_no, member_id) values(#{filesNo}, #{memberId})
+	</insert>
+	
 	<select id="one" parameterType="String" resultType="MemberDto">
 		select * from member where member_id = #{memberId}
 	</select>
@@ -54,5 +60,10 @@
 		where member_id=#{memberId}
 	</update>
 
+	
+	<select id="findFileNo" parameterType="String">
+	select files_no from member_img where member_id = #{memberId}
+	</select>
+	
 	
 </mapper>

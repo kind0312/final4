@@ -8,7 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.PetDto;
 import com.kh.finalproject.entity.PetImgDto;
+
 import com.kh.finalproject.vo.MemberDetailVO;
+
+import com.kh.finalproject.vo.PetInsertVO;
+
 
 @Repository
 public class PetDaoImpl implements PetDao{
@@ -16,6 +20,12 @@ public class PetDaoImpl implements PetDao{
 	@Autowired
 	private SqlSession sqlSession;
 
+	//시퀀스 발급
+	@Override
+	public int sequence() {
+		return sqlSession.selectOne("pet.sequence");
+	}
+	
 	//등록
 	@Override
 	public void insert(PetDto petDto) {
@@ -33,6 +43,12 @@ public class PetDaoImpl implements PetDao{
 	public PetDto selectOne(int petNo) {
 		return sqlSession.selectOne("pet.selectone",petNo);
 	}
+	
+	//동기로 펫 목록 출력
+	@Override
+	public List<PetInsertVO> list(String memberId) {
+		return sqlSession.selectList("pet.volist",memberId);
+	}
 
 	//수정
 	@Override
@@ -46,12 +62,23 @@ public class PetDaoImpl implements PetDao{
 		return sqlSession.delete("pet.delete", petNo)>0;
 	}
 
+
+	@Override
+	public void petProfileInsert(PetInsertVO petInsertVO) {
+		sqlSession.insert("pet.profileInsert", petInsertVO);
+	}
 	
+	@Override
+	public void petProfileUpdate(PetInsertVO petInsertVO) {
+		sqlSession.update("pet.profileUpdate",petInsertVO);
+	}
+
+	@Override
+	public int selectFileNo(int petNo) {
+		return sqlSession.selectOne("pet.selectFileNo",petNo);
+	}
 	
-	
-	
-	
-	
+
 
 	
 	
