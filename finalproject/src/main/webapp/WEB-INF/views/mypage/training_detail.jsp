@@ -122,88 +122,166 @@
 			  						</c:choose>
 			  					</div>
 			  					<div class="mt-4 mb-3">
-				  					<a href="#" class="btn btn-blue">프로필 보기</a>
-				  					<a href="#" class="btn btn-yellow">연락 하기</a>
+				  					<c:choose>
+				  						<c:when test="${training.trainingStatus=='이용완료'}">
+				  							<a href="#" class="btn btn-blue" style="margin-right:10px;">프로필 보기</a>
+					  						<a href="#" class="btn btn-yellow" style="margin-left:10px;">후기 작성</a>
+				  						</c:when>
+				  						<c:otherwise>
+				  							<a href="#" class="btn btn-blue" style="margin-right:10px;">프로필 보기</a>
+					  						<a href="#" class="btn btn-yellow" style="margin-left:10px;">연락 하기</a>
+				  						</c:otherwise>
+				  					</c:choose>
 			  					</div>
 			  				</td>
 			  			</tr>
 
 			  			<!-- 상세내역(+예약취소버튼)  예약상태에 따라서 다르게 표시하기 -->
-			  			<tr class="table-default"><td colspan="2"></td></tr>
-			  			<tr class="table-default underline-out" height="60px">
-			  				<td class="title pt-sm-3" width="45%"><span class="ps-sm-4">날짜</span></td>
-			  				<td width="55%" class="content pe-sm-4 pt-sm-3">
-			  					<fmt:formatDate value="${training.trainingDate}" pattern="yyyy-MM-dd (E)"/>
-			  					<span>${training.trainingStartTime}</span>
-			  				</td>
-			  			</tr>
-			  			<tr class="table-default underline-out"  height="50px">
-			  				<td class="title"  width="45%"><span class="ps-sm-4">이용요금</span></td>
-			  				<td width="55%" class="content">
-			  				<span class="pe-sm-4 price-font">
-			  					<fmt:formatNumber value="${purchase.trainingPurchasePrice}" pattern="###,###"></fmt:formatNumber>
-			  				</span>
-			  				</td>
-			  			</tr>
-			  			<tr class="table-default underline-out"  height="50px">
-			  				<td class="title"  width="45%"><span class="ps-sm-4">반려동물</span></td>
-			  				<td width="55%" class="content"><span class="pe-sm-4">${petName}</span></td>
-			  			</tr>
-			  			<tr class="table-default underline-out"  height="70px">
-			  				<td class="title"  width="45%"><span class="ps-sm-4">방문주소</span></td>
-			  				<td width="55%" class="content">
-				  				<p class="pe-sm-4">${training.trainingBasicAddress}</p>
-				  				<p class="pe-sm-4">${training.trainingDetailAddress}</p>
-			  				</td>
-			  			</tr>
-		  				<tr class="table-default" height="50px">
-			  				<td colspan="2"><a class="cancel-font pb-sm-2" href="${pageContext.request.contextPath}/mypage/training_cancel?trainingNo=${training.trainingNo}">예약 취소</a></td>
-			  			</tr>
-				  		
-						<!-- 결제내역 -->
-						<tr class="table-default"><td colspan="2"></td></tr>
-			  			<tr class="table-default align-middle underline-out" height="50px">
-			  				<td colspan="2" width="45%"><span class="pay-title">결제내역</span></td>
-			  			</tr>
-			  			<tr class="table-default align-middle underline-out"  height="50px">
-			  				<td class="title"  width="45%"><span class="ps-sm-4">훈련 ${petCount}마리</span></td>
-			  				<td width="55%" class="content">
-			  					<c:choose>
-			  						<c:when test="${petCount>1}">
-			  							<span class="pe-sm-4">
-			  								<fmt:formatNumber value="${purchase.trainingPurchasePrice-10000}" pattern="###,###"></fmt:formatNumber>
-			  							</span>
-			  						</c:when>
-			  						<c:otherwise>
-			  							<span class="pe-sm-4">
-			  								<fmt:formatNumber value="${purchase.trainingPurchasePrice}" pattern="###,###"></fmt:formatNumber>
-			  							</span>
-			  						</c:otherwise>
-			  					</c:choose>
-			  				</td>
-			  			</tr>
-			  			<c:if test="${petCount > 1}">
-			  				<tr class="table-default align-middle underline-out"  height="50px">
-				  				<td class="title"  width="45%"><span class="ps-sm-4">추가 요금(+10,000)</span></td>
-				  				<td width="55%" class="content"><span class="pe-sm-4">10,000</span></td>
-			  				</tr>
-			  			</c:if>
-			  			<tr class="table-default align-middle underline-out"  height="50px">
-			  				<td class="title"  width="45%"><span class="ps-sm-4">총 이용 요금</span></td>
-			  				<td width="55%" class="content">
-				  				<span class="pe-sm-4 price-font">
-				  					<fmt:formatNumber value="${purchase.trainingPurchasePrice}" pattern="###,###"></fmt:formatNumber>
-				  				</span>
-			  				</td>
-			  			</tr>
-			  			<tr class="table-default align-middle"  height="50px">
-			  				<td class="text-start"  colspan="2">
-			  					<span class="ps-sm-4">
-			  						${purchase.trainingPurchasePayment} 결제 
-			  						<fmt:formatDate value="${purchase.trainingPurchaseDate}" pattern="(yy.MM.dd)"/>
-			  					</span>
-			  				</td>
-			  			</tr>
+			  			<c:choose>
+			  				<c:when test="${training.trainingStatus!='예약취소'}">
+			  					<tr class="table-default"><td colspan="2"></td></tr>
+						  			<tr class="table-default underline-out" height="60px">
+						  				<td class="title pt-sm-3" width="45%"><span class="ps-sm-4">날짜</span></td>
+						  				<td width="55%" class="content pt-sm-3">
+						  					<fmt:formatDate value="${training.trainingDate}" pattern="yyyy-MM-dd (E)"/>
+						  					<span class="pe-sm-4">${training.trainingStartTime}</span>
+						  				</td>
+						  			</tr>
+						  			<tr class="table-default underline-out"  height="50px">
+						  				<td class="title"  width="45%"><span class="ps-sm-4">이용요금</span></td>
+						  				<td width="55%" class="content">
+						  				<span class="pe-sm-4 price-font">
+						  					<fmt:formatNumber value="${purchase.trainingPurchasePrice}" pattern="###,###"></fmt:formatNumber>
+						  				</span> 
+						  				</td>
+						  			</tr>
+						  			<tr class="table-default underline-out"  height="50px">
+						  				<td class="title"  width="45%"><span class="ps-sm-4">반려동물</span></td>
+						  				<td width="55%" class="content"><span class="pe-sm-4">${petName}</span></td>
+						  			</tr>
+						  			<tr class="table-default underline-out"  height="70px">
+						  				<td class="title"  width="45%"><span class="ps-sm-4">방문주소</span></td>
+						  				<td width="55%" class="content">
+							  				<p class="pe-sm-4">${training.trainingBasicAddress}</p>
+							  				<p class="pe-sm-4">${training.trainingDetailAddress}</p>
+						  				</td>
+						  			</tr>
+						  			<!-- 이용완료일 경우에 예약 취소 버튼 제거 -->
+						  			<c:choose>
+						  				<c:when test="${training.trainingStatus=='이용완료'}">
+						  					<tr class="table-default">
+								  				<td colspan="2"></td>
+								  			</tr>
+						  				</c:when>
+						  				<c:otherwise>
+						  					<tr class="table-default" height="50px">
+								  				<td colspan="2">
+								  					<a class="cancel-font pb-sm-2" 
+								  						href="${pageContext.request.contextPath}/mypage/training_cancel?trainingNo=${training.trainingNo}">예약 취소
+								  					</a>
+								  				</td>
+								  			</tr>
+						  				</c:otherwise>
+						  			</c:choose>
+							  		
+									<!-- 결제내역 -->
+									<tr class="table-default"><td colspan="2"></td></tr>
+						  			<tr class="table-default align-middle underline-out" height="50px">
+						  				<td colspan="2" width="45%"><span class="pay-title">결제내역</span></td>
+						  			</tr>
+						  			<tr class="table-default align-middle underline-out"  height="50px">
+						  				<td class="title"  width="45%"><span class="ps-sm-4">훈련 ${petCount}마리</span></td>
+						  				<td width="55%" class="content">
+						  					<c:choose>
+						  						<c:when test="${petCount>1}">
+						  							<span class="pe-sm-4">
+						  								<fmt:formatNumber value="${purchase.trainingPurchasePrice-10000}" pattern="###,###"></fmt:formatNumber>
+						  							</span>
+						  						</c:when>
+						  						<c:otherwise>
+						  							<span class="pe-sm-4">
+						  								<fmt:formatNumber value="${purchase.trainingPurchasePrice}" pattern="###,###"></fmt:formatNumber>
+						  							</span>
+						  						</c:otherwise>
+						  					</c:choose>
+						  				</td>
+						  			</tr>
+						  			<c:if test="${petCount > 1}">
+						  				<tr class="table-default align-middle underline-out"  height="50px">
+							  				<td class="title"  width="45%"><span class="ps-sm-4">추가 요금(+${(petCount-1)*10000})</span></td>
+							  				<td width="55%" class="content">
+								  				<span class="pe-sm-4">
+								  					<fmt:formatNumber value="${(petCount-1)*10000}" pattern="###,###"></fmt:formatNumber>
+								  				</span>
+							  				</td>
+						  				</tr>
+						  			</c:if>
+						  			<tr class="table-default align-middle underline-out"  height="50px">
+						  				<td class="title"  width="45%"><span class="ps-sm-4">총 이용 요금</span></td>
+						  				<td width="55%" class="content">
+							  				<span class="pe-sm-4 price-font">
+							  					<fmt:formatNumber value="${purchase.trainingPurchasePrice}" pattern="###,###"></fmt:formatNumber>
+							  				</span>
+						  				</td>
+						  			</tr>
+						  			<tr class="table-default align-middle"  height="50px">
+						  				<td class="text-start pb-sm-3"  colspan="2">
+						  					<span class="ps-sm-4">
+						  						${purchase.trainingPurchasePayment} 결제 
+						  						<fmt:formatDate value="${purchase.trainingPurchaseDate}" pattern="(yy.MM.dd)"/>
+						  					</span>
+						  				</td>
+						  			</tr>
+			  				</c:when>
+			  				<c:otherwise>
+			  				
+			  					<!-- 예약취소일 경우 표시되는 화면 - 환불내역 -->
+								<tr class="table-default"><td colspan="2"></td></tr>
+					  			<tr class="table-default align-middle underline-out" height="50px">
+					  				<td colspan="2" width="45%"><span class="pay-title">환불 내역</span></td>
+					  			</tr>
+					  			<tr class="table-default align-middle underline-out"  height="50px">
+					  				<td class="title"  width="45%"><span class="ps-sm-4">훈련 ${petCount}마리</span></td>
+					  				<td width="55%" class="content">
+					  					<c:choose>
+					  						<c:when test="${petCount>1}">
+					  							<span class="pe-sm-4">
+					  								<fmt:formatNumber value="${purchase.trainingPurchasePrice-10000}" pattern="###,###"></fmt:formatNumber>
+					  							</span>
+					  						</c:when>
+					  						<c:otherwise>
+					  							<span class="pe-sm-4">
+					  								<fmt:formatNumber value="${purchase.trainingPurchasePrice}" pattern="###,###"></fmt:formatNumber>
+					  							</span>
+					  						</c:otherwise>
+					  					</c:choose>
+					  				</td>
+					  			</tr>
+					  			<c:if test="${petCount > 1}">
+					  				<tr class="table-default align-middle underline-out"  height="50px">
+						  				<td class="title"  width="45%"><span class="ps-sm-4">추가 요금(+10,000)</span></td>
+						  				<td width="55%" class="content"><span class="pe-sm-4">10,000</span></td>
+					  				</tr>
+					  			</c:if>
+					  			<tr class="table-default align-middle underline-out"  height="50px">
+					  				<td class="title"  width="45%"><span class="ps-sm-4">총 환불 금액</span></td>
+					  				<td width="55%" class="content">
+						  				<span class="pe-sm-4 price-font">
+						  					<fmt:formatNumber value="${purchase.trainingPurchasePrice}" pattern="###,###"></fmt:formatNumber>
+						  				</span>
+					  				</td>
+					  			</tr>
+					  			<tr class="table-default align-middle"  height="50px">
+					  				<td class="text-start pb-sm-3"  colspan="2">
+					  					<span class="ps-sm-4">
+					  						환불 완료
+					  						<fmt:formatDate value="${training.trainingChangeDate}" pattern="(yy.MM.dd)"/>
+					  					</span>
+					  				</td>
+					  			</tr>
+			  				</c:otherwise>
+			  			</c:choose>
+			  			
 					</tbody>
 				</table>
 				
