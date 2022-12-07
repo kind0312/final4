@@ -83,6 +83,15 @@ public class MypageController {
 		return "mypage/training_detail";
 	}
 	
+	@RequestMapping("/training_cancel")
+	public String cancel() {
+		//예약대기, 예약확정 상태에서 취소신청가능
+		//1. 결제금액만큼 포인트 환불
+		//2. 훈련서비스(training) 상태 예약취소로 변경
+		//3. 훈련서비스 결제상세내역(purchase_detail) 거래상태 취소로 변경
+		return "mypage/training_cancel";
+	}
+	
 	
 	
 

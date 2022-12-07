@@ -8,25 +8,6 @@
 </jsp:include>
 
 <style>
-	.training-table {
-	    border-top:1px solid rgba(0, 0, 0, 0.1);
-	    height:130px;
-	}
-	.training-zero-font{
-		color:#303030;
-		font-size:15px;
-	}
-	.training-btn{
-		background-color:#fff;
-		border:none;
-		font-weight:bolder;
-		color:#303030;
-		margin:0 4.5rem;
-		font-size:19px;
-	}
-	.unselect-btn{
-		color:#7B7B7B;
-	}
 	.img-circle{
 		border-radius: 70%;
 	   	border:none;
@@ -59,45 +40,14 @@
 		font-weight:bolder;
 		font-size:17px;
 	}
+	.cancel-font:hover{
+		text-decoration: underline;
+		color:#81BDF1;
+	}
 </style>
 
 <script>
-	$(function(){
-		//시작시 진행예약화면 고정
-		ingClick();
-		
-		//진행 예약 버튼 이벤트
-		$(".ing-btn").click(function(){
-			ingClick();
-		});
-		
-		//지난 예약 버튼 이벤트
-		$(".end-btn").click(function(){
-			endClick();
-		});
-
-	function ingClick(){
-		//버튼 색상 변경
-		$(".end-btn").removeClass("unselect-btn");
-		$(".ing-btn").removeClass("unselect-btn");
-		$(".end-btn").addClass("unselect-btn");
-		//진행 예약만 출력
-		$(".training-end").children().hide();
-		$(".training-ing").children().show();
-	}
 	
-	function endClick(){
-		//버튼 색상 변경
-		$(".ing-btn").removeClass("unselect-btn");
-		$(".end-btn").removeClass("unselect-btn");
-		$(".ing-btn").addClass("unselect-btn");
-		//지난 예약만 출력
-		$(".training-end").children().show();
-		$(".training-ing").children().hide();
-	}
-		
-		
-	});
 </script>
 
 <body>
@@ -146,10 +96,10 @@
 
 		<div class="row mt-3">
 			<div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 ">   
-				<table class="table table-hover point-table text-center">
+				<table class="table point-table text-center">
 					<tbody>
 						<tr class="table-default"><td colspan="3"></td></tr>
-						<!-- 예약이 없으면 표시 -->
+						<!-- 훈련사 프로필 및 현재 예약상태 표시 -->
 						<tr class="table-default align-middle">
 			  				<td colspan="2" height="200px">
 			  					<div class="mt-3">
@@ -159,6 +109,12 @@
 			  						<c:choose>
 			  							<c:when test="${training.trainingStatus=='예약대기'}">
 			  								<span>훈련사 님의 승인을 기다리고 있습니다.</span>
+			  							</c:when>
+			  							<c:when test="${training.trainingStatus=='예약취소'}">
+			  								<span>예약이 취소되었습니다.</span>
+			  							</c:when>
+			  							<c:when test="${training.trainingStatus=='이용완료'}">
+			  								<span>훈련이 종료되었습니다.</span>
 			  							</c:when>
 			  							<c:otherwise>
 			  								<span>훈련사 님이 방문 예정입니다.</span>
@@ -172,7 +128,7 @@
 			  				</td>
 			  			</tr>
 
-			  			<!-- 상세내역(+예약취소버튼) -->
+			  			<!-- 상세내역(+예약취소버튼)  예약상태에 따라서 다르게 표시하기 -->
 			  			<tr class="table-default"><td colspan="2"></td></tr>
 			  			<tr class="table-default underline-out" height="60px">
 			  				<td class="title pt-sm-3" width="45%"><span class="ps-sm-4">날짜</span></td>
@@ -200,10 +156,10 @@
 				  				<p class="pe-sm-4">${training.trainingDetailAddress}</p>
 			  				</td>
 			  			</tr>
-			  			<tr class="table-default" height="50px">
-			  				<td colspan="2"><span class="cancel-font pb-sm-2">예약 취소</span></td>
+		  				<tr class="table-default" height="50px">
+			  				<td colspan="2"><a class="cancel-font pb-sm-2" href="${pageContext.request.contextPath}/mypage/training_cancel?trainingNo=${training.trainingNo}">예약 취소</a></td>
 			  			</tr>
-			  			
+				  		
 						<!-- 결제내역 -->
 						<tr class="table-default"><td colspan="2"></td></tr>
 			  			<tr class="table-default align-middle underline-out" height="50px">
