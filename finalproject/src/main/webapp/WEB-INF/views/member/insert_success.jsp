@@ -16,7 +16,7 @@
             	<h4 class="mt-50">회원가입이 완료되었습니다.</h4>
 			</div>
 		</div>
-		<div class="row mt-50">
+		<div class="row mt-50 mb-5">
 			<div class="col-md-10 offset-md-1 text-center">
 				<a href="${pageContext.request.contextPath}/#" class="btn btn-blue btn-md">로그인</a><br>
 			</div>
