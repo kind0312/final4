@@ -7,6 +7,10 @@
 	<jsp:param value="CareRegistration" name="title"/>
 </jsp:include>
 <style>
+	.img-circle{
+		border-radius: 70%;
+    	/* overflow: hidden; 사진 첨부하고 주석풀기*/
+	}
 	.form-check-input.is-valid:checked{
 		background-color:#4582ec;
 		border-color:#4582ec;
@@ -17,12 +21,20 @@
 	
 	<div class="container-fluid">
 
-        <div class="row mt-4">
+        <div class="row mt-100">
             <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
                  <h1 class="text-center">회원가입</h1>
             </div>
         </div>
         <form class="join-form" action="insert" method="post" enctype="multipart/form-data" autocomplete="off">
+        <div class="row mt-4 mb-5">
+        	<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
+        		<img src="${pageContext.request.contextPath}/image/profile_basic.jpg" 
+                 		width="120" height="120" class="img-circle">
+                <input type="file" style="display:none;" class="form-control input-file" name="memberImg" accept=".jpg, .png, .gif">
+                <input type="hidden" value="" name="filesNo">
+        	</div>
+        </div>
         <div class="row mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 				<div class="row form-group">
@@ -181,7 +193,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row mt-4 text-center">
+		<div class="row mt-4 mb-5 text-center">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 				<button type="submit" class="btn btn-blue w-75">회원가입</button>
 			</div>
@@ -190,6 +202,43 @@
     </div>
 	<script type="text/javascript">
 	$(function(){
+		//프로필 클릭 시 첨부파일 버튼 실행
+		$(".img-circle").click(function(){
+			$(".input-file").click();
+		});
+		
+		//프로필 파일 저장 및 미리보기
+		$(".input-file").change(function(){
+			//console.log($(".input-file").val()); //선택된 파일 경로와 이름이 나옴
+			//console.log(this.files); //선택한 파일들(배열)이 나옴
+			//console.log(this.files[0].name); //선택한 파일의 첫번째 값의 이름
+			var value = $(this).val();
+			if(value.length>0){ //파일 있음(비동기화로 파일 불러오기)
+				//서버에 전송할 formdate 만들기
+				var formData = new FormData();
+				formData.append("files", this.files[0]);
+                
+				$.ajax({
+					url:"http://localhost:8888/upload",
+					method:"post",
+					data:formData,
+					//multipart 요청을 위해 아래 2가지 꼭 보내줘야함
+					processData:false, 
+                    contentType:false,
+                    success:function(resp){
+                    	//console.log(resp); //이미지 경로 반환
+                    	$(".img-circle").attr("src",resp);
+                    	var check = resp.lastIndexOf("/"); //경로에서 /위치 찾기
+                    	var filesNo = resp.substr(check+1); //fileNo 꺼내기
+                    	$("[name=filesNo]").val(filesNo); //filesNo input태그에 값 넣기
+                    }
+				});
+			}else{ //파일 없거나 있던 파일 삭제
+				$(".img-circle").attr("src","${pageContext.request.contextPath}/image/profile_basic.jpg");
+			}
+		});
+		
+		//형식 검사를 위한 객체 생성
 		var validChecker = {
 			memberIdValid : false, memberIdRegex : /^[a-z][a-zA-Z0-9!@#$-_]{4,19}$/,
 			memberPwValid : false, memberPwRegex : /^[a-zA-Z0-9!@#$]{8,16}$/,
@@ -208,7 +257,8 @@
 			this.memberDetailAddressValid && this.memberBirthValid && this.memberGenderValid;
 			}
 		};
-				
+		
+		//형식 검사
 		$(".check-input").blur(function(){ 
             var name = $(this).attr("name");
             var value = $(this).val();
@@ -224,6 +274,7 @@
             }
         });
 		
+		//비밀번호 재확인
 		$("#memberPwRe").blur(function(){
             var pwRe = $(this).val();
             var pw = $("[name=memberPw]").val();
@@ -238,8 +289,10 @@
             }
         });
 		
+		//주소 검색
 		$("#address-button").click(findAddress);
 		
+		//date-picker
 		new Lightpick({
             //field는 datepicker 적용 대상을 설정하는 공간
             field:document.querySelector(".single-date-picker"),
@@ -255,6 +308,7 @@
 
         });
 		
+		//생일 검사
 		$("[name=memberBirth]").change(function(){
 			var birth = $("[name=memberBirth]").val();
 // 			console.log(birth);
@@ -270,6 +324,7 @@
             }
 		});
 		
+		//성별 검사
 		$("[name=memberGender]").click(function(){
 			var check = $(".form-check-input:checked").val();
 			if(check){
