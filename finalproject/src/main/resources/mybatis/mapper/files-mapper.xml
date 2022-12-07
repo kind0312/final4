@@ -17,11 +17,12 @@
 	
 	<select id="petProfile" resultType="FilesDto" parameterType="int">
 		select * from files where files_no=#{filesNo}
-	</select>
+	</select>	
 	
 	<delete id="delete" parameterType="int">
 		delete files where files_no=#{filesNo}
 	</delete>
+
 
 	
 </mapper>

@@ -46,5 +46,8 @@
 		#{trainerProfileContent})
       </insert>
       
-      
+      <!-- 트레이너 자기소개 단일조회 -->
+      <select id="selectOnePro" parameterType="String" resultType="TrainerDto">
+      select * from trainer where member_id = #{memberId}
+      </select>
 </mapper>
