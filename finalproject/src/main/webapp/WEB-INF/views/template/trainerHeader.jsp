@@ -164,6 +164,33 @@
 			  border-color: #FADE81;
 			  font-weight: bolder;
 			}
+			
+			.bg-blue{
+				background-color: #81BDF1 !important;
+			}
+			
+			.btn-md{
+				padding: 0.5rem 1rem;
+				width:400px;
+				display:inline-block;
+				justify-content: center;
+			}
+			.page-link .page-blue{
+				background-color:#81BDF1;
+				border-color: #81BDF1;
+			}
+			
+			/* input창 메세지 색상 설정*/
+			.valid-feedback {
+			  color: #81BDF1;
+			}
+			.form-control.is-valid{
+				border-color:#81BDF1;
+			}
+			.form-control.is-valid:focus {
+				border-color: #81BDF1;
+				box-shadow: 0 0 0 0.25rem rgba(69, 130, 236, 0.25);
+			}
 
 		</style>
 		
