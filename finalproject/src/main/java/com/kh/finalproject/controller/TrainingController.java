@@ -20,8 +20,8 @@ public class TrainingController {
 	@RequestMapping("/training")
 	public String training(HttpSession session, Model model) {
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
-		model.addAttribute("memberId", memberId);
 		model.addAttribute("ingList", trainingDao.ingList(memberId));
-		return "mypage/training_list2";
+		model.addAttribute("endList", trainingDao.endList(memberId));
+		return "mypage/training_list";
 	}
 }
