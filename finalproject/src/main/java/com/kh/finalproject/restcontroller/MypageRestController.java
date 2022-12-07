@@ -17,14 +17,5 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping("/rest")
 public class MypageRestController {
 	
-	@Autowired
-	private PointDao pointDao;
-	
-	//조회
-	@GetMapping("/point_list")
-	public List<PointDto> list(){
-		String memberId = "test1234";
-		List<PointDto> dto = pointDao.selectList(memberId);
-		return dto;
-	}
+
 }

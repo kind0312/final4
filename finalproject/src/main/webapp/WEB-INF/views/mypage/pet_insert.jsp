@@ -186,7 +186,7 @@
 					contentType:"application/json",
 					data:JSON.stringify(data),
 					success:function(resp){
-						location.href="${pageContext.request.contextPath}/mypage/pet";
+						location.href="${pageContext.request.contextPath}/mypage/pet_detail?petNo="+petNo;
 					}
 				});
 			}
