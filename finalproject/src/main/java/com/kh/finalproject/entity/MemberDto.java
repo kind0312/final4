@@ -1,6 +1,7 @@
 package com.kh.finalproject.entity;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,4 +25,6 @@ public class MemberDto {
 	private Date memberJoinDate;
 	private String memberGoodbye;
 	private Date memberGoodbyeDate;
+	
+	//private List<String>sort;
 }

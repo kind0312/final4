@@ -8,7 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.PetDto;
 import com.kh.finalproject.entity.PetImgDto;
+
+import com.kh.finalproject.vo.MemberDetailVO;
+
 import com.kh.finalproject.vo.PetInsertVO;
+
 
 @Repository
 public class PetDaoImpl implements PetDao{
@@ -57,6 +61,7 @@ public class PetDaoImpl implements PetDao{
 	public boolean delete(int petNo) {
 		return sqlSession.delete("pet.delete", petNo)>0;
 	}
+
 
 	@Override
 	public void petProfileInsert(PetInsertVO petInsertVO) {

@@ -1,4 +1,4 @@
-package com.kh.finalproject.entity;
+package com.kh.finalproject.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,8 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class TrainingDetailDto {
+public class MemberListVO {
+	
+	private String memberName,memberId,memberEmail,memberTel;
 
-	private int trainingNo;
-	private int trainingDetailPetNo;
 }
