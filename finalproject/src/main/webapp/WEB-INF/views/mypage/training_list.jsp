@@ -149,7 +149,7 @@
 			                 				<img src="#" class="img-circle" width="100" height="100">
 			                 			</td>
 			                 			<td width="40%">
-			                 				<p class="training-date" >${ingList.trainingDate}</p>
+			                 				<fmt:formatDate value="${ingList.trainingDate}" pattern="yyyy-MM-dd (E)"/>
 			                 			</td>
 			                 			<td width="30%">
 			                 				<c:choose>
@@ -181,7 +181,7 @@
 			                 				<img src="#" class="img-circle" width="100" height="100">
 			                 			</td>
 			                 			<td width="40%">
-			                 				<p class="training-date" >${endList.trainingDate}</p>
+			                 				<fmt:formatDate value="${endList.trainingDate}" pattern="yyyy-MM-dd (E)"/>
 			                 			</td>
 			                 			<td width="30%">
 			                 				<c:choose>
