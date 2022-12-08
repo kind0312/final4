@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 public class TrainingDetailDto {
 
 	private int trainingNo;
-	private int trainingDetailPetNo;
+	private String trainingDetailPetName;
 }

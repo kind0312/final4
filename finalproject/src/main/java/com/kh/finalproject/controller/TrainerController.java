@@ -51,5 +51,12 @@ public class TrainerController {
 	}
 	
 	
+	@GetMapping("/reservation")
+	public String reservation() {
+		
+		return "/trainer/reservation";
+	}
+	
+	
 
 }
