@@ -191,6 +191,16 @@
 				});
 			}
 		});
+		
+		//이후 날짜 선택되지 않도록 제한
+		$(".input-calendar").click(function(){
+			var now = Date.now(); //현재 날짜 밀리초로 변환
+			var calcul = new Date().getTimezoneOffset()*60000; //현재 시간과의 차이를 분 단위로 반환
+			var today = new Date(now-calcul).toISOString(); //2022-12-08T17:50:05.809Z 형식으로 출력됨
+			var max = today.substring(0,10); //필요한 범위(연/월/일)까지만 문자열 자르기
+			$(this).attr("max",max);
+		});
+		
 	});
 </script>
 
@@ -299,7 +309,7 @@
 							<tr class="my-2">
 								<th>생일<i class="fa-solid fa-asterisk blue"></i></th>
 								<td>
-		  							<input type="date" name="petBirth" class="form-control underline" placeholder="생일" required>
+		  							<input type="date" name="petBirth" class="form-control underline input-calendar" placeholder="생일" required>
 								</td>
 							</tr>
 							<tr class="my-2">
