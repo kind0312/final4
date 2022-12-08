@@ -50,4 +50,10 @@
       <select id="selectOnePro" parameterType="String" resultType="TrainerDto">
       select * from trainer where member_id = #{memberId}
       </select>
+      
+      <update id="trainerProfileUpdate" parameterType="TrainerDto">
+      update trainer set trainer_profile=#{trainerProfile}, trainer_profile_content=#{trainerProfileContent} where trainer_no= #{trainerNo};
+      </update>
+      
+      
 </mapper>

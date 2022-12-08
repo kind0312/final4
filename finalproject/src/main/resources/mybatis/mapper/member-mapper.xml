@@ -25,7 +25,7 @@
 		where member_id=#{memberId}
 	</update>
 	
-	<select id="findFileNo" parameterType="String">
+	<select id="findFileNo" parameterType="String" resultType="int">
 	select files_no from member_img where member_id = #{memberId}
 	</select>
 	
