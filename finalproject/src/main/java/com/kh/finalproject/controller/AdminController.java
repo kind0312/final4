@@ -74,7 +74,18 @@ public class AdminController {
 		return "admin/trainerList";
 	}
 			
-			
+	//관리자   훈련사-신청/전환
+	@RequestMapping("/applyList")
+	public String applyList(Model model,@RequestParam String memberId){
+		//지원번호,회원아이디,지원날짜,연락처,지원상태(승인/반려/대기)...연락처만 회원 테이블에 있음..
+		//model.addAttribute("applyList", )
+		
+		TrainerListVO trainerListVO=trainerDao.selectOne(memberId);
+		model.addAttribute("trainerListVO",trainerListVO);
+		
+		
+		return "admin/applyList";
+	}
 			
 	
 
@@ -108,6 +119,20 @@ public class AdminController {
 		
 		return "admin/trainerDetail";
 	}
+	
+	
+	
+	//훈련사 지원-상세
+//	@GetMapping("/applyDetail")
+//	public String applyDetail(Model model,@RequestParam int applyNo,@ModelAttribute applyDto) {
+//		//훈련사 지원테이블에 있는정보, 회원 테이블에 있는 정보(성별,이메일등등)
+//		
+//		
+//		
+//		
+//		
+//		return "admin/applyDetail";
+//	}
 			 
 
 }
