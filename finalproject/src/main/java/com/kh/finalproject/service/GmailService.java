@@ -7,6 +7,9 @@ import java.util.Scanner;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -61,11 +64,16 @@ public class GmailService implements EmailService {
 				buffer.append(sc.nextLine());
 			}
 		}
-		//전송 전에 {{serial}}에 다른 값을 넣어서 전송
+		//Jsoup 라이브러리를 사용하여 ID와 Address를 설정한 뒤 전송
 		String text = buffer.toString();
-		text = text.replace("{{serial}}", serial);
-				
-		helper.setText(text, true); //true 적으면 html 태그를 읽는다.
+		Document doc = Jsoup.parse(text);//불러온 문자열을 HTML로 파싱(해석)
+		Element element = doc.getElementById("serial");//id=serial 선택
+		element.text(serial);//선택한 대상에 text를 설정
+		
+		Element img = doc.getElementById("logo");//id=serial 선택
+		img.attr("src", "${pageContext.request.contextPath}/image/logo.png");
+		
+		helper.setText(doc.toString(), true); //true 적으면 html 태그를 읽는다.
 		
 		//4.전송
 		javaMailSender.send(message);
