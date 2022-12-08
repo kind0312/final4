@@ -132,7 +132,7 @@ drop table purchase_detail;
 create table purchase_detail(
 purchase_detail_no number primary key,
 training_purchase_no references training_purchase(training_purchase_no) on delete cascade,
-purchase_detail_pet_no number not null,
+purchase_detail_pet_name varchar2(30) not null,
 purchase_detail_price number not null,
 purchase_detail_status char(6) not null check(purchase_detail_status in('승인','취소'))
 );
@@ -145,7 +145,7 @@ create sequence purchase_detail_seq;
 drop table training_detail;
 create table training_detail( 
 training_no references training(training_no) on delete cascade,
-training_detail_pet_no number not null
+training_detail_pet_name varchar2(30) not null
 ); 
 
 -- apply 훈련사 지원
