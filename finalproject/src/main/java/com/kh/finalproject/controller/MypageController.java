@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalproject.constant.SessionConstant;
-import com.kh.finalproject.entity.PetDto;
 import com.kh.finalproject.entity.PointDto;
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingPurchaseDto;
@@ -70,13 +69,10 @@ public class MypageController {
 		model.addAttribute("purchase", dto);
 		//훈련서비스 받은 반려동물 조회
 		List<TrainingDetailDto> detailDto = trainingDao.trainingPet(trainingNo);
-		//반려견이 1마리 이상이면 반려견이름 외 ?마리 출력
-		PetDto petDto = petDao.selectOne(detailDto.get(0).getTrainingDetailPetNo());
-		String petName = "";
-		if(detailDto.size()==1) {
-			petName=petDto.getPetName();
-		}else {
-			petName=petDto.getPetName()+" 외 "+(detailDto.size()-1)+"마리";
+		//반려견 이름 출력
+		String petName = detailDto.get(0).getTrainingDetailPetName();
+		if(detailDto.size()>1) {
+			petName=detailDto.get(0).getTrainingDetailPetName()+" 외 "+(detailDto.size()-1)+"마리";
 		}
 		model.addAttribute("petName", petName);
 		

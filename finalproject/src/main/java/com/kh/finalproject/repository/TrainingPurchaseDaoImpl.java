@@ -1,5 +1,7 @@
 package com.kh.finalproject.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -21,7 +23,7 @@ public class TrainingPurchaseDaoImpl implements TrainingPurchaseDao{
 
 	//결제 고유번호로 훈련서비스 상세내역 조회
 	@Override
-	public PurchaseDetailDto detailSelectOne(int trainingPurchaseNo) {
+	public List<PurchaseDetailDto> detailSelectOne(int trainingPurchaseNo) {
 		return sqlSession.selectOne("training_purchase.detailSelectOne",trainingPurchaseNo);
 	}
 	
