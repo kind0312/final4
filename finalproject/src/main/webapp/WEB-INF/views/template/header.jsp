@@ -245,6 +245,9 @@
 				display:inline-block;
 				justify-content: center;
 			}
+			.btn-danger{
+				border:2px solid #d9534f;
+			}
 			.page-link .page-blue{
 				background-color:#81BDF1;
 				border-color: #81BDF1;
