@@ -36,6 +36,7 @@ public class CreateCertTest {
 		
 		Format f = new DecimalFormat("000000");
 		String serial = f.format(number);
+		System.out.println("serial = " + serial);
 		
 		//(2)
 		SimpleMailMessage message = new SimpleMailMessage();
