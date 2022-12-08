@@ -185,7 +185,7 @@
 					data:newFilesNo,
 					success:function(resp){
 						$("[name=filesNo]").val($("#originFilesNo").val());
-						alert(' 삭제 성공 ! '+resp);
+						//alert(' 삭제 성공 ! '+resp);
 					}
 				});
 			}
