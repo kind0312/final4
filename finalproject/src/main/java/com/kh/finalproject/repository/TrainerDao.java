@@ -6,6 +6,7 @@ import java.util.List;
 import com.kh.finalproject.entity.TrainerDto;
 import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.vo.ReviewVO;
+import com.kh.finalproject.vo.TrainerListSearchVO;
 import com.kh.finalproject.vo.TrainerListVO;
 
 
@@ -34,5 +35,6 @@ public interface TrainerDao {
 	//훈련사테이블(자기소개) update 수정 메소드
 	boolean updateTrainer(TrainerDto trainerDto);
 	
-
+	//관리자 훈련사 목록 조회
+	List<TrainerListVO>selectList(TrainerListSearchVO vo);
 }

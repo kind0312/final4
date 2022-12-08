@@ -1,4 +1,4 @@
-package com.kh.finalproject.entity;
+package com.kh.finalproject.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,9 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class MemberImgDto {
+public class MemberListSearchVO {
 	
-	private int filesNo;
-	private String memberId;
+	private String type,keyword;
+	
+	public boolean isSearch() {
+		return type!=null && keyword !=null;
+	}
 
 }

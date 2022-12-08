@@ -1,7 +1,6 @@
-package com.kh.finalproject.entity;
+package com.kh.finalproject.vo;
 
 import java.sql.Date;
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class MemberDto {
+public class MemberInsertVO {
+	//MemberDto 변수
 	private String memberId;
 	private String memberPw;
 	private String memberName;
@@ -26,5 +26,6 @@ public class MemberDto {
 	private String memberGoodbye;
 	private Date memberGoodbyeDate;
 	
-	//private List<String>sort;
+	//회원, 첨부파일 연결테이블 추가하기 위한 변수
+	private int filesNo;
 }

@@ -7,9 +7,37 @@
 	<jsp:param value="CareRegistration" name="title"/>
 </jsp:include>
 <style>
+	.img-circle{
+		border-radius: 70%;
+    	/* overflow: hidden; 사진 첨부하고 주석풀기*/
+	}
 	.form-check-input.is-valid:checked{
 		background-color:#4582ec;
 		border-color:#4582ec;
+	}
+	
+    .able ~ .possible {
+    	display: block;
+	}
+	
+	.disable ~ .impossible {
+		display: block;
+	}
+    
+	.possible {
+		display: none;
+		width: 100%;
+		margin-top: 0.25rem;
+		font-size: 0.875em;
+		color: #81BDF1;
+	}
+	
+	.impossible {
+		display: none;
+		width: 100%;
+		margin-top: 0.25rem;
+		font-size: 0.875em;
+		color: #d9534f;
 	}
 </style>
 
@@ -17,12 +45,21 @@
 	
 	<div class="container-fluid">
 
-        <div class="row mt-4">
+        <div class="row mt-100">
             <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
                  <h1 class="text-center">회원가입</h1>
             </div>
         </div>
         <form class="join-form" action="insert" method="post" enctype="multipart/form-data" autocomplete="off">
+        <div class="row mt-4 mb-5">
+        	<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
+        		<img src="${pageContext.request.contextPath}/image/profile_basic.jpg" 
+                 		width="120" height="120" class="img-circle">
+                <input type="file" style="display:none;" class="form-control input-file" name="memberImg" accept=".jpg, .png, .gif">
+                <div class="invalid-feedback">사진을 등록해주세요!</div>
+                <input type="hidden" value="" name="filesNo">
+        	</div>
+        </div>
         <div class="row mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 				<div class="row form-group">
@@ -31,11 +68,12 @@
 						<i class="fa-solid fa-asterisk blue"></i>
 					</label>
 					<div class="input-group">
-						<input type="text" name="memberId" class="form-control underline w-75 check-input" required aria-describedby="memberId-button">
+						<input type="text" name="memberId" class="form-control underline w-75" required aria-describedby="memberId-button">
 	      				<button class="btn btn-outline-blue w-25" type="button" id="memberId-button">중복확인</button>
+	      				<div class="idResult"></div>
 						<div class="valid-feedback"></div>
 						<div class="invalid-feedback">영문 소문자로 시작하고 5~20자의 대 소문자, 숫자와 </div>
-						<div class="invalid-feedback">특수기호(!@#$-_)만 사용 가능합니다.</div>
+						<div class="invalid-feedback">특수기호(-)(_)만 사용 가능합니다.</div>
 					</div>
 				</div>
 			</div>
@@ -181,17 +219,56 @@
 				</div>
 			</div>
 		</div>
-		<div class="row mt-4 text-center">
+		<div class="row mt-4 mb-5 text-center">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-				<button type="submit" class="btn btn-blue w-75">회원가입</button>
+				<button type="submit" id="insert-btn" class="btn btn-blue w-75">회원가입</button>
 			</div>
 		</div>
 		</form>
     </div>
 	<script type="text/javascript">
 	$(function(){
+		//프로필 클릭 시 첨부파일 버튼 실행
+		$(".img-circle").click(function(){
+			$(".input-file").click();
+		});
+		
+		//프로필 파일 저장 및 미리보기
+		$(".input-file").change(function(){
+			//console.log($(".input-file").val()); //선택된 파일 경로와 이름이 나옴
+			//console.log(this.files); //선택한 파일들(배열)이 나옴
+			//console.log(this.files[0].name); //선택한 파일의 첫번째 값의 이름
+			var value = $(this).val();
+			console.log(value.length);
+			if(value.length>0){ //파일 있음(비동기화로 파일 불러오기)
+				//서버에 전송할 formdate 만들기
+				var formData = new FormData();
+				formData.append("files", this.files[0]);
+                
+				$.ajax({
+					url:"http://localhost:8888/upload",
+					method:"post",
+					data:formData,
+					//multipart 요청을 위해 아래 2가지 꼭 보내줘야함
+					processData:false, 
+                    contentType:false,
+                    success:function(resp){
+                    	//console.log(resp); //이미지 경로 반환
+                    	$(".img-circle").attr("src",resp);
+                    	var check = resp.lastIndexOf("/"); //경로에서 /위치 찾기
+                    	var filesNo = resp.substr(check+1); //fileNo 꺼내기
+                    	$("[name=filesNo]").val(filesNo); //filesNo input태그에 값 넣기
+                    }
+				});
+			}else{ //파일 없거나 있던 파일 삭제
+				$(".img-circle").attr("src","${pageContext.request.contextPath}/image/profile_basic.jpg");
+			}
+		});
+		
+		//형식 검사를 위한 객체 생성
 		var validChecker = {
-			memberIdValid : false, memberIdRegex : /^[a-z][a-zA-Z0-9!@#$-_]{4,19}$/,
+			memberImgValid : false,
+			memberIdValid : false, memberIdRegex : /^[a-z][a-zA-Z0-9-_]{4,19}$/,
 			memberPwValid : false, memberPwRegex : /^[a-zA-Z0-9!@#$]{8,16}$/,
 			memberPwReValid : false,
 			memberNameValid : false, memberNameRegex : /^[a-zA-Z가-힣]{2,7}$/,
@@ -203,18 +280,90 @@
 			memberBirthValid : false, memberBirthRegex : /^(19|20)\d\d([- /.])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])$/,
 			memberGenderValid : false,
 			isAllValid : function(){
-			return this.memberIdValid && this.memberPwValid && this.memberPwReValid && this.memberNameValid
+			return this.memberImgValid && this.memberIdValid && this.memberPwValid && this.memberPwReValid && this.memberNameValid
 			&& this.memberEmailValid && this.memberTelValid && this.memberPostValid && this.memberBaseAddressValid
 			this.memberDetailAddressValid && this.memberBirthValid && this.memberGenderValid;
 			}
 		};
-				
+		
+		//사진검사 함수
+		function profileCheck(){
+			var img = $("[name=memberImg]").val();
+			$("[name=memberImg]").removeClass("is-valid is-invalid");
+			if(img.length > 0){
+				validChecker.memberImgValid = true;
+				$("[name=memberImg]").addClass("is-valid");
+			}else{
+				validChecker.memberImgValid = false;
+				$("[name=memberImg]").addClass("is-invalid");
+			}
+		}
+		
+		//아이디 중복검사 여부
+		function idCheck(){
+			if($("[name=memberId]").hasClass("is-valid")){
+				validChecker.memberIdValid = true;
+				$("[name=memberId]").removeClass("is-valid is-invalid").addClass("is-valid").addClass("able");
+			}else{
+				$(".idResult").removeClass("possible impossible").addClass("impossible").text("아이디 중복검사 해주세요");
+				validChecker.memberIdValid = false;
+                $("[name=memberId]").removeClass("is-valid is-invalid").addClass("disable");
+			}
+		}
+		
+		//형식 검사
+		$("[name=memberId]").blur(function(){
+			var id = $("[name=memberId]").val();
+            var regex = validChecker.memberIdRegex;
+            
+            $("[name=memberId]").removeClass("is-valid is-invalid able disable");
+            if(regex.test(id)) {
+            	
+            	//아이디 중복검사
+                $("#memberId-button").click(function(){
+                	var memberId = $("[name=memberId]").val();
+                	var regex = validChecker.memberIdRegex;
+//                 	console.log(memberId.length);
+                    if(!memberId) return;
+                    
+                    if(regex.test(memberId) && memberId.length > 4){
+	                    $.ajax({
+	                        url:"http://localhost:8888/rest/member/"+memberId,
+	                        method:"get",
+	                        success:function(resp){
+	                            //$("input[name=memberId]").next("span").text(resp);
+	                            if(resp == "possible"){
+	                                $(".idResult").removeClass("possible impossible").addClass("possible").text("사용할 수 있는 아이디입니다");
+	                                validChecker.memberIdValid = true;
+	                                $("[name=memberId]").removeClass("is-valid is-invalid").addClass("is-valid").addClass("able");
+	                            }
+	                            else if(resp == "impossible"){
+	                            	$(".idResult").removeClass("possible impossible").addClass("impossible").text("이미 사용중인 아이디입니다");
+	                                validChecker.memberIdValid = false;
+	                                $("[name=memberId]").removeClass("is-valid is-invalid").addClass("disable");
+	                            }
+	                        }
+	                    });
+                    }
+                    else{
+                    	$(".idResult").text("");
+                    	validChecker.memberIdValid = false;
+                        $("[name=memberId]").removeClass("is-valid is-invalid").addClass("is-invalid");
+                    }                    
+                });
+            }
+            else {
+            	validChecker.memberIdValid = false;
+                $("[name=memberId]").removeClass("is-valid is-invalid").addClass("is-invalid");
+            }
+		});
+		
 		$(".check-input").blur(function(){ 
             var name = $(this).attr("name");
             var value = $(this).val();
             var regex = validChecker[name+"Regex"];
             if(regex.test(value)) {
-                //+비동기통신(중복검사)
+            	
                 validChecker[name+"Valid"] = true;
                 $(this).removeClass("is-valid is-invalid").addClass("is-valid");
             }
@@ -224,6 +373,7 @@
             }
         });
 		
+		//비밀번호 재확인
 		$("#memberPwRe").blur(function(){
             var pwRe = $(this).val();
             var pw = $("[name=memberPw]").val();
@@ -238,8 +388,10 @@
             }
         });
 		
+		//주소 검색
 		$("#address-button").click(findAddress);
 		
+		//date-picker
 		new Lightpick({
             //field는 datepicker 적용 대상을 설정하는 공간
             field:document.querySelector(".single-date-picker"),
@@ -255,6 +407,7 @@
 
         });
 		
+		//생일 검사
 		$("[name=memberBirth]").change(function(){
 			var birth = $("[name=memberBirth]").val();
 // 			console.log(birth);
@@ -270,6 +423,7 @@
             }
 		});
 		
+		//성별 검사
 		$("[name=memberGender]").click(function(){
 			var check = $(".form-check-input:checked").val();
 			if(check){
@@ -285,11 +439,14 @@
 	
 // 	        $(this).find("input, textarea, select").blur();//모든 입력창
 	        $(this).find("[name]").blur();
+	        profileCheck();
+	        idCheck();
 			
-			console.log(validChecker.memberBirthValid);
-	      	console.log(validChecker.memberGenderValid);
+// 			console.log(validChecker.memberBirthValid);
+// 	      	console.log(validChecker.memberGenderValid);
+	      	console.log(validChecker.isAllValid());
 	        if(validChecker.isAllValid()){
-	            this.submit();//전송
+	        	this.submit();//전송
 	        }
 	    });
 	});

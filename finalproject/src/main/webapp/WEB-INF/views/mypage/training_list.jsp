@@ -21,14 +21,11 @@
 		border:none;
 		font-weight:bolder;
 		color:#303030;
-		margin:0 4.5rem;
+		margin:0 3rem;
 		font-size:19px;
 	}
 	.unselect-btn{
 		color:#7B7B7B;
-	}
-	.btn{
-	  	pointer-events: none;
 	}
 	.img-circle{
 	border-radius: 70%;
@@ -154,11 +151,11 @@
 			                 			<td width="30%">
 			                 				<c:choose>
 			                 					<c:when test="${ingList.trainingStatus=='예약대기'}">
-			                 						<a href="${pageContext.request.contextPath}/mypage/training?trainingNo=${ingList.trainingNo}"
+			                 						<a href="${pageContext.request.contextPath}/mypage/training_detail?trainingNo=${ingList.trainingNo}"
 			                 									 class="btn btn-outline-blue training-status">예약대기</a>
 			                 					</c:when>
 			                 					<c:otherwise>
-			                 						<a href="${pageContext.request.contextPath}/mypage/training?trainingNo=${ingList.trainingNo}" 
+			                 						<a href="${pageContext.request.contextPath}/mypage/training_detail?trainingNo=${ingList.trainingNo}" 
 			                 									class="btn btn-blue training-status">예약확정</a>
 			                 					</c:otherwise>
 			                 				</c:choose>
@@ -186,11 +183,11 @@
 			                 			<td width="30%">
 			                 				<c:choose>
 			                 					<c:when test="${endList.trainingStatus=='예약취소'}">
-			                 						<a href="${pageContext.request.contextPath}/mypage/training?trainingNo=${endList.trainingNo}"
+			                 						<a href="${pageContext.request.contextPath}/mypage/training_detail?trainingNo=${endList.trainingNo}"
 			                 									 class="btn btn-outline-yellow training-status">예약취소</a>
 			                 					</c:when>
 			                 					<c:otherwise>
-			                 						<a href="${pageContext.request.contextPath}/mypage/training?trainingNo=${endList.trainingNo}" 
+			                 						<a href="${pageContext.request.contextPath}/mypage/training_detail?trainingNo=${endList.trainingNo}" 
 			                 									class="btn btn-yellow training-status">이용완료</a>
 			                 					</c:otherwise>
 			                 				</c:choose>
