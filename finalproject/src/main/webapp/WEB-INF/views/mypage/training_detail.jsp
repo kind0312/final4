@@ -259,8 +259,12 @@
 					  			</tr>
 					  			<c:if test="${petCount > 1}">
 					  				<tr class="table-default align-middle underline-out"  height="50px">
-						  				<td class="title"  width="45%"><span class="ps-sm-4">추가 요금(+10,000)</span></td>
-						  				<td width="55%" class="content"><span class="pe-sm-4">10,000</span></td>
+						  				<td class="title"  width="45%"><span class="ps-sm-4">추가 요금(+${(petCount-1)*10000})</span></td>
+							  				<td width="55%" class="content">
+								  				<span class="pe-sm-4">
+								  					<fmt:formatNumber value="${(petCount-1)*10000}" pattern="###,###"></fmt:formatNumber>
+								  				</span>
+							  				</td>
 					  				</tr>
 					  			</c:if>
 					  			<tr class="table-default align-middle underline-out"  height="50px">

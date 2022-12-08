@@ -24,7 +24,13 @@ public class TrainingPurchaseDaoImpl implements TrainingPurchaseDao{
 	//결제 고유번호로 훈련서비스 상세내역 조회
 	@Override
 	public List<PurchaseDetailDto> detailSelectOne(int trainingPurchaseNo) {
-		return sqlSession.selectOne("training_purchase.detailSelectOne",trainingPurchaseNo);
+		return sqlSession.selectList("training_purchase.detailSelectOne",trainingPurchaseNo);
+	}
+
+	//결제 고유번호로 거래상태 취소로 변경
+	@Override
+	public boolean statusChange(int trainingPurchaseNo) {
+		return sqlSession.update("training_purchase.statusChange", trainingPurchaseNo)>0;
 	}
 	
 	
