@@ -89,17 +89,6 @@
 				check.petProfile=false;
 			}
 		}
-		
-		/* $("[name=petProfile]").change(function(e){
-			$(this).removeClass("is-valid is-invalid");
-			if($(this).val().length>0){
-				$(this).addClass("is-valid");
-				check.petProfile=true;
-			}else{
-				$(this).addClass("is-invalid");
-				check.petProfile=false;
-			}	
-		}); */
 
 		//이름검사
 		$("[name=petName]").blur(function(e){
