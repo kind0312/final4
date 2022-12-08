@@ -14,6 +14,11 @@
  		select A.* from training A inner join linked_list B on A.training_no = B.training_no inner join trainer C on C.trainer_no = B.trainer_no where C.trainer_no = #{trainerNo}
  	</select>
  	
+ 	<!-- 예약상태 > 예약취소로 변경 -->
+ 	<update id="statusChange" parameterType="int">
+ 		update training set training_status='예약취소' where training_no=#{trainingNo}
+ 	</update>
+ 	
  	<!-- 훈련서비스 번호로 1건의 예약내역 조회 -->
  	<select id="selectone" resultType="TrainingDto" parameterType="int">
  		select * from training where training_no=#{trainingNo}
@@ -42,6 +47,11 @@
   	<select id="petList" resultType="TrainingDetailDto" parameterType="int">
   		select * from training_detail where training_no=#{trainingNo}
   	</select>
+  	
+  	<!-- 훈련서비스 삭제 -->
+  	<delete id="delete" parameterType="int">
+  		delete training where training_no=#{trainingNo}
+  	</delete>
   
   </mapper>
  

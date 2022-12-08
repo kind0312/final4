@@ -9,8 +9,9 @@ public interface TrainingDao {
 	//등록
 	
 	//수정
+	//상태(예약취소) 변경
+	boolean statusChange(int trainingNo);
 	
-	//
 	//훈련서비스 번호로 예약내역 조회
 	TrainingDto selectOne(int trainingNo);
 	//진행예약 조회
@@ -23,4 +24,6 @@ public interface TrainingDao {
 	List<TrainingDetailDto> trainingPet(int trainingNo);
 	
 	//삭제
+	boolean delete(int trainingNo);
+	
 }
