@@ -65,7 +65,7 @@ drop table point;
 create table point(
 point_no number primary key,
 member_id varchar2(20) not null,
-point_status char(6) not null check(point_status in('구매','사용')),
+point_status char(6) not null check(point_status in('구매','사용','환불')),
 point_price number not null,
 point_date date default sysdate
 );
