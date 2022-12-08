@@ -1,5 +1,10 @@
 package com.kh.finalproject.restcontroller;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -39,7 +44,7 @@ public class MemberRestController {
 	
 	//이메일 인증
 	@PostMapping("/emailcert")
-	public void emailcert(@RequestParam String emailcertEmail) {
+	public void emailcert(@RequestParam String emailcertEmail) throws FileNotFoundException, MessagingException, IOException {
 		emailService.sendCertMail(emailcertEmail);
 	}
 	
