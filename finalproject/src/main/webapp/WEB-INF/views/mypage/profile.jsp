@@ -15,10 +15,6 @@
     	background-color:black;
     	overflow: hidden;
 	}
-	.form-control{
-		display:inline;
-		font-size:16px;
-	}
 	.underline-out{
 		border-bottom:#fff;
 	}
@@ -32,20 +28,22 @@
 	.form-control[readonly] {
 	  background-color: #fff;
 	}
+	.btn{
+		border-radius: 10px !important;
+	}
 
 </style>
 
 <script>
 	$(function(){
 		detailBtn();
-		
 		//버튼 숨김 함수
 		function detailBtn(){
 			$(".confirm-btn").hide();
 			$(".cancel-btn").hide();
 			$(".edit-btn").show();
 			$(".delete-btn").show();
-			$(".new-table").hide();
+			$(".new-input").hide();
 			$(".origin-table").show();
 		}
 		//버튼 표시 함수
@@ -55,7 +53,7 @@
 			$(".confirm-btn").show();
 			$(".cancel-btn").show();
 			$(".origin-table").hide();
-			$(".new-table").show();
+			$(".new-input").show();
 		}
 		
 		//목록버튼(돌아가기) 이벤트 - 새로 추가한 첨부파일 db에서 삭제
@@ -78,7 +76,7 @@
 		//수정버튼 클릭 시 새로운 input창 표시 및 원래 input창 숨김
 		$(".edit-btn").click(function(){
 			editBtn();
-			
+			$(".input-test").show();
 			//프로필 클릭 시 첨부파일 버튼 실행
 			$(".img-circle").click(function(){
 				$(".input-file").click();
@@ -105,29 +103,33 @@
 					});
 				}
 			});
+			//우편번호, 기본/상세 input창 클릭할 경우 다음 주소 api 팝업창 열림
+			$("[name=memberPost]").click(function(){
+				findAddress();
+			});
+			$("[name=memberBaseAddress]").click(function(){
+				findAddress();
+			});
+
 			
-			//기존 input창 숨김
-			
-			
-			//비동기화로 정보 출력 및 새로운 input창 생성
-			
-			
-			
+
 		});
-		
-		
-		
-	
-		//변경된 정보 비동기화 수정처리
+
 		//상태 판정
 		check={
-				petProfile:false,
-				petName:false,
-				petBreed:false,
-				petWeight:false, weightRegex:/^[0-9]{1,5}$/,
+				memberImgValid : false,
+				memberNameValid : false, memberNameRegex : /^[a-zA-Z가-힣]{2,7}$/,
+				memberEmailValid : false, memberEmailRegex : /^[\w\.-]{1,64}@[\w\.-]{1,125}\.\w{2,4}$/,
+				emailConfirmValid : false, 
+				memberTelValid : false, memberTelRegex : /^01[016789][1-9]\d{6,7}$/,
+				memberPostValid : false,
+				memberBaseAddressValid : false,
+				memberDetailAddressValid : false, memberDetailAddressRegex : /^[가-힣a-zA-Z0-9-_ ]{1,}$/,
 				allValid:function(){
-					return this.petName && this.petBreed && 
-									this.petWeight && this.petProfile;
+					return this.memberImgValid && this.memberNameValid && 
+									this.memberEmailValid && this.emailConfirmValid
+									&& this.memberTelValid && this.memberPostValid
+									&& this.memberBaseAddressValid && this.memberDetailAddressValid;
 				}
 		};
 	
@@ -143,6 +145,17 @@
 				check.petProfile=false;
 			}
 		}
+		
+		//이름검사
+		
+		//메일검사
+		
+		//휴대폰검사
+		
+		//주소검사
+		
+		
+		
 		
 		//수정 폼 이벤트
 		$(".update-form").submit(function(e){
@@ -209,7 +222,7 @@
 	          <a class="nav-link mypage-nav" style="color:white;" href="${pageContext.request.contextPath}/mypage/profile">정보수정</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">펫시터로 전환</a>
+	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">훈련사로 전환</a>
 	        </li>
      	 </ul>
     	</div>
@@ -230,90 +243,118 @@
 		</div>
 		
 		<form class="update-form">
-			<div class="row text-center">
-	            <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-3">   
-	            
-	                 <!-- 기존 input창 -->
-	                 <table class="table mb-4 origin-table">
-						<tbody>
-							<tr class="table-default"><td colspan="2"></tr>
-							<tr class="table-default underline-out" height="65px">
-								<th class="ps-sm-4">이름</th>
-								<td class="ps-sm-4">${member.memberName}</td>
-							</tr>
-							<tr class="table-default underline-out" height="65px">
-								<th class="ps-sm-4">이메일</th>
-								<td class="ps-sm-4">${member.memberEmail}</td>
-							</tr>
-							<tr class="table-default underline-out" height="65px">
-								<th class="ps-sm-4">휴대폰</th>
-								<c:set var="tel" value="${member.memberTel}"></c:set>
-								<td class="ps-sm-4">
-									${fn:substring(tel, 0, 3)}-${fn:substring(tel, 3, 7)}-${fn:substring(tel, 7, 11)}
-								</td>
-							</tr>
-							<tr class="table-default underline-out" height="65px">
-								<th class="ps-sm-4">우편번호</th>
-								<td class="ps-sm-4">${member.memberPost}</td>
-							</tr>
-							<tr class="table-default underline-out" height="65px">
-								<th class="ps-sm-4">기본주소</th>
-								<td class="ps-sm-4">${member.memberBaseAddress}</td>
-							</tr>
-							<tr class="table-default" height="65px">
-								<th class="ps-sm-4">상세주소</th>
-								<td class="ps-sm-4">${member.memberDetailAddress}</td>
-							</tr>
-						</tbody>						
-					</table>
-					<!-- 기존 input창 끝 -->
-					
-					<!-- 새로운 input창 -->
-					<table class="table mb-4 new-table">
-						<tbody>
-							<tr class="table-default"><td colspan="2"></tr>
-							<tr class="table-default underline-out" height="65px">
-								<th class="ps-sm-4">이름</th>
-								<td class="ps-sm-4">
-									<input type="text" class="underline form-control" value="${member.memberName}">
-								</td>
-							</tr>
-							<tr class="table-default underline-out" height="65px">
-								<th class="ps-sm-4">이메일</th>
-								<td class="ps-sm-4">
-									<input type="text" class="underline form-control" value="${member.memberEmail}">
-								</td>
-							</tr>
-							<tr class="table-default underline-out" height="65px">
-								<th class="ps-sm-4">휴대폰</th>
-								<c:set var="tel" value="${member.memberTel}"></c:set>
-								<td class="ps-sm-4">
-									<input type="text" class="underline form-control" value="${member.memberTel}">
-								</td>
-							</tr>
-							<tr class="table-default underline-out" height="65px">
-								<th class="ps-sm-4">우편번호</th>
-								<td class="ps-sm-4">
-									<input type="text" class="underline form-control" value="${member.memberPost}">
-								</td>
-							</tr>
-							<tr class="table-default underline-out" height="65px">
-								<th class="ps-sm-4">기본주소</th>
-								<td class="ps-sm-4">
-									<input type="text" class="underline form-control" value="${member.memberBaseAddress}">
-								</td>
-							</tr>
-							<tr class="table-default" height="65px">
-								<th class="ps-sm-4">상세주소</th>
-								<td class="ps-sm-4">
-									<input type="text" class="underline form-control" value="${member.memberDetailAddress}">
-								</td>
-							</tr>
-						</tbody>						
-					</table>
-					<!-- 비동기화 처리 -->
-						
-					<!-- 비동기 처리 위한 데이터-->
+		<div class="new-input">
+			<div class="row mt-4">
+				<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+					<div class="row">
+						<label>
+							이름
+							<i class="fa-solid fa-asterisk blue"></i>
+						</label>
+						<div class="input-group">
+							<input type="text" name="memberName" class="form-control underline" required>
+		                    <div class="invalid-feedback">이름은 2~7자 한글 또는 대 소문자 작성하세요</div>
+	                    </div>
+					</div>
+				</div>
+			</div>
+			<div class="row mt-4">
+				<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+					<div class="row">
+						<label>
+							이메일
+							<i class="fa-solid fa-asterisk blue"></i>
+						</label>
+						<div class="input-group">
+							<input type="email" name="memberEmail" class="form-control underline w-75" aria-describedby="email-button" required>
+							<button class="btn btn-outline-blue w-25" type="button">인증코드발송</button>
+		                    <div class="invalid-feedback">형식에 맞게 입력해주세요</div>
+						</div>
+						<div class="input-group mt-2">
+							<input type="text" class="form-control underline w-75" aria-describedby="confirm-button">
+							<button class="btn btn-outline-blue w-25" type="button">확 인</button>
+		                    <div class="invalid-feedback"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mt-4">
+				<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+					<div class="row form-group">
+						<label>
+							휴대폰
+							<i class="fa-solid fa-asterisk blue"></i>
+						</label>
+						<div class="mt-2">
+							<input type="tel" name="memberTel" class="form-control underline" maxlength="11" placeholder="숫자만 입력해주세요" required>
+		                    <div class="invalid-feedback">형식에 맞게 입력해주세요</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mt-4">
+				<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+					<div class="row form-group">
+						<label>
+							주소
+							<i class="fa-solid fa-asterisk blue"></i>
+						</label>
+						<div class="input-group mt-2">
+							<input type="text" name="memberPost" class="form-control underline w-75" maxlength="6"
+							 placeholder="우편번호" required aria-describedby="address-button" readonly>
+							<button class="btn btn-outline-blue w-25" type="button" id="address-button">주소검색</button>
+		                    <div class="invalid-feedback">우편번호를 입력해주세요</div>
+		                </div>
+		                <div class="input-group mt-2">
+							<input type="text" name="memberBaseAddress" class="form-control underline w-100" placeholder="기본주소" readonly required>
+		                    <div class="invalid-feedback">기본주소를 입력해주세요</div>
+						</div>
+						<div class="input-group mt-2">
+							<input type="text" name="memberDetailAddress" class="form-control underline w-100" placeholder="상세주소" required>
+		                    <div class="invalid-feedback">상세주소를 입력해주세요</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 기존 input창 -->
+		<div class="row text-center">
+            <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-3">
+                 <table class="table mb-4 origin-table">
+					<tbody>
+						 <tr class="table-default"><td colspan="2"></td></tr>
+						<tr class="table-default underline-out" height="65px">
+							<th class="ps-sm-4">이름</th>
+							<td class="ps-sm-4">${member.memberName}</td>
+						</tr>
+						<tr class="table-default underline-out" height="65px">
+							<th class="ps-sm-4">이메일</th>
+							<td class="ps-sm-4">${member.memberEmail}</td>
+						</tr>
+						<tr class="table-default underline-out" height="65px">
+							<th class="ps-sm-4">휴대폰</th>
+							<c:set var="tel" value="${member.memberTel}"></c:set>
+							<td class="ps-sm-4">
+								${fn:substring(tel, 0, 3)}-${fn:substring(tel, 3, 7)}-${fn:substring(tel, 7, 11)}
+							</td>
+						</tr>
+						<tr class="table-default underline-out" height="65px">
+							<th class="ps-sm-4">우편번호</th>
+							<td class="ps-sm-4">${member.memberPost}</td>
+						</tr>
+						<tr class="table-default underline-out" height="65px">
+							<th class="ps-sm-4">기본주소</th>
+							<td class="ps-sm-4">${member.memberBaseAddress}</td>
+						</tr>
+						<tr class="table-default" height="65px">
+							<th class="ps-sm-4">상세주소</th>
+							<td class="ps-sm-4">${member.memberDetailAddress}</td>
+						</tr>
+					</tbody>						
+				</table>
+				<!-- 기존 input창 끝 -->
+				<!-- 비동기 처리 위한 데이터-->
 					<input type="hidden" value="${member.memberId}" name="memberId">
 					<input type="hidden" value="${filesNo}" name="filesNo">
 					<input type="hidden" value="${filesNo}" id="originFilesNo">
@@ -325,7 +366,58 @@
 				</div>
 			</div>
 		</form>
-    </div>
+	</div>			
+					<%-- <!-- 새로운 input창-->
+					<table class="table mb-4 new-table">
+						<tbody>
+							<tr class="table-default"><td colspan="2"></td></tr>
+							<tr class="table-default underline-out" height="65px">
+								<th class="ps-sm-4">이름</th>
+								<td class="ps-sm-4">
+									<input type="text" class="underline form-control" value="${member.memberName}" required>
+									<div class="invalid-feedback">이름은 2~7자 한글 또는 대 소문자 작성하세요</div>
+								</td>
+							</tr>
+							<tr class="table-default underline-out" height="65px">
+								<th class="ps-sm-4">이메일</th>
+								<td class="ps-sm-4">
+									<input type="text" class="underline form-control w-75" value="${member.memberEmail}" required>
+									<button class="btn btn-outline-blue w-25" type="button" id="email-button">인증코드발송</button>
+									<div class="invalid-feedback">형식에 맞게 입력해주세요</div>
+								</td>
+							</tr>
+							<tr class="table-default underline-out" height="65px">
+								<th class="ps-sm-4">휴대폰</th>
+								<c:set var="tel" value="${member.memberTel}"></c:set>
+								<td class="ps-sm-4">
+									<input type="text" class="underline form-control" value="${member.memberTel}" required>
+									<div class="invalid-feedback">형식에 맞게 입력해주세요</div>
+								</td>
+							</tr>
+							<tr class="table-default underline-out" height="65px">
+								<th class="ps-sm-4">우편번호</th>
+								<td class="ps-sm-4">
+									<input type="text" class="underline form-control w-75" value="${member.memberPost}" maxlength="6" required>
+									<button class="btn btn-outline-blue w-25" type="button" id="address-button">주소검색</button>
+									<div class="invalid-feedback">주소 검색을 클릭해주세요</div>
+								</td>
+							</tr>
+							<tr class="table-default underline-out" height="65px">
+								<th class="ps-sm-4">기본주소</th>
+								<td class="ps-sm-4">
+									<input type="text" class="underline form-control" value="${member.memberBaseAddress}" required>
+								</td>
+							</tr>
+							<tr class="table-default" height="65px">
+								<th class="ps-sm-4">상세주소</th>
+								<td class="ps-sm-4">
+									<input type="text" class="underline form-control" value="${member.memberDetailAddress}" required>
+									<div class="invalid-feedback">상세주소를 입력해주세요</div>
+								</td>
+							</tr>
+						</tbody>						
+					</table> --%>
+					<!-- 비동기화 처리 -->
 </body>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
