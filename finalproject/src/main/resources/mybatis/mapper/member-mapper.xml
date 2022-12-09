@@ -60,7 +60,7 @@
 
 	
 	<select id="findFileNo" parameterType="String" resultType="int">
-		select files_no from member_img where member_id = #{memberId}
+	select files_no from member_img where member_id = #{memberId}
 	</select>
 	
 	
