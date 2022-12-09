@@ -35,6 +35,7 @@
 	  background-color: #fff;
 	}
 
+
 </style>
 
 <script>
@@ -43,15 +44,6 @@
 		tdHide();
 		
 		var petNo = $("[name=petNo]").val();
-		//pet_no로 첨부파일 불러오기
-		$.ajax({
-			url:"http://localhost:8888/rest/pet_img/"+petNo,
-			method:"get",
-			data:petNo,
-			success:function(resp){
-				$(".img-circle").attr("src","http://localhost:8888/download/"+resp);
-			}
-		});
 		
 		//pet_no로 상세 불러오기
 		$.ajax({
@@ -190,6 +182,21 @@
 				});
 			}
 		});
+		
+		//삭제버튼 이벤트
+		$(".delete-confirm").click(function(){
+			var petNo = $("[name=petNo]").val();
+			$.ajax({
+				url:"http://localhost:8888/rest/pet_delete/"+petNo,
+				method:"delete",
+				data:petNo,
+				success:function(resp){
+					location.href="${pageContext.request.contextPath}/mypage/pet";
+					//alert(' 삭제 성공 ! '+resp);
+				}
+			});
+		});
+		
 	
 		//변경된 정보 비동기화 수정처리
 		//상태 판정
@@ -402,6 +409,7 @@
 			$(".newtdWeight").show();
 			$(".newtdNeutralization").show();
 		}
+
 	});
 </script>
 
@@ -453,13 +461,15 @@
 			 </div>
 		</div>
 		
+		<!-- 이미지 -->
 		<div class="row text-center mt-3">
             <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">   
-                 <img src="" width="120" height="120" class="img-circle">
+                 <img src="http://localhost:8888/download/${filesNo}" width="120" height="120" class="img-circle">
                  <input type="file" style="display:none;" class="input-file form-control" name="petProfile" accept=".jpg, .png, .gif">
 			</div>
 		</div>
 		
+		<!-- 폼 시작 -->
 		<form class="update-form">
 		<div class="row text-center">
             <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">   
@@ -542,11 +552,26 @@
 	            <button type="button" class="btn btn-blue text-center edit-btn">수정</button>
 	            <button type="submit" class="btn btn-blue text-center confirm-btn">확인</button>
 	            <a href="${pageContext.request.contextPath}/mypage/pet" class="btn btn-yellow list-btn">목록</a>
-				<a href="${pageContext.request.contextPath}/mypage/pet_delete?petNo=${petNo}" class="btn btn-danger delete-btn">삭제</a>
-				<!--<button type="button" class="btn btn-danger delete-btn">삭제</button> -->
+				<button type="button" class="btn btn-danger delete-btn"  data-bs-toggle="modal" data-bs-target="#delete-modal">삭제</button>
+				<!-- <a href="${pageContext.request.contextPath}/mypage/pet_delete?petNo=${petNo}" class="btn btn-danger delete-btn">삭제</a>-->
 			</div>
 		</div>
 		</form>
+
+		<!-- Modal -->
+		<div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-body">
+		        정말 삭제하시겠습니까?
+		      </div>
+		      <div class="modal-footer">
+		      	<button type="button" class="btn btn-blue delete-confirm">확인</button>
+		        <button type="button" class="btn btn-yellow" data-bs-dismiss="modal">취소</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
     </div>
 </body>
 
