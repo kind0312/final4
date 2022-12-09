@@ -39,6 +39,7 @@ public class MemberController {
 		return "redirect:insert_success";
 	}
 	
+	//회원가입 성공
 	@GetMapping("/insert_success")
 	public String insertSuccess() {
 		return "member/insert_success";
@@ -72,5 +73,28 @@ public class MemberController {
 	public String logout(HttpSession session) {
 		session.removeAttribute(SessionConstant.ID);
 		return "redirect:/";
+	}
+	
+	//아이디 찾기
+	@GetMapping("/find_memberid")
+	public String findMemberId() {
+		return "member/find_memberid";
+	}
+	
+	@PostMapping("/find_memberid")
+	public String findMemberId(@ModelAttribute MemberDto meberDto) {
+		boolean find = memberDao.findId(meberDto);
+		if(find) {
+			return "redirect:find_memberid_success";
+		}
+		else {
+			return "redirect:find_memberid?error";
+		}
+	}
+	
+	//아이디 찾기 성공
+	@GetMapping("/find_memberid_success")
+	public String findMemberIdSuccess() {
+		return "member/find_memberid_success";
 	}
 }

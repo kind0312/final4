@@ -15,8 +15,12 @@ public interface MemberDao {
 	void insert(MemberDto memberDto);
 	//회원, 첨부파일 연결테이블 등록
 	void memberProfileInsert(MemberImgDto memberImgDto);
+	
 	//로그인
 	boolean login(MemberDto memberDto);
+	//아이디 찾기
+	boolean findId(MemberDto memberDto);
+	
 	
 	//조회
     //회원 검색

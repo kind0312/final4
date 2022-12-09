@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="CareLogin" name="title"/>
+	<jsp:param value="CareFindPw" name="title"/>
 </jsp:include>
 
 <body>
@@ -35,7 +35,7 @@
 		<div class="row mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
 			<h6>
-			<a href="${pageContext.request.contextPath}/member/find_memberid" style="color:black;">
+			<a href="#" style="color:black;">
 			아이디 찾기
 			</a>
 			&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -52,7 +52,7 @@
 		</div>
 		<div class="row mt-4 mb-5">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
-			<a href="${pageContext.request.contextPath}/member/insert" class="btn btn-yellow btn-md">회원가입</a>
+			<a href="../member/insert" class="btn btn-yellow btn-md">회원가입</a>
 			</div>
 		</div>
 	</div>
