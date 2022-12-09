@@ -27,13 +27,13 @@
 	</if>-->
 	</select> 
 	  
-	 <select id="search" parameterType="map" resultType="MemberDto">
+	<select id="search" parameterType="map" resultType="MemberDto">
      	select*from member  
 	    	<if test="type !=null and keyword !=null">
 			     where instr(${type}, #{keyword}) > 0
 			     order by ${type} asc
 	       </if>
-     </select>
+	</select>
 
 	<!-- 회원, 첨부파일 연결테이블 등록 -->
 	<insert id="profileInsert" parameterType="MemberImgDto">
