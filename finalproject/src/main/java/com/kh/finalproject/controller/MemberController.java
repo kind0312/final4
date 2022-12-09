@@ -4,10 +4,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.entity.MemberDto;
@@ -94,7 +96,8 @@ public class MemberController {
 	
 	//아이디 찾기 성공
 	@GetMapping("/find_memberid_success")
-	public String findMemberIdSuccess() {
+	public String findMemberIdSuccess(Model model, @ModelAttribute MemberDto memberDto) {
+		model.addAttribute("memberDto", memberDao.findId(memberDto));
 		return "member/find_memberid_success";
 	}
 }

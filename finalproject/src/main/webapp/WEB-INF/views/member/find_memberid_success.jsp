@@ -17,7 +17,7 @@
 		</div>
 		<div class="row mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-			<input type="text" name="memberId" class="form-control underline" placeholder="아이디">
+			<input type="hidden" name="memberId" class="form-control underline" value="${memberDto.memberId}">
 			</div>
 		</div>
 		<div class="row mt-100 mb-5">
