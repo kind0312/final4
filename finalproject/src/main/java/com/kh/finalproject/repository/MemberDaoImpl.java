@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.MemberDto;
@@ -19,15 +20,31 @@ public class MemberDaoImpl implements MemberDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	@Autowired
+	private PasswordEncoder encoder;
+	
 	//회원 등록
 	@Override
 	public void insert(MemberDto memberDto) {
+		String memberPw = memberDto.getMemberPw();
+		String encode = encoder.encode(memberPw);
+		memberDto.setMemberPw(encode);
 		sqlSession.insert("member.insert", memberDto);
 	}
+	
 	//회원 프로필 등록
 	@Override
 	public void memberProfileInsert(MemberImgDto memberImgDto) {
 		sqlSession.insert("member.profileInsert", memberImgDto);
+	}
+	
+	//로그인
+	@Override
+	public boolean login(MemberDto memberDto) {
+		MemberDto findDto = sqlSession.selectOne("member.one", memberDto.getMemberId());
+		if(findDto == null) return false;
+		boolean match = encoder.matches(memberDto.getMemberPw(), findDto.getMemberPw());
+		return match;
 	}
 	
 	//회원 검색

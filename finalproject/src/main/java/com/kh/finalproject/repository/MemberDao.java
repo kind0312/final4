@@ -11,10 +11,12 @@ import com.kh.finalproject.vo.MemberListVO;
 public interface MemberDao {
 	
 	//등록
-	//회원 등록
+	//회원 등록(비밀번호 암호화 하여 등록)
 	void insert(MemberDto memberDto);
 	//회원, 첨부파일 연결테이블 등록
 	void memberProfileInsert(MemberImgDto memberImgDto);
+	//로그인
+	boolean login(MemberDto memberDto);
 	
 	//조회
     //회원 검색

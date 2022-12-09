@@ -4,12 +4,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.entity.MemberDto;
@@ -54,16 +52,10 @@ public class MemberController {
 	
 	@PostMapping("/login")
 	public String login(HttpSession session, 
-			String memberId, String memberPw) {
-		MemberDto findDto = memberDao.selectOne(memberId);
-		
-		if(findDto == null) {
-			return "redirect:login?error";
-		}
-		
-		boolean isLogin = memberPw.equals(findDto.getMemberPw());
-		if(isLogin) {
-			session.setAttribute(SessionConstant.ID, memberId);
+			@ModelAttribute MemberDto memberDto) {
+		boolean login = memberDao.login(memberDto);
+		if(login) {
+			session.setAttribute(SessionConstant.ID, memberDto.getMemberId());
 			
 //			//로그인 시간을 갱신시키는 작업
 //			memberDao.updateLoginTime(findDto.getMemberId());
