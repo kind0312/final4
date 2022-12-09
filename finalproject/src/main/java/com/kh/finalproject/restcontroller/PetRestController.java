@@ -26,26 +26,27 @@ public class PetRestController {
 	@Autowired
 	private PetDao petDao;
 	
-	@PostMapping("/pet_insert")
-	public void insert(@RequestBody PetInsertVO petInsertVO){
-		//펫 db등록
-		PetDto dto = PetDto.builder()
-				.petNo(petInsertVO.getPetNo())
-				.memberId(petInsertVO.getMemberId())
-				.petType(petInsertVO.getPetType())
-				.petName(petInsertVO.getPetName())
-				.petGender(petInsertVO.getPetGender())
-				.petBreed(petInsertVO.getPetBreed())
-				.petBirth(petInsertVO.getPetBirth())
-				.petWeight(petInsertVO.getPetWeight())
-				.petNeutralization(petInsertVO.getPetNeutralization())
-				.build();
-		petDao.insert(dto);
-		
-		//펫, 첨부파일 연결테이블 db등록 - vo만들어서 처리!!!
-		petDao.petProfileInsert(petInsertVO);
-		
-	}
+//	펫 등록 - 동기로 사용예정
+//	@PostMapping("/pet_insert")
+//	public void insert(@RequestBody PetInsertVO petInsertVO){
+//		//펫 db등록
+//		PetDto dto = PetDto.builder()
+//				.petNo(petInsertVO.getPetNo())
+//				.memberId(petInsertVO.getMemberId())
+//				.petType(petInsertVO.getPetType())
+//				.petName(petInsertVO.getPetName())
+//				.petGender(petInsertVO.getPetGender())
+//				.petBreed(petInsertVO.getPetBreed())
+//				.petBirth(petInsertVO.getPetBirth())
+//				.petWeight(petInsertVO.getPetWeight())
+//				.petNeutralization(petInsertVO.getPetNeutralization())
+//				.build();
+//		petDao.insert(dto);
+//		
+//		//펫, 첨부파일 연결테이블 db등록 - vo만들어서 처리!!!
+//		petDao.petProfileInsert(petInsertVO);
+//		
+//	}
 	
 	//한 명의 회원의 펫 목록 - 동기로 사용예정
 	@GetMapping("/pet_list/{memberId}")

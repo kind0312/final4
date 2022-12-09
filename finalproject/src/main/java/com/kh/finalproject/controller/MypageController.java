@@ -152,6 +152,14 @@ public class MypageController {
 		return "mypage/training_cancel_success";
 	}
 	
+	@RequestMapping("/profile")
+	public String profile(HttpSession session, Model model) {
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("member", memberDao.selectOne(memberId));
+		model.addAttribute("filesNo", memberDao.findFileNo(memberId));
+		return "mypage/profile";
+	}
+	
 	
 	
 
