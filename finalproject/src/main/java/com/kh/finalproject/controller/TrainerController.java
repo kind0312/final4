@@ -1,5 +1,7 @@
 package com.kh.finalproject.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +82,7 @@ public class TrainerController {
 			RedirectAttributes attr,
 			@ModelAttribute TrainingDto trainingDto,
 			Model model
-			) {
+			) throws IllegalStateException, IOException {
 		
 		String userId = (String)session.getAttribute(SessionConstant.ID);
 		trainingDto.setMemberId(userId);

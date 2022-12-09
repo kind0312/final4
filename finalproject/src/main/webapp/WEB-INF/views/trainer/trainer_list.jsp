@@ -62,6 +62,9 @@ cursor:pointer;
 <div class="row mt-4">
 <div class="col-md-10 offset-md-1 mt-100 text-center">
 <h1>훈련사를 소개합니다!</h1><br><br>
+
+
+
 <c:forEach var="list" items="${list}">
 <img src="${pageContext.request.contextPath}/image/kang.png"  width="400" height="250" class="img0"><br>
 ${list.getMemberName()} 훈련사님<br>

@@ -369,7 +369,5 @@
            </nav>
          </div>
        </div>
-   
         </div>
-        
         <main class="container-fluid">
