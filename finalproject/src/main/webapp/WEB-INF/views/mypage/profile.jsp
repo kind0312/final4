@@ -17,6 +17,7 @@
 	}
 	.form-control{
 		display:inline;
+		font-size:16px;
 	}
 	.underline-out{
 		border-bottom:#fff;
@@ -36,12 +37,48 @@
 
 <script>
 	$(function(){
-		//첫 화면 버튼 숨김
-		$(".confirm-btn").hide();
-		$(".cancel-btn").hide();
+		detailBtn();
+		
+		//버튼 숨김 함수
+		function detailBtn(){
+			$(".confirm-btn").hide();
+			$(".cancel-btn").hide();
+			$(".edit-btn").show();
+			$(".delete-btn").show();
+			$(".new-table").hide();
+			$(".origin-table").show();
+		}
+		//버튼 표시 함수
+		function editBtn(){
+			$(".edit-btn").hide();
+			$(".delete-btn").hide();
+			$(".confirm-btn").show();
+			$(".cancel-btn").show();
+			$(".origin-table").hide();
+			$(".new-table").show();
+		}
+		
+		//목록버튼(돌아가기) 이벤트 - 새로 추가한 첨부파일 db에서 삭제
+		$(".cancel-btn").click(function(){
+			var newFilesNo = $("[name=filesNo]").val();
+			var originFilesNo = $("#originFilesNo").val();
+			if(newFilesNo!=originFilesNo){
+				$.ajax({
+					url:"http://localhost:8888/delete/"+newFilesNo,
+					method:"delete",
+					data:newFilesNo,
+					success:function(resp){
+						$("[name=filesNo]").val($("#originFilesNo").val());
+						//alert(' 삭제 성공 ! '+resp);
+					}
+				});
+			}
+		});
 
-		//수정버튼 클릭 시 새로운 input창 숨김 및 원래 input창 숨김해제
-		$(".edit-btn").click(function(){			
+		//수정버튼 클릭 시 새로운 input창 표시 및 원래 input창 숨김
+		$(".edit-btn").click(function(){
+			editBtn();
+			
 			//프로필 클릭 시 첨부파일 버튼 실행
 			$(".img-circle").click(function(){
 				$(".input-file").click();
@@ -68,25 +105,18 @@
 					});
 				}
 			});
+			
+			//기존 input창 숨김
+			
+			
+			//비동기화로 정보 출력 및 새로운 input창 생성
+			
+			
+			
 		});
 		
 		
-		//목록버튼(돌아가기) 이벤트 - 새로 추가한 첨부파일 db에서 삭제
-		$(".list-btn").click(function(){
-			var newFilesNo = $("[name=filesNo]").val();
-			var originFilesNo = $("#originFilesNo").val();
-			if(newFilesNo!=originFilesNo){
-				$.ajax({
-					url:"http://localhost:8888/delete/"+newFilesNo,
-					method:"delete",
-					data:newFilesNo,
-					success:function(resp){
-						$("[name=filesNo]").val($("#originFilesNo").val());
-						//alert(' 삭제 성공 ! '+resp);
-					}
-				});
-			}
-		});
+		
 	
 		//변경된 정보 비동기화 수정처리
 		//상태 판정
@@ -114,49 +144,6 @@
 			}
 		}
 		
-		
-		//이름검사
-		$("[name=petName]").blur(function(e){
-			$(this).removeClass("is-valid is-invalid");
-			if($(this).val().length>0){
-				$(this).addClass("is-valid");
-				check.petName=true;
-			}else{
-				$(this).addClass("is-invalid");
-				check.petName=false;
-			}	
-		});
-	
-		//품종검사
-		$("[name=petBreed]").blur(function(e){
-			$(this).removeClass("is-valid is-invalid");
-			if($(this).val().length>0){
-				$(this).addClass("is-valid");
-				check.petBreed=true;
-			}else{
-				$(this).addClass("is-invalid");
-				check.petBreed=false;
-			}	
-		});
-		
-		//몸무게 숫자만 입력 검사
-		$("[name=petWeight]").blur(function(e){
-			$(this).removeClass("is-valid is-invalid");
-			var value = $(this).val();
-			if(value.length==0){
-				check.petWeight=true;
-			}else{
-				var regex = check.weightRegex;
-				if(regex.test(value)){
-					$(this).addClass("is-valid");
-					check.petWeight=true;
-				}else{
-					$(this).addClass("is-invalid");
-					check.petWeight=false;
-				}
-			}
-		});
-		
 		//수정 폼 이벤트
 		$(".update-form").submit(function(e){
 			//기본이벤트 차단
@@ -168,73 +155,28 @@
 			profileCheck();
 
 			//비동기화 데이터 준비
-			var filesNo = $("[name=filesNo]").val();
-			var petNo = $("[name=petNo]").val();
-			var memberId = $("[name=memberId]").val();
-			var type=$("[name=petType]:checked").val();
-			var name=$("[name=petName]").val();
-			var gender=$("[name=petGender]:checked").val();
-			var breed=$("[name=petBreed]").val();
-			var birth=$("[name=petBirth]").val();
-			var weight=$("[name=petWeight]").val();
-			var neutralization=$("[name=petNeutralization]:checked").val();
-			console.log(type);
-			console.log(gender);
-			console.log(neutralization);
+			//var filesNo = $("[name=filesNo]").val();
+			//var petNo = $("[name=petNo]").val();
+			//var memberId = $("[name=memberId]").val();
+			//var type=$("[name=petType]:checked").val();
 			
 			//data에 묶음
 			data={
-				filesNo:filesNo,
-				memberId:memberId,
-				petNo:petNo,
-				petType:type,
-				petName:name,
-				petGender:gender,
-				petBreed:breed,
-				petBirth:birth,
-				petWeight:weight,
-				petNeutralization:neutralization
+				//filesNo:filesNo,
 			}
 			if(check.allValid()){//수정처리
 				$.ajax({
-					url:"http://localhost:8888/rest/pet_edit",
+					url:"",
 					method:"put",
-					async:false,
+					//async:false,
 					contentType:"application/json",
 					data:JSON.stringify(data),
 					success:function(resp){
-						$(".edit-btn").show();
-						tdHide();
-						newtdShow();
+
 					}
 				});
 			}
-			loadList();
 		});
-		
-				
-		//선택한 정보 불러오기
-		function updateInfo(){
-			var petNo = $("[name=petNo]").val();
-			$.ajax({
-				url:"http://localhost:8888/rest/pet_selectone/"+petNo,
-				method:"get",
-				dataType:"json",
-				data:petNo,
-				success:function(resp){
-					console.log(resp);
-					$("[name=petName]").val(resp.petName);
-					$("[name=petBreed]").val(resp.petBreed);
-					$("[name=petBirth]").val(resp.petBirth);
-					$("[name=petWeight]").val(resp.petWeight);
-					
-					//$("input[name='radio의 name'][value='선택할 값']").prop("checked", true);
-					$("[name=petType][value="+resp.petType+"]").prop("checked", true);
-					$("[name=petGender][value="+resp.petGender+"]").prop("checked", true);
-					$("[name=petNeutralization][value="+resp.petNeutralization+"]").prop("checked", true);				
-				}
-			});
-		}
 
 	});
 </script>
@@ -290,9 +232,15 @@
 		<form class="update-form">
 			<div class="row text-center">
 	            <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-3">   
-	                 <table class="table mb-4">
+	            
+	                 <!-- 기존 input창 -->
+	                 <table class="table mb-4 origin-table">
 						<tbody>
 							<tr class="table-default"><td colspan="2"></tr>
+							<tr class="table-default underline-out" height="65px">
+								<th class="ps-sm-4">이름</th>
+								<td class="ps-sm-4">${member.memberName}</td>
+							</tr>
 							<tr class="table-default underline-out" height="65px">
 								<th class="ps-sm-4">이메일</th>
 								<td class="ps-sm-4">${member.memberEmail}</td>
@@ -312,16 +260,59 @@
 								<th class="ps-sm-4">기본주소</th>
 								<td class="ps-sm-4">${member.memberBaseAddress}</td>
 							</tr>
-							<tr class="table-default underline-out" height="65px">
+							<tr class="table-default" height="65px">
 								<th class="ps-sm-4">상세주소</th>
 								<td class="ps-sm-4">${member.memberDetailAddress}</td>
 							</tr>
-							<tr class="table-default" height="65px">
-								<th class="ps-sm-4">생일</th>
-								<td class="ps-sm-4">${member.memberBirth}</td>
-							</tr>
-						</tbody>
+						</tbody>						
 					</table>
+					<!-- 기존 input창 끝 -->
+					
+					<!-- 새로운 input창 -->
+					<table class="table mb-4 new-table">
+						<tbody>
+							<tr class="table-default"><td colspan="2"></tr>
+							<tr class="table-default underline-out" height="65px">
+								<th class="ps-sm-4">이름</th>
+								<td class="ps-sm-4">
+									<input type="text" class="underline form-control" value="${member.memberName}">
+								</td>
+							</tr>
+							<tr class="table-default underline-out" height="65px">
+								<th class="ps-sm-4">이메일</th>
+								<td class="ps-sm-4">
+									<input type="text" class="underline form-control" value="${member.memberEmail}">
+								</td>
+							</tr>
+							<tr class="table-default underline-out" height="65px">
+								<th class="ps-sm-4">휴대폰</th>
+								<c:set var="tel" value="${member.memberTel}"></c:set>
+								<td class="ps-sm-4">
+									<input type="text" class="underline form-control" value="${member.memberTel}">
+								</td>
+							</tr>
+							<tr class="table-default underline-out" height="65px">
+								<th class="ps-sm-4">우편번호</th>
+								<td class="ps-sm-4">
+									<input type="text" class="underline form-control" value="${member.memberPost}">
+								</td>
+							</tr>
+							<tr class="table-default underline-out" height="65px">
+								<th class="ps-sm-4">기본주소</th>
+								<td class="ps-sm-4">
+									<input type="text" class="underline form-control" value="${member.memberBaseAddress}">
+								</td>
+							</tr>
+							<tr class="table-default" height="65px">
+								<th class="ps-sm-4">상세주소</th>
+								<td class="ps-sm-4">
+									<input type="text" class="underline form-control" value="${member.memberDetailAddress}">
+								</td>
+							</tr>
+						</tbody>						
+					</table>
+					<!-- 비동기화 처리 -->
+						
 					<!-- 비동기 처리 위한 데이터-->
 					<input type="hidden" value="${member.memberId}" name="memberId">
 					<input type="hidden" value="${filesNo}" name="filesNo">

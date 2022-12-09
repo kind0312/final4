@@ -11,7 +11,7 @@ admin_pw varchar2(16)  not null
 drop table member;
 create table member(
 member_id varchar2(20) primary key check(regexp_like(member_id,'^[a-z][a-zA-Z0-9!@#$-_]{4,19}$')),
-member_pw varchar2(16) not null check(regexp_like(member_pw, '^[a-zA-Z0-9!@#$]{8,16}$')),
+member_pw varchar2(60) not null,
 member_name varchar2(21) not null check(regexp_like(member_name, '^[a-zA-Z가-힣]{2,7}$')),
 member_email varchar2(30) not null check(regexp_like(member_email,'@')),
 member_tel char(11) not null check(regexp_like(member_tel,'^01[016789][1-9]\d{6,7}$')),
