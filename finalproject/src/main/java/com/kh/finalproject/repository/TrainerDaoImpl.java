@@ -32,7 +32,7 @@ public class TrainerDaoImpl implements TrainerDao {
 	}
 
 	@Override
-	public void insert(TrainerDto trainerDto) {
+	public void insertTrainer(TrainerDto trainerDto) {
 		sqlSession.insert("trainer.trainerProfileInsert", trainerDto);
 		
 	}
@@ -68,11 +68,13 @@ public class TrainerDaoImpl implements TrainerDao {
 	
 
 
-//	@Override
-//	public boolean update(TrainerDto trainerDto) {		
-//		int count =sqlSession.update("trainer.???", trainerDto);
-//		return count > 0;
-//	}
+	@Override
+	public boolean updateTrainer(TrainerDto trainerDto) {		
+		int count =sqlSession.update("trainer.trainerProfileUpdate", trainerDto);
+		return count > 0;
+	}
+
+
 	
 	
 }
