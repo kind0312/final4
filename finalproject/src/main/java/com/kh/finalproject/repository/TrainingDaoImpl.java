@@ -15,6 +15,11 @@ public class TrainingDaoImpl implements TrainingDao{
 	@Autowired
 	private SqlSession sqlSession;
 	
+	@Override
+	public boolean statusChange(int trainingNo) {
+		return sqlSession.update("training.statusChange",trainingNo)>0;
+	}
+	
 	//훈련서비스 번호로 예약내역 조회
 	@Override
 	public TrainingDto selectOne(int trainingNo) {
@@ -43,6 +48,12 @@ public class TrainingDaoImpl implements TrainingDao{
 	@Override
 	public List<TrainingDetailDto> trainingPet(int trainingNo) {
 		return sqlSession.selectList("training.petList",trainingNo);
+	}
+	
+	//훈련서비스 삭제
+	@Override
+	public boolean delete(int trainingNo) {
+		return sqlSession.delete("training.delete",trainingNo)>0;
 	}
 	
 }

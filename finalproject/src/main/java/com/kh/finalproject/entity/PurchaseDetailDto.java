@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 public class PurchaseDetailDto {
 	private int purchaseDetailNo;
 	private int trainingPurchaseNo;
-	private int purchaseDetailPetNo;
+	private String purchaseDetailPetName;
 	private int purchaseDetailPrice;
 	private String purchaseDetailStatus;
 }

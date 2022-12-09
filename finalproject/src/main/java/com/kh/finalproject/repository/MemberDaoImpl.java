@@ -56,12 +56,11 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("member.one", memberId);
 	}
 	
+	//결제 후 포인트 증가
 	@Override
 	public boolean pointPlus(MemberDto memberDto) {
 		return sqlSession.update("member.plusPoint",memberDto)>0;
 	}
-
-
 
      @Override
 	public int findFileNo(String memberId) {		

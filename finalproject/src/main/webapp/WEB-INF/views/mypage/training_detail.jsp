@@ -44,6 +44,7 @@
 		text-decoration: underline;
 		color:#81BDF1;
 	}
+	
 </style>
 
 <script>
@@ -75,7 +76,7 @@
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">후기</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">정보수정</a>
+	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/profile">정보수정</a>
 	        </li>
 	        <li class="nav-item">
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">펫시터로 전환</a>
@@ -259,8 +260,12 @@
 					  			</tr>
 					  			<c:if test="${petCount > 1}">
 					  				<tr class="table-default align-middle underline-out"  height="50px">
-						  				<td class="title"  width="45%"><span class="ps-sm-4">추가 요금(+10,000)</span></td>
-						  				<td width="55%" class="content"><span class="pe-sm-4">10,000</span></td>
+						  				<td class="title"  width="45%"><span class="ps-sm-4">추가 요금(+${(petCount-1)*10000})</span></td>
+							  				<td width="55%" class="content">
+								  				<span class="pe-sm-4">
+								  					<fmt:formatNumber value="${(petCount-1)*10000}" pattern="###,###"></fmt:formatNumber>
+								  				</span>
+							  				</td>
 					  				</tr>
 					  			</c:if>
 					  			<tr class="table-default align-middle underline-out"  height="50px">
