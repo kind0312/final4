@@ -97,7 +97,7 @@ public class MemberController {
 	//아이디 찾기 성공
 	@GetMapping("/find_memberid_success")
 	public String findMemberIdSuccess(Model model, @ModelAttribute MemberDto memberDto) {
-		model.addAttribute("memberDto", memberDao.findId(memberDto));
+		model.addAttribute("memberDto", memberDao.find(memberDto));
 		return "member/find_memberid_success";
 	}
 }

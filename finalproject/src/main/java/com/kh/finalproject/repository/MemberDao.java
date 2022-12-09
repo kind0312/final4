@@ -20,7 +20,7 @@ public interface MemberDao {
 	boolean login(MemberDto memberDto);
 	//아이디 찾기
 	boolean findId(MemberDto memberDto);
-	//아이디 조회
+	//아이디 불러오기
 	MemberDto find(MemberDto memberDto);
 	
 	

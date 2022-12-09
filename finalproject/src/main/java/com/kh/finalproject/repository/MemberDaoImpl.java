@@ -58,6 +58,12 @@ public class MemberDaoImpl implements MemberDao {
 		return find;
 	}
 	
+	//아이디 불러오기
+	@Override
+	public MemberDto find(MemberDto memberDto) {
+		return sqlSession.selectOne("member.findId", memberDto.getMemberName());
+	}
+	
 	//회원 검색
 	@Override
 	public List<MemberListVO> selectList(MemberListSearchVO vo) {

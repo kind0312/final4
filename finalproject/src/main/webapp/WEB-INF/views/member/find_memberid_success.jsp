@@ -9,7 +9,7 @@
 
 <body>
 
-	<div class="container-fluid" style="height:60%;">
+	<div class="container-fluid" style="height:100%;">
 		<div class="row text-center mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-150">
 				<h1>ID 찾기</h1>
