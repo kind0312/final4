@@ -21,17 +21,17 @@ public class TrainingRestController {
 	@Autowired
 	private TrainingDao trainingDao;
 	
-	@GetMapping("/training_ing/{memberId}")
-	public List<TrainingDto> list(@PathVariable String memberId){
-		List<TrainingDto> dto = trainingDao.ingList(memberId);
-		return dto;
-	}
-	
-	@GetMapping("/training_end/{memberId}")
-	public List<TrainingDto> selectone(@PathVariable String memberId){
-		List<TrainingDto> dto = trainingDao.endList(memberId);
-		return dto;
-	}
+//	@GetMapping("/training_ing/{memberId}")
+//	public List<TrainingDto> list(@PathVariable String memberId){
+//		List<TrainingDto> dto = trainingDao.ingList(memberId);
+//		return dto;
+//	}
+//	
+//	@GetMapping("/training_end/{memberId}")
+//	public List<TrainingDto> selectone(@PathVariable String memberId){
+//		List<TrainingDto> dto = trainingDao.endList(memberId);
+//		return dto;
+//	}
 
 	
 

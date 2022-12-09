@@ -65,7 +65,7 @@ drop table point;
 create table point(
 point_no number primary key,
 member_id varchar2(20) not null,
-point_status char(6) not null check(point_status in('구매','사용')),
+point_status char(6) not null check(point_status in('구매','사용','환불')),
 point_price number not null,
 point_date date default sysdate
 );
@@ -132,7 +132,7 @@ drop table purchase_detail;
 create table purchase_detail(
 purchase_detail_no number primary key,
 training_purchase_no references training_purchase(training_purchase_no) on delete cascade,
-purchase_detail_pet_no number not null,
+purchase_detail_pet_name varchar2(30) not null,
 purchase_detail_price number not null,
 purchase_detail_status char(6) not null check(purchase_detail_status in('승인','취소'))
 );
@@ -145,7 +145,7 @@ create sequence purchase_detail_seq;
 drop table training_detail;
 create table training_detail( 
 training_no references training(training_no) on delete cascade,
-training_detail_pet_no number not null
+training_detail_pet_name varchar2(30) not null
 ); 
 
 -- apply 훈련사 지원
@@ -304,4 +304,12 @@ drop table chat_img;
 create table chat_img( 
 files_no REFERENCES files(files_no) on DELETE set null,
 chat_no REFERENCES chat(chat_no) on DELETE CASCADE
+);
+
+-- emailcert 이메일인증
+drop table emailcert;
+create table emailcert(
+emailcert_email varchar2(60) primary key,
+emailcert_serial char(6) not null,
+emailcert_send date default sysdate not null
 );

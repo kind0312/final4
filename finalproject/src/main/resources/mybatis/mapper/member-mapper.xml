@@ -16,8 +16,6 @@
 		#{memberTel}, #{memberPost}, #{memberBaseAddress}, #{memberDetailAddress},
 		#{memberBirth}, #{memberGender})
 	</insert>
-
-	
     	
 	<select id="list" resultType="MemberDto">
 	    select *from member order by member_joindate asc

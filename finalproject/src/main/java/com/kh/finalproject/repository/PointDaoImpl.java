@@ -13,10 +13,21 @@ public class PointDaoImpl implements PointDao{
 	
 	@Autowired
 	private SqlSession sqlSession;
+	
+	@Override
+	public int sequence() {
+		return sqlSession.selectOne("point.sequence");
+	}
 
 	@Override
 	public void insert(PointDto pointDto) {
 		sqlSession.insert("point.insert",pointDto);
+	}
+	
+	//예약 취소 후 포인트 insert
+	@Override
+	public void cancelInsert(PointDto pointDto) {
+		sqlSession.insert("point.cancelInsert",pointDto);
 	}
 
 	@Override
@@ -28,7 +39,8 @@ public class PointDaoImpl implements PointDao{
 	public int count(String memberId) {
 		return sqlSession.selectOne("point.count",memberId);
 	}
+
 	
-	
+
 
 }

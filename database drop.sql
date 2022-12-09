@@ -1,3 +1,5 @@
+-- emailcert 이메일 인증
+drop table emailcert;
 
 -- admin 관리자
 drop table admin;

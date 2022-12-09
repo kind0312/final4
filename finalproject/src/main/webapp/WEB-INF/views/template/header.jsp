@@ -142,6 +142,12 @@
 			.footer-link{
 				color: #f8f9fa;
 			}
+			.w-30{
+				width: 30%;
+			}
+			.w-70{
+				width: 70%;
+			}
 			.mt-150{
 				margin-top:150px;
 			}
