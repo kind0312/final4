@@ -51,6 +51,7 @@
 		insert into member_img(files_no, member_id) values(#{filesNo}, #{memberId})
 	</insert>
 	
+	<!-- 회원 단일조회 -->
 	<select id="one" parameterType="String" resultType="MemberDto">
 		select * from member where member_id = #{memberId}
 	</select>
