@@ -47,7 +47,7 @@ height: 300px;
          <div class="col-md-10 offset-md-1 mt-150 text-center">
          <h1>훈련사를 소개합니다!</h1>
          <img src="${pageContext.request.contextPath}/image/kang.png"  width="400" height="250" class="img0"><br>
-<a type="button" href="/trainer/reservation" class="btn btn-blue btn-md ">예약하기</a><br><br>
+<a type="button" href="/trainer/reservation?memeberId=${list.memberId}" class="btn btn-blue btn-md ">예약하기</a><br><br>
 <!-- 태림누나 추가 요망 -->
 <a type="button" href="#" class="btn btn-blue btn-md ">문의하기</a><br>
 ${list.getMemberName()} 훈련사님<br>
