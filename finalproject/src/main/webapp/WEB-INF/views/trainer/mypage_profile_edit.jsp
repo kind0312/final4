@@ -66,7 +66,6 @@
 
 
 
-<form class="insert-form">
   <fieldset>
     <legend>훈련사 프로필 관리</legend>
     
@@ -75,39 +74,42 @@
             <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">   
              <img src="${pageContext.request.contextPath}/download/${filesDto.getFilesNo()}" 
                  		width="120" height="120" class="img-circle">
-                <input type="file" style="display:none;" class="input-file form-control" name="memProfileImg" accept=".jpg, .png, .gif">              
+                <input type="file" style="display:none;" class="input-file form-control" accept=".jpg, .png, .gif" name="trainerImg">  
 				<div class="invalid-feedback">사진을 등록해주세요!</div> 			 
 			</div>
 	</div>
     
-    <!-- 나중에 readonly 기능 시간 되면 넣어보기, 수정버튼 누르면 input창 활성화 기능 -->
+<form method="post" >
+  
     <div class="form-group">
       <label for="exampleInputEmail1" class="form-label mt-4">제목</label>
-      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" 
-      value="${trainerDto.getTrainerProfile()}" name="trainerProfile" > 
+      <input type="text" class="form-control" 
+      value="${trainerProfile}" name="trainerProfile" > 
       <div class="invalid-feedback">필수 항목입니다.</div>   
     </div>
 
 	
     <div class="form-group">
       <label for="exampleTextarea" class="form-label mt-4">내용</label>
-      <textarea  class="form-control" id="exampleTextarea" rows="5" 
-      name= "trainerProfileContenct" >${trainerDto.getTrainerProfileContent()}</textarea>
+      <textarea  class="form-control" rows="5" 
+      name= "trainerProfileContent" >${trainerProfileContent}</textarea>
       <div class="invalid-feedback">필수 항목입니다.</div>
     </div>
     
    	<!-- input 으로 넘겨야 하는데 안써도 되는건 히든으로 넘겨야함 -->
-   <input type="hidden" value="${trainerDto.getTrainerNo()}" name="trainerNo">
-   <input type="hidden" value="${trainerDto.getMemberId()}" name="memberId"> 
-   <input type="hidden" value="${trainerDto.getApplyNo()}" name="applyNo">
+    <input type="hidden" value="${trainerDto.getTrainerNo()}" name="trainerNo">
+  <input type="hidden" value="${trainerDto.getMemberId()}" name="memberId"> 
+  <input type="hidden" value="${trainerDto.getApplyNo()}" name="applyNo">
+   
+   <input type="hidden" value="" name="filesNo">            
    
    
    
 
      <button type="submit" class="btn btn-blue" >저장</button>        
    
-    </fieldset>
     </form>
+    </fieldset>
     
 
    			</div>
@@ -147,7 +149,7 @@
                     	$(".img-circle").attr("src",resp);
                     	var check = resp.lastIndexOf("/"); //경로에서 /위치 찾기
                     	var filesNo = resp.substr(check+1); //fileNo 꺼내기
-                    	$("[name=memProfileImg]").val(filesNo); //하단 파일no input태그에 값 넣기
+                    	$("[name=filesNo]").val(filesNo); //하단 파일no input태그에 값 넣기
                     }
 				});
 			}

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.finalproject.constant.SessionConstant;
+import com.kh.finalproject.entity.MemberImgDto;
 import com.kh.finalproject.entity.TrainerDto;
 import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.repository.FilesDao;
@@ -65,7 +66,7 @@ public class PetTrainerController {
 		
 		String memberId = (String) session.getAttribute(SessionConstant.ID);		
 		TrainerDto dto = trainerDao.selectOnePro(memberId);		
-		//System.out.println(dto);
+		
 		model.addAttribute("trainerDto", dto );	
 		
 		//멤버 아이디로 파일 조회해 오는것도 추가해야함
@@ -81,7 +82,7 @@ public class PetTrainerController {
 		
 		String memberId = (String) session.getAttribute(SessionConstant.ID);		
 		TrainerDto dto = trainerDao.selectOnePro(memberId);		
-		System.out.println(dto);
+		System.out.println("겟매핑 dto =" + dto);
 		model.addAttribute("trainerDto", dto );	
 		
 		//멤버 아이디로 파일 조회해 오는것도 추가해야함
@@ -95,24 +96,23 @@ public class PetTrainerController {
 	
 	
 	@PostMapping("/mypage_profile_edit")		
-	public String mypageProfileEdit(@RequestBody TrainerDto trainerDto) {  //동기로 처리
+	public String mypageProfileEdit(@ModelAttribute TrainerDto trainerDto, 
+														@ModelAttribute MemberImgDto memberImgDto,
+															HttpSession session) {  //동기로 처리
 		
-		//훈련사 Trainer 테이블 update		
+		//훈련사 Trainer 테이블 update					
 		
-		TrainerDto dto = TrainerDto.builder()
-				.trainerNo(trainerDto.getApplyNo())
-				.memberId(trainerDto.getMemberId())
-				.applyNo(trainerDto.getApplyNo())
-				.trainerProfile(trainerDto.getTrainerProfile())
-				.trainerProfileContent(trainerDto.getTrainerProfileContent())
-				.build();			
-		
-		Boolean result =trainerDao.updateTrainer(dto);
-		System.out.println(result);
+		System.out.println("Post매핑 trainerDto=" + trainerDto);
+		Boolean result =trainerDao.updateTrainer(trainerDto);
+	
 		
 		
-		//첨부파일 연결 db등록 member_img (member Dao에 insert 메소드 가져와야함)
-		//memberDao.insertImg(memberImgDto);	
+		//첨부파일 연결 db등록 member_img (member Dao에 update 메소드 가져와야함)
+		//int filesNo = memberDao.findFileNo(SessionConstant.ID); //새로 넣은 filesNo를 가져와야하는데 이렇게 가져오면 예전걸 가져온단 말이지
+				
+		//member_img 테이블에 이전 데이터를 지우고 
+		
+		memberDao.memberProfileInsert(memberImgDto);	//이거 정상 작동함 
 		
 		if(result) {			
 			return "redirect:trainer/mypage_profile";

@@ -73,7 +73,7 @@
 
       
       <update id="trainerProfileUpdate" parameterType="TrainerDto">
-      update trainer set trainer_profile=#{trainerProfile}, trainer_profile_content=#{trainerProfileContent} where trainer_no= #{trainerNo};
+      update trainer set trainer_profile=#{trainerProfile}, trainer_profile_content=#{trainerProfileContent} where trainer_no= #{trainerNo}
       </update>
       
 

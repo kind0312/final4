@@ -75,10 +75,8 @@
     
     <div class="row text-center mt-3">
             <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">   
-             <img src="${pageContext.request.contextPath}/download/${filesDto.getFilesNo()}" 
-                 		width="120" height="120" class="img-circle">
-                <input type="file" style="display:none;" class="input-file form-control" name="memProfileImg" accept=".jpg, .png, .gif">              
-				<div class="invalid-feedback">사진을 등록해주세요!</div> 			 
+            	 <img src="${pageContext.request.contextPath}/download/${filesDto.getFilesNo()}" 
+                 		width="120" height="120" class="img-circle">    
 			</div>
 	</div>
     
@@ -121,14 +119,13 @@
 
 
 </body>
-
 <script>
 	$(function(){
 		//프로필 클릭 시 첨부파일 버튼 실행
-// 		$(".img-circle").click(function(){
-// 			$(".input-file").click();
-// 		});
-		
+		$(".img-circle").click(function(){
+			$(".input-file").click();
+		});
+
 		//프로필 파일 저장 및 미리보기
 		$(".input-file").change(function(){
 			//console.log($(".input-file").val()); //선택된 파일 경로와 이름이 나옴
@@ -156,103 +153,14 @@
                     }
 				});
 			}
+				
+				
+			
 			else	{ //파일 없거나 있던 파일 삭제
 				$(".img-circle").attr("src","${pageContext.request.contextPath}/image/profile_basic.jpg");
 			}
 		});
 		
-// 		//상태 판정
-// 		check={
-// 				memProfileImg:false,
-// 				trainerProfile:false,
-// 				trainerProfileContenct:false,				
-// 				allValid:function(){
-// 					return this.trainerProfile && this.trainerProfileContenct &&	this.memProfileImg;
-// 				}
-// 		};
-		
-// 		//사진검사
-// 		function profileImgCheck(){
-// 			var value = $("[name=trainerProfileImg]").val();
-	
-// 			$("[name=trainerProfileImg]").removeClass("is-valid is-invalid");
-			
-// 			if(value.length>0){
-// 				$("[name=trainerProfileImg]").addClass("is-valid");
-// 				check.memProfileImg=true;
-// 			}else{
-// 				$("[name=trainerProfileImg]").addClass("is-invalid");
-// 				check.memProfileImg=false;
-// 			}	
-// 		}
-		
-// 		//제목title 검사
-// 		$("[name=trainerProfile]").blur(function(e){
-// 			$(this).removeClass("is-valid is-invalid");
-// 			if($(this).val().length>0){
-// 				$(this).addClass("is-valid");
-// 				check.trainerProfile=true;
-// 			}else{
-// 				$(this).addClass("is-invalid");
-// 				check.trainerProfile=false;
-// 			}	
-// 		});
-		
-// 		//자기소개 검사
-// 		$("[name=trainerProfileContencts]").blur(function(e){
-// 			$(this).removeClass("is-valid is-invalid");
-// 			if($(this).val().length>0){
-// 				$(this).addClass("is-valid");
-// 				check.trainerProfileContenct=true;
-// 			}else{
-// 				$(this).addClass("is-invalid");
-// 				check.trainerProfileContenct=false;
-// 			}	
-// 		});		
-		
-		
-// 		$(".insert-form").submit(function(e){
-// 			//기본이벤트 차단
-// 			e.preventDefault();
-// 			//필수항목 체크
-// 			$("[name=trainerProfile]").blur();
-// 			$("[name=trainerProfileContencts]").blur();			
-// 			$("[name=trainerProfileImg]").change();
-
-// 			// 필수입력사항만 보낼경우 value값에 null이 들어가 db에 등록되지 않음
-// 			// 필수, 전체입력 다 받을 경우만 ajax로 전송 및 db저장 되는 상태..
-// 			console.log("check valid", check.allValid());
-			
-// 			if(check.allValid()){//등록처리
-// 				//비동기화 데이터 준비
-// 				var filesNo = $("[name=filesNo]").val();	
-// 				var trainerNo = $("[name=trainerNo]").val();
-// 				var memberId = $("[name=memberId]").val();
-// 				var title =$("[name=trainerProfile]").val();
-// 				var applyNo = $("[name=applyNo]").val();
-// 				var content =$("[name=trainerProfileContencts]").val();
-				
-// 				//data에 묶음
-// 				data={
-// 					//filesNo:filesNo,
-// 					trainerNo:trainerNo,
-// 					memberId:memberId,
-// 					applyNo:applyNo,
-// 					trainerProfile:title,
-// 					trainerProfileContent:content					
-// 				}
-
-// 				$.ajax({
-// 					url:"http://localhost:8888/trainer/post/mypage_profile",
-// 					method:"post",
-// 					contentType:"application/json",
-// 					data:JSON.stringify(data),
-// 					success:function(resp){
-// 						location.href="${pageContext.request.contextPath}/trainer/mypage_profile";
-// 					}
-// 				});
-// 			}
-// 		}); 
 	});
 </script>
 
