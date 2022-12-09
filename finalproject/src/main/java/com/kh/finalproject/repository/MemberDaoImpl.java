@@ -79,8 +79,7 @@ public class MemberDaoImpl implements MemberDao {
      //프로필 정보수정
      @Override
     public boolean profileEdit(MemberDto memberDto) {
-    	// TODO Auto-generated method stub
-    	return false;
+    	return sqlSession.update("member.profileEdit",memberDto)>0;
     }
 
 }
