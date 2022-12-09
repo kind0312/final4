@@ -89,17 +89,6 @@
 				check.petProfile=false;
 			}
 		}
-		
-		/* $("[name=petProfile]").change(function(e){
-			$(this).removeClass("is-valid is-invalid");
-			if($(this).val().length>0){
-				$(this).addClass("is-valid");
-				check.petProfile=true;
-			}else{
-				$(this).addClass("is-invalid");
-				check.petProfile=false;
-			}	
-		}); */
 
 		//이름검사
 		$("[name=petName]").blur(function(e){
@@ -152,45 +141,20 @@
 			$("[name=petWeight]").blur();
 			profileCheck();
 
-			// 필수입력사항만 보낼경우 value값에 null이 들어가 db에 등록되지 않음
-			// 필수, 전체입력 다 받을 경우만 ajax로 전송 및 db저장 되는 상태..
 			if(check.allValid()){//등록처리
-				//비동기화 데이터 준비
-				var filesNo = $("[name=filesNo]").val();
-				var petNo = $("[name=petNo]").val();
-				var memberId = $("[name=memberId]").val();
-				var type=$("[name=petType]:checked").val();
-				var name=$("[name=petName]").val();
-				var gender=$("[name=petGender]:checked").val();
-				var breed=$("[name=petBreed]").val();
-				var birth=$("[name=petBirth]").val();
-				var weight=$("[name=petWeight]").val();
-				var neutralization=$("[name=petNeutralization]:checked").val();
-				//data에 묶음
-				data={
-					filesNo:filesNo,
-					memberId:memberId,
-					petNo:petNo,
-					petType:type,
-					petName:name,
-					petGender:gender,
-					petBreed:breed,
-					petBirth:birth,
-					petWeight:weight,
-					petNeutralization:neutralization
-				}
-
-				$.ajax({
-					url:"http://localhost:8888/rest/pet_insert",
-					method:"post",
-					contentType:"application/json",
-					data:JSON.stringify(data),
-					success:function(resp){
-						location.href="${pageContext.request.contextPath}/mypage/pet_detail?petNo="+petNo;
-					}
-				});
-			}
+				this.submit();
+			}	
 		});
+		
+		//이후 날짜 선택되지 않도록 제한
+		$(".input-calendar").click(function(){
+			var now = Date.now(); //현재 날짜 밀리초로 변환
+			var calcul = new Date().getTimezoneOffset()*60000; //현재 시간과의 차이를 분 단위로 반환
+			var today = new Date(now-calcul).toISOString(); //2022-12-08T17:50:05.809Z 형식으로 출력됨
+			var max = today.substring(0,10); //필요한 범위(연/월/일)까지만 문자열 자르기
+			$(this).attr("max",max);
+		});
+		
 	});
 </script>
 
@@ -219,7 +183,7 @@
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">후기</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">정보수정</a>
+	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/profile">정보수정</a>
 	        </li>
 	        <li class="nav-item">
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">펫시터로 전환</a>
@@ -251,13 +215,13 @@
 			</div>
 		</div>
 		
-		<form class="insert-form">
+		<form class="insert-form" action="/mypage/pet_insert" method="post">
 			<div class="row text-center">
 	            <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">   
 	                 <table class="table">
 						<tbody>
 							<tr class="table-default">
-								<th>종류<i class="fa-solid fa-asterisk blue"></i></th>
+								<th>종류 <i class="fa-solid fa-asterisk blue"></i></th>
 								<td>
 									<input class="form-check-input mx-1" type="radio" name="petType" value="강아지" id="optionsRadios1" required>
 							        <label class="label" for="optionsRadios1">
@@ -270,14 +234,14 @@
 								</td>
 							</tr>
 							<tr>
-								<th>이름<i class="fa-solid fa-asterisk blue"></i></th>
+								<th>이름 <i class="fa-solid fa-asterisk blue"></i></th>
 								<td>
-		  							<input type="text" name="petName" class="underline form-control" placeholder="이름" required>
+		  							<input type="text" name="petName" class="underline form-control" placeholder="예) 흰둥이" required>
 									<div class="invalid-feedback">필수 항목입니다.</div>
 								</td>
 							</tr>
 							<tr>
-								<th>성별<i class="fa-solid fa-asterisk blue"></i></th>
+								<th>성별 <i class="fa-solid fa-asterisk blue"></i></th>
 								<td>
 									<input class="form-check-input mx-1" type="radio" name="petGender" value="남" id="optionsRadios3" required>
 							        <label class="label" for="optionsRadios3">
@@ -290,27 +254,27 @@
 								</td>
 							</tr>
 							<tr class="my-2">
-								<th>품종<i class="fa-solid fa-asterisk blue"></i></th>
+								<th>품종 <i class="fa-solid fa-asterisk blue"></i></th>
 								<td>
-									<input type="text" name="petBreed" class="underline form-control" placeholder="예) 흰둥이" required>
+									<input type="text" name="petBreed" class="underline form-control" placeholder="예) 말티즈" required>
 									<div class="invalid-feedback">필수 항목입니다.</div>
 								</td>
 							</tr>
 							<tr class="my-2">
-								<th>생일<i class="fa-solid fa-asterisk blue"></i></th>
+								<th>생일 <i class="fa-solid fa-asterisk blue"></i></th>
 								<td>
-		  							<input type="date" name="petBirth" class="form-control underline" placeholder="생일" required>
+		  							<input type="date" name="petBirth" class="form-control underline input-calendar" placeholder="생일" required>
 								</td>
 							</tr>
 							<tr class="my-2">
-								<th>몸무게<i class="fa-solid fa-asterisk blue"></i></th>
+								<th>몸무게 <i class="fa-solid fa-asterisk blue"></i></th>
 								<td>
 									<input type="text" name="petWeight" class="underline form-control" placeholder="숫자만 입력해주세요" required>
 									<div class="invalid-feedback">숫자만 입력해주세요</div>
 								</td>
 							</tr>
 							<tr class="my-2">
-								<th>중성화<i class="fa-solid fa-asterisk blue"></i></th>
+								<th>중성화 <i class="fa-solid fa-asterisk blue"></i></th>
 								<td>
 							        <input class="form-check-input mx-1" type="radio" name="petNeutralization" value="유" id="optionsRadios5" required>
 							        <label class="label" for="optionsRadios5">
@@ -324,9 +288,7 @@
 							</tr>
 						</tbody>
 					</table>
-					<!-- 비동기 처리 위한 회원id + 파일no-->
-					<input type="hidden" value="${memberId}" name="memberId">
-					<input type="hidden" value="${petNo}" name="petNo">
+					<!-- 파일no-->
 					<input type="hidden" value="" name="filesNo">
 					
 		            <button type="submit" class="btn btn-blue text-center check-btn">등록</button>

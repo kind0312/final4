@@ -16,8 +16,6 @@
 		#{memberTel}, #{memberPost}, #{memberBaseAddress}, #{memberDetailAddress},
 		#{memberBirth}, #{memberGender})
 	</insert>
-
-	
     	
 	<select id="list" resultType="MemberDto">
 	    select *from member order by member_joindate asc
@@ -62,7 +60,7 @@
 	</update>
 
 	
-	<select id="findFileNo" parameterType="String">
+	<select id="findFileNo" parameterType="String" resultType="int">
 	select files_no from member_img where member_id = #{memberId}
 	</select>
 	

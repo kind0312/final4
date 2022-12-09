@@ -245,6 +245,9 @@
 				display:inline-block;
 				justify-content: center;
 			}
+			.btn-danger{
+				border:2px solid #d9534f;
+			}
 			.page-link .page-blue{
 				background-color:#81BDF1;
 				border-color: #81BDF1;
@@ -273,8 +276,7 @@
 	</head>
 	<body>
 	
-	<!-- bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+	
 	
 		<div class="container-fluid">
 

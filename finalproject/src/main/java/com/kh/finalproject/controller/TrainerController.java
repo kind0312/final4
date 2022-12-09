@@ -1,5 +1,7 @@
 package com.kh.finalproject.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,7 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.finalproject.constant.SessionConstant;
+import com.kh.finalproject.entity.MemberDto;
+import com.kh.finalproject.entity.TrainingDto;
+import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.TrainerDao;
 import com.kh.finalproject.vo.ReviewVO;
 import com.kh.finalproject.vo.TrainerListVO;
@@ -18,6 +25,9 @@ public class TrainerController {
 	
 	@Autowired
 	private TrainerDao trainerDao;
+	
+	@Autowired
+	private MemberDao memberDao;
 	
 	//훈련사 디테일(단일조회)
 	@GetMapping("/detail")
@@ -52,7 +62,28 @@ public class TrainerController {
 	
 	
 	@GetMapping("/reservation")
-	public String reservation() {
+	public String reservation(@ModelAttribute MemberDto memberDto,Model model,
+			HttpSession session) {
+		
+		
+		String userId = (String)session.getAttribute(SessionConstant.ID);
+		
+		memberDto.setMemberId(userId);
+		
+		model.addAttribute("member", memberDao.selectOne(userId));
+		return "/trainer/reservation";
+	}
+	
+	
+	@PostMapping("/reservation")
+	public String reservation(HttpSession session,
+			RedirectAttributes attr,
+			@ModelAttribute TrainingDto trainingDto,
+			Model model
+			) {
+		
+		String userId = (String)session.getAttribute(SessionConstant.ID);
+		trainingDto.setMemberId(userId);
 		
 		return "/trainer/reservation";
 	}

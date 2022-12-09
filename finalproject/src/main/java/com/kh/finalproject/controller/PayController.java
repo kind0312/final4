@@ -104,7 +104,9 @@ public class PayController {
 		PayApproveResponseVO response = payService.approve(vo);
 		
 		//DB테이블에 데이터 등록(point, point_purchase)
+		int pointNo = pointDao.sequence();
 		PointDto pointDto = PointDto.builder()
+				.pointNo(pointNo)
 				.memberId(partner_user_id)
 				.pointStatus("구매")
 				.pointPrice(response.getAmount().getTotal())
