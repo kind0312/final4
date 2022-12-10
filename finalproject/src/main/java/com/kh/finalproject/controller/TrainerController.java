@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.repository.MemberDao;
+import com.kh.finalproject.repository.PetDao;
 import com.kh.finalproject.repository.TrainerDao;
 import com.kh.finalproject.vo.ReviewVO;
 import com.kh.finalproject.vo.TrainerListVO;
@@ -30,6 +32,9 @@ public class TrainerController {
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	 private PetDao petDao;
 	
 	//훈련사 디테일(단일조회)
 	@GetMapping("/detail")
@@ -65,6 +70,7 @@ public class TrainerController {
 	
 	@GetMapping("/reservation")
 	public String reservation(@ModelAttribute MemberDto memberDto,Model model,
+			@RequestParam int trainerNo,
 			HttpSession session) {
 		
 		
@@ -73,6 +79,9 @@ public class TrainerController {
 		memberDto.setMemberId(userId);
 		
 		model.addAttribute("member", memberDao.selectOne(userId));
+		model.addAttribute("pet", petDao.list(userId));
+		model.addAttribute("trainerno",trainerNo);
+		
 		return "/trainer/reservation";
 	}
 	
@@ -89,6 +98,8 @@ public class TrainerController {
 		
 		return "/trainer/reservation";
 	}
+	
+	
 	
 	
 

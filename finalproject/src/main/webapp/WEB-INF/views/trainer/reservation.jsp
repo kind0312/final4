@@ -7,19 +7,16 @@
 <!-- Bootswatch CDN -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.0.2/cosmo/bootstrap.min.css">
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/layout.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons1.css">
   	
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.css">
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="훈련사 상세" name="title"/>
 </jsp:include>
 
 <style>
 .calendar{ 
-   width: 600px;
+   width: 300px;
 }
 #short-text-box{
    border: 1px solid #AAAAAA;
@@ -78,122 +75,8 @@ h2{
    display: inline;
 }
 
-div {
-   border: 1px dotted transparent;
-}
-
-.a-join {
-   font-size: 14px;
-   font-weight: bold;
-   color: #6c7aef;
-   cursor: pointer;
-}
 
 
-.a-hover:hover {
-   font-weight: bold;
-   text-decoration-line: underline;
-}
-.rows {
-   margin: 20px 0;
-}
-.stbox {
-   margin: 8px 0 0 0;
-}
-.join-p1 {
-   margin: 10px 10px 0px 0px;
-   font-size: 35px;
-   color: #3f3f3f;
-}
-.join-p2 {
-   margin: 2px 0px 0px 0px;
-   font-size: 14px;
-   color: #3f3f3f;
-}
-.join-p3 {
-   margin: 5px 10px 5px 0px;
-   font-size: 12px;
-   color: #3f3f3f;
-}
-.join-p4 {
-   margin: 10px 0px 8px 210px;
-   font-size: 12px;
-   color: #3f3f3f;
-}
-
-.join-p5 {
-   margin: 10px 0px 8px 210px;
-   font-size: 12px;
-   color: #3f3f3f;
-}
-.li-1 {
-   list-style: none;
-   max-height: 1000000px;
-   text-align: -webkit-math-parent;
-}
-.email-box {
-   width: 99%;
-   padding: 0 0 0 5px;
-}
-.email-drop-box {
-   width: 235px;
-   height: 59px;
-   
-   
-}
-.p1{
-   font-size: 20px;
-   color: #3f3f3f;
-   font-weight: bold;
-   margin-bottom: 16px;
-   padding-top:80px; 
-}
-.p1-1{
-   font-size: 20px;
-   color: #3f3f3f;
-   font-weight: bold;
-   margin-bottom: 10px;
-   padding-top:48px; 
-}
-.p2{
-   font-size: 12px;
-   color: #3f3f3f;
-   margin-bottom:50px;
-}
-select {
-   margin: 0 0 0 0;
-   padding: 0 0 0 5px; 
-   vertical-align: bottom;
-   font-weight: 400;
-   writing-mode: horizontal-tb !important;
-   text-rendering: auto;
-   letter-spacing: normal;
-   text-transform: none;
-   text-indent: 0px;
-   text-shadow: none;
-   display: inline-block;
-   align-items: center;
-   white-space: pre;
-   cursor: default;
-}
-.success-message, .fail-message, .NNNNN-message {
-   display: none;
-}
-.fail-message, .NNNNN-message {
-   color: #eb6f7f;
-}
-.input.success {
-   border-color: #6c7aef;
-}
-.input.success ~ .success-message {
-   display: block;
-}
-.input.fail ~ .fail-message {
-   display: block;
-}
-.input.NNNNN ~ .NNNNN-message {
-   display: block;
-}
 
 input::placeholder{
 font-weight: 400;
@@ -218,6 +101,19 @@ border-color: ##000000;
    width: 400px;
    height: 40px;
    text-align: center;
+   
+
+}
+.img0{
+border-radius: 50%;
+width: 200px;
+height: 200px;
+display:inline;
+}
+
+.map{
+float : left;
+margin-right: 20px;
 }
 
 </style>
@@ -241,6 +137,12 @@ $(function(){
     picker1.setDate(moment()); 
      
 });
+
+$(function(){
+	$("traingDetailPetName").click(function(e){
+		console.log(e.target);
+	});
+});
 </script>
 
 
@@ -252,29 +154,84 @@ $(function(){
 <h3>어디로 갈까요?</h3><br>
 <h6>주소를 입력해 주세요!</h6>
 <div class="rows">
+
+
+
+
 <form action="reservation" method="post" autocomplete="off">
+<input type="hidden" name="trainerNo" value="${trainerno}">
+
                <input type="text" name="memberBaseAddress"
                class="input short-text-box short-hover stbox basic" id="text-box1"
                 autocomplete="off" value="${member.memberBaseAddress}"><br><br>
                
+               
+               
+               
+               
                <input type="text" name="memberDetailAddress"
-               class="input short-text-box short-hover stbox" id="text-box1"
-               autocomplete="off" placeholder="상세정보  예) 우편함에 키가 있어요!  ,  현관 비밀번호 : **** ,  집 비밀번호 : ****">
+               class="input short-text-box short-hover stbox basic" id="text-box1"
+               autocomplete="off" value="${member.memberDetailAddress}">
                <br><br><br><br><br><br>
+               
+               
+               
+               
+               
                
                
                <div class="col-md-10 offset-md-1 mt-100 text-center">
                <h3>언제 갈까요?</h3><br>
-               <h6>날짜를 입력해주세요!</h6><br>
+               <h6>날짜를 선택해 주세요!</h6><br>
                <div class="row">
-                       <input type="text" class="single-date-picker short-hover date-box" id="short-text-box"  name="startDate" autocomplete="off" placeholder="챌린지 시작일을 정해주세요!">
-                       <span class="fail-message">필수 항목 입니다. </span>
+                       <input type="text" class="single-date-picker short-hover date-box" id="short-text-box" 
+                        name="trainingDate" autocomplete="off">
                    </div>
+                   <br><br>
+                   <h6>시간을 선택해 주세요!</h6><br>
+                   <select name="trainingStartTime">
+                   <option value="09:00">09시</option>
+                   <option value="10:00">10시</option>
+                   <option value="11:00">11시</option>
+                   <option value="12:00">12시</option>
+                   <option value="13:00">13시</option>
+                   <option value="14:00">14시</option>
+                   <option value="15:00">15시</option>
+                   <option value="16:00">16시</option>
+                   <option value="17:00">17시</option>
+                   <option value="18:00">18시</option>
+                   </select>
                </div>
+               
+               
+               
+               
+               
+               
                <br><br><br><br><br><br>
                <div class="col-md-10 offset-md-1 mt-100 text-center">
                <h3>반려동물에 대해 알려주세요!</h3><br>
                <h6>엄선된 훈련사가 갈거에요!</h6><br>
+                <c:forEach var="pet" items="${pet}">
+   <div class="map">
+      <img src="http://localhost:8888/download/${pet.filesNo}" width="400" height="250" class="img0">
+      <p>${pet.petName}</p>
+      <input type="checkbox" name="traingDetailPetName">
+   </div>
+</c:forEach>
+               </div>
+               <br><br><br><br><br><br>
+               
+               
+               
+               
+               
+               
+               <br><br><br><br><br><br>
+               <div class="col-md-10 offset-md-1 mt-100 text-center">
+               <h3>결제 화면</h3><br>
+               <h6>보유하신 포인트에서 차감돼요!</h6><br>
+               현재 내 포인트 : ${member.memberPoint}
                </div>
                
 </form>
