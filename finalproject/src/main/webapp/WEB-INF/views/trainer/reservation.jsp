@@ -10,9 +10,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons1.css">
-  	
+     
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="훈련사 상세" name="title"/>
+   <jsp:param value="훈련사 상세" name="title"/>
 </jsp:include>
 
 <style>
@@ -177,10 +177,63 @@ $(function(){
 });
 
 $(function(){
-	$("traingDetailPetName").click(function(e){
-		console.log(e.target);
-	});
+   $(".total-price").text(0);
+   var firstMyPoint = parseInt($(".myPoint").text());
+   var firstTotalPrice = parseInt($(".total-price").text());
+   $(".price").text(firstMyPoint-firstTotalPrice);
+   
+   
+   $("[name=trainingDetailPetName]").on("input", function(){
+         var cnt = 0;
+         $("[name=trainingDetailPetName]").each(function(){
+            //체크여부에 따라 ture/false 반환
+            //console.log($(this).prop("checked"));  
+            if($(this).prop("checked")){
+               cnt++; // 체크되어있으면 cnt추가
+            }
+         });
+         
+         //현재 내 포인트
+         var myPoint = parseInt($(".myPoint").text());
+         if(cnt>1){
+            $(".total-price").text(100000+(cnt-1)*50000);
+            var totalPrice = parseInt($(".total-price").text());
+            $(".price").text(myPoint-totalPrice);
+            $("[name=trainingPurchasePrice]").val(totalPrice);
+
+            
+         }else{
+            $(".total-price").text(cnt*100000);
+            var totalPrice = parseInt($(".total-price").text());
+            $(".price").text(myPoint-totalPrice);
+            $("[name=trainingPurchasePrice]").val(totalPrice);
+            $("[name=purchaseDetailPrice]").val(cnt*100000);
+         }
+         
+        
+   });
+   
+   //비동기 펫 리스트
+   /* var memberId = $("[name=memberId]").val();
+   $.ajax({
+      url:"http://localhost:8888/rest/pet_list/"+memberId,
+      method:"get",
+      data:memberId,
+      success:function(resp){
+         //console.log(resp.length);
+         var test = $(".test");
+         for(var i=0; i<resp.length; i++){
+            var input = $("<input>").attr("type","hidden").attr("name","purchaseDetailPrice").attr("value","");
+            test.append(input);
+            
+         }
+         
+      }
+   }); */
 });
+
+
+
 </script>
 
 
@@ -198,8 +251,7 @@ $(function(){
 
 <form action="/trainer/reservation" method="post" autocomplete="off">
 <input type="hidden" name="memberId" value="${member.memberId}">
-<input type="hidden" name="trainingPurchasePrice" value="1500000">
-<input type="hidden" name="purchaseDetailPrice" value="500000">
+<input type="hidden" name="trainingPurchasePrice" value="">
 <input type="hidden" name="purchaseDetailPrice" value="1000000">
  
                <input type="text" name="trainingBasicAddress"
@@ -245,11 +297,12 @@ $(function(){
                </div>
                
                
+               <!-- 비동기 테스트 -->
+               <div class="test"></div>
                
                
                
-               
-               <br><br><br><br><br><br>
+               <br><br><br><br><br>
                <div class="col-md-10 offset-md-1 mt-100 text-center">
                <h3>반려동물에 대해 알려주세요!</h3><br>
                <h6>엄선된 훈련사가 갈거에요!</h6><br>
@@ -257,11 +310,11 @@ $(function(){
    <div class="map">
       <img src="http://localhost:8888/download/${pet.filesNo}" width="400" height="250" class="img0">
       <p>${pet.petName}</p>
-      <input type="checkbox" name="trainingDetailPetName" value="${pet.petName}">
+      <input type="checkbox" class ="petCheck" name="trainingDetailPetName" value="${pet.petName}">
    </div>
 </c:forEach>
-<p class="p2"> 반려견 추가시 1마리당 10000원의 추가요금이 발생합니다.
-                       (기본 20000원)</p>
+<p class="p2"> 반려견 추가시 1마리당 50000포인트의 추가요금이 발생합니다.
+                       (기본 100000포인트)</p>
                </div>
                <br>
                <div class="row">
@@ -275,13 +328,13 @@ $(function(){
                <div class="col-md-10 offset-md-1 mt-100 text-center">
                <h3>결제 화면</h3><br>
                <h6>보유하신 포인트에서 차감돼요!</h6><br>
-               현재 내 포인트 : ${member.memberPoint}<br>
-               총 결제 포인트 : 100000<br>
+               현재 내 포인트 : <span class="myPoint">${member.memberPoint}</span>P<br>
+               총 결제 포인트 : <span class="total-price">0</span>P<br>
                
-               결제 후 포인트 : 1002202002
+               결제 후 포인트 :<span class="price"></span>P<br>
                </div>   
                
-               <button type ="submit">신청하기</button>
+               <button class ="buttontest" type ="submit">신청하기</button>
                
 </form>
             
