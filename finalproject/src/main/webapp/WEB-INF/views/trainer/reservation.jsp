@@ -5,8 +5,9 @@
 <!-- Bootstrap CSS -->
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Bootswatch CDN -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.css">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.0.2/cosmo/bootstrap.min.css">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons1.css">
   	
@@ -15,11 +16,27 @@
 </jsp:include>
 
 <style>
+textarea{
+   width: 600px;
+   height: 200px;
+   padding: 10px;
+   box-sizing: border-box;
+   border: solid 2px #81BDF1;
+   border-radius: 0.5em;
+   font-size: 16px;
+   resize: none;
+   margin:0 0 0 0;
+}
+.p2{
+   font-size: 12px;
+   color: #3f3f3f;
+   margin-bottom:50px;
+}
 .calendar{ 
    width: 300px;
 }
 #short-text-box{
-   border: 1px solid #AAAAAA;
+   border: 1px solid ##81BDF1;
    border-radius: 0.5em;
 }
 .blind{
@@ -89,14 +106,8 @@ font-size: 17px;
 text-align: center;
 border-color: ##000000;
 }
-.stbox:focus,
-.stbox:active,
-.stbox:hover{
-   border:1px solid  #6c7aef;
-   
-}
 #short-text-box{
-   border: 1px solid #AAAAAA;
+   border: 1px solid ##81BDF1;
    border-radius: 0.5em;
    width: 400px;
    height: 40px;
@@ -114,13 +125,40 @@ display:inline;
 .map{
 float : left;
 margin-right: 20px;
+
 }
+.col{
+ border: solid 2px #81BDF1;
+ 
+}
+
+.col:hover,
+.col:focus,
+.col:active
+{
+ border: solid 2px #81BDF1;
+ 
+}
+
 
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.js"></script>
 <script type="text/javascript">
+
+$(function(){
+    $(".helper-text2").on("input", function(){
+        var text = $(this).val();
+        $(this).next().text(text.length);
+        if(text.length > 300){
+            $(this).next();
+        }
+        else {
+            $(this).next().css("color", "#3f3f3f");
+        }
+    });
+});
 
 $(function(){
     var picker1 = new Lightpick({
@@ -160,9 +198,12 @@ $(function(){
 
 <form action="/trainer/reservation" method="post" autocomplete="off">
 <input type="hidden" name="memberId" value="${member.memberId}">
-
+<input type="hidden" name="trainingPurchasePrice" value="1500000">
+<input type="hidden" name="purchaseDetailPrice" value="500000">
+<input type="hidden" name="purchaseDetailPrice" value="1000000">
+ 
                <input type="text" name="trainingBasicAddress"
-               class="input short-text-box short-hover stbox basic" id="text-box1"
+               class="input short-text-box short-hover stbox basic col" id="text-box1"
                 autocomplete="off" value="${member.memberBaseAddress}"><br><br>
                
                
@@ -170,7 +211,7 @@ $(function(){
                
                
                <input type="text" name="trainingDetailAddress"
-               class="input short-text-box short-hover stbox basic" id="text-box1"
+               class="input short-text-box short-hover stbox basic col" id="text-box1"
                autocomplete="off" value="${member.memberDetailAddress}">
                <br><br><br><br><br><br>
                
@@ -216,13 +257,16 @@ $(function(){
    <div class="map">
       <img src="http://localhost:8888/download/${pet.filesNo}" width="400" height="250" class="img0">
       <p>${pet.petName}</p>
-      <input type="checkbox" name="traingDetailPetName">
+      <input type="checkbox" name="trainingDetailPetName" value="${pet.petName}">
    </div>
 </c:forEach>
+<p class="p2"> 반려견 추가시 1마리당 10000원의 추가요금이 발생합니다.
+                       (기본 20000원)</p>
                </div>
-               <br><br><br><br><br><br>
-               <input type="text" name="trainingMemo">
-               
+               <br>
+               <div class="row">
+               <textarea class="helper-text2 short-hover" name="trainingMemo"  placeholder="요청사항 예) 까미는 ~간식을 못먹어요!, 자주 물어요!" maxlength="300" ></textarea>
+               </div>
                
                
                
@@ -234,7 +278,7 @@ $(function(){
                현재 내 포인트 : ${member.memberPoint}<br>
                총 결제 포인트 : 100000<br>
                
-               보유포인트 : 1002202002
+               결제 후 포인트 : 1002202002
                </div>   
                
                <button type ="submit">신청하기</button>
