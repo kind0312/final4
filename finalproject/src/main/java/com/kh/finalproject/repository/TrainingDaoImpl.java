@@ -59,7 +59,7 @@ public class TrainingDaoImpl implements TrainingDao{
 	@Override
 	public void insert(TrainingDto dto) {
 		
-		 sqlSession.insert("training.insert");
+		 sqlSession.insert("training.insert",dto);
 		
 	}
 	

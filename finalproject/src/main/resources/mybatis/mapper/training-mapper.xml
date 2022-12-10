@@ -52,7 +52,7 @@
   insert into training(training_no, member_id, training_date,
   training_starttime,training_basic_address,training_detail_address,training_memo,
   training_status,training_changedate) values(training_seq.nextval,
-  #{memberId}, #{trainingDate}, #{trainingStrartTime}, #{trainingBasicAddress}
+  #{memberId}, #{trainingDate}, #{trainingStartTime}, #{trainingBasicAddress}
   ,#{trainingDetailAddress}, #{trainingMemo}, '예약대기', sysdate)
   </insert>
   	
