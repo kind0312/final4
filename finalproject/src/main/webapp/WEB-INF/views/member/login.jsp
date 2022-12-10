@@ -39,7 +39,7 @@
 			아이디 찾기
 			</a>
 			&nbsp;&nbsp;|&nbsp;&nbsp;
-			<a href="#" style="color:black;">
+			<a href="${pageContext.request.contextPath}/member/find_memberpw" style="color:black;">
 			비밀번호 찾기
 			</a>
 			</h6>

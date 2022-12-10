@@ -102,4 +102,10 @@ public class MemberController {
 		model.addAttribute("memberDto", memberDao.find(memberDto));
 		return "member/find_memberid_success";
 	}
+	
+	//비밀번호 찾기
+	@GetMapping("/find_memberpw")
+	public String findMemberPw() {
+		return "member/find_memberpw";
+	}
 }

@@ -23,38 +23,25 @@
 		</div>
 		<div class="row mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-			<input type="password" name="memberPw" class="form-control rounded" placeholder="비밀번호">
+				<div class="row form-group">
+					<div class="input-group">
+						<input type="email" name="memberEmail" class="form-control w-75" placeholder="이메일" aria-describedby="email-button" required>
+						<button class="btn btn-outline-blue w-25" type="button" id="email-button">인증코드발송</button>
+					</div>
+					<div class="input-group mt-2">
+						<input type="text" id="confirm-input" class="form-control underline w-75" aria-describedby="confirm-button">
+						<button class="btn btn-outline-blue w-25" type="button" id="confirm-button">확 인</button>
+						<div class="confirmResult"></div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="row mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
-			<button type="submit" class="btn btn-blue btn-md">로그인</button>
+			<button type="submit" class="btn btn-blue btn-md">확인</button>
 			</div>
 		</div>
 	</form>
-		<div class="row mt-4">
-			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
-			<h6>
-			<a href="#" style="color:black;">
-			아이디 찾기
-			</a>
-			&nbsp;&nbsp;|&nbsp;&nbsp;
-			<a href="#" style="color:black;">
-			비밀번호 찾기
-			</a>
-			</h6>
-			</div>
-		</div>
-		<div class="row mt-2">
-			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-			<hr>
-			</div>
-		</div>
-		<div class="row mt-4 mb-5">
-			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
-			<a href="../member/insert" class="btn btn-yellow btn-md">회원가입</a>
-			</div>
-		</div>
 	</div>
 
 </body>

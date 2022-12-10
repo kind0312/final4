@@ -182,6 +182,10 @@
             font-weight:bolder;
          }
          
+        .btn{
+			border-radius: 10px !important;
+		}
+         
          .btn-blue{
               background-color: #81BDF1;
               border:2px solid #81BDF1;
