@@ -1,7 +1,6 @@
 package com.kh.finalproject.controller;
 
-import java.io.IOException;
-
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,21 +11,28 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.entity.MemberDto;
+import com.kh.finalproject.entity.PurchaseDetailDto;
+import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
+import com.kh.finalproject.entity.TrainingPurchaseDto;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.PetDao;
 import com.kh.finalproject.repository.TrainerDao;
 import com.kh.finalproject.repository.TrainingDao;
+import com.kh.finalproject.repository.TrainingPurchaseDao;
+import com.kh.finalproject.vo.ReservationVO;
 import com.kh.finalproject.vo.ReviewVO;
 import com.kh.finalproject.vo.TrainerListVO;
 
 @Controller
 @RequestMapping("/trainer")
 public class TrainerController {
+	
+	@Autowired
+	private TrainingPurchaseDao trainingPurchaseDao;
 	
 	@Autowired
 	private TrainerDao trainerDao;
@@ -90,10 +96,61 @@ public class TrainerController {
 	
 	@PostMapping("/reservation")
 	public String reservation(HttpSession session,
-			@ModelAttribute TrainingDto trainingDto) {
-		System.out.println(trainingDto + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			@ModelAttribute ReservationVO reservationVO,
+			HttpServletRequest request) {
+		
+		int trainingNo = trainingDao.sequence();
+		int trainingPurchaseNo =  trainingPurchaseDao.sequence();
+		
+		
+		TrainingDto trainingDto =TrainingDto.builder()
+				.trainingNo(trainingNo)
+				.memberId(reservationVO.getMemberId())
+				.trainingDate(reservationVO.getTrainingDate())
+				.trainingStartTime(reservationVO.getTrainingStartTime())
+				.trainingBasicAddress(reservationVO.getTrainingBasicAddress())
+				.trainingDetailAddress(reservationVO.getTrainingDetailAddress())
+				.trainingMemo(reservationVO.getTrainingMemo())
+				.build();
 		
 		trainingDao.insert(trainingDto);
+		
+		TrainingPurchaseDto trainingPurchaseDto = TrainingPurchaseDto.builder()
+				.trainingPurchaseNo(trainingPurchaseNo)
+				.trainingNo(trainingNo)
+				.trainingPurchasePrice(reservationVO.getTrainingPurchasePrice())
+				.build();
+		
+		trainingPurchaseDao.purchaseInsert(trainingPurchaseDto);
+		
+		
+		
+		String[] arrayParam = request.getParameterValues("trainingDetailPetName");
+		String[] arrayParam2 = request.getParameterValues("purchaseDetailPrice");
+		
+		if(arrayParam != null) {
+			for(int i = 0; i<arrayParam.length; i++) {
+				
+				TrainingDetailDto trainingDetailDto = TrainingDetailDto.builder()
+						.trainingNo(trainingNo)
+						.trainingDetailPetName(arrayParam[i])
+						.build();
+				trainingDao.insertDetail(trainingDetailDto);
+				
+				
+				PurchaseDetailDto purchaseDetailDto = PurchaseDetailDto.builder()
+						.trainingPurchaseNo(trainingPurchaseNo)
+						.purchaseDetailPetName(arrayParam[i])
+						.purchaseDetailPrice(Integer.parseInt(arrayParam2[i]))
+						.build();
+				
+				
+				trainingPurchaseDao.purchaseDetailInsert(purchaseDetailDto);
+				
+			}
+		}
+		
+		
 		return "redirect:/trainer/list";
 	}
 

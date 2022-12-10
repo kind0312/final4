@@ -62,5 +62,17 @@ public class TrainingDaoImpl implements TrainingDao{
 		 sqlSession.insert("training.insert",dto);
 		
 	}
+
+	@Override
+	public int sequence() {
+		
+		return sqlSession.selectOne("training.sequence");
+	}
+
+	@Override
+	public void insertDetail(TrainingDetailDto dto) {
+		sqlSession.insert("training.detailInsert", dto);
+		
+	}
 	
 }
