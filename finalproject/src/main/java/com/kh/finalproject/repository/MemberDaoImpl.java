@@ -13,7 +13,9 @@ import com.kh.finalproject.entity.MemberImgDto;
 import com.kh.finalproject.vo.MemberListSearchVO;
 import com.kh.finalproject.vo.MemberListVO;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Repository
 public class MemberDaoImpl implements MemberDao {
 
@@ -45,6 +47,21 @@ public class MemberDaoImpl implements MemberDao {
 		if(findDto == null) return false;
 		boolean match = encoder.matches(memberDto.getMemberPw(), findDto.getMemberPw());
 		return match;
+	}
+	
+	//아이디 찾기
+	@Override
+	public boolean findId(MemberDto memberDto) {
+		MemberDto findId = sqlSession.selectOne("member.findId", memberDto.getMemberName());
+		if(findId == null) return false;
+		boolean find = memberDto.getMemberTel().equals(findId.getMemberTel());
+		return find;
+	}
+	
+	//아이디 불러오기
+	@Override
+	public MemberDto find(MemberDto memberDto) {
+		return sqlSession.selectOne("member.findId", memberDto.getMemberName());
 	}
 	
 	//회원 검색

@@ -16,6 +16,11 @@
 		#{memberTel}, #{memberPost}, #{memberBaseAddress}, #{memberDetailAddress},
 		#{memberBirth}, #{memberGender})
 	</insert>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findId" parameterType="String" resultType="MemberDto">
+		select * from member where member_name = #{memberName}
+	</select>
     	
 	<select id="list" resultType="MemberDto">
 	    select *from member order by member_joindate asc
