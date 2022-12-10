@@ -58,7 +58,15 @@
 
 	<!-- 프로필 정보수정 -->
 	<update id="profileEdit" parameterType="MemberDto">
-		
+		update member set member_name=#{memberName}, member_email=#{memberEmail}, 
+		member_tel=#{memberTel}, member_post=#{memberPost}, 
+		member_base_address=#{memberBaseAddress}, member_detail_address=#{memberDetailAddress} 
+		where member_id=#{memberId}
+	</update>
+	
+	<!-- 회원, 첨부파일 연결테이블 수정 -->
+	<update id="profileImgEdit" parameterType="memberImgDto">
+		update member_img set files_no=#{filesNo} where member_id=#{memberId}
 	</update>
 	
 	

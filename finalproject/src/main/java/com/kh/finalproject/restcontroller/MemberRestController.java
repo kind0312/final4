@@ -10,13 +10,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.finalproject.entity.EmailcertDto;
+import com.kh.finalproject.entity.MemberDto;
+import com.kh.finalproject.entity.MemberImgDto;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.service.EmailService;
+import com.kh.finalproject.vo.MemberEditVO;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -57,5 +62,28 @@ public class MemberRestController {
 		else {
 			return false;
 		}
+	}
+	
+	//회원 내정보수정
+	@PutMapping("/profile_edit")
+	public void edit(@RequestBody MemberEditVO memberEditVO) {
+		//회원 db수정
+		MemberDto dto = MemberDto.builder()
+				.memberId(memberEditVO.getMemberId())
+				.memberName(memberEditVO.getMemberName())
+				.memberEmail(memberEditVO.getMemberEmail())
+				.memberTel(memberEditVO.getMemberTel())
+				.memberPost(memberEditVO.getMemberPost())
+				.memberBaseAddress(memberEditVO.getMemberBaseAddress())
+				.memberDetailAddress(memberEditVO.getMemberDetailAddress())
+				.build();
+		memberDao.profileEdit(dto);
+				
+		//회원, 첨부파일 연결테이블 db수정
+		MemberImgDto imgDto = MemberImgDto.builder()
+				.filesNo(memberEditVO.getFilesNo())
+				.memberId(memberEditVO.getMemberId())
+				.build();
+		memberDao.profileImgEdit(imgDto);
 	}
 }

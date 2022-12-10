@@ -31,6 +31,7 @@ public interface MemberDao {
 	boolean pointPlus(MemberDto memberDto);
 	//프로필 정보수정
 	boolean profileEdit(MemberDto memberDto);
-     
+     //프로필 첨부파일 수정
+	boolean profileImgEdit(MemberImgDto memberImgDto);
 
 }
