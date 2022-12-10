@@ -137,6 +137,12 @@ $(function(){
     picker1.setDate(moment()); 
      
 });
+
+$(function(){
+	$("traingDetailPetName").click(function(e){
+		console.log(e.target);
+	});
+});
 </script>
 
 
@@ -229,7 +235,6 @@ $(function(){
                총 결제 포인트 : 100000<br>
                
                보유포인트 : 1002202002
-               </div>
                
                <button type ="submit">신청하기</button>
                

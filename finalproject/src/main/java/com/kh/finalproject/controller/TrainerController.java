@@ -38,7 +38,7 @@ public class TrainerController {
 	private TrainingDao trainingDao;
 	
 	@Autowired
-	 private PetDao petDao;
+	private PetDao petDao;
 	
 	//훈련사 디테일(단일조회)
 	@GetMapping("/detail")
