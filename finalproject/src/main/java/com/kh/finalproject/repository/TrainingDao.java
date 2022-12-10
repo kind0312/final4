@@ -23,6 +23,8 @@ public interface TrainingDao {
 	//훈련서비스 받은 펫 조회
 	List<TrainingDetailDto> trainingPet(int trainingNo);
 	
+	void insert(TrainingDto dto);
+	
 	//삭제
 	boolean delete(int trainingNo);
 	

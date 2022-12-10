@@ -159,9 +159,9 @@ $(function(){
 
 
 <form action="reservation" method="post" autocomplete="off">
-<input type="hidden" name="trainerNo" value="${trainerno}">
+<input type="hidden" name="memberId" value="${member.memberId}">
 
-               <input type="text" name="memberBaseAddress"
+               <input type="text" name="trainingBasicAddress"
                class="input short-text-box short-hover stbox basic" id="text-box1"
                 autocomplete="off" value="${member.memberBaseAddress}"><br><br>
                
@@ -169,7 +169,7 @@ $(function(){
                
                
                
-               <input type="text" name="memberDetailAddress"
+               <input type="text" name="trainingDetailAddress"
                class="input short-text-box short-hover stbox basic" id="text-box1"
                autocomplete="off" value="${member.memberDetailAddress}">
                <br><br><br><br><br><br>
@@ -221,7 +221,7 @@ $(function(){
 </c:forEach>
                </div>
                <br><br><br><br><br><br>
-               
+               <input type="text" name="trainingMemo">
                
                
                
@@ -231,8 +231,12 @@ $(function(){
                <div class="col-md-10 offset-md-1 mt-100 text-center">
                <h3>결제 화면</h3><br>
                <h6>보유하신 포인트에서 차감돼요!</h6><br>
-               현재 내 포인트 : ${member.memberPoint}
-               </div>
+               현재 내 포인트 : ${member.memberPoint}<br>
+               총 결제 포인트 : 100000<br>
+               
+               보유포인트 : 1002202002
+               
+               <button type ="submit">신청하기</button>
                
 </form>
                
