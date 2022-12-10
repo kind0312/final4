@@ -111,8 +111,6 @@
 				findAddress();
 			});
 
-			
-
 		});
 
 		//상태 판정
@@ -136,23 +134,32 @@
 		//사진검사 함수
 		function profileCheck(){
 			var value = $("[name=filesNo]").val();
-			$("[name=petProfile]").removeClass("is-valid is-invalid");
+			$("[name=memberImg]").removeClass("is-valid is-invalid");
 			if(value!=null){
-				$("[name=petProfile]").addClass("is-valid");
-				check.petProfile=true;
+				$("[name=memberImg]").addClass("is-valid");
+				check.memberImgValid=true;
 			}else{
-				$("[name=petProfile]").addClass("is-invalid");
-				check.petProfile=false;
+				$("[name=memberImg]").addClass("is-invalid");
+				check.memberImgValid=false;
 			}
 		}
 		
-		//이름검사
+		//형식 검사
+		$(".check-input").blur(function(){ 
+            var name = $(this).attr("name");
+            var value = $(this).val();
+            var regex = check[name+"Regex"];
+            if(regex.test(value)) {
+            	check[name+"Valid"] = true;
+                $(this).removeClass("is-valid is-invalid").addClass("is-valid");
+            }
+            else {
+            	check[name+"Valid"] = false;
+                $(this).removeClass("is-valid is-invalid").addClass("is-invalid");
+            }
+        });
 		
 		//메일검사
-		
-		//휴대폰검사
-		
-		//주소검사
 		
 		
 		
@@ -228,6 +235,7 @@
     	</div>
   	</div>
 </nav>
+
 	<div class="container-fluid">
         <div class="row mt-80">
             <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
@@ -238,7 +246,7 @@
 		<div class="row text-center mt-4">
             <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">   
                  <img src="http://localhost:8888/download/${filesNo}" width="120" height="120" class="img-circle">
-                 <input type="file" style="display:none;" class="input-file form-control" name="petProfile" accept=".jpg, .png, .gif">
+                 <input type="file" style="display:none;" class="input-file form-control" name="memberImg" accept=".jpg, .png, .gif">
 			</div>
 		</div>
 		
@@ -252,7 +260,8 @@
 							<i class="fa-solid fa-asterisk blue"></i>
 						</label>
 						<div class="input-group">
-							<input type="text" name="memberName" class="form-control underline" required>
+							<input type="text" name="memberName" value="${member.memberName}"
+								class="form-control underline check-input" required>
 		                    <div class="invalid-feedback">이름은 2~7자 한글 또는 대 소문자 작성하세요</div>
 	                    </div>
 					</div>
@@ -266,7 +275,8 @@
 							<i class="fa-solid fa-asterisk blue"></i>
 						</label>
 						<div class="input-group">
-							<input type="email" name="memberEmail" class="form-control underline w-75" aria-describedby="email-button" required>
+							<input type="email" name="memberEmail" class="form-control underline w-75 check-input" 
+								aria-describedby="email-button" value="${member.memberEmail}" required>
 							<button class="btn btn-outline-blue w-25" type="button">인증코드발송</button>
 		                    <div class="invalid-feedback">형식에 맞게 입력해주세요</div>
 						</div>
@@ -286,7 +296,8 @@
 							<i class="fa-solid fa-asterisk blue"></i>
 						</label>
 						<div class="mt-2">
-							<input type="tel" name="memberTel" class="form-control underline" maxlength="11" placeholder="숫자만 입력해주세요" required>
+							<input type="tel" name="memberTel" class="form-control underline check-input" value="${member.memberTel}"
+							 maxlength="11" placeholder="숫자만 입력해주세요" required>
 		                    <div class="invalid-feedback">형식에 맞게 입력해주세요</div>
 						</div>
 					</div>
@@ -301,16 +312,18 @@
 						</label>
 						<div class="input-group mt-2">
 							<input type="text" name="memberPost" class="form-control underline w-75" maxlength="6"
-							 placeholder="우편번호" required aria-describedby="address-button" readonly>
+							 placeholder="우편번호" required aria-describedby="address-button" value="${member.memberPost}" readonly>
 							<button class="btn btn-outline-blue w-25" type="button" id="address-button">주소검색</button>
 		                    <div class="invalid-feedback">우편번호를 입력해주세요</div>
 		                </div>
 		                <div class="input-group mt-2">
-							<input type="text" name="memberBaseAddress" class="form-control underline w-100" placeholder="기본주소" readonly required>
+							<input type="text" name="memberBaseAddress" class="form-control underline w-100" 
+								placeholder="기본주소" value="${member.memberBaseAddress}" readonly required>
 		                    <div class="invalid-feedback">기본주소를 입력해주세요</div>
 						</div>
 						<div class="input-group mt-2">
-							<input type="text" name="memberDetailAddress" class="form-control underline w-100" placeholder="상세주소" required>
+							<input type="text" name="memberDetailAddress" value="${member.memberDetailAddress}"
+							 class="form-control underline w-100 check-input" placeholder="상세주소" required>
 		                    <div class="invalid-feedback">상세주소를 입력해주세요</div>
 						</div>
 					</div>
