@@ -177,12 +177,13 @@ $(function(){
 });
 
 $(function(){
+	//첫 화면 고정금액 출력
 	$(".total-price").text(0);
 	var firstMyPoint = parseInt($(".myPoint").text());
 	var firstTotalPrice = parseInt($(".total-price").text());
 	$(".price").text(firstMyPoint-firstTotalPrice);
 	
-	
+	//하단 금액 자동계산
 	$("[name=trainingDetailPetName]").on("input", function(){
 	      var cnt = 0;
 	      $("[name=trainingDetailPetName]").each(function(){
@@ -209,27 +210,44 @@ $(function(){
 	         $("[name=trainingPurchasePrice]").val(totalPrice);
 	         $("[name=purchaseDetailPrice]").val(cnt*100000);
 	      }
-	      
-	     
 	});
 	
-	//비동기 펫 리스트
-	/* var memberId = $("[name=memberId]").val();
-	$.ajax({
-		url:"http://localhost:8888/rest/pet_list/"+memberId,
-		method:"get",
-		data:memberId,
-		success:function(resp){
-			//console.log(resp.length);
-			var test = $(".test");
-			for(var i=0; i<resp.length; i++){
-				var input = $("<input>").attr("type","hidden").attr("name","purchaseDetailPrice").attr("value","");
-				test.append(input);
-				
-			}
-			
-		}
-	}); */
+	//submit 이벤트
+	$(".form-check").submit(function(e){
+		//처음 화면에서 form 전송 막기
+		e.preventDefault();
+		
+		//목표 : (1)체크박스 개수 확인 후 (2)input창 생성 및 value에 가격 적용
+		//(1)
+		var cnt = 0;
+      	$("[name=trainingDetailPetName]").each(function(){
+	         if($(this).prop("checked")){
+	            cnt++; // 체크되어있으면 cnt추가
+	         }
+	    });
+
+      	//(2)
+      	var detailPriceTag = $(".detailPrice");
+      	if(cnt>1){ //수량이 1 이상일 경우
+      		for(var i=0; i<cnt; i++){
+      			if(i==0){ //value값에 처음만 10만원
+      				var input = $("<input>").attr("type","text").attr("name","purchaseDetailPrice")
+      				.attr("value","100000");
+      				detailPriceTag.append(input);
+      			}else{ //나머지는 5만원
+      				var input = $("<input>").attr("type","text").attr("name","purchaseDetailPrice")
+      				.attr("value","50000");
+      				detailPriceTag.append(input);
+      			}
+      		}
+      		
+      	}else{ //수량이 1이거나 0일경우(0일 경우 막는 event 추가 생성해야함!!! ex) 반려견 선택해주세요 등 문구출력하는 이벤트)
+      		var input = $("<input>").attr("type","text").attr("name","purchaseDetailPrice")
+			.attr("value","100000");
+      		detailPriceTag.append(input);
+      	}
+	});
+	
 });
 
 
@@ -249,10 +267,12 @@ $(function(){
 
 
 
-<form action="/trainer/reservation" method="post" autocomplete="off">
+<form class="form-check">
 <input type="hidden" name="memberId" value="${member.memberId}">
 <input type="hidden" name="trainingPurchasePrice" value="">
-<input type="hidden" name="purchaseDetailPrice" value="1000000">
+<div class="detailPrice">
+<!-- hidden으로 보낼 값 계산 name=purchaseDetailPrice -->
+</div>
  
                <input type="text" name="trainingBasicAddress"
                class="input short-text-box short-hover stbox basic col" id="text-box1"
