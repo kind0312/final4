@@ -55,5 +55,12 @@ public class TrainingDaoImpl implements TrainingDao{
 	public boolean delete(int trainingNo) {
 		return sqlSession.delete("training.delete",trainingNo)>0;
 	}
+
+	@Override
+	public void insert(TrainingDto dto) {
+		
+		 sqlSession.insert("training.insert");
+		
+	}
 	
 }

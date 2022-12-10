@@ -20,6 +20,7 @@ import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.PetDao;
 import com.kh.finalproject.repository.TrainerDao;
+import com.kh.finalproject.repository.TrainingDao;
 import com.kh.finalproject.vo.ReviewVO;
 import com.kh.finalproject.vo.TrainerListVO;
 
@@ -32,6 +33,9 @@ public class TrainerController {
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private TrainingDao trainingDao;
 	
 	@Autowired
 	 private PetDao petDao;
@@ -89,12 +93,16 @@ public class TrainerController {
 	@PostMapping("/reservation")
 	public String reservation(HttpSession session,
 			RedirectAttributes attr,
-			@ModelAttribute TrainingDto trainingDto,
-			Model model
+			@ModelAttribute TrainingDto trainingDto
 			) throws IllegalStateException, IOException {
 		
-		String userId = (String)session.getAttribute(SessionConstant.ID);
-		trainingDto.setMemberId(userId);
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		trainingDto.setMemberId(memberId);
+		System.out.println(trainingDto + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		
+		trainingDao.insert(trainingDto);
+		
+		
 		
 		return "/trainer/reservation";
 	}

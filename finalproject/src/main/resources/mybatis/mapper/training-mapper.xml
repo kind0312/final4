@@ -48,6 +48,14 @@
   		select * from training_detail where training_no=#{trainingNo}
   	</select>
   	
+  	<insert id="insert" parameterType="TrainingDto">
+  insert into training(training_no, member_id, training_date,
+  training_starttime,training_basic_address,training_detail_address,training_memo,
+  training_status,training_changedate) values(training_seq.nextval,
+  #{memberId}, #{trainingDate}, #{trainingStrartTime}, #{trainingBasicAddress}
+  ,#{trainingDetailAddress}, #{trainingMemo}, '예약대기', sysdate)
+  </insert>
+  	
   	<!-- 훈련서비스 삭제 -->
   	<delete id="delete" parameterType="int">
   		delete training where training_no=#{trainingNo}
