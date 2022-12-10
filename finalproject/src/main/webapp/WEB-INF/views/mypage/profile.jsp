@@ -228,6 +228,8 @@
     	</div>
   	</div>
 </nav>
+
+테스트 출력 : ${member}
 	<div class="container-fluid">
         <div class="row mt-80">
             <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
@@ -252,7 +254,8 @@
 							<i class="fa-solid fa-asterisk blue"></i>
 						</label>
 						<div class="input-group">
-							<input type="text" name="memberName" class="form-control underline" required>
+							<input type="text" name="memberName" value="${member.memberName}"
+								class="form-control underline" required>
 		                    <div class="invalid-feedback">이름은 2~7자 한글 또는 대 소문자 작성하세요</div>
 	                    </div>
 					</div>
@@ -266,7 +269,8 @@
 							<i class="fa-solid fa-asterisk blue"></i>
 						</label>
 						<div class="input-group">
-							<input type="email" name="memberEmail" class="form-control underline w-75" aria-describedby="email-button" required>
+							<input type="email" name="memberEmail" class="form-control underline w-75" 
+								aria-describedby="email-button" value="${member.memberEmail}" required>
 							<button class="btn btn-outline-blue w-25" type="button">인증코드발송</button>
 		                    <div class="invalid-feedback">형식에 맞게 입력해주세요</div>
 						</div>
@@ -286,7 +290,8 @@
 							<i class="fa-solid fa-asterisk blue"></i>
 						</label>
 						<div class="mt-2">
-							<input type="tel" name="memberTel" class="form-control underline" maxlength="11" placeholder="숫자만 입력해주세요" required>
+							<input type="tel" name="memberTel" class="form-control underline" value="${member.memberTel}"
+							 maxlength="11" placeholder="숫자만 입력해주세요" required>
 		                    <div class="invalid-feedback">형식에 맞게 입력해주세요</div>
 						</div>
 					</div>
@@ -301,16 +306,18 @@
 						</label>
 						<div class="input-group mt-2">
 							<input type="text" name="memberPost" class="form-control underline w-75" maxlength="6"
-							 placeholder="우편번호" required aria-describedby="address-button" readonly>
+							 placeholder="우편번호" required aria-describedby="address-button" value="${member.memberPost}" readonly>
 							<button class="btn btn-outline-blue w-25" type="button" id="address-button">주소검색</button>
 		                    <div class="invalid-feedback">우편번호를 입력해주세요</div>
 		                </div>
 		                <div class="input-group mt-2">
-							<input type="text" name="memberBaseAddress" class="form-control underline w-100" placeholder="기본주소" readonly required>
+							<input type="text" name="memberBaseAddress" class="form-control underline w-100" 
+								placeholder="기본주소" value="${member.memberBaseAddress}" readonly required>
 		                    <div class="invalid-feedback">기본주소를 입력해주세요</div>
 						</div>
 						<div class="input-group mt-2">
-							<input type="text" name="memberDetailAddress" class="form-control underline w-100" placeholder="상세주소" required>
+							<input type="text" name="memberDetailAddress" value="${member.memberDetailAddress}"
+							 class="form-control underline w-100" placeholder="상세주소" required>
 		                    <div class="invalid-feedback">상세주소를 입력해주세요</div>
 						</div>
 					</div>
