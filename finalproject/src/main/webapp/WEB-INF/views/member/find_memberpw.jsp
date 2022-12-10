@@ -44,5 +44,64 @@
 	</form>
 	</div>
 
+	<script>
+	$(function(){
+		//이메일 인증
+		
+		var confirmbtn = $("#confirm-button");
+		confirmbtn.prop("disabled", true);
+		
+		$("#email-button").click(function(){
+			var email = $("[name=memberEmail]").val();
+			if(email.length == 0) return;
+			
+			var emailbtn = $(this);
+			emailbtn.prop("disabled", true);
+			
+			$.ajax({
+				url:"${pageContext.request.contextPath}/rest/member/emailcert",
+				method:"post",
+				data:{emailcertEmail:email},
+				success:function(resp){
+					//성공했다면 메일은 전송되었다고 볼 수 있다.
+					console.log("메일 전송 완료");
+					emailbtn.prop("disabled", false);
+					confirmbtn.prop("disabled", false);
+					
+					$("#confirm-button").click(function(){
+						var serial = $("#confirm-input").val();
+						if(serial.length != 6) return;//6자리 아니면 검사 안함
+						
+						$.ajax({
+							url:"${pageContext.request.contextPath}/rest/member/confirmcert",
+							method:"post",
+							data:{
+								emailcertEmail:email,
+								emailcertSerial:serial
+							},
+							success:function(resp){
+								console.log(resp);
+								if(resp){
+									$("[name=memberEmail]").attr("readonly", "readonly");
+									$("#confirm-input").attr("readonly", "readonly");
+									validChecker.emailConfirmValid = true;
+									emailbtn.prop("disabled", true);
+									confirmbtn.prop("disabled", true);
+									$(".confirmResult").removeClass("possible impossible").addClass("possible").text("인증이 완료되었습니다");
+                               		$("#confirm-input").removeClass("is-valid is-invalid able disable").addClass("is-valid").addClass("able");
+								}
+								else{
+									$(".confirmResult").removeClass("possible impossible").addClass("impossible").text("인증번호 다시 확인해주세요");
+                               		$("#confirm-input").removeClass("is-valid is-invalid able disable").addClass("is-invalid").addClass("disable");
+								}
+							}
+						});
+					});
+				}
+			});
+		});
+	});
+	
+	</script>
 </body>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
