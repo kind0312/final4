@@ -60,7 +60,7 @@
   training_status,
   training_changedate)
    values(
-   training_seq.nextval,
+  #{trainingNo},
   #{memberId},
   #{trainingDate},
   #{trainingStartTime},
@@ -70,6 +70,15 @@
   '예약대기',
    sysdate)
 
+  </insert>
+  
+  <select id="sequence" resultType="int">
+   select training_seq.nextval from dual
+  </select>
+  
+  <insert id="detailInsert" parameterType="TrainingDetailDto">
+  insert into training_detail(training_no, training_detail_pet_name)
+   values(#{trainingNo}, #{trainingDetailPetName})
   </insert>
   	
   	<!-- 훈련서비스 삭제 -->

@@ -22,6 +22,40 @@
  		 where training_purchase_no=#{trainingPurchaseNo}
  	</update>
  	
+  <select id="sequence" resultType="int">
+   select training_purchase_seq.nextval from dual
+  </select>
+  
+  <insert id="purchaseInsert" parameterType="TrainingPurchaseDto">
+  insert into training_purchase(training_purchase_no, 
+  training_no,
+  training_purchase_price,
+  training_purchase_payment,
+  training_purchase_date
+  )values(
+  #{trainingPurchaseNo},
+  #{trainingNo},
+  #{trainingPurchasePrice},
+  '포인트',
+  sysdate
+  )
+  </insert>
+  
+  <insert id ="purchaseDetailInsert" parameterType="PurchaseDetailDto">
+  insert into purchase_detail(purchase_detail_no,
+  training_purchase_no,
+  purchase_detail_pet_name,
+  purchase_detail_price,
+  purchase_detail_status
+  )values(
+  purchase_detail_seq.nextval,
+  #{trainingPurchaseNo},
+  #{purchaseDetailPetName},
+  #{purchaseDetailPrice},
+  '승인'
+  )
+  </insert>
+ 	
   
   </mapper>
  
