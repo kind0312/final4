@@ -26,7 +26,7 @@
 			<input type="tel" name="memberTel" class="form-control rounded" placeholder="휴대전화" maxlength="11">
 			</div>
 		</div>
-		<div class="row mt-4">
+		<div class="row mt-5">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
 			<button type="submit" class="btn btn-blue btn-md">확인</button>
 			</div>

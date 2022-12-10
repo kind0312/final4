@@ -15,14 +15,18 @@
 				<h1>ID 찾기</h1>
 			</div>
 		</div>
-		<div class="row mt-4">
+		<div class="row mt-100 text-center">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-			<input type="hidden" name="memberId" class="form-control underline" value="${memberDto.memberId}">
+			<h5 class="underline">
+			  회원님의 아이디는
+			  <small class="blue">${memberDto.memberId}</small>
+			  입니다
+			</h5>
 			</div>
 		</div>
 		<div class="row mt-100 mb-5">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
-			<a href="${pageContext.request.contextPath}/#" class="btn btn-blue btn-md">비밀번호 찾기</a>
+			<a href="${pageContext.request.contextPath}/member/find_memberpw" class="btn btn-blue btn-md">비밀번호 찾기</a>
 			</div>
 		</div>
 		<div class="row mt-4 mb-5">

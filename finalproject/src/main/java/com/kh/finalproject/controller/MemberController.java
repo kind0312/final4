@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.entity.MemberDto;
@@ -84,9 +84,11 @@ public class MemberController {
 	}
 	
 	@PostMapping("/find_memberid")
-	public String findMemberId(@ModelAttribute MemberDto meberDto) {
-		boolean find = memberDao.findId(meberDto);
+	public String findMemberId(@ModelAttribute MemberDto memberDto,
+			RedirectAttributes attr) {
+		boolean find = memberDao.findId(memberDto);
 		if(find) {
+			attr.addAttribute("memberName", memberDao.find(memberDto).getMemberName());
 			return "redirect:find_memberid_success";
 		}
 		else {
