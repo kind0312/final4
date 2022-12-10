@@ -80,7 +80,6 @@ public class TrainerController {
 		
 		String userId = (String)session.getAttribute(SessionConstant.ID);
 		
-		memberDto.setMemberId(userId);
 		
 		model.addAttribute("member", memberDao.selectOne(userId));
 		model.addAttribute("pet", petDao.list(userId));
@@ -96,8 +95,6 @@ public class TrainerController {
 			@ModelAttribute TrainingDto trainingDto
 			) throws IllegalStateException, IOException {
 		
-		String memberId = (String)session.getAttribute(SessionConstant.ID);
-		trainingDto.setMemberId(memberId);
 		System.out.println(trainingDto + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		
 		trainingDao.insert(trainingDto);
