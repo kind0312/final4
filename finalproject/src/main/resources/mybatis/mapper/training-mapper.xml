@@ -48,6 +48,39 @@
   		select * from training_detail where training_no=#{trainingNo}
   	</select>
   	
+  	<insert id="insert" parameterType="TrainingDto">
+  insert into training(
+  training_no,
+   member_id,
+    training_date,
+  training_starttime,
+  training_basic_address,
+  training_detail_address,
+  training_memo,
+  training_status,
+  training_changedate)
+   values(
+  #{trainingNo},
+  #{memberId},
+  #{trainingDate},
+  #{trainingStartTime},
+  #{trainingBasicAddress},
+  #{trainingDetailAddress},
+  #{trainingMemo},
+  '예약대기',
+   sysdate)
+
+  </insert>
+  
+  <select id="sequence" resultType="int">
+   select training_seq.nextval from dual
+  </select>
+  
+  <insert id="detailInsert" parameterType="TrainingDetailDto">
+  insert into training_detail(training_no, training_detail_pet_name)
+   values(#{trainingNo}, #{trainingDetailPetName})
+  </insert>
+  	
   	<!-- 훈련서비스 삭제 -->
   	<delete id="delete" parameterType="int">
   		delete training where training_no=#{trainingNo}

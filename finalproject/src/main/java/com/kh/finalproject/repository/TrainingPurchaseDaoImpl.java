@@ -32,6 +32,24 @@ public class TrainingPurchaseDaoImpl implements TrainingPurchaseDao{
 	public boolean statusChange(int trainingPurchaseNo) {
 		return sqlSession.update("training_purchase.statusChange", trainingPurchaseNo)>0;
 	}
+
+	@Override
+	public void purchaseInsert(TrainingPurchaseDto trainingPurchaseDto) {
+
+		sqlSession.insert("training_purchase.purchaseInsert",trainingPurchaseDto);
+		
+	}
+
+	@Override
+	public void purchaseDetailInsert(PurchaseDetailDto purchaseDetailDto) {
+		
+		sqlSession.insert("training_purchase.purchaseDetailInsert",purchaseDetailDto);
+	}
+
+	@Override
+	public int sequence() {
+		return sqlSession.selectOne("training_purchase.sequence");
+	}
 	
 	
 	
