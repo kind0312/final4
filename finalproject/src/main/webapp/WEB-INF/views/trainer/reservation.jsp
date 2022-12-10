@@ -10,9 +10,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons1.css">
-     
+  	
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-   <jsp:param value="훈련사 상세" name="title"/>
+	<jsp:param value="훈련사 상세" name="title"/>
 </jsp:include>
 
 <style>
@@ -177,59 +177,59 @@ $(function(){
 });
 
 $(function(){
-   $(".total-price").text(0);
-   var firstMyPoint = parseInt($(".myPoint").text());
-   var firstTotalPrice = parseInt($(".total-price").text());
-   $(".price").text(firstMyPoint-firstTotalPrice);
-   
-   
-   $("[name=trainingDetailPetName]").on("input", function(){
-         var cnt = 0;
-         $("[name=trainingDetailPetName]").each(function(){
-            //체크여부에 따라 ture/false 반환
-            //console.log($(this).prop("checked"));  
-            if($(this).prop("checked")){
-               cnt++; // 체크되어있으면 cnt추가
-            }
-         });
-         
-         //현재 내 포인트
-         var myPoint = parseInt($(".myPoint").text());
-         if(cnt>1){
-            $(".total-price").text(100000+(cnt-1)*50000);
-            var totalPrice = parseInt($(".total-price").text());
-            $(".price").text(myPoint-totalPrice);
-            $("[name=trainingPurchasePrice]").val(totalPrice);
+	$(".total-price").text(0);
+	var firstMyPoint = parseInt($(".myPoint").text());
+	var firstTotalPrice = parseInt($(".total-price").text());
+	$(".price").text(firstMyPoint-firstTotalPrice);
+	
+	
+	$("[name=trainingDetailPetName]").on("input", function(){
+	      var cnt = 0;
+	      $("[name=trainingDetailPetName]").each(function(){
+	         //체크여부에 따라 ture/false 반환
+	         //console.log($(this).prop("checked"));  
+	         if($(this).prop("checked")){
+	            cnt++; // 체크되어있으면 cnt추가
+	         }
+	      });
+	      
+	      //현재 내 포인트
+	      var myPoint = parseInt($(".myPoint").text());
+	      if(cnt>1){
+	         $(".total-price").text(100000+(cnt-1)*50000);
+	         var totalPrice = parseInt($(".total-price").text());
+	         $(".price").text(myPoint-totalPrice);
+	         $("[name=trainingPurchasePrice]").val(totalPrice);
 
-            
-         }else{
-            $(".total-price").text(cnt*100000);
-            var totalPrice = parseInt($(".total-price").text());
-            $(".price").text(myPoint-totalPrice);
-            $("[name=trainingPurchasePrice]").val(totalPrice);
-            $("[name=purchaseDetailPrice]").val(cnt*100000);
-         }
-         
-        
-   });
-   
-   //비동기 펫 리스트
-   /* var memberId = $("[name=memberId]").val();
-   $.ajax({
-      url:"http://localhost:8888/rest/pet_list/"+memberId,
-      method:"get",
-      data:memberId,
-      success:function(resp){
-         //console.log(resp.length);
-         var test = $(".test");
-         for(var i=0; i<resp.length; i++){
-            var input = $("<input>").attr("type","hidden").attr("name","purchaseDetailPrice").attr("value","");
-            test.append(input);
-            
-         }
-         
-      }
-   }); */
+	         
+	      }else{
+	         $(".total-price").text(cnt*100000);
+	         var totalPrice = parseInt($(".total-price").text());
+	         $(".price").text(myPoint-totalPrice);
+	         $("[name=trainingPurchasePrice]").val(totalPrice);
+	         $("[name=purchaseDetailPrice]").val(cnt*100000);
+	      }
+	      
+	     
+	});
+	
+	//비동기 펫 리스트
+	/* var memberId = $("[name=memberId]").val();
+	$.ajax({
+		url:"http://localhost:8888/rest/pet_list/"+memberId,
+		method:"get",
+		data:memberId,
+		success:function(resp){
+			//console.log(resp.length);
+			var test = $(".test");
+			for(var i=0; i<resp.length; i++){
+				var input = $("<input>").attr("type","hidden").attr("name","purchaseDetailPrice").attr("value","");
+				test.append(input);
+				
+			}
+			
+		}
+	}); */
 });
 
 
