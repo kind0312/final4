@@ -79,8 +79,7 @@ public class TrainerController {
 		
 		
 		String userId = (String)session.getAttribute(SessionConstant.ID);
-		
-		
+
 		model.addAttribute("member", memberDao.selectOne(userId));
 		model.addAttribute("pet", petDao.list(userId));
 		model.addAttribute("trainerno",trainerNo);
@@ -91,21 +90,11 @@ public class TrainerController {
 	
 	@PostMapping("/reservation")
 	public String reservation(HttpSession session,
-			RedirectAttributes attr,
-			@ModelAttribute TrainingDto trainingDto
-			) throws IllegalStateException, IOException {
-		
+			@ModelAttribute TrainingDto trainingDto) {
 		System.out.println(trainingDto + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		
 		trainingDao.insert(trainingDto);
-		
-		
-		
-		return "/trainer/reservation";
+		return "redirect:/trainer/list";
 	}
-	
-	
-	
-	
 
 }

@@ -158,7 +158,7 @@ $(function(){
 
 
 
-<form action="reservation" method="post" autocomplete="off">
+<form action="/trainer/reservation" method="post" autocomplete="off">
 <input type="hidden" name="memberId" value="${member.memberId}">
 
                <input type="text" name="trainingBasicAddress"

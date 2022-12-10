@@ -69,6 +69,7 @@
   #{trainingMemo},
   '예약대기',
    sysdate)
+
   </insert>
   	
   	<!-- 훈련서비스 삭제 -->
