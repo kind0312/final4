@@ -24,18 +24,34 @@
  		select * from training where training_no=#{trainingNo}
  	</select>
  	
- 	<!-- 진행 예약 리스트 -->
+ 	<!-- 훈련서비스 번호로 서비스, 서비스상세, 회원 첨부파일 연결테이블 3개 조인 리스트 -->
+ 	<select id="oneTraining" resultType="OneTrainingVO" parameterType="int">
+ 		select * from training t 
+		inner join training_detail td on t.training_no = td.training_no
+		inner join member_img img on t.member_id = img.member_id
+		where t.training_no=#{trainingNo}
+ 	</select>
+ 	
+ 	<!-- 진행 예약 리스트(회원 기준) -->
  	<select id="ingList" resultType="TrainingDto" parameterType="String">
  		select * from training 
  		where member_id=#{memberId} 
 		and (training_status='예약대기' or training_status='예약확정')
  	</select>
  	
- 	<!-- 지난 예약 리스트 -->
+ 	<!-- 지난 예약 리스트(회원 기준) -->
  	<select id="endList" resultType="TrainingDto" parameterType="String">
  		select * from training 
 		where member_id=#{memberId} 
 		and (training_status='예약취소' or training_status='이용완료')
+ 	</select>
+ 	
+ 	<!-- 진행 예약 리스트(훈련사 기준) -->
+ 	<select id="reservationIngList" resultType="ReservationIngListVO" parameterType="int">
+ 		select m.member_name, t.*, li.trainer_no from member m 
+		inner join training t on m.member_id=t.member_id
+		inner join linked_list li on t.training_no=li.training_no
+		where li.trainer_no=#{trainerNo} and t.training_status='예약확정'
  	</select>
  	
  	<!-- 훈련서비스 받은 펫 마리수 -->
@@ -47,6 +63,39 @@
   	<select id="petList" resultType="TrainingDetailDto" parameterType="int">
   		select * from training_detail where training_no=#{trainingNo}
   	</select>
+  	
+  	<insert id="insert" parameterType="TrainingDto">
+  insert into training(
+  training_no,
+   member_id,
+    training_date,
+  training_starttime,
+  training_basic_address,
+  training_detail_address,
+  training_memo,
+  training_status,
+  training_changedate)
+   values(
+  #{trainingNo},
+  #{memberId},
+  #{trainingDate},
+  #{trainingStartTime},
+  #{trainingBasicAddress},
+  #{trainingDetailAddress},
+  #{trainingMemo},
+  '예약대기',
+   sysdate)
+
+  </insert>
+  
+  <select id="sequence" resultType="int">
+   select training_seq.nextval from dual
+  </select>
+  
+  <insert id="detailInsert" parameterType="TrainingDetailDto">
+  insert into training_detail(training_no, training_detail_pet_name)
+   values(#{trainingNo}, #{trainingDetailPetName})
+  </insert>
   	
   	<!-- 훈련서비스 삭제 -->
   	<delete id="delete" parameterType="int">

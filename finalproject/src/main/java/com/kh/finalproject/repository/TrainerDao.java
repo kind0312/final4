@@ -23,21 +23,23 @@ public interface TrainerDao {
 	
 	//훈련사 리뷰 메소드
 	List<ReviewVO> selectTrainerReview(int trainerNo);
-	
 
 	//훈련사테이블(자기소개) insert 메소드
 	void insertTrainer(TrainerDto trainerDto);
 	
-	//훈련사테이블(자기소개) 디테일 메소드
+	//훈련사 한 명 단일 조회
 	TrainerDto selectOnePro(String memberId);
-	
 	
 	//훈련사테이블(자기소개) update 수정 메소드
 	boolean updateTrainer(TrainerDto trainerDto);
 	
 	//관리자 훈련사 목록 조회
 	List<TrainerListVO>selectList(TrainerListSearchVO vo);
+
 	
 	//트레이너 아이디로 trainer 테이블에서 trainerNo 찾기
 	int selectOneTrainerNo(String memberId);
+
+
+
 }

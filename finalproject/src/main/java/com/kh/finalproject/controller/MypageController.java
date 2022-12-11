@@ -66,40 +66,18 @@ public class MypageController {
 	@RequestMapping("/training_detail")
 	public String detail(@RequestParam int trainingNo, Model model) {
 		//훈련서비스 단일조회
-		model.addAttribute("training", trainingDao.selectOne(trainingNo));
-		//훈련받은 반려동물 마리수 조회
-		model.addAttribute("petCount", trainingDao.petCount(trainingNo));
+		model.addAttribute("training", trainingDao.oneTraining(trainingNo));
 		//결제내역 단일조회
 		model.addAttribute("purchase", trainingPurchaseDao.selectOne(trainingNo));
-		//훈련서비스 받은 반려동물 조회		
-		List<TrainingDetailDto> detailDto = trainingDao.trainingPet(trainingNo);
-		//반려견 이름 출력
-		String petName = detailDto.get(0).getTrainingDetailPetName();
-		if(detailDto.size()>1) {
-			petName=detailDto.get(0).getTrainingDetailPetName()+" 외 "+(detailDto.size()-1)+"마리";
-		}
-		model.addAttribute("petName", petName);
-		
 		return "mypage/training_detail";
 	}
 	
 	@RequestMapping("/training_cancel")
 	public String cancel(@RequestParam int trainingNo, Model model) {
-		//화면에 필요한 데이터 찍어주기
 		//훈련서비스 단일조회
-		model.addAttribute("training", trainingDao.selectOne(trainingNo));
-		//훈련받은 반려동물 마리수 조회
-		model.addAttribute("petCount", trainingDao.petCount(trainingNo));
+		model.addAttribute("training", trainingDao.oneTraining(trainingNo));
 		//결제내역 단일조회
 		model.addAttribute("purchase", trainingPurchaseDao.selectOne(trainingNo));
-		//훈련서비스 받은 반려동물 조회		
-		List<TrainingDetailDto> detailDto = trainingDao.trainingPet(trainingNo);
-		//반려견 이름 출력
-		String petName = detailDto.get(0).getTrainingDetailPetName();
-		if(detailDto.size()>1) {
-			petName=detailDto.get(0).getTrainingDetailPetName()+" 외 "+(detailDto.size()-1)+"마리";
-		}
-		model.addAttribute("petName", petName);
 
 		return "mypage/training_cancel";
 	}
@@ -158,9 +136,7 @@ public class MypageController {
 		model.addAttribute("member", memberDao.selectOne(memberId));
 		model.addAttribute("filesNo", memberDao.findFileNo(memberId));
 		return "mypage/profile";
-	}
-	
-	
+	}	
 	
 
 }

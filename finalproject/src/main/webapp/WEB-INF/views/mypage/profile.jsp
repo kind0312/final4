@@ -15,9 +15,6 @@
     	background-color:black;
     	overflow: hidden;
 	}
-	.form-control{
-		display:inline;
-	}
 	.underline-out{
 		border-bottom:#fff;
 	}
@@ -31,17 +28,78 @@
 	.form-control[readonly] {
 	  background-color: #fff;
 	}
+	.btn{
+		border-radius: 10px !important;
+	}
+	.able ~ .possible {
+    	display: block;
+	}
+	
+	.disable ~ .impossible {
+		display: block;
+	}
+    
+	.possible {
+		display: none;
+		width: 100%;
+		margin-top: 0.25rem;
+		font-size: 0.875em;
+		color: #81BDF1;
+	}
+	
+	.impossible {
+		display: none;
+		width: 100%;
+		margin-top: 0.25rem;
+		font-size: 0.875em;
+		color: #d9534f;
+	}
 
 </style>
 
 <script>
 	$(function(){
-		//첫 화면 버튼 숨김
-		$(".confirm-btn").hide();
-		$(".cancel-btn").hide();
+		detailBtn();
+		//버튼 숨김 함수
+		function detailBtn(){
+			$(".confirm-btn").hide();
+			$(".cancel-btn").hide();
+			$(".edit-btn").show();
+			$(".delete-btn").show();
+			$(".new-input").hide();
+			$(".origin-table").show();
+		}
+		//버튼 표시 함수
+		function editBtn(){
+			$(".edit-btn").hide();
+			$(".delete-btn").hide();
+			$(".confirm-btn").show();
+			$(".cancel-btn").show();
+			$(".origin-table").hide();
+			$(".new-input").show();
+		}
+		
+		//목록버튼(돌아가기) 이벤트 - 새로 추가한 첨부파일 db에서 삭제
+		$(".cancel-btn").click(function(){
+			var newFilesNo = $("[name=filesNo]").val();
+			var originFilesNo = $("#originFilesNo").val();
+			if(newFilesNo!=originFilesNo){
+				$.ajax({
+					url:"http://localhost:8888/delete/"+newFilesNo,
+					method:"delete",
+					data:newFilesNo,
+					success:function(resp){
+						$("[name=filesNo]").val($("#originFilesNo").val());
+						//alert(' 삭제 성공 ! '+resp);
+					}
+				});
+			}
+		});
 
-		//수정버튼 클릭 시 새로운 input창 숨김 및 원래 input창 숨김해제
-		$(".edit-btn").click(function(){			
+		//수정버튼 클릭 시 새로운 input창 표시 및 원래 input창 숨김
+		$(".edit-btn").click(function(){
+			editBtn();
+			$(".input-test").show();
 			//프로필 클릭 시 첨부파일 버튼 실행
 			$(".img-circle").click(function(){
 				$(".input-file").click();
@@ -68,92 +126,123 @@
 					});
 				}
 			});
+			//우편번호, 기본/상세 input창 클릭할 경우 다음 주소 api 팝업창 열림
+			$("[name=memberPost]").click(function(){
+				findAddress();
+			});
+			$("[name=memberBaseAddress]").click(function(){
+				findAddress();
+			});
+
 		});
-		
-		
-		//목록버튼(돌아가기) 이벤트 - 새로 추가한 첨부파일 db에서 삭제
-		$(".list-btn").click(function(){
-			var newFilesNo = $("[name=filesNo]").val();
-			var originFilesNo = $("#originFilesNo").val();
-			if(newFilesNo!=originFilesNo){
-				$.ajax({
-					url:"http://localhost:8888/delete/"+newFilesNo,
-					method:"delete",
-					data:newFilesNo,
-					success:function(resp){
-						$("[name=filesNo]").val($("#originFilesNo").val());
-						//alert(' 삭제 성공 ! '+resp);
-					}
-				});
-			}
-		});
-	
-		//변경된 정보 비동기화 수정처리
+
 		//상태 판정
 		check={
-				petProfile:false,
-				petName:false,
-				petBreed:false,
-				petWeight:false, weightRegex:/^[0-9]{1,5}$/,
+				memberImgValid : false,
+				memberNameValid : false, memberNameRegex : /^[a-zA-Z가-힣]{2,7}$/,
+				memberEmailValid : false, memberEmailRegex : /^[\w\.-]{1,64}@[\w\.-]{1,125}\.\w{2,4}$/,
+				emailConfirmValid : false, 
+				memberTelValid : false, memberTelRegex : /^01[016789][1-9]\d{6,7}$/,
+				memberDetailAddressValid : false, memberDetailAddressRegex : /^[가-힣a-zA-Z0-9-_ ]{1,}$/,
 				allValid:function(){
-					return this.petName && this.petBreed && 
-									this.petWeight && this.petProfile;
+					return this.memberImgValid && this.memberNameValid && 
+									this.memberEmailValid && this.emailConfirmValid
+									&& this.memberTelValid && this.memberDetailAddressValid;
 				}
 		};
 	
 		//사진검사 함수
 		function profileCheck(){
 			var value = $("[name=filesNo]").val();
-			$("[name=petProfile]").removeClass("is-valid is-invalid");
+			$("[name=memberImg]").removeClass("is-valid is-invalid");
 			if(value!=null){
-				$("[name=petProfile]").addClass("is-valid");
-				check.petProfile=true;
+				$("[name=memberImg]").addClass("is-valid");
+				check.memberImgValid=true;
 			}else{
-				$("[name=petProfile]").addClass("is-invalid");
-				check.petProfile=false;
+				$("[name=memberImg]").addClass("is-invalid");
+				check.memberImgValid=false;
 			}
 		}
 		
+		//형식 검사
+		$(".check-input").blur(function(){ 
+            var name = $(this).attr("name");
+            var value = $(this).val();
+            var regex = check[name+"Regex"];
+            if(regex.test(value)) {
+            	check[name+"Valid"] = true;
+                $(this).removeClass("is-valid is-invalid").addClass("is-valid");
+            }
+            else {
+            	check[name+"Valid"] = false;
+                $(this).removeClass("is-valid is-invalid").addClass("is-invalid");
+                $(".code-send-btn").prop("disabled", true);
+            }
+        });
 		
-		//이름검사
-		$("[name=petName]").blur(function(e){
-			$(this).removeClass("is-valid is-invalid");
-			if($(this).val().length>0){
-				$(this).addClass("is-valid");
-				check.petName=true;
-			}else{
-				$(this).addClass("is-invalid");
-				check.petName=false;
-			}	
-		});
-	
-		//품종검사
-		$("[name=petBreed]").blur(function(e){
-			$(this).removeClass("is-valid is-invalid");
-			if($(this).val().length>0){
-				$(this).addClass("is-valid");
-				check.petBreed=true;
-			}else{
-				$(this).addClass("is-invalid");
-				check.petBreed=false;
-			}	
-		});
+		//메일검사
+		//첫 화면 이메일 전송, 확인 버튼 막기
+		$(".code-send-btn").prop("disabled", true);
+		$(".code-confirm-btn").prop("disabled", true);
+		$(".code-input").attr("readonly", "readonly");
 		
-		//몸무게 숫자만 입력 검사
-		$("[name=petWeight]").blur(function(e){
-			$(this).removeClass("is-valid is-invalid");
-			var value = $(this).val();
-			if(value.length==0){
-				check.petWeight=true;
+		$("[name=memberEmail]").change(function(){
+			var origin = $(".origin-email").text();
+			var email = $("[name=memberEmail]").val();
+			if(email.length == 0) return;
+
+			if(origin == email){
+				check.memberEmailValid=true;
+				check.emailConfirmValid = true;
+				$(".code-send-btn").prop("disabled", true);
 			}else{
-				var regex = check.weightRegex;
-				if(regex.test(value)){
-					$(this).addClass("is-valid");
-					check.petWeight=true;
-				}else{
-					$(this).addClass("is-invalid");
-					check.petWeight=false;
-				}
+				$(".code-send-btn").prop("disabled", false);
+				$(".code-send-btn").click(function(){
+					$(".code-send-btn").prop("disabled", true);
+					$(".code-input").attr("readonly", false);
+					$.ajax({
+						url:"${pageContext.request.contextPath}/rest/member/emailcert",
+						method:"post",
+						data:{emailcertEmail:email},
+						success:function(resp){
+							$(".code-send-btn").prop("disabled", false);
+							$(".code-confirm-btn").prop("disabled", false);
+							
+							$(".code-confirm-btn").click(function(){
+								var serial = $(".code-input").val();
+								if(serial.length!=6){
+									$(".confirmResult").removeClass("possible impossible").addClass("impossible").text("인증번호를 다시 확인해주세요");
+								}
+								//if(serial.length != 6) return;//6자리 아니면 검사 안함
+								
+								$.ajax({
+									url:"${pageContext.request.contextPath}/rest/member/confirmcert",
+									method:"post",
+									data:{
+										emailcertEmail:email,
+										emailcertSerial:serial
+									},
+									success:function(resp){
+										if(resp){
+											$("[name=memberEmail]").attr("readonly", "readonly");
+											$(".code-input").attr("readonly", "readonly");
+											check.memberEmailValid=true;
+											check.emailConfirmValid = true;
+											$(".code-send-btn").prop("disabled", true);
+											$(".code-confirm-btn").prop("disabled", true);
+											$(".confirmResult").removeClass("possible impossible").addClass("possible").text("인증이 완료되었습니다");
+		                               		$(".code-input").removeClass("is-valid is-invalid able disable").addClass("is-valid").addClass("able");
+										}
+										else{
+											$(".confirmResult").removeClass("possible impossible").addClass("impossible").text("인증번호를 다시 확인해주세요");
+		                               		$(".code-input").removeClass("is-valid is-invalid able disable").addClass("is-invalid").addClass("disable");
+										}
+									}
+								});
+							});
+						}
+					});
+				});
 			}
 		});
 		
@@ -162,79 +251,89 @@
 			//기본이벤트 차단
 			e.preventDefault();
 			//필수항목 체크
-			$("[name=petName]").blur();
-			$("[name=petBreed]").blur();
-			$("[name=petWeight]").blur();
+			$(".check-input").blur();
+			$("[name=memberEmail]").change();
 			profileCheck();
 
 			//비동기화 데이터 준비
 			var filesNo = $("[name=filesNo]").val();
-			var petNo = $("[name=petNo]").val();
-			var memberId = $("[name=memberId]").val();
-			var type=$("[name=petType]:checked").val();
-			var name=$("[name=petName]").val();
-			var gender=$("[name=petGender]:checked").val();
-			var breed=$("[name=petBreed]").val();
-			var birth=$("[name=petBirth]").val();
-			var weight=$("[name=petWeight]").val();
-			var neutralization=$("[name=petNeutralization]:checked").val();
-			console.log(type);
-			console.log(gender);
-			console.log(neutralization);
+			var memberId = $("[name=memberId]").val();	
+			var memberName = $("[name=memberName]").val();
+			var memberEmail= $("[name=memberEmail]").val();
+			var memberTel = $("[name=memberTel]").val();
+			var memberPost = $("[name=memberPost]").val();
+			var memberBaseAddress = $("[name=memberBaseAddress]").val();
+			var memberDetailAddress = $("[name=memberDetailAddress]").val();
 			
 			//data에 묶음
 			data={
 				filesNo:filesNo,
 				memberId:memberId,
-				petNo:petNo,
-				petType:type,
-				petName:name,
-				petGender:gender,
-				petBreed:breed,
-				petBirth:birth,
-				petWeight:weight,
-				petNeutralization:neutralization
+				memberName:memberName,
+				memberEmail:memberEmail,
+				memberTel:memberTel,
+				memberPost:memberPost,
+				memberBaseAddress:memberBaseAddress,
+				memberDetailAddress:memberDetailAddress
 			}
+			
 			if(check.allValid()){//수정처리
 				$.ajax({
-					url:"http://localhost:8888/rest/pet_edit",
+					url:"http://localhost:8888/rest/member/profile_edit",
 					method:"put",
 					async:false,
 					contentType:"application/json",
 					data:JSON.stringify(data),
 					success:function(resp){
-						$(".edit-btn").show();
-						tdHide();
-						newtdShow();
+						$(".origin-name").text(data.memberName);
+						$(".origin-email").text(data.memberEmail);
+						$(".origin-tel").text(data.memberTel);
+						$(".origin-post").text(data.memberPost);
+						$(".origin-base_address").text(data.memberBaseAddress);
+						$(".origin-detail-address").text(data.memberDetailAddress);
+						editBtn();
+						detailBtn();
 					}
 				});
 			}
-			loadList();
 		});
 		
-				
-		//선택한 정보 불러오기
-		function updateInfo(){
-			var petNo = $("[name=petNo]").val();
+		//탈퇴버튼 이벤트
+		$(".goodbye-confirm").click(function(){
+			var memberId = $("[name=memberId]").val();
 			$.ajax({
-				url:"http://localhost:8888/rest/pet_selectone/"+petNo,
-				method:"get",
-				dataType:"json",
-				data:petNo,
+				url:"http://localhost:8888/rest/member/goodbye/"+memberId,
+				method:"put",
+				data:memberId,
 				success:function(resp){
-					console.log(resp);
-					$("[name=petName]").val(resp.petName);
-					$("[name=petBreed]").val(resp.petBreed);
-					$("[name=petBirth]").val(resp.petBirth);
-					$("[name=petWeight]").val(resp.petWeight);
-					
-					//$("input[name='radio의 name'][value='선택할 값']").prop("checked", true);
-					$("[name=petType][value="+resp.petType+"]").prop("checked", true);
-					$("[name=petGender][value="+resp.petGender+"]").prop("checked", true);
-					$("[name=petNeutralization][value="+resp.petNeutralization+"]").prop("checked", true);				
+					location.href="${pageContext.request.contextPath}/member/logout";
 				}
 			});
-		}
+		});
+		
+		//훈련사 전환 이벤트
+		$(".trainer-change").click(function(e){
+			e.preventDefault();
+			$("#change-modal").modal('hide');
+			//1. 회원의 훈련사 여부 비동기로 확인
+			//2. y를 반환할 경우 훈련사 메인화면으로 이동
+			//3. n을 반환할 경우 훈련사 전환이 불가능한 회원입니다. 라는 문구 모달로 출력
+			var memberId = $("[name=memberId]").val();
+			$.ajax({
+				url:"http://localhost:8888/rest/member/trainer_change/"+memberId,
+				method:"get",
+				data:memberId,
+				success:function(resp){
+					console.log(resp);
+					if(resp=='N'){
+						$("#change-modal").modal('show');
+					}else if(resp=='Y'){
+						location.href="${pageContext.request.contextPath}/trainer/main";
+						$("#change-modal").modal('hide');
+					}
+				}
+			});
+		});	
 
 	});
 </script>
@@ -267,12 +366,27 @@
 	          <a class="nav-link mypage-nav" style="color:white;" href="${pageContext.request.contextPath}/mypage/profile">정보수정</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">펫시터로 전환</a>
+	          <a class="nav-link mypage-nav trainer-change" href="#" data-bs-toggle="modal" data-bs-target="#change-modal">훈련사로 전환</a>
 	        </li>
      	 </ul>
     	</div>
   	</div>
 </nav>
+
+	<!-- Modal -->
+	<div class="modal fade" id="change-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-body">
+	        훈련사 전환이 불가능한 회원입니다.
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-yellow" data-bs-dismiss="modal">확인</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
 	<div class="container-fluid">
         <div class="row mt-80">
             <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
@@ -283,46 +397,128 @@
 		<div class="row text-center mt-4">
             <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">   
                  <img src="http://localhost:8888/download/${filesNo}" width="120" height="120" class="img-circle">
-                 <input type="file" style="display:none;" class="input-file form-control" name="petProfile" accept=".jpg, .png, .gif">
+                 <input type="file" style="display:none;" class="input-file form-control" name="memberImg" accept=".jpg, .png, .gif">
 			</div>
 		</div>
 		
 		<form class="update-form">
-			<div class="row text-center">
-	            <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-3">   
-	                 <table class="table mb-4">
-						<tbody>
-							<tr class="table-default"><td colspan="2"></tr>
-							<tr class="table-default underline-out" height="65px">
-								<th class="ps-sm-4">이메일</th>
-								<td class="ps-sm-4">${member.memberEmail}</td>
-							</tr>
-							<tr class="table-default underline-out" height="65px">
-								<th class="ps-sm-4">휴대폰</th>
-								<c:set var="tel" value="${member.memberTel}"></c:set>
-								<td class="ps-sm-4">
-									${fn:substring(tel, 0, 3)}-${fn:substring(tel, 3, 7)}-${fn:substring(tel, 7, 11)}
-								</td>
-							</tr>
-							<tr class="table-default underline-out" height="65px">
-								<th class="ps-sm-4">우편번호</th>
-								<td class="ps-sm-4">${member.memberPost}</td>
-							</tr>
-							<tr class="table-default underline-out" height="65px">
-								<th class="ps-sm-4">기본주소</th>
-								<td class="ps-sm-4">${member.memberBaseAddress}</td>
-							</tr>
-							<tr class="table-default underline-out" height="65px">
-								<th class="ps-sm-4">상세주소</th>
-								<td class="ps-sm-4">${member.memberDetailAddress}</td>
-							</tr>
-							<tr class="table-default" height="65px">
-								<th class="ps-sm-4">생일</th>
-								<td class="ps-sm-4">${member.memberBirth}</td>
-							</tr>
-						</tbody>
-					</table>
-					<!-- 비동기 처리 위한 데이터-->
+		<div class="new-input">
+			<div class="row mt-4">
+				<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+					<div class="row">
+						<label>
+							이름
+							<i class="fa-solid fa-asterisk blue"></i>
+						</label>
+						<div class="input-group">
+							<input type="text" name="memberName" value="${member.memberName}"
+								class="form-control underline check-input" required>
+		                    <div class="invalid-feedback">이름은 2~7자 한글 또는 대 소문자 작성하세요</div>
+	                    </div>
+					</div>
+				</div>
+			</div>
+			<div class="row mt-4">
+				<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+					<div class="row">
+						<label>
+							이메일
+							<i class="fa-solid fa-asterisk blue"></i>
+						</label>
+						<div class="input-group">
+							<input type="email" name="memberEmail" class="form-control underline w-75 check-input" 
+								aria-describedby="email-button" value="${member.memberEmail}" required>
+							<button class="btn btn-outline-blue w-25 code-send-btn" type="button">인증코드발송</button>
+		                    <div class="invalid-feedback">형식에 맞게 입력해주세요</div>
+						</div>
+						<div class="input-group mt-2">
+							<input type="text" class="form-control underline w-75 code-input" aria-describedby="confirm-button">
+							<button class="btn btn-outline-blue w-25 code-confirm-btn" type="button">확 인</button>
+		                    <div class="confirmResult"></div>
+		                    <div class="valid-feedback"></div>
+		                    <div class="invalid-feedback"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mt-4">
+				<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+					<div class="row form-group">
+						<label>
+							휴대폰
+							<i class="fa-solid fa-asterisk blue"></i>
+						</label>
+						<div class="mt-2">
+							<input type="tel" name="memberTel" class="form-control underline check-input" value="${member.memberTel}"
+							 maxlength="11" placeholder="숫자만 입력해주세요" required>
+		                    <div class="invalid-feedback">형식에 맞게 입력해주세요</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mt-4">
+				<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+					<div class="row form-group">
+						<label>
+							주소
+							<i class="fa-solid fa-asterisk blue"></i>
+						</label>
+						<div class="input-group mt-2">
+							<input type="text" name="memberPost" class="form-control underline w-75" maxlength="6"
+							 placeholder="우편번호" required aria-describedby="address-button" value="${member.memberPost}" readonly>
+							<button class="btn btn-outline-blue w-25" type="button" id="address-button">주소검색</button>
+		                </div>
+		                <div class="input-group mt-2">
+							<input type="text" name="memberBaseAddress" class="form-control underline w-100" 
+								placeholder="기본주소" value="${member.memberBaseAddress}" readonly required>
+						</div>
+						<div class="input-group mt-2">
+							<input type="text" name="memberDetailAddress" value="${member.memberDetailAddress}"
+							 class="form-control underline w-100 check-input" placeholder="상세주소" required>
+		                    <div class="invalid-feedback">상세주소를 입력해주세요</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 기존 input창 -->
+		<div class="row text-center">
+            <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-3">
+                 <table class="table mb-4 origin-table">
+					<tbody>
+						 <tr class="table-default"><td colspan="2"></td></tr>
+						<tr class="table-default underline-out" height="65px">
+							<th class="ps-sm-4">이름</th>
+							<td class="ps-sm-4 origin-name">${member.memberName}</td>
+						</tr>
+						<tr class="table-default underline-out" height="65px">
+							<th class="ps-sm-4">이메일</th>
+							<td class="ps-sm-4 origin-email">${member.memberEmail}</td>
+						</tr>
+						<tr class="table-default underline-out" height="65px">
+							<th class="ps-sm-4">휴대폰</th>
+							<c:set var="tel" value="${member.memberTel}"></c:set>
+							<td class="ps-sm-4 origin-tel">
+								${fn:substring(tel, 0, 3)}-${fn:substring(tel, 3, 7)}-${fn:substring(tel, 7, 11)}
+							</td>
+						</tr>
+						<tr class="table-default underline-out" height="65px">
+							<th class="ps-sm-4">우편번호</th>
+							<td class="ps-sm-4 origin-post">${member.memberPost}</td>
+						</tr>
+						<tr class="table-default underline-out" height="65px">
+							<th class="ps-sm-4">기본주소</th>
+							<td class="ps-sm-4 origin-base-address">${member.memberBaseAddress}</td>
+						</tr>
+						<tr class="table-default" height="65px">
+							<th class="ps-sm-4">상세주소</th>
+							<td class="ps-sm-4 origin-detail-address">${member.memberDetailAddress}</td>
+						</tr>
+					</tbody>						
+				</table>
+				<!-- 기존 input창 끝 -->
+				<!-- 비동기 처리 위한 데이터-->
 					<input type="hidden" value="${member.memberId}" name="memberId">
 					<input type="hidden" value="${filesNo}" name="filesNo">
 					<input type="hidden" value="${filesNo}" id="originFilesNo">
@@ -330,11 +526,26 @@
 		            <button type="button" class="btn btn-blue text-center edit-btn">수정</button>
 		            <button type="submit" class="btn btn-blue text-center confirm-btn">확인</button>
 		            <a href="${pageContext.request.contextPath}/mypage/profile" class="btn btn-yellow cancel-btn">취소</a>
-					<button type="button" class="btn btn-yellow delete-btn">탈퇴</button>
+					<button type="button" class="btn btn-yellow delete-btn" data-bs-toggle="modal" data-bs-target="#goodbye-modal">탈퇴</button>
 				</div>
 			</div>
 		</form>
-    </div>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="goodbye-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-body">
+		        정말 탈퇴하시겠습니까?
+		      </div>
+		      <div class="modal-footer">
+		      	<button type="button" class="btn btn-blue goodbye-confirm">확인</button>
+		        <button type="button" class="btn btn-yellow" data-bs-dismiss="modal">취소</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</div>		
 </body>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.entity.MemberDto;
@@ -41,6 +41,7 @@ public class MemberController {
 		return "redirect:insert_success";
 	}
 	
+	//회원가입 성공
 	@GetMapping("/insert_success")
 	public String insertSuccess() {
 		return "member/insert_success";
@@ -54,16 +55,10 @@ public class MemberController {
 	
 	@PostMapping("/login")
 	public String login(HttpSession session, 
-			String memberId, String memberPw) {
-		MemberDto findDto = memberDao.selectOne(memberId);
-		
-		if(findDto == null) {
-			return "redirect:login?error";
-		}
-		
-		boolean isLogin = memberPw.equals(findDto.getMemberPw());
-		if(isLogin) {
-			session.setAttribute(SessionConstant.ID, memberId);
+			@ModelAttribute MemberDto memberDto) {
+		boolean login = memberDao.login(memberDto);
+		if(login) {
+			session.setAttribute(SessionConstant.ID, memberDto.getMemberId());
 			
 //			//로그인 시간을 갱신시키는 작업
 //			memberDao.updateLoginTime(findDto.getMemberId());
@@ -80,5 +75,37 @@ public class MemberController {
 	public String logout(HttpSession session) {
 		session.removeAttribute(SessionConstant.ID);
 		return "redirect:/";
+	}
+	
+	//아이디 찾기
+	@GetMapping("/find_memberid")
+	public String findMemberId() {
+		return "member/find_memberid";
+	}
+	
+	@PostMapping("/find_memberid")
+	public String findMemberId(@ModelAttribute MemberDto memberDto,
+			RedirectAttributes attr) {
+		boolean find = memberDao.findId(memberDto);
+		if(find) {
+			attr.addAttribute("memberName", memberDao.find(memberDto).getMemberName());
+			return "redirect:find_memberid_success";
+		}
+		else {
+			return "redirect:find_memberid?error";
+		}
+	}
+	
+	//아이디 찾기 성공
+	@GetMapping("/find_memberid_success")
+	public String findMemberIdSuccess(Model model, @ModelAttribute MemberDto memberDto) {
+		model.addAttribute("memberDto", memberDao.find(memberDto));
+		return "member/find_memberid_success";
+	}
+	
+	//비밀번호 찾기
+	@GetMapping("/find_memberpw")
+	public String findMemberPw() {
+		return "member/find_memberpw";
 	}
 }

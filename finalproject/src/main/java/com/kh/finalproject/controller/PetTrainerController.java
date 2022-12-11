@@ -12,12 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.entity.MemberImgDto;
@@ -30,9 +26,11 @@ import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.PetDao;
 import com.kh.finalproject.repository.TrainerDao;
 import com.kh.finalproject.repository.TrainingDao;
+
 import com.kh.finalproject.vo.PetDetailListVO;
 
 import lombok.Builder;
+
 
 
 
@@ -48,12 +46,15 @@ public class PetTrainerController {
 	
 	@Autowired
 	private MemberDao memberDao;
+
 		
 	@Autowired
 	private TrainingDao trainingDao;
 	
 	@Autowired
 	private PetDao petDao;
+
+
 	
 	
 	@RequestMapping("/main")
@@ -174,23 +175,42 @@ public class PetTrainerController {
 		memberDao.memberProfileInsert(memberImgDto);	//이거 정상 작동함 
 		
 		if(result) {			
-			return "redirect:/trainer/mypage_profile";
+			return "redirect:trainer/mypage_profile";
 		}
 		else {
-			return "redirect:fail";
-			}
+			return "redirect:fail";		
 		}
-	
-	
 	}
-	
-	
-	
 	
 //	@RequestMapping("/chat_list")
 //	public String chatlist() {
 //		
 //		return "trainer/chat_list";
 //	}
+	
+	
+	
+	
+	
+	
+	@RequestMapping("/mypage_reservation")
+	public String reservation(HttpSession session, Model model) {
+		//String memberId = (String)session.getAttribute(SessionConstant.ID);
+		String memberId = "trainer3";
+		TrainerDto dto = trainerDao.selectOnePro(memberId);
+		int trainerNo = dto.getTrainerNo();
+		
+		model.addAttribute("ingList", trainingDao.ingList(trainerNo));
+		
+		return "trainer/mypage_reservation";
+	}
+	
+	
+}
+	
+	
+	
+	
+
 	
 

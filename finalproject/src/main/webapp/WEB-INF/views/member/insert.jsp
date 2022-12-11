@@ -7,9 +7,6 @@
 	<jsp:param value="CareRegistration" name="title"/>
 </jsp:include>
 <style>
-	.btn{
-		border-radius: 10px !important;
-	}
 	.img-circle{
 		border-radius: 70%;
     	/* overflow: hidden; 사진 첨부하고 주석풀기*/
@@ -41,6 +38,10 @@
 		margin-top: 0.25rem;
 		font-size: 0.875em;
 		color: #d9534f;
+	}
+	.form-control:disabled, .form-control[readonly] {
+	  background-color: #e5f1fc;
+	  opacity: 1;
 	}
 </style>
 

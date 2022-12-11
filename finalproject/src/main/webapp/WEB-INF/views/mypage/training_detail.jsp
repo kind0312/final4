@@ -45,10 +45,49 @@
 		color:#81BDF1;
 	}
 	
+	
+	
 </style>
 
 <script>
-	
+	$(function(){
+		//훈련사 전환 이벤트
+		$(".trainer-change").click(function(e){
+			e.preventDefault();
+			$("#change-modal").modal('hide');
+			//1. 회원의 훈련사 여부 비동기로 확인
+			//2. y를 반환할 경우 훈련사 메인화면으로 이동
+			//3. n을 반환할 경우 훈련사 전환이 불가능한 회원입니다. 라는 문구 모달로 출력
+			var memberId = $("[name=memberId]").val();
+			$.ajax({
+				url:"http://localhost:8888/rest/member/trainer_change/"+memberId,
+				method:"get",
+				data:memberId,
+				success:function(resp){
+					console.log(resp);
+					if(resp=='N'){
+						$("#change-modal").modal('show');
+					}else if(resp=='Y'){
+						location.href="${pageContext.request.contextPath}/trainer/main";
+						$("#change-modal").modal('hide');
+					}
+				}
+			});
+		});
+		
+		//펫 이름 + 추가 요금 출력
+		var petName = $("[name=petName]").val();
+		var cnt = $("[name=cnt]").val();
+		if(cnt>1){
+			$(".petName").text(petName+" 외 "+(cnt-1)+"마리");
+			$(".plus-price").text((cnt-1)*50000);
+		}else{
+			$(".petName").text(petName);
+			$(".plus-price").text(0);
+		}
+		
+
+	});
 </script>
 
 <body>
@@ -79,12 +118,26 @@
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/profile">정보수정</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">펫시터로 전환</a>
+	          <a class="nav-link mypage-nav trainer-change" href="#" data-bs-toggle="modal" data-bs-target="#change-modal">훈련사로 전환</a>
 	        </li>
      	 </ul>
     	</div>
   	</div>
 </nav>
+
+	<!-- Modal -->
+	<div class="modal fade" id="change-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-body">
+	        훈련사 전환이 불가능한 회원입니다.
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-yellow" data-bs-dismiss="modal">확인</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 	
 	<div class="container-fluid">
 		<div class="row mt-80">
@@ -104,17 +157,17 @@
 						<tr class="table-default align-middle">
 			  				<td colspan="2" height="200px">
 			  					<div class="mt-3">
-			  						<img src=# class="img-circle" width="100" height="100">
+			  						<img src="http://localhost:8888/download/${training[0].filesNo}" class="img-circle" width="100" height="100">
 			  					</div>
 			  					<div class="mt-4">
 			  						<c:choose>
-			  							<c:when test="${training.trainingStatus=='예약대기'}">
+			  							<c:when test="${training[0].trainingStatus=='예약대기'}">
 			  								<span>훈련사 님의 승인을 기다리고 있습니다.</span>
 			  							</c:when>
-			  							<c:when test="${training.trainingStatus=='예약취소'}">
+			  							<c:when test="${training[0].trainingStatus=='예약취소'}">
 			  								<span>예약이 취소되었습니다.</span>
 			  							</c:when>
-			  							<c:when test="${training.trainingStatus=='이용완료'}">
+			  							<c:when test="${training[0].trainingStatus=='이용완료'}">
 			  								<span>훈련이 종료되었습니다.</span>
 			  							</c:when>
 			  							<c:otherwise>
@@ -124,7 +177,7 @@
 			  					</div>
 			  					<div class="mt-4 mb-3">
 				  					<c:choose>
-				  						<c:when test="${training.trainingStatus=='이용완료'}">
+				  						<c:when test="${training[0].trainingStatus=='이용완료'}">
 				  							<a href="#" class="btn btn-blue" style="margin-right:10px;">프로필 보기</a>
 					  						<a href="#" class="btn btn-yellow" style="margin-left:10px;">후기 작성</a>
 				  						</c:when>
@@ -139,13 +192,13 @@
 
 			  			<!-- 상세내역(+예약취소버튼)  예약상태에 따라서 다르게 표시하기 -->
 			  			<c:choose>
-			  				<c:when test="${training.trainingStatus!='예약취소'}">
+			  				<c:when test="${training[0].trainingStatus!='예약취소'}">
 			  					<tr class="table-default"><td colspan="2"></td></tr>
 						  			<tr class="table-default underline-out" height="60px">
 						  				<td class="title pt-sm-3" width="45%"><span class="ps-sm-4">날짜</span></td>
 						  				<td width="55%" class="content pt-sm-3">
-						  					<fmt:formatDate value="${training.trainingDate}" pattern="yyyy-MM-dd (E)"/>
-						  					<span class="pe-sm-4">${training.trainingStartTime}</span>
+						  					<fmt:formatDate value="${training[0].trainingDate}" pattern="yyyy-MM-dd (E)"/>
+						  					<span class="pe-sm-4">${training[0].trainingStartTime}</span>
 						  				</td>
 						  			</tr>
 						  			<tr class="table-default underline-out"  height="50px">
@@ -156,20 +209,21 @@
 						  				</span> 
 						  				</td>
 						  			</tr>
+
 						  			<tr class="table-default underline-out"  height="50px">
 						  				<td class="title"  width="45%"><span class="ps-sm-4">반려동물</span></td>
-						  				<td width="55%" class="content"><span class="pe-sm-4">${petName}</span></td>
+						  				<td width="55%" class="content"><span class="pe-sm-4 petName"></span></td>
 						  			</tr>
 						  			<tr class="table-default underline-out"  height="70px">
 						  				<td class="title"  width="45%"><span class="ps-sm-4">방문주소</span></td>
 						  				<td width="55%" class="content">
-							  				<p class="pe-sm-4">${training.trainingBasicAddress}</p>
-							  				<p class="pe-sm-4">${training.trainingDetailAddress}</p>
+							  				<p class="pe-sm-4">${training[0].trainingBasicAddress}</p>
+							  				<p class="pe-sm-4">${training[0].trainingDetailAddress}</p>
 						  				</td>
 						  			</tr>
 						  			<!-- 이용완료일 경우에 예약 취소 버튼 제거 -->
 						  			<c:choose>
-						  				<c:when test="${training.trainingStatus=='이용완료'}">
+						  				<c:when test="${training[0].trainingStatus=='이용완료'}">
 						  					<tr class="table-default">
 								  				<td colspan="2"></td>
 								  			</tr>
@@ -178,7 +232,7 @@
 						  					<tr class="table-default" height="50px">
 								  				<td colspan="2">
 								  					<a class="cancel-font pb-sm-2" 
-								  						href="${pageContext.request.contextPath}/mypage/training_cancel?trainingNo=${training.trainingNo}">예약 취소
+								  						href="${pageContext.request.contextPath}/mypage/training_cancel?trainingNo=${training[0].trainingNo}">예약 취소
 								  					</a>
 								  				</td>
 								  			</tr>
@@ -191,28 +245,22 @@
 						  				<td colspan="2" width="45%"><span class="pay-title">결제내역</span></td>
 						  			</tr>
 						  			<tr class="table-default align-middle underline-out"  height="50px">
-						  				<td class="title"  width="45%"><span class="ps-sm-4">훈련 ${petCount}마리</span></td>
+						  				<td class="title"  width="45%"><span class="ps-sm-4">훈련 ${training.size()}마리</span></td>
 						  				<td width="55%" class="content">
-						  					<c:choose>
-						  						<c:when test="${petCount>1}">
-						  							<span class="pe-sm-4">
-						  								<fmt:formatNumber value="${purchase.trainingPurchasePrice-10000}" pattern="###,###"></fmt:formatNumber>
-						  							</span>
-						  						</c:when>
-						  						<c:otherwise>
-						  							<span class="pe-sm-4">
-						  								<fmt:formatNumber value="${purchase.trainingPurchasePrice}" pattern="###,###"></fmt:formatNumber>
-						  							</span>
-						  						</c:otherwise>
-						  					</c:choose>
+				  							<span class="pe-sm-4 ">
+				  								<fmt:formatNumber value="100000" pattern="###,###"></fmt:formatNumber>
+				  							</span>
 						  				</td>
 						  			</tr>
-						  			<c:if test="${petCount > 1}">
+						  			<c:if test="${training.size() > 1}">
 						  				<tr class="table-default align-middle underline-out"  height="50px">
-							  				<td class="title"  width="45%"><span class="ps-sm-4">추가 요금(+${(petCount-1)*10000})</span></td>
+							  				<td class="title "  width="45%">
+							  					<span class="ps-sm-4">추가 요금(+</span>
+							  					<span class="plus-price"></span>)
+							  				</td>
 							  				<td width="55%" class="content">
-								  				<span class="pe-sm-4">
-								  					<fmt:formatNumber value="${(petCount-1)*10000}" pattern="###,###"></fmt:formatNumber>
+								  				<span class="pe-sm-4 plus-price">
+								  					<fmt:formatNumber value="" pattern="###,###"></fmt:formatNumber>
 								  				</span>
 							  				</td>
 						  				</tr>
@@ -242,30 +290,24 @@
 					  				<td colspan="2" width="45%"><span class="pay-title">환불 내역</span></td>
 					  			</tr>
 					  			<tr class="table-default align-middle underline-out"  height="50px">
-					  				<td class="title"  width="45%"><span class="ps-sm-4">훈련 ${petCount}마리</span></td>
+					  				<td class="title"  width="45%"><span class="ps-sm-4">훈련 ${training.size()}마리</span></td>
 					  				<td width="55%" class="content">
-					  					<c:choose>
-					  						<c:when test="${petCount>1}">
-					  							<span class="pe-sm-4">
-					  								<fmt:formatNumber value="${purchase.trainingPurchasePrice-10000}" pattern="###,###"></fmt:formatNumber>
-					  							</span>
-					  						</c:when>
-					  						<c:otherwise>
-					  							<span class="pe-sm-4">
-					  								<fmt:formatNumber value="${purchase.trainingPurchasePrice}" pattern="###,###"></fmt:formatNumber>
-					  							</span>
-					  						</c:otherwise>
-					  					</c:choose>
+			  							<span class="pe-sm-4">
+			  								<fmt:formatNumber value="100000" pattern="###,###"></fmt:formatNumber>
+			  							</span>
 					  				</td>
 					  			</tr>
-					  			<c:if test="${petCount > 1}">
+					  			<c:if test="${training.size() > 1}">
 					  				<tr class="table-default align-middle underline-out"  height="50px">
-						  				<td class="title"  width="45%"><span class="ps-sm-4">추가 요금(+${(petCount-1)*10000})</span></td>
-							  				<td width="55%" class="content">
-								  				<span class="pe-sm-4">
-								  					<fmt:formatNumber value="${(petCount-1)*10000}" pattern="###,###"></fmt:formatNumber>
-								  				</span>
-							  				</td>
+						  				<td class="title "  width="45%">
+						  					<span class="ps-sm-4">추가 요금(+</span>
+						  					<span class="plus-price"></span>)
+						  				</td>
+						  				<td width="55%" class="content">
+							  				<span class="pe-sm-4 plus-price">
+							  					<fmt:formatNumber value="" pattern="###,###"></fmt:formatNumber>
+							  				</span>
+						  				</td>
 					  				</tr>
 					  			</c:if>
 					  			<tr class="table-default align-middle underline-out"  height="50px">
@@ -280,7 +322,7 @@
 					  				<td class="text-start pb-sm-3"  colspan="2">
 					  					<span class="ps-sm-4">
 					  						환불 완료
-					  						<fmt:formatDate value="${training.trainingChangeDate}" pattern="(yy.MM.dd)"/>
+					  						<fmt:formatDate value="${training[0].trainingChangeDate}" pattern="(yy.MM.dd)"/>
 					  					</span>
 					  				</td>
 					  			</tr>
@@ -295,12 +337,13 @@
 						<a class="btn btn-blue" href="${pageContext.request.contextPath}/mypage/training">목록</a>
 					</div>
 				</div>
-				
 			</div>
 		</div>
-
 	</div>
-
+	
+	<!-- 정보 출력을 위한 hidden값 -->
+	<input type="hidden" name="petName" value="${training[0].trainingDetailPetName}">
+	<input type="hidden" name="cnt" value="${training.size()}">
 </body>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
