@@ -98,5 +98,23 @@ public class MemberDaoImpl implements MemberDao {
     public boolean profileEdit(MemberDto memberDto) {
     	return sqlSession.update("member.profileEdit",memberDto)>0;
     }
+     
+     //회원 프로필 이미지 파일 번호 수정
+     @Override
+    public boolean profileImgEdit(MemberImgDto memberImgDto) {
+    	return sqlSession.update("member.profileImgEdit",memberImgDto)>0;
+    }
+
+     //탈퇴 회원 처리
+	@Override
+	public boolean goodbye(String memberId) {
+		return sqlSession.update("member.goodbye",memberId)>0;
+	}
+	
+	//훈련사 전환여부
+	@Override
+	public MemberDto trainerConfirm(String memberId) {
+		return sqlSession.selectOne("member.trainerConfirm",memberId);
+	}
 
 }

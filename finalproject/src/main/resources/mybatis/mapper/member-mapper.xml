@@ -63,8 +63,30 @@
 
 	<!-- 프로필 정보수정 -->
 	<update id="profileEdit" parameterType="MemberDto">
-		
+		update member set member_name=#{memberName}, member_email=#{memberEmail}, 
+		member_tel=#{memberTel}, member_post=#{memberPost}, 
+		member_base_address=#{memberBaseAddress}, member_detail_address=#{memberDetailAddress} 
+		where member_id=#{memberId}
 	</update>
+	
+	<!-- 회원, 첨부파일 연결테이블 수정 -->
+	<update id="profileImgEdit" parameterType="memberImgDto">
+		update member_img set files_no=#{filesNo} where member_id=#{memberId}
+	</update>
+	
+	<!-- 탈퇴시 회원 탈퇴 여부, 회원 탈퇴 일시 변경 -->
+	<update id="goodbye" parameterType="String">
+		update member set 
+		member_goodbye='Y', member_goodbyedate=sysdate 
+		where member_id=#{memberId}
+	</update>
+	
+	<!-- 훈련사 전환 확인 -->
+	<select id="trainerConfirm" parameterType="String" resultType="MemberDto">
+		select * from member
+		where member_status='Y' and member_id=#{memberId}
+	</select>
+	
 	
 	
 </mapper>

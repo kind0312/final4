@@ -52,7 +52,7 @@ height: 200px;
         <div class="content">
             <div class="box">
                 <div class="imgbox">
-                    <img src="${pageContext.request.contextPath}/image/kang.png" class="img0">
+                    <img src="http://localhost:8888/download/${list.filesNo}" class="img0">
                 </div>
                 <div class="textbox">
                     <h3>${list.getTrainerProfile()}</h3>

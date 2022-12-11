@@ -49,6 +49,11 @@
 		$(".end-btn").click(function(){
 			endClick();
 		});
+		
+		//회원모드로 전환 이벤트
+		$(".mode-change").click(function(){
+			location.href="${pageContext.request.contextPath}/";
+		});
 
 	function ingClick(){
 		//버튼 색상 변경
@@ -70,30 +75,6 @@
 		$(".training-ing").children().hide();
 	}
 	
-	//훈련사 전환 이벤트
-	$(".trainer-change").click(function(e){
-		e.preventDefault();
-		$("#change-modal").modal('hide');
-		//1. 회원의 훈련사 여부 비동기로 확인
-		//2. y를 반환할 경우 훈련사 메인화면으로 이동
-		//3. n을 반환할 경우 훈련사 전환이 불가능한 회원입니다. 라는 문구 모달로 출력
-		var memberId = $("[name=memberId]").val();
-		$.ajax({
-			url:"http://localhost:8888/rest/member/trainer_change/"+memberId,
-			method:"get",
-			data:memberId,
-			success:function(resp){
-				console.log(resp);
-				if(resp=='N'){
-					$("#change-modal").modal('show');
-				}else if(resp=='Y'){
-					location.href="${pageContext.request.contextPath}/trainer/main";
-					$("#change-modal").modal('hide');
-				}
-			}
-		});
-	});	
-		
 		
 	});
 </script>
@@ -101,32 +82,23 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-expand-lg-re navbar-dark bg-blue mypage-top-nav">
 	  <div class="container-fluid">
-	    <a class="navbar-brand-re footer-link" href="${pageContext.request.contextPath}/mypage/training">마이페이지</a>
+	    <a class="navbar-brand-re footer-link" href="${pageContext.request.contextPath}/trainer/mypage_reservation">마이페이지</a>
 	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 	      <span class="navbar-toggler-icon"></span>
 	    </button>
 	    <div class="collapse navbar-collapse justify-content-end" id="navbarColor01">
 	      <ul class="navbar-nav me-0">
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" style="color:white;" href="${pageContext.request.contextPath}/mypage/training">예약확인</a>
+	          <a class="nav-link mypage-nav" style="color:white;" href="${pageContext.request.contextPath}/trainer/mypage_reservation">예약확인</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/pet">반려동물</a>
+	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/trainer/mypage_profile">프로필관리</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/point">포인트</a>
+	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">정산관리</a>
 	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">찜관리</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">후기</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/profile">정보수정</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link mypage-nav trainer-change" href="#" data-bs-toggle="modal" data-bs-target="#change-modal">훈련사로 전환</a>
+	        <li>
+	          <a class="nav-link mypage-nav" href="#" data-bs-toggle="modal" data-bs-target="#change-modal">회원모드로 전환</a>
 	        </li>
      	 </ul>
     	</div>
@@ -138,28 +110,28 @@
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-body">
-	        훈련사 전환이 불가능한 회원입니다.
+	        회원 모드로 전환하시겠습니까?
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-yellow" data-bs-dismiss="modal">확인</button>
+	        <button type="button" class="btn btn-yellow mode-change" data-bs-dismiss="modal">확인</button>
 	      </div>
 	    </div>
 	  </div>
 	</div>
-	
+	테스트 출력 : ${ingList}
 	<div class="container-fluid">
         <div class="row mt-80">
-            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
+            <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4 mt-4">
                  <div class="text-center">
                  	<button class="training-btn ing-btn">진행 예약</button>
                  	<button class="training-btn end-btn">지난 예약</button>
                  </div>
             </div>
         </div>
-
+ 
       	<!-- 진행 예약 화면 -->	
         <div class="row mt-8 training-ing">
-            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
+            <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4 mt-4">
                   	<c:if test="${ingList.size()==0}">
 		                 <table class="table table-hover training-table text-center">
 		                 	<tbody>
@@ -171,26 +143,21 @@
 			      	</c:if>
                  <table class="table table-hover training-table text-center">
                  	<tbody>
+                 		<tr>
+                 			<th>이름</th>
+                 			<th>지역</th>
+                 			<th>날짜</th>
+                 			<th>시간</th>
+                 			<th colspan="2"></th>
+                 		</tr>
                  		<c:forEach var="ingList" items="${ingList}">
                  			<tr class="table-default align-middle">
-	                 			<td width="30%">
-	                 				<img src="#" class="img-circle" width="100" height="100">
-	                 			</td>
-	                 			<td width="40%">
-	                 				<fmt:formatDate value="${ingList.trainingDate}" pattern="yyyy-MM-dd (E)"/>
-	                 			</td>
-	                 			<td width="30%">
-	                 				<c:choose>
-	                 					<c:when test="${ingList.trainingStatus=='예약대기'}">
-	                 						<a href="${pageContext.request.contextPath}/mypage/training_detail?trainingNo=${ingList.trainingNo}"
-	                 									 class="btn btn-outline-blue training-status">예약대기</a>
-	                 					</c:when>
-	                 					<c:otherwise>
-	                 						<a href="${pageContext.request.contextPath}/mypage/training_detail?trainingNo=${ingList.trainingNo}" 
-	                 									class="btn btn-blue training-status">예약확정</a>
-	                 					</c:otherwise>
-	                 				</c:choose>
-	                 			</td>
+	                 			<td>${ingList.memberName}</td>
+	                 			<td>${ingList.trainingBasicAddress}</td>
+	                 			<td>${ingList.trainingDate}</td>
+	                 			<td>${ingList.trainingStartTime}</td>
+	                 			<td><a href="${pageContext.request.contextPath}/trainer/mypage_reservation?trainingNo=${ingList.trainingNo}" class="btn btn-blue">상세 내역</a></td>
+	                 			<td><a href="#" class="btn btn-yellow">채팅 하기</a></td>
 	                 		</tr>
                  		</c:forEach>
                  	</tbody>
@@ -200,7 +167,7 @@
   
         <!-- 지난 예약 화면 -->
          <div class="row mt-12 training-end">
-            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
+            <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4 mt-4">
            		 <c:if test="${endList.size()==0}">
 		                 <table class="table table-hover training-table text-center">
 		                 	<tbody>
@@ -212,26 +179,22 @@
 			      	</c:if>
                  <table class="table table-hover training-table text-center">
                  	<tbody>
-                 		<c:forEach var="endList" items="${endList}">
+                 		<tr>
+                 			<th>이름</th>
+                 			<th>지역</th>
+                 			<th>날짜</th>
+                 			<th>시간</th>
+                 			<th>수익금</th>
+                 			<th></th>
+                 		</tr>
+                 		<c:forEach var="ingList" items="${endList}">
                  			<tr class="table-default align-middle">
-	                 			<td width="30%">
-	                 				<img src="#" class="img-circle" width="100" height="100">
-	                 			</td>
-	                 			<td width="40%">
-	                 				<fmt:formatDate value="${endList.trainingDate}" pattern="yyyy-MM-dd (E)"/>
-	                 			</td>
-	                 			<td width="30%">
-	                 				<c:choose>
-	                 					<c:when test="${endList.trainingStatus=='예약취소'}">
-	                 						<a href="${pageContext.request.contextPath}/mypage/training_detail?trainingNo=${endList.trainingNo}"
-	                 									 class="btn btn-outline-yellow training-status">예약취소</a>
-	                 					</c:when>
-	                 					<c:otherwise>
-	                 						<a href="${pageContext.request.contextPath}/mypage/training_detail?trainingNo=${endList.trainingNo}" 
-	                 									class="btn btn-yellow training-status">이용완료</a>
-	                 					</c:otherwise>
-	                 				</c:choose>
-	                 			</td>
+	                 			<td>${endList.memberName}</td>
+	                 			<td>${endList.trainingBasicAddress}</td>
+	                 			<td>${endList.trainingDate}</td>
+	                 			<td>${endList.trainingStartTime}</td>
+	                 			<td>${endList.trainingStartTime}</td>
+	                 			<td><a href="${pageContext.request.contextPath}/trainer/mypage_reservation?trainingNo=${endList.trainingNo}" class="btn btn-blue">상세 내역</a></td>
 	                 		</tr>
                  		</c:forEach>
                  	</tbody>

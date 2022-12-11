@@ -61,11 +61,10 @@ public class TrainerDaoImpl implements TrainerDao {
 		
 	}
 
+	//훈련사 한 명 단일조회
 	public TrainerDto selectOnePro(String memberId) {		
 		return sqlSession.selectOne("trainer.selectOnePro", memberId);
 	}
-
-	
 
 
 	@Override

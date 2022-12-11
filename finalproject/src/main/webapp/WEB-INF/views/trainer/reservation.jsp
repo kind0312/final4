@@ -213,12 +213,25 @@ $(function(){
 	      }
 	});
 	
-	//submit 이벤트
+	//폼 보내기 전에 반드시 체크해야 할 것
+	check={
+				// 주소 input창 입력 확인
+				// 날짜와 시간 선택 확인
+				// 반려동물 선택과 메모 입력 확인
+				// 결제금액과 보유포인트 확인(결제금액>보유포인트)
+
+				allValid:function(){
+					return ;
+				}
+	};
+	
+	
+	//form 전송 submit 이벤트
 	$(".form-check").submit(function(e){
 		//처음 화면에서 form 전송 막기
 		e.preventDefault();
 		
-		//목표 : (1)체크박스 개수 확인 후 (2)input창 생성 및 value에 가격 적용
+		//목표 : (1)체크박스 개수 확인 후 (2)input창 생성 및 value에 가격 적용 (나중에 함수로 만들어서 빼는게 좋음!!!)
 		//(1)
 		var cnt = 0;
       	$("[name=trainingDetailPetName]").each(function(){
@@ -232,18 +245,18 @@ $(function(){
       	if(cnt>1){ //수량이 1 이상일 경우
       		for(var i=0; i<cnt; i++){
       			if(i==0){ //value값에 처음만 10만원
-      				var input = $("<input>").attr("type","text").attr("name","purchaseDetailPrice")
+      				var input = $("<input>").attr("type","hidden").attr("name","purchaseDetailPrice")
       				.attr("value","100000");
       				detailPriceTag.append(input);
       			}else{ //나머지는 5만원
-      				var input = $("<input>").attr("type","text").attr("name","purchaseDetailPrice")
+      				var input = $("<input>").attr("type","hidden").attr("name","purchaseDetailPrice")
       				.attr("value","50000");
       				detailPriceTag.append(input);
       			}
       		}
       		
       	}else{ //수량이 1이거나 0일경우(0일 경우 막는 event 추가 생성해야함!!! ex) 반려견 선택해주세요 등 문구출력하는 이벤트)
-      		var input = $("<input>").attr("type","text").attr("name","purchaseDetailPrice")
+      		var input = $("<input>").attr("type","hidden").attr("name","purchaseDetailPrice")
 			.attr("value","100000");
       		detailPriceTag.append(input);
       	}
