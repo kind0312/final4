@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
+import com.kh.finalproject.vo.OneTrainingVO;
 
 @Repository
 public class TrainingDaoImpl implements TrainingDao{
@@ -18,6 +19,12 @@ public class TrainingDaoImpl implements TrainingDao{
 	@Override
 	public boolean statusChange(int trainingNo) {
 		return sqlSession.update("training.statusChange",trainingNo)>0;
+	}
+	
+	//훈련서비스, 서비스상세, 회원 첨부파일 연결테이블 3개 조인 리스트
+	@Override
+	public List<OneTrainingVO> oneTraining(int trainingNo) {
+		return sqlSession.selectList("training.oneTraining",trainingNo);
 	}
 	
 	//훈련서비스 번호로 예약내역 조회

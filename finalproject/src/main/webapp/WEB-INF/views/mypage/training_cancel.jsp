@@ -80,7 +80,18 @@
 					}
 				}
 			});
-		});	
+		});
+		
+		//펫 이름 + 추가 요금 출력
+		var petName = $("[name=petName]").val();
+		var cnt = $("[name=cnt]").val();
+		if(cnt>1){
+			$(".petName").text(petName+" 외 "+(cnt-1)+"마리");
+			$(".plus-price").text((cnt-1)*50000);
+		}else{
+			$(".petName").text(petName);
+			$(".plus-price").text(0);
+		}
 		
 	});
 </script>
@@ -153,8 +164,8 @@
 			  			<tr class="table-default underline-out" height="60px">
 			  				<td class="title pt-sm-3" width="45%"><span class="ps-sm-4">날짜</span></td>
 			  				<td width="55%" class="content pt-sm-3">
-			  					<fmt:formatDate value="${training.trainingDate}" pattern="yyyy-MM-dd (E)"/>
-			  					<span class="pe-sm-4">${training.trainingStartTime}</span>
+			  					<fmt:formatDate value="${training[0].trainingDate}" pattern="yyyy-MM-dd (E)"/>
+			  					<span class="pe-sm-4">${training[0].trainingStartTime}</span>
 			  				</td>
 			  			</tr>
 			  			<tr class="table-default underline-out"  height="50px">
@@ -167,13 +178,13 @@
 			  			</tr>
 			  			<tr class="table-default underline-out"  height="50px">
 			  				<td class="title"  width="45%"><span class="ps-sm-4">반려동물</span></td>
-			  				<td width="55%" class="content"><span class="pe-sm-4">${petName}</span></td>
+			  				<td width="55%" class="content"><span class="pe-sm-4 petName"></span></td>
 			  			</tr>
 			  			<tr class="table-default"  height="70px">
 			  				<td class="title"  width="45%"><span class="ps-sm-4">방문주소</span></td>
 			  				<td width="55%" class="content">
-				  				<p class="pe-sm-4">${training.trainingBasicAddress}</p>
-				  				<p class="pe-sm-4">${training.trainingDetailAddress}</p>
+				  				<p class="pe-sm-4">${training[0].trainingBasicAddress}</p>
+				  				<p class="pe-sm-4">${training[0].trainingDetailAddress}</p>
 			  				</td>
 			  			</tr>
 			  				
@@ -182,29 +193,23 @@
 			  				<td colspan="2" width="45%"><span class="pay-title">환불 내역</span></td>
 			  			</tr>
 			  			<tr class="table-default align-middle underline-out"  height="50px">
-			  				<td class="title"  width="45%"><span class="ps-sm-4">훈련 ${petCount}마리</span></td>
+			  				<td class="title"  width="45%"><span class="ps-sm-4">훈련 ${training.size()}마리</span></td>
 			  				<td width="55%" class="content">
-			  					<c:choose>
-			  						<c:when test="${petCount>1}">
-			  							<span class="pe-sm-4">
-			  								<fmt:formatNumber value="${purchase.trainingPurchasePrice-10000}" pattern="###,###"></fmt:formatNumber>
-			  							</span>
-			  						</c:when>
-			  						<c:otherwise>
-			  							<span class="pe-sm-4">
-			  								<fmt:formatNumber value="${purchase.trainingPurchasePrice}" pattern="###,###"></fmt:formatNumber>
-			  							</span>
-			  						</c:otherwise>
-			  					</c:choose>
+	  							<span class="pe-sm-4">
+	  								<fmt:formatNumber value="100000" pattern="###,###"></fmt:formatNumber>
+	  							</span>
 			  				</td>
 			  			</tr>
-			  			<c:if test="${petCount > 1}">
+			  			<c:if test="${training.size() > 1}">
 			  				<tr class="table-default align-middle underline-out"  height="50px">
-				  				<td class="title"  width="45%"><span class="ps-sm-4">추가 요금(+${(petCount-1)*10000})</span></td>
+				  				<td class="title "  width="45%">
+				  					<span class="ps-sm-4">추가 요금(+</span>
+				  					<span class="plus-price"></span>)
+				  				</td>
 				  				<td width="55%" class="content">
-					  				<span class="pe-sm-4">
-									  	<fmt:formatNumber value="${(petCount-1)*10000}" pattern="###,###"></fmt:formatNumber>
-									</span>
+					  				<span class="pe-sm-4 plus-price">
+					  					<fmt:formatNumber value="" pattern="###,###"></fmt:formatNumber>
+					  				</span>
 				  				</td>
 			  				</tr>
 			  			</c:if>
@@ -228,8 +233,7 @@
 				<form action="/mypage/training_cancel" method="post">
 					<div class="row mt-3">
 						<div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center mt-3">
-							<input type="hidden" name="trainingNo" value="${training.trainingNo}">  
-							<input type="hidden" name="trainingDetailPetName" value="${petName}">
+							<input type="hidden" name="trainingNo" value="${training[0].trainingNo}">  
 							<button type="button" class="btn btn-blue cancel-btn" data-toggle="modal" data-target="#btn-modal">취소</button>
 						</div>
 					</div>
@@ -245,7 +249,7 @@
 					      
 					      <!-- 예약 확정/대기 모달문구 다르게 표시 -->
 					      <c:choose>
-					      	<c:when test="${training.trainingStatus=='예약확정'}">
+					      	<c:when test="${training[0].trainingStatus=='예약확정'}">
 					      		<div class="modal-body">
 						        	<p>예약 확정 상태입니다. 취소하시겠습니까?</p>
 						      	</div>
@@ -268,6 +272,10 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- 정보 출력을 위한 hidden값 -->
+	<input type="hidden" name="petName" value="${training[0].trainingDetailPetName}">
+	<input type="hidden" name="cnt" value="${training.size()}">
 
 </body>
 

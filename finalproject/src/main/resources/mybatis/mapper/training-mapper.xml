@@ -24,6 +24,14 @@
  		select * from training where training_no=#{trainingNo}
  	</select>
  	
+ 	<!-- 훈련서비스 번호로 서비스, 서비스상세, 회원 첨부파일 연결테이블 3개 조인 리스트 -->
+ 	<select id="oneTraining" resultType="OneTrainingVO" parameterType="int">
+ 		select * from training t 
+		inner join training_detail td on t.training_no = td.training_no
+		inner join member_img img on t.member_id = img.member_id
+		where t.training_no=#{trainingNo}
+ 	</select>
+ 	
  	<!-- 진행 예약 리스트 -->
  	<select id="ingList" resultType="TrainingDto" parameterType="String">
  		select * from training 

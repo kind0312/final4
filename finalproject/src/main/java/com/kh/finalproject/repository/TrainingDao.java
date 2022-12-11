@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
+import com.kh.finalproject.vo.OneTrainingVO;
 
 public interface TrainingDao {
 	//등록
@@ -12,6 +13,8 @@ public interface TrainingDao {
 	//상태(예약취소) 변경
 	boolean statusChange(int trainingNo);
 	
+	//테이블 조인 후 예약내역 조회
+	List<OneTrainingVO> oneTraining(int trainingNo);
 	//훈련서비스 번호로 예약내역 조회
 	TrainingDto selectOne(int trainingNo);
 	//진행예약 조회
