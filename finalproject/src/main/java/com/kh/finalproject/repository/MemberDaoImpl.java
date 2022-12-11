@@ -67,4 +67,12 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("member.findFileNo", memberId);
 	}
 
+
+
+     //member_img 테이블 delete
+	@Override
+	public boolean memberImgDelete(String memberId) {		
+		return sqlSession.delete("member.memberImgDelete", memberId) > 0;
+	}
+
 }

@@ -72,6 +72,13 @@
       </select>
 
       
+      <!-- trainer 테이블 member_id로 단일조회 -->
+      <select id="selectOneTrainerNo" parameterType="String" resultType="int">
+        select trainer_no from trainer where member_id = #{memberId}
+      </select>
+      
+      
+      
       <update id="trainerProfileUpdate" parameterType="TrainerDto">
       update trainer set trainer_profile=#{trainerProfile}, trainer_profile_content=#{trainerProfileContent} where trainer_no= #{trainerNo}
       </update>

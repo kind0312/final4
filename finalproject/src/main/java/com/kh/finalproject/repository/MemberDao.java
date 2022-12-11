@@ -35,4 +35,7 @@ public interface MemberDao {
      //회원 프로필 이미지 파일 번호 찾기
 	int findFileNo(String memberId);
 
+	
+	//member_img테이블 delete 메소드
+	boolean memberImgDelete(String memberId);
 }
