@@ -116,22 +116,35 @@ public class PetTrainerController {
 		
 		if(result) {			
 			return "redirect:trainer/mypage_profile";
-		}
-		else {
+		}else {
 			return "redirect:fail";
-			}
 		}
-	
-	
 	}
-	
-	
-	
 	
 //	@RequestMapping("/chat_list")
 //	public String chatlist() {
 //		
 //		return "trainer/chat_list";
 //	}
+	
+	
+	
+	
+	
+	
+	@RequestMapping("/mypage_reservation")
+	public String reservation() {
+		
+		
+		return "trainer/mypage_reservation";
+	}
+	
+	
+}
+	
+	
+	
+	
+
 	
 
