@@ -87,8 +87,20 @@ public class MemberRestController {
 		memberDao.profileImgEdit(imgDto);
 	}
 	
+	//회원 탈퇴 처리
 	@PutMapping("/goodbye/{memberId}")
 	public void goodbye(@PathVariable String memberId) {
 		memberDao.goodbye(memberId);
+	}
+	
+	//훈련사 전환여부 반환
+	@GetMapping("/trainer_change/{memberId}")
+	private String trainerChange(@PathVariable String memberId) {
+		if(memberDao.trainerConfirm(memberId) == null) {
+			return "N"; //일반 회원(훈련사 전환 불가)
+		}
+		else {
+			return "Y"; //훈련사 회원(훈련사 전환 가능)
+		}
 	}
 }

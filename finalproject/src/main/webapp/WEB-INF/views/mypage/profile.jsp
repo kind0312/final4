@@ -310,6 +310,30 @@
 				}
 			});
 		});
+		
+		//훈련사 전환 이벤트
+		$(".trainer-change").click(function(e){
+			e.preventDefault();
+			$("#change-modal").modal('hide');
+			//1. 회원의 훈련사 여부 비동기로 확인
+			//2. y를 반환할 경우 훈련사 메인화면으로 이동
+			//3. n을 반환할 경우 훈련사 전환이 불가능한 회원입니다. 라는 문구 모달로 출력
+			var memberId = $("[name=memberId]").val();
+			$.ajax({
+				url:"http://localhost:8888/rest/member/trainer_change/"+memberId,
+				method:"get",
+				data:memberId,
+				success:function(resp){
+					console.log(resp);
+					if(resp=='N'){
+						$("#change-modal").modal('show');
+					}else if(resp=='Y'){
+						location.href="${pageContext.request.contextPath}/trainer/main";
+						$("#change-modal").modal('hide');
+					}
+				}
+			});
+		});	
 
 	});
 </script>
@@ -342,12 +366,26 @@
 	          <a class="nav-link mypage-nav" style="color:white;" href="${pageContext.request.contextPath}/mypage/profile">정보수정</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">훈련사로 전환</a>
+	          <a class="nav-link mypage-nav trainer-change" href="#" data-bs-toggle="modal" data-bs-target="#change-modal">훈련사로 전환</a>
 	        </li>
      	 </ul>
     	</div>
   	</div>
 </nav>
+
+	<!-- Modal -->
+	<div class="modal fade" id="change-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-body">
+	        훈련사 전환이 불가능한 회원입니다.
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-yellow" data-bs-dismiss="modal">확인</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
 	<div class="container-fluid">
         <div class="row mt-80">

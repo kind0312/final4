@@ -76,8 +76,11 @@
 		where member_id=#{memberId}
 	</update>
 	
-	
-	
+	<!-- 훈련사 전환 확인 -->
+	<select id="trainerConfirm" parameterType="String" resultType="MemberDto">
+		select * from member
+		where member_status='Y' and member_id=#{memberId}
+	</select>
 	
 	
 	
