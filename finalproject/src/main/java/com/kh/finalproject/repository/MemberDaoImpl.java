@@ -88,4 +88,9 @@ public class MemberDaoImpl implements MemberDao {
     	return sqlSession.update("member.profileImgEdit",memberImgDto)>0;
     }
 
+	@Override
+	public boolean goodbye(String memberId) {
+		return sqlSession.update("member.goodbye",memberId)>0;
+	}
+
 }

@@ -69,5 +69,16 @@
 		update member_img set files_no=#{filesNo} where member_id=#{memberId}
 	</update>
 	
+	<!-- 탈퇴시 회원 탈퇴 여부, 회원 탈퇴 일시 변경 -->
+	<update id="goodbye" parameterType="String">
+		update member set 
+		member_goodbye='Y', member_goodbyedate=sysdate 
+		where member_id=#{memberId}
+	</update>
+	
+	
+	
+	
+	
 	
 </mapper>

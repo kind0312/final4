@@ -86,4 +86,9 @@ public class MemberRestController {
 				.build();
 		memberDao.profileImgEdit(imgDto);
 	}
+	
+	@PutMapping("/goodbye/{memberId}")
+	public void goodbye(@PathVariable String memberId) {
+		memberDao.goodbye(memberId);
+	}
 }

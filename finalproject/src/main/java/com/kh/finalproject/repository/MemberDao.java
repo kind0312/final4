@@ -33,5 +33,7 @@ public interface MemberDao {
 	boolean profileEdit(MemberDto memberDto);
      //프로필 첨부파일 수정
 	boolean profileImgEdit(MemberImgDto memberImgDto);
+	//회원 탈퇴시 처리(삭제아님)
+	boolean goodbye(String memberId);
 
 }

@@ -277,14 +277,6 @@
 				memberDetailAddress:memberDetailAddress
 			}
 			
-			console.log(check.allValid());
-			/* console.log(check.memberImgValid);
-			console.log(check.memberNameValid);
-			console.log(check.memberEmailValid);
-			console.log(check.emailConfirmValid);
-			console.log(check.memberTelValid);
-			console.log(check.memberDetailAddressValid); */
-			
 			if(check.allValid()){//수정처리
 				$.ajax({
 					url:"http://localhost:8888/rest/member/profile_edit",
@@ -304,6 +296,19 @@
 					}
 				});
 			}
+		});
+		
+		//탈퇴버튼 이벤트
+		$(".goodbye-confirm").click(function(){
+			var memberId = $("[name=memberId]").val();
+			$.ajax({
+				url:"http://localhost:8888/rest/member/goodbye/"+memberId,
+				method:"put",
+				data:memberId,
+				success:function(resp){
+					location.href="${pageContext.request.contextPath}/member/logout";
+				}
+			});
 		});
 
 	});
@@ -483,62 +488,26 @@
 		            <button type="button" class="btn btn-blue text-center edit-btn">수정</button>
 		            <button type="submit" class="btn btn-blue text-center confirm-btn">확인</button>
 		            <a href="${pageContext.request.contextPath}/mypage/profile" class="btn btn-yellow cancel-btn">취소</a>
-					<button type="button" class="btn btn-yellow delete-btn">탈퇴</button>
+					<button type="button" class="btn btn-yellow delete-btn" data-bs-toggle="modal" data-bs-target="#goodbye-modal">탈퇴</button>
 				</div>
 			</div>
 		</form>
-	</div>			
-					<%-- <!-- 새로운 input창-->
-					<table class="table mb-4 new-table">
-						<tbody>
-							<tr class="table-default"><td colspan="2"></td></tr>
-							<tr class="table-default underline-out" height="65px">
-								<th class="ps-sm-4">이름</th>
-								<td class="ps-sm-4">
-									<input type="text" class="underline form-control" value="${member.memberName}" required>
-									<div class="invalid-feedback">이름은 2~7자 한글 또는 대 소문자 작성하세요</div>
-								</td>
-							</tr>
-							<tr class="table-default underline-out" height="65px">
-								<th class="ps-sm-4">이메일</th>
-								<td class="ps-sm-4">
-									<input type="text" class="underline form-control w-75" value="${member.memberEmail}" required>
-									<button class="btn btn-outline-blue w-25" type="button" id="email-button">인증코드발송</button>
-									<div class="invalid-feedback">형식에 맞게 입력해주세요</div>
-								</td>
-							</tr>
-							<tr class="table-default underline-out" height="65px">
-								<th class="ps-sm-4">휴대폰</th>
-								<c:set var="tel" value="${member.memberTel}"></c:set>
-								<td class="ps-sm-4">
-									<input type="text" class="underline form-control" value="${member.memberTel}" required>
-									<div class="invalid-feedback">형식에 맞게 입력해주세요</div>
-								</td>
-							</tr>
-							<tr class="table-default underline-out" height="65px">
-								<th class="ps-sm-4">우편번호</th>
-								<td class="ps-sm-4">
-									<input type="text" class="underline form-control w-75" value="${member.memberPost}" maxlength="6" required>
-									<button class="btn btn-outline-blue w-25" type="button" id="address-button">주소검색</button>
-									<div class="invalid-feedback">주소 검색을 클릭해주세요</div>
-								</td>
-							</tr>
-							<tr class="table-default underline-out" height="65px">
-								<th class="ps-sm-4">기본주소</th>
-								<td class="ps-sm-4">
-									<input type="text" class="underline form-control" value="${member.memberBaseAddress}" required>
-								</td>
-							</tr>
-							<tr class="table-default" height="65px">
-								<th class="ps-sm-4">상세주소</th>
-								<td class="ps-sm-4">
-									<input type="text" class="underline form-control" value="${member.memberDetailAddress}" required>
-									<div class="invalid-feedback">상세주소를 입력해주세요</div>
-								</td>
-							</tr>
-						</tbody>						
-					</table> --%>
-					<!-- 비동기화 처리 -->
+		
+		<!-- Modal -->
+		<div class="modal fade" id="goodbye-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-body">
+		        정말 탈퇴하시겠습니까?
+		      </div>
+		      <div class="modal-footer">
+		      	<button type="button" class="btn btn-blue goodbye-confirm">확인</button>
+		        <button type="button" class="btn btn-yellow" data-bs-dismiss="modal">취소</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</div>		
 </body>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
