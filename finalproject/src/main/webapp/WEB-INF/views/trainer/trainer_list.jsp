@@ -50,6 +50,7 @@ height: 200px;
 }
     </style>
 <body>
+
     <div class="trainer">    
         <h2>훈련사를 소개합니다</h2>
         <div class="content">
@@ -57,7 +58,7 @@ height: 200px;
             <div class="box">
                 <div class="imgbox">
                 <!-- 이미지 경로 추가 여기 -->
-                    <div class="img_area"><img src="${pageContext.request.contextPath}/image/kang.png" class="img0"></div>
+                    <div class="img_area"><img src="http://localhost:8888/download/${list.filesNo}" class="img0"></div>
                 </div>
                 <div class="textbox">
                     <h2>${list.getMemberName()} 펫시터</h2>
