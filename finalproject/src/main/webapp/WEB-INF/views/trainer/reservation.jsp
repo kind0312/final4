@@ -10,7 +10,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons1.css">
-  	
+  	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset2.css">
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="훈련사 상세" name="title"/>
 </jsp:include>
@@ -358,16 +359,25 @@ $(function(){
                
                
                <br><br><br><br><br><br>
-               <div class="col-md-10 offset-md-1 mt-100 text-center">
-               <h3>결제 화면</h3><br>
-               <h6>보유하신 포인트에서 차감돼요!</h6><br>
-               현재 내 포인트 : <span class="myPoint">${member.memberPoint}</span>P<br>
-               총 결제 포인트 : <span class="total-price">0</span>P<br>
                
-               결제 후 포인트 :<span class="price"></span>P<br>
-               </div>   
-               
-               <button class ="buttontest" type ="submit">신청하기</button>
+               <div class="payment">    
+        <h3>결제화면</h3><br>
+        <span>보유하신 포인트에서 차감돼요!</span>
+        <div class="content">
+            <div class="point nowpoint">
+                <span>현재 내 포인트</span>
+                <span class="myPoint">${member.memberPoint}</span>P
+            </div>
+            <div class="point totalpoint">
+                <span>총 결제 포인트</span>
+                <span class="total-price">0</span>P
+            </div>
+            <div class="point afterpoint">
+                <span>결제 후 포인트</span>
+                <span class="price"></span>P
+            </div>
+        </div>  
+</div>
                
 </form>
             

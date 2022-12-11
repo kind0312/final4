@@ -1,17 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!-- Bootstrap CSS -->
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Bootswatch CDN -->
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.0.2/cosmo/bootstrap.min.css">
-
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
-
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="훈련사 목록" name="title"/>
+	<jsp:param value="훈련사 상세" name="title"/>
 </jsp:include>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset2.css">
+    <title></title>
+</head>
 <!-- jquery를 사용하기 위하여 라이브러리 js 파일을 불러온다-->
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.min.js"></script>
@@ -40,48 +42,48 @@
             });
         });
     </script>
-<style>
-.img0{
+    <style>
+    .img0{
 border-radius: 50%;
 width: 200px;
 height: 200px;
 }
-.btn4{
-border: 1px solid #6c7aef;
-border-radius: 0.5em;
-background-color: #6c7aef;
-font-color: #FFF;
-font-size: 16px;
-font-weight: 700;
-width: 100px;
-height:50px;
-cursor:pointer;
-}rsor:pointer;
-}
-</style>
-<div class="row mt-4">
-<div class="col-md-10 offset-md-1 mt-100 text-center">
-<h1>훈련사를 소개합니다!</h1><br><br>
-
-
-
-<c:forEach var="list" items="${list}">
-<img src="${pageContext.request.contextPath}/image/kang.png"  width="400" height="250" class="img0"><br>
-${list.getMemberName()} 훈련사님<br>
-후기 : ${list.getCnt()}개<br>
-<div class="col-md-10 offset-md-1 text-center">
+    </style>
+<body>
+    <div class="trainer">    
+        <h2>훈련사를 소개합니다</h2>
+        <div class="content">
+        <c:forEach var="list" items="${list}">
+            <div class="box">
+                <div class="imgbox">
+                <!-- 이미지 경로 추가 여기 -->
+                    <div class="img_area"><img src="${pageContext.request.contextPath}/image/kang.png" class="img0"></div>
+                </div>
+                <div class="textbox">
+                    <h2>${list.getMemberName()} 펫시터</h2>
+                    <h3>${list.getTrainerProfile()}</h3>
+                    <div class="review">
+                        <div class="scopebox">
+                            <div class="scope_area">
+                                <a href="javascript:void(0);" class="scope"></a>   
+                                <a href="javascript:void(0);" class="scope"></a>   
+                                <a href="javascript:void(0);" class="scope"></a>   
+                                <a href="javascript:void(0);" class="scope"></a>   
+                                <a href="javascript:void(0);" class="scope"></a>   
+                            </div>
+                            <span>
             <div class="star-score blue" data-max="5" data-rate="${list.getAvg()}" ></div>
-        </div><br>
-소개 : ${list.getTrainerProfile()}<br> 
-<a type="button" href="/trainer/detail?memberId=${list.getMemberId()}&trainerNo=${list.getTrainerNo()}"class="btn btn-blue btn-md">상세보기</a><br> 
-</c:forEach>
-         </div>
-      </div>
-
-
-
-
-
-
-
+        <br></span>
+                        </div>
+                        <span>후기 ${list.getCnt()}개</span>
+                    </div>
+                </div>
+                <a href="/trainer/detail?memberId=${list.getMemberId()}&trainerNo=${list.getTrainerNo()}" class="view">상세 보기</a>
+            </div>
+            </c:forEach>
+        </div>
+        
+    </div>
+</body>
+</html>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
