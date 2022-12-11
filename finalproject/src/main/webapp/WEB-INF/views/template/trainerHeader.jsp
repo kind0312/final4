@@ -316,19 +316,19 @@
 	                    - .active는 활성화된 메뉴(현재 메뉴), 상황에 따라 맞는 메뉴에 추가
 	                -->
 	                <li class="nav-item">
-	                  <a class="nav-link" href="${pageContext.request.contextPath}/#">채팅
+	                  <a class="nav-link" href="${pageContext.request.contextPath}/trainer/main">채팅
 	                    <span class="visually-hidden">(current)</span>
 	                  </a>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link" href="${pageContext.request.contextPath}/#">훈련서비스</a>
+	                  <a class="nav-link" href="${pageContext.request.contextPath}/trainer/main">훈련서비스</a>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link" href="${pageContext.request.contextPath}/#">스케줄</a>
+	                  <a class="nav-link" href="${pageContext.request.contextPath}/trainer/main">스케줄</a>
 	                </li>
 	                <li class="nav-item dropdown">
 	                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" 
-	                  role="button" aria-haspopup="true" aria-expanded="false" href="${pageContext.request.contextPath}/#">마이페이지</a>
+	                  role="button" aria-haspopup="true" aria-expanded="false" href="${pageContext.request.contextPath}/trainer/mypage_reservation">마이페이지</a>
 	                  <div class="dropdown-menu">
 	                    <a class="dropdown-item" href="${pageContext.request.contextPath}/trainer/mypage_reservation">예약확인</a>
 	                    <div class="dropdown-divider"></div><!-- 중간 중간 선으로 구분하는 것-->

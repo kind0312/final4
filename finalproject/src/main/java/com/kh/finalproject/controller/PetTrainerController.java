@@ -11,12 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.entity.MemberImgDto;
@@ -25,8 +21,7 @@ import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.repository.FilesDao;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.TrainerDao;
-
-import lombok.Builder;
+import com.kh.finalproject.repository.TrainingDao;
 
 
 
@@ -42,6 +37,8 @@ public class PetTrainerController {
 	
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private TrainingDao trainingDao;
 	
 	
 	@RequestMapping("/main")
@@ -133,8 +130,13 @@ public class PetTrainerController {
 	
 	
 	@RequestMapping("/mypage_reservation")
-	public String reservation() {
+	public String reservation(HttpSession session, Model model) {
+		//String memberId = (String)session.getAttribute(SessionConstant.ID);
+		String memberId = "trainer3";
+		TrainerDto dto = trainerDao.selectOnePro(memberId);
+		int trainerNo = dto.getTrainerNo();
 		
+		model.addAttribute("ingList", trainingDao.ingList(trainerNo));
 		
 		return "trainer/mypage_reservation";
 	}

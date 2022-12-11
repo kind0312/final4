@@ -32,18 +32,26 @@
 		where t.training_no=#{trainingNo}
  	</select>
  	
- 	<!-- 진행 예약 리스트 -->
+ 	<!-- 진행 예약 리스트(회원 기준) -->
  	<select id="ingList" resultType="TrainingDto" parameterType="String">
  		select * from training 
  		where member_id=#{memberId} 
 		and (training_status='예약대기' or training_status='예약확정')
  	</select>
  	
- 	<!-- 지난 예약 리스트 -->
+ 	<!-- 지난 예약 리스트(회원 기준) -->
  	<select id="endList" resultType="TrainingDto" parameterType="String">
  		select * from training 
 		where member_id=#{memberId} 
 		and (training_status='예약취소' or training_status='이용완료')
+ 	</select>
+ 	
+ 	<!-- 진행 예약 리스트(훈련사 기준) -->
+ 	<select id="reservationIngList" resultType="ReservationIngListVO" parameterType="int">
+ 		select m.member_name, t.*, li.trainer_no from member m 
+		inner join training t on m.member_id=t.member_id
+		inner join linked_list li on t.training_no=li.training_no
+		where li.trainer_no=#{trainerNo} and t.training_status='예약확정'
  	</select>
  	
  	<!-- 훈련서비스 받은 펫 마리수 -->

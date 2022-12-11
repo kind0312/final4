@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.vo.OneTrainingVO;
+import com.kh.finalproject.vo.ReservationIngListVO;
 
 @Repository
 public class TrainingDaoImpl implements TrainingDao{
@@ -33,16 +34,22 @@ public class TrainingDaoImpl implements TrainingDao{
 		return sqlSession.selectOne("training.selectone",trainingNo);
 	}
 	
-	//진행예약 조회
+	//진행예약 조회(회원기준)
 	@Override
 	public List<TrainingDto> ingList(String memberId) {
 		return sqlSession.selectList("training.ingList",memberId);
 	}
 	
-	//지난예약 조회
+	//지난예약 조회(회원기준)
 	@Override
 	public List<TrainingDto> endList(String memberId) {
 		return sqlSession.selectList("training.endList",memberId);
+	}
+	
+	//진행예약 조회(훈련사 기준)
+	@Override
+	public List<ReservationIngListVO> ingList(int trainerNo) {
+		return sqlSession.selectList("training.reservationIngList",trainerNo);
 	}
 	
 	//훈련서비스 받은 펫 마리 수 조회
@@ -65,14 +72,11 @@ public class TrainingDaoImpl implements TrainingDao{
 
 	@Override
 	public void insert(TrainingDto dto) {
-		
 		 sqlSession.insert("training.insert",dto);
-		
 	}
 
 	@Override
 	public int sequence() {
-		
 		return sqlSession.selectOne("training.sequence");
 	}
 
@@ -81,5 +85,6 @@ public class TrainingDaoImpl implements TrainingDao{
 		sqlSession.insert("training.detailInsert", dto);
 		
 	}
+
 	
 }

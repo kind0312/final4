@@ -37,19 +37,13 @@
       <select id="selectReviewOne" parameterType="int" resultType="ReviewVO">
       select * from review where trainer_no = #{trainerNo}
       </select>
-      
-      
-      
-      
-      
+
       <insert id="trainerProfileInsert" parameterType="TrainerDto"> 
       insert into trainer
 		(trainer_no, member_id, apply_no, trainer_profile, trainer_profile_content)
 		values(trainer_seq.nextval, '#{memberId}', #{applyNo},  #{trainerProfile},
 		#{trainerProfileContent})
       </insert>
-      
-
       
         <!--parameterType="map" 관리자 훈련사 검색 --> 
         <select id="search"  parameterType="map" resultType="TrainerListVO">
@@ -69,7 +63,7 @@
         </select>    
         
 
-      <!-- 트레이너 자기소개 단일조회 -->
+      <!-- 훈련사 단일조회 -->
       <select id="selectOnePro" parameterType="String" resultType="TrainerDto">
       select * from trainer where member_id = #{memberId}
       </select>
