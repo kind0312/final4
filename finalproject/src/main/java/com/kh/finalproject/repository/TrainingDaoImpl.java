@@ -110,6 +110,12 @@ public class TrainingDaoImpl implements TrainingDao{
 		return sqlSession.update("training.statusChange2",trainingNo)>0;
 	}
 	
+	//훈련상태변경- 이용완료
+	@Override
+	public boolean statusChange3(int trainingNo) {
+		return sqlSession.update("training.statusChange3",trainingNo)>0;
+	}
+	
 	//훈련사 request_detail 펫 리스트 조회
 	@Override
 	public List<PetDetailListVO> requestDetail(int trainingNo) {		

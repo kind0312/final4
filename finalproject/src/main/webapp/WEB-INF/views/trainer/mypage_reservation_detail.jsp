@@ -57,6 +57,11 @@
 		//완료 버튼 이벤트(해당 훈련서비스 상태를 이용완료로 변경처리)
 		$(".change-btn").click(function(){
 			
+			
+			//버튼 목록만 출력, 상태 이용완료로 변경
+			//$(".change-btn").hide();
+			//$(".status").text('이용완료');
+			
 		});
 		
 		//1000단위 콤마찍기
@@ -113,7 +118,6 @@
 	</div>
 
 	<div class="container-fluid">
-
         <div class="row mt-80">
             <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4 mt-4">
                 <div class="text-center">
@@ -133,7 +137,7 @@
 								<tr class="table-default align-middle">
 									<td class="py-3">
 										<div>
-					  						<img src="http://localhost:8888/download/${detail[0].filesNo}" class="img-circle" width="100" height="100">
+					  						<img src="http://localhost:8888/download/${detail[0].filesNo}" class="img-circle" width="180" height="180">
 					  					</div>
 					  					<div class="mt-3">
 					  						<span>${detail[0].petName}(${detail[0].petGender}/${detail[0].petWeight}kg)</span>
@@ -151,7 +155,7 @@
 										 	<div class="carousel-inner">
 										 		<div class="carousel-item active">
 										 			<div class="">
-										 				<img src="http://localhost:8888/download/${detail[0].filesNo}" class="img-circle" width="200" height="200" alt="반려동물 사진">
+										 				<img src="http://localhost:8888/download/${detail[0].filesNo}" class="img-circle" width="180" height="180" alt="반려동물 사진">
 										 			</div>
 											   		<div class="carousel-caption">
 												        <h6 style="color:white;">${detail[0].petName}(${detail[0].petGender}/${detail[0].petWeight}kg)</h6>
@@ -161,7 +165,7 @@
 									    		<c:forEach var="detail" begin="1" items="${detail}">
 											    	<div class="carousel-item">
 											    		<div class="">
-											    			<img src="http://localhost:8888/download/${detail.filesNo}" class="img-circle" width="200" height="200" alt="반려동물 사진">
+											    			<img src="http://localhost:8888/download/${detail.filesNo}" class="img-circle" width="180" height="180" alt="반려동물 사진">
 											    		</div>
 											    		<div class="carousel-caption">
 													        <h6 style="color:white;">${detail.petName}(${detail.petGender}세/${detail.petWeight}kg)</h6>
@@ -183,7 +187,6 @@
 								</tr>
 							</c:otherwise>
 						</c:choose>
-						
 					</tbody>
 				</table>	
 				
@@ -196,6 +199,17 @@
 							<td>${detail[0].memberName}</td>
 						</tr>
 						<tr class="table-default align-middle underline-out">
+							<th>반려동물(총 ${detail.size()}마리)</th>
+							<c:choose>
+								<c:when test="${detail.size()>1}">
+									<td>${detail[0].petName} 외 ${detail.size()-1}마리</td>
+								</c:when>
+								<c:otherwise>
+									<td>${detail[0].petName}</td>
+								</c:otherwise>
+							</c:choose>
+						</tr>
+						<tr class="table-default align-middle underline-out">
 							<th>주소</th>
 							<td>${detail[0].trainingBasicAddress} ${detail[0].trainingDetailAddress}</td>
 						</tr>	
@@ -203,9 +217,13 @@
 							<th>돌봄날짜</th>
 							<td>${detail[0].trainingDate}</td>
 						</tr>
-						<tr class="table-default align-middle">
+						<tr class="table-default align-middle underline-out">
 							<th>방문시간</th>
 							<td>${detail[0].trainingStartTime}</td>
+						</tr>
+						<tr class="table-default align-middle">
+							<th>상태</th>
+							<td><span class="status">${detail[0].trainingStatus}</span></td>
 						</tr>
 					</tbody>
 				</table>		
@@ -256,8 +274,7 @@
 							</tr>
 						</tbody>
 					</table>
-					
-					
+
 				</div>
 			</div>
 		</c:if>
@@ -273,8 +290,8 @@
 			</div>
 		</div>
 		
-		<!-- 금액 계산을 위한 데이터 준비 -->
-        <input type="hidden" name="trainingPurchasePrice" value="${detail[0].trainingPurchasePrice}">
+		<!-- 비동기화를 위한 훈련번호 -->
+		<input type="hidden" name="trainingNo" value="${detail[0].trainingNo}">
     </div>
 </body>
 

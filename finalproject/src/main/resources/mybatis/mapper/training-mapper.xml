@@ -129,6 +129,11 @@
  		update training set training_status='예약확정', training_changedate=sysdate where training_no=#{trainingNo}
  	</update>
  	
+ 	<!-- 예약상태 > 이용완료 변경 -->
+ 	<update id="statusChange3" parameterType="int">
+ 		update training set training_status='이용완료', training_changedate=sysdate where training_no=#{trainingNo}
+ 	</update>
+ 	
  	<!-- request detail 펫 정보 -->
  	<select id="requestDetailPetList" parameterType="int" resultType="PetDetailListVO">
  		select p.*, img.files_no from training t 

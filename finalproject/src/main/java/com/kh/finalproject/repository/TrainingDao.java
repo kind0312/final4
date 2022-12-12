@@ -20,6 +20,8 @@ public interface TrainingDao {
 	boolean statusChange(int trainingNo);
 	//상태(예약확정) 변경
 	boolean statusChange2(int trainingNo);
+	//상태(이용완료) 변경
+	boolean statusChange3(int trainingNo);
 	
 	
 	//테이블 조인 후 예약내역 조회
