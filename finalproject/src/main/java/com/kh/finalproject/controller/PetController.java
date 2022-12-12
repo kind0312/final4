@@ -35,7 +35,9 @@ public class PetController {
 	}
 	
 	@RequestMapping("/pet_insert")
-	public String insert() {
+	public String insert(HttpSession session, Model model) {
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("memberId", memberId);
 		return "mypage/pet_insert";
 	}
 	

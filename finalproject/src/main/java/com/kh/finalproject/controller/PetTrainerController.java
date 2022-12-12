@@ -53,7 +53,10 @@ public class PetTrainerController {
 
 	@RequestMapping("/main")
 	public String main(HttpSession session) {
-
+		//훈련사 번호 세션에 저장
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		int trainerNo = trainerDao.selectOneTrainerNo(memberId);
+		session.setAttribute(SessionConstant.trainingNo, trainerNo);
 		return "trainer/main";
 	}
 	

@@ -61,11 +61,6 @@ public class MemberController {
 		boolean login = memberDao.login(memberDto);
 		if(login) {
 			session.setAttribute(SessionConstant.ID, memberDto.getMemberId());
-			//훈련사 번호 세션에 저장
-			String memberId = (String)session.getAttribute(SessionConstant.ID);
-			int trainerNo = trainerDao.selectOneTrainerNo(memberId);
-			session.setAttribute(SessionConstant.trainingNo, trainerNo);
-			
 //			//로그인 시간을 갱신시키는 작업
 //			memberDao.updateLoginTime(findDto.getMemberId());
 			
