@@ -191,6 +191,12 @@ public class PetTrainerController {
 		return "trainer/mypage_reservation";
 	}
 	
+	@RequestMapping("/mypage_reservation_detail")
+	public String reservationDetail(@RequestParam int trainingNo, Model model) {
+		model.addAttribute("detail", trainingDao.detailList(trainingNo));
+		return "trainer/mypage_reservation_detail";
+	}
+	 
 	
 	
 	//로그아웃 누를 경우 세션값 제거하기
