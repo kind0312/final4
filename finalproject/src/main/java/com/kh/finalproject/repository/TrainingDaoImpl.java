@@ -1,5 +1,6 @@
 package com.kh.finalproject.repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -13,6 +14,7 @@ import com.kh.finalproject.vo.PetDetailListVO;
 
 import com.kh.finalproject.vo.OneTrainingVO;
 import com.kh.finalproject.vo.ReservationIngListVO;
+import com.kh.finalproject.vo.TrainingRequestListVO;
 
 
 @Repository
@@ -101,6 +103,16 @@ public class TrainingDaoImpl implements TrainingDao{
 	@Override
 	public List<PetDetailListVO> requestDetail(int trainingNo) {		
 		return sqlSession.selectList("training.requestDetailPetList", trainingNo);
+	}
+
+	@Override
+	public List<TrainingRequestListVO> requestList(int trainerNo) {		
+		return sqlSession.selectList("training.requestList", trainerNo);
+	}
+
+	@Override
+	public List<TrainingDto> checkRequest(Date requestDate) {		
+		return sqlSession.selectList("training.checkRequest", requestDate);
 	}
 	
 }

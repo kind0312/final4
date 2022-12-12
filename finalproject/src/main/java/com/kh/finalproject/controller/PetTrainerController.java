@@ -1,7 +1,8 @@
 package com.kh.finalproject.controller;
 
 
-import java.util.ArrayList;
+import java.sql.Date;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -28,6 +29,7 @@ import com.kh.finalproject.repository.TrainerDao;
 import com.kh.finalproject.repository.TrainingDao;
 
 import com.kh.finalproject.vo.PetDetailListVO;
+import com.kh.finalproject.vo.TrainingRequestListVO;
 
 import lombok.Builder;
 
@@ -68,11 +70,11 @@ public class PetTrainerController {
 		String memberId = (String) session.getAttribute(SessionConstant.ID);	
 		int trainerNo = trainerDao.selectOneTrainerNo(memberId); // trainerNo를 찾아옴
 		
-		System.out.println("트레이너 번호 : " + trainerNo);
-		
+		System.out.println("트레이너 번호 : " + trainerNo);	
 				
-		List<TrainingDto> list = trainerDao.requestList(trainerNo);  //예약 요청 리스트
+		List<TrainingRequestListVO> list = trainingDao.requestList(trainerNo);
 		model.addAttribute("requestList", list);		
+		
 		return "trainer/request_list";
 	}
 	
@@ -95,8 +97,14 @@ public class PetTrainerController {
 	public String approve(@RequestParam int trainingNo) {
 		//Dao에 training 테이블의 status 상태 수정update 
 		//Dao에 상태수정 날짜 sysdate 들어가게 
-		Boolean result = trainingDao.statusChange2(trainingNo);		
-		if(!result) {
+		TrainingDto dto = trainingDao.selectOne(trainingNo);
+		Date requestDate = dto.getTrainingDate(); //해당 trainingNo의 훈련 요청 날짜를 구함
+		
+		List<TrainingDto> list = trainingDao.checkRequest(requestDate); //훈련날짜에 확정된 예약이 있는지 검색 	
+				
+		Boolean result = trainingDao.statusChange2(trainingNo);	//status 상태를 예약확정으로 바꾸는 메소드
+		
+		if(!result || list.size() > 0) { //이거 꼭 확인하기 로그인 안돼서 테스트 못함
 			return "trainer/training_disable"; //예약승인 불가 - 승인 불가한 경우 코드 넣어야함
 		}		
 		return "trainer/training_approve"; //예약승인 성공
@@ -107,12 +115,6 @@ public class PetTrainerController {
 		trainingDao.statusChange(trainingNo); // 상태를 -> 예약취소로 변경
 		return "trainer/training_reject"; //예약거절(승인취소)
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 	

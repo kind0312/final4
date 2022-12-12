@@ -1,5 +1,6 @@
 package com.kh.finalproject.repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.kh.finalproject.entity.TrainingDetailDto;
@@ -9,6 +10,7 @@ import com.kh.finalproject.vo.PetDetailListVO;
 
 import com.kh.finalproject.vo.OneTrainingVO;
 import com.kh.finalproject.vo.ReservationIngListVO;
+import com.kh.finalproject.vo.TrainingRequestListVO;
 
 
 public interface TrainingDao {
@@ -51,5 +53,11 @@ public interface TrainingDao {
 	
 	//request_training 디테일 내역
 	List<PetDetailListVO> requestDetail(int trainerNo);
+	
+	//request_training list
+	List<TrainingRequestListVO> requestList(int trainerNo);
+	
+	//훈련요청날짜에 확정된 요청이 있는지
+	List<TrainingDto> checkRequest(Date requestDate);
 	
 }

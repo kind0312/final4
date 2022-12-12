@@ -107,13 +107,35 @@
  		update training set training_status='예약확정', training_changedate=sysdate where training_no=#{trainingNo}
  	</update>
  	
- 	<!-- request list detail 펫 정보 -->
+ 	<!-- request detail 펫 정보 -->
  	<select id="requestDetailPetList" parameterType="int" resultType="PetDetailListVO">
  		select p.*, img.files_no from training t 
 		inner join training_detail td on t.training_no=td.training_no
 		inner join pet p on td.training_detail_pet_name=p.pet_name
 		inner join pet_img img on p.pet_no = img.pet_no
 		inner join linked_list list on td.training_no=list.training_no where training_no=#{trainingNo}
+ 	</select>
+ 	
+ 	<!-- request list 훈련요청리스트(훈련사) -->
+ 	<select id="requestList" parameterType="int" resultType="TrainingRequestListVO">
+ 	select * 
+	from
+	(
+	select t.training_no,t.member_id,t.training_date,t.training_starttime,t.training_basic_address,p.pet_no,p.pet_name,img.files_no
+	 ,ROW_NUMBER() OVER (PARTITION BY t.training_no ORDER BY p.pet_no) AS emp_no 
+	from training t 
+	inner join training_detail td on t.training_no=td.training_no
+	inner join pet p on td.training_detail_pet_name=p.pet_name
+	inner join pet_img img on p.pet_no = img.pet_no
+	inner join linked_list list on td.training_no=list.training_no where trainer_no=#{trainerNo} and t.training_status='예약대기'
+	)
+	WHERE emp_no = 1;
+ 	</select>
+ 	
+ 	
+ 	<!-- 훈련요청 날짜에 확정된 예약이 있는지 확인 -->
+ 	<select id="checkRequest" parameterType="Date" resultType="TrainingDto">
+ 	select * from training where training_status='예약확정' and training_date=#{requestDate}
  	</select>
   	
   
