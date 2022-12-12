@@ -25,8 +25,10 @@ public class MemberController {
 
 	@Autowired
 	private MemberDao memberDao;
+	
 	@Autowired
 	private FilesDao filesDao;
+	
 	@Autowired
 	private TrainerDao trainerDao;
 	
@@ -142,5 +144,11 @@ public class MemberController {
 	@GetMapping("/change_memberpw_success")
 	public String changeMemberPwSuccess() {
 		return "member/change_memberpw_success";
+	}
+	
+	//훈련사 지원
+	@GetMapping("/apply")
+	public String apply() {
+		return "member/apply";
 	}
 }
