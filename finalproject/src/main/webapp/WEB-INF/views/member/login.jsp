@@ -4,14 +4,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="CareRegistration" name="title"/>
+	<jsp:param value="CareLogin" name="title"/>
 </jsp:include>
+
 <body>
 
-	<div class="container-fluid">
+	<div class="container-fluid" style="height:100%;">
 	<form action="login" method="post" autocomplete="off">
-		<div class="row mt-4">
-			<div class="col-md-10 offset-md-1 mt-150 text-center">
+		<div class="row text-center mt-4">
+			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-150">
 				<h1>로그인</h1>
 			</div>
 		</div>
@@ -34,11 +35,11 @@
 		<div class="row mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
 			<h6>
-			<a href="#" style="color:black;">
+			<a href="${pageContext.request.contextPath}/member/find_memberid" style="color:black;">
 			아이디 찾기
 			</a>
 			&nbsp;&nbsp;|&nbsp;&nbsp;
-			<a href="#" style="color:black;">
+			<a href="${pageContext.request.contextPath}/member/find_memberpw" style="color:black;">
 			비밀번호 찾기
 			</a>
 			</h6>
@@ -51,7 +52,7 @@
 		</div>
 		<div class="row mt-4 mb-5">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
-			<a href="../member/insert" class="btn btn-yellow btn-md">회원가입</a>
+			<a href="${pageContext.request.contextPath}/member/insert" class="btn btn-yellow btn-md">회원가입</a>
 			</div>
 		</div>
 	</div>

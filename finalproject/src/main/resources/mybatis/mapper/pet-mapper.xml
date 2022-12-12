@@ -62,5 +62,6 @@
 		select files_no from pet_img where pet_no=#{petNo}
 	</select>
 	
+
 	
 </mapper>

@@ -8,7 +8,6 @@
 </jsp:include>
 
 <style>
-	.pet-table>thead,
 	.pet-table>tbody{
 		height:130px;
 	}
@@ -29,11 +28,37 @@
     	background-color:#81BDF1;
     	overflow: hidden;
 	}
+	.pet-table {
+	    border-top:1px solid rgba(0, 0, 0, 0.1);
+	    height:130px;
+	}
 </style>
 
 <script>
 	$(function(){
-		
+		//훈련사 전환 이벤트
+		$(".trainer-change").click(function(e){
+			e.preventDefault();
+			$("#change-modal").modal('hide');
+			//1. 회원의 훈련사 여부 비동기로 확인
+			//2. y를 반환할 경우 훈련사 메인화면으로 이동
+			//3. n을 반환할 경우 훈련사 전환이 불가능한 회원입니다. 라는 문구 모달로 출력
+			var memberId = $("[name=memberId]").val();
+			$.ajax({
+				url:"http://localhost:8888/rest/member/trainer_change/"+memberId,
+				method:"get",
+				data:memberId,
+				success:function(resp){
+					console.log(resp);
+					if(resp=='N'){
+						$("#change-modal").modal('show');
+					}else if(resp=='Y'){
+						location.href="${pageContext.request.contextPath}/trainer/main";
+						$("#change-modal").modal('hide');
+					}
+				}
+			});
+		});	
 	});
 </script>
 
@@ -62,15 +87,31 @@
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">후기</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">정보수정</a>
+	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/profile">정보수정</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">펫시터로 전환</a>
+	          <a class="nav-link mypage-nav trainer-change" href="#" data-bs-toggle="modal" data-bs-target="#change-modal">훈련사로 전환</a>
 	        </li>
      	 </ul>
     	</div>
   	</div>
 </nav>
+
+	<!-- Modal -->
+	<div class="modal fade" id="change-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-body">
+	        훈련사 전환이 불가능한 회원입니다.
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-yellow" data-bs-dismiss="modal">확인</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- 비동기화를 위한 데이터 -->
+	<input type="hidden" name="memberId" value="${memberId}">
 
 	<div class="container-fluid">
         <div class="row mt-80 mb-3">
@@ -83,30 +124,20 @@
             <div class="col-md-6 offset-md-3">   
                  <table class="table table-hover pet-table text-center">
                  		<thead>
-                 			<c:choose>
-                 				<c:when test="${pet.size()==0}">
-									<tr class="table-default">
-		                 				<th scope="col" colspan="3" height="130px">내역이 존재하지 않습니다!</th>                					
-			                 		</tr>
-                 				</c:when>
-                 				<c:otherwise>
-                 					<c:forEach var="pet" items="${pet}">
-		                 				<tr class="table-default align-middle">
-			                 				<th width="30%">
-			                 					<img src="http://localhost:8888/download/${pet.filesNo}" class="img-circle" width="100" height="100">
-			                 				</th>
-			                 				<th width="40%">
-			                 					<p class="name-font">${pet.petName}</p>
-			                 					<p class="gender-font">${pet.petType} / ${pet.petGender} / ${pet.petWeight}kg</p>
-			                 				</th>
-			                 				<th width="30%">
-			                 					<a href="${pageContext.request.contextPath}/mypage/pet_detail?petNo=${pet.petNo}" class="btn btn-blue">상세</a>
-			                 				</th>
-			                 			</tr>
-		                 			</c:forEach>
-                 				</c:otherwise>
-                 			</c:choose>
-                 			
+              				<c:forEach var="pet" items="${pet}">
+                				<tr class="table-default align-middle">
+	                 				<th width="30%">
+	                 					<img src="http://localhost:8888/download/${pet.filesNo}" class="img-circle" width="100" height="100">
+	                 				</th>
+	                 				<th width="40%">
+	                 					<p class="name-font">${pet.petName}</p>
+	                 					<p class="gender-font">${pet.petType} / ${pet.petGender} / ${pet.petWeight}kg</p>
+	                 				</th>
+	                 				<th width="30%">
+	                 					<a href="${pageContext.request.contextPath}/mypage/pet_detail?petNo=${pet.petNo}" class="btn btn-blue">상세</a>
+	                 				</th>
+                 				</tr>
+		                	</c:forEach>
                  		</thead>
 					  	<tbody>
 						    <tr class="table-default align-middle">
@@ -123,8 +154,7 @@
 			 </div>
 		</div>
     </div>
-    <!-- 비동기 처리 위한 회원id -->
-    <input type="hidden" value="${memberId}" name="memberId">
+    
 </body>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

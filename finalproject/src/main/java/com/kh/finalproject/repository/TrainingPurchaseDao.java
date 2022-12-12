@@ -18,5 +18,10 @@ public interface TrainingPurchaseDao {
 	//수정
 	//결제 고유번호로 거래상태 취소로 변경
 	boolean statusChange(int trainingPurchaseNo);
+	
+	void purchaseInsert(TrainingPurchaseDto trainingPurchaseDto);
+	void purchaseDetailInsert(PurchaseDetailDto purchaseDetailDto);
+	int sequence();
+	
 
 }

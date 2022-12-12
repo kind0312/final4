@@ -5,11 +5,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.finalproject.constant.SessionConstant;
+import com.kh.finalproject.entity.PetDto;
 import com.kh.finalproject.repository.PetDao;
+import com.kh.finalproject.vo.PetInsertVO;
 
 @Controller
 @RequestMapping("/mypage")
@@ -32,10 +37,36 @@ public class PetController {
 	@RequestMapping("/pet_insert")
 	public String insert(HttpSession session, Model model) {
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
-		int petNo = petDao.sequence();
 		model.addAttribute("memberId", memberId);
-		model.addAttribute("petNo", petNo);
 		return "mypage/pet_insert";
+	}
+	
+	@PostMapping("/pet_insert")
+	public String insert(@ModelAttribute PetInsertVO petInsertVO, 
+			HttpSession session, RedirectAttributes attr) {
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		int petNo = petDao.sequence();
+		petInsertVO.setPetNo(petNo);
+		
+		//펫 db등록
+		PetDto dto = PetDto.builder()
+				.petNo(petNo)
+				.memberId(memberId)
+				.petType(petInsertVO.getPetType())
+				.petName(petInsertVO.getPetName())
+				.petGender(petInsertVO.getPetGender())
+				.petBreed(petInsertVO.getPetBreed())
+				.petBirth(petInsertVO.getPetBirth())
+				.petWeight(petInsertVO.getPetWeight())
+				.petNeutralization(petInsertVO.getPetNeutralization())
+				.build();
+		petDao.insert(dto);
+		
+		//펫, 첨부파일 연결테이블 db등록 - vo만들어서 처리!!!
+		petDao.petProfileInsert(petInsertVO);
+		
+		attr.addAttribute("petNo", petNo);
+		return "redirect:/mypage/pet_detail";
 	}
 	
 	@RequestMapping("/pet_detail")

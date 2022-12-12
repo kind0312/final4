@@ -87,7 +87,7 @@
 /*       		} */
     		/* 태그 스타일 */
 		    body {
-		     	height:10000px;
+		     	height:3000px;
 		    }
 		    p {
 			  margin-top: 0;
@@ -101,96 +101,172 @@
 				color: #dfe6e9;
 			}
 
-			/* 클래스 스타일 */
-		    .logo {
-		    	width:80px;
-		    }
-			.navbar {
-			    font-size: 1.1rem;
- 			    font-weight: bold;
-			}
-			.underline{
-				border:0;
-				border-bottom:2px solid rgba(0, 0, 0, 0.1);
-			}
-			
-			.btn-blue{
-  				background-color: #81BDF1;
-  				border:2px solid #81BDF1;
-  				font-weight: bolder;
-  				color:#fff;
-  			}
-  			
-  			.btn-blue:hover {
-			  color: #fff;
-			  background-color: #3b6fc9;
-			  border-color: #3768bd;
-			}
-  			
-  			.btn-yellow{
-  				background-color: #FADE81;
-  				border-color:#FADE81;
-  				color:#303030;
-  				font-weight: bolder;
-  			}
-  			
-  			.btn-yellow:hover {
-			  color: #fff;
-			  background-color: #cc9342;
-			  border-color: #c08a3e;
-			}
-			
-			.btn-outline-blue {
-			  color: #81BDF1;
-			  border:2px solid #81BDF1;
-			  font-weight: bolder;
-			}
-			
-			.btn-outline-blue:hover {
-			  color: #fff;
-			  background-color: #81BDF1;
-			  border-color: #81BDF1;
-			  font-weight: bolder;
-			}
-			
-			.btn-outline-yellow {
-			  color: #303030;
-			  border:2px solid #FADE81;
-			  font-weight: bolder;
-			}
-			
-			.btn-outline-yellow:hover {
-			  background-color: #FADE81;
-			  border-color: #FADE81;
-			  font-weight: bolder;
-			}
-			
-			.bg-blue{
-				background-color: #81BDF1 !important;
-			}
-			
-			.btn-md{
-				padding: 0.5rem 1rem;
-				width:400px;
-				display:inline-block;
-				justify-content: center;
-			}
-			.page-link .page-blue{
-				background-color:#81BDF1;
-				border-color: #81BDF1;
-			}
-			
-			/* input창 메세지 색상 설정*/
-			.valid-feedback {
-			  color: #81BDF1;
-			}
-			.form-control.is-valid{
-				border-color:#81BDF1;
-			}
-			.form-control.is-valid:focus {
-				border-color: #81BDF1;
-				box-shadow: 0 0 0 0.25rem rgba(69, 130, 236, 0.25);
-			}
+			 /* 클래스 스타일 */
+          .logo {
+             width:80px;
+          }
+          .mainimg{
+             width:100%;
+          }
+         .navbar {
+             font-size: 1.1rem;
+              font-weight: bold;
+         }
+         .underline{
+            border:0;
+            border-bottom:2px solid rgba(0, 0, 0, 0.1);
+         }
+         /* 마이페이지 navbar 메뉴별 좌우간격, 글자크기 설정 */
+         .mypage-nav{
+            font-size:16px;
+            margin-left:10px;
+            margin-right:10px;
+         }
+         /* 헤더크기에 맞춰 마이페이지 navbar 바깥으로 나오게 top 설정*/
+         .mypage-top-nav{
+            margin-top: 1.7rem !important;
+         }
+         /* 마이페이지 navbar 좌우 간격 수정 */
+         .navbar-expand-lg-re{
+            padding-left:5rem;
+            padding-right:5rem;
+         }
+         /* navbar 마이페이지(제일 왼쪽 제목) 설정 */
+         .navbar-brand-re {
+           padding-top: 0.29375rem;
+           padding-bottom: 0.29375rem;
+           margin-left:10px;
+           margin-right:10px;
+           font-size: calc(1.2625rem + 0.15vw);
+           text-decoration: none;
+           white-space: nowrap;
+         }
+         .footer-link{
+            color: #f8f9fa;
+         }
+         .w-30{
+            width: 30%;
+         }
+         .w-70{
+            width: 70%;
+         }
+         .mt-150{
+            margin-top:150px;
+         }
+         .mt-120{
+            margin-top:120px;
+         }
+         .mt-100{
+            margin-top:100px;
+         }
+         .mt-80{
+            margin-top:80px;
+         }
+         .mt-50{
+            margin-top:50px;
+         }
+         .mt-40{
+            margin-top:40px;
+         }
+         .mt-30{
+            margin-top:30px;
+         }
+         .mt-29{
+            margin-top:29px;
+         }
+         .mt-20{
+            margin-top:20px;
+         }
+         .blue{
+            color:#81BDF1;
+         }
+         .blue-bolder{
+            font-weight:bolder;
+         }
+         
+        .btn{
+			border-radius: 10px !important;
+		}
+         
+         .btn-blue{
+              background-color: #81BDF1;
+              border:2px solid #81BDF1;
+              font-weight: bolder;
+              color:#fff;
+              font-size:15px;
+           }
+           
+           .btn-blue:hover {
+           color: #fff;
+           background-color: #3b6fc9;
+           border-color: #3768bd;
+         }
+           
+           .btn-yellow{
+              background-color: #FADE81;
+              border:2px solid #FADE81;
+              color:#303030;
+              font-weight: bolder;
+              font-size:15px;
+           }
+           
+           .btn-yellow:hover {
+           color: #fff;
+           background-color: #cc9342;
+           border-color: #c08a3e;
+         }
+         
+         .btn-outline-blue {
+           color: #81BDF1;
+           border:2px solid #81BDF1;
+           font-weight: bolder;
+         }
+         
+         .btn-outline-blue:hover {
+           color: #fff;
+           background-color: #81BDF1;
+           border-color: #81BDF1;
+           font-weight: bolder;
+         }
+         
+         .btn-outline-yellow {
+           color: #303030;
+           border:2px solid #FADE81;
+           font-weight: bolder;
+         }
+         
+         .btn-outline-yellow:hover {
+           background-color: #FADE81;
+           border-color: #FADE81;
+           font-weight: bolder;
+         }
+         
+         .bg-blue{
+            background-color: #81BDF1 !important;
+         }
+         
+         .btn-md{
+            padding: 0.5rem 1rem;
+            width:400px;
+            display:inline-block;
+            justify-content: center;
+         }
+         .page-link .page-blue{
+            background-color:#81BDF1;
+            border-color: #81BDF1;
+         }
+         
+         /* input창 메세지 색상 설정*/
+         .valid-feedback {
+           color: #81BDF1;
+         }
+         .form-control.is-valid{
+            border-color:#81BDF1;
+         }
+         .form-control.is-valid:focus {
+            border-color: #81BDF1;
+            box-shadow: 0 0 0 0.25rem rgba(69, 130, 236, 0.25);
+         }
 
 		</style>
 		
@@ -217,45 +293,50 @@
 	
 	            <!-- Brand : 로고 이미지와 대표 상호를 적는 공간 -->
 	            <a class="navbar-brand" href="/">
-	              CarePet
-	            </a>
+               <span class="visually-hidden">(current)</span>
+                  <img class="logo" src="${pageContext.request.contextPath}/image/logo.png">
+               </a>
+               <a class="navbar-brand" href="/">
+               <span class="visually-hidden">(current)</span>
+                  CarePet
+               </a>
 	
 	            <!-- 토글 버튼 -->
 	            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu-bar"
-	              aria-controls="menu-bar" aria-expanded="false" aria-label="Toggle navigation">
-	              <span class="navbar-toggler-icon"></span>
-	            </button>
-	
-	            <!-- 메뉴 영역 -->
-	            <div class="collapse navbar-collapse" id="menu-bar">
-	              <ul class="navbar-nav me-auto">
+                 aria-controls="menu-bar" aria-expanded="false" aria-label="Toggle navigation">
+                 <span class="navbar-toggler-icon"></span>
+               </button>
+   
+               <!-- 메뉴 영역 -->
+               <div class="collapse navbar-collapse justify-content-end" id="menu-bar">
+                 <ul class="navbar-nav me-0">
 	
 	                <!-- 
 	                    메뉴 항목
 	                    - .active는 활성화된 메뉴(현재 메뉴), 상황에 따라 맞는 메뉴에 추가
 	                -->
 	                <li class="nav-item">
-	                  <a class="nav-link active" href="#">채팅
+	                  <a class="nav-link" href="${pageContext.request.contextPath}/trainer/main">채팅
 	                    <span class="visually-hidden">(current)</span>
 	                  </a>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link" href="#">훈련서비스</a>
+	                  <a class="nav-link" href="${pageContext.request.contextPath}/trainer/main">훈련서비스</a>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link" href="#">스케줄</a>
+	                  <a class="nav-link" href="${pageContext.request.contextPath}/trainer/main">스케줄</a>
 	                </li>
 	                <li class="nav-item dropdown">
 	                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" 
-	                  role="button" aria-haspopup="true" aria-expanded="false" href="#">마이페이지</a>
+	                  role="button" aria-haspopup="true" aria-expanded="false" href="${pageContext.request.contextPath}/trainer/mypage_reservation">마이페이지</a>
 	                  <div class="dropdown-menu">
-	                    <a class="dropdown-item" href="#">예약확인</a>
+	                    <a class="dropdown-item" href="${pageContext.request.contextPath}/trainer/mypage_reservation">예약확인</a>
 	                    <div class="dropdown-divider"></div><!-- 중간 중간 선으로 구분하는 것-->
-	                    <a class="dropdown-item" href="#">프로필관리</a>
+	                    <a class="dropdown-item" href="${pageContext.request.contextPath}/trainer/mypage_profile">프로필관리</a>
 	                     <div class="dropdown-divider"></div><!-- 중간 중간 선으로 구분하는 것-->
-	                     <a class="dropdown-item" href="#">정산관리(뺄수있음)</a>
+	                     <a class="dropdown-item" href="${pageContext.request.contextPath}/#">정산관리(뺄수있음)</a>
 	                     <div class="dropdown-divider"></div><!-- 중간 중간 선으로 구분하는 것-->
-	                     <a class="dropdown-item" href="#">회원모드로 전환</a>	                    
+	                     <a class="dropdown-item" href="${pageContext.request.contextPath}/#">회원모드로 전환</a>	                    
 	                  </div>
 	                </li>
 	                <li class="nav-item">
@@ -274,5 +355,5 @@
 	        </nav>
 	      </div>
 	    </div>
-	
   </div> 
+  <main class="container-fluid">

@@ -18,5 +18,11 @@ public class TrainerListVO {
 	private String memberId;
 	private String memberEmail;
 	private String memberTel;
+
 	private String memberGender;
+
+	
+	//파일 번호 추가
+	private int filesNo;
+
 }
