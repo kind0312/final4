@@ -63,11 +63,18 @@
         </select>    
         
 
-      <!-- 훈련사 단일조회 -->
+      <!-- 훈련사 단일조회(id)로 조회 -->
       <select id="selectOnePro" parameterType="String" resultType="TrainerDto">
-      select * from trainer where member_id = #{memberId}
+      	select * from trainer where member_id = #{memberId}
       </select>
-
+      
+	  <!-- 훈련사 단일조회(no)로 조회 -->
+      <select id="selectOneProNo" parameterType="int" resultType="TrainerOneVO">
+      	select m.member_name, t.member_id, t.trainer_no 
+      	from member m 
+      	inner join trainer t on m.member_id=t.member_id 
+      	where t.trainer_no = #{trainerNo}
+      </select>
       
       <!-- trainer 테이블 member_id로 단일조회 -->
       <select id="selectOneTrainerNo" parameterType="String" resultType="int">
