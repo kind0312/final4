@@ -344,6 +344,7 @@
 	<!-- 정보 출력을 위한 hidden값 -->
 	<input type="hidden" name="petName" value="${training[0].trainingDetailPetName}">
 	<input type="hidden" name="cnt" value="${training.size()}">
+	<input type="hidden" name="memberId" value="${training.memberId}">
 </body>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

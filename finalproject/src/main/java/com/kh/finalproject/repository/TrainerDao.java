@@ -36,4 +36,10 @@ public interface TrainerDao {
 	//관리자 훈련사 목록 조회
 	List<TrainerListVO>selectList(TrainerListSearchVO vo);
 
+	
+	//트레이너 아이디로 trainer 테이블에서 trainerNo 찾기
+	int selectOneTrainerNo(String memberId);
+
+
+
 }

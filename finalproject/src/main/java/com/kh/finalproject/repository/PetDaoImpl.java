@@ -77,6 +77,8 @@ public class PetDaoImpl implements PetDao{
 	public int selectFileNo(int petNo) {
 		return sqlSession.selectOne("pet.selectFileNo",petNo);
 	}
+
+	
 	
 
 

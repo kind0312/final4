@@ -1,5 +1,6 @@
 package com.kh.finalproject.repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,8 +9,13 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
+
+import com.kh.finalproject.vo.PetDetailListVO;
+
 import com.kh.finalproject.vo.OneTrainingVO;
 import com.kh.finalproject.vo.ReservationIngListVO;
+import com.kh.finalproject.vo.TrainingRequestListVO;
+
 
 @Repository
 public class TrainingDaoImpl implements TrainingDao{
@@ -86,5 +92,27 @@ public class TrainingDaoImpl implements TrainingDao{
 		
 	}
 
+	
+	//훈련상태변경- 예약확정
+	@Override
+	public boolean statusChange2(int trainingNo) {		
+		return sqlSession.update("training.statusChange2",trainingNo)>0;
+	}
+	
+	//훈련사 request_detail 펫 리스트 조회
+	@Override
+	public List<PetDetailListVO> requestDetail(int trainingNo) {		
+		return sqlSession.selectList("training.requestDetailPetList", trainingNo);
+	}
+
+	@Override
+	public List<TrainingRequestListVO> requestList(int trainerNo) {		
+		return sqlSession.selectList("training.requestList", trainerNo);
+	}
+
+	@Override
+	public List<TrainingDto> checkRequest(Date requestDate) {		
+		return sqlSession.selectList("training.checkRequest", requestDate);
+	}
 	
 }

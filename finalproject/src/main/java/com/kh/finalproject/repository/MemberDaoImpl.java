@@ -141,4 +141,16 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("member.trainerConfirm",memberId);
 	}
 
+     //member_img 테이블 delete
+	@Override
+	public boolean memberImgDelete(String memberId) {		
+		return sqlSession.delete("member.memberImgDelete", memberId) > 0;
+	}
+
+	//회원 탈퇴시 처리(삭제)
+	@Override
+	public boolean delete(String memberId) {
+		return sqlSession.delete("member.delete",memberId)>0;
+	}
+
 }

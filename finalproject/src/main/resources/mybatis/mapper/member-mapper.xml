@@ -90,11 +90,20 @@
 		where member_id=#{memberId}
 	</update>
 	
+	<!-- 탈퇴시 회원 삭제 -->
+	<delete id="delete" parameterType="String">
+		delete member where member_id = #{memberId}
+	</delete>
+	
 	<!-- 훈련사 전환 확인 -->
 	<select id="trainerConfirm" parameterType="String" resultType="MemberDto">
 		select * from member
 		where member_status='Y' and member_id=#{memberId}
 	</select>
+	
+	<delete id="memberImgDelete" parameterType="String">
+	delete member_img where member_id = #{memberId}
+	</delete>
 	
 	
 	

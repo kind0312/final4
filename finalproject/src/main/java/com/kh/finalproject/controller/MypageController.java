@@ -55,6 +55,8 @@ public class MypageController {
 	@RequestMapping("/training")
 	public String training(HttpSession session, Model model) {
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		//비동기 처리 위한 데이터 넘김
+		model.addAttribute("memberId", memberId);
 		//진행예약 조회
 		model.addAttribute("ingList", trainingDao.ingList(memberId));
 		//지난예약 조회

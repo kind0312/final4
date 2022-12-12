@@ -89,8 +89,8 @@ public class MemberRestController {
 	
 	//회원 탈퇴 처리
 	@PutMapping("/goodbye/{memberId}")
-	public void goodbye(@PathVariable String memberId) {
-		memberDao.goodbye(memberId);
+	public void delete(@PathVariable String memberId) {
+		memberDao.delete(memberId);
 	}
 	
 	//훈련사 전환여부 반환

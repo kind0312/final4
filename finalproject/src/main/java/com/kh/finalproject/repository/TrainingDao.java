@@ -1,11 +1,17 @@
 package com.kh.finalproject.repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
+
+import com.kh.finalproject.vo.PetDetailListVO;
+
 import com.kh.finalproject.vo.OneTrainingVO;
 import com.kh.finalproject.vo.ReservationIngListVO;
+import com.kh.finalproject.vo.TrainingRequestListVO;
+
 
 public interface TrainingDao {
 	//등록
@@ -13,6 +19,9 @@ public interface TrainingDao {
 	//수정
 	//상태(예약취소) 변경
 	boolean statusChange(int trainingNo);
+	//상태(예약확정) 변경
+	boolean statusChange2(int trainingNo);
+	
 	
 	//테이블 조인 후 예약내역 조회
 	List<OneTrainingVO> oneTraining(int trainingNo);
@@ -41,5 +50,14 @@ public interface TrainingDao {
 	
 	//삭제
 	boolean delete(int trainingNo);
+	
+	//request_training 디테일 내역
+	List<PetDetailListVO> requestDetail(int trainerNo);
+	
+	//request_training list
+	List<TrainingRequestListVO> requestList(int trainerNo);
+	
+	//훈련요청날짜에 확정된 요청이 있는지
+	List<TrainingDto> checkRequest(Date requestDate);
 	
 }

@@ -17,6 +17,7 @@ import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.MemberImgDto;
 import com.kh.finalproject.repository.FilesDao;
 import com.kh.finalproject.repository.MemberDao;
+import com.kh.finalproject.repository.TrainerDao;
 
 @Controller
 @RequestMapping("/member")
@@ -24,9 +25,10 @@ public class MemberController {
 
 	@Autowired
 	private MemberDao memberDao;
-	
 	@Autowired
 	private FilesDao filesDao;
+	@Autowired
+	private TrainerDao trainerDao;
 	
 	//회원가입
 	@GetMapping("/insert")
@@ -60,7 +62,6 @@ public class MemberController {
 		boolean login = memberDao.login(memberDto);
 		if(login) {
 			session.setAttribute(SessionConstant.ID, memberDto.getMemberId());
-			
 //			//로그인 시간을 갱신시키는 작업
 //			memberDao.updateLoginTime(findDto.getMemberId());
 			
@@ -75,6 +76,7 @@ public class MemberController {
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute(SessionConstant.ID);
+		session.removeAttribute(SessionConstant.trainingNo);
 		return "redirect:/";
 	}
 	
