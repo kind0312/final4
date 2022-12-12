@@ -40,9 +40,15 @@
 	  opacity: 1;
 	}
 	
-	#applyMotive{
-		min-height: 250px;
+	.note-editor.note-frame{
+		border-radius: 10px !important;
 	}
+	.note-editor.note-frame .note-statusbar .note-resizebar{
+		background-color: #81BDF1;
+		border-bottom-right-radius: 10px !important;
+		border-bottom-left-radius: 10px !important;
+	}
+
 </style>
 
 <body>
@@ -54,8 +60,8 @@
                  <h1 class="text-center">지원서 작성하기</h1>
             </div>
         </div>
-        <form class="join-form" action="apply" method="post" enctype="multipart/form-data" autocomplete="off">
-        <div class="row mt-4">
+        <form class="join-form" action="apply" method="post" autocomplete="off">
+        <div class="row mt-80">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 				<div class="form-group">
 					<label class="label-font-weight">
@@ -63,15 +69,15 @@
 						<i class="fa-solid fa-asterisk blue"></i>
 						<small class="text-muted">(중복 선택가능)</small>
 					</label>
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" name="applyActive" value="모두 가능합니다" id="allable">
+					<div class="form-check mt-3">
+						<input class="form-check-input" type="checkbox" name="applyActive" value="풀 타임(오전 8:00 ~ 오후 10:00)" id="allable">
 						<label for="allable">
-							모두 가능합니다
+							풀 타임(오전 8:00 ~ 오후 10:00)
 						</label>
 					</div>
 					<div class="form-check">
 						<input class="form-check-input" type="checkbox" name="applyActive" value="오전 타임(오전 8:00 ~ 오후 12:00)" id="morningTime">
-						<label for="morningTime"">
+						<label for="morningTime">
 							오전 타임(오전 8:00 ~ 오후 12:00)
 						</label>
 					</div>
@@ -104,8 +110,8 @@
 						지원동기
 						<i class="fa-solid fa-asterisk blue"></i>
 					</label>
-					<div class="input-group">
-						<textarea type="text" id="applyMotive" name="applyMotive" class="form-control rounded"></textarea>
+					<div class="input-group mt-3">
+						<textarea id="applyMotive" name="applyMotive" class="form-control rounded"></textarea>
 						<div class="valid-feedback"></div>
 	                    <div class="invalid-feedback"></div>
 					</div>
@@ -118,7 +124,7 @@
 					<label class="label-font-weight">
 						반려동물관련 자격증
 					</label>
-					<div class="input-group">
+					<div class="input-group mt-3">
 						<input type="text" name="applyLicense" class="form-control underline">
 						<div class="valid-feedback"></div>
 	                    <div class="invalid-feedback"></div>
@@ -132,8 +138,11 @@
 					<label class="label-font-weight">
 						흡연여부
 						<i class="fa-solid fa-asterisk blue"></i>
+						<small class="text-muted">
+							직업 특성상 흡연을 하시는 경우, 펫시터 활동이 어려울 수 있습니다
+						</small>
 					</label>
-					<div class="input-group">
+					<div class="input-group mt-3">
 						<div class="col-md-6 offset-md-1 text-center">
 						<input class="form-check-input mx-1" type="radio" name="applySmoke" value="Y" id="smokeYes">
 				        <label class="label" for="smokeYes">
@@ -172,7 +181,7 @@
 		//활동시간 선택
 		$("[name=applyActive]").click(function(){
 			var active = $("[name=applyActive]:checked").val();
-			console.log(active.length);
+// 			console.log(active.length);
 			if(active.length > 0){
                 validChecker.applyActiveValid = true;
             }
@@ -182,9 +191,9 @@
 			
 		});
 		
+		//지원 동기
 		$("[name=applyMotive]").summernote({
-			toolbar: [['font', ['bold', 'underline', 'clear']]
-				],
+			toolbar: [],
 			width:600,
 			height: 250, // 높이
             minHeight: 250, // 최소 높이
@@ -192,19 +201,18 @@
             lang:"ko-KR", // 언어설정
         });
 		
-		//지원 동기
-		$("[name=applyMotive]").blur(function(){
-            var motive = $(this).val();
-
-            if(motive.length > 0){
-                validChecker.applyMotiveValid = true;
-                $(this).removeClass("is-valid is-invalid").addClass("is-valid");
-            }
-            else {
+		$(".note-icon-bar").hide();
+		
+		function emtpy() {
+            if ($("[name=applyMotive]").summernote('isEmpty')) {
+                console.log("비어있음");
                 validChecker.applyMotiveValid = false;
-                $(this).removeClass("is-valid is-invalid").addClass("is-invalid");
             }
-        });
+            else{
+            	console.log("내용있음");
+            	validChecker.applyMotiveValid = true;
+            }
+        }
 		
 		//흡연 여부
 		$("[name=applySmoke]").click(function(){
@@ -220,10 +228,10 @@
 		$(".join-form").submit(function(e){
 	        e.preventDefault();
 	        
-	        $("[name=applyActive]").blur();
-			$("[name=applyMotive]").change();
-			$("[name=applySmoke]").blur();
-	
+	        emtpy();
+			console.log(validChecker.applyActiveValid);
+			console.log(validChecker.applyMotiveValid);
+			console.log(validChecker.applySmokeValid);
 	        if(validChecker.isAllValid()){
 	        	this.submit();//전송
 	        }

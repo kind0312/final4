@@ -80,18 +80,20 @@
        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94efcfc3a2fb279ab90052c1c24e8cc6"></script>
    
       <style>
+      	
 /*          <!-- div 확인 점선 --> */
 /*            div{ */
 /*                  border: 1px dotted gray; */
 /*               } */
           /* 태그 스타일 */
-           body {
+		body {
 /*                height:1000px; */
-           }
-          p {
+        }
+        p {
            margin-top: 0;
            margin-bottom: 0;
-         }
+           font-family: var(--bs-font-sans-serif);
+        }
          a {
             text-decoration: none;
          }
