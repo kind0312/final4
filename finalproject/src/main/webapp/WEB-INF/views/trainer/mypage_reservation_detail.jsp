@@ -14,9 +14,10 @@
 	   	background-color:#81BDF1;
 	   	overflow: hidden;
 	}
-	.carousel-control-prev-icon,
-	.carousel-control-next-icon{
+	.carousel-control-prev,
+	.carousel-control-next{
 		color:black;
+		opacity: 0.3;
 	}
 	.underline-out{
 		border-bottom:#fff;
@@ -112,8 +113,7 @@
 	</div>
 
 	<div class="container-fluid">
-	
-	테스트 출력 : ${detail}
+
         <div class="row mt-80">
             <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4 mt-4">
                 <div class="text-center">
@@ -147,39 +147,34 @@
 							<c:otherwise>
 								<tr class="text-center">
 									<td height="200px" class="py-3">
-										<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-										 	<div class="carousel-indicators">
-											    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-											    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-											    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-										  </div>
+										<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
 										 	<div class="carousel-inner">
 										 		<div class="carousel-item active">
-										 			<div class="d-md-block">
-										 				<img src="http://localhost:8888/download/${detail[0].filesNo}" class="img-circle" width="100" height="100" alt="반려동물 사진">
+										 			<div class="">
+										 				<img src="http://localhost:8888/download/${detail[0].filesNo}" class="img-circle" width="200" height="200" alt="반려동물 사진">
 										 			</div>
-											   		<div class="carousel-caption d-none d-md-block">
-												        <h6>${detail[0].petName}(${detail[0].petGender}/${detail[0].petWeight}kg)</h6>
-												        <p>${detail[0].petBreed}</p>
+											   		<div class="carousel-caption">
+												        <h6 style="color:white;">${detail[0].petName}(${detail[0].petGender}/${detail[0].petWeight}kg)</h6>
+												        <p style="color:white;">${detail[0].petBreed}</p>
 												    </div>
 											    </div>
 									    		<c:forEach var="detail" begin="1" items="${detail}">
 											    	<div class="carousel-item">
-											    		<div class="d-md-block">
-											    			<img src="http://localhost:8888/download/${detail.filesNo}" class="img-circle" width="100" height="100" alt="반려동물 사진">
+											    		<div class="">
+											    			<img src="http://localhost:8888/download/${detail.filesNo}" class="img-circle" width="200" height="200" alt="반려동물 사진">
 											    		</div>
-											    		<div class="carousel-caption d-none d-md-block">
-													        <h6>${detail.petName}(${detail.petGender}세/${detail.petWeight})</h6>
-													        <p>${detail.petBreed}</p>
+											    		<div class="carousel-caption">
+													        <h6 style="color:white;">${detail.petName}(${detail.petGender}세/${detail.petWeight}kg)</h6>
+													        <p style="color:white;">${detail.petBreed}</p>
 													    </div>
 											    	</div>
 											    </c:forEach>
 										  	</div>
-											<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+											<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
 											    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 											    <span class="visually-hidden">Previous</span>
 											  </button>
-											  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+											  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
 											    <span class="carousel-control-next-icon" aria-hidden="true"></span>
 											    <span class="visually-hidden">Next</span>
 											  </button>
