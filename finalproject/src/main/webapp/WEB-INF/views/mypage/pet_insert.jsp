@@ -230,7 +230,9 @@
 	    </div>
 	  </div>
 	</div>
-
+	<!-- 비동기화를 위한 데이터 -->
+	<input type="hidden" name="memberId" value="${memberId}">
+	
 	<div class="container-fluid">
         <div class="row mt-80">
             <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">

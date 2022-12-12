@@ -238,8 +238,9 @@
                  </table>
             </div>
         </div>
-
         
+        <!-- 비동기 처리 위한 데이터-->
+		<input type="hidden" value="${memberId}" name="memberId">
     </div>
 
 </body>

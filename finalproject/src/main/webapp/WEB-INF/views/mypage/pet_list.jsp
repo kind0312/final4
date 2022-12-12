@@ -110,6 +110,8 @@
 	    </div>
 	  </div>
 	</div>
+	<!-- 비동기화를 위한 데이터 -->
+	<input type="hidden" name="memberId" value="${memberId}">
 
 	<div class="container-fluid">
         <div class="row mt-80 mb-3">
@@ -152,6 +154,7 @@
 			 </div>
 		</div>
     </div>
+    
 </body>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

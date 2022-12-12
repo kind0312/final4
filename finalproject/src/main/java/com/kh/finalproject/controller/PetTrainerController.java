@@ -44,27 +44,25 @@ public class PetTrainerController {
 	
 	@Autowired
 	private TrainerDao trainerDao;
-	
 	@Autowired
 	private FilesDao filesDao;
-	
 	@Autowired
 	private MemberDao memberDao;
-
-		
 	@Autowired
 	private TrainingDao trainingDao;
-	
 	@Autowired
 	private PetDao petDao;
 
 	@Autowired
 	private ScheduleDao scheduleDao;
 	
-	
+
 	@RequestMapping("/main")
-	public String main() {
-		
+	public String main(HttpSession session) {
+		//훈련사 번호 세션에 저장
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		int trainerNo = trainerDao.selectOneTrainerNo(memberId);
+		session.setAttribute(SessionConstant.trainingNo, trainerNo);
 		return "trainer/main";
 	}
 	
@@ -222,6 +220,7 @@ public class PetTrainerController {
 	}
 	
 	
+
 	@RequestMapping("/schedule")
 	public String schedule(HttpSession session, Model model) {
 		
@@ -231,6 +230,10 @@ public class PetTrainerController {
 	
 	
 	
+
+	
+	//로그아웃 누를 경우 세션값 제거하기
+
 	
 }
 	
