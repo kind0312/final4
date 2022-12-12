@@ -53,9 +53,7 @@ public class PetTrainerController {
 
 	@RequestMapping("/main")
 	public String main(HttpSession session) {
-		String memberId = (String)session.getAttribute(SessionConstant.ID);
-		int trainerNo = trainerDao.selectOneTrainerNo(memberId);
-		session.setAttribute(SessionConstant.trainingNo, trainerNo);
+
 		return "trainer/main";
 	}
 	
