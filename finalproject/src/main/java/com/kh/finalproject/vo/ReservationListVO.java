@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class ReservationIngListVO {
+public class ReservationListVO {
 	
 	private String memberId;
 	private String memberName;
@@ -23,5 +23,7 @@ public class ReservationIngListVO {
 	private Date trainingChangeDate;
 	
 	private int trainerNo;
+	
+	private int trainingPurchasePrice;
 
 }

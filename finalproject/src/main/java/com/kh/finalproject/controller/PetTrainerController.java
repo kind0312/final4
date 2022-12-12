@@ -2,7 +2,6 @@ package com.kh.finalproject.controller;
 
 
 import java.sql.Date;
-
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -18,20 +17,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.entity.MemberImgDto;
-import com.kh.finalproject.entity.PetDto;
 import com.kh.finalproject.entity.TrainerDto;
-import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.repository.FilesDao;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.PetDao;
 import com.kh.finalproject.repository.TrainerDao;
 import com.kh.finalproject.repository.TrainingDao;
-
+import com.kh.finalproject.repository.TrainingPurchaseDao;
 import com.kh.finalproject.vo.PetDetailListVO;
 import com.kh.finalproject.vo.TrainingRequestListVO;
-
-import lombok.Builder;
 
 
 
@@ -50,6 +45,8 @@ public class PetTrainerController {
 	private TrainingDao trainingDao;
 	@Autowired
 	private PetDao petDao;
+	@Autowired
+	private TrainingPurchaseDao trainingPurchaseDao;
 
 	@RequestMapping("/main")
 	public String main(HttpSession session) {
@@ -186,19 +183,11 @@ public class PetTrainerController {
 //	}
 	
 	
-	
-	
-	
-	
 	@RequestMapping("/mypage_reservation")
 	public String reservation(HttpSession session, Model model) {
-		//String memberId = (String)session.getAttribute(SessionConstant.ID);
-		String memberId = "trainer3";
-		TrainerDto dto = trainerDao.selectOnePro(memberId);
-		int trainerNo = dto.getTrainerNo();
-		
+		int trainerNo = (int)session.getAttribute(SessionConstant.trainingNo);
 		model.addAttribute("ingList", trainingDao.ingList(trainerNo));
-		
+		model.addAttribute("endList", trainingDao.endList(trainerNo));
 		return "trainer/mypage_reservation";
 	}
 	
