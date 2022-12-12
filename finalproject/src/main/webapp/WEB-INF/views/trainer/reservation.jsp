@@ -10,7 +10,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/basic.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons1.css">
-  	
+  	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset2.css">
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="훈련사 상세" name="title"/>
 </jsp:include>
@@ -212,12 +213,25 @@ $(function(){
 	      }
 	});
 	
-	//submit 이벤트
+	//폼 보내기 전에 반드시 체크해야 할 것
+	check={
+				// 주소 input창 입력 확인
+				// 날짜와 시간 선택 확인
+				// 반려동물 선택과 메모 입력 확인
+				// 결제금액과 보유포인트 확인(결제금액>보유포인트)
+
+				allValid:function(){
+					return ;
+				}
+	};
+	
+	
+	//form 전송 submit 이벤트
 	$(".form-check").submit(function(e){
 		//처음 화면에서 form 전송 막기
 		e.preventDefault();
 		
-		//목표 : (1)체크박스 개수 확인 후 (2)input창 생성 및 value에 가격 적용
+		//목표 : (1)체크박스 개수 확인 후 (2)input창 생성 및 value에 가격 적용 (나중에 함수로 만들어서 빼는게 좋음!!!)
 		//(1)
 		var cnt = 0;
       	$("[name=trainingDetailPetName]").each(function(){
@@ -231,18 +245,18 @@ $(function(){
       	if(cnt>1){ //수량이 1 이상일 경우
       		for(var i=0; i<cnt; i++){
       			if(i==0){ //value값에 처음만 10만원
-      				var input = $("<input>").attr("type","text").attr("name","purchaseDetailPrice")
+      				var input = $("<input>").attr("type","hidden").attr("name","purchaseDetailPrice")
       				.attr("value","100000");
       				detailPriceTag.append(input);
       			}else{ //나머지는 5만원
-      				var input = $("<input>").attr("type","text").attr("name","purchaseDetailPrice")
+      				var input = $("<input>").attr("type","hidden").attr("name","purchaseDetailPrice")
       				.attr("value","50000");
       				detailPriceTag.append(input);
       			}
       		}
       		
       	}else{ //수량이 1이거나 0일경우(0일 경우 막는 event 추가 생성해야함!!! ex) 반려견 선택해주세요 등 문구출력하는 이벤트)
-      		var input = $("<input>").attr("type","text").attr("name","purchaseDetailPrice")
+      		var input = $("<input>").attr("type","hidden").attr("name","purchaseDetailPrice")
 			.attr("value","100000");
       		detailPriceTag.append(input);
       	}
@@ -345,16 +359,25 @@ $(function(){
                
                
                <br><br><br><br><br><br>
-               <div class="col-md-10 offset-md-1 mt-100 text-center">
-               <h3>결제 화면</h3><br>
-               <h6>보유하신 포인트에서 차감돼요!</h6><br>
-               현재 내 포인트 : <span class="myPoint">${member.memberPoint}</span>P<br>
-               총 결제 포인트 : <span class="total-price">0</span>P<br>
                
-               결제 후 포인트 :<span class="price"></span>P<br>
-               </div>   
-               
-               <button class ="buttontest" type ="submit">신청하기</button>
+               <div class="payment">    
+        <h3>결제화면</h3><br>
+        <span>보유하신 포인트에서 차감돼요!</span>
+        <div class="content">
+            <div class="point nowpoint">
+                <span>현재 내 포인트</span>
+                <span class="myPoint">${member.memberPoint}</span>P
+            </div>
+            <div class="point totalpoint">
+                <span>총 결제 포인트</span>
+                <span class="total-price">0</span>P
+            </div>
+            <div class="point afterpoint">
+                <span>결제 후 포인트</span>
+                <span class="price"></span>P
+            </div>
+        </div>  
+</div>
                
 </form>
             

@@ -27,38 +27,55 @@
 	}
 
 </style>
-
+<script>
+	$(function(){
+		//회원모드로 전환 이벤트
+		$(".mode-change").click(function(){
+			location.href="${pageContext.request.contextPath}/";
+		});
+	});
+</script>
 
 
 <body>
-
-
 <nav class="navbar navbar-expand-lg navbar-expand-lg-re navbar-dark bg-blue mypage-top-nav">
 	  <div class="container-fluid">
-	    <a class="navbar-brand-re footer-link" href="${pageContext.request.contextPath}/mypage/training">마이페이지</a>
+	    <a class="navbar-brand-re footer-link" href="${pageContext.request.contextPath}/trainer/mypage_reservation">마이페이지</a>
 	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 	      <span class="navbar-toggler-icon"></span>
 	    </button>
 	    <div class="collapse navbar-collapse justify-content-end" id="navbarColor01">
 	      <ul class="navbar-nav me-0">
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}//trainer/mypage_reservation">예약확인</a>
+	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/trainer/mypage_reservation">예약확인</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" style="color:white;" href="${pageContext.request.contextPath}/trainer/mypage_profile">프로필 관리</a>
-	        </li>      
+	          <a class="nav-link mypage-nav" style="color:white;" href="${pageContext.request.contextPath}/trainer/mypage_profile">프로필관리</a>
+	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">회원페이지로 전환</a>
+	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">정산관리</a>
+	        </li>
+	        <li>
+	          <a class="nav-link mypage-nav" href="#" data-bs-toggle="modal" data-bs-target="#change-modal">회원모드로 전환</a>
 	        </li>
      	 </ul>
     	</div>
   	</div>
 </nav>
 
-
-
-
-
+	<!-- Modal -->
+	<div class="modal fade" id="change-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-body">
+	        회원 모드로 전환하시겠습니까?
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-yellow mode-change" data-bs-dismiss="modal">확인</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
 
 
