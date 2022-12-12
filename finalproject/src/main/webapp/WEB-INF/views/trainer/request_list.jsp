@@ -52,11 +52,11 @@
               				<c:forEach var="request" items="${requestList}">
                 				<tr class="table-default align-middle">
 	                 				<th width="30%">
-	                 					<img src="http://localhost:8888/download/#" class="img-circle" width="100" height="100"><!-- 이미지에 번호들어가야함 -->
+	                 					<img src="http://localhost:8888/download/${request.filesNo}" class="img-circle" width="100" height="100"><!-- 이미지에 번호들어가야함 -->
 	                 				</th>
 	                 				<th width="40%">
 	                 					
-	                 					<p class="name-font">애완동물 이름 외 (숫자)</p>
+	                 					<p class="name-font">${request.petName } 외 (숫자)</p>
 	                 					<p class="gender-font">주소 : ${request.trainingBasicAddress}</p>
 	                 					<p class="gender-font">방문 일자 : ${request.trainingDate}</p>
 	                 					<p class="gender-font">방문시간 : ${request.trainingStartTime}</p>
