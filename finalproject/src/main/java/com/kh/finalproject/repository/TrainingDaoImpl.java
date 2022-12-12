@@ -11,7 +11,7 @@ import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
 
 import com.kh.finalproject.vo.PetDetailListVO;
-
+import com.kh.finalproject.vo.ReservationDetailListVO;
 import com.kh.finalproject.vo.OneTrainingVO;
 import com.kh.finalproject.vo.ReservationListVO;
 import com.kh.finalproject.vo.TrainingRequestListVO;
@@ -61,6 +61,12 @@ public class TrainingDaoImpl implements TrainingDao{
 	@Override
 	public List<ReservationListVO> endList(int trainerNo) {
 		return sqlSession.selectList("training.reservationEndList",trainerNo);
+	}
+	
+	//예약 상세조회(훈련사 기준)
+	@Override
+	public List<ReservationDetailListVO> detailList(int trainingNo) {
+		return sqlSession.selectList("training.reservationDetailList",trainingNo);
 	}
 	
 	//훈련서비스 받은 펫 마리 수 조회
@@ -119,6 +125,8 @@ public class TrainingDaoImpl implements TrainingDao{
 	public List<TrainingDto> checkRequest(Date requestDate) {		
 		return sqlSession.selectList("training.checkRequest", requestDate);
 	}
+
+	
 
 	
 	

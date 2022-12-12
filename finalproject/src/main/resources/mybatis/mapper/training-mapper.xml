@@ -63,6 +63,19 @@
 		where li.trainer_no=#{trainerNo} and t.training_status='이용완료'
  	</select>
  	
+ 	<!-- 예약상세 리스트(훈련사 기준) -->
+ 	<select id="reservationDetailList" resultType="ReservationDetailListVO" parameterType="int">
+ 		select m.member_name,t.*, tp.training_purchase_price, 
+		td.training_detail_pet_name, p.*, img.files_no 
+		from member m 
+			inner join training t on m.member_id = t.member_id 
+			inner join training_purchase tp on t.training_no = tp.training_no
+			inner join training_detail td on tp.training_no = td.training_no
+			inner join pet p on td.training_detail_pet_name = p.pet_name
+			inner join pet_img img on p.pet_no = img.pet_no
+		where t.training_no=#{trainingNo}
+ 	</select>
+ 	
  	<!-- 훈련서비스 받은 펫 마리수 -->
   	<select id="petCount" resultType="int" parameterType="int">
   		select count(*) from training_detail where training_no=#{trainingNo}

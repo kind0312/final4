@@ -117,9 +117,7 @@
 	    </div>
 	  </div>
 	</div>
-	테스트 출력(진행예약) : ${ingList}<br>
-	테스트 출력(지난예약) : ${endList}<br>
-	테스트 출력(훈련서비스) : ${training}<br>
+
 	<div class="container-fluid">
         <div class="row mt-80">
             <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4 mt-4">
@@ -158,7 +156,7 @@
 	                 			<td>${ingList.trainingDate}</td>
 	                 			<td>${ingList.trainingStartTime}</td>
 	                 			<td>
-	                 				<a href="${pageContext.request.contextPath}/trainer/mypage_reservation?trainingNo=${ingList.trainingNo}" class="btn btn-blue">상세</a>
+	                 				<a href="${pageContext.request.contextPath}/trainer/mypage_reservation_detail?trainingNo=${ingList.trainingNo}" class="btn btn-blue">상세</a>
 	                 				<a href="#" class="btn btn-yellow">채팅</a>
 	                 			</td>
 	                 		</tr>
@@ -200,7 +198,7 @@
 	                 				<fmt:formatNumber value="${endList.trainingPurchasePrice*0.9}" pattern="###,###"></fmt:formatNumber>
 	                 			</td>
 	                 			<td>
-	                 				<a href="${pageContext.request.contextPath}/trainer/mypage_reservation?trainingNo=${endList.trainingNo}" class="btn btn-blue">상세</a>
+	                 				<a href="${pageContext.request.contextPath}/trainer/mypage_reservation_detail?trainingNo=${endList.trainingNo}" class="btn btn-blue">상세</a>
 	                 			</td>
 	                 		</tr>
                  		</c:forEach>
