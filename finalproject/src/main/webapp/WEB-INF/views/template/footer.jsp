@@ -24,8 +24,8 @@
 		</div>
 	</footer>
 	loginId : ${sessionScope.loginId} <br>
-			로그인 : ${sessionScope.loginId != null} <br>
-
+	로그인 : ${sessionScope.loginId != null} <br>
+	훈련사번호 : ${sessionScope.trainingNo} <br>
 	</body>
 </html>
 	
