@@ -129,7 +129,7 @@
 	inner join pet_img img on p.pet_no = img.pet_no
 	inner join linked_list list on td.training_no=list.training_no where trainer_no=#{trainerNo} and t.training_status='예약대기'
 	)
-	WHERE emp_no = 1;
+	WHERE emp_no = 1
  	</select>
  	
  	

@@ -177,7 +177,7 @@ public class PetTrainerController {
 		memberDao.memberProfileInsert(memberImgDto);	//이거 정상 작동함 
 		
 		if(result) {			
-			return "redirect:trainer/mypage_profile";
+			return "redirect:/trainer/mypage_profile";
 		}
 		else {
 			return "redirect:fail";		
