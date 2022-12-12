@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.finalproject.constant.SessionConstant;
@@ -107,5 +108,37 @@ public class MemberController {
 	@GetMapping("/find_memberpw")
 	public String findMemberPw() {
 		return "member/find_memberpw";
+	}
+	
+	@PostMapping("/find_memberpw")
+	public String findMemberPw(@ModelAttribute MemberDto memberDto,
+			RedirectAttributes attr) {
+		boolean judge = memberDao.findPw(memberDto);
+		if(judge) {
+			attr.addAttribute("memberId", memberDao.certPw(memberDto).getMemberId());
+			return "redirect:change_memberpw";
+		}
+		else {
+			return "redirect:find_memberpw?error";
+		}
+	}
+	
+	//비밀번호 찾은 후 변경
+	@GetMapping("/change_memberpw")
+	public String changeMemeberPw(@ModelAttribute MemberDto memberDto, Model model) {
+		model.addAttribute("memberDto", memberDao.certPw(memberDto));
+		return "member/change_memberpw";
+	}
+	
+	@PostMapping("/change_memberpw")
+	public String changeMemeberPw(@ModelAttribute MemberDto memberDto) {
+		memberDao.changePw(memberDto);
+		return "redirect:change_memberpw_success";
+	}
+	
+	//비밀번호 변경 완료
+	@GetMapping("/change_memberpw_success")
+	public String changeMemberPwSuccess() {
+		return "member/change_memberpw_success";
 	}
 }
