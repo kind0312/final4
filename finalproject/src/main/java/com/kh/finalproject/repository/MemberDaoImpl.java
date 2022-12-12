@@ -43,7 +43,7 @@ public class MemberDaoImpl implements MemberDao {
 	//로그인
 	@Override
 	public boolean login(MemberDto memberDto) {
-		MemberDto findDto = sqlSession.selectOne("member.one", memberDto.getMemberId());
+		MemberDto findDto = sqlSession.selectOne("member.one", memberDto);
 		if(findDto == null) return false;
 		boolean match = encoder.matches(memberDto.getMemberPw(), findDto.getMemberPw());
 		return match;
@@ -52,7 +52,7 @@ public class MemberDaoImpl implements MemberDao {
 	//아이디 찾기
 	@Override
 	public boolean findId(MemberDto memberDto) {
-		MemberDto findId = sqlSession.selectOne("member.findId", memberDto.getMemberName());
+		MemberDto findId = sqlSession.selectOne("member.findId", memberDto);
 		if(findId == null) return false;
 		boolean find = memberDto.getMemberTel().equals(findId.getMemberTel());
 		return find;
@@ -61,7 +61,31 @@ public class MemberDaoImpl implements MemberDao {
 	//아이디 불러오기
 	@Override
 	public MemberDto find(MemberDto memberDto) {
-		return sqlSession.selectOne("member.findId", memberDto.getMemberName());
+		return sqlSession.selectOne("member.findId", memberDto);
+	}
+	
+	//비밀번호 찾기
+	@Override
+	public boolean findPw(MemberDto memberDto) {
+		MemberDto findId = sqlSession.selectOne("member.one", memberDto);
+		if(findId == null) return false;
+		boolean judge = memberDto.getMemberEmail().equals(findId.getMemberEmail());
+		return judge;
+	}
+	
+	//비밀번호 찾기 후 아이디 불러오기
+	@Override
+	public MemberDto certPw(MemberDto memberDto) {
+		return sqlSession.selectOne("member.one", memberDto);
+	}
+	
+	//비밀번호 변경
+	@Override
+	public void changePw(MemberDto memberDto) {
+		String memberPw = memberDto.getMemberPw();
+		String encode = encoder.encode(memberPw);
+		memberDto.setMemberPw(encode);
+		sqlSession.update("member.changePw", memberDto);
 	}
 	
 	//회원 검색

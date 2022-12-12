@@ -181,6 +181,9 @@
          .blue-bolder{
             font-weight:bolder;
          }
+         .yellow{
+        	color:#FADE81;
+         }
          
         .btn{
 			border-radius: 10px !important;
