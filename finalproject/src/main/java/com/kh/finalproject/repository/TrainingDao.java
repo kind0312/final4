@@ -9,7 +9,7 @@ import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.vo.PetDetailListVO;
 
 import com.kh.finalproject.vo.OneTrainingVO;
-import com.kh.finalproject.vo.ReservationIngListVO;
+import com.kh.finalproject.vo.ReservationListVO;
 import com.kh.finalproject.vo.TrainingRequestListVO;
 
 
@@ -32,8 +32,9 @@ public interface TrainingDao {
 	//지난예약 조회(회원 기준)
 	List<TrainingDto> endList(String memberId);
 	//진행예약 조회(훈련사 기준)
-	List<ReservationIngListVO> ingList(int trainerNo);
+	List<ReservationListVO> ingList(int trainerNo);
 	//진난예약 조회(훈련사 기준)
+	List<ReservationListVO> endList(int trainerNo);
 	//훈련서비스 받은 펫 마리 수 조회
 	int petCount(int trainingNo);
 	//훈련서비스 받은 펫 조회
