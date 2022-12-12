@@ -8,8 +8,12 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
+
+import com.kh.finalproject.vo.PetDetailListVO;
+
 import com.kh.finalproject.vo.OneTrainingVO;
 import com.kh.finalproject.vo.ReservationIngListVO;
+
 
 @Repository
 public class TrainingDaoImpl implements TrainingDao{
@@ -86,5 +90,17 @@ public class TrainingDaoImpl implements TrainingDao{
 		
 	}
 
+	
+	//훈련상태변경- 예약확정
+	@Override
+	public boolean statusChange2(int trainingNo) {		
+		return sqlSession.update("training.statusChange2",trainingNo)>0;
+	}
+	
+	//훈련사 request_detail 펫 리스트 조회
+	@Override
+	public List<PetDetailListVO> requestDetail(int trainingNo) {		
+		return sqlSession.selectList("training.requestDetailPetList", trainingNo);
+	}
 	
 }

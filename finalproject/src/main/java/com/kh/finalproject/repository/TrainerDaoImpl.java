@@ -73,6 +73,11 @@ public class TrainerDaoImpl implements TrainerDao {
 		return count > 0;
 	}
 
+	@Override
+	public int selectOneTrainerNo(String memberId) {		
+		return sqlSession.selectOne("trainer.selectOneTrainerNo", memberId);
+	}
+
 
 	
 	

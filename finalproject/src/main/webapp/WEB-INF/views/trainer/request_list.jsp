@@ -6,42 +6,73 @@
 	<jsp:param value="" name=""/>
 </jsp:include>
 
+<style>
+	.pet-table>tbody{
+		height:130px;
+	}
+	.insert-font{
+		color:black;
+		font-weight:bolder;
+		font-size:15px;
+	}
+	.name-font{
+		font-weight:bolder;
+	}
+	.gender-font{
+		color:#7B7B7B;
+	}
+	.img-circle{
+		border-radius: 70%;
+    	border:none;
+    	background-color:#81BDF1;
+    	overflow: hidden;
+	}
+	.pet-table {
+	    border-top:1px solid rgba(0, 0, 0, 0.1);
+	    height:130px;
+	}
+</style>
+
+
 
 
 <body>
-훈련 요청 목록 
 
-<!-- 결과화면 -->
-<table>
-	<thead>
-		<tr>
-			<th>훈련사 번호</th>
-			<th>아이디</th>
-			<th>훈련신청 날짜</th>
-			<th>방문 시간</th>
-			<th>기본주소</th>
-			<th>상세주소</th>
-			<th>요청사항</th>
-			<th>상태</th>
-			<th>상태변경날짜</th>
-		</tr>
-	</thead>
-	<tbody>
-		<c:forEach var="trainingDto" items="${requestList}">
-		<tr>
-			<td>${trainingDto.trainingNo}</td>
-			<td>${trainingDto.memberId}</td>
-			<td>${trainingDto.trainingDate}</td>
-			<td>${trainingDto.trainingStartTime}</td>
-			<td>${trainingDto.trainingBasicAddress}</td>
-			<td>${trainingDto.trainingDetailAddress}</td>
-			<td>${trainingDto.trainingMemo}</td>
-			<td>${trainingDto.trainingStatus}</td>
-			<td>${trainingDto.trainingChangeDate}</td>
-		</tr>
-		</c:forEach>
-	</tbody>
-</table>
+	<div class="container-fluid">
+        <div class="row mt-80 mb-3">
+            <div class="col-md-6 offset-md-3">
+                 <h4 class="text-center">훈련 요청 목록</h4>
+            </div>
+        </div>
+		
+        <div class="row">
+            <div class="col-md-6 offset-md-3">   
+                 <table class="table table-hover pet-table text-center">
+                 		<thead>
+              				<c:forEach var="request" items="${requestList}">
+                				<tr class="table-default align-middle">
+	                 				<th width="30%">
+	                 					<img src="http://localhost:8888/download/#" class="img-circle" width="100" height="100"><!-- 이미지에 번호들어가야함 -->
+	                 				</th>
+	                 				<th width="40%">
+	                 					
+	                 					<p class="name-font">애완동물 이름 외 (숫자)</p>
+	                 					<p class="gender-font">주소 : ${request.trainingBasicAddress}</p>
+	                 					<p class="gender-font">방문 일자 : ${request.trainingDate}</p>
+	                 					<p class="gender-font">방문시간 : ${request.trainingStartTime}</p>
+	                 				</th>
+	                 				<th width="30%">
+	                 					<a href="${pageContext.request.contextPath}/trainer/request_detail?trainingNo=${request.trainingNo}" class="btn btn-blue">상세</a>
+	                 				</th>
+                 				</tr>
+		                	</c:forEach>
+                 		</thead>					  	
+					  
+                 </table>
+			 </div>
+		</div>
+    </div>
+
 
 
 

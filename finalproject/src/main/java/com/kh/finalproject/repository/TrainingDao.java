@@ -4,8 +4,12 @@ import java.util.List;
 
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
+
+import com.kh.finalproject.vo.PetDetailListVO;
+
 import com.kh.finalproject.vo.OneTrainingVO;
 import com.kh.finalproject.vo.ReservationIngListVO;
+
 
 public interface TrainingDao {
 	//등록
@@ -13,6 +17,9 @@ public interface TrainingDao {
 	//수정
 	//상태(예약취소) 변경
 	boolean statusChange(int trainingNo);
+	//상태(예약확정) 변경
+	boolean statusChange2(int trainingNo);
+	
 	
 	//테이블 조인 후 예약내역 조회
 	List<OneTrainingVO> oneTraining(int trainingNo);
@@ -41,5 +48,8 @@ public interface TrainingDao {
 	
 	//삭제
 	boolean delete(int trainingNo);
+	
+	//request_training 디테일 내역
+	List<PetDetailListVO> requestDetail(int trainerNo);
 	
 }

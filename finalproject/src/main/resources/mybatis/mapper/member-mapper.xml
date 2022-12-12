@@ -87,6 +87,10 @@
 		where member_status='Y' and member_id=#{memberId}
 	</select>
 	
+	<delete id="memberImgDelete" parameterType="String">
+	delete member_img where member_id = #{memberId}
+	</delete>
+	
 	
 	
 </mapper>

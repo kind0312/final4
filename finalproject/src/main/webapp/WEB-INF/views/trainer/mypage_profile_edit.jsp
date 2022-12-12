@@ -117,6 +117,7 @@
     <input type="hidden" value="${trainerDto.getTrainerNo()}" name="trainerNo">
   <input type="hidden" value="${trainerDto.getMemberId()}" name="memberId"> 
   <input type="hidden" value="${trainerDto.getApplyNo()}" name="applyNo">
+  <!--<input type="hidden" value="${filesNo}" id="originFilesNo">  -->
    
    <input type="hidden" value="" name="filesNo">            
    
@@ -169,14 +170,32 @@
                     	$("[name=filesNo]").val(filesNo); //하단 파일no input태그에 값 넣기
                     }
 				});
-			}
-				
-				
-			
+			}			
 			else	{ //파일 없거나 있던 파일 삭제
 				$(".img-circle").attr("src","${pageContext.request.contextPath}/image/profile_basic.jpg");
 			}
 		});
+		
+		
+// 		//목록버튼(돌아가기) 이벤트 - 새로 추가한 첨부파일 db에서 삭제
+// 		$(".list-btn").click(function(){
+// 			var newFilesNo = $("[name=filesNo]").val();
+// 			var originFilesNo = $("#originFilesNo").val();
+// 			if(newFilesNo!=originFilesNo){
+// 				$.ajax({
+// 					url:"http://localhost:8888/delete/"+newFilesNo,
+// 					method:"delete",
+// 					data:newFilesNo,
+// 					success:function(resp){
+// 						$("[name=filesNo]").val($("#originFilesNo").val());
+// 						//alert(' 삭제 성공 ! '+resp);
+// 					}
+// 				});
+// 			}
+// 		});
+		
+		
+		
 		
 	});
 </script>
