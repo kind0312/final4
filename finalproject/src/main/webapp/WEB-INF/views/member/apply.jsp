@@ -63,6 +63,7 @@
         <form class="join-form" action="apply" method="post" autocomplete="off">
         <div class="row mt-80">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+				<input type="hidden" name="memberId" value="${memberDto.memberId}" readonly>
 				<div class="form-group">
 					<label class="label-font-weight">
 						활동 가능한 시간대
@@ -70,34 +71,34 @@
 						<small class="text-muted">(중복 선택가능)</small>
 					</label>
 					<div class="form-check mt-3">
-						<input class="form-check-input" type="checkbox" name="applyActive" value="풀 타임(오전 8:00 ~ 오후 10:00)" id="allable">
+						<input class="form-check-input" type="checkbox" name="applyActive" value="오전 8:00 ~ 오후 10:00" id="allable">
 						<label for="allable">
 							풀 타임(오전 8:00 ~ 오후 10:00)
 						</label>
 					</div>
 					<div class="form-check">
-						<input class="form-check-input" type="checkbox" name="applyActive" value="오전 타임(오전 8:00 ~ 오후 12:00)" id="morningTime">
+						<input class="form-check-input" type="checkbox" name="applyActive" value="오전 8:00 ~ 오후 12:00" id="morningTime">
 						<label for="morningTime">
 							오전 타임(오전 8:00 ~ 오후 12:00)
 						</label>
 					</div>
 					<div class="form-check">
-						<input class="form-check-input" type="checkbox" name="applyActive" value="오후 타임(오후 12:00 ~ 오후 6:00)" id="afternoonTime">
+						<input class="form-check-input" type="checkbox" name="applyActive" value="오후 12:00 ~ 오후 6:00" id="afternoonTime">
 						<label for="afternoonTime">
 							오후 타임(오후 12:00 ~ 오후 6:00)
 						</label>
 					</div>
 					<div class="form-check">
-						<input class="form-check-input" type="checkbox" name="applyActive" value="저녁 타임(오후 6:00 ~ 오후 10:00)" id="eveningTime">
+						<input class="form-check-input" type="checkbox" name="applyActive" value="오후 6:00 ~ 오후 10:00" id="eveningTime">
 						<label for="eveningTime">
 							저녁 타임(오후 6:00 ~ 오후 10:00)
 						</label>
 					</div>
 					<div class="form-check">
-						<input class="form-check-input" type="checkbox" name="applyActive" value="1" id="inputTime">
+						<input class="form-check-input" type="checkbox" name="applyActive" value="time" id="inputTime">
 						<label for="inputTime">
 							직접 입력
-							<input type="text" class="underline" id="inputTime-text">
+							<input type="text" class="underline" id="inputTime-text" placeholder="예)오전 00:00 ~ 오후 00:00">
 						</label>
 					</div>
 				</div>
@@ -181,14 +182,18 @@
 		//활동시간 선택
 		$("[name=applyActive]").click(function(){
 			var active = $("[name=applyActive]:checked").val();
-// 			console.log(active.length);
+			console.log(active);
 			if(active.length > 0){
                 validChecker.applyActiveValid = true;
             }
             else {
                 validChecker.applyActiveValid = false;
             }
-			
+		});
+		
+		$("#inputTime-text").on("input", function(){
+			var time = $(this).val();
+			$("#inputTime").attr("value", time);
 		});
 		
 		//지원 동기
@@ -217,6 +222,7 @@
 		//흡연 여부
 		$("[name=applySmoke]").click(function(){
 			var check = $("[name=applySmoke]:checked").val();
+// 			console.log(check);
 			if(check){
                 validChecker.applySmokeValid = true;
                 $("#smokeYes").removeClass("is-valid is-invalid");
