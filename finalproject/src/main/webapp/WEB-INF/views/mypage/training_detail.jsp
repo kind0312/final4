@@ -118,7 +118,7 @@
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/profile">정보수정</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav trainer-change" href="#" data-bs-toggle="modal" data-bs-target="#change-modal">훈련사로 전환</a>
+	          <a class="nav-link mypage-nav trainer-change" href="#">훈련사로 전환</a>
 	        </li>
      	 </ul>
     	</div>
@@ -138,7 +138,8 @@
 	    </div>
 	  </div>
 	</div>
-	
+	테스트 출력 : ${training}<br>
+	트레이너 테스트 출력 : ${trainer}
 	<div class="container-fluid">
 		<div class="row mt-80">
 			<div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
@@ -162,7 +163,7 @@
 			  					<div class="mt-4">
 			  						<c:choose>
 			  							<c:when test="${training[0].trainingStatus=='예약대기'}">
-			  								<span>훈련사 님의 승인을 기다리고 있습니다.</span>
+			  								<span>${trainer.memberName} 훈련사 님의 승인을 기다리고 있습니다.</span>
 			  							</c:when>
 			  							<c:when test="${training[0].trainingStatus=='예약취소'}">
 			  								<span>예약이 취소되었습니다.</span>
@@ -171,7 +172,7 @@
 			  								<span>훈련이 종료되었습니다.</span>
 			  							</c:when>
 			  							<c:otherwise>
-			  								<span>훈련사 님이 방문 예정입니다.</span>
+			  								<span>${trainer.memberName} 훈련사 님이 방문 예정입니다.</span>
 			  							</c:otherwise>
 			  						</c:choose>
 			  					</div>
@@ -344,7 +345,7 @@
 	<!-- 정보 출력을 위한 hidden값 -->
 	<input type="hidden" name="petName" value="${training[0].trainingDetailPetName}">
 	<input type="hidden" name="cnt" value="${training.size()}">
-	<input type="hidden" name="memberId" value="${training.memberId}">
+	<input type="hidden" name="memberId" value="${training[0].memberId}">
 </body>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -26,24 +26,36 @@
  	
  	<!-- 훈련서비스 번호로 서비스, 서비스상세, 회원 첨부파일 연결테이블 3개 조인 리스트 -->
  	<select id="oneTraining" resultType="OneTrainingVO" parameterType="int">
- 		select * from training t 
-		inner join training_detail td on t.training_no = td.training_no
-		inner join member_img img on t.member_id = img.member_id
+ 		select m.member_name, img.files_no, t.*, td.training_detail_pet_name, li.trainer_no from member m 
+		inner join member_img img on m.member_id=img.member_id
+		inner join training t on m.member_id=t.member_id
+		inner join training_detail td on t.training_no=td.training_no
+		inner join linked_list li on td.training_no=li.training_no
 		where t.training_no=#{trainingNo}
  	</select>
  	
  	<!-- 진행 예약 리스트(회원 기준) -->
- 	<select id="ingList" resultType="TrainingDto" parameterType="String">
- 		select * from training 
- 		where member_id=#{memberId} 
-		and (training_status='예약대기' or training_status='예약확정')
+ 	<select id="ingList" resultType="TrainingListVO" parameterType="String">
+ 		select img.files_no, pro.trainer_no, li.training_no, 
+			t.training_date, t.training_starttime, t.training_status, t.member_id
+			from member_img img 
+			inner join trainer pro on img.member_id=pro.member_id
+			inner join linked_list li on pro.trainer_no=li.trainer_no
+			inner join training t on li.training_no=t.training_no
+			where member_id=#{memberId} 
+ 			and (training_status='예약대기' or training_status='예약확정')
  	</select>
  	
  	<!-- 지난 예약 리스트(회원 기준) -->
- 	<select id="endList" resultType="TrainingDto" parameterType="String">
- 		select * from training 
-		where member_id=#{memberId} 
-		and (training_status='예약취소' or training_status='이용완료')
+ 	<select id="endList" resultType="TrainingListVO" parameterType="String">
+ 		select img.files_no, pro.trainer_no, li.training_no, 
+			t.training_date, t.training_starttime, t.training_status, t.member_id
+			from member_img img 
+			inner join trainer pro on img.member_id=pro.member_id
+			inner join linked_list li on pro.trainer_no=li.trainer_no
+			inner join training t on li.training_no=t.training_no
+			where member_id=#{memberId} 
+ 			and (training_status='예약취소' or training_status='이용완료')
  	</select>
 
  	<!-- 진행 예약 리스트(훈련사 기준) -->
