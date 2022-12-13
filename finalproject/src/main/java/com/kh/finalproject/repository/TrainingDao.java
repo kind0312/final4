@@ -5,10 +5,9 @@ import java.util.List;
 
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
-
-import com.kh.finalproject.vo.PetDetailListVO;
-
 import com.kh.finalproject.vo.OneTrainingVO;
+import com.kh.finalproject.vo.PetDetailListVO;
+import com.kh.finalproject.vo.ReservationDetailListVO;
 import com.kh.finalproject.vo.ReservationListVO;
 import com.kh.finalproject.vo.TrainingRequestListVO;
 
@@ -21,6 +20,8 @@ public interface TrainingDao {
 	boolean statusChange(int trainingNo);
 	//상태(예약확정) 변경
 	boolean statusChange2(int trainingNo);
+	//상태(이용완료) 변경
+	boolean statusChange3(int trainingNo);
 	
 	
 	//테이블 조인 후 예약내역 조회
@@ -35,6 +36,8 @@ public interface TrainingDao {
 	List<ReservationListVO> ingList(int trainerNo);
 	//진난예약 조회(훈련사 기준)
 	List<ReservationListVO> endList(int trainerNo);
+	//예약 상세조회(훈련사 기준)
+	List<ReservationDetailListVO> detailList(int trainingNo);
 	//훈련서비스 받은 펫 마리 수 조회
 	int petCount(int trainingNo);
 	//훈련서비스 받은 펫 조회

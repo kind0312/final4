@@ -17,27 +17,25 @@
 </jsp:include>
 
 <style>
+textarea::placeholder{
+   font-size: 14px;
+   color: #AAAAAA;
+   }
 textarea{
    width: 600px;
    height: 200px;
    padding: 10px;
    box-sizing: border-box;
-   border: solid 2px #81BDF1;
+   border: solid 2px #DDDDDD;
    border-radius: 0.5em;
    font-size: 16px;
    resize: none;
-   margin:0 0 0 0;
 }
-.p2{
-   font-size: 12px;
-   color: #3f3f3f;
-   margin-bottom:50px;
-}
-.calendar{ 
+calendar{ 
    width: 300px;
 }
 #short-text-box{
-   border: 1px solid ##81BDF1;
+   border: 1px solid #AAAAAA;
    border-radius: 0.5em;
 }
 .blind{
@@ -107,6 +105,50 @@ font-size: 17px;
 text-align: center;
 border-color: ##000000;
 }
+.stbox:focus,
+.stbox:active,
+.stbox:hover{
+   border:1px solid  #6c7aef;
+   
+}
+#short-text-box{
+   border: 1px solid #AAAAAA;
+   border-radius: 0.5em;
+   width: 400px;
+   height: 40px;
+   text-align: center;
+   
+
+}
+.img0{
+border-radius: 50%;
+width: 200px;
+height: 200px;
+display:inline;
+float: left;
+}
+
+.map{
+float : left;
+margin-right: 20px;
+}
+
+}
+
+
+
+
+input::placeholder{
+font-weight: 400;
+font-size: 13px;
+text-align: center;
+}
+
+.basic{
+font-size: 17px;
+text-align: center;
+border-color: ##000000;
+}
 #short-text-box{
    border: 1px solid ##81BDF1;
    border-radius: 0.5em;
@@ -121,6 +163,7 @@ border-radius: 50%;
 width: 200px;
 height: 200px;
 display:inline;
+float:left;
 }
 
 .map{
@@ -139,8 +182,17 @@ margin-right: 20px;
 {
  border: solid 2px #81BDF1;
  
+
+ 
 }
 
+.row{
+text-align: center;
+}
+
+.jebal{
+margin-right : 10px;
+}
 
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -263,58 +315,42 @@ $(function(){
 	});
 	
 });
-
-
-
 </script>
-
-
-
-<div class="container-650">
-<div class="row mt-4">
-<div class="col-md-10 offset-md-1 mt-30 text-center">
-<div class="text-center">
+<div class="container-450 mt-100">
+<div class="row">
 <h3>어디로 갈까요?</h3><br>
+<div class="mt-20">
 <h6>주소를 입력해 주세요!</h6>
-<div class="rows">
-
-
-
-
+</div>
+</div>
 <form class="form-check">
 <input type="hidden" name="memberId" value="${member.memberId}">
 <input type="hidden" name="trainingPurchasePrice" value="">
 <div class="detailPrice">
 <!-- hidden으로 보낼 값 계산 name=purchaseDetailPrice -->
 </div>
- 
-               <input type="text" name="trainingBasicAddress"
-               class="input short-text-box short-hover stbox basic col" id="text-box1"
-                autocomplete="off" value="${member.memberBaseAddress}"><br><br>
-               
-               
-               
-               
-               
-               <input type="text" name="trainingDetailAddress"
-               class="input short-text-box short-hover stbox basic col" id="text-box1"
+<div class="row">
+<input type="text" name="trainingBasicAddress"
+               class="input short-text-box short-hover  basic col" id="text-box1"
+                autocomplete="off" value="${member.memberBaseAddress}">
+</div>
+<div class="row">
+<input type="text" name="trainingDetailAddress"
+               class="input short-text-box short-hover  basic col" id="text-box1"
                autocomplete="off" value="${member.memberDetailAddress}">
-               <br><br><br><br><br><br>
-               
-               
-               
-               
-               
-               
-               
-               <div class="col-md-10 offset-md-1 mt-100 text-center">
-               <h3>언제 갈까요?</h3><br>
-               <h6>날짜를 선택해 주세요!</h6><br>
-               <div class="row">
+</div>
+<br><br><br><br>
+<div class="row mt-100">
+<h3>언제 갈까요?</h3><br>
+<div class="mt-20">
+<h6>날짜를 선택해 주세요!</h6><br>
+</div>
+</div>
+ <div class="row">
                        <input type="text" class="single-date-picker short-hover date-box" id="short-text-box" 
                         name="trainingDate" autocomplete="off">
                    </div>
-                   <br><br>
+                    <div class="row">
                    <h6>시간을 선택해 주세요!</h6><br>
                    <select name="trainingStartTime">
                    <option value="09:00">09시</option>
@@ -328,39 +364,29 @@ $(function(){
                    <option value="17:00">17시</option>
                    <option value="18:00">18시</option>
                    </select>
-               </div>
-               
-               
-               <!-- 비동기 테스트 -->
-               <div class="test"></div>
-               
-               
-               
-               <br><br><br><br><br>
-               <div class="col-md-10 offset-md-1 mt-100 text-center">
-               <h3>반려동물에 대해 알려주세요!</h3><br>
-               <h6>엄선된 훈련사가 갈거에요!</h6><br>
-                <c:forEach var="pet" items="${pet}">
-   <div class="map">
-      <img src="http://localhost:8888/download/${pet.filesNo}" width="400" height="250" class="img0">
-      <p>${pet.petName}</p>
-      <input type="checkbox" class ="petCheck" name="trainingDetailPetName" value="${pet.petName}">
-   </div>
+</div>
+
+<br><br><br>
+<div class="row mt-100">
+<h3>반려동물에 대해 알려주세요!</h3><br><br><br>
+<h6>엄선된 훈련사가 갈거에요!</h6><br>
+</div>
+<div class="row">
+<c:forEach var="pet" items="${pet}">
+<img src="http://localhost:8888/download/${pet.filesNo}" width="400" height="250" class="img0">
+<p>${pet.petName}</p>
+<input type="checkbox" class ="petCheck" name="trainingDetailPetName" value="${pet.petName}">
 </c:forEach>
-<p class="p2"> 반려견 추가시 1마리당 50000포인트의 추가요금이 발생합니다.
-                       (기본 100000포인트)</p>
-               </div>
-               <br>
-               <div class="row">
-               <textarea class="helper-text2 short-hover" name="trainingMemo"  placeholder="요청사항 예) 까미는 ~간식을 못먹어요!, 자주 물어요!" maxlength="300" ></textarea>
-               </div>
-               
-               
-               
-               
-               <br><br><br><br><br><br>
-               
-               <div class="payment">    
+
+ <div class="mt-20">
+ <p class="p2"> 반려견 추가시 1마리당 50000포인트의 추가요금이 발생합니다.<br>(기본 100000포인트)</p></div>
+  </div>
+<div class="row">
+<textarea class="helper-text2 short-hover" name="trainingMemo"  placeholder="요청사항 예) 까미는 ~간식을 못먹어요!, 자주 물어요!" maxlength="300" ></textarea>
+</div>
+
+<div class="row jebal">
+ <div class="payment">    
         <h3>결제화면</h3><br>
         <span>보유하신 포인트에서 차감돼요!</span>
         <div class="content">
@@ -376,22 +402,20 @@ $(function(){
                 <span>결제 후 포인트</span>
                 <span class="price"></span>P
             </div>
-        </div>  
+            </div>
+            </div>
 </div>
-               
+<div class="row">
+<button type="submit">신청하기!</button>
+</div>
+
+
+
 </form>
-            
-         </div>
-
 </div>
 
 
-</div>
 
-
-</div>
-
-</div>
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
