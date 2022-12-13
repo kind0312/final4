@@ -39,6 +39,9 @@ public interface TrainerDao {
 	
 	//트레이너 아이디로 trainer 테이블에서 trainerNo 찾기
 	int selectOneTrainerNo(String memberId);
+	
+	//트레이너 번호로 트레이너 아이디 찾기
+	String selectOneTrainerId(int trainerNo);
 
 
 

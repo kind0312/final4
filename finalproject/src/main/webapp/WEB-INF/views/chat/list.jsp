@@ -1,28 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<jsp:include page="/WEB-INF/views/template/header.jsp">
+	<jsp:param value="회원 채팅 리스트" name="title"/>
+</jsp:include>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-
+<style>
+	.pet-table>tbody{
+		height:130px;
+	}
+	.insert-font{
+		color:black;
+		font-weight:bolder;
+		font-size:15px;
+	}
+	.name-font{
+		font-weight:bolder;
+	}
+	.gender-font{
+		color:#7B7B7B;
+	}
+	.img-circle{
+		border-radius: 70%;
+    	border:none;
+    	background-color:#81BDF1;
+    	overflow: hidden;
+	}
+	.pet-table {
+	    border-top:1px solid rgba(0, 0, 0, 0.1);
+	    height:130px;
+	}
+</style>
 
 
 
 <body>
-일반회원 채팅목록
-
-목록을 누르면 해당 훈련사와의 채팅방으로 연결
-<button type="button" onclick="location.href='http://localhost:8888/chat/room/1'">1번room 채팅</button>
-<button type="button" onclick="location.href='http://localhost:8888/chat/room/2'">2번room 채팅</button>
-<button type="button" onclick="location.href='http://localhost:8888/chat/room/3'">3번room 채팅</button>
-
-<!-- 목록마다 다른 room/${room}을 가져와야 하는데 이거 어케 가져오지?
-- 룸 생성 시점은 : 훈련사가 승인을 눌러서 예약이 확정되면 -> 자동으로 예약날짜 채팅이 가야함)
-- 디비에서 방번호를 생성해주고(seq라 번호가 다른 방 자동생성가능) -> 메세지 isnert를 해주면 list 불러오기 가능
 
 
- -->
+<div class="container-fluid">
+        <div class="row mt-80 mb-3">
+            <div class="col-md-6 offset-md-3">
+                 <h4 class="text-center">일반회원 채팅목록</h4>
+            </div>
+        </div>
+		
+        <div class="row">
+            <div class="col-md-6 offset-md-3">   
+                 <table class="table table-hover pet-table text-center">
+                 		<thead>
+              				<c:forEach var="chatList" items="${chatList}">
+                				<tr class="table-default align-middle">
+	                 				<th width="30%">
+	                 				<!-- 	<img src="http://localhost:8888/download/${request.filesNo}" class="img-circle" width="100" height="100"> --><!-- 이미지에 번호들어가야함 -->
+	                 				</th>
+	                 				<th width="40%">
+	                 					
+	                 					<p class="name-font">${chatList.memberName} 훈련사</p>
+	                 					
+	                 					<p class="gender-font">마지막 채팅 내용</p>
+	                 					<p class="gender-font">마지막 채팅 시간</p>
+	                 				</th>
+	                 				<th width="30%">
+	                 					<a href="${pageContext.request.contextPath}/chat/room?roomNo=${chatList.roomNo}" class="btn btn-blue">채팅</a>
+	                 				</th>
+                 				</tr>
+		                	</c:forEach>
+                 		</thead>					  	
+					  
+                 </table>
+			 </div>
+		</div>
+    </div>
+
+
+
+
 
 </body>
 
@@ -31,4 +87,4 @@
 	
 </script>
 
-</html>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

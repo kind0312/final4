@@ -80,5 +80,10 @@
       update trainer set trainer_profile=#{trainerProfile}, trainer_profile_content=#{trainerProfileContent} where trainer_no= #{trainerNo}
       </update>
       
+      <!-- 트레이너 번호로 트레이너 id찾기 -->
+      <select id="selectOneTrainerId" parameterType="int" resultType="String">
+      	select member_id from trainer where trainer_no =#{trainerNo}
+      </select>
+      
 
 </mapper>
