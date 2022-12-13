@@ -28,9 +28,6 @@
   	.fc .fc-button-primary:not(:disabled).fc-button-active:focus {
     	box-shadow: none;
   	}
-	
-
-	
 	.select-date{
 		border:1px solid rgba(0, 0, 0, 0.1);
 		width:95%;
@@ -39,7 +36,6 @@
 		font-size:15px;
 		border-radius: 0.5rem;
 	}
-	
 	.margin-10{
 		margin-left:10px;
 		margin-right:10px;
@@ -53,6 +49,17 @@
 		background-color:#81BDF1;
 		color:#fff;
 	}
+	table>tbody>tr>td{
+		height:50px;
+		vertical-align: middle;
+	}
+	.fc-scrollgrid{
+		border-radius: 0.5rem;
+	}
+	.fc .fc-scrollgrid-section{
+		border:none;
+	}
+
 </style>
 
 <script>
