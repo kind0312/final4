@@ -19,6 +19,11 @@
 		font-weight:bolder;
 		font-size:17px;
 	}
+	.minus-price-font{
+		color:#d9534f;
+		font-weight:bolder;
+		font-size:17px;
+	}#d9534f
 </style>
 
 <script>
@@ -107,7 +112,9 @@
         
 		<div class="row mt-5">
             <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-                 <span class="float-left">보유포인트 : ${point.memberPoint}P</span>
+                 <span class="float-left">
+                 	보유포인트 : <fmt:formatNumber value="${point.memberPoint}" pattern="###,###"></fmt:formatNumber>P
+                 </span>
                  <a href="${pageContext.request.contextPath}/pay/point_select" class="btn btn-blue float-end">포인트 구매</a>
                  <br>
             </div>
@@ -136,10 +143,18 @@
 						  				<td>${list.pointStatus}</td>
 						  				<c:choose>
 						  					<c:when test="${list.pointStatus=='구매'}">
-						  						<td class="price-font">+${list.pointPrice}</td>
+						  						<td class="price-font">
+						  							<span>
+						  								+<fmt:formatNumber value="${list.pointPrice}" pattern="###,###"></fmt:formatNumber>
+						  							</span>
+						  						</td>
 						  					</c:when>
 						  					<c:otherwise>
-						  						<td class="price-font">-${list.pointPrice}</td>
+						  						<td class="minus-price-font">
+						  							<span>
+						  								-<fmt:formatNumber value="${list.pointPrice}" pattern="###,###"></fmt:formatNumber>
+						  							</span>
+						  						</td>
 						  					</c:otherwise>
 						  				</c:choose>				  				
 						  			</tr>

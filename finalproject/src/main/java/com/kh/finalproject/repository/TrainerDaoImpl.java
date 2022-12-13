@@ -84,6 +84,11 @@ public class TrainerDaoImpl implements TrainerDao {
 		return sqlSession.selectOne("trainer.selectOneTrainerNo", memberId);
 	}
 
+	@Override
+	public String selectOneTrainerId(int trainerNo) {		
+		return sqlSession.selectOne("trainer.selectOneTrainerId", trainerNo);
+	}
+
 
 	
 	

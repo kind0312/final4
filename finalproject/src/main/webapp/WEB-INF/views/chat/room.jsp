@@ -97,6 +97,7 @@ $(function(){
 		
 		var data = {
 			type : 2,
+			room : "${roomNo}",
 			text : text
 		};
 		socket.send(JSON.stringify(data));
