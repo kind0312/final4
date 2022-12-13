@@ -126,7 +126,7 @@
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/profile">정보수정</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav trainer-change" href="#" data-bs-toggle="modal" data-bs-target="#change-modal">훈련사로 전환</a>
+	          <a class="nav-link mypage-nav trainer-change" href="#">훈련사로 전환</a>
 	        </li>
      	 </ul>
     	</div>
@@ -147,6 +147,8 @@
 	  </div>
 	</div>
 	
+	진행예약 테스트 출력: ${ingList}<br>
+	지난예약 테스트 출력: ${endList}<br>
 	<div class="container-fluid">
         <div class="row mt-80">
             <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
@@ -174,10 +176,10 @@
                  		<c:forEach var="ingList" items="${ingList}">
                  			<tr class="table-default align-middle">
 	                 			<td width="30%">
-	                 				<img src="#" class="img-circle" width="100" height="100">
+	                 				<img src="http://localhost:8888/download/${ingList.filesNo}" class="img-circle" width="100" height="100">
 	                 			</td>
 	                 			<td width="40%">
-	                 				<fmt:formatDate value="${ingList.trainingDate}" pattern="yyyy-MM-dd (E)"/>
+	                 				<fmt:formatDate value="${ingList.trainingDate}" pattern="yyyy-MM-dd (E)"/> ${ingList.trainingStartTime}
 	                 			</td>
 	                 			<td width="30%">
 	                 				<c:choose>
@@ -215,10 +217,10 @@
                  		<c:forEach var="endList" items="${endList}">
                  			<tr class="table-default align-middle">
 	                 			<td width="30%">
-	                 				<img src="#" class="img-circle" width="100" height="100">
+	                 				<img src="http://localhost:8888/download/${endList.filesNo}" class="img-circle" width="100" height="100">
 	                 			</td>
 	                 			<td width="40%">
-	                 				<fmt:formatDate value="${endList.trainingDate}" pattern="yyyy-MM-dd (E)"/>
+	                 				<fmt:formatDate value="${endList.trainingDate}" pattern="yyyy-MM-dd (E)"/>  ${endList.trainingStartTime}
 	                 			</td>
 	                 			<td width="30%">
 	                 				<c:choose>

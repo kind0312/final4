@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="apply">
+
+	<select id="sequence" resultType="int">
+		select apply_seq.nextval from dual
+	</select>
+	
+	<insert id="insert" parameterType="ApplyDto">
+		insert into apply(apply_no, member_id, apply_active, apply_motive, apply_license, apply_smoke, apply_status)  
+		values(#{applyNo}, #{memberId}, #{applyActive}, #{applyMotive}, #{applyLicense}, #{applySmoke}, '신청')
+	</insert>
+	
+	<select id="one" parameterType="String" resultType="ApplyDto">
+		select * from apply where member_id = #{memberId}
+	</select>
+	
+</mapper>

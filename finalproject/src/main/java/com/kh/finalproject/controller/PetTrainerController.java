@@ -2,7 +2,6 @@ package com.kh.finalproject.controller;
 
 
 import java.sql.Date;
-
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -18,10 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.entity.MemberImgDto;
+
 import com.kh.finalproject.entity.PetDto;
 import com.kh.finalproject.entity.ScheduleDto;
+
 import com.kh.finalproject.entity.TrainerDto;
-import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.repository.FilesDao;
 import com.kh.finalproject.repository.MemberDao;
@@ -29,11 +29,9 @@ import com.kh.finalproject.repository.PetDao;
 import com.kh.finalproject.repository.ScheduleDao;
 import com.kh.finalproject.repository.TrainerDao;
 import com.kh.finalproject.repository.TrainingDao;
-
+import com.kh.finalproject.repository.TrainingPurchaseDao;
 import com.kh.finalproject.vo.PetDetailListVO;
 import com.kh.finalproject.vo.TrainingRequestListVO;
-
-import lombok.Builder;
 
 
 
@@ -52,6 +50,8 @@ public class PetTrainerController {
 	private TrainingDao trainingDao;
 	@Autowired
 	private PetDao petDao;
+	@Autowired
+	private TrainingPurchaseDao trainingPurchaseDao;
 
 	@Autowired
 	private ScheduleDao scheduleDao;
@@ -203,33 +203,27 @@ public class PetTrainerController {
 //	}
 	
 	
-	
-	
-	
-	
 	@RequestMapping("/mypage_reservation")
 	public String reservation(HttpSession session, Model model) {
-		//String memberId = (String)session.getAttribute(SessionConstant.ID);
-		String memberId = "trainer3";
-		TrainerDto dto = trainerDao.selectOnePro(memberId);
-		int trainerNo = dto.getTrainerNo();
-		
+		int trainerNo = (int)session.getAttribute(SessionConstant.trainingNo);
 		model.addAttribute("ingList", trainingDao.ingList(trainerNo));
-		
+		model.addAttribute("endList", trainingDao.endList(trainerNo));
 		return "trainer/mypage_reservation";
 	}
+
 	
-	
+	@RequestMapping("/mypage_reservation_detail")
+	public String reservationDetail(@RequestParam int trainingNo, Model model) {
+		model.addAttribute("detail", trainingDao.detailList(trainingNo));
+		return "trainer/mypage_reservation_detail";
+	}
 
 	@RequestMapping("/schedule")
 	public String schedule(HttpSession session, Model model) {
-		
+		int trainerNo = (int)session.getAttribute(SessionConstant.trainingNo);
+		model.addAttribute("trainerNo", trainerNo);
 		return "trainer/schedule";
 	}
-	
-	
-	
-	
 
 	
 	//로그아웃 누를 경우 세션값 제거하기

@@ -10,7 +10,7 @@
 <body>
 
 	<div class="container-fluid" style="height:100%;">
-	<form action="find_memberid" method="post" autocomplete="off">
+	<form class="join-form" action="find_memberid" method="post" autocomplete="off">
 		<div class="row text-center mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-150">
 				<h1>ID 찾기</h1>
@@ -33,6 +33,41 @@
 		</div>
 	</form>
 	</div>
+	
+	<script>
+	$(function(){
+		var check = {
+				memberNameValid : false, memberNameRegex : /^[a-zA-Z가-힣]{2,7}$/,
+				memberTelValid : false, memberTelRegex : /^01[016789][1-9]\d{6,7}$/,
+				checkValid : function(){
+					return this.memberNameValid && this.memberTelValid;
+					}
+		};
+		
+		$("[name]").blur(function(){ 
+			var name = $(this).attr("name");
+            var value = $(this).val();
+            var regex = check[name+"Regex"];
+            if(regex.test(value)) {
+            	check[name+"Valid"] = true;
+                $(this).removeClass("is-valid is-invalid").addClass("is-valid");
+            }
+            else {
+            	check[name+"Valid"] = false;
+                $(this).removeClass("is-valid is-invalid").addClass("is-invalid");
+            }
+        });
+		
+		$(".join-form").submit(function(e){
+	        e.preventDefault();
+			
+	        if(check.checkValid()){
+	        	this.submit();//전송
+	        }
+	    });
+	});
+	
+	</script>
 
 </body>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

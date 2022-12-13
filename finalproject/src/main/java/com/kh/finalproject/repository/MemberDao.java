@@ -22,6 +22,12 @@ public interface MemberDao {
 	boolean findId(MemberDto memberDto);
 	//아이디 불러오기
 	MemberDto find(MemberDto memberDto);
+	//비밀번호 찾기
+	boolean findPw(MemberDto memberDto);
+	//비밀번호 찾기 후 아이디 불러오기
+	MemberDto certPw(MemberDto memberDto);
+	//비밀번호 변경
+	void changePw(MemberDto memberDto);
 	
 	
 	//조회

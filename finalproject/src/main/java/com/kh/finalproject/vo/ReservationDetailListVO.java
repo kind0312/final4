@@ -6,14 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class OneTrainingVO {
+public class ReservationDetailListVO {
 	
-	private String memberName;
 	private String memberId;
+	private String memberName;
 	
 	private int trainingNo;
-	
 	private Date trainingDate;
 	private String trainingStartTime;
 	private String trainingBasicAddress;
@@ -22,8 +22,18 @@ public class OneTrainingVO {
 	private String trainingStatus;
 	private Date trainingChangeDate;
 	
-	private String trainingDetailPetName;
+	private int trainingPurchasePrice;
+	
+	private int petNo;
+	private String petType;
+	private String petName;
+	private String petGender;
+	private String petBreed;
+	private Date petBirth;
+	private int petWeight;
+	private String petNeutralization;
+	
 	private int filesNo;
 	
-	private int trainerNo;
+	//private String trainingDetailPetName;
 }

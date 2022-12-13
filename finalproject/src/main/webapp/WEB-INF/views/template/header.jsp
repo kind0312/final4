@@ -80,26 +80,32 @@
        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94efcfc3a2fb279ab90052c1c24e8cc6"></script>
    
       <style>
+      	
 /*          <!-- div 확인 점선 --> */
 /*            div{ */
 /*                  border: 1px dotted gray; */
 /*               } */
           /* 태그 스타일 */
-           body {
+		body {
 /*                height:1000px; */
-           }
-          p {
+        }
+        p {
            margin-top: 0;
            margin-bottom: 0;
-         }
+           font-family: var(--bs-font-sans-serif);
+        }
          a {
             text-decoration: none;
          }
          a:hover {
             color: #dfe6e9;
          }
-
+        
          /* 클래스 스타일 */
+         .rounded{
+         	border-radius: 10px !important;
+         }
+         
           .logo {
              width:80px;
           }
@@ -180,6 +186,9 @@
          }
          .blue-bolder{
             font-weight:bolder;
+         }
+         .yellow{
+        	color:#FADE81;
          }
          
         .btn{
@@ -266,8 +275,11 @@
             box-shadow: 0 0 0 0.25rem rgba(69, 130, 236, 0.25);
          }
          
+         /* 라벨 폰트 두껍게*/
+         .label-font-weight{
+         	font-weight:bold;
+         }
          
-
       </style>
       
       <script type="text/javascript"> 
@@ -328,7 +340,7 @@
                      <a class="nav-link" href="#">이용후기</a>
                    </li>
                    <li class="nav-item">
-                     <a class="nav-link" href="#">펫시터 지원</a>
+                     <a class="nav-link" href="${pageContext.request.contextPath}/member/apply">훈련사 지원</a>
                    </li>
                    <c:choose>
                       <c:when test="${loginId == null}">

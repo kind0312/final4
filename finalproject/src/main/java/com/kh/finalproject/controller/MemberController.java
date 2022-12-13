@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.finalproject.constant.SessionConstant;
+import com.kh.finalproject.entity.ApplyDto;
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.MemberImgDto;
+import com.kh.finalproject.repository.ApplyDao;
 import com.kh.finalproject.repository.FilesDao;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.TrainerDao;
@@ -24,8 +26,13 @@ public class MemberController {
 
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private ApplyDao applyDao;
+	
 	@Autowired
 	private FilesDao filesDao;
+	
 	@Autowired
 	private TrainerDao trainerDao;
 	
@@ -109,5 +116,64 @@ public class MemberController {
 	@GetMapping("/find_memberpw")
 	public String findMemberPw() {
 		return "member/find_memberpw";
+	}
+	
+	@PostMapping("/find_memberpw")
+	public String findMemberPw(@ModelAttribute MemberDto memberDto,
+			RedirectAttributes attr) {
+		boolean judge = memberDao.findPw(memberDto);
+		if(judge) {
+			attr.addAttribute("memberId", memberDao.certPw(memberDto).getMemberId());
+			return "redirect:change_memberpw";
+		}
+		else {
+			return "redirect:find_memberpw?error";
+		}
+	}
+	
+	//비밀번호 찾은 후 변경
+	@GetMapping("/change_memberpw")
+	public String changeMemeberPw(@ModelAttribute MemberDto memberDto, Model model) {
+		model.addAttribute("memberDto", memberDao.certPw(memberDto));
+		return "member/change_memberpw";
+	}
+	
+	@PostMapping("/change_memberpw")
+	public String changeMemeberPw(@ModelAttribute MemberDto memberDto) {
+		memberDao.changePw(memberDto);
+		return "redirect:change_memberpw_success";
+	}
+	
+	//비밀번호 변경 완료
+	@GetMapping("/change_memberpw_success")
+	public String changeMemberPwSuccess() {
+		return "member/change_memberpw_success";
+	}
+	
+	//훈련사 지원
+	@GetMapping("/apply")
+	public String apply(Model model, HttpSession session) {
+		String loginId = (String)session.getAttribute(SessionConstant.ID);
+		if(loginId == null) {
+			return "member/login";
+		}
+		ApplyDto findDto = applyDao.selectone(loginId);
+		if(findDto != null) {
+			return "redirect:apply_finish";
+		}
+		model.addAttribute("memberDto", memberDao.selectOne(loginId));
+		return "member/apply";
+	}
+	
+	@PostMapping("/apply")
+	public String apply(@ModelAttribute ApplyDto applyDto) {
+		applyDao.insert(applyDto);
+		return "redirect:apply_finish";
+	}
+	
+	//훈련사 지원완료
+	@GetMapping("/apply_finish")
+	public String applyFinish() {
+		return "member/apply_finish";
 	}
 }

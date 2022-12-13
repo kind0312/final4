@@ -1,7 +1,5 @@
 package com.kh.finalproject.controller;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -21,10 +19,12 @@ import com.kh.finalproject.entity.PurchaseDetailDto;
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingPurchaseDto;
 import com.kh.finalproject.repository.MemberDao;
-import com.kh.finalproject.repository.PetDao;
 import com.kh.finalproject.repository.PointDao;
+import com.kh.finalproject.repository.TrainerDao;
 import com.kh.finalproject.repository.TrainingDao;
 import com.kh.finalproject.repository.TrainingPurchaseDao;
+import com.kh.finalproject.vo.OneTrainingVO;
+import com.kh.finalproject.vo.TrainerOneVO;
 
 @Controller
 @RequestMapping("/mypage")
@@ -39,7 +39,7 @@ public class MypageController {
 	@Autowired
 	private TrainingPurchaseDao trainingPurchaseDao;
 	@Autowired
-	private PetDao petDao;
+	private TrainerDao trainerDao;
 	
 	//포인트 관리
 	@RequestMapping("/point")
@@ -68,7 +68,11 @@ public class MypageController {
 	@RequestMapping("/training_detail")
 	public String detail(@RequestParam int trainingNo, Model model) {
 		//훈련서비스 단일조회
-		model.addAttribute("training", trainingDao.oneTraining(trainingNo));
+		List<OneTrainingVO> dto = trainingDao.oneTraining(trainingNo);
+		model.addAttribute("training", dto);
+		//훈련사 단일조회
+		TrainerOneVO trainerDto = trainerDao.selectOnePro(dto.get(0).getTrainerNo());
+		model.addAttribute("trainer", trainerDto);
 		//결제내역 단일조회
 		model.addAttribute("purchase", trainingPurchaseDao.selectOne(trainingNo));
 		return "mypage/training_detail";

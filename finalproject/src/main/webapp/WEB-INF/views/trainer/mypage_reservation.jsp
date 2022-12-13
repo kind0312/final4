@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="/WEB-INF/views/template/header.jsp">
+<jsp:include page="/WEB-INF/views/template/trainerHeader.jsp">
 	<jsp:param value="예약 확인" name="title"/>
 </jsp:include>
 
@@ -54,28 +54,27 @@
 		$(".mode-change").click(function(){
 			location.href="${pageContext.request.contextPath}/";
 		});
-
-	function ingClick(){
-		//버튼 색상 변경
-		$(".end-btn").removeClass("unselect-btn");
-		$(".ing-btn").removeClass("unselect-btn");
-		$(".end-btn").addClass("unselect-btn");
-		//진행 예약만 출력
-		$(".training-end").children().hide();
-		$(".training-ing").children().show();
-	}
-	
-	function endClick(){
-		//버튼 색상 변경
-		$(".ing-btn").removeClass("unselect-btn");
-		$(".end-btn").removeClass("unselect-btn");
-		$(".ing-btn").addClass("unselect-btn");
-		//지난 예약만 출력
-		$(".training-end").children().show();
-		$(".training-ing").children().hide();
-	}
-	
 		
+		function ingClick(){
+			//버튼 색상 변경
+			$(".end-btn").removeClass("unselect-btn");
+			$(".ing-btn").removeClass("unselect-btn");
+			$(".end-btn").addClass("unselect-btn");
+			//진행 예약만 출력
+			$(".training-end").children().hide();
+			$(".training-ing").children().show();
+		}
+		
+		function endClick(){
+			//버튼 색상 변경
+			$(".ing-btn").removeClass("unselect-btn");
+			$(".end-btn").removeClass("unselect-btn");
+			$(".ing-btn").addClass("unselect-btn");
+			//지난 예약만 출력
+			$(".training-end").children().show();
+			$(".training-ing").children().hide();
+		}
+
 	});
 </script>
 
@@ -118,7 +117,7 @@
 	    </div>
 	  </div>
 	</div>
-	테스트 출력 : ${ingList}
+
 	<div class="container-fluid">
         <div class="row mt-80">
             <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4 mt-4">
@@ -132,76 +131,103 @@
       	<!-- 진행 예약 화면 -->	
         <div class="row mt-8 training-ing">
             <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4 mt-4">
-                  	<c:if test="${ingList.size()==0}">
-		                 <table class="table table-hover training-table text-center">
+                 <c:choose>
+                 	<c:when test="${ingList.size()==0}">
+                 		<table class="table table-hover training-table text-center">
 		                 	<tbody>
+		                 		<tr class="align-middle">
+		                 			<th width="20%">이름</th>
+		                 			<th width="20%">지역</th>
+		                 			<th width="20%">날짜</th>
+		                 			<th width="10%">시간</th>
+		                 			<th></th>
+		                 		</tr>
 		                 		<tr class="table-default align-middle">
-		                 			<td><span class="training-zero-font">아직 예약이 없습니다</span></td>
+		                 			<td colspan="5"><span class="training-zero-font">아직 예약이 없습니다</span></td>
 		                 		</tr>
 		                 	</tbody>
 		                 </table>
-			      	</c:if>
-                 <table class="table table-hover training-table text-center">
-                 	<tbody>
-                 		<tr>
-                 			<th>이름</th>
-                 			<th>지역</th>
-                 			<th>날짜</th>
-                 			<th>시간</th>
-                 			<th colspan="2"></th>
-                 		</tr>
-                 		<c:forEach var="ingList" items="${ingList}">
-                 			<tr class="table-default align-middle">
-	                 			<td>${ingList.memberName}</td>
-	                 			<td>${ingList.trainingBasicAddress}</td>
-	                 			<td>${ingList.trainingDate}</td>
-	                 			<td>${ingList.trainingStartTime}</td>
-	                 			<td><a href="${pageContext.request.contextPath}/trainer/mypage_reservation?trainingNo=${ingList.trainingNo}" class="btn btn-blue">상세 내역</a></td>
-	                 			<td><a href="#" class="btn btn-yellow">채팅 하기</a></td>
-	                 		</tr>
-                 		</c:forEach>
-                 	</tbody>
-                 </table>
+                 	</c:when>
+                 	<c:otherwise>
+		                 <table class="table table-hover training-table text-center">
+		                 	<tbody>
+		                 		<tr class="align-middle">
+		                 			<th width="20%">이름</th>
+		                 			<th width="20%">지역</th>
+		                 			<th width="20%">날짜</th>
+		                 			<th width="10%">시간</th>
+		                 			<th colspan="2" ></th>
+		                 		</tr>
+		                 		<c:forEach var="ingList" items="${ingList}">
+		                 			<tr class="table-default align-middle">
+			                 			<td>${ingList.memberName}</td>
+			                 			<td>${ingList.trainingBasicAddress}</td>
+			                 			<td>${ingList.trainingDate}</td>
+			                 			<td>${ingList.trainingStartTime}</td>
+			                 			<td>
+			                 				<a href="${pageContext.request.contextPath}/trainer/mypage_reservation_detail?trainingNo=${ingList.trainingNo}" class="btn btn-blue">상세</a>
+			                 				<a href="#" class="btn btn-yellow">채팅</a>
+			                 			</td>
+			                 		</tr>
+		                 		</c:forEach>
+		                 	</tbody>
+		                 </table>
+                 	</c:otherwise>
+                </c:choose>
             </div>
         </div>
   
         <!-- 지난 예약 화면 -->
          <div class="row mt-12 training-end">
             <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4 mt-4">
-           		 <c:if test="${endList.size()==0}">
-		                 <table class="table table-hover training-table text-center">
+           		 <c:choose>
+           		 	<c:when test="${endList.size()==0}">
+           		 		<table class="table table-hover training-table text-center">
 		                 	<tbody>
+		                 		<tr class="align-middle">
+		                 			<th width="20%">이름</th>
+		                 			<th width="20%">지역</th>
+		                 			<th width="20%">날짜</th>
+		                 			<th width="10%">시간</th>
+		                 			<th></th>
+		                 		</tr>
 		                 		<tr class="table-default align-middle">
 		                 			<td><span class="training-zero-font">아직 예약이 없습니다</span></td>
 		                 		</tr>
 		                 	</tbody>
 		                 </table>
-			      	</c:if>
-                 <table class="table table-hover training-table text-center">
-                 	<tbody>
-                 		<tr>
-                 			<th>이름</th>
-                 			<th>지역</th>
-                 			<th>날짜</th>
-                 			<th>시간</th>
-                 			<th>수익금</th>
-                 			<th></th>
-                 		</tr>
-                 		<c:forEach var="ingList" items="${endList}">
-                 			<tr class="table-default align-middle">
-	                 			<td>${endList.memberName}</td>
-	                 			<td>${endList.trainingBasicAddress}</td>
-	                 			<td>${endList.trainingDate}</td>
-	                 			<td>${endList.trainingStartTime}</td>
-	                 			<td>${endList.trainingStartTime}</td>
-	                 			<td><a href="${pageContext.request.contextPath}/trainer/mypage_reservation?trainingNo=${endList.trainingNo}" class="btn btn-blue">상세 내역</a></td>
-	                 		</tr>
-                 		</c:forEach>
-                 	</tbody>
-                 </table>
+           		 	</c:when>
+           		 	<c:otherwise>
+           		 		<table class="table table-hover training-table text-center">
+		                 	<tbody>
+		                 		<tr class="align-middle">
+		                 			<th width="20%">이름</th>
+		                 			<th width="20%">지역</th>
+		                 			<th width="20%">날짜</th>
+		                 			<th width="10%">시간</th>
+		                 			<th width="15%">수익금</th>
+		                 			<th></th>
+		                 		</tr>
+		                 		<c:forEach var="endList" items="${endList}">
+		                 			<tr class="table-default align-middle">
+			                 			<td>${endList.memberName}</td>
+			                 			<td>${endList.trainingBasicAddress}</td>
+			                 			<td>${endList.trainingDate}</td>
+			                 			<td>${endList.trainingStartTime}</td>
+			                 			<td>
+			                 				<fmt:formatNumber value="${endList.trainingPurchasePrice*0.9}" pattern="###,###"></fmt:formatNumber>
+			                 			</td>
+			                 			<td>
+			                 				<a href="${pageContext.request.contextPath}/trainer/mypage_reservation_detail?trainingNo=${endList.trainingNo}" class="btn btn-blue">상세</a>
+			                 			</td>
+			                 		</tr>
+		                 		</c:forEach>
+		                 	</tbody>
+		                 </table>
+           		 	</c:otherwise>
+           		 </c:choose>
             </div>
         </div>
-
         
     </div>
 

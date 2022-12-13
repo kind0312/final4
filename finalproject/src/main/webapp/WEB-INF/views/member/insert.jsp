@@ -67,7 +67,7 @@
         <div class="row mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 				<div class="row form-group">
-					<label>
+					<label class="label-font-weight">
 						아이디
 						<i class="fa-solid fa-asterisk blue"></i>
 					</label>
@@ -86,7 +86,7 @@
 		<div class="row mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 				<div class="row form-group">
-					<label>
+					<label class="label-font-weight">
 						비밀번호
 						<i class="fa-solid fa-asterisk blue"></i>
 					</label>
@@ -102,7 +102,7 @@
 		<div class="row mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 				<div class="row form-group">
-					<label>
+					<label class="label-font-weight">
 						비밀번호 재확인
 						<i class="fa-solid fa-asterisk blue"></i>
 					</label>
@@ -117,7 +117,7 @@
 		<div class="row mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 				<div class="row form-group">
-					<label>
+					<label class="label-font-weight">
 						이름
 						<i class="fa-solid fa-asterisk blue"></i>
 					</label>
@@ -132,7 +132,7 @@
 		<div class="row mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 				<div class="row form-group">
-					<label>
+					<label class="label-font-weight">
 						이메일
 						<i class="fa-solid fa-asterisk blue"></i>
 					</label>
@@ -155,7 +155,7 @@
 		<div class="row mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 				<div class="row form-group">
-					<label>
+					<label class="label-font-weight">
 						휴대폰
 						<i class="fa-solid fa-asterisk blue"></i>
 					</label>
@@ -170,7 +170,7 @@
 		<div class="row mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 				<div class="row form-group">
-					<label>
+					<label class="label-font-weight">
 						주소
 						<i class="fa-solid fa-asterisk blue"></i>
 					</label>
@@ -197,7 +197,7 @@
 		<div class="row mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 				<div class="row form-group">
-					<label>
+					<label class="label-font-weight">
 						생년월일
 						<i class="fa-solid fa-asterisk blue"></i>
 					</label>
@@ -212,7 +212,7 @@
 		<div class="row mt-4">
 			<div class="col-lg-6 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 				<div class="row form-group">
-					<label>
+					<label class="label-font-weight">
 						성별
 						<i class="fa-solid fa-asterisk blue"></i>
 					</label>
