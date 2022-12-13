@@ -64,7 +64,7 @@
        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.min.js"></script>
    
        <!-- score (jquery 보다 뒤에 나와야 한다.)-->
-       <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@0.0.6/score.min.js"></script>
    
        <!-- 주소 검색 -->
        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -148,11 +148,17 @@
          .footer-link{
             color: #f8f9fa;
          }
+         .w-10{
+         	width: 10% !important;
+         }
          .w-30{
             width: 30%;
          }
          .w-70{
             width: 70%;
+         }
+         .w-90{
+         	width: 90% !important;
          }
          .mt-150{
             margin-top:150px;
@@ -337,7 +343,7 @@
                      </div>
                    </li>
                    <li class="nav-item">
-                     <a class="nav-link" href="#">이용후기</a>
+                     <a class="nav-link" href="${pageContext.request.contextPath}/review/list">이용후기</a>
                    </li>
                    <li class="nav-item">
                      <a class="nav-link" href="${pageContext.request.contextPath}/member/apply">훈련사 지원</a>
