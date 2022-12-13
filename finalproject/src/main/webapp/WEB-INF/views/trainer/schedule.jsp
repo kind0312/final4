@@ -29,6 +29,16 @@
 		font-size:15px;
 		border-radius: 0.5rem;
 	}
+	
+	.margin-10{
+		margin-left:10px;
+		margin-right:10px;
+	}
+	
+	.select-font{
+		font-weight:bolder;
+		font-size:20px;
+	}
 </style>
 
 <script>
@@ -42,8 +52,9 @@
 		//풀캘린더
 		var calendarEl = $('#calendar')[0];
 	      // full-calendar 생성하기
+	      var trainerNo = $("[name=trainerNo]").val();
 	      var calendar = new FullCalendar.Calendar(calendarEl, {
-	        height: '600px', // calendar 높이 설정
+	        height: '500px', // calendar 높이 설정
 	        expandRows: true, // 화면에 맞게 높이 재설정
 	        // 해더에 표시할 툴바
 	        headerToolbar: {
@@ -58,8 +69,7 @@
 	            $(".careDate").text(careDate);
 	            
 	            var trainingDate = $(".careDate").text();
-	            var trainerNo = $("[name=trainerNo]").val();
-	            
+
 	            data={
 	            		trainingDate:trainingDate,
 	            		trainerNo:trainerNo
@@ -75,7 +85,11 @@
 		    			 if(resp.length>0){
 		    				 for(var i=0; i<resp.length; i++){ 
 		    					 var tr =  $("<tr>").attr("class","table-default align-middle"); 
-		    					 var td1 = $("<td>").text(resp[i].memberName);
+		    					 var td1 = $("<td>");
+		    					 var a = $("<a>").text(resp[i].memberName)
+		    					 				.attr("href",
+		    					 				"${pageContext.request.contextPath}/trainer/mypage_reservation_detail?trainingNo="+resp[i].trainingNo);
+		    					 td1.append(a);
 		    					 var td2 =  $("<td>").text(resp[i].trainingBasicAddress);
 		    					 var td3 =  $("<td>").text(resp[i].trainingDate);
 		    					 var td4 =  $("<td>").text(resp[i].trainingStartTime);
@@ -98,10 +112,28 @@
 	        nowIndicator: true, // 현재 시간 마크
 	        dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
 	        locale: 'ko', // 한국어 설정
+	        events: [
+	        	$.ajax({
+	        		url:"http://localhost:8888/rest/schedule/"+trainerNo,
+	        		method:"get",
+	        		data:trainerNo,
+	        		success:function(resp){
+	        			//console.log(resp);
+	        			if(resp.length!=0){
+	        				for(var i=0; i<resp.length; i++){
+	        					 calendar.addEvent({
+	        						 start: resp[i]['trainingDate'],
+	        						 display: ['background'],
+	        						 color : ['#81BDF1']
+                                 })
+	        				}
+	        			}
+	        		}
+	        	})
+           	]
 	      });
 	      // 캘린더 랜더링
 	      calendar.render();
-	      
 	});
 </script>
 
@@ -134,18 +166,18 @@
  		<div class="row mt-5">
             <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4">
                  <div class="text-center" id="calendar"></div>
-                 <div class="text-center">
-                 	<span>현재 날짜</span>
-                 	<span>예약 있음</span>
+                 <div class="text-center mt-2">
+                 	<span class="margin-10"><i class="fa-solid fa-circle"  style="color:#FFFADF;"></i> 현재 날짜</span>
+                 	<span class="margin-10"><i class="fa-solid fa-circle blue"></i> 예약 있음</span>
                  </div>
             </div>
         </div>
         
-		<div class="row mt-3">
+		<div class="row mt-5">
             <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4">
                  <div class="text-center">
-                 	<span>선택 날짜 : </span>
-                 	<span class="careDate"></span>
+                 	<span class="select-font">선택 날짜 : </span>
+                 	<span class="careDate select-font blue"></span>
                  </div>
             </div>
         </div>
@@ -153,7 +185,7 @@
         <div class="row mt-3">
             <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4">
                  <div class="text-center">
-                 	<table class="table table-hover text-center">
+                 	<table class="table text-center">
                  		<thead>
                  			<tr class="align-middle">
                  				<th>이름</th>
@@ -167,6 +199,13 @@
                  			<!-- 비동기화 목록 출력 -->
                  		</tbody>
                  	</table>
+                 </div>
+            </div>
+        </div>
+        
+        <div class="row mt-3 mb-5">
+            <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4">
+                 <div class="text-center">
                  </div>
             </div>
         </div>

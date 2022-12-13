@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
+import com.kh.finalproject.vo.CalendarVO;
 import com.kh.finalproject.vo.OneTrainingVO;
 import com.kh.finalproject.vo.PetDetailListVO;
 import com.kh.finalproject.vo.ReservationDetailListVO;
@@ -39,8 +40,10 @@ public interface TrainingDao {
 	List<ReservationListVO> endList(int trainerNo);
 	//예약 상세조회(훈련사 기준)
 	List<ReservationDetailListVO> detailList(int trainingNo);
-	//스케줄 조회
+	//스케줄 날짜 클릭 후 예약내역 조회
 	List<ReservationListVO> schedule(ScheduleVO scheduleVO);
+	//DB에 있는 데이터 스케줄에 미리 표시하기 위한 조회
+	List<CalendarVO> scheduleDataList(int trainerNo);
 	//훈련서비스 받은 펫 마리 수 조회
 	int petCount(int trainingNo);
 	//훈련서비스 받은 펫 조회

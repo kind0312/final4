@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.finalproject.repository.TrainingDao;
+import com.kh.finalproject.vo.CalendarVO;
 import com.kh.finalproject.vo.ReservationListVO;
 import com.kh.finalproject.vo.ScheduleVO;
 
@@ -38,6 +39,14 @@ public class TrainingRestController {
 				.build();
 		return trainingDao.schedule(vo);
 	}
+	
+	@GetMapping("/schedule/{trainerNo}")
+	public List<CalendarVO> scheduleDataList(@PathVariable int trainerNo){
+		return trainingDao.scheduleDataList(trainerNo);
+	}
+	
+	
+	
 	
 
 }
