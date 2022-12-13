@@ -20,6 +20,16 @@
 		background-color: #3b6fc9;
 		border-color: #3768bd;
 	}
+	.fc .fc-button:focus{
+		border-color:none;
+		box-shadow: none;
+	}
+	.fc .fc-button-primary:not(:disabled):active:focus,
+  	.fc .fc-button-primary:not(:disabled).fc-button-active:focus {
+    	box-shadow: none;
+  	}
+	
+
 	
 	.select-date{
 		border:1px solid rgba(0, 0, 0, 0.1);
@@ -38,6 +48,10 @@
 	.select-font{
 		font-weight:bolder;
 		font-size:20px;
+	}
+	.schedule-table{
+		background-color:#81BDF1;
+		color:#fff;
 	}
 </style>
 
@@ -85,20 +99,21 @@
 		    			 if(resp.length>0){
 		    				 for(var i=0; i<resp.length; i++){ 
 		    					 var tr =  $("<tr>").attr("class","table-default align-middle"); 
-		    					 var td1 = $("<td>");
-		    					 var a = $("<a>").text(resp[i].memberName)
-		    					 				.attr("href",
-		    					 				"${pageContext.request.contextPath}/trainer/mypage_reservation_detail?trainingNo="+resp[i].trainingNo);
-		    					 td1.append(a);
-		    					 var td2 =  $("<td>").text(resp[i].trainingBasicAddress);
-		    					 var td3 =  $("<td>").text(resp[i].trainingDate);
-		    					 var td4 =  $("<td>").text(resp[i].trainingStartTime);
-		    					 tr.append(td1).append(td2).append(td3).append(td4);
+		    					 var td1 = $("<td>").text(resp[i].memberName);
+		    					 var td2 = $("<td>").text(resp[i].trainingBasicAddress);
+		    					 var td3 = $("<td>").text(resp[i].trainingDate);
+		    					 var td4 = $("<td>").text(resp[i].trainingStartTime);
+		    					 var td5 = $("<td>");
+		    					 var a = $("<a>").attr("href",
+		    						"${pageContext.request.contextPath}/trainer/mypage_reservation_detail?trainingNo="+resp[i].trainingNo	 
+		    					 ).attr("class","btn btn-yellow").text('상세');
+		    					 td5.append(a);
+		    					 tr.append(td1).append(td2).append(td3).append(td4).append(td5);
 		    					 tbody.append(tr);
 		    				 }
 		    			 }else{ 
 		    				 var tr =  $("<tr>").attr("class","table-default align-middle");
-		    				 var td = $("<td>").attr("colspan","4").text('예약이 없습니다');
+		    				 var td = $("<td>").attr("colspan","5").text('예약이 없습니다');
 		    				 tr.append(td);
 		    				 tbody.append(tr);
 		    			 } 
@@ -182,17 +197,17 @@
             </div>
         </div>
         
-        <div class="row mt-3">
+        <div class="row mt-5">
             <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4">
                  <div class="text-center">
                  	<table class="table text-center">
                  		<thead>
-                 			<tr class="align-middle">
-                 				<th>이름</th>
-                 				<th>지역</th>
-                 				<th>날짜</th>
-                 				<th>방문시간</th>
-                 				
+                 			<tr class="align-middle schedule-table">
+                 				<th width="20%">이름</th>
+                 				<th width="20%">지역</th>
+                 				<th width="20%">날짜</th>
+                 				<th width="20%">방문시간</th>
+                 				<th>상세</th>
                  			</tr>
                  		</thead>
                  		<tbody class="ajax-content">
