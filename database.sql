@@ -158,7 +158,7 @@ apply_motive varchar2(4000)not null,
 apply_smoke char(1)not null,
 apply_active varchar2(100) not null,
 apply_license varchar2(100),
-apply_status char(6) default '신청' not null check(apply_status in('신청,'승인','반려'))
+apply_status char(6) default '신청' not null check(apply_status in('신청','승인','반려'))
 );
 
 create sequence apply_seq;
