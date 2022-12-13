@@ -12,6 +12,7 @@ import com.kh.finalproject.entity.TrainingDto;
 
 import com.kh.finalproject.vo.PetDetailListVO;
 import com.kh.finalproject.vo.ReservationDetailListVO;
+import com.kh.finalproject.vo.CalendarVO;
 import com.kh.finalproject.vo.OneTrainingVO;
 import com.kh.finalproject.vo.ReservationListVO;
 import com.kh.finalproject.vo.ScheduleVO;
@@ -70,11 +71,18 @@ public class TrainingDaoImpl implements TrainingDao{
 		return sqlSession.selectList("training.reservationDetailList",trainingNo);
 	}
 	
-	//스케줄 조회
+	//스케줄 예약내역 조회
 	@Override
 	public List<ReservationListVO> schedule(ScheduleVO scheduleVO) {
 		return sqlSession.selectList("training.scheduleList",scheduleVO);
 	}
+	
+	//스케줄에 표시할 데이터 조회(db데이터 넣기)
+	@Override
+	public List<CalendarVO> scheduleDataList(int trainerNo) {
+		return sqlSession.selectList("training.schedule",trainerNo);
+	}
+	
 	
 	//훈련서비스 받은 펫 마리 수 조회
 	@Override

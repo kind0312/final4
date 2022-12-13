@@ -37,7 +37,14 @@
 		background-color: #3b6fc9;
 		border-color: #3768bd;
 	}
-	
+	.fc .fc-button:focus{
+		border-color:none;
+		box-shadow: none;
+	}
+	.fc .fc-button-primary:not(:disabled):active:focus,
+  	.fc .fc-button-primary:not(:disabled).fc-button-active:focus {
+    	box-shadow: none;
+  	}
 	.select-date{
 		border:1px solid rgba(0, 0, 0, 0.1);
 		width:95%;
@@ -46,6 +53,30 @@
 		font-size:15px;
 		border-radius: 0.5rem;
 	}
+	.margin-10{
+		margin-left:10px;
+		margin-right:10px;
+	}
+	
+	.select-font{
+		font-weight:bolder;
+		font-size:20px;
+	}
+	.schedule-table{
+		background-color:#81BDF1;
+		color:#fff;
+	}
+	table>tbody>tr>td{
+		height:50px;
+		vertical-align: middle;
+	}
+	.fc-scrollgrid{
+		border-radius: 0.5rem;
+	}
+	.fc .fc-scrollgrid-section{
+		border:none;
+	}
+
 </style>
 
 <script>
@@ -59,8 +90,9 @@
 		//풀캘린더
 		var calendarEl = $('#calendar')[0];
 	      // full-calendar 생성하기
+	      var trainerNo = $("[name=trainerNo]").val();
 	      var calendar = new FullCalendar.Calendar(calendarEl, {
-	        height: '600px', // calendar 높이 설정
+	        height: '500px', // calendar 높이 설정
 	        expandRows: true, // 화면에 맞게 높이 재설정
 	        // 해더에 표시할 툴바
 	        headerToolbar: {
@@ -75,8 +107,7 @@
 	            $(".careDate").text(careDate);
 	            
 	            var trainingDate = $(".careDate").text();
-	            var trainerNo = $("[name=trainerNo]").val();
-	            
+
 	            data={
 	            		trainingDate:trainingDate,
 	            		trainerNo:trainerNo
@@ -93,15 +124,20 @@
 		    				 for(var i=0; i<resp.length; i++){ 
 		    					 var tr =  $("<tr>").attr("class","table-default align-middle"); 
 		    					 var td1 = $("<td>").text(resp[i].memberName);
-		    					 var td2 =  $("<td>").text(resp[i].trainingBasicAddress);
-		    					 var td3 =  $("<td>").text(resp[i].trainingDate);
-		    					 var td4 =  $("<td>").text(resp[i].trainingStartTime);
-		    					 tr.append(td1).append(td2).append(td3).append(td4);
+		    					 var td2 = $("<td>").text(resp[i].trainingBasicAddress);
+		    					 var td3 = $("<td>").text(resp[i].trainingDate);
+		    					 var td4 = $("<td>").text(resp[i].trainingStartTime);
+		    					 var td5 = $("<td>");
+		    					 var a = $("<a>").attr("href",
+		    						"${pageContext.request.contextPath}/trainer/mypage_reservation_detail?trainingNo="+resp[i].trainingNo	 
+		    					 ).attr("class","btn btn-yellow").text('상세');
+		    					 td5.append(a);
+		    					 tr.append(td1).append(td2).append(td3).append(td4).append(td5);
 		    					 tbody.append(tr);
 		    				 }
 		    			 }else{ 
 		    				 var tr =  $("<tr>").attr("class","table-default align-middle");
-		    				 var td = $("<td>").attr("colspan","4").text('예약이 없습니다');
+		    				 var td = $("<td>").attr("colspan","5").text('예약이 없습니다');
 		    				 tr.append(td);
 		    				 tbody.append(tr);
 		    			 } 
@@ -115,10 +151,28 @@
 	        nowIndicator: true, // 현재 시간 마크
 	        dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
 	        locale: 'ko', // 한국어 설정
+	        events: [
+	        	$.ajax({
+	        		url:"http://localhost:8888/rest/schedule/"+trainerNo,
+	        		method:"get",
+	        		data:trainerNo,
+	        		success:function(resp){
+	        			//console.log(resp);
+	        			if(resp.length!=0){
+	        				for(var i=0; i<resp.length; i++){
+	        					 calendar.addEvent({
+	        						 start: resp[i]['trainingDate'],
+	        						 display: ['background'],
+	        						 color : ['#81BDF1']
+                                 })
+	        				}
+	        			}
+	        		}
+	        	})
+           	]
 	      });
 	      // 캘린더 랜더링
 	      calendar.render();
-	      
 	});
 </script>
 
@@ -151,39 +205,46 @@
  		<div class="row mt-5">
             <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4">
                  <div class="text-center" id="calendar"></div>
-                 <div class="text-center">
-                 	<span>현재 날짜</span>
-                 	<span>예약 있음</span>
+                 <div class="text-center mt-2">
+                 	<span class="margin-10"><i class="fa-solid fa-circle"  style="color:#FFFADF;"></i> 현재 날짜</span>
+                 	<span class="margin-10"><i class="fa-solid fa-circle blue"></i> 예약 있음</span>
                  </div>
             </div>
         </div>
         
-		<div class="row mt-3">
+		<div class="row mt-5">
             <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4">
                  <div class="text-center">
-                 	<span>선택 날짜 : </span>
-                 	<span class="careDate"></span>
+                 	<span class="select-font">선택 날짜 : </span>
+                 	<span class="careDate select-font blue"></span>
                  </div>
             </div>
         </div>
         
-        <div class="row mt-3">
+        <div class="row mt-5">
             <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4">
                  <div class="text-center">
-                 	<table class="table table-hover text-center">
+                 	<table class="table text-center">
                  		<thead>
-                 			<tr class="align-middle">
-                 				<th>이름</th>
-                 				<th>지역</th>
-                 				<th>날짜</th>
-                 				<th>방문시간</th>
-                 				
+                 			<tr class="align-middle schedule-table">
+                 				<th width="20%">이름</th>
+                 				<th width="20%">지역</th>
+                 				<th width="20%">날짜</th>
+                 				<th width="20%">방문시간</th>
+                 				<th>상세</th>
                  			</tr>
                  		</thead>
                  		<tbody class="ajax-content">
                  			<!-- 비동기화 목록 출력 -->
                  		</tbody>
                  	</table>
+                 </div>
+            </div>
+        </div>
+        
+        <div class="row mt-3 mb-5">
+            <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4">
+                 <div class="text-center">
                  </div>
             </div>
         </div>
