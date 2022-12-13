@@ -2,6 +2,23 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
+
+
+ <!--fullcalendar css-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
+
+    <!-- fullcalendar CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <!-- fullcalendar 언어 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
+    <!-- moment CDN (format사용하기 위해)-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script type="text/javascript"></script>
+
+
+
 
 <jsp:include page="/WEB-INF/views/template/trainerHeader.jsp">
 	<jsp:param value="스케줄" name="title"/>
@@ -179,3 +196,4 @@
 </body>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+

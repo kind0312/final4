@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.finalproject.entity.ChatDto;
 import com.kh.finalproject.entity.ChatUserDto;
 import com.kh.finalproject.entity.RoomDto;
+import com.kh.finalproject.vo.SearchRoomVO;
 
 
 
@@ -24,4 +25,9 @@ public interface ChatDao {
 	// list 불러오기
 	List<ChatDto> chatSearch(String roomNo); 
 	
+	//기존에 있는 채팅룸 불러오기
+	String searchRoomVO(SearchRoomVO searchRoomVO);
+	
+	//채팅방 리스트(일반회원)
+	List<ChatUserDto> chatRoomList(String memberId);
 }

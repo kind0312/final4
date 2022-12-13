@@ -97,6 +97,6 @@ height: 200px;
         
     </div>
     <a href="/trainer/reservation?trainerNo=${list.trainerNo}" class="btn btn-blue btn-md " class="btn reserve">예약하기</a>
-    <a href="javascript:void(0);" class="btn inquiry">문의하기</a>
+    <a href="/chat/enter?trainerNo=${list.trainerNo}" class="btn inquiry">문의하기</a>
 </body>
 </html>
