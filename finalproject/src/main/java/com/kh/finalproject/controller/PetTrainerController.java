@@ -198,8 +198,9 @@ public class PetTrainerController {
 	}
 
 	@RequestMapping("/schedule")
-	public String schedule() {
-		
+	public String schedule(HttpSession session, Model model) {
+		int trainerNo = (int)session.getAttribute(SessionConstant.trainingNo);
+		model.addAttribute("trainerNo", trainerNo);
 		return "trainer/schedule";
 	}
 	
