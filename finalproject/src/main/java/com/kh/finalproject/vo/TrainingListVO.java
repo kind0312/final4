@@ -6,24 +6,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class OneTrainingVO {
-	
-	private String memberName;
+public class TrainingListVO {
 	private String memberId;
 	
 	private int trainingNo;
-	
 	private Date trainingDate;
 	private String trainingStartTime;
-	private String trainingBasicAddress;
-	private String trainingDetailAddress;
-	private String trainingMemo;
 	private String trainingStatus;
-	private Date trainingChangeDate;
-	
-	private String trainingDetailPetName;
-	private int filesNo;
 	
 	private int trainerNo;
+	
+	private int filesNo;
 }

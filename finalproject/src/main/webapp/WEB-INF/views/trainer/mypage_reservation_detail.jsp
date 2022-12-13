@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="예약 확인" name="title"/>
+<jsp:include page="/WEB-INF/views/template/trainerHeader.jsp">
+	<jsp:param value="예약 상세" name="title"/>
 </jsp:include>
 
 <style>
@@ -56,12 +56,18 @@
 		
 		//완료 버튼 이벤트(해당 훈련서비스 상태를 이용완료로 변경처리)
 		$(".change-btn").click(function(){
-			
-			
-			//버튼 목록만 출력, 상태 이용완료로 변경
-			//$(".change-btn").hide();
-			//$(".status").text('이용완료');
-			
+			var trainingNo = $("[name=trainingNo]").val();
+			$.ajax({
+				url:"http://localhost:8888/rest/training_status/"+trainingNo,
+				method:"patch",
+				data:trainingNo,
+				success:function(resp){
+					if(resp){
+						$(".change-btn").hide(); //완료 버튼 숨김
+						$(".status").text('이용완료');
+					}
+				}
+			});			
 		});
 		
 		//1000단위 콤마찍기
@@ -168,7 +174,7 @@
 											    			<img src="http://localhost:8888/download/${detail.filesNo}" class="img-circle" width="180" height="180" alt="반려동물 사진">
 											    		</div>
 											    		<div class="carousel-caption">
-													        <h6 style="color:white;">${detail.petName}(${detail.petGender}세/${detail.petWeight}kg)</h6>
+													        <h6 style="color:white;">${detail.petName}(${detail.petGender}/${detail.petWeight}kg)</h6>
 													        <p style="color:white;">${detail.petBreed}</p>
 													    </div>
 											    	</div>

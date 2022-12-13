@@ -8,6 +8,7 @@ import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.vo.ReviewVO;
 import com.kh.finalproject.vo.TrainerListSearchVO;
 import com.kh.finalproject.vo.TrainerListVO;
+import com.kh.finalproject.vo.TrainerOneVO;
 
 
 public interface TrainerDao {
@@ -27,8 +28,10 @@ public interface TrainerDao {
 	//훈련사테이블(자기소개) insert 메소드
 	void insertTrainer(TrainerDto trainerDto);
 	
-	//훈련사 한 명 단일 조회
+	//훈련사 한 명 단일 조회(변수:회원ID)
 	TrainerDto selectOnePro(String memberId);
+	//훈련사 한 명 단일 조회(변수:훈련사번호)
+	TrainerOneVO selectOnePro(int trainingNo);
 	
 	//훈련사테이블(자기소개) update 수정 메소드
 	boolean updateTrainer(TrainerDto trainerDto);
