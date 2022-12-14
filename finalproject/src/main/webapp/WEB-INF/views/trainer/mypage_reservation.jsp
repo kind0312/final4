@@ -129,7 +129,7 @@
         </div>
  
       	<!-- 진행 예약 화면 -->	
-        <div class="row mt-8 training-ing">
+        <div class="row training-ing">
             <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4 mt-4">
                  <c:choose>
                  	<c:when test="${ingList.size()==0}">
@@ -178,7 +178,7 @@
         </div>
   
         <!-- 지난 예약 화면 -->
-         <div class="row mt-12 training-end">
+         <div class="row training-end">
             <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4 mt-4">
            		 <c:choose>
            		 	<c:when test="${endList.size()==0}">
