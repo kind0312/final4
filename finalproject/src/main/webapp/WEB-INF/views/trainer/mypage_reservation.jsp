@@ -33,6 +33,14 @@
    	background-color:#81BDF1;
    	overflow: hidden;
 	}
+	table>tbody>tr>td{
+		vertical-align:middle;
+		
+	}
+	table>tbody>tr>th{
+		vertical-align:middle;
+		height:20px;
+	}
 </style>
 
 <script>
@@ -120,7 +128,7 @@
 
 	<div class="container-fluid">
         <div class="row mt-80">
-            <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4 mt-4">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
                  <div class="text-center">
                  	<button class="training-btn ing-btn">진행 예약</button>
                  	<button class="training-btn end-btn">지난 예약</button>
@@ -130,28 +138,28 @@
  
       	<!-- 진행 예약 화면 -->	
         <div class="row training-ing">
-            <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4 mt-4">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
                  <c:choose>
                  	<c:when test="${ingList.size()==0}">
                  		<table class="table table-hover training-table text-center">
 		                 	<tbody>
-		                 		<tr class="align-middle">
+		                 		<tr>
 		                 			<th width="20%">이름</th>
 		                 			<th width="20%">지역</th>
 		                 			<th width="20%">날짜</th>
 		                 			<th width="10%">시간</th>
 		                 			<th></th>
 		                 		</tr>
-		                 		<tr class="table-default align-middle">
+		                 		<tr class="table-default">
 		                 			<td colspan="5"><span class="training-zero-font">아직 예약이 없습니다</span></td>
 		                 		</tr>
 		                 	</tbody>
 		                 </table>
                  	</c:when>
                  	<c:otherwise>
-		                 <table class="table table-hover training-table text-center">
+		                 <table class="table training-table text-center">
 		                 	<tbody>
-		                 		<tr class="align-middle">
+		                 		<tr>
 		                 			<th width="20%">이름</th>
 		                 			<th width="20%">지역</th>
 		                 			<th width="20%">날짜</th>
@@ -159,7 +167,7 @@
 		                 			<th colspan="2" ></th>
 		                 		</tr>
 		                 		<c:forEach var="ingList" items="${ingList}">
-		                 			<tr class="table-default align-middle">
+		                 			<tr class="table-default">
 			                 			<td>${ingList.memberName}</td>
 			                 			<td>${ingList.trainingBasicAddress}</td>
 			                 			<td>${ingList.trainingDate}</td>
@@ -179,20 +187,21 @@
   
         <!-- 지난 예약 화면 -->
          <div class="row training-end">
-            <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4 mt-4">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-3">
            		 <c:choose>
            		 	<c:when test="${endList.size()==0}">
            		 		<table class="table table-hover training-table text-center">
 		                 	<tbody>
-		                 		<tr class="align-middle">
+		                 		<tr>
 		                 			<th width="20%">이름</th>
 		                 			<th width="20%">지역</th>
 		                 			<th width="20%">날짜</th>
 		                 			<th width="10%">시간</th>
+		                 			<th width="15%">수익금</th>
 		                 			<th></th>
 		                 		</tr>
-		                 		<tr class="table-default align-middle">
-		                 			<td><span class="training-zero-font">아직 예약이 없습니다</span></td>
+		                 		<tr class="table-default">
+		                 			<td colspan="6"><span class="training-zero-font">아직 예약이 없습니다</span></td>
 		                 		</tr>
 		                 	</tbody>
 		                 </table>
@@ -200,7 +209,7 @@
            		 	<c:otherwise>
            		 		<table class="table table-hover training-table text-center">
 		                 	<tbody>
-		                 		<tr class="align-middle">
+		                 		<tr>
 		                 			<th width="20%">이름</th>
 		                 			<th width="20%">지역</th>
 		                 			<th width="20%">날짜</th>
@@ -209,7 +218,7 @@
 		                 			<th></th>
 		                 		</tr>
 		                 		<c:forEach var="endList" items="${endList}">
-		                 			<tr class="table-default align-middle">
+		                 			<tr class="table-default">
 			                 			<td>${endList.memberName}</td>
 			                 			<td>${endList.trainingBasicAddress}</td>
 			                 			<td>${endList.trainingDate}</td>

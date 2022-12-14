@@ -138,8 +138,7 @@
 	    </div>
 	  </div>
 	</div>
-	테스트 출력 : ${training}<br>
-	트레이너 테스트 출력 : ${trainer}
+	
 	<div class="container-fluid">
 		<div class="row mt-80">
 			<div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
