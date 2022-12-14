@@ -88,6 +88,24 @@
 		where t.training_no=#{trainingNo}
  	</select>
  	
+ 	<!-- 스케쥴 예약내역 리스트 -->
+ 	<select id="scheduleList" resultType="ReservationListVO" parameterType="ScheduleVO">
+ 		select m.member_name, t.*, li.trainer_no from member m 
+		inner join training t on m.member_id=t.member_id
+		inner join linked_list li on t.training_no=li.training_no
+		where li.trainer_no=#{trainerNo} and t.training_status='예약확정'
+		and t.training_date=#{trainingDate}
+ 	</select>
+ 	
+ 	<!-- 스케줄 데이터 리스트(화면에 미리 찍어줄 데이터) -->
+ 	<select id="schedule" resultType="CalendarVO" parameterType="int">
+ 		select t.training_date, t. training_no, 
+ 		t.training_status, li.trainer_no from training t 
+		inner join linked_list li on t.training_no=li.training_no
+		where li.trainer_no=#{trainerNo} and t.training_status='예약확정'
+ 	</select>
+ 	
+ 	
  	<!-- 훈련서비스 받은 펫 마리수 -->
   	<select id="petCount" resultType="int" parameterType="int">
   		select count(*) from training_detail where training_no=#{trainingNo}

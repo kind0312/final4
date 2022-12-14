@@ -17,11 +17,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.entity.MemberImgDto;
+
+import com.kh.finalproject.entity.PetDto;
+import com.kh.finalproject.entity.ScheduleDto;
+
 import com.kh.finalproject.entity.TrainerDto;
 import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.repository.FilesDao;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.PetDao;
+import com.kh.finalproject.repository.ScheduleDao;
 import com.kh.finalproject.repository.TrainerDao;
 import com.kh.finalproject.repository.TrainingDao;
 import com.kh.finalproject.repository.TrainingPurchaseDao;
@@ -47,6 +52,10 @@ public class PetTrainerController {
 	private PetDao petDao;
 	@Autowired
 	private TrainingPurchaseDao trainingPurchaseDao;
+
+	@Autowired
+	private ScheduleDao scheduleDao;
+	
 
 	@RequestMapping("/main")
 	public String main(HttpSession session) {
@@ -86,7 +95,9 @@ public class PetTrainerController {
 	}
 	
 	@GetMapping("/training_approve")
-	public String approve(@RequestParam int trainingNo) {
+	public String approve(@RequestParam int trainingNo, HttpSession session) {
+		String memberId = (String) session.getAttribute(SessionConstant.ID);	
+		int trainerNo = trainerDao.selectOneTrainerNo(memberId); // trainerNo를 찾아옴
 		//Dao에 training 테이블의 status 상태 수정update 
 		//Dao에 상태수정 날짜 sysdate 들어가게 
 		TrainingDto dto = trainingDao.selectOne(trainingNo);
@@ -96,9 +107,18 @@ public class PetTrainerController {
 				
 		Boolean result = trainingDao.statusChange2(trainingNo);	//status 상태를 예약확정으로 바꾸는 메소드
 		
+		
 		if(!result || list.size() > 0) { //이거 꼭 확인하기 로그인 안돼서 테스트 못함
 			return "trainer/training_disable"; //예약승인 불가 - 승인 불가한 경우 코드 넣어야함
 		}		
+		
+		//스케줄 테이블에 예약 날짜를 넣어야함 dto.getTrainingDate()
+		ScheduleDto scheduleDto = ScheduleDto
+				.builder()
+				.trainerNo(trainerNo)
+				.scheduleDate(dto.getTrainingDate())
+				.build();
+		scheduleDao.insert(scheduleDto);
 		return "trainer/training_approve"; //예약승인 성공
 	}
 	
@@ -190,6 +210,7 @@ public class PetTrainerController {
 		model.addAttribute("endList", trainingDao.endList(trainerNo));
 		return "trainer/mypage_reservation";
 	}
+
 	
 	@RequestMapping("/mypage_reservation_detail")
 	public String reservationDetail(@RequestParam int trainingNo, Model model) {
@@ -198,12 +219,15 @@ public class PetTrainerController {
 	}
 
 	@RequestMapping("/schedule")
-	public String schedule() {
-		
+	public String schedule(HttpSession session, Model model) {
+		int trainerNo = (int)session.getAttribute(SessionConstant.trainingNo);
+		model.addAttribute("trainerNo", trainerNo);
 		return "trainer/schedule";
 	}
+
 	
 	//로그아웃 누를 경우 세션값 제거하기
+
 	
 }
 	
