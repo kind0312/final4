@@ -156,9 +156,6 @@
                  </div>
             </div>
         </div>
-        
-        테스트 출력 : ${ingList}<br>
-        테스트 출력 : ${endList}<br>
 
       	<!-- 진행 예약 화면 -->	
         <div class="row training-ing">
