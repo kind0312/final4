@@ -23,14 +23,14 @@
       </select>
       
       <!-- 훈련사 단일 조회 mapper -->
-      <select id="selectOne"  parameterType="String" resultType="TrainerListVO">
-      select nvl(R.cnt,0) cnt , nvl(CEIL(R.avg),0) avg, T.trainer_no, T.member_id,
+      <select id="selectOne"  parameterType="int" resultType="TrainerListVO">
+      select nvl(R.cnt,0) cnt , nvl(CEIL(R.avg),0) avg, T.trainer_no, T.member_id, T.trainer_like,
       T.trainer_profile, T.trainer_profile_content,
       M.member_name,M.member_tel,M.member_email from trainer T
       inner join member M on T.member_id = M.member_id left outer join
       (select trainer_no, count(*) cnt, avg(review_good) avg 
       from review group by trainer_no)
-      R on R.trainer_no = T.trainer_no where T.member_id = #{memberId}
+      R on R.trainer_no = T.trainer_no where T.trainer_no = #{trainerNo}
       </select>
       
       <!-- 훈련사 단일 리뷰 조회 -->
