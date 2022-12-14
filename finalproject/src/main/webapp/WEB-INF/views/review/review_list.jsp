@@ -18,12 +18,15 @@
 /* 	.star-score { */
 /* 		white-space: nowrap; */
 /* 	} */
-
+	.reviewborder{
+		border-radius:10px;
+		box-shadow: rgb(235 235 235) 0px 2px 12px 0px;
+	}
 </style>
 <body>
 
 	<div class="container-fluid" style="height:100%;">
-		<div class="row text-center mt-100">
+		<div class="row text-center mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-150">
 				<h1>이용 후기<i class="fa-solid fa-rss wifi blue"></i>
 				</h1>
@@ -36,36 +39,58 @@
 				</div>
 			</div>
 			<div class="row mt-4">
-				<div class="col-md-8 offset-md-3">
+				<div class="col-md-8 offset-md-2 d-flex justify-content-center">
 					<div class="row mt-4">
 						<c:forEach var="reviewDto" items="${reviewList}">
-							<div>
-							<div class="col-xl-1 offset-xl-0 col-lg-1 offset-lg-0 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
-								<img src="${pageContext.request.contextPath}/download/${reviewDto.filesNo}" style="width:75px; height: 75px; border-radius: 70%;">
-							</div>
-							<div class="col-xl-4 offset-xl-0 col-lg-4 offset-lg-0 col-md-6 offset-md-4 col-sm-8 offset-sm-4">
-								<h3>${reviewDto.memberId}</h3>
+							<div class="col-xl-5 offset-xl-1 col-lg-5 offset-lg-1 col-md-10 offset-md-1 col-sm-10 offset-sm-1 mt-4 reviewborder">
 								<div class="row">
-									<div class="col">
-										<div class="star-score" data-max="5" data-rate="${reviewDto.reviewGood}"></div>
+									<img class="col-xl-1 offset-xl-0 col-lg-1 offset-lg-0 col-md-4 offset-md-0 col-sm-4 offset-sm-0 mt-4" src="${pageContext.request.contextPath}/download/${reviewDto.filesNo}" style="width:100px; height: 85px; border-radius: 70%;">
+									<div class="col-xl-8 offset-xl-0 col-lg-6 offset-lg-0 col-md-8 offset-md-0 col-sm-8 offset-sm-0 mt-4">
+									<h3>${reviewDto.memberId}</h3>
+										<div class="row">
+											<div class="col">
+												<div class="star-score" data-max="5" data-rate="${reviewDto.reviewGood}"></div>
+											</div>
+										</div>
+										<div class="row mt-3 mb-4">
+											<div class="col">
+												<div>${reviewDto.reviewTitle}</div>
+											</div>
+										</div>
 									</div>
 								</div>
-								<div class="row mt-3">
-									<div class="col">
-										<p class="card-text">${reviewDto.reviewContent}</p>
-									</div>
-								</div>
-							</div>
 							</div>
 						</c:forEach>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row mt-100 mb-5">
-			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
-			<a href="${pageContext.request.contextPath}/" class="btn btn-blue btn-md">홈으로</a>
-			</div>
+		<div class="row mt-100">
+            <div class="col-md-10 offset-md-1 d-flex justify-content-center">
+			  <ul class="pagination">
+			    <li class="page-item disabled">
+			      <a class="page-link" href="#">&laquo;</a>
+			    </li>
+			    <li class="page-item active">
+			      <a class="page-link" href="#">1</a>
+			    </li>
+			    <li class="page-item">
+			      <a class="page-link" href="#">2</a>
+			    </li>
+			    <li class="page-item">
+			      <a class="page-link" href="#">3</a>
+			    </li>
+			    <li class="page-item">
+			      <a class="page-link" href="#">4</a>
+			    </li>
+			    <li class="page-item">
+			      <a class="page-link" href="#">5</a>
+			    </li>
+			    <li class="page-item">
+			      <a class="page-link" href="#">&raquo;</a>
+			    </li>
+			  </ul>
+		  	</div>
 		</div>
 	</div>
 	
@@ -91,4 +116,4 @@
 	</script>
 
 </body>
-<%-- <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> --%>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

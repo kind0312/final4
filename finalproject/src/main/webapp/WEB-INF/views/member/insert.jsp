@@ -49,8 +49,8 @@
 	
 	<div class="container-fluid">
 
-        <div class="row mt-100">
-            <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
+        <div class="row mt-4">
+            <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-150">
                  <h1 class="text-center">회원가입</h1>
             </div>
         </div>
@@ -138,7 +138,7 @@
 					</label>
 					<div class="input-group">
 						<input type="email" name="memberEmail" class="form-control underline w-75 check-input" aria-describedby="email-button" required>
-						<button class="btn btn-outline-blue w-25" type="button" id="email-button">인증코드발송</button>
+						<button class="btn btn-outline-blue w-25" type="button" id="email-button">인증 코드</button>
 						<div class="valid-feedback"></div>
 	                    <div class="invalid-feedback">형식에 맞게 입력해주세요</div>
 					</div>
@@ -232,7 +232,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row mt-4 mb-5 text-center">
+		<div class="row mt-5 mb-5 text-center">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 				<button type="submit" id="insert-btn" class="btn btn-blue w-75">회원가입</button>
 			</div>

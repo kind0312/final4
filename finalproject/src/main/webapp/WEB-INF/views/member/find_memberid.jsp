@@ -9,7 +9,7 @@
 
 <body>
 
-	<div class="container-fluid" style="height:100%;">
+	<div class="container-fluid">
 	<form class="join-form" action="find_memberid" method="post" autocomplete="off">
 		<div class="row text-center mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-150">
@@ -17,16 +17,17 @@
 			</div>
 		</div>
 		<div class="row mt-4">
-			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-			<input type="text" name="memberName" class="form-control" placeholder="이름">
+			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2" align="center">
+			<input type="text" name="memberName" class="form-control rounded" placeholder="이름" style="width:400px;">
 			</div>
 		</div>
 		<div class="row mt-4">
-			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-			<input type="tel" name="memberTel" class="form-control rounded" placeholder="휴대전화" maxlength="11">
+			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2" align="center">
+			<input type="tel" name="memberTel" class="form-control rounded" placeholder="휴대전화" maxlength="11" style="width:400px;">
+			<div class="invalid-feedback" align="left" style="width:400px;">숫자만 입력해주세요</div>
 			</div>
 		</div>
-		<div class="row mt-5">
+		<div class="row mt-5 mb-5">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
 			<button type="submit" class="btn btn-blue btn-md">확인</button>
 			</div>

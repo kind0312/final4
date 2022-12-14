@@ -86,9 +86,20 @@
 /*                  border: 1px dotted gray; */
 /*               } */
           /* 태그 스타일 */
+        html,
 		body {
-/*                height:1000px; */
+                height:100%;
         }
+        
+      	body {
+		  display: flex;
+		  flex-direction: column;
+		}
+		
+		section {
+		  flex: 1;
+		}
+        
         p {
            margin-top: 0;
            margin-bottom: 0;
@@ -171,6 +182,9 @@
          }
          .mt-80{
             margin-top:80px;
+         }
+         .mt-70{
+            margin-top:70px;
          }
          .mt-50{
             margin-top:50px;
@@ -379,4 +393,4 @@
          </div>
        </div>
         </div>
-        <main class="container-fluid">
+        <section class="container-fluid">

@@ -20,7 +20,8 @@
 <!-- 			inner join pet_img img on p.pet_no = img.pet_no -->
 <!--             inner join review r on t.training_no= r.training_no -->
 <!--         order by review_writetime desc -->
-		select * from review_list_view order by review_writetime desc
+<!-- 		select * from review_list_view order by review_writetime desc -->
+		select * from review_img_view order by review_writetime desc
 	</select>
 	
 </mapper>

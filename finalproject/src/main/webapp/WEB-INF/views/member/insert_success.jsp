@@ -9,15 +9,19 @@
 
 <body>
 	
-	<div class="container-fluid" style="height:50%;">
+	<div class="container-fluid">
         
-        <div class="row text-center mt-150">
-            <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+        <div class="row text-center mt-4">
+			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-150">
             	<i class="fa-solid fa-circle-check fa-2x" style="color:#FADE81;" ></i> 
-            	<h4 class="mt-50">회원가입이 완료되었습니다.</h4>
 			</div>
 		</div>
-		<div class="row mt-50 mb-5">
+		<div class="row mt-70 text-center">
+			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+            	<h2>회원가입이 완료되었습니다.</h2>
+			</div>
+		</div>
+		<div class="row mt-100 mb-5">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
 				<a href="${pageContext.request.contextPath}/member/login" class="btn btn-blue btn-md">로그인</a><br>
 			</div>

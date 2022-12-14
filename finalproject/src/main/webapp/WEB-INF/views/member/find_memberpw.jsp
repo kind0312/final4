@@ -34,11 +34,14 @@
 	  background-color: #e5f1fc;
 	  opacity: 1;
 	}
+	div.input-group{
+		padding:0;
+	}
 </style>
 
 <body>
 
-	<div class="container-fluid" style="height:100%;">
+	<div class="container-fluid">
 	<form class="join-form" action="find_memberpw" method="post" autocomplete="off">
 		<div class="row text-center mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-150">
@@ -46,30 +49,30 @@
 			</div>
 		</div>
 		<div class="row mt-4">
-			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-			<input type="text" name="memberId" class="form-control" placeholder="아이디">
+			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2"  align="center" >
+			<input type="text" name="memberId" class="form-control rounded" placeholder="아이디" style="width:400px;">
 			</div>
 		</div>
 		<div class="row mt-4">
-			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-				<div class="row form-group">
+			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2" align="center">
+				<div class="row form-group" style="width:400px;">
 					<div class="input-group">
-						<input type="email" name="memberEmail" class="form-control w-75" placeholder="이메일" aria-describedby="email-button" required>
-						<button class="btn btn-outline-blue w-25" type="button" id="email-button">인증코드발송</button>
+						<input type="email" name="memberEmail" class="form-control rounded w-70" placeholder="이메일" aria-describedby="email-button" required>
+						<button class="btn btn-outline-blue w-30" type="button" id="email-button">인증 코드</button>
 						<div class="valid-feedback"></div>
-	                    <div class="invalid-feedback">형식에 맞게 입력해주세요</div>
+	                    <div class="invalid-feedback" align="left">형식에 맞게 입력해주세요</div>
 					</div>
 					<div class="input-group mt-2">
-						<input type="text" id="confirm-input" class="form-control underline w-75" aria-describedby="confirm-button">
-						<button class="btn btn-outline-blue w-25" type="button" id="confirm-button">확 인</button>
-						<div class="confirmResult"></div>
+						<input type="text" id="confirm-input" class="form-control underline w-70" aria-describedby="confirm-button">
+						<button class="btn btn-outline-blue w-30" type="button" id="confirm-button">확 인</button>
+						<div class="confirmResult" align="left"></div>
 						<div class="valid-feedback"></div>
 	                    <div class="invalid-feedback"></div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row mt-4">
+		<div class="row mt-5 mb-5">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
 			<button type="submit" class="btn btn-blue btn-md">확인</button>
 			</div>
@@ -81,12 +84,27 @@
 	$(function(){
 		
 		var checkEmail = {
+			memberIdValid : false, memberIdRegex : /^[a-z][a-zA-Z0-9-_]{4,19}$/,
 			memberEmailValid : false, memberEmailRegex : /^[\w\.-]{1,64}@[\w\.-]{1,125}\.\w{2,4}$/,
 			emailConfirmValid : false,
 			emailValid : function(){
-				return this.memberEmailValid && this.emailConfirmValid;
+				return this.memberIdValid && this.memberEmailValid && this.emailConfirmValid;
 				}
 		};
+		
+		//아이디 형식
+		$("[name=memberId]").blur(function(){ 
+			var id = $(this).val();
+			var regex = checkEmail.memberIdRegex;
+            if(regex.test(id)){
+            	checkEmail.memberIdValid = true;
+                $(this).removeClass("is-valid is-invalid").addClass("is-valid");
+            }
+            else {
+            	checkEmail.memberIdValid = false;
+                $(this).removeClass("is-valid is-invalid").addClass("is-invalid");
+            }
+        });
 		
 		//이메일 형식
 		$("[name=memberEmail]").blur(function(){ 
