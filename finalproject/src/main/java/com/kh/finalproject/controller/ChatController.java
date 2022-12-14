@@ -19,12 +19,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.finalproject.constant.SessionConstant;
+import com.kh.finalproject.entity.ChatDto;
 import com.kh.finalproject.entity.ChatUserDto;
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.RoomDto;
 import com.kh.finalproject.repository.ChatDao;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.TrainerDao;
+import com.kh.finalproject.vo.ChatPartnerSearchVO;
+import com.kh.finalproject.vo.ChatPartnerVO;
+import com.kh.finalproject.vo.ChatRoomVO;
 import com.kh.finalproject.vo.SearchRoomVO;
 
 
@@ -59,20 +63,36 @@ public class ChatController {
 		for(int i = 0; i < list.size(); i++) {
 			listA.add(i, list.get(i).getMemberId());
 			
-		}
+		}	
 		
-		
-		
-		System.out.println("listA =" + listA);
+		//System.out.println("listA =" + listA);
 		
 		return "chat/list";
 	}
 	
+	
+	
 	//채팅방 {room 번호}
 	@RequestMapping("/room")
-	public String chatRoom(@RequestParam String roomNo, Model model, @ModelAttribute RoomDto roomDto) {
-		//roomNo를 어디서 가져올까?	
+	public String chatRoom(@RequestParam String roomNo, Model model
+			,@ModelAttribute RoomDto roomDto	, HttpSession session		
+			) {
+		
+		String memberId = (String) session.getAttribute(SessionConstant.ID);
+		
+		//파라미터에서 roomNo
 		model.addAttribute("roomNo", roomNo);
+		
+		//채팅내역
+		List<ChatRoomVO> chat = chatDao.chatRoom(roomNo);		
+		model.addAttribute("chatHistory", chat );		
+		
+		ChatPartnerSearchVO searchVO = ChatPartnerSearchVO.builder().memberId(memberId).roomNo(roomNo).build();
+		
+		// 채팅 상대 정보
+		ChatPartnerVO partner = chatDao.chatPartner(searchVO);		 
+		model.addAttribute("partner", partner);
+		
 		return "chat/room";
 	}
 	

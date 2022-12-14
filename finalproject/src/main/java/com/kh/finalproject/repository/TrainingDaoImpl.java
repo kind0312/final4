@@ -13,6 +13,7 @@ import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.vo.PetDetailListVO;
 import com.kh.finalproject.vo.ReservationDetailListVO;
 import com.kh.finalproject.vo.CalendarVO;
+import com.kh.finalproject.vo.CheckRequestVO;
 import com.kh.finalproject.vo.OneTrainingVO;
 import com.kh.finalproject.vo.ReservationListVO;
 import com.kh.finalproject.vo.ScheduleVO;
@@ -143,9 +144,11 @@ public class TrainingDaoImpl implements TrainingDao{
 	}
 
 	@Override
-	public List<TrainingDto> checkRequest(Date requestDate) {		
-		return sqlSession.selectList("training.checkRequest", requestDate);
+	public List<TrainingDto> checkRequest(CheckRequestVO checkReuqestVO) {		
+		return sqlSession.selectList("training.checkRequest", checkReuqestVO);
 	}
+
+
 
 	
 
