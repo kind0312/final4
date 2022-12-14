@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 public class TrainerOneVO {
 	private String memberName;
 	private String memberId;
-	private int trainerNo;
+	private int filesNo;
 }

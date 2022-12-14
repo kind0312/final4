@@ -224,6 +224,7 @@ public class PetTrainerController {
 		model.addAttribute("trainerNo", trainerNo);
 		return "trainer/schedule";
 	}
+
 	
 	//로그아웃 누를 경우 세션값 제거하기
 
