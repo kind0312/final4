@@ -11,7 +11,7 @@
 	.img-circle{
 		border-radius: 70%;
 	   	border:none;
-	   	background-color:#81BDF1;
+	   	background-color:#fff;
 	   	overflow: hidden;
 	}
 	.underline-out{
@@ -138,8 +138,11 @@
 	    </div>
 	  </div>
 	</div>
-	테스트 출력 : ${training}<br>
-	트레이너 테스트 출력 : ${trainer}
+	
+	훈련서비스 테스트출력 : ${training}<br>
+	결제내역 테스트출력: ${purchase}<br>
+	훈련사정보 테스트출력:${trainer}<br>
+	
 	<div class="container-fluid">
 		<div class="row mt-80">
 			<div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
@@ -158,7 +161,7 @@
 						<tr class="table-default align-middle">
 			  				<td colspan="2" height="200px">
 			  					<div class="mt-3">
-			  						<img src="http://localhost:8888/download/${training[0].filesNo}" class="img-circle" width="100" height="100">
+			  						<img src="http://localhost:8888/download/${trainer.filesNo}" class="img-circle" width="100" height="100">
 			  					</div>
 			  					<div class="mt-4">
 			  						<c:choose>

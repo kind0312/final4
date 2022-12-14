@@ -70,10 +70,10 @@
       
 	  <!-- 훈련사 단일조회(no)로 조회 -->
       <select id="selectOneProNo" parameterType="int" resultType="TrainerOneVO">
-      	select m.member_name, t.member_id, t.trainer_no 
-      	from member m 
-      	inner join trainer t on m.member_id=t.member_id 
-      	where t.trainer_no = #{trainerNo}
+      	select t.member_id, m.member_name, img.files_no from trainer t 
+		    inner join member m on t.member_id=m.member_id
+		    inner join member_img img on m.member_id=img.member_id
+		    where t.trainer_no = #{trainerNo}
       </select>
       
       <!-- trainer 테이블 member_id로 단일조회 -->
