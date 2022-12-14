@@ -73,9 +73,9 @@
 	.fc-scrollgrid{
 		border-radius: 0.5rem;
 	}
-	.fc .fc-scrollgrid-section{
-		border:none;
-	}
+	.fc-theme-standard .fc-scrollgrid {
+    border: 1px solid #ddd;
+  }
 
 </style>
 
