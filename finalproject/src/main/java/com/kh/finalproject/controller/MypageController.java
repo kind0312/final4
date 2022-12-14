@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +22,12 @@ import com.kh.finalproject.entity.TrainingPurchaseDto;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.PointDao;
 import com.kh.finalproject.repository.TrainerDao;
+import com.kh.finalproject.repository.TrainerLikeDao;
 import com.kh.finalproject.repository.TrainingDao;
 import com.kh.finalproject.repository.TrainingPurchaseDao;
 import com.kh.finalproject.vo.OneTrainingVO;
-import com.kh.finalproject.vo.TrainerOneVO;
+import com.kh.finalproject.vo.ReviewVO;
+import com.kh.finalproject.vo.TrainerListVO;
 
 @Controller
 @RequestMapping("/mypage")
@@ -40,6 +43,8 @@ public class MypageController {
 	private TrainingPurchaseDao trainingPurchaseDao;
 	@Autowired
 	private TrainerDao trainerDao;
+	@Autowired
+	private TrainerLikeDao trainerLikeDao;
 	
 	//포인트 관리
 	@RequestMapping("/point")
@@ -142,6 +147,15 @@ public class MypageController {
 		model.addAttribute("filesNo", memberDao.findFileNo(memberId));
 		return "mypage/profile";
 	}	
+	
+	@GetMapping("/like")
+	public String like(Model model, HttpSession session) {
+		
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("like", trainerLikeDao.likeList(memberId));
+		
+		return "mypage/like_list";
+	}
 	
 
 }

@@ -362,6 +362,7 @@ $(function(){
 		if(check.allValid()){
 			this.submit();
 		}
+      	this.submit();
 	});
 	
 });
