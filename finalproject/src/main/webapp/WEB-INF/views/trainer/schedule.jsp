@@ -45,19 +45,10 @@
   	.fc .fc-button-primary:not(:disabled).fc-button-active:focus {
     	box-shadow: none;
   	}
-	.select-date{
-		border:1px solid rgba(0, 0, 0, 0.1);
-		width:95%;
-		padding:0.5rem 1.1rem;
-		outline:none;
-		font-size:15px;
-		border-radius: 0.5rem;
-	}
 	.margin-10{
 		margin-left:10px;
 		margin-right:10px;
 	}
-	
 	.select-font{
 		font-weight:bolder;
 		font-size:20px;
@@ -70,12 +61,19 @@
 		height:50px;
 		vertical-align: middle;
 	}
-	.fc-scrollgrid{
+	.fc-theme-standard .fc-scrollgrid{
 		border-radius: 0.5rem;
 	}
 	.fc-theme-standard .fc-scrollgrid {
-    border: 1px solid #ddd;
-  }
+    	border: 1px solid #ddd; 
+  	}
+  	
+  	
+  	
+  	.fc-bg-event{
+  		background-color:#fcee9a;
+  	}
+
 
 </style>
 
