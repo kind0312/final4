@@ -139,10 +139,6 @@
 	  </div>
 	</div>
 	
-	훈련서비스 테스트출력 : ${training}<br>
-	결제내역 테스트출력: ${purchase}<br>
-	훈련사정보 테스트출력:${trainer}<br>
-	
 	<div class="container-fluid">
 		<div class="row mt-80">
 			<div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
