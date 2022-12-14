@@ -161,6 +161,7 @@ public class TrainerController {
 		}
 		
 		//linked_list 테이블 DB등록
+		
 		//point 사용내역 테이블 DB등록
 		
 		
