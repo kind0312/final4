@@ -381,6 +381,7 @@ $(function(){
 <form class="form-check" action="reservation" method="post">
 <input type="hidden" name="memberId"  value="${member.memberId}">
 <input type="hidden" name="trainingPurchasePrice" value="">
+<input type="hidden" name="trainerNo" value="${trainerno}">
 <div class="detailPrice">
 <!-- hidden으로 보낼 값 계산 name=purchaseDetailPrice -->
 </div>

@@ -200,6 +200,10 @@
  		insert into point(point_no, member_id, point_status, point_price, point_date)
  		values(point_seq.nextval, #{memberId}, '사용', #{pointPrice}, sysdate)
  	</insert>
+ 	
+ 	<insert id="linkedInsert" parameterType="LinkedListDto">
+ 	insert into linked_list(training_no, trainer_no) values(#{trainingNo}, #{trainerNo})
+ 	</insert>
   	
   
   </mapper>

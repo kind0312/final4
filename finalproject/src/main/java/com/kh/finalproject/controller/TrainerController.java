@@ -107,6 +107,7 @@ public class TrainerController {
 
 		model.addAttribute("member", memberDao.selectOne(userId));
 		model.addAttribute("pet", petDao.list(userId));
+		model.addAttribute("trainerno", trainerNo);
 		
 		return "/trainer/reservation";
 	}
@@ -161,6 +162,13 @@ public class TrainerController {
 				trainingPurchaseDao.purchaseDetailInsert(purchaseDetailDto);
 			}
 		}
+		
+		//linked_list 테이블 DB등록
+		LinkedListDto linkedListDto =LinkedListDto.builder()
+				.trainingNo(trainingNo)
+				.trainerNo(reservationVO.getTrainerNo())
+				.build();
+		trainingDao.insertLinkedList(linkedListDto);
 		
 		//point 사용내역 테이블 DB등록
 		PointDto pointDto = PointDto.builder()
