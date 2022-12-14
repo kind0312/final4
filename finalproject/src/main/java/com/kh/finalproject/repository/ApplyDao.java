@@ -10,7 +10,7 @@ public interface ApplyDao {
 	
 	//지원자 상세
 	ApplyDto selectOne(int applyNo);
-	
+	ApplyDto selectOne(String memberId);
 	//지원자 수정기능
 
      //eidt(ApplyDto applyDto);

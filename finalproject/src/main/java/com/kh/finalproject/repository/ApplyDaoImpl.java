@@ -46,6 +46,12 @@ public class ApplyDaoImpl implements ApplyDao {
 	}
 
 
+	@Override
+	public ApplyDto selectOne(String memberId) {
+		return sqlSession.selectOne("apply.two",memberId);
+	}
+
+
 
 //	@Override
 //	public ApplyDto update(int applyNo) {

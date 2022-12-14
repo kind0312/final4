@@ -11,18 +11,17 @@
 	<!-- 훈련사 목록 조회 mapper-->
 	  <select id="list" resultType="TrainerListVO">
 
-      select nvl(R.cnt,0) cnt , nvl(CEIL(R.avg),0) avg, T.trainer_no, T.member_id,
-      T.trainer_profile, T.trainer_profile_content,
+     <!--  select nvl(R.cnt,0) cnt , nvl(CEIL(R.avg),0) avg,
+      T.trainer_no, T.member_id,T.trainer_profile, T.trainer_profile_content,
       M.member_name,M.member_tel,M.member_email,M.member_gender  from trainer T
       inner join member M on T.member_id = M.member_id left outer join
       (select trainer_no, count(*) cnt, avg(review_good) avg 
       from review group by trainer_no)
-      R on R.trainer_no = T.trainer_no
+      R on R.trainer_no = T.trainer_no--> 
 
       select nvl(R.cnt,0) cnt , nvl(CEIL(R.avg),0) avg, 
 	    T.trainer_no, T.member_id, T.trainer_profile, T.trainer_profile_content,
-	    M.member_name,M.member_tel,M.member_email,
-	    img.files_no 
+	    M.member_name,M.member_tel,M.member_email,M.member_gender,img.files_no 
 	    from trainer T inner join member M on T.member_id = M.member_id
 	    inner join member_img img on T.member_id = img.member_id 
 	    left outer join
@@ -57,13 +56,15 @@
       
         <!--parameterType="map" 관리자 훈련사 검색 --> 
         <select id="search"  parameterType="map" resultType="TrainerListVO">
-        select nvl(R.cnt,0) cnt , nvl(CEIL(R.avg),0) avg, T.trainer_no, T.member_id,
-      T.trainer_profile, T.trainer_profile_content,
-      M.member_name,M.member_tel,M.member_email,M.member_gender from trainer T
-      inner join member M on T.member_id = M.member_id left outer join
-      (select trainer_no, count(*) cnt, avg(review_good) avg 
-      from review group by trainer_no)
-      R on R.trainer_no = T.trainer_no
+   		select nvl(R.cnt,0) cnt , nvl(CEIL(R.avg),0) avg, 
+	    T.trainer_no, T.member_id, T.trainer_profile, T.trainer_profile_content,
+	    M.member_name,M.member_tel,M.member_email,M.member_gender,img.files_no 
+	    from trainer T inner join member M on T.member_id = M.member_id
+	    inner join member_img img on T.member_id = img.member_id 
+	    left outer join
+	    (select trainer_no, count(*) cnt, avg(review_good) avg 
+	    from review group by trainer_no)
+	    R on R.trainer_no = T.trainer_no
         
         <if test="type!=null and keyword !=null">
         where instr(${type},#{keyword})>0

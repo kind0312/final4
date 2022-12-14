@@ -26,6 +26,7 @@ import com.kh.finalproject.repository.PetDao;
 import com.kh.finalproject.repository.TrainerDao;
 import com.kh.finalproject.vo.MemberDetailVO;
 import com.kh.finalproject.vo.MemberListSearchVO;
+import com.kh.finalproject.vo.PetInsertVO;
 import com.kh.finalproject.vo.TrainerListSearchVO;
 import com.kh.finalproject.vo.TrainerListVO;
 
@@ -110,13 +111,18 @@ public class AdminController {
 			
 			//pet정보
 
-			List<PetDto> petDto= petDao.selectList(memberId);
-			model.addAttribute("petDto",petDto);
+//			List<PetDto> petDto= petDao.selectList(memberId);
+//			model.addAttribute("petDto",petDto);
 		
 		    
 			//회원 정보
 		    MemberDto memberDto=memberDao.selectOne(memberId);
 			model.addAttribute("memberDto",memberDto);
+			
+			//첨부파일+pet
+			//해당 아이디의 반려동물 번호의 이미지 모두 출력
+			List<PetInsertVO> list=petDao.list(memberId);
+			model.addAttribute("list",list);
 
 			 return "admin/memberDetail";
 		}
@@ -136,8 +142,7 @@ public class AdminController {
 	@GetMapping("/applyList")
 	public String applyList(Model model)
 	{
-//		List<PetDto> petDto= petDao.selectList(memberId);
-//		model.addAttribute("petDto",petDto);
+//		
 //		
 		List<ApplyDto> applyDto=applyDao.selectList();
 	    model.addAttribute("applyDto",applyDto);
@@ -149,16 +154,15 @@ public class AdminController {
 			
 	//관리자   훈련사-신청/전환 상세
 	@GetMapping("/applyDetail")
-	public String applyDetail(Model model,@RequestParam String memberId,int applyNo){
-		//지원번호,회원아이디,지원날짜,연락처,지원상태(승인/반려/대기)...연락처만 회원 테이블에 있음..
-		//model.addAttribute("applyList", )
+	public String applyDetail(Model model,@RequestParam String memberId){
+		
 		
 		MemberDto memberDto=memberDao.selectOne(memberId);
 		model.addAttribute("memberDto",memberDto);
-		//TrainerListVO trainerListVO=trainerDao.selectOne(memberId);
-		//model.addAttribute("trainerListVO",trainerListVO);
+
 		
-		ApplyDto applyDto=applyDao.selectOne(applyNo);
+		;
+		ApplyDto applyDto=applyDao.selectOne(memberId);
 		model.addAttribute("applyDto",applyDto);
 		//여기까지가 상세임.....상태는 신청으로 된 상태
 		
@@ -180,9 +184,9 @@ public class AdminController {
 
 	//지원 승인
 	@GetMapping("/apply_success")
-	public String applySuccess(@RequestParam int applyNo,Model model) {
+	public String applySuccess(@RequestParam String memberId,Model model) {
 	
-		return "admin/applySuccess";
+		return "admin/apply_success";
 	}
 	
 	@PostMapping("/apply_success")

@@ -138,6 +138,7 @@
 			  font-size: calc(1.2625rem + 0.15vw);
 			  text-decoration: none;
 			  white-space: nowrap;
+			
 			}
 			.footer-link{
 				color: #f8f9fa;
@@ -183,17 +184,44 @@
 			}
 			
 			.btn-blue{
-  				background-color: #81BDF1;
-  				border:2px solid #81BDF1;
+			background-color: #256BF3;
+  				border:2px solid #256BF31;
   				font-weight: bolder;
   				color:#fff;
   				font-size:15px;
-  			}
+			
+			
+			}
+			.btn-blue2{
+              background-color: #81BDF1;
+              border:2px solid #81BDF1;
+              font-weight: bolder;
+              color:#fff;
+              font-size:15px;
+           }
+           .btn-gray{
+              background-color: #D9D9D9;
+              border:2px solid #D9D9D9;
+              font-weight: bolder;
+              color:#fff;
+              font-size:15px;
+           
+           
+           
+           }
+           
+           .btn-blue2:hover {
+           color: #fff;
+           background-color: #3b6fc9;
+           border-color: #3768bd;
+         }
+			
+		
   			
   			.btn-blue:hover {
 			  color: #fff;
-			  background-color: #3b6fc9;
-			  border-color: #3768bd;
+			  background-color: #81BDF1;
+			  border-color: #81BDF1;
 			}
   			
   			.btn-yellow{
@@ -238,6 +266,9 @@
 			.bg-blue{
 				background-color: #81BDF1 !important;
 			}
+			.bg-black{
+			background-color: #303030 !important;
+			}
 			
 			.btn-md{
 				padding: 0.5rem 1rem;
@@ -261,7 +292,7 @@
 				border-color: #81BDF1;
 				box-shadow: 0 0 0 0.25rem rgba(69, 130, 236, 0.25);
 			}
-			
+		
 			
 
 		</style>
@@ -284,7 +315,8 @@
 	        <!-- navbar : 드롭다운 메뉴를 제공하는 상단 메뉴바 -->
 	        <!--  <div class="mt-4">&nbsp;</div>--><div class="mt-4">&nbsp;</div>
 	
-	        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+	        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
+	       
 	          <div class="container-fluid">
 	
 	            <!-- Brand : 로고 이미지와 대표 상호를 적는 공간 -->
@@ -294,7 +326,7 @@
 	            </a>
 	            <a class="navbar-brand" href="#">
 	            <span class="visually-hidden">(current)</span>
-	            	CarePet
+	            	관리자
 	            </a>
 	
 	        

@@ -14,6 +14,15 @@
   <select id="one" parameterType="int" resultType="ApplyDto">
   	select*from apply where apply_no=#{applyNo}
   </select>
+  <!-- 훈련사 아이디 상세 -->
+   <select id="two" parameterType="string" resultType="ApplyDto">
+  	select*from apply where member_id=#{memberId}
+  </select>
+  
+ 
+  
+  
+  
   <!-- 훈련사 지원 상태가 승인으로 변환 -->
     <select id="approval" parameterType="ApplyDto">
     update apply set apply_status='승인' where apply_no=#{applyNo};
