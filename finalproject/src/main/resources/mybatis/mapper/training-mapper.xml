@@ -195,6 +195,19 @@
 		inner join trainer tt on tt.trainer_no = LL.trainer_no
 		where tr.training_status='예약확정' and tr.training_date=#{trainingDate} and tt.trainer_no = #{trainerNo}
  	</select>
+ 	
+ 	<insert id="linkedInsert" parameterType="LinkedListDto">
+ 	insert into linked_list(training_no, trainer_no) values(#{trainingNo}, #{trainerNo})
+ 	</insert>
+ 	
+ 	<insert id="scheduleInsert" parameterType="ScheduleDto">
+ 	insert into schedule(schedule_no, trainer_no, schedule_date) values(schedule_seq.nextval, #{trainerNo}, #{scheduleDate})
+ 	</insert>
+ 	
+ 	<insert id="pointInsert" parameterType="PointDto">
+ 		insert into point(point_no, member_id, point_status, point_price, point_date)
+ 		values(point_seq.nextval, #{memberId}, '사용', #{pointPrice}, sysdate)
+ 	</insert>
   	
   
   </mapper>

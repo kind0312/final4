@@ -81,7 +81,7 @@
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/point">포인트</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" style="color:white;" href="${pageContext.request.contextPath}/mypage/like">찜관리</a>
+	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/like">찜관리</a>
 	        </li>
 	        <li class="nav-item">
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">후기</a>
@@ -110,46 +110,31 @@
 	    </div>
 	  </div>
 	</div>
-	<!-- 비동기화를 위한 데이터 -->
-	<input type="hidden" name="memberId" value="${memberId}">
-
 	<div class="container-fluid">
         <div class="row mt-80 mb-3">
             <div class="col-md-6 offset-md-3">
-                 <h4 class="text-center">반려동물</h4>
+                 <h4 class="text-center">찜한 훈련사</h4>
             </div>
         </div>
-		
         <div class="row">
             <div class="col-md-6 offset-md-3">   
                  <table class="table table-hover pet-table text-center">
                  		<thead>
-              				<c:forEach var="pet" items="${pet}">
+              				<c:forEach var="like" items="${like}">
                 				<tr class="table-default align-middle">
 	                 				<th width="30%">
-	                 					<img src="http://localhost:8888/download/${pet.filesNo}" class="img-circle" width="100" height="100">
+	                 					<img src="http://localhost:8888/download/${like.filesNo}" class="img-circle" width="100" height="100">
 	                 				</th>
 	                 				<th width="40%">
-	                 					<p class="name-font">${pet.petName}</p>
-	                 					<p class="gender-font">${pet.petType} / ${pet.petGender} / ${pet.petWeight}kg</p>
+	                 					<p class="name-font">${like.memberName}</p>
+	                 					<p class="gender-font">${like.trainerProfile} / ${like.trainerProfileContent}/ ${like.trainerLike}</p>
 	                 				</th>
 	                 				<th width="30%">
-	                 					<a href="${pageContext.request.contextPath}/mypage/pet_detail?petNo=${pet.petNo}" class="btn btn-blue">상세</a>
+	                 					<a href="/trainer/detail?trainerNo=${like.trainerNo}" class="btn btn-blue">상세</a>
 	                 				</th>
                  				</tr>
 		                	</c:forEach>
                  		</thead>
-					  	<tbody>
-						    <tr class="table-default align-middle">
-					    		<td scope="row" colspan="3">
-						    		<i class="fa-solid fa-plus" style="color:#81BDF1;"></i>
-						    	 	<a href="${pageContext.request.contextPath}/mypage/pet_insert">
-						    	 		<span class="insert-font">반려동물 추가</span>
-						    	 	</a>
-					    		</td>
-						    </tr>
-					  	</tbody>
-					  
                  </table>
 			 </div>
 		</div>

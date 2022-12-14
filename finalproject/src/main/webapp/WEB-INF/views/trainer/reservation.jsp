@@ -329,6 +329,8 @@ $(function(){
 			.attr("value","100000");
       		detailPriceTag.append(input);
       	}
+      	
+      	this.submit();
 	});
 	
 });
@@ -340,7 +342,7 @@ $(function(){
 <h6>주소를 입력해 주세요!</h6>
 </div>
 </div>
-<form class="form-check">
+<form class="form-check" action="reservation" method="post">
 <input type="hidden" name="memberId"  value="${member.memberId}">
 <input type="hidden" name="trainingPurchasePrice" value="">
 <input type="hidden" name="trainerNo" value="${trainerno}">
