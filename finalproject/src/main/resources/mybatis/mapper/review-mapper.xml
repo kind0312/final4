@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="review">
+	
+	<!-- 리뷰 목록 조회 -->
+	<select id="list" resultType="ReviewVO">
+<!-- 		select  -->
+<!-- 			m.member_name,t.*, tp.training_purchase_price,  -->
+<!-- 			td.training_detail_pet_name, p.*, img.files_no,  -->
+<!-- 	        r.review_title, r.review_content, r.review_writetime, r.review_updatetime, r.review_good -->
+<!-- 		from member m  -->
+<!-- 			inner join training t on m.member_id = t.member_id  -->
+<!-- 			inner join training_purchase tp on t.training_no = tp.training_no -->
+<!-- 			inner join training_detail td on tp.training_no = td.training_no -->
+<!-- 			inner join pet p on td.training_detail_pet_name = p.pet_name -->
+<!-- 			inner join pet_img img on p.pet_no = img.pet_no -->
+<!--             inner join review r on t.training_no= r.training_no -->
+<!--         order by review_writetime desc -->
+<!-- 		select * from review_list_view order by review_writetime desc -->
+		select * from review_img_view order by review_writetime desc
+	</select>
+	
+</mapper>

@@ -1,4 +1,4 @@
-package com.kh.finalproject.vo;
+package com.kh.finalproject.entity;
 
 import java.sql.Date;
 
@@ -8,8 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class ReviewVO {
-
+public class ReviewDto {
 	private int reviewNo;
 	private int trainingNo;
 	private int trainerNo;
@@ -19,8 +18,4 @@ public class ReviewVO {
 	private Date reviewWriteTime;
 	private Date reviewUpdateTime;
 	private int reviewGood;
-	
-	//pet 이미지 첨부
-	private int filesNo;
-	private int petNo;
 }

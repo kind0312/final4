@@ -26,7 +26,5 @@
 	<delete id="delete" parameterType="int">
 		delete files where files_no=#{filesNo}
 	</delete>
-
-
 	
 </mapper>
