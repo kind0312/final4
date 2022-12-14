@@ -215,7 +215,7 @@
                  <div class="text-center" id="calendar"></div>
                  <div class="text-center mt-2">
                  	<span class="margin-10"><i class="fa-solid fa-circle"  style="color:#fcee9a;"></i> 오늘</span>
-                 	<span class="margin-10"><i class="fa-solid fa-circle blue"></i> 예약있음</span>
+                 	<span class="margin-10"><i class="fa-solid fa-circle blue"></i> 훈련</span>
                  	<span class="margin-10"><i class="fa-solid fa-circle blue"  style="color:#303030;"></i> 완료</span>
                  </div>
             </div>
