@@ -125,7 +125,9 @@ border-radius: 50%;
 width: 200px;
 height: 200px;
 display:inline;
-float: left;
+}
+.img1{
+display: flex; 
 }
 
 .map{
@@ -162,10 +164,8 @@ border-color: ##000000;
 border-radius: 50%;
 width: 200px;
 height: 200px;
-display:inline;
-float:left;
+display:inline-block;
 }
-
 .map{
 float : left;
 margin-right: 20px;
@@ -189,11 +189,29 @@ margin-right: 20px;
 .row{
 text-align: center;
 }
-
-.jebal{
-margin-right : 10px;
+.row1{
+position:relative; 
+}
+.pay1{
+	margin-left: 140px;
+}
+.pay2{
+	margin-left: 80px;
+}
+.hr1{
+	width: 450px;
+}
+.address-box{
+	border: solid 2px #DDDDDD;
+}
+.textarea-hover:hover{
+border: 2px solid #81BDF1;
 }
 
+.textarea-hover:focus{
+border: 2px solid #81BDF1;
+outline-color: #81BDF1;
+}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.js"></script>
@@ -324,19 +342,19 @@ $(function(){
 </div>
 </div>
 <form class="form-check">
-<input type="hidden" name="memberId" value="${member.memberId}">
+<input type="hidden" name="memberId"  value="${member.memberId}">
 <input type="hidden" name="trainingPurchasePrice" value="">
 <div class="detailPrice">
 <!-- hidden으로 보낼 값 계산 name=purchaseDetailPrice -->
 </div>
 <div class="row">
 <input type="text" name="trainingBasicAddress"
-               class="input short-text-box short-hover  basic col" id="text-box1"
+               class="input short-text-box address-box basic col" id="text-box1" required
                 autocomplete="off" value="${member.memberBaseAddress}">
 </div>
 <div class="row">
 <input type="text" name="trainingDetailAddress"
-               class="input short-text-box short-hover  basic col" id="text-box1"
+               class="input short-text-box address-box basic col" id="text-box1" required
                autocomplete="off" value="${member.memberDetailAddress}">
 </div>
 <br><br><br><br>
@@ -371,24 +389,32 @@ $(function(){
 <h3>반려동물에 대해 알려주세요!</h3><br><br><br>
 <h6>엄선된 훈련사가 갈거에요!</h6><br>
 </div>
-<div class="row">
+<div class="row1">
+<div class="row row2">
 <c:forEach var="pet" items="${pet}">
 <img src="http://localhost:8888/download/${pet.filesNo}" width="400" height="250" class="img0">
 <p>${pet.petName}</p>
-<input type="checkbox" class ="petCheck" name="trainingDetailPetName" value="${pet.petName}">
+<br>
+<input required type="checkbox" class ="petCheck" name="trainingDetailPetName" value="${pet.petName}">
 </c:forEach>
 
- <div class="mt-20">
- <p class="p2"> 반려견 추가시 1마리당 50000포인트의 추가요금이 발생합니다.<br>(기본 100000포인트)</p></div>
-  </div>
-<div class="row">
-<textarea class="helper-text2 short-hover" name="trainingMemo"  placeholder="요청사항 예) 까미는 ~간식을 못먹어요!, 자주 물어요!" maxlength="300" ></textarea>
+</div>
 </div>
 
-<div class="row jebal">
- <div class="payment">    
-        <h3>결제화면</h3><br>
-        <span>보유하신 포인트에서 차감돼요!</span>
+<div class="row">
+ <div class="mt-20">
+ <p class="p2"> 반려견 추가시 1마리당 50000포인트의 추가요금이 발생합니다.<br>(기본 100000포인트)</p>
+ </div>
+  </div>
+<div class="row">
+<textarea class="helper-text2 textarea-hover" name="trainingMemo" required  placeholder="요청사항 예) 까미는 ~간식을 못먹어요!, 자주 물어요!" maxlength="300" ></textarea>
+</div>
+
+
+ <div class="payment mt-100">    
+        <h3 class="pay1">결제화면</h3><br>
+        <span class="pay2">보유하신 포인트에서 차감돼요!</span>
+        <div class="row">
         <div class="content">
             <div class="point nowpoint">
                 <span>현재 내 포인트</span>
@@ -398,15 +424,16 @@ $(function(){
                 <span>총 결제 포인트</span>
                 <span class="total-price">0</span>P
             </div>
+            <hr class="hr1">
             <div class="point afterpoint">
                 <span>결제 후 포인트</span>
                 <span class="price"></span>P
             </div>
             </div>
             </div>
-</div>
+            </div>
 <div class="row">
-<button type="submit">신청하기!</button>
+<button class="nop" type="submit">신청하기!</button>
 </div>
 
 

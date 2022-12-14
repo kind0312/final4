@@ -102,8 +102,8 @@ public class AdminController {
 	@GetMapping("/trainerDetail")
 	public String trainerDetail(Model model, @RequestParam String memberId) {
 		
-		TrainerListVO trainerListVO=trainerDao.selectOne(memberId);
-		model.addAttribute("trainerListVO",trainerListVO);
+		//TrainerListVO trainerListVO=trainerDao.selectOne(memberId);
+		//model.addAttribute("trainerListVO",trainerListVO);
 		
 		
 		return "admin/trainerDetail";

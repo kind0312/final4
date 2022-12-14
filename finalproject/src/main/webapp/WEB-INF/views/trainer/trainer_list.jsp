@@ -79,7 +79,7 @@ height: 200px;
                         <span>후기 ${list.getCnt()}개</span>
                     </div>
                 </div>
-                <a href="/trainer/detail?memberId=${list.getMemberId()}&trainerNo=${list.getTrainerNo()}" class="view">상세 보기</a>
+                <a href="/trainer/detail?trainerNo=${list.getTrainerNo()}" class="view">상세 보기</a>
             </div>
             </c:forEach>
         </div>
