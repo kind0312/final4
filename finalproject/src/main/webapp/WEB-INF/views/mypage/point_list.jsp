@@ -109,7 +109,8 @@
                  <h4 class="text-center">포인트 내역</h4>
             </div>
         </div>
-        
+        조회결과 테스트 : ${page}<br>
+        vo 테스트 : ${vo}
 		<div class="row mt-5">
             <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
                  <span class="float-left">
