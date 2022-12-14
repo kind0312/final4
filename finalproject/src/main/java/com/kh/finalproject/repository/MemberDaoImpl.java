@@ -105,10 +105,16 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("member.one", memberId);
 	}
 	
-	//결제 후 포인트 증가
+	//카카오페이 결제 후 포인트 증가
 	@Override
 	public boolean pointPlus(MemberDto memberDto) {
 		return sqlSession.update("member.plusPoint",memberDto)>0;
+	}
+	
+	//훈련서비스 결제 후 포인트 감소 처리
+	@Override
+	public boolean pointMinus(MemberDto memberDto) {
+		return sqlSession.update("member.plusMinus",memberDto)>0;
 	}
 	
 	//회원 프로필 이미지 파일 번호 찾기

@@ -69,6 +69,12 @@
 		update member set member_point=member_point+#{memberPoint} 
 		where member_id=#{memberId}
 	</update>
+	
+	<!-- 포인트 감소(수정)  -->
+	<update id="plusMinus" parameterType="MemberDto">
+		update member set member_point=member_point-#{memberPoint} 
+		where member_id=#{memberId}
+	</update>
 
 	<!-- 프로필 정보수정 -->
 	<update id="profileEdit" parameterType="MemberDto">

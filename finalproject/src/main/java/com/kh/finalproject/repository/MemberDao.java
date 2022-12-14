@@ -41,8 +41,10 @@ public interface MemberDao {
 	MemberDto trainerConfirm(String memberId);
 	
 	//수정
-	//결제 후 포인트 증가 처리
+	//카카오페이 결제 후 포인트 증가 처리
 	boolean pointPlus(MemberDto memberDto);
+	//훈련서비스 결제 후 포인트 감소 처리
+	boolean pointMinus(MemberDto memberDto);
 	//프로필 정보수정
 	boolean profileEdit(MemberDto memberDto);
      //프로필 첨부파일 수정
