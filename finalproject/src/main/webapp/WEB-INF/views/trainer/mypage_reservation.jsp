@@ -30,7 +30,7 @@
 	.img-circle{
 	border-radius: 70%;
    	border:none;
-   	background-color:#81BDF1;
+   	background-color:#fff;
    	overflow: hidden;
 	}
 	table>tbody>tr>td{

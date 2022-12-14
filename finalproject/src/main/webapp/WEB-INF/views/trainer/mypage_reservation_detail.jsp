@@ -11,7 +11,7 @@
 	.img-circle{
 		border-radius: 70%;
 	   	border:none;
-	   	background-color:#81BDF1;
+	   	background-color:#fff;
 	   	overflow: hidden;
 	}
 	.carousel-control-prev,
@@ -39,6 +39,10 @@
 		font-weight:bolder;
 		font-size:17px;
 	}
+	.status{
+		color:#81BDF1;
+		font-weight:bolder;
+	}
 	
 </style>
 
@@ -63,8 +67,8 @@
 				data:trainingNo,
 				success:function(resp){
 					if(resp){
-						$(".change-btn").hide(); //완료 버튼 숨김
 						$(".status").text('이용완료');
+						$(".modal-start-btn").hide(); //완료 버튼 숨김
 					}
 				}
 			});			
@@ -145,7 +149,7 @@
 										<div>
 					  						<img src="http://localhost:8888/download/${detail[0].filesNo}" class="img-circle" width="180" height="180">
 					  					</div>
-					  					<div class="mt-3">
+					  					<div class="mt-3" style="font-weight:bolder;">
 					  						<span>${detail[0].petName}(${detail[0].petGender}/${detail[0].petWeight}kg)</span>
 					  					</div>
 					  					<div class="mt-2">
@@ -280,7 +284,6 @@
 							</tr>
 						</tbody>
 					</table>
-
 				</div>
 			</div>
 		</c:if>
@@ -289,11 +292,26 @@
           	<div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4">
 				<div class="text-center">
 					<c:if test="${detail[0].trainingStatus=='예약확정'}">
-						<button type="button" class="btn btn-blue change-btn">완료</button>
+						<button type="button" class="btn btn-blue modal-start-btn" data-bs-toggle="modal" data-bs-target="#change-training">완료</button>
        				</c:if>
        				<a type="button" href="${pageContext.request.contextPath}/trainer/mypage_reservation" class="btn btn-yellow">목록</a>
 				</div>
 			</div>
+		</div>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="change-training" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-body">
+		        훈련 상태를 이용완료로 변경하시겠습니까?
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-blue change-btn" data-bs-dismiss="modal">확인</button>
+		      	<button type="button" class="btn btn-yellow" data-bs-dismiss="modal">취소</button>
+		      </div>
+		    </div>
+		  </div>
 		</div>
 		
 		<!-- 비동기화를 위한 훈련번호 -->
