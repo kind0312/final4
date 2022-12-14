@@ -11,9 +11,9 @@
 		vertical-align:super;
 	}
 /* 	<!-- div 확인 점선 --> 1200이상 xl, 1200이하 lg, 990이하 md, 768이하 sm  */
-/*  	div{ */
-/*  		border: 1px dotted gray; */
-/*  	} */
+/*   	div{ */
+/*   		border: 1px dotted gray; */
+/*   	} */
 /* 	<!-- 별점 공백 없애는 스타일 --> 0.0.6 사용으로 더이상 사용 X */
 /* 	.star-score { */
 /* 		white-space: nowrap; */
@@ -30,34 +30,34 @@
 			</div>
 		</div>
 		<div class="row mt-100">
-			<div class="row mt-4 mb-3">
-				<div class="col-xl-3 offset-xl-2 col-lg-3 offset-lg-2 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+			<div class="row mt-4">
+				<div class="col-xl-3 offset-xl-3 col-lg-3 offset-lg-3 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 					<h3>${reviewList.size()}개의 후기</h3>
 				</div>
 			</div>
-			<div>
-				<div style="display: block; text-align: center;">
-					<div id="review-list-desktop" class="my-masonry-grid">
-						<div class="my-masonry-grid_column" style="width: 50%;">
-							<c:forEach var="reviewDto" items="${reviewList}">
-								<div style="display: flex; flex-direction: column; vertical-align: top; border-radius: 10px; box-shadow: rgb(235, 235, 235) 0px 2px 12px 0px; align-items: center;">
-									<div style="display: flex; padding-top: 32px; justify-content: space-between; width: 417px;">
-										<div style="display: flex;">
-										<div style="display: flex; position: relative;">
-											<img src="${pageContext.request.contextPath}/download/${reviewDto.filesNo}" style="width:80px; height: 80px; border-radius: 70%;">
-										</div>
-										<div style="display: flex; flex-direction: column; margin-left: 24px;">
-											<h1>${reviewDto.memberId}</h1>
-											<div style="display: flex; align-items: center;">
-												<div class="star-score" data-max="5" data-rate="${reviewDto.reviewGood}"></div>
-											</div>
-										</div>
-										</div>
+			<div class="row mt-4">
+				<div class="col-md-8 offset-md-3">
+					<div class="row mt-4">
+						<c:forEach var="reviewDto" items="${reviewList}">
+							<div>
+							<div class="col-xl-1 offset-xl-0 col-lg-1 offset-lg-0 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
+								<img src="${pageContext.request.contextPath}/download/${reviewDto.filesNo}" style="width:75px; height: 75px; border-radius: 70%;">
+							</div>
+							<div class="col-xl-4 offset-xl-0 col-lg-4 offset-lg-0 col-md-6 offset-md-4 col-sm-8 offset-sm-4">
+								<h3>${reviewDto.memberId}</h3>
+								<div class="row">
+									<div class="col">
+										<div class="star-score" data-max="5" data-rate="${reviewDto.reviewGood}"></div>
 									</div>
-									<p class="card-text">${reviewDto.reviewContent}</p>
 								</div>
-							</c:forEach>
-						</div>
+								<div class="row mt-3">
+									<div class="col">
+										<p class="card-text">${reviewDto.reviewContent}</p>
+									</div>
+								</div>
+							</div>
+							</div>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
