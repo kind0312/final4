@@ -70,9 +70,8 @@ public class MypageController {
 		//훈련서비스 단일조회
 		List<OneTrainingVO> dto = trainingDao.oneTraining(trainingNo);
 		model.addAttribute("training", dto);
-		//훈련사 단일조회
-		TrainerOneVO trainerDto = trainerDao.selectOnePro(dto.get(0).getTrainerNo());
-		model.addAttribute("trainer", trainerDto);
+		//해당 훈련사 정보 단일조회
+		model.addAttribute("trainer", trainerDao.selectOnePro(dto.get(0).getTrainerNo()));
 		//결제내역 단일조회
 		model.addAttribute("purchase", trainingPurchaseDao.selectOne(trainingNo));
 		return "mypage/training_detail";

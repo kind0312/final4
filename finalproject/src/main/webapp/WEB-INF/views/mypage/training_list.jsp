@@ -28,10 +28,10 @@
 		color:#7B7B7B;
 	}
 	.img-circle{
-	border-radius: 70%;
-   	border:none;
-   	background-color:#81BDF1;
-   	overflow: hidden;
+		border-radius: 70%;
+	   	border:none;
+	   	background-color:#fff;
+	   	overflow: hidden;
 	}
 </style>
 
@@ -147,8 +147,6 @@
 	  </div>
 	</div>
 	
-	진행예약 테스트 출력: ${ingList}<br>
-	지난예약 테스트 출력: ${endList}<br>
 	<div class="container-fluid">
         <div class="row mt-80">
             <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
@@ -158,9 +156,12 @@
                  </div>
             </div>
         </div>
+        
+        테스트 출력 : ${ingList}<br>
+        테스트 출력 : ${endList}<br>
 
       	<!-- 진행 예약 화면 -->	
-        <div class="row mt-8 training-ing">
+        <div class="row training-ing">
             <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
                   	<c:if test="${ingList.size()==0}">
 		                 <table class="table table-hover training-table text-center">
@@ -201,7 +202,7 @@
         </div>
   
         <!-- 지난 예약 화면 -->
-         <div class="row mt-12 training-end">
+         <div class="row training-end">
             <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
            		 <c:if test="${endList.size()==0}">
 		                 <table class="table table-hover training-table text-center">

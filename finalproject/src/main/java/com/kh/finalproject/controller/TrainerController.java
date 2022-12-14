@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.finalproject.constant.SessionConstant;
+import com.kh.finalproject.entity.LikeDto;
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.PurchaseDetailDto;
 import com.kh.finalproject.entity.TrainingDetailDto;
@@ -21,6 +23,7 @@ import com.kh.finalproject.entity.TrainingPurchaseDto;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.PetDao;
 import com.kh.finalproject.repository.TrainerDao;
+import com.kh.finalproject.repository.TrainerLikeDao;
 import com.kh.finalproject.repository.TrainingDao;
 import com.kh.finalproject.repository.TrainingPurchaseDao;
 import com.kh.finalproject.vo.ReservationVO;
@@ -46,15 +49,29 @@ public class TrainerController {
 	@Autowired
 	private PetDao petDao;
 	
+	@Autowired
+	private TrainerLikeDao trainerLikeDao; 
+	
 	//훈련사 디테일(단일조회)
 	@GetMapping("/detail")
 	public String detail(Model model,
 			@ModelAttribute TrainerListVO trainerListvo,
-			@ModelAttribute ReviewVO reviewVo
+			@ModelAttribute ReviewVO reviewVo,
+			@RequestParam int trainerNo,
+			HttpSession session
 			) {
 		
-		model.addAttribute("list", trainerDao.selectOne(trainerListvo.getMemberId()));	
+		model.addAttribute("list", trainerDao.selectOne(trainerListvo.getTrainerNo()));	
 		model.addAttribute("review", trainerDao.selectTrainerReview(reviewVo.getTrainerNo()));
+		
+		//좋아요 기록 조회
+				String memberId = (String) session.getAttribute(SessionConstant.ID);
+				if(memberId != null) {
+					LikeDto likeDto = new LikeDto();
+					likeDto.setMemberId(memberId);
+					likeDto.setTrainerNo(trainerNo);
+					model.addAttribute("isLike", trainerLikeDao.check(likeDto));
+				}
 		
 		return "trainer/trainer_detail";
 		
@@ -152,6 +169,29 @@ public class TrainerController {
 		
 		
 		return "redirect:/trainer/list";
+	}
+	
+	@GetMapping("/like") //인증글 좋아요
+	public String trainerLike(
+				@RequestParam int trainerNo,
+				HttpSession session, 
+				RedirectAttributes attr) {
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		LikeDto dto = new LikeDto();
+		dto.setMemberId(memberId);
+		dto.setTrainerNo(trainerNo);
+		
+		if(trainerLikeDao.check(dto)) {//좋아요를 한 상태면
+			trainerLikeDao.delete(dto);//취소(데이터 삭제)
+		}
+		else {//좋아요를 한 적이 없는 상태면
+			trainerLikeDao.insert(dto);//좋아요(데이터 추가)
+		}
+		
+		trainerLikeDao.refresh(trainerNo);//trainer_like(인증글 좋아요 수) 갱신
+		
+		attr.addAttribute("trainerNo", trainerNo);
+		return "redirect:detail";
 	}
 
 }

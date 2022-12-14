@@ -11,9 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpringBootServerTimezoneApplication {
 
     @PostConstruct
-    public void started() {
-      // timezone UTC 셋팅
-      TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+    public void start() {
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul")); 
     }
     public static void main(String[] args) {       
       SpringApplication.run(SpringBootServerTimezoneApplication.class, args);
