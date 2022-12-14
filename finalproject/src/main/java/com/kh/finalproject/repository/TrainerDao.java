@@ -20,7 +20,7 @@ public interface TrainerDao {
 	List<TrainerListVO> selectTrainerList();
 	
 	//훈련사 디테일 메소드
-	TrainerListVO selectOne(String memberId);
+	TrainerListVO selectOne(int trainerNo);
 	
 	//훈련사 리뷰 메소드
 	List<ReviewVO> selectTrainerReview(int trainerNo);
