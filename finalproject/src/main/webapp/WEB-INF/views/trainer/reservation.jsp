@@ -13,7 +13,7 @@
   	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset2.css">
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="훈련사 상세" name="title"/>
+	<jsp:param value="훈련사 예약" name="title"/>
 </jsp:include>
 
 <style>
@@ -299,7 +299,6 @@ $(function(){
 	//form 전송 submit 이벤트
 	$(".form-check").submit(function(e){
 		//처음 화면에서 form 전송 막기
-		e.preventDefault();
 		
 		//목표 : (1)체크박스 개수 확인 후 (2)input창 생성 및 value에 가격 적용 (나중에 함수로 만들어서 빼는게 좋음!!!)
 		//(1)
@@ -330,6 +329,8 @@ $(function(){
 			.attr("value","100000");
       		detailPriceTag.append(input);
       	}
+      	
+      	this.submit();
 	});
 	
 });
@@ -341,9 +342,10 @@ $(function(){
 <h6>주소를 입력해 주세요!</h6>
 </div>
 </div>
-<form class="form-check">
+<form class="form-check" action="reservation" method="post">
 <input type="hidden" name="memberId"  value="${member.memberId}">
 <input type="hidden" name="trainingPurchasePrice" value="">
+<input type="hidden" name="trainerNo" value="${trainerno}">
 <div class="detailPrice">
 <!-- hidden으로 보낼 값 계산 name=purchaseDetailPrice -->
 </div>
@@ -395,7 +397,7 @@ $(function(){
 <img src="http://localhost:8888/download/${pet.filesNo}" width="400" height="250" class="img0">
 <p>${pet.petName}</p>
 <br>
-<input required type="checkbox" class ="petCheck" name="trainingDetailPetName" value="${pet.petName}">
+<input type="checkbox" class ="petCheck" name="trainingDetailPetName" value="${pet.petName}">
 </c:forEach>
 
 </div>
@@ -433,7 +435,7 @@ $(function(){
             </div>
             </div>
 <div class="row">
-<button class="nop" type="submit">신청하기!</button>
+<button type="submit">신청하기!</button>
 </div>
 
 

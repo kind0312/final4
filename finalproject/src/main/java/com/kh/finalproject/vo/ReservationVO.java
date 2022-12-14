@@ -28,5 +28,6 @@ public class ReservationVO {
 	private String purchaseDetailPetName;
 	private int purchaseDetailPrice;
 	private String purchaseDetailStatus;
+	private int trainerNo;
 
 }

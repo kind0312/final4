@@ -15,8 +15,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.entity.LikeDto;
+import com.kh.finalproject.entity.LinkedListDto;
 import com.kh.finalproject.entity.MemberDto;
+import com.kh.finalproject.entity.PointDto;
 import com.kh.finalproject.entity.PurchaseDetailDto;
+import com.kh.finalproject.entity.ScheduleDto;
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.entity.TrainingPurchaseDto;
@@ -160,8 +163,27 @@ public class TrainerController {
 			}
 		}
 		
+		
 		//linked_list 테이블 DB등록
+		LinkedListDto linkedListDto =LinkedListDto.builder()
+				.trainingNo(trainingNo)
+				.trainerNo(reservationVO.getTrainerNo())
+				.build();
+		trainingDao.insertLinkedList(linkedListDto);
 		//point 사용내역 테이블 DB등록
+		PointDto pointDto = PointDto.builder()
+				.memberId(reservationVO.getMemberId())
+				.build();
+		trainingDao.insertPurchase(pointDto);
+		
+		//schedule 테이블 등록~
+		ScheduleDto scheduleDto = ScheduleDto.builder()
+				.scheduleDate(reservationVO.getTrainingDate())
+				.trainerNo(reservationVO.getTrainerNo())
+				.build();
+		trainingDao.insertSchedule(scheduleDto);
+		
+		
 		
 		
 		return "redirect:/trainer/list";

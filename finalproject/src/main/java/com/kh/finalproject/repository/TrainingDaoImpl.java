@@ -7,13 +7,16 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.finalproject.entity.LinkedListDto;
+import com.kh.finalproject.entity.PointDto;
+import com.kh.finalproject.entity.ScheduleDto;
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
-
+import com.kh.finalproject.vo.CalendarVO;
+import com.kh.finalproject.vo.CheckRequestVO;
+import com.kh.finalproject.vo.OneTrainingVO;
 import com.kh.finalproject.vo.PetDetailListVO;
 import com.kh.finalproject.vo.ReservationDetailListVO;
-import com.kh.finalproject.vo.CalendarVO;
-import com.kh.finalproject.vo.OneTrainingVO;
 import com.kh.finalproject.vo.ReservationListVO;
 import com.kh.finalproject.vo.ScheduleVO;
 import com.kh.finalproject.vo.TrainingRequestListVO;
@@ -143,12 +146,26 @@ public class TrainingDaoImpl implements TrainingDao{
 	}
 
 	@Override
-	public List<TrainingDto> checkRequest(Date requestDate) {		
-		return sqlSession.selectList("training.checkRequest", requestDate);
+	public List<TrainingDto> checkRequest(CheckRequestVO checkReuqestVO) {		
+		return sqlSession.selectList("training.checkRequest", checkReuqestVO);
 	}
 
-	
+	@Override
+	public void insertSchedule(ScheduleDto dto) {
+		
+		sqlSession.insert("training.scheduleInsert", dto);
+	}
 
+	@Override
+	public void insertLinkedList(LinkedListDto dto) {
+		sqlSession.insert("training.linkedInsert", dto);
+		
+	}
+
+	@Override
+	public void insertPurchase(PointDto dto) {
+		sqlSession.insert("training.pointInsert", dto);
+	}
 	
 	
 }
