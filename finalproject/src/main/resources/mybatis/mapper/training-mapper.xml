@@ -101,6 +101,7 @@
  		t.training_status, li.trainer_no from training t 
 		inner join linked_list li on t.training_no=li.training_no
 		where li.trainer_no=#{trainerNo}
+		and (t.training_status='예약확정' or t.training_status='이용완료')
  	</select>
  	
  	

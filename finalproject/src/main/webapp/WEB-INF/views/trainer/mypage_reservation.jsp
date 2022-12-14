@@ -10,7 +10,7 @@
 <style>
 	.training-table {
 	    border-top:1px solid rgba(0, 0, 0, 0.1);
-	    height:130px;
+
 	}
 	.training-zero-font{
 		color:#303030;
@@ -137,11 +137,11 @@
         </div>
  
       	<!-- 진행 예약 화면 -->	
-        <div class="row training-ing">
-            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
+        <div class="row training-ing mt-5">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
                  <c:choose>
                  	<c:when test="${ingList.size()==0}">
-                 		<table class="table table-hover training-table text-center">
+                 		<table class="table training-table text-center">
 		                 	<tbody>
 		                 		<tr>
 		                 			<th width="20%">이름</th>
@@ -187,10 +187,10 @@
   
         <!-- 지난 예약 화면 -->
          <div class="row training-end">
-            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-3">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
            		 <c:choose>
            		 	<c:when test="${endList.size()==0}">
-           		 		<table class="table table-hover training-table text-center">
+           		 		<table class="table training-table text-center">
 		                 	<tbody>
 		                 		<tr>
 		                 			<th width="20%">이름</th>
@@ -207,7 +207,7 @@
 		                 </table>
            		 	</c:when>
            		 	<c:otherwise>
-           		 		<table class="table table-hover training-table text-center">
+           		 		<table class="table training-table text-center">
 		                 	<tbody>
 		                 		<tr>
 		                 			<th width="20%">이름</th>
@@ -223,7 +223,7 @@
 			                 			<td>${endList.trainingBasicAddress}</td>
 			                 			<td>${endList.trainingDate}</td>
 			                 			<td>${endList.trainingStartTime}</td>
-			                 			<td>
+			                 			<td class="blue" style="font-weight:bolder;">
 			                 				<fmt:formatNumber value="${endList.trainingPurchasePrice*0.9}" pattern="###,###"></fmt:formatNumber>
 			                 			</td>
 			                 			<td>
