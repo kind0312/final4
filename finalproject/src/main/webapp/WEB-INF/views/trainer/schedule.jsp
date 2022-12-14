@@ -85,14 +85,14 @@
 		$(".mode-change").click(function(){
 			location.href="${pageContext.request.contextPath}/";
 		});
-		
 
 		//풀캘린더
 		var calendarEl = $('#calendar')[0];
 	      // full-calendar 생성하기
 	      var trainerNo = $("[name=trainerNo]").val();
 	      var calendar = new FullCalendar.Calendar(calendarEl, {
-	        height: '500px', // calendar 높이 설정
+	        aspectRatio: 1.3, //달력의 가로 세로 비율 설정
+	       // height: '500px', // calendar 높이 설정
 	        expandRows: true, // 화면에 맞게 높이 재설정
 	        // 해더에 표시할 툴바
 	        headerToolbar: {
@@ -157,14 +157,22 @@
 	        		method:"get",
 	        		data:trainerNo,
 	        		success:function(resp){
-	        			//console.log(resp);
+	        			console.log(resp);
 	        			if(resp.length!=0){
 	        				for(var i=0; i<resp.length; i++){
-	        					 calendar.addEvent({
-	        						 start: resp[i]['trainingDate'],
-	        						 display: ['background'],
-	        						 color : ['#81BDF1']
-                                 })
+	        					if(resp[i].trainingStatus=='예약확정'){
+	        						calendar.addEvent({
+		        						 start: resp[i]['trainingDate'],
+		        						 display: ['background'],
+		        						 color : ['#81BDF1']
+	                                 })
+	        					}else{
+	        						calendar.addEvent({
+		        						 start: resp[i]['trainingDate'],
+		        						 display: ['background'],
+		        						 color : ['#303030']
+	                                 })
+	        					}
 	        				}
 	        			}
 	        		}
@@ -206,8 +214,9 @@
             <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4">
                  <div class="text-center" id="calendar"></div>
                  <div class="text-center mt-2">
-                 	<span class="margin-10"><i class="fa-solid fa-circle"  style="color:#FFFADF;"></i> 현재 날짜</span>
-                 	<span class="margin-10"><i class="fa-solid fa-circle blue"></i> 예약 있음</span>
+                 	<span class="margin-10"><i class="fa-solid fa-circle"  style="color:#fcee9a;"></i> 오늘</span>
+                 	<span class="margin-10"><i class="fa-solid fa-circle blue"></i> 예약있음</span>
+                 	<span class="margin-10"><i class="fa-solid fa-circle blue"  style="color:#303030;"></i> 완료</span>
                  </div>
             </div>
         </div>

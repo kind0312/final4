@@ -93,7 +93,7 @@
  		select m.member_name, t.*, li.trainer_no from member m 
 		inner join training t on m.member_id=t.member_id
 		inner join linked_list li on t.training_no=li.training_no
-		where li.trainer_no=#{trainerNo} and t.training_status='예약확정'
+		where li.trainer_no=#{trainerNo} 
 		and t.training_date=#{trainingDate}
  	</select>
  	
@@ -102,7 +102,7 @@
  		select t.training_date, t. training_no, 
  		t.training_status, li.trainer_no from training t 
 		inner join linked_list li on t.training_no=li.training_no
-		where li.trainer_no=#{trainerNo} and t.training_status='예약확정'
+		where li.trainer_no=#{trainerNo}
  	</select>
  	
  	
