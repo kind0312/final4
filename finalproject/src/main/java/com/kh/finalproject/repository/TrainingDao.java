@@ -9,6 +9,7 @@ import com.kh.finalproject.entity.ScheduleDto;
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.vo.CalendarVO;
+import com.kh.finalproject.vo.CheckRequestVO;
 import com.kh.finalproject.vo.OneTrainingVO;
 import com.kh.finalproject.vo.PetDetailListVO;
 import com.kh.finalproject.vo.ReservationDetailListVO;
@@ -71,7 +72,7 @@ public interface TrainingDao {
 	List<TrainingRequestListVO> requestList(int trainerNo);
 	
 	//훈련요청날짜에 확정된 요청이 있는지
-	List<TrainingDto> checkRequest(Date requestDate);
+	List<TrainingDto> checkRequest(CheckRequestVO checkReuqestVO);
 	
 	
 	void insertSchedule(ScheduleDto dto);
