@@ -100,7 +100,6 @@ public class TrainerController {
 			@RequestParam int trainerNo,
 			HttpSession session) {
 		
-		
 		String userId = (String)session.getAttribute(SessionConstant.ID);
 
 		model.addAttribute("member", memberDao.selectOne(userId));
@@ -118,8 +117,8 @@ public class TrainerController {
 		
 		int trainingNo = trainingDao.sequence();
 		int trainingPurchaseNo =  trainingPurchaseDao.sequence();
-		
-		
+
+		//training 훈련서비스 DB등록
 		TrainingDto trainingDto =TrainingDto.builder()
 				.trainingNo(trainingNo)
 				.memberId(reservationVO.getMemberId())
@@ -129,43 +128,40 @@ public class TrainerController {
 				.trainingDetailAddress(reservationVO.getTrainingDetailAddress())
 				.trainingMemo(reservationVO.getTrainingMemo())
 				.build();
-		
 		trainingDao.insert(trainingDto);
 		
+		//trainingPurchase 결제 DB 등록
 		TrainingPurchaseDto trainingPurchaseDto = TrainingPurchaseDto.builder()
 				.trainingPurchaseNo(trainingPurchaseNo)
 				.trainingNo(trainingNo)
 				.trainingPurchasePrice(reservationVO.getTrainingPurchasePrice())
 				.build();
-		
 		trainingPurchaseDao.purchaseInsert(trainingPurchaseDto);
-		
-		
-		
+
 		String[] arrayParam = request.getParameterValues("trainingDetailPetName");
 		String[] arrayParam2 = request.getParameterValues("purchaseDetailPrice");
 		
 		if(arrayParam != null) {
 			for(int i = 0; i<arrayParam.length; i++) {
-				
+				//훈련상세 trainingDetail DB 등록
 				TrainingDetailDto trainingDetailDto = TrainingDetailDto.builder()
 						.trainingNo(trainingNo)
 						.trainingDetailPetName(arrayParam[i])
 						.build();
 				trainingDao.insertDetail(trainingDetailDto);
 				
-				
+				//결제상세 purchaseDetail DB 등록
 				PurchaseDetailDto purchaseDetailDto = PurchaseDetailDto.builder()
 						.trainingPurchaseNo(trainingPurchaseNo)
 						.purchaseDetailPetName(arrayParam[i])
 						.purchaseDetailPrice(Integer.parseInt(arrayParam2[i]))
 						.build();
-				
-				
 				trainingPurchaseDao.purchaseDetailInsert(purchaseDetailDto);
-				
 			}
 		}
+		
+		//linked_list 테이블 DB등록
+		//point 사용내역 테이블 DB등록
 		
 		
 		return "redirect:/trainer/list";
