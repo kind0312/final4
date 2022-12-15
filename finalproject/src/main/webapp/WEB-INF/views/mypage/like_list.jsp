@@ -32,6 +32,9 @@
 	    border-top:1px solid rgba(0, 0, 0, 0.1);
 	    height:130px;
 	}
+	.fa-heart{
+	background-color: red;
+	}
 </style>
 
 <script>
@@ -127,7 +130,7 @@
 	                 				</th>
 	                 				<th width="40%">
 	                 					<p class="name-font">${like.memberName}</p>
-	                 					<p class="gender-font">${like.trainerProfile} / ${like.trainerProfileContent}/ ${like.trainerLike}</p>
+	                 					<p class="gender-font">${like.trainerProfile} / ${like.trainerProfileContent}</p>
 	                 				</th>
 	                 				<th width="30%">
 	                 					<a href="/trainer/detail?trainerNo=${like.trainerNo}" class="btn btn-blue">상세</a>

@@ -189,8 +189,12 @@ margin-right: 20px;
 .row{
 text-align: center;
 }
+
+
 .row1{
-position:relative; 
+display: flex;
+flex-direction:row;
+flex-wrap: wrap;
 }
 .pay1{
 	margin-left: 140px;
@@ -392,7 +396,7 @@ $(function(){
 <h6>엄선된 훈련사가 갈거에요!</h6><br>
 </div>
 <div class="row1">
-<div class="row row2">
+<div class="row">
 <c:forEach var="pet" items="${pet}">
 <img src="http://localhost:8888/download/${pet.filesNo}" width="400" height="250" class="img0">
 <p>${pet.petName}</p>
@@ -435,7 +439,7 @@ $(function(){
             </div>
             </div>
 <div class="row">
-<button type="submit">신청하기!</button>
+<button class="btn btn-blue" type="submit">신청하기!</button>
 </div>
 
 

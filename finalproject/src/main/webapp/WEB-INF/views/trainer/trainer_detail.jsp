@@ -44,7 +44,13 @@
 border-radius: 50%;
 width: 200px;
 height: 200px;
+
 }
+.like{
+margin-left: -7px;
+margin-bottom: 7px;
+}
+
     </style>
 <body>
     <div class="viewmore">    
@@ -66,12 +72,14 @@ height: 200px;
             <a class="heart"><i class="fa-regular fa-heart"></i></a>  
          </c:if>
          <c:if test="${isLike == true}">
-            <a href="like?trainerNo=${list.trainerNo}"><i class="fa-solid fa-heart"></i></a> 
+            <a href="like?trainerNo=${list.trainerNo}"><span style="color:red"><i class="fa-solid fa-heart"></i></span></a> 
          </c:if>
          <c:if test="${isLike == false}">
-            <a href="like?trainerNo=${list.trainerNo}"><i class="fa-regular fa-heart"></i></a>  
+            <a href="like?trainerNo=${list.trainerNo}"><span style="color:red"><i class="fa-regular fa-heart"></i></span></a>  
          </c:if>
+         <div class="like">
          ${list.trainerLike} 
+         </div>
                             <br>
                         </div>
                     </div>
