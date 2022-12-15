@@ -159,7 +159,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row mt-4 mb-5 text-center">
+		<div class="row mt-5 mb-5 text-center">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 				<button type="submit" id="insert-btn" class="btn btn-blue w-75">지원하기</button>
 			</div>

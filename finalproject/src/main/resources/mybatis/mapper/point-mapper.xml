@@ -31,4 +31,30 @@
 	</select>
 	
 	
+	<!-- 승정 테스트 -->
+	<select id="pageList" resultType="PointDto" parameterType="PointListVO">
+		select * from 
+        (select rownum rn, TMP.* from 
+        (select * from point where member_id=#{memberId} order by point_no desc)TMP ) 
+        where rn between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="pageSearch" resultType="PointDto" parameterType="PointListVO">
+		select * from 
+		(select rownum rn, TMP.* from 
+		(select * from point where member_id=#{memberId}
+		and instr(#{type},#{keyword})>0 
+		order by point_no desc)TMP ) where rn between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="listCount" resultType="int" parameterType="String">
+		select count(*) from point where member_id=#{memberId}
+	</select>
+	
+	<select id="searchCount" resultType="int" parameterType="PointListVO">
+		select count(*) from point where member_id=#{memberId} 
+		and instr(#{type},#{keyword})>0 
+	</select>
+	
+	
 </mapper>

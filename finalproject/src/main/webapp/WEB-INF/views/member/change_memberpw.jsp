@@ -9,7 +9,7 @@
 
 <body>
 
-	<div class="container-fluid" style="height:100%;">
+	<div class="container-fluid">
 	<form class="join-form" action="change_memberpw" method="post" autocomplete="off">
 		<div class="row text-center mt-4">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-150">
@@ -17,38 +17,22 @@
 			</div>
 		</div>
 		<div class="row mt-4">
-			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-				<div class="row form-group">
-					<label>
-						비밀번호
-						<i class="fa-solid fa-asterisk blue"></i>
-					</label>
-					<div class="input-group">
-						<input type="hidden" name="memberId" value="${memberDto.memberId}" readonly>
-						<input type="password" name="memberPw" class="form-control" required>
-						<div class="valid-feedback"></div>
-	                    <div class="invalid-feedback">비밀번호는 8~16자 영문 대 소문자, 숫자, </div>
-	                    <div class="invalid-feedback">특수문자(!@#$)를 사용하세요.</div>
-					</div>
-				</div>
+			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2" align="center">
+				<input type="hidden" name="memberId" value="${memberDto.memberId}" readonly>
+				<input type="password" name="memberPw" class="form-control rounded" placeholder="새 비밀번호" required style="width:400px;">
+				<div class="valid-feedback"></div>
+                <div class="invalid-feedback" align="left" style="width:400px;">비밀번호는 8~16자 영문 대 소문자, 숫자, </div>
+                <div class="invalid-feedback" align="left" style="width:400px;">특수문자(!@#$)를 사용하세요.</div>
 			</div>
 		</div>
 		<div class="row mt-4">
-			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-				<div class="row form-group">
-					<label>
-						비밀번호 재확인
-						<i class="fa-solid fa-asterisk blue"></i>
-					</label>
-					<div class="input-group">
-						<input type="password" id="memberPwRe" class="form-control" required>
-						<div class="valid-feedback"></div>
-	                    <div class="invalid-feedback">비밀번호가 일치하지 않습니다</div>
-					</div>
-				</div>
+			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2" align="center">
+				<input type="password" id="memberPwRe" class="form-control rounded" placeholder="비밀번호 재확인" required style="width:400px;">
+				<div class="valid-feedback"></div>
+                <div class="invalid-feedback" align="left" style="width:400px;">비밀번호가 일치하지 않습니다</div>
 			</div>
 		</div>
-		<div class="row mt-5">
+		<div class="row mt-5 mb-5">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
 			<button type="submit" class="btn btn-blue btn-md">확인</button>
 			</div>

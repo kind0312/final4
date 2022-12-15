@@ -151,15 +151,8 @@ public class TrainingDaoImpl implements TrainingDao{
 	}
 
 	@Override
-	public void insertSchedule(ScheduleDto dto) {
-		
-		sqlSession.insert("training.scheduleInsert", dto);
-	}
-
-	@Override
 	public void insertLinkedList(LinkedListDto dto) {
 		sqlSession.insert("training.linkedInsert", dto);
-		
 	}
 
 	@Override

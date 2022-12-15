@@ -276,7 +276,6 @@ $(function(){
 	         var totalPrice = parseInt($(".total-price").text());
 	         $(".price").text(myPoint-totalPrice);
 	         $("[name=trainingPurchasePrice]").val(totalPrice);
-
 	         
 	      }else{
 	         $(".total-price").text(cnt*100000);
@@ -289,22 +288,21 @@ $(function(){
 	
 	//폼 보내기 전에 반드시 체크해야 할 것
 	check={
-				// 주소 input창 입력 확인
-				// 날짜와 시간 선택 확인
-				// 반려동물 선택과 메모 입력 확인
-				// 결제금액과 보유포인트 확인(결제금액>보유포인트)
-
-				allValid:function(){
-					return ;
-				}
+		// 1. 반려동물 선택(체크박스 선택없을 경우) - 함수 petSelectCheck()
+		// 2. 결제금액과 보유포인트 확인(결제금액>보유포인트) - pointCheck()
+		checkbox:false,
+		point:false,
+		allValid:function(){
+			return this.checkbox && this.point;
+		}
 	};
 	
-	
-	//form 전송 submit 이벤트
-	$(".form-check").submit(function(e){
-		//처음 화면에서 form 전송 막기
+	//펫 선택 체크박스 검사
+	function petSelectCheck(){
+		//feedback 문구 삭제
+  		$("[name=trainingDetailPetName]").removeClass("is-invalid");
 		
-		//목표 : (1)체크박스 개수 확인 후 (2)input창 생성 및 value에 가격 적용 (나중에 함수로 만들어서 빼는게 좋음!!!)
+		// 목표 : (1)체크박스 개수 확인 후 (2)input창 생성 및 value에 가격 적용
 		//(1)
 		var cnt = 0;
       	$("[name=trainingDetailPetName]").each(function(){
@@ -327,14 +325,52 @@ $(function(){
       				detailPriceTag.append(input);
       			}
       		}
-      		
-      	}else{ //수량이 1이거나 0일경우(0일 경우 막는 event 추가 생성해야함!!! ex) 반려견 선택해주세요 등 문구출력하는 이벤트)
+      		check.checkbox=true; //폼 체크박스 검사 false를 true로 변경
+      	}else if(cnt==1){ //수량이 1
       		var input = $("<input>").attr("type","hidden").attr("name","purchaseDetailPrice")
 			.attr("value","100000");
       		detailPriceTag.append(input);
+      		check.checkbox=true;
+      	}else{ // 수량이 0
+      		$("[name=trainingDetailPetName]").addClass("is-invalid");
+      		check.checkbox=false;
       	}
-      	
-      	this.submit();
+	}
+	
+	//보유 포인트 검사
+	function pointCheck(){
+		var myPoint = parseInt($(".myPoint").text());
+		var totalPrice = parseInt($(".total-price").text());
+		
+		//feedback 문구 삭제
+  		$(".afterpoint").removeClass("is-invalid");
+		if(myPoint<totalPrice){
+			$(".afterpoint").addClass("is-invalid");
+			check.point=false;
+		}else if(totalPrice ==0){
+			check.point=false;
+		}else{
+			check.point=true;
+		}
+		
+	}
+	
+	//form 전송 submit 이벤트
+	$(".form-check").submit(function(e){
+		//처음 화면에서 form 전송 막기
+		e.preventDefault();
+		
+		//함수 실행
+		petSelectCheck();
+		pointCheck();
+		
+		console.log(check.checkbox);
+		console.log(check.point);
+		
+		//폼 체크가 전부 true이면 전송하기
+		if(check.allValid()){
+			this.submit();
+		}
 	});
 	
 });
@@ -403,12 +439,13 @@ $(function(){
 <br>
 <input type="checkbox" class ="petCheck" name="trainingDetailPetName" value="${pet.petName}">
 </c:forEach>
-
+<div class="invalid-feedback">반려견을 선택해주세요!</div>
 </div>
 </div>
 
 <div class="row">
  <div class="mt-20">
+ 
  <p class="p2"> 반려견 추가시 1마리당 50000포인트의 추가요금이 발생합니다.<br>(기본 100000포인트)</p>
  </div>
   </div>
@@ -435,6 +472,7 @@ $(function(){
                 <span>결제 후 포인트</span>
                 <span class="price"></span>P
             </div>
+            <div class="invalid-feedback">결제할 포인트가 부족합니다!</div>
             </div>
             </div>
             </div>

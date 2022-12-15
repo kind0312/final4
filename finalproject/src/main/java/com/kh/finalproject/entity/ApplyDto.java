@@ -7,8 +7,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class ApplyDto {
+
+	
 	private int applyNo;
 	private String memberId;
 	private Date applyDate;
@@ -17,4 +21,7 @@ public class ApplyDto {
 	private String applyActive;
 	private String applyLicense;
 	private String applyStatus;
+	
+	
+
 }
