@@ -3,11 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
-<jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="회원 채팅 리스트" name="title"/>
+    
+    <jsp:include page="/WEB-INF/views/template/trainerHeader.jsp">
+	<jsp:param value="훈련사 채팅리스트" name="title"/>
 </jsp:include>
-
 
 <style>
 	.pet-table>tbody{
@@ -44,7 +43,7 @@
 <div class="container-fluid">
         <div class="row mt-80 mb-3">
             <div class="col-md-6 offset-md-3">
-                 <h4 class="text-center">일반회원 채팅목록</h4>
+                 <h4 class="text-center">훈련사 채팅목록</h4>
             </div>
         </div>
 		
@@ -59,13 +58,13 @@
 	                 				</th>
 	                 				<th width="40%">
 	                 					
-	                 					<p class="name-font">${chatList.memberName} 훈련사</p>
+	                 					<p class="name-font">${chatList.memberName} 회원</p>
 	                 					
 	                 					<p class="gender-font">${chatList.chatMessage}</p>
 	                 					<p class="gender-font">${chatList.chatCreateAt}</p>
 	                 				</th>
 	                 				<th width="30%">
-	                 					<a href="${pageContext.request.contextPath}/chat/room?roomNo=${chatList.roomNo}" class="btn btn-blue">채팅</a>
+	                 					<a href="${pageContext.request.contextPath}/chat/room_trainer?roomNo=${chatList.roomNo}" class="btn btn-blue">채팅</a>
 	                 				</th>
                  				</tr>
 		                	</c:forEach>
@@ -86,5 +85,7 @@
 <script>
 	
 </script>
+
+
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
