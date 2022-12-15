@@ -11,16 +11,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.finalproject.constant.SessionConstant;
+import com.kh.finalproject.entity.LikeDto;
+import com.kh.finalproject.entity.LinkedListDto;
 import com.kh.finalproject.entity.MemberDto;
+import com.kh.finalproject.entity.PointDto;
 import com.kh.finalproject.entity.PurchaseDetailDto;
+import com.kh.finalproject.entity.ScheduleDto;
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.entity.TrainingPurchaseDto;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.PetDao;
 import com.kh.finalproject.repository.TrainerDao;
+import com.kh.finalproject.repository.TrainerLikeDao;
 import com.kh.finalproject.repository.TrainingDao;
 import com.kh.finalproject.repository.TrainingPurchaseDao;
 import com.kh.finalproject.vo.ReservationVO;
@@ -46,15 +52,29 @@ public class TrainerController {
 	@Autowired
 	private PetDao petDao;
 	
+	@Autowired
+	private TrainerLikeDao trainerLikeDao; 
+	
 	//훈련사 디테일(단일조회)
 	@GetMapping("/detail")
 	public String detail(Model model,
 			@ModelAttribute TrainerListVO trainerListvo,
-			@ModelAttribute ReviewVO reviewVo
+			@ModelAttribute ReviewVO reviewVo,
+			@RequestParam int trainerNo,
+			HttpSession session
 			) {
 		
-		model.addAttribute("list", trainerDao.selectOne(trainerListvo.getMemberId()));	
+		model.addAttribute("list", trainerDao.selectOne(trainerListvo.getTrainerNo()));	
 		model.addAttribute("review", trainerDao.selectTrainerReview(reviewVo.getTrainerNo()));
+		
+		//좋아요 기록 조회
+				String memberId = (String) session.getAttribute(SessionConstant.ID);
+				if(memberId != null) {
+					LikeDto likeDto = new LikeDto();
+					likeDto.setMemberId(memberId);
+					likeDto.setTrainerNo(trainerNo);
+					model.addAttribute("isLike", trainerLikeDao.check(likeDto));
+				}
 		
 		return "trainer/trainer_detail";
 		
@@ -83,7 +103,6 @@ public class TrainerController {
 			@RequestParam int trainerNo,
 			HttpSession session) {
 		
-		
 		String userId = (String)session.getAttribute(SessionConstant.ID);
 
 		model.addAttribute("member", memberDao.selectOne(userId));
@@ -101,8 +120,8 @@ public class TrainerController {
 		
 		int trainingNo = trainingDao.sequence();
 		int trainingPurchaseNo =  trainingPurchaseDao.sequence();
-		
-		
+
+		//training 훈련서비스 DB등록
 		TrainingDto trainingDto =TrainingDto.builder()
 				.trainingNo(trainingNo)
 				.memberId(reservationVO.getMemberId())
@@ -112,46 +131,85 @@ public class TrainerController {
 				.trainingDetailAddress(reservationVO.getTrainingDetailAddress())
 				.trainingMemo(reservationVO.getTrainingMemo())
 				.build();
-		
 		trainingDao.insert(trainingDto);
 		
+		//trainingPurchase 결제 DB 등록
 		TrainingPurchaseDto trainingPurchaseDto = TrainingPurchaseDto.builder()
 				.trainingPurchaseNo(trainingPurchaseNo)
 				.trainingNo(trainingNo)
 				.trainingPurchasePrice(reservationVO.getTrainingPurchasePrice())
 				.build();
-		
 		trainingPurchaseDao.purchaseInsert(trainingPurchaseDto);
-		
-		
-		
+
 		String[] arrayParam = request.getParameterValues("trainingDetailPetName");
 		String[] arrayParam2 = request.getParameterValues("purchaseDetailPrice");
 		
 		if(arrayParam != null) {
 			for(int i = 0; i<arrayParam.length; i++) {
-				
+				//훈련상세 trainingDetail DB 등록
 				TrainingDetailDto trainingDetailDto = TrainingDetailDto.builder()
 						.trainingNo(trainingNo)
 						.trainingDetailPetName(arrayParam[i])
 						.build();
 				trainingDao.insertDetail(trainingDetailDto);
 				
-				
+				//결제상세 purchaseDetail DB 등록
 				PurchaseDetailDto purchaseDetailDto = PurchaseDetailDto.builder()
 						.trainingPurchaseNo(trainingPurchaseNo)
 						.purchaseDetailPetName(arrayParam[i])
 						.purchaseDetailPrice(Integer.parseInt(arrayParam2[i]))
 						.build();
-				
-				
 				trainingPurchaseDao.purchaseDetailInsert(purchaseDetailDto);
-				
 			}
 		}
 		
 		
+		//linked_list 테이블 DB등록
+		LinkedListDto linkedListDto =LinkedListDto.builder()
+				.trainingNo(trainingNo)
+				.trainerNo(reservationVO.getTrainerNo())
+				.build();
+		trainingDao.insertLinkedList(linkedListDto);
+		//point 사용내역 테이블 DB등록
+		PointDto pointDto = PointDto.builder()
+				.memberId(reservationVO.getMemberId())
+				.build();
+		trainingDao.insertPurchase(pointDto);
+		
+		//schedule 테이블 등록~
+		ScheduleDto scheduleDto = ScheduleDto.builder()
+				.scheduleDate(reservationVO.getTrainingDate())
+				.trainerNo(reservationVO.getTrainerNo())
+				.build();
+		trainingDao.insertSchedule(scheduleDto);
+		
+		
+		
+		
 		return "redirect:/trainer/list";
+	}
+	
+	@GetMapping("/like") //인증글 좋아요
+	public String trainerLike(
+				@RequestParam int trainerNo,
+				HttpSession session, 
+				RedirectAttributes attr) {
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		LikeDto dto = new LikeDto();
+		dto.setMemberId(memberId);
+		dto.setTrainerNo(trainerNo);
+		
+		if(trainerLikeDao.check(dto)) {//좋아요를 한 상태면
+			trainerLikeDao.delete(dto);//취소(데이터 삭제)
+		}
+		else {//좋아요를 한 적이 없는 상태면
+			trainerLikeDao.insert(dto);//좋아요(데이터 추가)
+		}
+		
+		trainerLikeDao.refresh(trainerNo);//trainer_like(인증글 좋아요 수) 갱신
+		
+		attr.addAttribute("trainerNo", trainerNo);
+		return "redirect:detail";
 	}
 
 }

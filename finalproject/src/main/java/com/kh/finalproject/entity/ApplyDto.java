@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class ApplyDto {
 
@@ -22,4 +23,5 @@ public class ApplyDto {
 	private String applyStatus;
 	
 	
+
 }

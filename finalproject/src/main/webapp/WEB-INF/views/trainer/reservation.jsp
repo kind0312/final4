@@ -13,31 +13,29 @@
   	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset2.css">
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="훈련사 상세" name="title"/>
+	<jsp:param value="훈련사 예약" name="title"/>
 </jsp:include>
 
 <style>
+textarea::placeholder{
+   font-size: 14px;
+   color: #AAAAAA;
+   }
 textarea{
    width: 600px;
    height: 200px;
    padding: 10px;
    box-sizing: border-box;
-   border: solid 2px #81BDF1;
+   border: solid 2px #DDDDDD;
    border-radius: 0.5em;
    font-size: 16px;
    resize: none;
-   margin:0 0 0 0;
 }
-.p2{
-   font-size: 12px;
-   color: #3f3f3f;
-   margin-bottom:50px;
-}
-.calendar{ 
+calendar{ 
    width: 300px;
 }
 #short-text-box{
-   border: 1px solid ##81BDF1;
+   border: 1px solid #AAAAAA;
    border-radius: 0.5em;
 }
 .blind{
@@ -107,8 +105,14 @@ font-size: 17px;
 text-align: center;
 border-color: ##000000;
 }
+.stbox:focus,
+.stbox:active,
+.stbox:hover{
+   border:1px solid  #6c7aef;
+   
+}
 #short-text-box{
-   border: 1px solid ##81BDF1;
+   border: 1px solid #AAAAAA;
    border-radius: 0.5em;
    width: 400px;
    height: 40px;
@@ -122,7 +126,46 @@ width: 200px;
 height: 200px;
 display:inline;
 }
+.img1{
+display: flex; 
+}
 
+.map{
+float : left;
+margin-right: 20px;
+}
+
+}
+
+
+
+
+input::placeholder{
+font-weight: 400;
+font-size: 13px;
+text-align: center;
+}
+
+.basic{
+font-size: 17px;
+text-align: center;
+border-color: ##000000;
+}
+#short-text-box{
+   border: 1px solid ##81BDF1;
+   border-radius: 0.5em;
+   width: 400px;
+   height: 40px;
+   text-align: center;
+   
+
+}
+.img0{
+border-radius: 50%;
+width: 200px;
+height: 200px;
+display:inline-block;
+}
 .map{
 float : left;
 margin-right: 20px;
@@ -139,9 +182,36 @@ margin-right: 20px;
 {
  border: solid 2px #81BDF1;
  
+
+ 
 }
 
+.row{
+text-align: center;
+}
+.row1{
+position:relative; 
+}
+.pay1{
+	margin-left: 140px;
+}
+.pay2{
+	margin-left: 80px;
+}
+.hr1{
+	width: 450px;
+}
+.address-box{
+	border: solid 2px #DDDDDD;
+}
+.textarea-hover:hover{
+border: 2px solid #81BDF1;
+}
 
+.textarea-hover:focus{
+border: 2px solid #81BDF1;
+outline-color: #81BDF1;
+}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.js"></script>
@@ -202,7 +272,6 @@ $(function(){
 	         var totalPrice = parseInt($(".total-price").text());
 	         $(".price").text(myPoint-totalPrice);
 	         $("[name=trainingPurchasePrice]").val(totalPrice);
-
 	         
 	      }else{
 	         $(".total-price").text(cnt*100000);
@@ -215,23 +284,21 @@ $(function(){
 	
 	//폼 보내기 전에 반드시 체크해야 할 것
 	check={
-				// 주소 input창 입력 확인
-				// 날짜와 시간 선택 확인
-				// 반려동물 선택과 메모 입력 확인
-				// 결제금액과 보유포인트 확인(결제금액>보유포인트)
-
-				allValid:function(){
-					return ;
-				}
+		// 1. 반려동물 선택(체크박스 선택없을 경우) - 함수 petSelectCheck()
+		// 2. 결제금액과 보유포인트 확인(결제금액>보유포인트) - pointCheck()
+		checkbox:false,
+		point:false,
+		allValid:function(){
+			return this.checkbox && this.point;
+		}
 	};
 	
-	
-	//form 전송 submit 이벤트
-	$(".form-check").submit(function(e){
-		//처음 화면에서 form 전송 막기
-		e.preventDefault();
+	//펫 선택 체크박스 검사
+	function petSelectCheck(){
+		//feedback 문구 삭제
+  		$("[name=trainingDetailPetName]").removeClass("is-invalid");
 		
-		//목표 : (1)체크박스 개수 확인 후 (2)input창 생성 및 value에 가격 적용 (나중에 함수로 만들어서 빼는게 좋음!!!)
+		// 목표 : (1)체크박스 개수 확인 후 (2)input창 생성 및 value에 가격 적용
 		//(1)
 		var cnt = 0;
       	$("[name=trainingDetailPetName]").each(function(){
@@ -254,67 +321,88 @@ $(function(){
       				detailPriceTag.append(input);
       			}
       		}
-      		
-      	}else{ //수량이 1이거나 0일경우(0일 경우 막는 event 추가 생성해야함!!! ex) 반려견 선택해주세요 등 문구출력하는 이벤트)
+      		check.checkbox=true; //폼 체크박스 검사 false를 true로 변경
+      	}else if(cnt==1){ //수량이 1
       		var input = $("<input>").attr("type","hidden").attr("name","purchaseDetailPrice")
 			.attr("value","100000");
       		detailPriceTag.append(input);
+      		check.checkbox=true;
+      	}else{ // 수량이 0
+      		$("[name=trainingDetailPetName]").addClass("is-invalid");
+      		check.checkbox=false;
       	}
+	}
+	
+	//보유 포인트 검사
+	function pointCheck(){
+		var myPoint = parseInt($(".myPoint").text());
+		var totalPrice = parseInt($(".total-price").text());
+		
+		//feedback 문구 삭제
+  		$(".afterpoint").removeClass("is-invalid");
+		if(myPoint<totalPrice){
+			$(".afterpoint").addClass("is-invalid");
+			check.point=false;
+		}else{
+			check.point=true;
+		}
+		
+	}
+	
+	//form 전송 submit 이벤트
+	$(".form-check").submit(function(e){
+		//처음 화면에서 form 전송 막기
+		e.preventDefault();
+		
+		//함수 실행
+		petSelectCheck();
+		pointCheck();
+		
+		//폼 체크가 전부 true이면 전송하기
+		if(check.allValid()){
+			this.submit();
+		}
+      	this.submit();
 	});
 	
 });
-
-
-
 </script>
-
-
-
-<div class="container-650">
-<div class="row mt-4">
-<div class="col-md-10 offset-md-1 mt-30 text-center">
-<div class="text-center">
+<div class="container-450 mt-100">
+<div class="row">
 <h3>어디로 갈까요?</h3><br>
+<div class="mt-20">
 <h6>주소를 입력해 주세요!</h6>
-<div class="rows">
-
-
-
-
-<form class="form-check">
-<input type="hidden" name="memberId" value="${member.memberId}">
+</div>
+</div>
+<form class="form-check" action="reservation" method="post">
+<input type="hidden" name="memberId"  value="${member.memberId}">
 <input type="hidden" name="trainingPurchasePrice" value="">
+<input type="hidden" name="trainerNo" value="${trainerno}">
 <div class="detailPrice">
 <!-- hidden으로 보낼 값 계산 name=purchaseDetailPrice -->
 </div>
- 
-               <input type="text" name="trainingBasicAddress"
-               class="input short-text-box short-hover stbox basic col" id="text-box1"
-                autocomplete="off" value="${member.memberBaseAddress}"><br><br>
-               
-               
-               
-               
-               
-               <input type="text" name="trainingDetailAddress"
-               class="input short-text-box short-hover stbox basic col" id="text-box1"
+<div class="row">
+<input type="text" name="trainingBasicAddress"
+               class="input short-text-box address-box basic col" id="text-box1" required
+                autocomplete="off" value="${member.memberBaseAddress}">
+</div>
+<div class="row">
+<input type="text" name="trainingDetailAddress"
+               class="input short-text-box address-box basic col" id="text-box1" required
                autocomplete="off" value="${member.memberDetailAddress}">
-               <br><br><br><br><br><br>
-               
-               
-               
-               
-               
-               
-               
-               <div class="col-md-10 offset-md-1 mt-100 text-center">
-               <h3>언제 갈까요?</h3><br>
-               <h6>날짜를 선택해 주세요!</h6><br>
-               <div class="row">
+</div>
+<br><br><br><br>
+<div class="row mt-100">
+<h3>언제 갈까요?</h3><br>
+<div class="mt-20">
+<h6>날짜를 선택해 주세요!</h6><br>
+</div>
+</div>
+ <div class="row">
                        <input type="text" class="single-date-picker short-hover date-box" id="short-text-box" 
                         name="trainingDate" autocomplete="off">
                    </div>
-                   <br><br>
+                    <div class="row">
                    <h6>시간을 선택해 주세요!</h6><br>
                    <select name="trainingStartTime">
                    <option value="09:00">09시</option>
@@ -328,41 +416,40 @@ $(function(){
                    <option value="17:00">17시</option>
                    <option value="18:00">18시</option>
                    </select>
-               </div>
-               
-               
-               <!-- 비동기 테스트 -->
-               <div class="test"></div>
-               
-               
-               
-               <br><br><br><br><br>
-               <div class="col-md-10 offset-md-1 mt-100 text-center">
-               <h3>반려동물에 대해 알려주세요!</h3><br>
-               <h6>엄선된 훈련사가 갈거에요!</h6><br>
-                <c:forEach var="pet" items="${pet}">
-   <div class="map">
-      <img src="http://localhost:8888/download/${pet.filesNo}" width="400" height="250" class="img0">
-      <p>${pet.petName}</p>
-      <input type="checkbox" class ="petCheck" name="trainingDetailPetName" value="${pet.petName}">
-   </div>
+</div>
+
+<br><br><br>
+<div class="row mt-100">
+<h3>반려동물에 대해 알려주세요!</h3><br><br><br>
+<h6>엄선된 훈련사가 갈거에요!</h6><br>
+</div>
+<div class="row1">
+<div class="row row2">
+<c:forEach var="pet" items="${pet}">
+<img src="http://localhost:8888/download/${pet.filesNo}" width="400" height="250" class="img0">
+<p>${pet.petName}</p>
+<br>
+<input type="checkbox" class ="petCheck" name="trainingDetailPetName" value="${pet.petName}">
 </c:forEach>
-<p class="p2"> 반려견 추가시 1마리당 50000포인트의 추가요금이 발생합니다.
-                       (기본 100000포인트)</p>
-               </div>
-               <br>
-               <div class="row">
-               <textarea class="helper-text2 short-hover" name="trainingMemo"  placeholder="요청사항 예) 까미는 ~간식을 못먹어요!, 자주 물어요!" maxlength="300" ></textarea>
-               </div>
-               
-               
-               
-               
-               <br><br><br><br><br><br>
-               
-               <div class="payment">    
-        <h3>결제화면</h3><br>
-        <span>보유하신 포인트에서 차감돼요!</span>
+<div class="invalid-feedback">반려견을 선택해주세요!</div>
+</div>
+</div>
+
+<div class="row">
+ <div class="mt-20">
+ 
+ <p class="p2"> 반려견 추가시 1마리당 50000포인트의 추가요금이 발생합니다.<br>(기본 100000포인트)</p>
+ </div>
+  </div>
+<div class="row">
+<textarea class="helper-text2 textarea-hover" name="trainingMemo" required  placeholder="요청사항 예) 까미는 ~간식을 못먹어요!, 자주 물어요!" maxlength="300" ></textarea>
+</div>
+
+
+ <div class="payment mt-100">    
+        <h3 class="pay1">결제화면</h3><br>
+        <span class="pay2">보유하신 포인트에서 차감돼요!</span>
+        <div class="row">
         <div class="content">
             <div class="point nowpoint">
                 <span>현재 내 포인트</span>
@@ -372,26 +459,26 @@ $(function(){
                 <span>총 결제 포인트</span>
                 <span class="total-price">0</span>P
             </div>
+            <hr class="hr1">
             <div class="point afterpoint">
                 <span>결제 후 포인트</span>
                 <span class="price"></span>P
             </div>
-        </div>  
+            <div class="invalid-feedback">결제할 포인트가 부족합니다!</div>
+            </div>
+            </div>
+            </div>
+<div class="row">
+<button type="submit">신청하기!</button>
 </div>
-               
+
+
+
 </form>
-            
-         </div>
-
 </div>
 
 
-</div>
 
-
-</div>
-
-</div>
 
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

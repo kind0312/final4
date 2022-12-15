@@ -64,7 +64,7 @@
        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.min.js"></script>
    
        <!-- score (jquery 보다 뒤에 나와야 한다.)-->
-       <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@0.0.6/score.min.js"></script>
    
        <!-- 주소 검색 -->
        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -80,26 +80,43 @@
        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94efcfc3a2fb279ab90052c1c24e8cc6"></script>
    
       <style>
+      	
 /*          <!-- div 확인 점선 --> */
 /*            div{ */
 /*                  border: 1px dotted gray; */
 /*               } */
           /* 태그 스타일 */
-           body {
-/*                height:1000px; */
-           }
-          p {
+        html,
+		body {
+                height:100%;
+        }
+        
+      	body {
+		  display: flex;
+		  flex-direction: column;
+		}
+		
+		section {
+		  flex: 1;
+		}
+        
+        p {
            margin-top: 0;
            margin-bottom: 0;
-         }
+           font-family: var(--bs-font-sans-serif);
+        }
          a {
             text-decoration: none;
          }
          a:hover {
             color: #dfe6e9;
          }
-
+        
          /* 클래스 스타일 */
+         .rounded{
+         	border-radius: 10px !important;
+         }
+         
           .logo {
              width:80px;
           }
@@ -142,11 +159,17 @@
          .footer-link{
             color: #f8f9fa;
          }
+         .w-10{
+         	width: 10% !important;
+         }
          .w-30{
             width: 30%;
          }
          .w-70{
             width: 70%;
+         }
+         .w-90{
+         	width: 90% !important;
          }
          .mt-150{
             margin-top:150px;
@@ -159,6 +182,9 @@
          }
          .mt-80{
             margin-top:80px;
+         }
+         .mt-70{
+            margin-top:70px;
          }
          .mt-50{
             margin-top:50px;
@@ -180,6 +206,9 @@
          }
          .blue-bolder{
             font-weight:bolder;
+         }
+         .yellow{
+        	color:#FADE81;
          }
          
         .btn{
@@ -266,8 +295,11 @@
             box-shadow: 0 0 0 0.25rem rgba(69, 130, 236, 0.25);
          }
          
+         /* 라벨 폰트 두껍게*/
+         .label-font-weight{
+         	font-weight:bold;
+         }
          
-
       </style>
       
       <script type="text/javascript"> 
@@ -315,20 +347,14 @@
                        메뉴 항목
                        - .active는 활성화된 메뉴(현재 메뉴), 상황에 따라 맞는 메뉴에 추가
                    -->
-                   <li class="nav-item dropdown">
-                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" 
-                     role="button" aria-haspopup="true" aria-expanded="false" href="#">훈련서비스</a>
-                     <div class="dropdown-menu">
-                       <a class="dropdown-item" href="#">예약하기</a>
-                       <div class="dropdown-divider"></div><!-- 중간 중간 선으로 구분하는 것-->
-                       <a class="dropdown-item" href="/trainer/list">훈련사 프로필 보기</a>
-                     </div>
+                   <li class="nav-item">
+                     <a class="nav-link" href="${pageContext.request.contextPath}/trainer/list">훈련서비스</a>
                    </li>
                    <li class="nav-item">
-                     <a class="nav-link" href="#">이용후기</a>
+                     <a class="nav-link" href="${pageContext.request.contextPath}/review/list">이용후기</a>
                    </li>
                    <li class="nav-item">
-                     <a class="nav-link" href="#">펫시터 지원</a>
+                     <a class="nav-link" href="${pageContext.request.contextPath}/member/apply">훈련사 지원</a>
                    </li>
                    <c:choose>
                       <c:when test="${loginId == null}">
@@ -343,16 +369,9 @@
                      <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/pay/point_select">포인트 구매</a>
                      </li>
-                     <li class="nav-item dropdown">
-                           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" 
-                           role="button" aria-haspopup="true" aria-expanded="false" href="${pageContext.request.contextPath}/mypage/training">마이페이지</a>
-                           <div class="dropdown-menu">
-                             <a class="dropdown-item" href="${pageContext.request.contextPath}/mypage/training">예약내역</a>
-                             <a class="dropdown-item" href="${pageContext.request.contextPath}/mypage/pet">반려동물 관리</a>
-                             <div class="dropdown-divider"></div><!-- 중간 중간 선으로 구분하는 것-->
-                             <a class="dropdown-item" href="${pageContext.request.contextPath}/mypage/point">포인트내역</a>
-                           </div>
-                         </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/mypage/training">마이페이지</a>
+                     </li>
                      <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/member/logout">로그아웃</a>
                      </li>
@@ -374,4 +393,4 @@
          </div>
        </div>
         </div>
-        <main class="container-fluid">
+        <section class="container-fluid">

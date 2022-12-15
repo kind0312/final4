@@ -11,6 +11,7 @@ import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.vo.ReviewVO;
 import com.kh.finalproject.vo.TrainerListSearchVO;
 import com.kh.finalproject.vo.TrainerListVO;
+import com.kh.finalproject.vo.TrainerOneVO;
 
 
 @Repository
@@ -38,9 +39,9 @@ public class TrainerDaoImpl implements TrainerDao {
 	}
 
 	@Override
-	public TrainerListVO selectOne(String memberId) {
+	public TrainerListVO selectOne(int trainerNo) {
 		
-		return sqlSession.selectOne("trainer.selectOne", memberId);
+		return sqlSession.selectOne("trainer.selectOne", trainerNo);
 		
 	}
 
@@ -61,9 +62,14 @@ public class TrainerDaoImpl implements TrainerDao {
 		
 	}
 
-	//훈련사 한 명 단일조회
+	//훈련사 한 명 단일 조회(변수:회원ID)
 	public TrainerDto selectOnePro(String memberId) {		
 		return sqlSession.selectOne("trainer.selectOnePro", memberId);
+	}
+	//훈련사 한 명 단일 조회(변수:훈련사번호)
+	@Override
+	public TrainerOneVO selectOnePro(int trainingNo) {
+		return sqlSession.selectOne("trainer.selectOneProNo", trainingNo);
 	}
 
 
@@ -76,6 +82,17 @@ public class TrainerDaoImpl implements TrainerDao {
 	@Override
 	public int selectOneTrainerNo(String memberId) {		
 		return sqlSession.selectOne("trainer.selectOneTrainerNo", memberId);
+	}
+
+	@Override
+	public String selectOneTrainerId(int trainerNo) {		
+		return sqlSession.selectOne("trainer.selectOneTrainerId", trainerNo);
+	}
+
+	@Override
+	public TrainerListVO selectOne(String memberId) {
+
+		return sqlSession.selectOne("trainer.selectOneId",memberId);
 	}
 
 

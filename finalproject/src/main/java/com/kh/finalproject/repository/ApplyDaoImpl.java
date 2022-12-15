@@ -1,5 +1,6 @@
 package com.kh.finalproject.repository;
 
+
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -46,10 +47,7 @@ public class ApplyDaoImpl implements ApplyDao {
 	}
 
 
-	@Override
-	public ApplyDto selectOne(String memberId) {
-		return sqlSession.selectOne("apply.two",memberId);
-	}
+
 
 
 
@@ -59,4 +57,30 @@ public class ApplyDaoImpl implements ApplyDao {
 //	
 //	}
 	      
+	
+
+//시퀀스 생성
+	@Override
+	public int sequence() {
+		return sqlSession.selectOne("apply.sequence");
 	}
+	
+	//훈련사 등록
+	@Override
+	public void insert(ApplyDto applyDto) {
+		int applyNo = sequence();
+		applyDto.setApplyNo(applyNo);
+		sqlSession.insert("apply.insert", applyDto);
+	}
+	
+	@Override
+	public ApplyDto selectone(String memberId) {
+		return sqlSession.selectOne("apply.one", memberId);
+	}
+	
+
+
+
+	
+}
+

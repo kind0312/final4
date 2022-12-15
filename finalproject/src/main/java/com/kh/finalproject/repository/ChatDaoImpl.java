@@ -9,6 +9,10 @@ import org.springframework.stereotype.Repository;
 import com.kh.finalproject.entity.ChatDto;
 import com.kh.finalproject.entity.ChatUserDto;
 import com.kh.finalproject.entity.RoomDto;
+import com.kh.finalproject.vo.ChatPartnerSearchVO;
+import com.kh.finalproject.vo.ChatPartnerVO;
+import com.kh.finalproject.vo.ChatRoomVO;
+import com.kh.finalproject.vo.SearchRoomVO;
 
 
 
@@ -51,6 +55,30 @@ public class ChatDaoImpl implements ChatDao{
 		// 룸 table 시퀀스 번호 생성
 		return sqlSession.selectOne("chat.roomSeqNo");
 	}
+
+	@Override
+	public String searchRoomVO(SearchRoomVO searchRoomVO) {		
+		return sqlSession.selectOne("chat.searchRoom", searchRoomVO);
+	}
+
+	@Override
+	public List<ChatUserDto> chatRoomList(String memberId) {		
+		return sqlSession.selectList("chat.chatRoomList", memberId);
+	}
+
+	@Override
+	public List<ChatRoomVO> chatRoom(String roomNo) {		
+		return sqlSession.selectList("chat.chatRoom", roomNo);
+	}
+
+	@Override
+	public ChatPartnerVO chatPartner(ChatPartnerSearchVO chatPartnerSearchVO) {		
+		return sqlSession.selectOne("chat.searchPartner", chatPartnerSearchVO);
+	}
+
+
+
+
 
 
 

@@ -1,5 +1,6 @@
 package com.kh.finalproject.repository;
 
+
 import java.util.List;
 
 import com.kh.finalproject.entity.ApplyDto;
@@ -10,15 +11,23 @@ public interface ApplyDao {
 	
 	//지원자 상세
 	ApplyDto selectOne(int applyNo);
-	ApplyDto selectOne(String memberId);
+	
 	//지원자 수정기능
-
-     //eidt(ApplyDto applyDto);
-	//ApplyDto update(int applyNo);
 	boolean update(ApplyDto dto);
 	boolean update2(ApplyDto dto);
-	//반환형 이름 (매개변수)
-
 	
+
+	//시퀀스 생성
+	int sequence();
+	
+	//훈련사 등록
+	void insert(ApplyDto applyDto);
+	
+	//훈련사 지원여부확인
+	ApplyDto selectone(String memberId);
+
+
+
+
 
 }

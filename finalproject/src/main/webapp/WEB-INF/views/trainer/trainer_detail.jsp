@@ -62,8 +62,16 @@ height: 200px;
                         </div>
                         <span>후기 ${list.getCnt()}개</span>
                         <div class="heart">
-                            <a href="javascript:void(0);"></a>
-                            <span>2</span>
+                            <c:if test="${isLike == null}">
+            <a class="heart"><i class="fa-regular fa-heart"></i></a>  
+         </c:if>
+         <c:if test="${isLike == true}">
+            <a href="like?trainerNo=${list.trainerNo}"><i class="fa-solid fa-heart"></i></a> 
+         </c:if>
+         <c:if test="${isLike == false}">
+            <a href="like?trainerNo=${list.trainerNo}"><i class="fa-regular fa-heart"></i></a>  
+         </c:if>
+         ${list.trainerLike} 
                             <br>
                         </div>
                     </div>
@@ -97,6 +105,6 @@ height: 200px;
         
     </div>
     <a href="/trainer/reservation?trainerNo=${list.trainerNo}" class="btn btn-blue btn-md " class="btn reserve">예약하기</a>
-    <a href="javascript:void(0);" class="btn inquiry">문의하기</a>
+    <a href="/chat/enter?trainerNo=${list.trainerNo}" class="btn inquiry">문의하기</a>
 </body>
 </html>

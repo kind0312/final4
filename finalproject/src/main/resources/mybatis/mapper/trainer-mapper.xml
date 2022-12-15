@@ -32,14 +32,14 @@
       </select>
       
       <!-- 훈련사 단일 조회 mapper -->
-      <select id="selectOne"  parameterType="String" resultType="TrainerListVO">
-      select nvl(R.cnt,0) cnt , nvl(CEIL(R.avg),0) avg, T.trainer_no, T.member_id,
+      <select id="selectOne"  parameterType="int" resultType="TrainerListVO">
+      select nvl(R.cnt,0) cnt , nvl(CEIL(R.avg),0) avg, T.trainer_no, T.member_id, T.trainer_like,
       T.trainer_profile, T.trainer_profile_content,
       M.member_name,M.member_tel,M.member_email,M.member_gender from trainer T
       inner join member M on T.member_id = M.member_id left outer join
       (select trainer_no, count(*) cnt, avg(review_good) avg 
       from review group by trainer_no)
-      R on R.trainer_no = T.trainer_no where T.member_id = #{memberId}
+      R on R.trainer_no = T.trainer_no where T.trainer_no = #{trainerNo}
       </select>
       
       <!-- 훈련사 단일 리뷰 조회 -->
@@ -74,11 +74,18 @@
         </select>    
         
 
-      <!-- 훈련사 단일조회 -->
+      <!-- 훈련사 단일조회(id)로 조회 -->
       <select id="selectOnePro" parameterType="String" resultType="TrainerDto">
-      select * from trainer where member_id = #{memberId}
+      	select * from trainer where member_id = #{memberId}
       </select>
-
+      
+	  <!-- 훈련사 단일조회(no)로 조회 -->
+      <select id="selectOneProNo" parameterType="int" resultType="TrainerOneVO">
+      	select t.member_id, m.member_name, img.files_no from trainer t 
+		    inner join member m on t.member_id=m.member_id
+		    inner join member_img img on m.member_id=img.member_id
+		    where t.trainer_no = #{trainerNo}
+      </select>
       
       <!-- trainer 테이블 member_id로 단일조회 -->
       <select id="selectOneTrainerNo" parameterType="String" resultType="int">
@@ -91,5 +98,20 @@
       update trainer set trainer_profile=#{trainerProfile}, trainer_profile_content=#{trainerProfileContent} where trainer_no= #{trainerNo}
       </update>
       
+      <!-- 트레이너 번호로 트레이너 id찾기 -->
+      <select id="selectOneTrainerId" parameterType="int" resultType="String">
+      	select member_id from trainer where trainer_no =#{trainerNo}
+      </select>
+      
+      <!-- 훈련사 id로 단일 조회 mapper -->
+      <select id="selectOneId"  parameterType="string" resultType="TrainerListVO">
+      select nvl(R.cnt,0) cnt , nvl(CEIL(R.avg),0) avg, T.trainer_no, T.member_id, T.trainer_like,
+      T.trainer_profile, T.trainer_profile_content,
+      M.member_name,M.member_tel,M.member_email,M.member_gender from trainer T
+      inner join member M on T.member_id = M.member_id left outer join
+      (select trainer_no, count(*) cnt, avg(review_good) avg 
+      from review group by trainer_no)
+      R on R.trainer_no = T.trainer_no where T.member_id = #{memberId}
+      </select>
 
 </mapper>

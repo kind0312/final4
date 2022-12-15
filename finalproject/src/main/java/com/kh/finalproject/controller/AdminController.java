@@ -172,8 +172,8 @@ public class AdminController {
 		model.addAttribute("memberDto",memberDto);
 
 		
-		;
-		ApplyDto applyDto=applyDao.selectOne(memberId);
+		
+		ApplyDto applyDto=applyDao.selectone(memberId);
 		model.addAttribute("applyDto",applyDto);
 		//여기까지가 상세임.....상태는 신청으로 된 상태
 		

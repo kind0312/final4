@@ -24,35 +24,85 @@
  		select * from training where training_no=#{trainingNo}
  	</select>
  	
- 	<!-- 훈련서비스 번호로 서비스, 서비스상세, 회원 첨부파일 연결테이블 3개 조인 리스트 -->
+ 	<!-- 훈련서비스 번호로 서비스, 서비스상세, 서비스 연결테이블 3개 조인 리스트 -->
  	<select id="oneTraining" resultType="OneTrainingVO" parameterType="int">
- 		select * from training t 
-		inner join training_detail td on t.training_no = td.training_no
-		inner join member_img img on t.member_id = img.member_id
-		where t.training_no=#{trainingNo}
+ 		select t.*, td.training_detail_pet_name, li.trainer_no from training t 
+		  inner join training_detail td on t.training_no=td.training_no
+		  inner join linked_list li on td.training_no=li.training_no
+		  where t.training_no=#{trainingNo}
  	</select>
  	
  	<!-- 진행 예약 리스트(회원 기준) -->
- 	<select id="ingList" resultType="TrainingDto" parameterType="String">
- 		select * from training 
- 		where member_id=#{memberId} 
-		and (training_status='예약대기' or training_status='예약확정')
+ 	<select id="ingList" resultType="TrainingListVO" parameterType="String">
+ 		select img.files_no, pro.trainer_no, li.training_no, 
+			t.training_date, t.training_starttime, t.training_status, t.member_id
+			from member_img img 
+			inner join trainer pro on img.member_id=pro.member_id
+			inner join linked_list li on pro.trainer_no=li.trainer_no
+			inner join training t on li.training_no=t.training_no
+			where member_id=#{memberId} 
+ 			and (training_status='예약대기' or training_status='예약확정')
  	</select>
  	
  	<!-- 지난 예약 리스트(회원 기준) -->
- 	<select id="endList" resultType="TrainingDto" parameterType="String">
- 		select * from training 
-		where member_id=#{memberId} 
-		and (training_status='예약취소' or training_status='이용완료')
+ 	<select id="endList" resultType="TrainingListVO" parameterType="String">
+ 		select img.files_no, pro.trainer_no, li.training_no, 
+			t.training_date, t.training_starttime, t.training_status, t.member_id
+			from member_img img 
+			inner join trainer pro on img.member_id=pro.member_id
+			inner join linked_list li on pro.trainer_no=li.trainer_no
+			inner join training t on li.training_no=t.training_no
+			where member_id=#{memberId} 
+ 			and (training_status='예약취소' or training_status='이용완료')
  	</select>
- 	
+
  	<!-- 진행 예약 리스트(훈련사 기준) -->
- 	<select id="reservationIngList" resultType="ReservationIngListVO" parameterType="int">
+ 	<select id="reservationIngList" resultType="ReservationListVO" parameterType="int">
  		select m.member_name, t.*, li.trainer_no from member m 
 		inner join training t on m.member_id=t.member_id
 		inner join linked_list li on t.training_no=li.training_no
 		where li.trainer_no=#{trainerNo} and t.training_status='예약확정'
  	</select>
+ 	
+ 	<!-- 지난 예약 리스트(훈련사 기준) -->
+ 	<select id="reservationEndList" resultType="ReservationListVO" parameterType="int">
+ 		select m.member_name, t.*, li.trainer_no, p.training_purchase_price from member m 
+		inner join training t on m.member_id=t.member_id
+		inner join linked_list li on t.training_no=li.training_no
+		inner join training_purchase p on li.training_no = p.training_no 
+		where li.trainer_no=#{trainerNo} and t.training_status='이용완료'
+ 	</select>
+ 	
+ 	<!-- 예약상세 리스트(훈련사 기준) -->
+ 	<select id="reservationDetailList" resultType="ReservationDetailListVO" parameterType="int">
+ 		select m.member_name,t.*, tp.training_purchase_price, 
+		td.training_detail_pet_name, p.*, img.files_no 
+		from member m 
+			inner join training t on m.member_id = t.member_id 
+			inner join training_purchase tp on t.training_no = tp.training_no
+			inner join training_detail td on tp.training_no = td.training_no
+			inner join pet p on td.training_detail_pet_name = p.pet_name
+			inner join pet_img img on p.pet_no = img.pet_no
+		where t.training_no=#{trainingNo}
+ 	</select>
+ 	
+ 	<!-- 스케쥴 예약내역 리스트 -->
+ 	<select id="scheduleList" resultType="ReservationListVO" parameterType="ScheduleVO">
+ 		select m.member_name, t.*, li.trainer_no from member m 
+		inner join training t on m.member_id=t.member_id
+		inner join linked_list li on t.training_no=li.training_no
+		where li.trainer_no=#{trainerNo} 
+		and t.training_date=#{trainingDate}
+ 	</select>
+ 	
+ 	<!-- 스케줄 데이터 리스트(화면에 미리 찍어줄 데이터) -->
+ 	<select id="schedule" resultType="CalendarVO" parameterType="int">
+ 		select t.training_date, t. training_no, 
+ 		t.training_status, li.trainer_no from training t 
+		inner join linked_list li on t.training_no=li.training_no
+		where li.trainer_no=#{trainerNo}
+ 	</select>
+ 	
  	
  	<!-- 훈련서비스 받은 펫 마리수 -->
   	<select id="petCount" resultType="int" parameterType="int">
@@ -107,6 +157,11 @@
  		update training set training_status='예약확정', training_changedate=sysdate where training_no=#{trainingNo}
  	</update>
  	
+ 	<!-- 예약상태 > 이용완료 변경 -->
+ 	<update id="statusChange3" parameterType="int">
+ 		update training set training_status='이용완료', training_changedate=sysdate where training_no=#{trainingNo}
+ 	</update>
+ 	
  	<!-- request detail 펫 정보 -->
  	<select id="requestDetailPetList" parameterType="int" resultType="PetDetailListVO">
  		select p.*, img.files_no from training t 
@@ -134,9 +189,25 @@
  	
  	
  	<!-- 훈련요청 날짜에 확정된 예약이 있는지 확인 -->
- 	<select id="checkRequest" parameterType="Date" resultType="TrainingDto">
- 	select * from training where training_status='예약확정' and training_date=#{requestDate}
+ 	<select id="checkRequest" parameterType="CheckRequestVO" resultType="TrainingDto">
+		select tr.* from training tr
+		inner join linked_list LL on tr.training_no = LL.training_no
+		inner join trainer tt on tt.trainer_no = LL.trainer_no
+		where tr.training_status='예약확정' and tr.training_date=#{trainingDate} and tt.trainer_no = #{trainerNo}
  	</select>
+ 	
+ 	<insert id="linkedInsert" parameterType="LinkedListDto">
+ 	insert into linked_list(training_no, trainer_no) values(#{trainingNo}, #{trainerNo})
+ 	</insert>
+ 	
+ 	<insert id="scheduleInsert" parameterType="ScheduleDto">
+ 	insert into schedule(schedule_no, trainer_no, schedule_date) values(schedule_seq.nextval, #{trainerNo}, #{scheduleDate})
+ 	</insert>
+ 	
+ 	<insert id="pointInsert" parameterType="PointDto">
+ 		insert into point(point_no, member_id, point_status, point_price, point_date)
+ 		values(point_seq.nextval, #{memberId}, '사용', #{pointPrice}, sysdate)
+ 	</insert>
   	
   
   </mapper>

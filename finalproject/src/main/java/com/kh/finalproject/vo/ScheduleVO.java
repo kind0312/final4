@@ -1,4 +1,4 @@
-package com.kh.finalproject.entity;
+package com.kh.finalproject.vo;
 
 import java.sql.Date;
 
@@ -7,10 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class LinkedList {
-	
-	private int trainingNo;
+@Data @Builder @NoArgsConstructor @AllArgsConstructor
+public class ScheduleVO {
+	private Date trainingDate;
 	private int trainerNo;
-
 }

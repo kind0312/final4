@@ -1,7 +1,5 @@
 package com.kh.finalproject.controller;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -9,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +20,14 @@ import com.kh.finalproject.entity.PurchaseDetailDto;
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingPurchaseDto;
 import com.kh.finalproject.repository.MemberDao;
-import com.kh.finalproject.repository.PetDao;
 import com.kh.finalproject.repository.PointDao;
+import com.kh.finalproject.repository.TrainerDao;
+import com.kh.finalproject.repository.TrainerLikeDao;
 import com.kh.finalproject.repository.TrainingDao;
 import com.kh.finalproject.repository.TrainingPurchaseDao;
+import com.kh.finalproject.vo.OneTrainingVO;
+import com.kh.finalproject.vo.ReviewVO;
+import com.kh.finalproject.vo.TrainerListVO;
 
 @Controller
 @RequestMapping("/mypage")
@@ -39,7 +42,9 @@ public class MypageController {
 	@Autowired
 	private TrainingPurchaseDao trainingPurchaseDao;
 	@Autowired
-	private PetDao petDao;
+	private TrainerDao trainerDao;
+	@Autowired
+	private TrainerLikeDao trainerLikeDao;
 	
 	//포인트 관리
 	@RequestMapping("/point")
@@ -68,7 +73,10 @@ public class MypageController {
 	@RequestMapping("/training_detail")
 	public String detail(@RequestParam int trainingNo, Model model) {
 		//훈련서비스 단일조회
-		model.addAttribute("training", trainingDao.oneTraining(trainingNo));
+		List<OneTrainingVO> dto = trainingDao.oneTraining(trainingNo);
+		model.addAttribute("training", dto);
+		//해당 훈련사 정보 단일조회
+		model.addAttribute("trainer", trainerDao.selectOnePro(dto.get(0).getTrainerNo()));
 		//결제내역 단일조회
 		model.addAttribute("purchase", trainingPurchaseDao.selectOne(trainingNo));
 		return "mypage/training_detail";
@@ -139,6 +147,15 @@ public class MypageController {
 		model.addAttribute("filesNo", memberDao.findFileNo(memberId));
 		return "mypage/profile";
 	}	
+	
+	@GetMapping("/like")
+	public String like(Model model, HttpSession session) {
+		
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("like", trainerLikeDao.likeList(memberId));
+		
+		return "mypage/like_list";
+	}
 	
 
 }

@@ -32,10 +32,10 @@
 .viewmore .btn.inquiry {top:274px;}
 
 /* 결제 */
-.payment {width:922px; min-width:922px; margin:0 auto; font-size:22px; }
-.payment > h2 {display:block; margin-top:90px; margin-bottom:48px; text-align:center; font-size:24px; font-weight:700;}
-.payment > span {display:block; font-size:18px; text-align:center;}
+.payment {width:922px; min-width:922px; font-size:22px; }
+.payment > h2 {display:block; margin-top:90px; margin-bottom:48px;font-size:24px; font-weight:700;}
+.payment > span {display:block; font-size:18px;}
 .payment .content {margin-top:100px;}
-.payment .content .point {display:flex; height:122px; padding:0 100px; font-size:29px; justify-content:space-between; align-items:center; text-align:center;}
-.payment .content .point.totalpoint {border-bottom:1px solid #000; font-size:34px; font-weight:800;}
+.payment .content .point {display:flex; height:122px; padding-right: 500px; font-size:29px; justify-content:space-between;}
+.payment .content .point.totalpoint {font-size:34px; font-weight:800;}
 .payment .content .point.totalpoint span:nth-last-child(1) {color:red;}

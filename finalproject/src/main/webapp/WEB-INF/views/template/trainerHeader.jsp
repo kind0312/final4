@@ -80,6 +80,11 @@
 	    <!-- 카카오 지도-->
 	    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94efcfc3a2fb279ab90052c1c24e8cc6"></script>
 	
+		 <!-- fullcalendar CDN -->
+		 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
+		 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
+		 <!-- fullcalendar 언어 CDN -->
+		 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
 		<style>
 /* 			<!-- div 확인 점선 --> */
 /* 			div{ */
@@ -316,15 +321,15 @@
 	                    - .active는 활성화된 메뉴(현재 메뉴), 상황에 따라 맞는 메뉴에 추가
 	                -->
 	                <li class="nav-item">
-	                  <a class="nav-link" href="${pageContext.request.contextPath}/trainer/main">채팅
+	                  <a class="nav-link" href="${pageContext.request.contextPath}/trainer/chat_list">채팅
 	                    <span class="visually-hidden">(current)</span>
 	                  </a>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link" href="${pageContext.request.contextPath}/trainer/main">훈련서비스</a>
+	                  <a class="nav-link" href="${pageContext.request.contextPath}/trainer/request_list">훈련서비스</a>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link" href="${pageContext.request.contextPath}/trainer/main">스케줄</a>
+	                  <a class="nav-link" href="${pageContext.request.contextPath}/trainer/schedule">스케줄</a>
 	                </li>
 	                <li class="nav-item dropdown">
 	                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" 
@@ -340,7 +345,7 @@
 	                  </div>
 	                </li>
 	                <li class="nav-item">
-	                  <a class="nav-link" href="#">로그아웃</a>
+	                  <a class="nav-link" href="${pageContext.request.contextPath}/member/logout">로그아웃</a>
 	                </li>
 	
 	              </ul>

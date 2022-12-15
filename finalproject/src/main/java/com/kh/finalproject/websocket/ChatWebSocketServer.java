@@ -49,8 +49,8 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 		// Dao에서 해당 룸(Room_no) list를 가져와야겠고
 		
 		
-		//@Autowired
-		//private ChatDao chatDao;
+		@Autowired
+		private ChatDao chatDao;
 		
 		//ChatDao에 있는 insert 메소드를 생성해야 하는데
 		//훈련사 controller 에서 승인 버튼을 누르면 채팅방을 만들어야 함
@@ -128,6 +128,14 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 				String json = mapper.writeValueAsString(chatDto);
 				TextMessage msg = new TextMessage(json);
 				channel.send(user, msg);
+				
+				System.out.println("채팅Dto " + chatDto); 
+				//chatNo는 실시간 소켓에서는 없음 디비 들어갈때 생성 
+				// roomNo는 가져올수있을거같은데 ...-> 가져왔음 Dto에 들어온다
+				
+				chatDao.insertMessage(chatDto);
+				
+				
 			}
 			
 		}

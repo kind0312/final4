@@ -11,7 +11,7 @@
 	.img-circle{
 		border-radius: 70%;
 	   	border:none;
-	   	background-color:#81BDF1;
+	   	background-color:#fff;
 	   	overflow: hidden;
 	}
 	.underline-out{
@@ -109,7 +109,7 @@
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/point">포인트</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">찜관리</a>
+	          <a class="nav-link mypage-nav" style="color:white;" href="${pageContext.request.contextPath}/mypage/like">찜관리</a>
 	        </li>
 	        <li class="nav-item">
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">후기</a>
@@ -118,7 +118,7 @@
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/profile">정보수정</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav trainer-change" href="#" data-bs-toggle="modal" data-bs-target="#change-modal">훈련사로 전환</a>
+	          <a class="nav-link mypage-nav trainer-change" href="#">훈련사로 전환</a>
 	        </li>
      	 </ul>
     	</div>
@@ -157,12 +157,12 @@
 						<tr class="table-default align-middle">
 			  				<td colspan="2" height="200px">
 			  					<div class="mt-3">
-			  						<img src="http://localhost:8888/download/${training[0].filesNo}" class="img-circle" width="100" height="100">
+			  						<img src="http://localhost:8888/download/${trainer.filesNo}" class="img-circle" width="100" height="100">
 			  					</div>
 			  					<div class="mt-4">
 			  						<c:choose>
 			  							<c:when test="${training[0].trainingStatus=='예약대기'}">
-			  								<span>훈련사 님의 승인을 기다리고 있습니다.</span>
+			  								<span>${trainer.memberName} 훈련사 님의 승인을 기다리고 있습니다.</span>
 			  							</c:when>
 			  							<c:when test="${training[0].trainingStatus=='예약취소'}">
 			  								<span>예약이 취소되었습니다.</span>
@@ -171,7 +171,7 @@
 			  								<span>훈련이 종료되었습니다.</span>
 			  							</c:when>
 			  							<c:otherwise>
-			  								<span>훈련사 님이 방문 예정입니다.</span>
+			  								<span>${trainer.memberName} 훈련사 님이 방문 예정입니다.</span>
 			  							</c:otherwise>
 			  						</c:choose>
 			  					</div>
@@ -344,7 +344,7 @@
 	<!-- 정보 출력을 위한 hidden값 -->
 	<input type="hidden" name="petName" value="${training[0].trainingDetailPetName}">
 	<input type="hidden" name="cnt" value="${training.size()}">
-	<input type="hidden" name="memberId" value="${training.memberId}">
+	<input type="hidden" name="memberId" value="${training[0].memberId}">
 </body>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

@@ -8,8 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class OneTrainingVO {
-	private int trainingNo;
 	private String memberId;
+	private int trainingNo;
 	private Date trainingDate;
 	private String trainingStartTime;
 	private String trainingBasicAddress;
@@ -19,5 +19,6 @@ public class OneTrainingVO {
 	private Date trainingChangeDate;
 	
 	private String trainingDetailPetName;
-	private int filesNo;
+	
+	private int trainerNo;
 }

@@ -2,7 +2,6 @@ package com.kh.finalproject.controller;
 
 
 import java.sql.Date;
-
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,21 +16,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalproject.constant.SessionConstant;
+import com.kh.finalproject.entity.ChatDto;
+import com.kh.finalproject.entity.ChatUserDto;
+import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.MemberImgDto;
+
 import com.kh.finalproject.entity.PetDto;
+import com.kh.finalproject.entity.RoomDto;
+import com.kh.finalproject.entity.ScheduleDto;
+
 import com.kh.finalproject.entity.TrainerDto;
-import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
+import com.kh.finalproject.repository.ChatDao;
 import com.kh.finalproject.repository.FilesDao;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.PetDao;
+import com.kh.finalproject.repository.ScheduleDao;
 import com.kh.finalproject.repository.TrainerDao;
 import com.kh.finalproject.repository.TrainingDao;
-
+import com.kh.finalproject.repository.TrainingPurchaseDao;
+import com.kh.finalproject.vo.CheckRequestVO;
 import com.kh.finalproject.vo.PetDetailListVO;
+import com.kh.finalproject.vo.SearchRoomVO;
 import com.kh.finalproject.vo.TrainingRequestListVO;
-
-import lombok.Builder;
 
 
 
@@ -50,6 +57,15 @@ public class PetTrainerController {
 	private TrainingDao trainingDao;
 	@Autowired
 	private PetDao petDao;
+	@Autowired
+	private TrainingPurchaseDao trainingPurchaseDao;
+
+	@Autowired
+	private ScheduleDao scheduleDao;
+	
+	@Autowired
+	private ChatDao chatDao;
+	
 
 	@RequestMapping("/main")
 	public String main(HttpSession session) {
@@ -89,19 +105,131 @@ public class PetTrainerController {
 	}
 	
 	@GetMapping("/training_approve")
-	public String approve(@RequestParam int trainingNo) {
+	public String approve(@RequestParam int trainingNo
+			, HttpSession session
+			,@ModelAttribute RoomDto roomDto
+			,@ModelAttribute ChatUserDto chatUserDto
+			,@ModelAttribute MemberDto memberDto
+			) {
+		
+		String trainerId = (String) session.getAttribute(SessionConstant.ID);	
+		
+		
+		int trainerNo = trainerDao.selectOneTrainerNo(trainerId); // trainerNo를 찾아옴
 		//Dao에 training 테이블의 status 상태 수정update 
 		//Dao에 상태수정 날짜 sysdate 들어가게 
 		TrainingDto dto = trainingDao.selectOne(trainingNo);
 		Date requestDate = dto.getTrainingDate(); //해당 trainingNo의 훈련 요청 날짜를 구함
 		
-		List<TrainingDto> list = trainingDao.checkRequest(requestDate); //훈련날짜에 확정된 예약이 있는지 검색 	
-				
-		Boolean result = trainingDao.statusChange2(trainingNo);	//status 상태를 예약확정으로 바꾸는 메소드
 		
-		if(!result || list.size() > 0) { //이거 꼭 확인하기 로그인 안돼서 테스트 못함
+		//date랑 트레이너 번호 들어가야함 
+		CheckRequestVO checkReuqestVO = CheckRequestVO
+				.builder()
+				.trainingDate(requestDate)
+				.trainerNo(trainerNo)
+				.build();
+		
+		
+		List<TrainingDto> list = trainingDao.checkRequest(checkReuqestVO); //훈련날짜에 확정된 예약이 있는지 검색 	지금 여기가 문제 
+		System.out.println("예약날짜 개수: " + list.size());		
+		
+		
+		if(list.size() > 0) { //이거 꼭 확인하기 로그인 안돼서 테스트 못함
 			return "trainer/training_disable"; //예약승인 불가 - 승인 불가한 경우 코드 넣어야함
 		}		
+		
+		Boolean result = trainingDao.statusChange2(trainingNo);	//status 상태를 예약확정으로 바꾸는 메소드
+		
+		//스케줄 테이블에 예약 날짜를 넣어야함 dto.getTrainingDate()
+		ScheduleDto scheduleDto = ScheduleDto
+				.builder()
+				.trainerNo(trainerNo)
+				.scheduleDate(dto.getTrainingDate())
+				.build();
+		scheduleDao.insert(scheduleDto);
+		
+		//chat방 자동생성 되면서 -> 예약 메시지 들어가야함 
+				
+		//해당 예약 회원 아이디 찾아오기
+		String memberId = dto.getMemberId();
+		
+		// 트레이너랑 멤버 정보 가져옴
+		MemberDto memDto = memberDao.selectOne(memberId);
+		MemberDto trainerDto = memberDao.selectOne(trainerId);
+		
+		
+		// 채팅방 룸 찾을 준비 vo
+		SearchRoomVO vo = SearchRoomVO
+				.builder()
+				.memberId(memberId)
+				.trainerId(trainerId)
+				.build();
+		String searchRoomNo = chatDao.searchRoomVO(vo);
+		System.out.println( " 룸 번호 " + searchRoomNo);
+		
+		//만약에 searchRoomNo가 null이 아니라면 방번호가 있는것
+		// -> 해당 방으로 메세지를 보내야함
+		if(searchRoomNo != null) {			
+			//chatDao.insertApproveMessage  룸번호는 searchRoomNo
+			
+			String message ="[ " + dto.getTrainingDate() +" ]" + "예약이 확정되었습니다. 감사합니다";
+			
+			
+			ChatDto insertApproveMessage1 = ChatDto
+					.builder()
+					.roomNo(searchRoomNo)
+					.memberId(trainerId)
+					.chatMessage(message)
+					.build();
+					
+					
+			chatDao.insertMessage(insertApproveMessage1);
+			//System.out.println("인서트 메세지" + insertApproveMessage1);
+			
+		}
+		else {
+			String seqNo = chatDao.createRoomSeq();  //채팅방 시퀀스번호 생성	
+			
+			//채팅room 테이블에 생성된 테이블 정보 insert
+			chatDao.createRoom(roomDto.builder()
+					.roomNo(seqNo)
+					.roomCreateAt(roomDto.getRoomCreateAt())
+					.roomUpdateAt(roomDto.getRoomUpdateAt())
+					.build()
+					);
+			//해당 방에 들어가는 유저 정보 chat_user테이블에 정보 insert
+			chatDao.insertChatUser(chatUserDto.builder()
+					.memberId(memberId)
+					.roomNo(seqNo)
+					.memberName(memDto.getMemberName())
+					.memberStatus(memDto.getMemberStatus())
+					.build());
+			//그럼 훈련사도 같은 방에 memberId가 저장되어야 하는데...	
+			chatDao.insertChatUser(chatUserDto.builder()
+					.memberId(trainerId)
+					.roomNo(seqNo)
+					.memberName(trainerDto.getMemberName())
+					.memberStatus(trainerDto.getMemberStatus())
+					.build());
+			
+			System.out.println("새로방만들기 성공");
+			
+			String message = "[ " + dto.getTrainingDate() +" ]" + "예약이 확정되었습니다. 감사합니다";
+			
+			
+			//chatDao.insertApproveMessage  룸번호는 seqNo
+			ChatDto insertApproveMessage2 = ChatDto
+					.builder()
+					.roomNo(seqNo)
+					.memberId(trainerId)
+					.chatMessage(message)
+					.build();
+					
+					
+			chatDao.insertMessage(insertApproveMessage2);			
+		}
+		
+		
 		return "trainer/training_approve"; //예약승인 성공
 	}
 	
@@ -186,25 +314,31 @@ public class PetTrainerController {
 //	}
 	
 	
-	
-	
-	
-	
 	@RequestMapping("/mypage_reservation")
 	public String reservation(HttpSession session, Model model) {
-		//String memberId = (String)session.getAttribute(SessionConstant.ID);
-		String memberId = "trainer3";
-		TrainerDto dto = trainerDao.selectOnePro(memberId);
-		int trainerNo = dto.getTrainerNo();
-		
+		int trainerNo = (int)session.getAttribute(SessionConstant.trainingNo);
 		model.addAttribute("ingList", trainingDao.ingList(trainerNo));
-		
+		model.addAttribute("endList", trainingDao.endList(trainerNo));
 		return "trainer/mypage_reservation";
 	}
+
 	
-	
+	@RequestMapping("/mypage_reservation_detail")
+	public String reservationDetail(@RequestParam int trainingNo, Model model) {
+		model.addAttribute("detail", trainingDao.detailList(trainingNo));
+		return "trainer/mypage_reservation_detail";
+	}
+
+	@RequestMapping("/schedule")
+	public String schedule(HttpSession session, Model model) {
+		int trainerNo = (int)session.getAttribute(SessionConstant.trainingNo);
+		model.addAttribute("trainerNo", trainerNo);
+		return "trainer/schedule";
+	}
+
 	
 	//로그아웃 누를 경우 세션값 제거하기
+
 	
 }
 	

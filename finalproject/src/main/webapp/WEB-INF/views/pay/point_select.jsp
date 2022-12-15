@@ -61,7 +61,7 @@
 		            </c:forEach>
 		            <br>
 		            <input type="hidden" value="" name="itemNo">
-		            <a href="${pageContext.request.contextPath}/mypage/point_list" class="btn btn-yellow btn-md mt-5 mb-5">취소</a>
+		            <a href="${pageContext.request.contextPath}/mypage/point" class="btn btn-yellow btn-md mt-5 mb-5">취소</a>
 	            </form>
             </div>
         </div>

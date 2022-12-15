@@ -7,13 +7,18 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.finalproject.entity.LinkedListDto;
+import com.kh.finalproject.entity.PointDto;
+import com.kh.finalproject.entity.ScheduleDto;
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
-
-import com.kh.finalproject.vo.PetDetailListVO;
-
+import com.kh.finalproject.vo.CalendarVO;
+import com.kh.finalproject.vo.CheckRequestVO;
 import com.kh.finalproject.vo.OneTrainingVO;
-import com.kh.finalproject.vo.ReservationIngListVO;
+import com.kh.finalproject.vo.PetDetailListVO;
+import com.kh.finalproject.vo.ReservationDetailListVO;
+import com.kh.finalproject.vo.ReservationListVO;
+import com.kh.finalproject.vo.ScheduleVO;
 import com.kh.finalproject.vo.TrainingRequestListVO;
 
 
@@ -54,9 +59,33 @@ public class TrainingDaoImpl implements TrainingDao{
 	
 	//진행예약 조회(훈련사 기준)
 	@Override
-	public List<ReservationIngListVO> ingList(int trainerNo) {
+	public List<ReservationListVO> ingList(int trainerNo) {
 		return sqlSession.selectList("training.reservationIngList",trainerNo);
 	}
+	//지난예약 조회(훈련사 기준)
+	@Override
+	public List<ReservationListVO> endList(int trainerNo) {
+		return sqlSession.selectList("training.reservationEndList",trainerNo);
+	}
+	
+	//예약 상세조회(훈련사 기준)
+	@Override
+	public List<ReservationDetailListVO> detailList(int trainingNo) {
+		return sqlSession.selectList("training.reservationDetailList",trainingNo);
+	}
+	
+	//스케줄 예약내역 조회
+	@Override
+	public List<ReservationListVO> schedule(ScheduleVO scheduleVO) {
+		return sqlSession.selectList("training.scheduleList",scheduleVO);
+	}
+	
+	//스케줄에 표시할 데이터 조회(db데이터 넣기)
+	@Override
+	public List<CalendarVO> scheduleDataList(int trainerNo) {
+		return sqlSession.selectList("training.schedule",trainerNo);
+	}
+	
 	
 	//훈련서비스 받은 펫 마리 수 조회
 	@Override
@@ -99,6 +128,12 @@ public class TrainingDaoImpl implements TrainingDao{
 		return sqlSession.update("training.statusChange2",trainingNo)>0;
 	}
 	
+	//훈련상태변경- 이용완료
+	@Override
+	public boolean statusChange3(int trainingNo) {
+		return sqlSession.update("training.statusChange3",trainingNo)>0;
+	}
+	
 	//훈련사 request_detail 펫 리스트 조회
 	@Override
 	public List<PetDetailListVO> requestDetail(int trainingNo) {		
@@ -111,8 +146,26 @@ public class TrainingDaoImpl implements TrainingDao{
 	}
 
 	@Override
-	public List<TrainingDto> checkRequest(Date requestDate) {		
-		return sqlSession.selectList("training.checkRequest", requestDate);
+	public List<TrainingDto> checkRequest(CheckRequestVO checkReuqestVO) {		
+		return sqlSession.selectList("training.checkRequest", checkReuqestVO);
 	}
+
+	@Override
+	public void insertSchedule(ScheduleDto dto) {
+		
+		sqlSession.insert("training.scheduleInsert", dto);
+	}
+
+	@Override
+	public void insertLinkedList(LinkedListDto dto) {
+		sqlSession.insert("training.linkedInsert", dto);
+		
+	}
+
+	@Override
+	public void insertPurchase(PointDto dto) {
+		sqlSession.insert("training.pointInsert", dto);
+	}
+	
 	
 }
