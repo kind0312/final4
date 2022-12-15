@@ -63,14 +63,19 @@ public class MypageController {
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
 		model.addAttribute("point", memberDao.selectOne(memberId));
 		List<PointDto> list = pointDao.selectList(memberId);
-		model.addAttribute("list", list);
+		//model.addAttribute("list", list);
 		
 		// 조회 유형 판정과 실행시킬 메소드를 PointDaoImpl에서 결정하도록 변경
 		// 조회 유형에 따른 조회 결과의 총 갯수를 반환
-		vo.setMemberId(memberId);
-		int count = pointDao.count(vo);
+		vo.setMemberId(memberId); //count구하기 위해 먼저 실행되어야함
 		// 반환한 조회 결과의 총 갯수(count)를 vo의 count 필드의 값으로 설정
+		int count = pointDao.count(vo);
 		vo.setCount(count);
+		
+		int endRow = vo.getP()*vo.getSize();
+		int startRow = endRow - (vo.getSize() - 1);
+		vo.setEndRow(endRow);
+		vo.setStartRow(startRow);
 		
 		// model에 조회 유형에 따른 조회 결과를 첨부
 		model.addAttribute("page", pointDao.listAll(vo));
