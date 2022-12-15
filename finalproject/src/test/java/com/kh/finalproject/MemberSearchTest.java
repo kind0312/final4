@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.kh.finalproject.entity.ApplyDto;
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.vo.TrainerListVO;
 
@@ -18,12 +19,39 @@ public class MemberSearchTest {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@Test
-	public void test() {
-		String memberId="test1235";
-		TrainerListVO trainerListVO=sqlSession.selectOne("trainer.selectOne", memberId);
-		System.out.println(trainerListVO);
-	}
+//	@Test
+//	public void test() {
+//		ApplyDto applyDto=applyDto.builder()
+//				
+//				
+//				
+//				                      .applyNo(3)
+//				                      .memberId
+//				                      
+//	}
+//	
+//	@Test
+//	public void test() {
+//		List<ApplyDto>list=sqlSession.selectList("apply.list");
+//		System.out.println(list.size());
+//		for(ApplyDto dto:list) {
+//			System.out.println(dto);
+//		}
+//	}
+	
+//	@Test
+//	public void test() {
+//		int applyNo=1;
+//		ApplyDto applyDto=sqlSession.selectOne("apply.one",applyNo);
+//		System.out.println(applyDto);
+//	}
+	
+//	@Test
+//	public void test() {
+//		String memberId="test1235";
+//		TrainerListVO trainerListVO=sqlSession.selectOne("trainer.selectOne", memberId);
+//		System.out.println(trainerListVO);
+//	}
 	
 //	@Test
 //	public void test() {
