@@ -23,6 +23,7 @@
 		box-shadow: rgb(235 235 235) 0px 2px 12px 0px;
 	}
 </style>
+
 <body>
 
 	<div class="container-fluid" style="height:100%;">
@@ -39,13 +40,13 @@
 				</div>
 			</div>
 			<div class="row mt-4">
-				<div class="col-md-8 offset-md-2 d-flex justify-content-center">
+				<div class="col-md-10 offset-md-1 d-flex justify-content-center">
 					<div class="row mt-4">
 						<c:forEach var="reviewDto" items="${reviewList}">
 							<div class="col-xl-5 offset-xl-1 col-lg-5 offset-lg-1 col-md-10 offset-md-1 col-sm-10 offset-sm-1 mt-4 reviewborder">
 								<div class="row">
 									<img class="col-xl-1 offset-xl-0 col-lg-1 offset-lg-0 col-md-4 offset-md-0 col-sm-4 offset-sm-0 mt-4" src="${pageContext.request.contextPath}/download/${reviewDto.filesNo}" style="width:100px; height: 85px; border-radius: 70%;">
-									<div class="col-xl-8 offset-xl-0 col-lg-6 offset-lg-0 col-md-8 offset-md-0 col-sm-8 offset-sm-0 mt-4">
+									<div class="col-xl-4 offset-xl-0 col-lg-6 offset-lg-0 col-md-8 offset-md-0 col-sm-8 offset-sm-0 mt-4">
 									<h3>${reviewDto.memberId}</h3>
 										<div class="row">
 											<div class="col">
