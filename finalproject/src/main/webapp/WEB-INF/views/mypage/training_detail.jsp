@@ -179,7 +179,7 @@
 				  					<c:choose>
 				  						<c:when test="${training[0].trainingStatus=='이용완료'}">
 				  							<a href="#" class="btn btn-blue" style="margin-right:10px;">프로필 보기</a>
-					  						<a href="#" class="btn btn-yellow" style="margin-left:10px;">후기 작성</a>
+					  						<a href="${pageContext.request.contextPath}/review/write" class="btn btn-yellow" style="margin-left:10px;">후기 작성</a>
 				  						</c:when>
 				  						<c:otherwise>
 				  							<a href="#" class="btn btn-blue" style="margin-right:10px;">프로필 보기</a>

@@ -243,6 +243,13 @@
            border-color: #c08a3e;
          }
          
+         .btn-danger{
+              border:2px solid #d9534f;
+              color:#fff;
+              font-weight: bolder;
+              font-size:15px;
+           }
+         
          .btn-outline-blue {
            color: #81BDF1;
            border:2px solid #81BDF1;
