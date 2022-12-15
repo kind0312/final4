@@ -12,10 +12,11 @@ public interface ApplyDao {
 	//지원자 상세
 	ApplyDto selectOne(int applyNo);
 	
-	//지원자 수정기능
-	boolean update(ApplyDto dto);
-	boolean update2(ApplyDto dto);
-	
+	//수정
+	//상태(승인)변경
+	boolean status1(String memberId);
+	//상태(반려)변경
+	boolean status2(String memberId);
 
 	//시퀀스 생성
 	int sequence();

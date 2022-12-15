@@ -32,30 +32,14 @@ public class ApplyDaoImpl implements ApplyDao {
 	}
 
 
-	@Override
-	public boolean update(ApplyDto dto) {
-		int count= sqlSession.update("apply.approval",dto);
-		return count>0;
-	}
-
-
-	@Override
-	public boolean update2(ApplyDto dto) {
-		int count=sqlSession.update("apply.reject",dto);
-		return count>0;
-	
-	}
 
 
 
 
 
 
-//	@Override
-//	public ApplyDto update(int applyNo) {
-//		return sqlSession.update("apply.approval",applyNo);
-//	
-//	}
+
+
 	      
 	
 
@@ -76,6 +60,18 @@ public class ApplyDaoImpl implements ApplyDao {
 	@Override
 	public ApplyDto selectone(String memberId) {
 		return sqlSession.selectOne("apply.one", memberId);
+	}
+
+
+	@Override
+	public boolean status1(String memberId) {
+		return sqlSession.update("apply.approval",memberId)>0;
+	}
+
+
+	@Override
+	public boolean status2(String memberId) {
+		return sqlSession.update("apply.reject",memberId)>0;
 	}
 	
 

@@ -19,6 +19,7 @@ import com.kh.finalproject.entity.AdminDto;
 import com.kh.finalproject.entity.ApplyDto;
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.PetDto;
+import com.kh.finalproject.entity.TrainerDto;
 import com.kh.finalproject.repository.AdminDao;
 import com.kh.finalproject.repository.ApplyDao;
 import com.kh.finalproject.repository.MemberDao;
@@ -59,20 +60,25 @@ public class AdminController {
 		return "admin/login";
 	}
 	
-
+	//리퀘스트파람 아이디 비밀번호 인풋에 있는 네임이랑 똑같음이름
 	@PostMapping("/login")
 	public String login(@ModelAttribute AdminDto adminDto,HttpSession session) {
 		
+		//받아온 아이디로 여기
 		AdminDto findDto=adminDao.selectOne(adminDto.getAdminId());
 		if(findDto==null) {
 			return "redirect:login?error";
 		}
+		
+		//adminDto.getAdminPw() 이부분에 파라미터로 받아온 비밀번호 변수 넣어요
+		
 		boolean passwordMatch=adminDto.getAdminPw().equals(findDto.getAdminPw());
 		if(passwordMatch) {
 			session.setAttribute(SessionConstant.ID, adminDto.getAdminId());
-			return "redirect:inquery"; 
+			return "redirect:/adminHome"; 
 		}else {
 			return "redirect:/login?error";
+			
 		}
 	}
 	
@@ -197,33 +203,35 @@ public class AdminController {
 	@GetMapping("/apply_success")
 	public String applySuccess(@RequestParam String memberId) {
 		
-		//ApplyDto dto=applyDao.selectOne(memberId);
-		//String status=dto.getApplyStatus();
-		
-		//ApplyDto applyDto=applyDao.update(dto);
-		
-		//ApplyDto applyDto=ApplyDto
-		//		.builder()
-		//		.applyStatus("승인")
-		//		.build();
+	
 	
 		return "admin/apply_success";
 	}
 	
-//	@PostMapping("/apply_success")
-//	public String applySuccess(RedirectAttributes attr, @ModelAttribute ApplyDto dto) {
-//		
-//		boolean result=applyDao.update(dto);
-//		if(result) {
-//			attr.addAttribute("applyNo",dto.getApplyNo());
-//			return "redirect:applyList";
-//		}
-//		boolean result=applyDao.update(dto);
-//		attr.addAttribute("applyNo",dto.getApplyNo());
-//		return "redirect:applyList";
+	@PostMapping("/apply_success")
+	public String applySuccess(@ModelAttribute ApplyDto applyDto,@ModelAttribute TrainerDto trainerDto) {
 		
 		
-//	}
+		
+		//지원 상태를 승인으로 변경
+		applyDao.status1(applyDto.getMemberId());
+		
+		int trainerNo=trainerDao.sequence();
+		//trainer 훈련사 DB등록
+		TrainerDto a=TrainerDto.builder()
+				.trainerNo(trainerNo)
+				.memberId(trainerDto.getMemberId())
+                .applyNo(trainerDto.getApplyNo())
+                .trainerProfile(trainerDto.getTrainerProfile())
+                .trainerProfileContent(trainerDto.getTrainerProfileContent())
+                .trainerLike(trainerDto.getTrainerLike())
+                .build();
+		trainerDao.insert(a);
+		
+		return "redirect:/admin/applyList";
+	}
+	
+	
 	
 	//지원 반려
 	@GetMapping("/apply_fail")
@@ -233,7 +241,7 @@ public class AdminController {
 		return "admin/apply_fail";
 	}
 	
-	//지원 반려
+//지원 반려
 
 //	@PostMapping("/apply_fail")
 //	public String applyFail(RedirectAttributes attr, @ModelAttribute ApplyDto dto) {
