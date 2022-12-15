@@ -24,9 +24,10 @@ import com.kh.finalproject.repository.AdminDao;
 import com.kh.finalproject.repository.ApplyDao;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.PetDao;
+import com.kh.finalproject.repository.PointDao;
 import com.kh.finalproject.repository.TrainerDao;
-import com.kh.finalproject.vo.MemberDetailVO;
 import com.kh.finalproject.vo.MemberListSearchVO;
+import com.kh.finalproject.vo.PointListVO;
 import com.kh.finalproject.vo.PetInsertVO;
 import com.kh.finalproject.vo.TrainerListSearchVO;
 import com.kh.finalproject.vo.TrainerListVO;
@@ -39,19 +40,16 @@ public class AdminController {
 	
 	@Autowired
 	private MemberDao memberDao;
-	
 	@Autowired
 	private PetDao petDao;
-	
 	@Autowired
 	private TrainerDao trainerDao;
-	
 	@Autowired
-	private ApplyDao applyDao;
-	
+	private PointDao pointDao;	
+	@Autowired
+	private ApplyDao applyDao;	
 	@Autowired
 	private AdminDao adminDao;
-	
 
 	
 	//관리자 계정 로그인
@@ -110,11 +108,10 @@ public class AdminController {
 		return "admin/trainerList";
 	}
 	
-	
+
 	//회원-상세
-		@GetMapping("/memberDetail")
-		public String memberDetail(Model model, @RequestParam String memberId) {
-			
+	@GetMapping("/memberDetail")
+	public String memberDetail(Model model, @RequestParam String memberId) {
 			//pet정보
 
 //			List<PetDto> petDto= petDao.selectList(memberId);
@@ -173,17 +170,19 @@ public class AdminController {
 	@GetMapping("/applyDetail")
 	public String applyDetail(Model model,@RequestParam String memberId){
 		
-		
 		MemberDto memberDto=memberDao.selectOne(memberId);
 		model.addAttribute("memberDto",memberDto);
 
-		
+		List<PetDto> petDto= petDao.selectList(memberId);
+		model.addAttribute("petDto",petDto);
+	    
+		//회원 정보
+	    MemberDto memberDto1=memberDao.selectOne(memberId);
+		model.addAttribute("memberDto",memberDto1);		
 		
 		ApplyDto applyDto=applyDao.selectone(memberId);
 		model.addAttribute("applyDto",applyDto);
 		//여기까지가 상세임.....상태는 신청으로 된 상태
-		
-		
 		
 	
 		return "admin/applyDetail";
@@ -197,7 +196,7 @@ public class AdminController {
 //	
 //
 //	}
-	
+
 
 	//지원 승인
 	@GetMapping("/apply_success")
@@ -236,12 +235,31 @@ public class AdminController {
 	//지원 반려
 	@GetMapping("/apply_fail")
 	public String applyFail(@RequestParam String memberId) {
-		
-		
+
 		return "admin/apply_fail";
 	}
 	
-//지원 반려
+
+	//포인트 이용내역
+	@GetMapping("/memberPoint")
+	public String memberPoint(@ModelAttribute(name = "vo") PointListVO vo,
+			Model model, @RequestParam String memberId) {
+		
+		vo.setMemberId(memberId);
+		int count = pointDao.count(vo);
+		vo.setCount(count);
+		vo.setSize(10);
+		
+		int endRow = vo.getP()*vo.getSize();
+		int startRow = endRow - (vo.getSize() - 1);
+		vo.setEndRow(endRow);
+		vo.setStartRow(startRow);
+		
+		model.addAttribute("list", pointDao.listAll(vo)); 
+		return "admin/memberPoint";
+	}
+
+
 
 //	@PostMapping("/apply_fail")
 //	public String applyFail(RedirectAttributes attr, @ModelAttribute ApplyDto dto) {
@@ -257,11 +275,6 @@ public class AdminController {
 		
 		
 //	}
-
-	
-
-	
-
 
 }
 	

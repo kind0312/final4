@@ -339,8 +339,8 @@
 	                    메뉴 항목
 	                    - .active는 활성화된 메뉴(현재 메뉴), 상황에 따라 맞는 메뉴에 추가
 	                -->
-	               
-	              <!--  <c:choose>
+	               <!--  
+	                 <c:choose>
 	                     <c:when test="${loginId == null}">
 							<li class="nav-item">
 								<a class="nav-link" href="${pageContext.request.contextPath}/admin/logout">로그인</a>
@@ -353,9 +353,7 @@
 
 						</c:otherwise>
 					</c:choose>
-					
-					-->   
-	                
+	                -->
 	               <!--   <c:choose>
 		                <c:when test="${loginId == null}">
 							<li class="nav-item">

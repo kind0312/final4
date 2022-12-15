@@ -7,11 +7,16 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class PointListVO {
-	//추가
-	private String memberId;
 	// 필드
+	private String memberId;
 	private String type;	// 검색 분류
 	private String keyword;	// 검색어
+	private int p = 1;	// 현재 페이지 번호 (기본값이 1이 되도록)
+	private int size =5;
+	private int count;
+	private int blockSize = 10;
+	private int endRow;
+	private int startRow;
 	
 	// 메소드 - 조회 유형이 검색 조회인지 여부 반환
 	public boolean isSearch() {
@@ -20,18 +25,15 @@ public class PointListVO {
 	
 	// 1) 현재 페이지 rownum의 시작과 끝 번호 관련
 	// 필드
-	private int p = 1;	// 현재 페이지 번호 (기본값이 1이 되도록)
-	private int size = 10;	// 페이지에 표시할 목록의 수
-	
-	private int endRow = p*size;
-	private int startRow = endRow - (size - 1);
+	//private int p = 1;	// 현재 페이지 번호 (기본값이 1이 되도록)
+	//private int size = 10;	// 페이지에 표시할 목록의 수
 	
 	// 메소드
 	// 현재 페이지 첫 항목 rownum
 	public int startRow() {
 		return endRow() - (size - 1);
 	}
-	
+
 	// 현재 페이지 마지막 항목 rownum
 	public int endRow() {
 		return p * size;
@@ -43,26 +45,28 @@ public class PointListVO {
 		return (p - 1) / blockSize * blockSize + 1;
 	}
 	
+	
 	// 현재 페이지에 표시할 블럭의 끝 번호
 	public int endBlock() {
 		int value = startBlock() + blockSize - 1;
 		return Math.min(value, lastBlock());
 	}
-	
+
+
 	// 3) 페이지 블럭 전체의 시작과 끝 번호 관련
 	// 필드
 	// 총 항목의 수 (= 마지막 항목의 rownum)
-	private int count;
+	//private int count;
 	
 	// 페이지에 표시할 블럭 구간의 크기
-	private int blockSize = 10; 
+	//private int blockSize = 10; 
 	
 	// 메소드
 	// 마지막 게시글이 속한 블럭 번호(마지막 페이지 번호)
 	public int pageCount() {
 		return (count + (size - 1)) / size;
 	}
-	
+
 	// 블럭의 시작 번호(첫 페이지 번호)
 	public int firstBlock() {
 		return 1;
@@ -91,7 +95,7 @@ public class PointListVO {
 	
 	// 현재 블럭이 마지막 블럭인지의 여부를 반환
 	public boolean isLast() {
-		return endBlock() == lastBlock();
+		return p == lastBlock();
 	}
 	
 	// 이전 블럭 구간이 존재하는지의 여부를 반환
@@ -114,4 +118,6 @@ public class PointListVO {
 			return "size=" + size;
 		}
 	}
+	
+	
 }
