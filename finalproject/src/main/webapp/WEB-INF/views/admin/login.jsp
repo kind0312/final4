@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <
-<jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
-	<jsp:param value="관리자 록인" name="mg"/>
+<jsp:include page="/WEB-INF/views/template/adminHeaderlogin.jsp">
+	<jsp:param value="관리자 로그인" name="mg"/>
 </jsp:include>
 
  <style>
