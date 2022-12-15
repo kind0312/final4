@@ -18,11 +18,11 @@ import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.PetDto;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.PetDao;
+import com.kh.finalproject.repository.PointDao;
 import com.kh.finalproject.repository.TrainerDao;
-import com.kh.finalproject.vo.MemberDetailVO;
 import com.kh.finalproject.vo.MemberListSearchVO;
+import com.kh.finalproject.vo.PointListVO;
 import com.kh.finalproject.vo.TrainerListSearchVO;
-import com.kh.finalproject.vo.TrainerListVO;
 
 
 @Controller
@@ -32,14 +32,12 @@ public class AdminController {
 	
 	@Autowired
 	private MemberDao memberDao;
-	
 	@Autowired
 	private PetDao petDao;
-	
 	@Autowired
 	private TrainerDao trainerDao;
-	
-
+	@Autowired
+	private PointDao pointDao;
 	
 	//관리자 계정 로그인
 	@GetMapping("/login")
@@ -73,13 +71,6 @@ public class AdminController {
 		
 		return "admin/trainerList";
 	}
-			
-			
-			
-	
-
-	
-
 	
 	//회원-상세
 	@GetMapping("/memberDetail")
@@ -89,7 +80,6 @@ public class AdminController {
 
 		List<PetDto> petDto= petDao.selectList(memberId);
 		model.addAttribute("petDto",petDto);
-	
 	    
 		//회원 정보
 	    MemberDto memberDto=memberDao.selectOne(memberId);
@@ -105,10 +95,31 @@ public class AdminController {
 		//TrainerListVO trainerListVO=trainerDao.selectOne(memberId);
 		//model.addAttribute("trainerListVO",trainerListVO);
 		
-		
 		return "admin/trainerDetail";
 	}
-			 
+	
+	//포인트 이용내역
+	@GetMapping("/memberPoint")
+	public String memberPoint(@ModelAttribute(name = "vo") PointListVO vo,
+			Model model, @RequestParam String memberId) {
+		
+		vo.setMemberId(memberId);
+		int count = pointDao.count(vo);
+		vo.setCount(count);
+		vo.setSize(10);
+		
+		int endRow = vo.getP()*vo.getSize();
+		int startRow = endRow - (vo.getSize() - 1);
+		vo.setEndRow(endRow);
+		vo.setStartRow(startRow);
+		
+		model.addAttribute("list", pointDao.listAll(vo)); 
+		return "admin/memberPoint";
+	}
+	
+	
+	
+	
 
 }
 	
