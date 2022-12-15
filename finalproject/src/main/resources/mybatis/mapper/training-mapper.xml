@@ -205,7 +205,15 @@
  	<insert id="linkedInsert" parameterType="LinkedListDto">
  	insert into linked_list(training_no, trainer_no) values(#{trainingNo}, #{trainerNo})
  	</insert>
-  	
-  
+ 	
+ 	<!-- 훈련 이용 내역 목록 -->
+ 	<select id="traingUsage" resultType="TrainingUsageVO" parameterType="int">
+  	select
+    T.*,
+    M.member_name
+    from training T  inner join member M on T.member_id=M.member_id;
+    where traing_no=#{traingNo}
+
+    </select>
   </mapper>
  
