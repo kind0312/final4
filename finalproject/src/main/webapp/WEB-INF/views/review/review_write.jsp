@@ -97,7 +97,7 @@
 		<div class="row mt-100 mb-5">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
 				<button type="submit" class="btn btn-blue text-center">등록</button>
-            	<a href="${pageContext.request.contextPath}/#" class="btn btn-yellow">취소</a>
+            	<a href="${pageContext.request.contextPath}/mypage/training_detail?trainingNo=${endList.trainingNo}" class="btn btn-yellow">취소</a>
 			</div>
 		</div>
 		</form>

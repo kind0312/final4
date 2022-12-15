@@ -27,15 +27,15 @@ public class ReviewController {
 	
 	//이용후기 작성
 	@GetMapping("/write")
-	private String write(Model model, HttpSession session,
+	public String write(Model model, HttpSession session, 
+			@ModelAttribute TrainingDto trainingDto,
 			RedirectAttributes attr) {
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
-		TrainingDto dto = reviewDao.one(memberId);
+		trainingDto.setMemberId(memberId);
 		//지난예약 조회
-		model.addAttribute("endList", reviewDao.selectOne(dto));
-		attr.addAttribute("training", dto.getTrainingNo());
+		model.addAttribute("endList", reviewDao.selectOne(trainingDto));
 		//이용후기 작성여부
-		ReviewDto findDto = reviewDao.writed(reviewDao.selectOne(dto).getTrainingNo());
+		ReviewDto findDto = reviewDao.writed(reviewDao.selectOne(trainingDto).getTrainingNo());
 		if(findDto != null) {
 			attr.addAttribute("reviewNo", findDto.getReviewNo());
 			return "redirect:detail";
@@ -45,7 +45,7 @@ public class ReviewController {
 	}
 	
 	@PostMapping("/write")
-	private String write(@ModelAttribute ReviewDto reviewDto,
+	public String write(@ModelAttribute ReviewDto reviewDto,
 			RedirectAttributes attr) {
 		int reviewNo = reviewDao.insert(reviewDto);
 		attr.addAttribute("reviewNo", reviewNo);
@@ -58,10 +58,40 @@ public class ReviewController {
 		model.addAttribute("reviewDto", reviewDao.detail(reviewNo));
 		return "review/review_detail";
 	}
-	//이용후기 목록
+	
+	//이용후기 수정
+	@GetMapping("/edit")
+	public String edit(Model model, @RequestParam int reviewNo) {
+		model.addAttribute("reviewDto", reviewDao.detail(reviewNo));
+		return "review/review_edit";
+	}
+	
+	@PostMapping("/edit")
+	public String edit(@ModelAttribute ReviewDto reviewDto,
+			RedirectAttributes attr) {
+		boolean result = reviewDao.edit(reviewDto);
+		if(result) {
+			attr.addAttribute("reviewNo", reviewDto.getReviewNo());
+			return "redirect:detail";
+		}
+		else {
+			return "redirect:edit?error";
+		}
+	}
+	
+	
+	//이용후기 삭제
+	@GetMapping("/delete")
+	public String delete(@RequestParam int reviewNo) {
+		reviewDao.delete(reviewNo);
+		return "redirect:/mypage/training";
+	}
+	
+	//전체 이용후기 목록
 	@GetMapping("/list")
-	private String list(Model model) {
+	public String list(Model model) {
 		model.addAttribute("reviewList", reviewDao.reviewList());
 		return "review/review_list";
 	}
+	
 }

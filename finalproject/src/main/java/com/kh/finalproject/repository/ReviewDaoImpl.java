@@ -34,13 +34,8 @@ public class ReviewDaoImpl implements ReviewDao {
 	
 	//이용 완료 조회
 	@Override
-	public TrainingDto one(String memberId) {
-		return sqlSession.selectOne("review.end", memberId);
-	}
-	
-	@Override
 	public TrainingListVO selectOne(TrainingDto trainingDto) {
-		return sqlSession.selectOne("review.endList", trainingDto);
+		return sqlSession.selectOne("review.end", trainingDto);
 	}
 	
 	//이용후기 상세정보
@@ -49,15 +44,27 @@ public class ReviewDaoImpl implements ReviewDao {
 		return sqlSession.selectOne("review.one", reviewNo);
 	}
 	
-	//이용후기 목록
-	@Override
-	public List<ReviewVO> reviewList() {
-		return sqlSession.selectList("review.list");
-	}
-	
 	//이용후기 작성여부
 	@Override
 	public ReviewDto writed(int trainingNo) {
 		return sqlSession.selectOne("review.writed", trainingNo);
+	}
+	
+	//이용후기 수정
+	@Override
+	public boolean edit(ReviewDto reviewDto) {
+		return sqlSession.update("review.edit", reviewDto) > 0;
+	}
+	
+	//이용후기 삭제
+	@Override
+	public boolean delete(int reviewNo) {
+		return sqlSession.delete("review.delete", reviewNo) > 0;
+	}
+	
+	//전체 이용후기 목록
+	@Override
+	public List<ReviewVO> reviewList() {
+		return sqlSession.selectList("review.list");
 	}
 }

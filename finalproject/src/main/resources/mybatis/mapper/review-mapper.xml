@@ -22,17 +22,6 @@
 	</insert>
 	
 	<!-- 이용 완료 정보 -->
-	<select id="endList" resultType="TrainingDto" parameterType="String">
-		select img.files_no, pro.trainer_no, li.training_no, 
-			t.training_date, t.training_starttime, t.training_status, t.member_id
-			from member_img img 
-			inner join trainer pro on img.member_id=pro.member_id
-			inner join linked_list li on pro.trainer_no=li.trainer_no
-			inner join training t on li.training_no=t.training_no
-			where member_id= #{memberId} 
- 			and training_status='이용완료'
- 	</select>
-	
  	<select id="end" resultType="TrainingListVO" parameterType="TrainingDto">
 		select * from
 		(select img.files_no, pro.trainer_no, li.training_no, 
@@ -81,4 +70,21 @@
 				from review_list_view r) where rn = 1
 	</select>
 	
+	<update id="edit" parameterType="ReviewDto">
+		update review 
+			set 
+				review_title = #{reviewTitle}, 
+				review_content =#{reviewContent},
+				review_good = #{reviewGood}
+			where
+				review_no = #{reviewNo}
+	</update>
+	<update id="profileImgEdit" parameterType="memberImgDto">
+		update member_img set files_no=#{filesNo} where member_id=#{memberId}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete review where review_no = #{reviewNo}
+	</delete>
+		
 </mapper>
