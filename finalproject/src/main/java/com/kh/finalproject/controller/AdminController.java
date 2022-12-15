@@ -127,12 +127,14 @@ public class AdminController {
 	//포인트 이용내역
 	@GetMapping("/memberPoint")
 	public String memberPoint(@ModelAttribute(name = "vo") PointListVO vo,
-			Model model, @RequestParam String memberId) {
+			Model model) {
 		
-		vo.setMemberId(memberId);
+		model.addAttribute("member",memberDao.selectOne(vo.getMemberId()));
+		
+		vo.setMemberId(vo.getMemberId());
+		vo.setSize(10);
 		int count = pointDao.count(vo);
 		vo.setCount(count);
-		vo.setSize(10);
 		
 		int endRow = vo.getP()*vo.getSize();
 		int startRow = endRow - (vo.getSize() - 1);
