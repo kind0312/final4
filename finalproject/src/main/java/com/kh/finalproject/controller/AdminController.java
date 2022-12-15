@@ -191,7 +191,7 @@ public class AdminController {
 		//회원 정보
 	    MemberDto memberDto1=memberDao.selectOne(memberId);
 		model.addAttribute("memberDto",memberDto1);		
-		
+
 		ApplyDto applyDto=applyDao.selectone(memberId);
 		model.addAttribute("applyDto",applyDto);
 		//여기까지가 상세임.....상태는 신청으로 된 상태
@@ -249,7 +249,7 @@ public class AdminController {
 
 		return "admin/apply_fail";
 	}
-	
+
 //	@PostMapping("/apply_fail")
 //	public String applyFail(RedirectAttributes attr, @ModelAttribute ApplyDto dto) {
 		
