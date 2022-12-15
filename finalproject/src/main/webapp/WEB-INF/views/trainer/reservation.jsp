@@ -343,6 +343,8 @@ $(function(){
 		if(myPoint<totalPrice){
 			$(".afterpoint").addClass("is-invalid");
 			check.point=false;
+		}else if(totalPrice ==0){
+			check.point=false;
 		}else{
 			check.point=true;
 		}
@@ -358,11 +360,13 @@ $(function(){
 		petSelectCheck();
 		pointCheck();
 		
+		console.log(check.checkbox);
+		console.log(check.point);
+		
 		//폼 체크가 전부 true이면 전송하기
 		if(check.allValid()){
 			this.submit();
 		}
-      	this.submit();
 	});
 	
 });

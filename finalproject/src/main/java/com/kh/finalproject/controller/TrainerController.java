@@ -107,7 +107,7 @@ public class TrainerController {
 
 		model.addAttribute("member", memberDao.selectOne(userId));
 		model.addAttribute("pet", petDao.list(userId));
-		model.addAttribute("trainerno",trainerNo);
+		model.addAttribute("trainerno", trainerNo);
 		
 		return "/trainer/reservation";
 	}
@@ -163,29 +163,27 @@ public class TrainerController {
 			}
 		}
 		
-		
 		//linked_list 테이블 DB등록
 		LinkedListDto linkedListDto =LinkedListDto.builder()
 				.trainingNo(trainingNo)
 				.trainerNo(reservationVO.getTrainerNo())
 				.build();
 		trainingDao.insertLinkedList(linkedListDto);
+		
 		//point 사용내역 테이블 DB등록
 		PointDto pointDto = PointDto.builder()
 				.memberId(reservationVO.getMemberId())
+				.pointPrice(reservationVO.getTrainingPurchasePrice())
 				.build();
 		trainingDao.insertPurchase(pointDto);
 		
-		//schedule 테이블 등록~
-		ScheduleDto scheduleDto = ScheduleDto.builder()
-				.scheduleDate(reservationVO.getTrainingDate())
-				.trainerNo(reservationVO.getTrainerNo())
+		//member 포인트 차감
+		MemberDto memberDto = MemberDto.builder()
+				.memberId(reservationVO.getMemberId())
+				.memberPoint((long)reservationVO.getTrainingPurchasePrice())
 				.build();
-		trainingDao.insertSchedule(scheduleDto);
-		
-		
-		
-		
+		memberDao.pointMinus(memberDto);
+
 		return "redirect:/trainer/list";
 	}
 	

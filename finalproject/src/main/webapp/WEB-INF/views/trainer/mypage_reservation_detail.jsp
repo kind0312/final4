@@ -263,8 +263,8 @@
 						<tbody>
 							<tr class="table-default"><th></th><td></td></tr>
 							<tr class="table-default align-middle underline-out">
-								<th>금액</th>
-								<td>
+								<th width="50%">금액</th>
+								<td width="50%">
 									<span class="pay-price">
 										<fmt:formatNumber value="${detail[0].trainingPurchasePrice}" pattern="###,###"></fmt:formatNumber>
 									</span>

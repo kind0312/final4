@@ -74,8 +74,6 @@ public interface TrainingDao {
 	//훈련요청날짜에 확정된 요청이 있는지
 	List<TrainingDto> checkRequest(CheckRequestVO checkReuqestVO);
 	
-	
-	void insertSchedule(ScheduleDto dto);
 	void insertLinkedList(LinkedListDto dto);
 	void insertPurchase(PointDto dto);
 	
