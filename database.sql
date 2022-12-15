@@ -206,7 +206,8 @@ drop table schedule;
 create table schedule(
 schedule_no number primary key,
 trainer_no references trainer(trainer_no) on delete cascade,
-schedule_date date
+schedule_date date,
+training_no number not null
 );
 
 drop sequence schedule_seq;
