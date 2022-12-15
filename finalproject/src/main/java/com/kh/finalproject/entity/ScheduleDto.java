@@ -13,5 +13,6 @@ public class ScheduleDto {
 	private int scheduleNo;
 	private int trainerNo;
 	private Date scheduleDate;
+	private int trainingNo;
 
 }
