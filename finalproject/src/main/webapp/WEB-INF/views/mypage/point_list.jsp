@@ -23,7 +23,12 @@
 		color:#d9534f;
 		font-weight:bolder;
 		font-size:17px;
-	}#d9534f
+	}
+	.mypoint{
+		font-weight:bolder;
+		color:#81BDF1;
+		font-size:20px;
+	}
 </style>
 
 <script>
@@ -136,9 +141,11 @@
 
 		<div class="row mt-5">
             <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-                 <span class="float-left">
-                 	보유포인트 : <fmt:formatNumber value="${point.memberPoint}" pattern="###,###"></fmt:formatNumber>P
+            	 <h6 style="display:inline-block;">현재 보유 포인트 : </h6>
+                 <span class="mypoint" >
+                 	<fmt:formatNumber value="${point.memberPoint}" pattern="###,###"></fmt:formatNumber>P
                  </span>
+                 <a href="${pageContext.request.contextPath}/pay/list" class="btn btn-yellow float-end" style="margin-left:5px;">구매내역</a>
                  <a href="${pageContext.request.contextPath}/pay/point_select" class="btn btn-blue float-end">포인트 구매</a>
                  <br>
             </div>

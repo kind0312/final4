@@ -14,6 +14,8 @@ import org.springframework.web.client.RestTemplate;
 import com.kh.finalproject.configuration.KakaoPayCofigurationProperties;
 import com.kh.finalproject.vo.PayApproveRequestVO;
 import com.kh.finalproject.vo.PayApproveResponseVO;
+import com.kh.finalproject.vo.PayOrderRequestVO;
+import com.kh.finalproject.vo.PayOrderResponseVO;
 import com.kh.finalproject.vo.PayReadyRequestVO;
 import com.kh.finalproject.vo.PayReadyResponseVO;
 
@@ -88,6 +90,12 @@ public class PayServiceImpl implements PayService{
 						uri, entity, PayApproveResponseVO.class);
 				
 				return response;
+	}
+
+	@Override
+	public PayOrderResponseVO order(PayOrderRequestVO vo) throws URISyntaxException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

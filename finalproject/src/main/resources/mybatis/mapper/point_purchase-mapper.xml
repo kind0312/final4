@@ -18,5 +18,16 @@
 		#{pointPurchaseDate},#{pointPurchasePayment},#{pointPurchaseStatus}, #{tid})
 	</insert>
 	
-
+	<!-- 결제내역 전체조회 -->
+	<select id="selectList" resultType="PayListVO" parameterType="String">
+		select p.*, i.item_name from point_purchase p 
+		inner join item i on p.item_no=i.item_no 
+		where member_id=#{memberId} 
+		order by p.point_purchase_date desc
+	</select>
+	
+	<!-- 결제내역 단일조회 -->
+	<select id="selectOne" resultType="PayListVO" parameterType="int">
+		select * from point_purchase where point_purchase_no=#{pointPurchaseNo}
+	</select>
 </mapper>
