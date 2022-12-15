@@ -309,83 +309,53 @@
    
       <div class="container-fluid">
 
-       <div class="row mt-4">
-         <div class="col-md-10 offset-md-1">
-   
-           <!-- navbar : 드롭다운 메뉴를 제공하는 상단 메뉴바 -->
-           <!--  <div class="mt-4">&nbsp;</div>--><div class="mt-4">&nbsp;</div>
-   
-           <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
-          
-             <div class="container-fluid">
-   
-               <!-- Brand : 로고 이미지와 대표 상호를 적는 공간 -->
-               <a class="navbar-brand" href="#">
-               <span class="visually-hidden">(current)</span>
-                  <img class="logo" src="${pageContext.request.contextPath}/image/logo.png">
-               </a>
-               <a class="navbar-brand" href="#">
-               <span class="visually-hidden">(current)</span>
-                  관리자
-               </a>
-   
-           
-   
-               <!-- 메뉴 영역 -->
-               <div class="collapse navbar-collapse justify-content-end" id="menu-bar">
-                 <ul class="navbar-nav me-0">
-   
-                   <!-- 
-                       메뉴 항목
-                       - .active는 활성화된 메뉴(현재 메뉴), 상황에 따라 맞는 메뉴에 추가
-                   -->
-                  
-                    <c:choose>
-                        <c:when test="${loginId == null}">
-                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/admin/logout">로그인</a>
-                     </li>
-                      </c:when>
-                  <c:otherwise>
-                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/admin/login">로그아웃</a>
-                         </li>
+<<<<<<< HEAD
+    	<div class="row mt-4">
+	      <div class="col-md-10 offset-md-1">
+	
+	        <!-- navbar : 드롭다운 메뉴를 제공하는 상단 메뉴바 -->
+	        <!--  <div class="mt-4">&nbsp;</div>--><div class="mt-4">&nbsp;</div>
+	
+	        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
+	       
+	          <div class="container-fluid">
+	
+	            <!-- Brand : 로고 이미지와 대표 상호를 적는 공간 -->
+	            <a class="navbar-brand" href="#">
+	            <span class="visually-hidden">(current)</span>
+	            	<img class="logo" src="${pageContext.request.contextPath}/image/logo.png">
+	            </a>
+	            <a class="navbar-brand" href="#">
+	            <span class="visually-hidden">(current)</span>
+	            	관리자
+	            </a>
+	
+	        
+	
+	            <!-- 메뉴 영역 -->
+	            <div class="collapse navbar-collapse justify-content-end" id="menu-bar">
+	              <ul class="navbar-nav me-0">
+	
+	                <!-- 
+	                    메뉴 항목
+	                    - .active는 활성화된 메뉴(현재 메뉴), 상황에 따라 맞는 메뉴에 추가
+	                -->
+	               
+	                 <c:choose>
+	                     <c:when test="${loginId == null}">
+							<li class="nav-item">
+								<a class="nav-link" href="${pageContext.request.contextPath}/admin/logout">로그인</a>
+							</li>
+			             </c:when>
+						<c:otherwise>
+			                <li class="nav-item">
+			                	<a class="nav-link" href="${pageContext.request.contextPath}/admin/login">로그아웃</a>
+			                </li>
 
-                  </c:otherwise>
-               </c:choose>
-                   
-                  <!--   <c:choose>
-                      <c:when test="${loginId == null}">
-                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/admin/logout">로그아웃</a>
-                     </li>
-                       
-                      </c:when>
-                  <c:otherwise>
-                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/admin/login">로그인</a>
-                         </li>
-
-                  </c:otherwise>
-               </c:choose>
-               --> 
-                 
-               <!--  
-                     <c:choose>
-                      <c:when test="${login != null}">
-                       
-                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/admin/login">로그인</a>
-                         </li>
-                      </c:when>
-                  <c:otherwise>
-            
-                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/admin/logout">로그아웃</a>
-                     </li>
-                  </c:otherwise>
-               </c:choose>
-               -->
+						</c:otherwise>
+					</c:choose>
+	                
+	    
                
                
                  </ul>
@@ -393,11 +363,7 @@
       
 
    
-                 <!-- 검색 form (혹시 모르니 주석 처리) -->
-<!--                  <form class="d-flex"> -->
-<!--                    <input class="form-control me-sm-2" type="text" placeholder="Search"> -->
-<!--                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> -->
-<!--                  </form> -->
+
                </div>
              </div>
            </nav>

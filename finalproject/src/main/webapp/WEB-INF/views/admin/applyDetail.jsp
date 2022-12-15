@@ -34,7 +34,7 @@
 
 	<nav class="navbar navbar-expand-lg navbar-expand-lg-re navbar-dark bg-black mypage-top-nav">
 	  <div class="container-fluid">
-	    <a class="navbar-brand-re footer-link" href="${pageContext.request.contextPath}/admin/adminHome">홈</a>
+	    <a class="navbar-brand-re footer-link" href="${pageContext.request.contextPath}/adminHome">홈</a>
 	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 	      <span class="navbar-toggler-icon"></span>
 	    </button>
@@ -87,7 +87,9 @@
                  			<div class="mt-4 mb-3 text-center">
 				  					
 				  						<c:if test="${applyDto.applyStatus =='신청'}">
-				  							<a href="/admin/apply_success?memberId=${applyDto.memberId}" class="btn btn-blue" style="margin-right:10px;">승인</a>
+				  							<a href="/admin/apply_success?memberId=${applyDto.memberId}" class="btn btn-blue" style="margin-right:10px;">
+				  							승인
+				  							</a>
 					  						<a href="/admin/apply_fail?memberId=${applyDto.memberId}" class="btn btn-gray" style="margin-left:10px;">반려</a>
 				  						</c:if>
 				  					
