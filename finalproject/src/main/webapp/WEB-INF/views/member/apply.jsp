@@ -182,7 +182,9 @@
 		//활동시간 선택
 		$("[name=applyActive]").click(function(){
 			var active = $("[name=applyActive]:checked").val();
+			var count = $("[name=applyActive]:checked").length;
 			console.log(active);
+			console.log(count);
 			if(active.length > 0){
                 validChecker.applyActiveValid = true;
             }
