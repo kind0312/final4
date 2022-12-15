@@ -127,6 +127,17 @@ public class AdminController {
 			 return "admin/memberDetail";
 		}
 		
+		//관리자 훈련서비스 신청 목록
+		@GetMapping("/trainingList")
+		public String trainingList(Model model)
+		{
+			List<ApplyDto> applyDto=applyDao.selectList();
+		    model.addAttribute("applyDto",applyDto);
+			
+		    return "admin/trainingList";
+		}
+			
+		
 		//훈련사-상세
 		@GetMapping("/trainerDetail")
 		public String trainerDetail(Model model, @RequestParam String memberId) {
@@ -184,50 +195,60 @@ public class AdminController {
 
 	//지원 승인
 	@GetMapping("/apply_success")
-	public String applySuccess(@RequestParam String memberId,Model model) {
+	public String applySuccess(@RequestParam String memberId) {
+		
+		//ApplyDto dto=applyDao.selectOne(memberId);
+		//String status=dto.getApplyStatus();
+		
+		//ApplyDto applyDto=applyDao.update(dto);
+		
+		//ApplyDto applyDto=ApplyDto
+		//		.builder()
+		//		.applyStatus("승인")
+		//		.build();
 	
 		return "admin/apply_success";
 	}
 	
-	@PostMapping("/apply_success")
-	public String applySuccess(RedirectAttributes attr, @ModelAttribute ApplyDto dto) {
-		
+//	@PostMapping("/apply_success")
+//	public String applySuccess(RedirectAttributes attr, @ModelAttribute ApplyDto dto) {
+//		
 //		boolean result=applyDao.update(dto);
 //		if(result) {
 //			attr.addAttribute("applyNo",dto.getApplyNo());
 //			return "redirect:applyList";
 //		}
-		boolean result=applyDao.update(dto);
-		attr.addAttribute("applyNo",dto.getApplyNo());
-		return "redirect:applyList";
+//		boolean result=applyDao.update(dto);
+//		attr.addAttribute("applyNo",dto.getApplyNo());
+//		return "redirect:applyList";
 		
 		
-	}
+//	}
 	
 	//지원 반려
 	@GetMapping("/apply_fail")
-	public String applyFail(@RequestParam int applyNo) {
+	public String applyFail(@RequestParam String memberId) {
 		
 		
-		return "admin/applyFail";
+		return "admin/apply_fail";
 	}
 	
 	//지원 반려
 
-	@PostMapping("/apply_fail")
-	public String applyFail(RedirectAttributes attr, @ModelAttribute ApplyDto dto) {
+//	@PostMapping("/apply_fail")
+//	public String applyFail(RedirectAttributes attr, @ModelAttribute ApplyDto dto) {
 		
 //		boolean result=applyDao.update(dto);
 //		if(result) {
 //			attr.addAttribute("applyNo",dto.getApplyNo());
 //			return "redirect:applyList";
 //		}
-		boolean result=applyDao.update2(dto);
-		attr.addAttribute("applyNo",dto.getApplyNo());
-		return "redirect:applyList";
+//		boolean result=applyDao.update2(dto);
+//		attr.addAttribute("applyNo",dto.getApplyNo());
+//		return "redirect:applyList";
 		
 		
-	}
+//	}
 
 	
 

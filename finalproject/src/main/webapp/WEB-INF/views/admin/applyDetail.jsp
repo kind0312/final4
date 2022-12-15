@@ -88,7 +88,7 @@
 				  					
 				  						<c:if test="${applyDto.applyStatus =='신청'}">
 				  							<a href="/admin/apply_success?memberId=${applyDto.memberId}" class="btn btn-blue" style="margin-right:10px;">승인</a>
-					  						<a href="/admin/apply_reject" class="btn btn-gray" style="margin-left:10px;">반려</a>
+					  						<a href="/admin/apply_fail?memberId=${applyDto.memberId}" class="btn btn-gray" style="margin-left:10px;">반려</a>
 				  						</c:if>
 				  					
 			  					</div>

@@ -183,8 +183,8 @@
          }
          
         .btn{
-			border-radius: 10px !important;
-		}
+         border-radius: 10px !important;
+      }
          
          .btn-blue{
               background-color: #81BDF1;
