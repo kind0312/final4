@@ -4,7 +4,12 @@
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
 	<jsp:param value="훈련사 신청 목록" name="title"/>
 </jsp:include>
+<style>
+.mypage-top-nav{
+      margin-top:0.1rem !important
+   }
 
+</style>
 
 
 <body>

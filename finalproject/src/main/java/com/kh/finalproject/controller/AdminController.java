@@ -145,14 +145,14 @@ public class AdminController {
 	
 		
 	//관리자 훈련서비스 신청 목록
-	@GetMapping("/trainingList")
-	public String trainingList(Model model)
-	{
-		List<ApplyDto> applyDto=applyDao.selectList();
-	    model.addAttribute("applyDto",applyDto);
-		
-	    return "admin/trainingList";
-	}
+	//@GetMapping("/trainingList")
+	//public String trainingList(Model model)
+	//{
+	//	List<ApplyDto> applyDto=applyDao.selectList();
+	 //   model.addAttribute("applyDto",applyDto);
+	//	
+	 //   return "admin/trainingList";
+	//}
 			
 		
 	//훈련사-상세
@@ -264,6 +264,17 @@ public class AdminController {
 		
 		
 //	}
+	
+	
+	//관리자 회원/훈련이용내역
+	@GetMapping("/trainig_list")
+	public String trainingList(Model model){
+		//훈련서비스고유번호, 훈련날짜,훈련사, 이용상태
+		
+
+		
+	    return "admin/training_list";
+	}
 
 }
 	

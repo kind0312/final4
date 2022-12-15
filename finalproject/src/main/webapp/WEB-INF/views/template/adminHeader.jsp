@@ -309,7 +309,7 @@
    
       <div class="container-fluid">
 
-<<<<<<< HEAD
+
     	<div class="row mt-4">
 	      <div class="col-md-10 offset-md-1">
 	
