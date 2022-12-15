@@ -34,7 +34,7 @@
 
 	<nav class="navbar navbar-expand-lg navbar-expand-lg-re navbar-dark bg-black mypage-top-nav">
 	  <div class="container-fluid">
-	    <a class="navbar-brand-re footer-link" href="${pageContext.request.contextPath}/admin/adminHome">홈</a>
+	    <a class="navbar-brand-re footer-link" href="${pageContext.request.contextPath}/adminHome">홈</a>
 	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 	      <span class="navbar-toggler-icon"></span>
 	    </button>
@@ -118,69 +118,5 @@
     	</div>
     </div>
     </div>
-<!--
-<table border="1" width="800">
-<thead>
-<tr>
-<td>회원이름</td>
-<td>회원아이디</td>
-<td>이메일</td>
-<td>연락처</td>
-<td>가입일</td>
-<td>성별</td>
-<td>사진</td>
-</tr>
-</thead>
-<tbody>
 
-
-<tr>
-<td> ${memberDto.memberName}</td>
-<td>${memberDto.memberId}</td>
-<td>${memberDto.memberEmail }</td>
-<td>${memberDto.memberTel}</td>
-<td>${memberDto.memberJoinDate}</td>
-<td>${memberDto.memberTel}</td>
-
-</tr>
-
-
-</tbody>
-</table>
-
-
-<table border="1" width="800">
-<thead>
-<tr>
-<td>반려동물</td>
-<td>이름</td>
-<td>생일</td>
-<td>중성화</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<c:forEach var="petDto" items="${petDto}">
-<tr>
-<td> ${petDto.petType}</td>
-<td> ${petDto.petName}</td>
-<td> ${petDto.petBirth}</td>
-<td> ${petDto.petNeutralization}</td>
-<td> ${petDto.petNo}</td>
-</c:forEach>
-<c:forEach var="pet" items="${list}">
-                				<tr class="table-default align-middle">
-	                 				<th width="30%">
-	                 					<img src="http://localhost:8888/download/${pet.filesNo}" class="img-circle" width="100" height="100">
-	                 				</th>
-</tr>
-</c:forEach>
-</tr>
-
-</tbody>
-</table>
-
-
-<a class="btn btn-dark" href="${pageContext.request.contextPath}/admin/memberPoint?memberId=${memberDto.memberId}">포인트 이용내역</a>
-<a class="btn btn-dark">훈련사 이용내역</a>
 

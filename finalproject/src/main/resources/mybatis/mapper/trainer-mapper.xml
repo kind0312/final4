@@ -113,5 +113,29 @@
       from review group by trainer_no)
       R on R.trainer_no = T.trainer_no where T.member_id = #{memberId}
       </select>
+      
+        <select id="sequence" resultType="int">
+          select trainer_seq.nextval from dual
+        </select>
+        
+        <insert id="insert" parameterType="TrainerDto">
+        insert into trainer(
+        trainer_no,
+        member_id,
+        apply_no,
+        trainer_profile,
+        trainer_profile_content,
+        trainer_like
+        )
+        values(
+        #{trainerNo},
+        #{memberId},
+        #{applyNo},
+        #{trainerProfile},
+        #{trainerProfileContent},
+        #{trainerLike}
+    )
+        </insert>
+        
 
 </mapper>
