@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.entity.AdminDto;
@@ -26,9 +25,10 @@ import com.kh.finalproject.repository.PetDao;
 import com.kh.finalproject.repository.PointDao;
 import com.kh.finalproject.repository.TrainerDao;
 import com.kh.finalproject.vo.MemberListSearchVO;
-import com.kh.finalproject.vo.PointListVO;
 import com.kh.finalproject.vo.PetInsertVO;
+import com.kh.finalproject.vo.PointListVO;
 import com.kh.finalproject.vo.TrainerListSearchVO;
+import com.kh.finalproject.vo.TrainerListVO;
 
 
 @Controller
@@ -86,8 +86,6 @@ public class AdminController {
 			@ModelAttribute(name="vo") MemberListSearchVO vo) {
 		model.addAttribute("memberList",memberDao.selectList(vo));
 		
-		
-
 		return "admin/memberList";
 	}
 	//관리자 훈련사 목록과 검색
@@ -96,11 +94,9 @@ public class AdminController {
 			@ModelAttribute(name="vo")  TrainerListSearchVO vo) {
 		
 		model.addAttribute("trainerList",trainerDao.selectList(vo));
-	
-		
+
 		return "admin/trainerList";
 	}
-	
 
 	//회원-상세
 	@GetMapping("/memberDetail")
@@ -109,41 +105,60 @@ public class AdminController {
 
 //			List<PetDto> petDto= petDao.selectList(memberId);
 //			model.addAttribute("petDto",petDto);
-		
 		    
-			//회원 정보
-		    MemberDto memberDto=memberDao.selectOne(memberId);
-			model.addAttribute("memberDto",memberDto);
-			
-			//첨부파일+pet
-			//해당 아이디의 반려동물 번호의 이미지 모두 출력
-			List<PetInsertVO> list=petDao.list(memberId);
-			model.addAttribute("list",list);
+		//회원 정보
+	    MemberDto memberDto=memberDao.selectOne(memberId);
+		model.addAttribute("memberDto",memberDto);
+		
+		//첨부파일+pet
+		//해당 아이디의 반려동물 번호의 이미지 모두 출력
+		List<PetInsertVO> list=petDao.list(memberId);
+		model.addAttribute("list",list);
 
-			 return "admin/memberDetail";
-		}
+		 return "admin/memberDetail";
+	}
+	
+	//포인트 이용내역
+	@GetMapping("/memberPoint")
+	public String memberPoint(@ModelAttribute(name = "vo") PointListVO vo,
+			Model model, @RequestParam String memberId) {
 		
-		//관리자 훈련서비스 신청 목록
-		@GetMapping("/trainingList")
-		public String trainingList(Model model)
-		{
-			List<ApplyDto> applyDto=applyDao.selectList();
-		    model.addAttribute("applyDto",applyDto);
-			
-		    return "admin/trainingList";
-		}
+		vo.setMemberId(memberId);
+		int count = pointDao.count(vo);
+		vo.setCount(count);
+		vo.setSize(10);
+		
+		int endRow = vo.getP()*vo.getSize();
+		int startRow = endRow - (vo.getSize() - 1);
+		vo.setEndRow(endRow);
+		vo.setStartRow(startRow);
+		
+		model.addAttribute("list", pointDao.listAll(vo)); 
+		return "admin/memberPoint";
+	}
+	
+		
+	//관리자 훈련서비스 신청 목록
+	@GetMapping("/trainingList")
+	public String trainingList(Model model)
+	{
+		List<ApplyDto> applyDto=applyDao.selectList();
+	    model.addAttribute("applyDto",applyDto);
+		
+	    return "admin/trainingList";
+	}
 			
 		
-		//훈련사-상세
-		@GetMapping("/trainerDetail")
-		public String trainerDetail(Model model, @RequestParam String memberId) {
-			
-			TrainerListVO trainerListVO=trainerDao.selectOne(memberId);
-			model.addAttribute("trainerListVO",trainerListVO);
-			
-			
-			return "admin/trainerDetail";
-		}
+	//훈련사-상세
+	@GetMapping("/trainerDetail")
+	public String trainerDetail(Model model, @RequestParam String memberId) {
+		
+		TrainerListVO trainerListVO=trainerDao.selectOne(memberId);
+		model.addAttribute("trainerListVO",trainerListVO);
+		
+		
+		return "admin/trainerDetail";
+	}
 		
 	//관리자 훈련사-신청/전환/목록
 	@GetMapping("/applyList")
@@ -156,27 +171,20 @@ public class AdminController {
 		
 	    return "admin/applyList";
 	}
-		
-
-			
+	
 	//관리자   훈련사-신청/전환 상세
 	@GetMapping("/applyDetail")
 	public String applyDetail(Model model,@RequestParam String memberId){
-		
+		//회원 정보
 		MemberDto memberDto=memberDao.selectOne(memberId);
 		model.addAttribute("memberDto",memberDto);
 
 		List<PetDto> petDto= petDao.selectList(memberId);
 		model.addAttribute("petDto",petDto);
-	    
-		//회원 정보
-	    MemberDto memberDto=memberDao.selectOne(memberId);
-		model.addAttribute("memberDto",memberDto);		
-		
+
 		ApplyDto applyDto=applyDao.selectone(memberId);
 		model.addAttribute("applyDto",applyDto);
 		//여기까지가 상세임.....상태는 신청으로 된 상태
-		
 	
 		return "admin/applyDetail";
 	}
@@ -229,26 +237,6 @@ public class AdminController {
 
 		return "admin/apply_fail";
 	}
-	
-	//포인트 이용내역
-	@GetMapping("/memberPoint")
-	public String memberPoint(@ModelAttribute(name = "vo") PointListVO vo,
-			Model model, @RequestParam String memberId) {
-		
-		vo.setMemberId(memberId);
-		int count = pointDao.count(vo);
-		vo.setCount(count);
-		vo.setSize(10);
-		
-		int endRow = vo.getP()*vo.getSize();
-		int startRow = endRow - (vo.getSize() - 1);
-		vo.setEndRow(endRow);
-		vo.setStartRow(startRow);
-		
-		model.addAttribute("list", pointDao.listAll(vo)); 
-		return "admin/memberPoint";
-	}
-
 
 //	@PostMapping("/apply_fail")
 //	public String applyFail(RedirectAttributes attr, @ModelAttribute ApplyDto dto) {
