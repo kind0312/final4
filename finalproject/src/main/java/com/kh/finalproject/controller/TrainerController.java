@@ -183,8 +183,11 @@ public class TrainerController {
 				.memberPoint((long)reservationVO.getTrainingPurchasePrice())
 				.build();
 		memberDao.pointMinus(memberDto);
-
-		return "redirect:/trainer/list";
+		
+		
+		
+		return "redirect:/trainer/reservation_success";
+		
 	}
 	
 	@GetMapping("/like") //인증글 좋아요
@@ -209,5 +212,10 @@ public class TrainerController {
 		attr.addAttribute("trainerNo", trainerNo);
 		return "redirect:detail";
 	}
-
+	
+	@GetMapping("/reservation_success")
+	public String success() {
+		
+		return "trainer/reservation_success";
+	}
 }

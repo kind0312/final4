@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.kh.finalproject.entity.ApplyDto;
 import com.kh.finalproject.entity.MemberDto;
 
 @SpringBootTest
@@ -17,7 +18,7 @@ public class MemberInsertTest {
 	
 	@Test
 	public void test() {
-//		assertNotNull(sqlSession);
+
 		sqlSession.insert("member.insert", MemberDto.builder()
 						.memberId("test4444")
 						.memberPw("test4444!")
@@ -33,4 +34,9 @@ public class MemberInsertTest {
 	}
 	
 	
-}
+
+	      
+	}
+	
+	
+

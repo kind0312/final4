@@ -46,6 +46,13 @@ public interface TrainerDao {
 	//트레이너 번호로 트레이너 아이디 찾기
 	String selectOneTrainerId(int trainerNo);
 
-
+    //훈련사 디데일 메소드(어아디)
+	TrainerListVO selectOne(String memberId);
+	
+	//시퀀스 생성
+	int sequence();
+	
+	//훈련사 생성
+	void insert(TrainerDto dto);
 
 }
