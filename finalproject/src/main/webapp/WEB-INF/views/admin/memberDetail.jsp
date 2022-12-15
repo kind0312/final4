@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+
+ <!-- 시간 있을 때 쓰는 것 -->
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
 	<jsp:param value="회원 상세" name="title"/>
 </jsp:include>
 <style>
 	.pet-table>tbody{
-		height:130px;
-		
+		height:130px;		
 	}
+
 
 	.font{
 		color:#303030;
@@ -175,9 +177,10 @@
 </c:forEach>
 </tr>
 
-
-
 </tbody>
 </table>
-  -->
+
+
+<a class="btn btn-dark" href="${pageContext.request.contextPath}/admin/memberPoint?memberId=${memberDto.memberId}">포인트 이용내역</a>
+<a class="btn btn-dark">훈련사 이용내역</a>
 
