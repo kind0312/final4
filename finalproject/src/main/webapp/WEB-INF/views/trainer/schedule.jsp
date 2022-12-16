@@ -164,7 +164,7 @@
 		        						 display: ['background'],
 		        						 color : ['#81BDF1']
 	                                 })
-	        					}else{
+	        					}else if(resp[i].trainingStatus=='이용완료'){
 	        						calendar.addEvent({
 		        						 start: resp[i]['trainingDate'],
 		        						 display: ['background'],
