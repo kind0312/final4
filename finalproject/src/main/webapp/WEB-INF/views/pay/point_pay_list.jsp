@@ -60,6 +60,30 @@ $(function(){
 		});
 	});
 	
+	//페이지네이션
+	//제일 처음 막기
+	pageStart();
+
+	//제일 앞으로, 이전버튼 막기
+	$(".page-item").click(function(e){
+		pageStart();
+	});
+	
+	$(".blue-box").click(function(e){
+		e.target.css("background-color","#81BDF1");
+	});
+
+	//함수
+	function pageStart(){
+		var pageNo = $("[name=pageNo]").val();
+		$(".first-target").removeClass("disabled");
+		$(".second-target").removeClass("disabled");
+		if($("[name=pageNo]").val()==1){
+			$(".first-target").addClass("disabled");
+			$(".second-target").addClass("disabled");
+		}
+	}
+	
 });
 
 </script>
@@ -184,8 +208,75 @@ $(function(){
 		    </div>
 		  </div>
 		</div>
-
-
+		
+		<!-- 페이지네이션 -->
+		<div class="row mt-5 text-center mb-5">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
+              
+			  	<ul class="pagination justify-content-center">
+			  	
+			  		<%-- 맨 처음 페이지로 이동 --%>
+				    <li class="page-item first-target">
+						<c:choose>
+							<c:when test = "${vo.isFirst()==false}"> <%-- 맨 처음 페이지가 아니라면 --%>
+								<a class="page-link" href = "list?p=${vo.firstBlock()}&${vo.parameter()}">&laquo;</a> <%-- 첫 번째 페이지로 이동 --%>
+							</c:when>
+							<c:otherwise> <%-- 그렇지 않다면 --%>
+								<a class="page-link" href = "">&laquo;</a> <%-- 아무런 페이지 변화가 없도록 --%>
+							</c:otherwise>
+						</c:choose>
+				    </li>
+				    
+				    <li class="page-item second-target">
+					    <%-- 이전 구간의 마지막 페이지로 이동 --%>
+						<c:choose>
+							<c:when test = "${vo.hasPrev()}"> <%-- 이전 페이지가 있다면 --%>
+								<a class="page-link" href = "list?p=${vo.prevBlock()}&${vo.parameter()}">&lt;</a> <%-- 이전 구간의 마지막 페이지로 이동 --%>
+							</c:when>
+							<c:otherwise> <%-- 그렇지 않다면 --%>
+								<a class="page-link" href = "">&lt;</a> <%-- 아무런 페이지 변화가 없도록 --%>
+							</c:otherwise>
+						</c:choose>
+				    </li>
+				    
+				    <%-- 현재 구간의 페이지 이동 --%>
+					<%-- 변수명을 i로 하며 시작과 끝은 vo의 startBlock(), endBlock()의 반환값으로, 간격은 1로 한다  --%>
+					<c:forEach var = "i" begin = "${vo.startBlock()}" end = "${vo.endBlock()}" step = "1">
+						<li class="page-item blue-box">
+							<a class="page-link" href = "list?p=${i}&${vo.parameter()}">${i}</a>
+						</li>
+					</c:forEach>
+					
+					<%-- 다음 구간의 첫 번째 페이지로 이동 --%>
+					<li class="page-item last-target">
+						<c:choose>
+							<c:when test = "${vo.hasNext()}"> <%-- 다음 페이지가 있다면 --%>
+								<a class="page-link"  href = "list?p=${vo.nextBlock()}&${vo.parameter()}">&gt;</a> <%-- 다음 구간의 첫 번째 페이지로 이동 --%>
+							</c:when>
+							<c:otherwise> <%-- 그렇지 않다면 --%>
+								<a class="page-link"  href = "">&gt;</a> <%-- 아무런 페이지 변화가 없도록 --%>
+							</c:otherwise>
+						</c:choose>
+					</li>
+					
+					<%-- 맨 마지막 페이지로 이동 --%>
+				    <li class="page-item final-target">
+						<c:choose>
+							<c:when test = "${vo.isLast()==false}"> <%-- 맨 마지막 페이지가 아니라면 --%>
+								<a class="page-link" href = "list?p=${vo.lastBlock()}&${vo.parameter()}">&raquo;</a> <%-- 맨 마지막 페이지로 이동 --%>
+							</c:when>
+							<c:otherwise>
+								<a class="page-link" href = "">&raquo;</a>
+							</c:otherwise>
+						</c:choose>
+				    </li>
+			  	</ul>
+			</div>
+		</div>
+		
+		<!-- 페이지네이션 버튼 막기 위한 데이터 준비 -->
+		<input type="hidden" value="${vo.p}" name="pageNo">
+		
     </div>
 </body>
 

@@ -1,7 +1,6 @@
 package com.kh.finalproject.controller;
 
 import java.net.URISyntaxException;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.entity.ItemDto;
@@ -25,6 +23,7 @@ import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.PointDao;
 import com.kh.finalproject.repository.PointPurchaseDao;
 import com.kh.finalproject.service.PayService;
+import com.kh.finalproject.vo.PaginationListSearchVO;
 import com.kh.finalproject.vo.PayApproveRequestVO;
 import com.kh.finalproject.vo.PayApproveResponseVO;
 import com.kh.finalproject.vo.PayCancelResponseVO;
@@ -160,10 +159,22 @@ public class PayController {
 	
 	//결제내역 조회
 	@GetMapping("/list")
-	public String list(HttpSession session, Model model) {
+	public String list(HttpSession session, Model model,
+			@ModelAttribute(name="vo") PaginationListSearchVO vo ) {
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
-		List<PayListVO> list= pointPurchaseDao.selectList(memberId);
-		model.addAttribute("list", list);
+		
+		vo.setMemberId(memberId);
+		int count = pointPurchaseDao.count(vo);
+		vo.setCount(count);
+		
+		int endRow = vo.getP()*vo.getSize();
+		int startRow = endRow - (vo.getSize() - 1);
+		vo.setEndRow(endRow);
+		vo.setStartRow(startRow);
+		
+		//List<PayListVO> list= pointPurchaseDao.selectList(memberId);
+		model.addAttribute("list", pointPurchaseDao.listAll(vo));
+		
 		return "pay/point_pay_list";
 	}
 	
