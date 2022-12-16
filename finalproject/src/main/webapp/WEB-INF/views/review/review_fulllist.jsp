@@ -40,7 +40,7 @@
 				</div>
 			</div>
 			<div class="row mt-4">
-				<div class="col-md-10 offset-md-1 d-flex justify-content-center">
+				<div class="col-md-10 offset-md-1">
 					<div class="row mt-4">
 						<c:forEach var="reviewDto" items="${reviewList}">
 							<div class="col-xl-5 offset-xl-1 col-lg-5 offset-lg-1 col-md-10 offset-md-1 col-sm-10 offset-sm-1 mt-4 reviewborder">
