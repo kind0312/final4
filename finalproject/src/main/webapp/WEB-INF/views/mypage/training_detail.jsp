@@ -147,7 +147,8 @@
 				</div>
 			</div>
 		</div>
-
+			${training}<br>
+			${trainer}
 		<div class="row mt-3">
 			<div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 ">   
 				<table class="table point-table text-center">
@@ -190,7 +191,7 @@
 				  						</c:when>
 				  						<c:otherwise>
 				  							<a href="${pageContext.request.contextPath}/trainer/detail?trainerNo=${training[0].trainerNo}" class="btn btn-blue" style="margin-right:10px;">프로필 보기</a>
-					  						<a href="#" class="btn btn-yellow" style="margin-left:10px;">연락 하기</a>
+					  						<a href="${pageContext.request.contextPath}/chat/enter?trainerNo=${training[0].trainerNo}" class="btn btn-yellow" style="margin-left:10px;">연락 하기</a>
 				  						</c:otherwise>
 				  					</c:choose>
 			  					</div>
