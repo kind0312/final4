@@ -216,6 +216,49 @@ border: 2px solid #81BDF1;
 border: 2px solid #81BDF1;
 outline-color: #81BDF1;
 }
+.basecol{
+border: none;
+padding:11px;
+}
+.basecol:hover{
+border: none;
+padding:11px;
+}
+/* input 숨겨준다 */
+input#check_btn{
+  display:none;
+  }
+
+input#check_btn + label{
+  cursor:pointer;
+ }
+
+input#check_btn + label > span{
+  vertical-align: middle;
+  padding-left: 5px;
+ }
+
+/* label:before에 체크하기 전 상태 CSS */
+input#check_btn + label:before{
+  content:"";
+  display:inline-block;
+  width:17px;
+  height:17px;
+  border:2px solid #F47C7C;
+  border-radius: 4px;
+  vertical-align:middle;
+  }
+  
+/* label:before에 체크 된 상태 CSS */  
+input#check_btn:checked + label:before{
+  content:"";
+  background-color:#F47C7C;
+  border-color:#F47C7C;
+  background-image: url('check_btn.png');
+  background-repeat: no-repeat;
+  background-position: 50%;
+  }
+
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.js"></script>
@@ -434,15 +477,16 @@ $(function(){
 <div class="row1">
 <div class="row">
 <c:forEach var="pet" items="${pet}">
+<div class="col basecol">
 <img src="http://localhost:8888/download/${pet.filesNo}" width="400" height="250" class="img0">
 <p>${pet.petName}</p>
-<br>
 <input type="checkbox" class ="petCheck" name="trainingDetailPetName" value="${pet.petName}">
+
+</div>
 </c:forEach>
 <div class="invalid-feedback">반려견을 선택해주세요!</div>
 </div>
 </div>
-
 <div class="row">
  <div class="mt-20">
  

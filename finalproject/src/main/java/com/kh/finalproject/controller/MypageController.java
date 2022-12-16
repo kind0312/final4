@@ -21,14 +21,13 @@ import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingPurchaseDto;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.PointDao;
+import com.kh.finalproject.repository.ScheduleDao;
 import com.kh.finalproject.repository.TrainerDao;
 import com.kh.finalproject.repository.TrainerLikeDao;
 import com.kh.finalproject.repository.TrainingDao;
 import com.kh.finalproject.repository.TrainingPurchaseDao;
 import com.kh.finalproject.vo.OneTrainingVO;
 import com.kh.finalproject.vo.PointListVO;
-import com.kh.finalproject.vo.ReviewVO;
-import com.kh.finalproject.vo.TrainerListVO;
 
 @Controller
 @RequestMapping("/mypage")
@@ -46,6 +45,8 @@ public class MypageController {
 	private TrainerDao trainerDao;
 	@Autowired
 	private TrainerLikeDao trainerLikeDao;
+	@Autowired
+	private ScheduleDao scheduleDao;
 	
 	//포인트 관리
 //	@RequestMapping("/point")
@@ -143,7 +144,6 @@ public class MypageController {
 				.pointStatus("환불")
 				.pointPrice(payPrice)
 				.build();
-		System.out.println(pointDto);
 		pointDao.cancelInsert(pointDto);
 		
 		//3. 훈련서비스(training) 상태 예약취소로 변경
@@ -159,6 +159,10 @@ public class MypageController {
 			int no = purchaseDetailDto.get(i).getTrainingPurchaseNo();
 			trainingPurchaseDao.statusChange(no);
 		}
+		
+		//스케줄 테이블 DB삭제
+		scheduleDao.delete(trainingDetailDto.getTrainingNo());
+		
 		
 		return "redirect:/mypage/cancel_success";
 	}

@@ -6,16 +6,15 @@
 
 <mapper namespace="schedule">
 
-<!-- 스케줄 insert -->
-<insert id="insert" parameterType="ScheduleDto">
-	insert into schedule values (schedule_seq.nextval, #{trainerNo},#{scheduleDate})
-</insert>
+	<!-- 스케줄 insert -->
+	<insert id="insert" parameterType="ScheduleDto">
+		insert into schedule values (schedule_seq.nextval, #{trainerNo},#{scheduleDate})
+	</insert>
 
-
-
-
-
-
+	<!-- 스케줄 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete schedule where training_no=#{trainingNo}
+	</delete>
 
 
 

@@ -5,6 +5,7 @@ import com.kh.finalproject.entity.ScheduleDto;
 public interface ScheduleDao {
 	
 	//등록
-		void insert(ScheduleDto schduleDto);
-
+	void insert(ScheduleDto schduleDto);
+	//삭제
+	boolean delete(int trainingNo);
 }
