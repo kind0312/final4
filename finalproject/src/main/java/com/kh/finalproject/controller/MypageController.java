@@ -17,10 +17,12 @@ import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.PointDto;
 import com.kh.finalproject.entity.PurchaseDetailDto;
+import com.kh.finalproject.entity.ReviewDto;
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingPurchaseDto;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.PointDao;
+import com.kh.finalproject.repository.ReviewDao;
 import com.kh.finalproject.repository.ScheduleDao;
 import com.kh.finalproject.repository.TrainerDao;
 import com.kh.finalproject.repository.TrainerLikeDao;
@@ -47,6 +49,8 @@ public class MypageController {
 	private TrainerLikeDao trainerLikeDao;
 	@Autowired
 	private ScheduleDao scheduleDao;
+	@Autowired
+	private ReviewDao reviewDao;
 	
 	//포인트 관리
 //	@RequestMapping("/point")
@@ -108,6 +112,8 @@ public class MypageController {
 		model.addAttribute("trainer", trainerDao.selectOnePro(dto.get(0).getTrainerNo()));
 		//결제내역 단일조회
 		model.addAttribute("purchase", trainingPurchaseDao.selectOne(trainingNo));
+		//리뷰 작성 여부
+		model.addAttribute("reviewDto", reviewDao.writed(trainingNo));
 		return "mypage/training_detail";
 	}
 	

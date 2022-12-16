@@ -179,7 +179,14 @@
 				  					<c:choose>
 				  						<c:when test="${training[0].trainingStatus=='이용완료'}">
 				  							<a href="${pageContext.request.contextPath}/trainer/detail?trainerNo=${training[0].trainingNo}" class="btn btn-blue" style="margin-right:10px;">프로필 보기</a>
-					  						<a href="${pageContext.request.contextPath}/review/write?trainingNo=${training[0].trainingNo}" class="btn btn-yellow" style="margin-left:10px;">후기 작성</a>
+				  							<c:choose>
+				  								<c:when test="${reviewDto == null}">
+							  						<a href="${pageContext.request.contextPath}/review/write?trainingNo=${training[0].trainingNo}" class="btn btn-outline-yellow" style="margin-left:10px;">후기 작성</a>
+				  								</c:when>
+				  								<c:otherwise>
+				  									<a href="${pageContext.request.contextPath}/review/write?trainingNo=${training[0].trainingNo}" class="btn btn-yellow" style="margin-left:10px;">작성 완료</a>
+				  								</c:otherwise>
+				  							</c:choose>
 				  						</c:when>
 				  						<c:otherwise>
 				  							<a href="${pageContext.request.contextPath}/trainer/detail?trainerNo=${training[0].trainingNo}" class="btn btn-blue" style="margin-right:10px;">프로필 보기</a>

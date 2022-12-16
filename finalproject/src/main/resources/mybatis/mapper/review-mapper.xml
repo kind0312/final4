@@ -67,7 +67,7 @@
 		<!-- row() over() -->
 		select * from 
 			(select r.*, row_number() over(partition by review_no order by pet_no) as rn 
-				from review_list_view r) where rn = 1
+				from review_list_view r) where rn = 1 order by review_no desc
 	</select>
 	
 	<!-- 전체 이용후기 상세 -->
@@ -83,7 +83,8 @@
 			set 
 				review_title = #{reviewTitle}, 
 				review_content =#{reviewContent},
-				review_good = #{reviewGood}
+				review_good = #{reviewGood},
+				review_updatetime = sysdate
 			where
 				review_no = #{reviewNo}
 	</update>
