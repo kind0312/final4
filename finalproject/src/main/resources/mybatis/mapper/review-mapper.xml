@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="review">
+
+	<!-- 시퀀스 발급 -->
+	<select id="sequence" resultType="int">
+		select review_seq.nextval from dual
+	</select>
+	
+	<!-- 이용 후기 등록 -->
+	<insert id="insert" parameterType="ReviewDto">
+		insert into review
+			(review_no, training_no, trainer_no, member_id, 
+			review_title, review_content, review_good)
+		values
+			(#{reviewNo}, #{trainingNo}, #{trainerNo}, 
+			#{memberId}, #{reviewTitle}, #{reviewContent}, #{reviewGood})
+	</insert>
+	
+	<!-- 이용 완료 정보 -->
+ 	<select id="end" resultType="TrainingListVO" parameterType="TrainingDto">
+		select * from
+		(select img.files_no, pro.trainer_no, li.training_no, 
+			t.training_date, t.training_starttime, t.training_status, t.member_id
+			from member_img img 
+			inner join trainer pro on img.member_id=pro.member_id
+			inner join linked_list li on pro.trainer_no=li.trainer_no
+			inner join training t on li.training_no=t.training_no
+			where member_id= #{memberId} 
+ 			and training_status='이용완료')
+            where training_no = #{trainingNo}
+ 	</select>
+ 	
+ 	<!-- 이용후기 상세정보 -->
+ 	<select id="one" resultType="ReviewDto" parameterType="int">
+ 		select * from review where review_no = #{reviewNo}
+ 	</select>
+ 	
+ 	<!-- 이용후기 작성 여부 -->
+ 	<select id="writed" resultType="ReviewDto" parameterType="int">
+ 		select * from review where training_no = #{trainingNo}
+ 	</select>
+	
+	<!-- 전체 이용 이용후기 목록 조회 -->
+	<select id="list" resultType="ReviewVO">
+		<!-- 조인 -->
+<!-- 		select  -->
+<!-- 			m.member_name,t.*, tp.training_purchase_price,  -->
+<!-- 			td.training_detail_pet_name, p.*, img.files_no,  -->
+<!-- 	        r.review_title, r.review_content, r.review_writetime, r.review_updatetime, r.review_good -->
+<!-- 		from member m  -->
+<!-- 			inner join training t on m.member_id = t.member_id  -->
+<!-- 			inner join training_purchase tp on t.training_no = tp.training_no -->
+<!-- 			inner join training_detail td on tp.training_no = td.training_no -->
+<!-- 			inner join pet p on td.training_detail_pet_name = p.pet_name -->
+<!-- 			inner join pet_img img on p.pet_no = img.pet_no -->
+<!--             inner join review r on t.training_no= r.training_no -->
+<!--         order by review_writetime desc -->
+
+		<!-- view -->
+<!-- 		select * from review_list_view order by review_writetime desc -->
+
+		<!-- row() over() -->
+		select * from 
+			(select r.*, row_number() over(partition by review_no order by pet_no) as rn 
+				from review_list_view r) where rn = 1
+	</select>
+	
+	<update id="edit" parameterType="ReviewDto">
+		update review 
+			set 
+				review_title = #{reviewTitle}, 
+				review_content =#{reviewContent},
+				review_good = #{reviewGood}
+			where
+				review_no = #{reviewNo}
+	</update>
+	<update id="profileImgEdit" parameterType="memberImgDto">
+		update member_img set files_no=#{filesNo} where member_id=#{memberId}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete review where review_no = #{reviewNo}
+	</delete>
+		
+</mapper>

@@ -101,6 +101,7 @@
  		t.training_status, li.trainer_no from training t 
 		inner join linked_list li on t.training_no=li.training_no
 		where li.trainer_no=#{trainerNo}
+		and (t.training_status='예약확정' or t.training_status='이용완료')
  	</select>
  	
  	
@@ -189,9 +190,21 @@
  	
  	
  	<!-- 훈련요청 날짜에 확정된 예약이 있는지 확인 -->
- 	<select id="checkRequest" parameterType="Date" resultType="TrainingDto">
- 	select * from training where training_status='예약확정' and training_date=#{requestDate}
+ 	<select id="checkRequest" parameterType="CheckRequestVO" resultType="TrainingDto">
+		select tr.* from training tr
+		inner join linked_list LL on tr.training_no = LL.training_no
+		inner join trainer tt on tt.trainer_no = LL.trainer_no
+		where tr.training_status='예약확정' and tr.training_date=#{trainingDate} and tt.trainer_no = #{trainerNo}
  	</select>
+ 	
+ 	<insert id="pointInsert" parameterType="PointDto">
+ 		insert into point(point_no, member_id, point_status, point_price, point_date)
+ 		values(point_seq.nextval, #{memberId}, '사용', #{pointPrice}, sysdate)
+ 	</insert>
+ 	
+ 	<insert id="linkedInsert" parameterType="LinkedListDto">
+ 	insert into linked_list(training_no, trainer_no) values(#{trainingNo}, #{trainerNo})
+ 	</insert>
   	
   
   </mapper>

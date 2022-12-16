@@ -1,9 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+
+<jsp:include page="/WEB-INF/views/template/header.jsp">
+	<jsp:param value="회원 채팅 방" name="title"/>
+</jsp:include>
+
+
+
 
 <style>
 	.chat-message {
@@ -11,20 +21,68 @@
 		border:1px solid black;
 		border-radius:1em;
 	}
+	.img-circle{
+		border-radius: 70%;
+    	border:none;
+    	background-color:#81BDF1;
+    	overflow: hidden;
+	}
+	#chattext {
+		font-size: 13px;
+	}
+	
 </style>
 
 
 <body>
-<h1>채팅</h1>
-<h2>방번호 : ${roomNo}</h2>
 
-<input type="text" id="message-input">
-<button type="button" id="message-send">전송</button>
+<div class="container-fluid">
+        <div class="row mt-80 mb-3">
+            <div class="col-md-6 offset-md-3">
+                 <h4 class="text-center"></h4>
+            </div>
+        </div>
+
 <hr>
-<div id="message-list"></div>
 
 
+<div class="chat_wrap">
+        <div class="header">
+          <h2>${partner.memberName} 펫시터</h2>
+        </div>
+        <div class="chat">
+        
+        	<ul>
+        	<c:forEach var="chatHistory" items="${chatHistory}">
+                				<tr class="table-default align-middle">
+	                 				<th width="30%"> 
+	                 				<img src="http://localhost:8888/download/${chatHistory.filesNo}" class="img-circle" width="45" height="45">
+	                 				</th>
+	                 				<th width="40%">             					
+	                 						                 					
+	                 					<span class="gender-font">${chatHistory.chatMessage} </span>
+	                 					<span class="gender-font" id="chattext">${chatHistory.chatCreateAt}</span>
+	                 					<p> </p>
+	                 				</th>
+	                 				
+                 				</tr>
+		                	</c:forEach>
+        	</ul>
+        
+            <ul  id="message-list">
+                <!-- 동적 생성 -->
+            </ul>
+        </div>
+        <div class="input-div">
+         <!-- <textarea placeholder="Press Enter for send message."></textarea> -->   
+         	<input type="text" id="message-input">
+			<button type="button" id="message-send">전송</button>
+        </div>
+	</div>
 
+</div>
+
+<span>방번호 : ${roomNo}</span>
 </body>
 
 <script>
@@ -66,13 +124,21 @@ $(function(){
 		var data = JSON.parse(e.data);
 		console.log(data);  
 		
-		var p = $("<p>").addClass("chat-message");
+		var fileNo = ${partner.filesNo};
+		
+		 var div = $("<div></div>");
+		
+		
+		var p = $("<p>").addClass("chat-message");		
 		var time = moment(data.time).format("hh:mm");
 		var w = $("<p>").text(data.memberId); //콘솔에 key로 들어오는 값을 찍어줘야 나옴
-		var t = $("<p>").text("("+time+")");
-		var c = $("<p>").text(data.chatMessage);
+		var t = $("<span>").text("("+time+")");
+		var c = $("<span>").text(data.chatMessage);
+		
+		
 		p.append(w).append(c).append(t);  //작성자 내용 시간
-		$("#message-list").append(p);
+		$("#message-list").append(p).append(img);
+		
 		
 		//스크롤 하단으로 이동
 		var height = $(document).height();
@@ -108,3 +174,7 @@ $(function(){
 </script>
 
 </html>
+
+
+
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

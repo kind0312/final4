@@ -28,7 +28,16 @@ select count(*) cnt from trainer_like where trainer_no = #{trainerNo}
 update trainer set trainer_like = (select count(*) from trainer_like where trainer_no = #{trainerNo}) where trainer_no = #{trainerNo}
 </update>
 
-
-
+<!-- 내가 좋아요한 훈련사 조회 -->
+<select id="selectLikeList" resultType="LikeListVO" parameterType="String">
+select T.trainer_no, T.member_id,
+      T.trainer_profile, T.trainer_profile_content,
+      T.trainer_like, I.files_no, M.member_name
+      from trainer_like L 
+      inner join trainer T on T.trainer_no=L.trainer_no
+      inner join member_img I on I.member_id = T.member_id
+      inner join member M on M.member_id = I.member_id
+      where L.member_id = #{memberId}
+</select>
 
 </mapper>

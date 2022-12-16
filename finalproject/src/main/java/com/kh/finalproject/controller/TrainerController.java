@@ -15,8 +15,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.entity.LikeDto;
+import com.kh.finalproject.entity.LinkedListDto;
 import com.kh.finalproject.entity.MemberDto;
+import com.kh.finalproject.entity.PointDto;
 import com.kh.finalproject.entity.PurchaseDetailDto;
+import com.kh.finalproject.entity.ScheduleDto;
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.entity.TrainingPurchaseDto;
@@ -104,7 +107,7 @@ public class TrainerController {
 
 		model.addAttribute("member", memberDao.selectOne(userId));
 		model.addAttribute("pet", petDao.list(userId));
-		model.addAttribute("trainerno",trainerNo);
+		model.addAttribute("trainerno", trainerNo);
 		
 		return "/trainer/reservation";
 	}
@@ -161,11 +164,30 @@ public class TrainerController {
 		}
 		
 		//linked_list 테이블 DB등록
+		LinkedListDto linkedListDto =LinkedListDto.builder()
+				.trainingNo(trainingNo)
+				.trainerNo(reservationVO.getTrainerNo())
+				.build();
+		trainingDao.insertLinkedList(linkedListDto);
 		
 		//point 사용내역 테이블 DB등록
+		PointDto pointDto = PointDto.builder()
+				.memberId(reservationVO.getMemberId())
+				.pointPrice(reservationVO.getTrainingPurchasePrice())
+				.build();
+		trainingDao.insertPurchase(pointDto);
+		
+		//member 포인트 차감
+		MemberDto memberDto = MemberDto.builder()
+				.memberId(reservationVO.getMemberId())
+				.memberPoint((long)reservationVO.getTrainingPurchasePrice())
+				.build();
+		memberDao.pointMinus(memberDto);
 		
 		
-		return "redirect:/trainer/list";
+		
+		return "redirect:/trainer/reservation_success";
+		
 	}
 	
 	@GetMapping("/like") //인증글 좋아요
@@ -190,5 +212,10 @@ public class TrainerController {
 		attr.addAttribute("trainerNo", trainerNo);
 		return "redirect:detail";
 	}
-
+	
+	@GetMapping("/reservation_success")
+	public String success() {
+		
+		return "trainer/reservation_success";
+	}
 }

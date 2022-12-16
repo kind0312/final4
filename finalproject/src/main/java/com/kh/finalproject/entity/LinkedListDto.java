@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class LinkedList {
+public class LinkedListDto {
 	
 	private int trainingNo;
 	private int trainerNo;

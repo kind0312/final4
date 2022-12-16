@@ -13,4 +13,5 @@ public class TrainerDto {
 	private int applyNo;
 	private String trainerProfile;
 	private String trainerProfileContent;
+	private int trainerLike;
 }

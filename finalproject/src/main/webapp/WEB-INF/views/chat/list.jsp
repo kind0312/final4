@@ -55,14 +55,14 @@
               				<c:forEach var="chatList" items="${chatList}">
                 				<tr class="table-default align-middle">
 	                 				<th width="30%">
-	                 				<!-- 	<img src="http://localhost:8888/download/${request.filesNo}" class="img-circle" width="100" height="100"> --><!-- 이미지에 번호들어가야함 -->
+	                 				<img src="http://localhost:8888/download/${chatList.filesNo}" class="img-circle" width="100" height="100"> 
 	                 				</th>
 	                 				<th width="40%">
 	                 					
 	                 					<p class="name-font">${chatList.memberName} 훈련사</p>
 	                 					
-	                 					<p class="gender-font">마지막 채팅 내용</p>
-	                 					<p class="gender-font">마지막 채팅 시간</p>
+	                 					<p class="gender-font">${chatList.chatMessage}</p>
+	                 					<p class="gender-font">${chatList.chatCreateAt}</p>
 	                 				</th>
 	                 				<th width="30%">
 	                 					<a href="${pageContext.request.contextPath}/chat/room?roomNo=${chatList.roomNo}" class="btn btn-blue">채팅</a>

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +22,13 @@ import com.kh.finalproject.entity.TrainingPurchaseDto;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.PointDao;
 import com.kh.finalproject.repository.TrainerDao;
+import com.kh.finalproject.repository.TrainerLikeDao;
 import com.kh.finalproject.repository.TrainingDao;
 import com.kh.finalproject.repository.TrainingPurchaseDao;
 import com.kh.finalproject.vo.OneTrainingVO;
-import com.kh.finalproject.vo.TrainerOneVO;
+import com.kh.finalproject.vo.PointListVO;
+import com.kh.finalproject.vo.ReviewVO;
+import com.kh.finalproject.vo.TrainerListVO;
 
 @Controller
 @RequestMapping("/mypage")
@@ -40,16 +44,45 @@ public class MypageController {
 	private TrainingPurchaseDao trainingPurchaseDao;
 	@Autowired
 	private TrainerDao trainerDao;
+	@Autowired
+	private TrainerLikeDao trainerLikeDao;
 	
 	//포인트 관리
+//	@RequestMapping("/point")
+//	public String list(HttpSession session, Model model) {
+//		String memberId = (String)session.getAttribute(SessionConstant.ID);
+//		model.addAttribute("point", memberDao.selectOne(memberId));
+//		List<PointDto> list = pointDao.selectList(memberId);
+//		model.addAttribute("list", list);
+//		return "mypage/point_list";
+//	}
+	
 	@RequestMapping("/point")
-	public String list(HttpSession session, Model model) {
+	public String list(HttpSession session, Model model,
+			@ModelAttribute(name = "vo") PointListVO vo) {
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
 		model.addAttribute("point", memberDao.selectOne(memberId));
 		List<PointDto> list = pointDao.selectList(memberId);
-		model.addAttribute("list", list);
+		//model.addAttribute("list", list);
+		
+		// 조회 유형 판정과 실행시킬 메소드를 PointDaoImpl에서 결정하도록 변경
+		// 조회 유형에 따른 조회 결과의 총 갯수를 반환
+		vo.setMemberId(memberId); //count구하기 위해 먼저 실행되어야함
+		// 반환한 조회 결과의 총 갯수(count)를 vo의 count 필드의 값으로 설정
+		int count = pointDao.count(vo);
+		vo.setCount(count);
+		
+		int endRow = vo.getP()*vo.getSize();
+		int startRow = endRow - (vo.getSize() - 1);
+		vo.setEndRow(endRow);
+		vo.setStartRow(startRow);
+		
+		// model에 조회 유형에 따른 조회 결과를 첨부
+		model.addAttribute("page", pointDao.listAll(vo));
+
 		return "mypage/point_list";
 	}
+	
 	
 	//예약 확인
 	@RequestMapping("/training")
@@ -142,6 +175,15 @@ public class MypageController {
 		model.addAttribute("filesNo", memberDao.findFileNo(memberId));
 		return "mypage/profile";
 	}	
+	
+	@GetMapping("/like")
+	public String like(Model model, HttpSession session) {
+		
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		model.addAttribute("like", trainerLikeDao.likeList(memberId));
+		
+		return "mypage/like_list";
+	}
 	
 
 }

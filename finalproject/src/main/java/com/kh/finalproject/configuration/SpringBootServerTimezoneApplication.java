@@ -14,7 +14,7 @@ public class SpringBootServerTimezoneApplication {
     @PostConstruct
     public void start() {
         TimeZone.setDefault(TimeZone.getTimeZone("UTC")); 
-        System.out.println(LocalDateTime.now());
+        //System.out.println(LocalDateTime.now());
     }
     public static void main(String[] args) {       
       SpringApplication.run(SpringBootServerTimezoneApplication.class, args);

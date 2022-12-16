@@ -25,7 +25,7 @@
   
   <select id="chatList" parameterType="String" resultType="ChatDto">
   <!-- 번호(roomNo)랑 아이디(memberId)로 채팅 내역을 찾아야함/ 일단은 String (ChatSerchVO를 따로 만들어야하나?)-->
-  select * from chat where  room_no = #{roomNo}
+  select * from chat where  room_no = #{roomNo} order by chat_no asc
   </select>
   
   <select id="roomSeqNo" resultType="String" >
@@ -38,11 +38,53 @@
 	SELECT room_no FROM chat_user where member_id = #{trainerId}
   </select>
   
-  <select id="chatRoomList" parameterType="String" resultType="ChatUserDto">
-  	select * from chat_user CH 
-	where CH.room_no in (select room_no from chat_user where member_id = #{memberId})
-	and member_status = 'Y'
+  <!-- 일반회원 기준에서 채팅리스트 뽑기 -->
+  <select id="chatRoomList" parameterType="String" resultType="ChatListVO">
+  	select h.chat_no, h.room_no,h.chat_create_at,h.chat_message,p.member_name,p.files_no,h.chat_message_status
+	from
+	(
+	select chat.chat_no,chat.room_no,chat.chat_create_at,chat.chat_message,chat.chat_message_status
+	,ROW_NUMBER() OVER (PARTITION BY chat.room_no ORDER BY chat.chat_no desc) AS emp_no
+	from chat chat
+	)H left join(select *
+	from chat_user cu 
+	inner join member_img mi on mi.member_id = cu.member_id
+	where cu.room_no in (select room_no from chat_user where member_id = #{memberId})and member_status = 'Y') P
+	on P.room_no = H.room_no
+	WHERE emp_no = 1 and h.room_no = p.room_no order by h.chat_create_at desc
   </select>
+  
+  
+   <!-- 훈련사 기준에서 채팅리스트 뽑기 -->
+   <select id="trainerchatRoomList" parameterType="String" resultType="ChatListVO">
+  	select h.chat_no, h.room_no,h.chat_create_at,h.chat_message,p.member_name,p.files_no,h.chat_message_status
+	from
+	(
+	select chat.chat_no,chat.room_no,chat.chat_create_at,chat.chat_message,chat.chat_message_status
+	,ROW_NUMBER() OVER (PARTITION BY chat.room_no ORDER BY chat.chat_no desc) AS emp_no
+	from chat chat
+	)H left join(select *
+	from chat_user cu 
+	inner join member_img mi on mi.member_id = cu.member_id
+	where cu.room_no in (select room_no from chat_user where member_id = #{memberId})and member_status = 'N') P
+	on P.room_no = H.room_no
+	WHERE emp_no = 1 and h.room_no = p.room_no order by h.chat_create_at desc
+  </select>
+  
+  
+  
+  
+	<select id="chatRoom" parameterType="String" resultType="ChatRoomVO">
+	select m.member_name, chat.*, mi.files_no from chat chat 
+	inner join member_img mi on mi.member_id = chat.member_id 
+	inner join member m on m.member_id=chat.member_id
+	where room_no = #{roomNo} order by chat_no asc
+	</select>
+  
+  	<select id="searchPartner" parameterType="ChatPartnerSearchVO" resultType="ChatPartnerVO">
+  	select cu.member_id,cu.member_name, mi.files_no from chat_user cu inner join member_img mi on mi.member_id = cu.member_id 
+	where cu.room_no =#{roomNo} and not cu.member_id =#{memberId}
+  	</select>
   
   
   </mapper>

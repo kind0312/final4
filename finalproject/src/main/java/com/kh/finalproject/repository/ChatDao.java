@@ -5,6 +5,10 @@ import java.util.List;
 import com.kh.finalproject.entity.ChatDto;
 import com.kh.finalproject.entity.ChatUserDto;
 import com.kh.finalproject.entity.RoomDto;
+import com.kh.finalproject.vo.ChatListVO;
+import com.kh.finalproject.vo.ChatPartnerSearchVO;
+import com.kh.finalproject.vo.ChatPartnerVO;
+import com.kh.finalproject.vo.ChatRoomVO;
 import com.kh.finalproject.vo.SearchRoomVO;
 
 
@@ -29,5 +33,19 @@ public interface ChatDao {
 	String searchRoomVO(SearchRoomVO searchRoomVO);
 	
 	//채팅방 리스트(일반회원)
-	List<ChatUserDto> chatRoomList(String memberId);
+	List<ChatListVO> chatRoomList(String memberId);
+	
+	//채팅방 리스트(트레이너)
+	List<ChatListVO> chatRoomListTrainer(String memberId);
+	
+	//채팅방안에 들어갔을때 나올 내역
+	List<ChatRoomVO> chatRoom(String roomNo);
+	
+	//채팅방 상태 아이디,이름,프로필정보 -> 리스트 아님
+	ChatPartnerVO chatPartner(ChatPartnerSearchVO chatPartnerSearchVO);
+	
+	
+
+
+	
 }

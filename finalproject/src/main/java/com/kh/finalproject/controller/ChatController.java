@@ -19,12 +19,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.finalproject.constant.SessionConstant;
+import com.kh.finalproject.entity.ChatDto;
 import com.kh.finalproject.entity.ChatUserDto;
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.RoomDto;
 import com.kh.finalproject.repository.ChatDao;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.TrainerDao;
+import com.kh.finalproject.vo.ChatListVO;
+import com.kh.finalproject.vo.ChatPartnerSearchVO;
+import com.kh.finalproject.vo.ChatPartnerVO;
+import com.kh.finalproject.vo.ChatRoomVO;
 import com.kh.finalproject.vo.SearchRoomVO;
 
 
@@ -46,35 +51,83 @@ public class ChatController {
 	private MemberDao memberDao;
 		
 	
-	//채팅리스트
+	//일반회원 채팅리스트
 	@GetMapping("/list")
-	public String chatList(@ModelAttribute ChatUserDto chatUserDto, HttpSession session
-			,Model model) {
+	public String chatList( HttpSession session , Model model) {
 		String memberId = (String) session.getAttribute(SessionConstant.ID);
 		
-		List<ChatUserDto> list = chatDao.chatRoomList(memberId);
-		model.addAttribute("chatList", list);
+		List<ChatListVO> listVO = chatDao.chatRoomList(memberId); //아이디로 리스트 찾아오기(일반회원 기준)		
 		
-		List<String> listA = new ArrayList<String>();
-		for(int i = 0; i < list.size(); i++) {
-			listA.add(i, list.get(i).getMemberId());
-			
-		}
-		
-		
-		
-		System.out.println("listA =" + listA);
+		model.addAttribute("chatList" , listVO);
 		
 		return "chat/list";
 	}
 	
+	//트레이너 기준 채팅 리스트
+	@GetMapping("/list_trainer")
+	public String chatListTrainer(HttpSession session , Model model) {
+		String memberId = (String) session.getAttribute(SessionConstant.ID); //트레이너 아이디
+		
+		List<ChatListVO> listTrainerVO = chatDao.chatRoomListTrainer(memberId); //아이디로 리스트 찾아오기(일반회원 기준)
+		
+		model.addAttribute("chatList", listTrainerVO);
+		
+		return "chat/list_trainer";
+	}
+	
+	
+	
+	
 	//채팅방 {room 번호}
 	@RequestMapping("/room")
-	public String chatRoom(@RequestParam String roomNo, Model model, @ModelAttribute RoomDto roomDto) {
-		//roomNo를 어디서 가져올까?	
+	public String chatRoom(@RequestParam String roomNo, Model model
+			,@ModelAttribute RoomDto roomDto	, HttpSession session		
+			) {
+		
+		String memberId = (String) session.getAttribute(SessionConstant.ID);
+		
+		//파라미터에서 roomNo
 		model.addAttribute("roomNo", roomNo);
+		
+		//채팅내역
+		List<ChatRoomVO> chat = chatDao.chatRoom(roomNo);		
+		model.addAttribute("chatHistory", chat );		
+		
+		ChatPartnerSearchVO searchVO = ChatPartnerSearchVO.builder().memberId(memberId).roomNo(roomNo).build();
+		
+		// 채팅 상대 정보
+		ChatPartnerVO partner = chatDao.chatPartner(searchVO);		 
+		model.addAttribute("partner", partner);
+		
 		return "chat/room";
 	}
+	
+	//채팅방 {room 번호}
+		@RequestMapping("/room_trainer")
+		public String chatRoomTrainer(@RequestParam String roomNo, Model model
+				,@ModelAttribute RoomDto roomDto	, HttpSession session		
+				) {
+			
+			String memberId = (String) session.getAttribute(SessionConstant.ID);  //트레이너 memberId
+			
+			//파라미터에서 roomNo
+			model.addAttribute("roomNo", roomNo);
+			
+			//채팅내역
+			List<ChatRoomVO> chat = chatDao.chatRoom(roomNo);		
+			model.addAttribute("chatHistory", chat );		
+			
+			ChatPartnerSearchVO searchVO = ChatPartnerSearchVO.builder().memberId(memberId).roomNo(roomNo).build();
+			
+			// 채팅 상대 정보
+			ChatPartnerVO partner = chatDao.chatPartner(searchVO);		 
+			model.addAttribute("partner", partner);
+			
+			return "chat/room_trainer";
+		}
+	
+	
+	
 	
 	
 	

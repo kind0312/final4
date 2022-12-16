@@ -29,5 +29,4 @@ public class ReservationVO {
 	private int purchaseDetailPrice;
 	private String purchaseDetailStatus;
 	private int trainerNo;
-
 }

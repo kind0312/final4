@@ -64,7 +64,7 @@
        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.min.js"></script>
    
        <!-- score (jquery 보다 뒤에 나와야 한다.)-->
-       <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@0.0.6/score.min.js"></script>
    
        <!-- 주소 검색 -->
        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -86,9 +86,20 @@
 /*                  border: 1px dotted gray; */
 /*               } */
           /* 태그 스타일 */
+        html,
 		body {
-/*                height:1000px; */
+                height:100%;
         }
+        
+      	body {
+		  display: flex;
+		  flex-direction: column;
+		}
+		
+		section {
+		  flex: 1;
+		}
+        
         p {
            margin-top: 0;
            margin-bottom: 0;
@@ -148,11 +159,17 @@
          .footer-link{
             color: #f8f9fa;
          }
+         .w-10{
+         	width: 10% !important;
+         }
          .w-30{
             width: 30%;
          }
          .w-70{
             width: 70%;
+         }
+         .w-90{
+         	width: 90% !important;
          }
          .mt-150{
             margin-top:150px;
@@ -165,6 +182,9 @@
          }
          .mt-80{
             margin-top:80px;
+         }
+         .mt-70{
+            margin-top:70px;
          }
          .mt-50{
             margin-top:50px;
@@ -192,8 +212,8 @@
          }
          
         .btn{
-			border-radius: 10px !important;
-		}
+         border-radius: 10px !important;
+      }
          
          .btn-blue{
               background-color: #81BDF1;
@@ -222,6 +242,13 @@
            background-color: #cc9342;
            border-color: #c08a3e;
          }
+         
+         .btn-danger{
+              border:2px solid #d9534f;
+              color:#fff;
+              font-weight: bolder;
+              font-size:15px;
+           }
          
          .btn-outline-blue {
            color: #81BDF1;
@@ -373,4 +400,4 @@
          </div>
        </div>
         </div>
-        <main class="container-fluid">
+        <section class="container-fluid">

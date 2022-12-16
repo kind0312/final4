@@ -109,7 +109,7 @@
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/point">포인트</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">찜관리</a>
+	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/like">찜관리</a>
 	        </li>
 	        <li class="nav-item">
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">후기</a>
@@ -179,7 +179,7 @@
 				  					<c:choose>
 				  						<c:when test="${training[0].trainingStatus=='이용완료'}">
 				  							<a href="#" class="btn btn-blue" style="margin-right:10px;">프로필 보기</a>
-					  						<a href="#" class="btn btn-yellow" style="margin-left:10px;">후기 작성</a>
+					  						<a href="${pageContext.request.contextPath}/review/write?trainingNo=${training[0].trainingNo}" class="btn btn-yellow" style="margin-left:10px;">후기 작성</a>
 				  						</c:when>
 				  						<c:otherwise>
 				  							<a href="#" class="btn btn-blue" style="margin-right:10px;">프로필 보기</a>
