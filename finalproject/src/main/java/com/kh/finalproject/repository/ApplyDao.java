@@ -4,6 +4,7 @@ package com.kh.finalproject.repository;
 import java.util.List;
 
 import com.kh.finalproject.entity.ApplyDto;
+import com.kh.finalproject.vo.ApplyDetailVO;
 
 public interface ApplyDao {
 	//지원자 목록보기
@@ -11,6 +12,8 @@ public interface ApplyDao {
 	
 	//지원자 상세
 	ApplyDto selectOne(int applyNo);
+	//지원자 상세(ApplyDetailVO로 반환)
+	ApplyDetailVO detailOne(int applyNo);
 	
 	//수정
 	//상태(승인)변경

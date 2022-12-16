@@ -178,11 +178,11 @@
 			  					<div class="mt-4 mb-3">
 				  					<c:choose>
 				  						<c:when test="${training[0].trainingStatus=='이용완료'}">
-				  							<a href="#" class="btn btn-blue" style="margin-right:10px;">프로필 보기</a>
+				  							<a href="${pageContext.request.contextPath}/trainer/detail?trainerNo=${training[0].trainingNo}" class="btn btn-blue" style="margin-right:10px;">프로필 보기</a>
 					  						<a href="${pageContext.request.contextPath}/review/write?trainingNo=${training[0].trainingNo}" class="btn btn-yellow" style="margin-left:10px;">후기 작성</a>
 				  						</c:when>
 				  						<c:otherwise>
-				  							<a href="#" class="btn btn-blue" style="margin-right:10px;">프로필 보기</a>
+				  							<a href="${pageContext.request.contextPath}/trainer/detail?trainerNo=${training[0].trainingNo}" class="btn btn-blue" style="margin-right:10px;">프로필 보기</a>
 					  						<a href="#" class="btn btn-yellow" style="margin-left:10px;">연락 하기</a>
 				  						</c:otherwise>
 				  					</c:choose>

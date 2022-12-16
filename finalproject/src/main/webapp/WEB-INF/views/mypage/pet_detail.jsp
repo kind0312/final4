@@ -477,7 +477,7 @@
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-body">
-	        훈련사 전환이 불가능한 회원입니다.
+	        <span style="font-size:17px;">훈련사 전환이 불가능한 회원입니다.</span>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-yellow" data-bs-dismiss="modal">확인</button>
@@ -600,9 +600,13 @@
 		<div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
-		      <div class="modal-body">
-		        정말 삭제하시겠습니까?
-		      </div>
+		    	<div class="modal-header">
+			        <h6 class="modal-title" id="exampleModalLabel">등록한 반려동물이 삭제됩니다.</h6>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		        </div>
+	      	    <div class="modal-body">
+		        	<span style="font-size:15px;">정말 삭제하시겠습니까?</span>
+		        </div>
 		      <div class="modal-footer">
 		      	<button type="button" class="btn btn-blue delete-confirm">확인</button>
 		        <button type="button" class="btn btn-yellow" data-bs-dismiss="modal">취소</button>
