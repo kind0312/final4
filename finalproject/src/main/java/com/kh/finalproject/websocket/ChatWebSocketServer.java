@@ -41,22 +41,12 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 		private Channel channel = new Channel();
 		
 		
-		//@Autowired
-		//디비에 저장하는 Dao를 만들어서 연결해야함
-		//채팅이 올때마다 chat테이블에 chatDao에 있는 insert 메소드를 이용해서
-		
-		//채팅을 들어와서 시작하기 전에 이전에 있는 채팅 내역을 미리 찍어놔야 -> 채팅이 이어지게 보임
-		// Dao에서 해당 룸(Room_no) list를 가져와야겠고
 		
 		
 		@Autowired
 		private ChatDao chatDao;
 		
-		//ChatDao에 있는 insert 메소드를 생성해야 하는데
-		//훈련사 controller 에서 승인 버튼을 누르면 채팅방을 만들어야 함
-		//
-		// chatDao.createRoom();  //????? 방을 생성하고 방 번호를 줘야함 하....ㅠ모르겠어ㅠㅠ
-		 
+		
 		
 		
 		

@@ -26,6 +26,8 @@
     	border:none;
     	background-color:#81BDF1;
     	overflow: hidden;
+    	width : 45px;
+    	height : 45px;
 	}
 	#chattext {
 		font-size: 13px;
@@ -56,7 +58,7 @@
         	<c:forEach var="chatHistory" items="${chatHistory}">
                 				<tr class="table-default align-middle">
 	                 				<th width="30%"> 
-	                 				<img src="http://localhost:8888/download/${chatHistory.filesNo}" class="img-circle" width="45" height="45">
+	                 				<img src="http://localhost:8888/download/${chatHistory.filesNo}" class="img-circle">
 	                 				</th>
 	                 				<th width="40%">             					
 	                 						                 					
@@ -87,6 +89,8 @@
 
 <script>
 $(function(){
+	const userId = "${myId}";
+	
 	//목표
 	//1. 시작하자마자 웹소켓 연결을 생성
 	//2. 나가기 전에 웹소켓 연결을 제거
@@ -123,11 +127,7 @@ $(function(){
 		//수신된 e.data는 JSON 문자열
 		var data = JSON.parse(e.data);
 		console.log(data);  
-		
-		var fileNo = ${partner.filesNo};
-		
-		 var div = $("<div></div>");
-		
+					
 		
 		var p = $("<p>").addClass("chat-message");		
 		var time = moment(data.time).format("hh:mm");
@@ -135,9 +135,37 @@ $(function(){
 		var t = $("<span>").text("("+time+")");
 		var c = $("<span>").text(data.chatMessage);
 		
+		// 내 사진 번호만 가져와서 태그 만들어서 붙이면 될거같은데 
+		//<img src="http://localhost:8888/download/${myimg}">
+	    
+	    
+// 		$(document).ready(function(){
+// 	    	//이미지 변경 함수 호출
+// 	    	changeIMG();
+// 	    });
+// 	    function changeIMG(){
+	    	
+// 	    	if(data.memberId == userId){
+// 	    	//img 태그의 아이디로 변경 할 때
+// 	    	$("#imgID").attr("src", "http://localhost:8888/download/${myimg}" );	        
+// 	       }
+// 	    	else {
+// 	    		$("#imgID").attr("src", "http://localhost:8888/download/$partner.filesNo}" );	     
+// 	    	}
+	    	
+// 	    }
+// 		var img = $("<img>").addClass("img-circle").attr('id','imgID').attr( "src","http://localhost:8888/download/${myimg}");
+		//$("#message-list").append(img);
+		
+		//img를 변경해줘야하는데 조건을 어떻게 걸지
+		//넘어오는 json의 memberId가 다르다 -> 내 세션과 동일하면 내 이미지
+		// 다르면 상대 이미지
+				
 		
 		p.append(w).append(c).append(t);  //작성자 내용 시간
-		$("#message-list").append(p).append(img);
+		
+		$("#message-list").append(img).append(p);
+		
 		
 		
 		//스크롤 하단으로 이동
