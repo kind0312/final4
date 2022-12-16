@@ -85,12 +85,14 @@ public class ChatController {
 			) {
 		
 		String memberId = (String) session.getAttribute(SessionConstant.ID);
+		model.addAttribute("myId", memberId);
 		
 		//파라미터에서 roomNo
 		model.addAttribute("roomNo", roomNo);
 		
 		//채팅내역
-		List<ChatRoomVO> chat = chatDao.chatRoom(roomNo);		
+		List<ChatRoomVO> chat = chatDao.chatRoom(roomNo);				
+		
 		model.addAttribute("chatHistory", chat );		
 		
 		ChatPartnerSearchVO searchVO = ChatPartnerSearchVO.builder().memberId(memberId).roomNo(roomNo).build();
@@ -98,6 +100,11 @@ public class ChatController {
 		// 채팅 상대 정보
 		ChatPartnerVO partner = chatDao.chatPartner(searchVO);		 
 		model.addAttribute("partner", partner);
+		//partner.filesNo; 상대방 이미지 파일
+		
+		// 내 img filesNo 정보
+		int myfilesNo = memberDao.findFileNo(memberId);
+		model.addAttribute("myimg", myfilesNo);
 		
 		return "chat/room";
 	}
@@ -190,6 +197,14 @@ public class ChatController {
 				.memberName(trainerDto.getMemberName())
 				.memberStatus(trainerDto.getMemberStatus())
 				.build());
+		
+		//chat테이블에도 메세지 null로 하나 넣어줘야함
+		chatDao.insertMessage(ChatDto.builder()
+				.roomNo(seqNo)
+				.memberId(memberId)
+				.chatMessage("안녕하세요! "+"훈련사 " + memberDto.getMemberName() +"입니다." + " 문의사항이 있으시다면 남겨주세요.")
+				.build()				
+				);	
 		
 		System.out.println("새로방만들기 성공");
 		return "redirect:/chat/room?roomNo="+seqNo;

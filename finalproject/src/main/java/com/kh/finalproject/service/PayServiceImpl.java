@@ -14,6 +14,8 @@ import org.springframework.web.client.RestTemplate;
 import com.kh.finalproject.configuration.KakaoPayCofigurationProperties;
 import com.kh.finalproject.vo.PayApproveRequestVO;
 import com.kh.finalproject.vo.PayApproveResponseVO;
+import com.kh.finalproject.vo.PayCancelResponseVO;
+import com.kh.finalproject.vo.PayCancelReuqestVO;
 import com.kh.finalproject.vo.PayOrderRequestVO;
 import com.kh.finalproject.vo.PayOrderResponseVO;
 import com.kh.finalproject.vo.PayReadyRequestVO;
@@ -31,71 +33,94 @@ public class PayServiceImpl implements PayService{
 	@Override
 	public PayReadyResponseVO ready(PayReadyRequestVO vo) throws URISyntaxException {
 		//주소
-				URI uri = new URI("https://kapi.kakao.com/v1/payment/ready");
-				
-				//헤더설정
-				HttpHeaders headers = new HttpHeaders();
-				headers.add("Authorization", "KakaoAK "+kakaoPayCofigurationProperties.getKey());
-				headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-				
-				//바디 설정
-				MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
-				body.add("cid",kakaoPayCofigurationProperties.getCid()); //가맹점번호(테스트용)
-				body.add("partner_order_id", vo.getPartner_order_id()); //주문번호
-				body.add("partner_user_id",vo.getPartner_user_id());  //고객번호
-				body.add("item_name", vo.getItem_name()); //상품명
-				body.add("quantity", "1"); //상품수량
-				body.add("total_amount", String.valueOf(vo.getTotal_amount())); //구매금액
-				body.add("tax_free_amount", "0"); //비과세(0원)
-				body.add("approval_url", "http://localhost:8888/pay/success"); //성공시 실행될 주소
-				body.add("cancel_url", "http://localhost:8888/pay/point_pay_cancel"); //취소 시 실행될 주소
-				body.add("fail_url", "http://localhost:8888/pay/point_pay_fail"); //실패 시 실행될 주소
-				
-				//보낼 내용 합체
-				HttpEntity<MultiValueMap<String, String>> entity = 
-						new HttpEntity<>(body, headers);
-				
-				//요청
-				PayReadyResponseVO response = template.postForObject(
-						uri, entity, PayReadyResponseVO.class);
-				
-				return response;
+		URI uri = new URI("https://kapi.kakao.com/v1/payment/ready");
+		
+		//헤더설정
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", "KakaoAK "+kakaoPayCofigurationProperties.getKey());
+		headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+		
+		//바디 설정
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+		body.add("cid",kakaoPayCofigurationProperties.getCid()); //가맹점번호(테스트용)
+		body.add("partner_order_id", vo.getPartner_order_id()); //주문번호
+		body.add("partner_user_id",vo.getPartner_user_id());  //고객번호
+		body.add("item_name", vo.getItem_name()); //상품명
+		body.add("quantity", "1"); //상품수량
+		body.add("total_amount", String.valueOf(vo.getTotal_amount())); //구매금액
+		body.add("tax_free_amount", "0"); //비과세(0원)
+		body.add("approval_url", "http://localhost:8888/pay/success"); //성공시 실행될 주소
+		body.add("cancel_url", "http://localhost:8888/pay/point_pay_cancel"); //취소 시 실행될 주소
+		body.add("fail_url", "http://localhost:8888/pay/point_pay_fail"); //실패 시 실행될 주소
+		
+		//보낼 내용 합체
+		HttpEntity<MultiValueMap<String, String>> entity = 
+				new HttpEntity<>(body, headers);
+		
+		//요청
+		PayReadyResponseVO response = template.postForObject(
+				uri, entity, PayReadyResponseVO.class);
+		
+		return response;
 	}
 
 	//결제승인
 	@Override
 	public PayApproveResponseVO approve(PayApproveRequestVO vo) throws URISyntaxException {
 		//주소
-				URI uri = new URI("https://kapi.kakao.com/v1/payment/approve");
-				
-				//헤더설정
-				HttpHeaders headers = new HttpHeaders();
-				headers.add("Authorization", "KakaoAK "+kakaoPayCofigurationProperties.getKey());
-				headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-				
-				//바디 설정
-				MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
-				body.add("cid",kakaoPayCofigurationProperties.getCid()); //가맹점번호(테스트용)
-				body.add("tid",vo.getTid());
-				body.add("partner_order_id", vo.getPartner_order_id()); //주문번호
-				body.add("partner_user_id",vo.getPartner_user_id());  //고객번호
-				body.add("pg_token",vo.getPg_token());
-				
-				//보낼 내용 합체
-				HttpEntity<MultiValueMap<String, String>> entity = 
-						new HttpEntity<>(body, headers);
-				
-				//요청
-				PayApproveResponseVO response = template.postForObject(
-						uri, entity, PayApproveResponseVO.class);
-				
-				return response;
+		URI uri = new URI("https://kapi.kakao.com/v1/payment/approve");
+		
+		//헤더설정
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", "KakaoAK "+kakaoPayCofigurationProperties.getKey());
+		headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+		
+		//바디 설정
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+		body.add("cid",kakaoPayCofigurationProperties.getCid()); //가맹점번호(테스트용)
+		body.add("tid",vo.getTid());
+		body.add("partner_order_id", vo.getPartner_order_id()); //주문번호
+		body.add("partner_user_id",vo.getPartner_user_id());  //고객번호
+		body.add("pg_token",vo.getPg_token());
+		
+		//보낼 내용 합체
+		HttpEntity<MultiValueMap<String, String>> entity = 
+				new HttpEntity<>(body, headers);
+		
+		//요청
+		PayApproveResponseVO response = template.postForObject(
+				uri, entity, PayApproveResponseVO.class);
+		
+		return response;
 	}
 
+	//결제 취소
 	@Override
-	public PayOrderResponseVO order(PayOrderRequestVO vo) throws URISyntaxException {
-		// TODO Auto-generated method stub
-		return null;
+	public PayCancelResponseVO cancel(PayCancelReuqestVO vo) throws URISyntaxException {
+		//주소
+		URI uri = new URI("https://kapi.kakao.com/v1/payment/cancel");
+		
+		//헤더설정
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", "KakaoAK "+kakaoPayCofigurationProperties.getKey());
+		headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+		
+		//바디 설정
+		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+		body.add("cid",kakaoPayCofigurationProperties.getCid()); 
+		body.add("tid",vo.getTid());
+		body.add("cancel_amount", String.valueOf(vo.getCancel_amount()));
+		body.add("cancel_tax_free_amount", String.valueOf(vo.getCancel_tax_free_amount()));
+		
+		//보낼 내용 합체
+		HttpEntity<MultiValueMap<String, String>> entity = 
+				new HttpEntity<>(body, headers);
+		
+		//요청
+		PayCancelResponseVO response = template.postForObject(
+				uri, entity, PayCancelResponseVO.class);
+		
+		return response;
 	}
 	
 }

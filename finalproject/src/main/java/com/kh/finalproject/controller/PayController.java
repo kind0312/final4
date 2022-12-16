@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.entity.ItemDto;
@@ -26,6 +27,8 @@ import com.kh.finalproject.repository.PointPurchaseDao;
 import com.kh.finalproject.service.PayService;
 import com.kh.finalproject.vo.PayApproveRequestVO;
 import com.kh.finalproject.vo.PayApproveResponseVO;
+import com.kh.finalproject.vo.PayCancelResponseVO;
+import com.kh.finalproject.vo.PayCancelReuqestVO;
 import com.kh.finalproject.vo.PayListVO;
 import com.kh.finalproject.vo.PayReadyRequestVO;
 import com.kh.finalproject.vo.PayReadyResponseVO;
@@ -155,6 +158,7 @@ public class PayController {
 		return "pay/point_pay_fail";
 	}
 	
+	//결제내역 조회
 	@GetMapping("/list")
 	public String list(HttpSession session, Model model) {
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
@@ -162,6 +166,33 @@ public class PayController {
 		model.addAttribute("list", list);
 		return "pay/point_pay_list";
 	}
+	
+	//결제취소
+	@GetMapping("/cancel")
+	public String cancelAll(@RequestParam int pointPurchaseNo) throws URISyntaxException {
+		//pointListVO로 만들어놓은 것 그냥 사용하기!
+		PayListVO dto = pointPurchaseDao.selectOne(pointPurchaseNo);
+		
+		PayCancelReuqestVO request = 
+				PayCancelReuqestVO.builder()
+				.tid(dto.getTid())
+				.cancel_amount(dto.getPointPurchasePrice())
+				.cancel_tax_free_amount(0)
+				.build();
+		PayCancelResponseVO response = 
+				payService.cancel(request);
+		System.out.println(response);
+		//pointPurchaseDto 테이블 거래상태 취소로 변경
+		pointPurchaseDao.update(pointPurchaseNo);
+		//point 테이블 환불금액만큼 포인트 증가처리
+		
+		
+		return "redirect:list";
+	}
+	
+	
+	
+	
 	
 
 }

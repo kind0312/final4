@@ -16,4 +16,7 @@ public interface PointPurchaseDao {
 	List<PayListVO> selectList(String memberId);
 	PayListVO selectOne(int pointPurchaseNo);
 	
+	//수정
+	boolean update(int pointPurchaseNo);
+	
 }

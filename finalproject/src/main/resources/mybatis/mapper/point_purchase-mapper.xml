@@ -30,4 +30,13 @@
 	<select id="selectOne" resultType="PayListVO" parameterType="int">
 		select * from point_purchase where point_purchase_no=#{pointPurchaseNo}
 	</select>
+	
+	<!-- 거래상태 취소로 변경 -->
+	<update id="update" parameterType="int">
+		update point_purchase set point_purchase_status='취소' 
+		where point_purchase_no=#{pointPurchaseNo}
+	</update>
+	
+	
+	
 </mapper>

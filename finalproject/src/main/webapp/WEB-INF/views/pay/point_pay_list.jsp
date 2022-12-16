@@ -119,7 +119,7 @@ $(function(){
 	                 			<td>${list.pointPurchasePayment}</td>
 	                 			<td>${list.pointPurchaseStatus}</td>
 	                 			<td>
-	                 				<a href="#" class="btn btn-yellow btn-sm">취소</a>
+	                 				<a href="${pageContext.request.contextPath}/pay/cancel?pointPurchaseNo=${list.pointPurchaseNo}" class="btn btn-yellow btn-sm">취소</a>
 	                 			</td>
 	                 		</tr>
                  		</c:forEach>
