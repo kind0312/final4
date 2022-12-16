@@ -32,4 +32,7 @@ public interface ReviewDao {
 	
 	//전체 이용후기 목록
 	List<ReviewVO> reviewList();
+	
+	//전체 이용후기 상세
+	ReviewVO fullDetail(int reviewNo);
 }

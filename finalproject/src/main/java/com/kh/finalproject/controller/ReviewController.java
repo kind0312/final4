@@ -88,10 +88,17 @@ public class ReviewController {
 	}
 	
 	//전체 이용후기 목록
-	@GetMapping("/list")
+	@GetMapping("/fulllist")
 	public String list(Model model) {
 		model.addAttribute("reviewList", reviewDao.reviewList());
-		return "review/review_list";
+		return "review/review_fulllist";
+	}
+	
+	//전체 이용후기 상세
+	@GetMapping("/fulldetail")
+	public String fulldetail(Model model, @RequestParam int reviewNo) {
+		model.addAttribute("reviewDto", reviewDao.fullDetail(reviewNo));
+		return "review/review_fulllist_detail";
 	}
 	
 }

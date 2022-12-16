@@ -70,6 +70,14 @@
 				from review_list_view r) where rn = 1
 	</select>
 	
+	<!-- 전체 이용후기 상세 -->
+	<select id="fulldetail" resultType="ReviewVO" parameterType="int">
+		select * from 
+			(select r.*, row_number() over(partition by review_no order by pet_no) as rn 
+				from review_list_view r) where rn = 1 and review_no = #{reviewNo}
+	</select>
+	
+	<!-- 이용후기 수정 -->
 	<update id="edit" parameterType="ReviewDto">
 		update review 
 			set 
@@ -83,6 +91,7 @@
 		update member_img set files_no=#{filesNo} where member_id=#{memberId}
 	</update>
 	
+	<!-- 이용후기 삭제 -->
 	<delete id="delete" parameterType="int">
 		delete review where review_no = #{reviewNo}
 	</delete>

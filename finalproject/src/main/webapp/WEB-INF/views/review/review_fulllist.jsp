@@ -35,7 +35,7 @@
 		</div>
 		<div class="row mt-100">
 			<div class="row mt-4">
-				<div class="col-xl-3 offset-xl-3 col-lg-3 offset-lg-3 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+				<div class="col-xl-3 offset-xl-2 col-lg-3 offset-lg-2 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
 					<h3>${reviewList.size()}개의 후기</h3>
 				</div>
 			</div>
@@ -44,10 +44,12 @@
 					<div class="row mt-4">
 						<c:forEach var="reviewDto" items="${reviewList}">
 							<div class="col-xl-5 offset-xl-1 col-lg-5 offset-lg-1 col-md-10 offset-md-1 col-sm-10 offset-sm-1 mt-4 reviewborder">
+								<a href="${pageContext.request.contextPath}/review/fulldetail?reviewNo=${reviewDto.reviewNo}">
 								<div class="row">
 									<img class="col-xl-1 offset-xl-0 col-lg-1 offset-lg-0 col-md-4 offset-md-0 col-sm-4 offset-sm-0 mt-4" src="${pageContext.request.contextPath}/download/${reviewDto.filesNo}" style="width:100px; height: 85px; border-radius: 70%;">
-									<div class="col-xl-4 offset-xl-0 col-lg-6 offset-lg-0 col-md-8 offset-md-0 col-sm-8 offset-sm-0 mt-4">
-									<h3>${reviewDto.memberId}</h3>
+									<div class="col-xl-8 offset-xl-0 col-lg-8 offset-lg-0 col-md-8 offset-md-0 col-sm-8 offset-sm-0 mt-4">
+
+									<h3 class="text-dark">${reviewDto.reviewTitle}</h3>
 										<div class="row">
 											<div class="col">
 												<div class="star-score" data-max="5" data-rate="${reviewDto.reviewGood}"></div>
@@ -55,11 +57,16 @@
 										</div>
 										<div class="row mt-3 mb-4">
 											<div class="col">
-												<div>${reviewDto.reviewTitle}</div>
+												<div>
+													
+														<h5 class="text-primary">${reviewDto.memberId}</h5>
+													
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
+								</a>
 							</div>
 						</c:forEach>
 					</div>
