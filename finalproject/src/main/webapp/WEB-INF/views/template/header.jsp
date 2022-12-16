@@ -358,7 +358,7 @@
                      <a class="nav-link" href="${pageContext.request.contextPath}/trainer/list">훈련서비스</a>
                    </li>
                    <li class="nav-item">
-                     <a class="nav-link" href="${pageContext.request.contextPath}/review/list">이용후기</a>
+                     <a class="nav-link" href="${pageContext.request.contextPath}/review/fulllist">이용후기</a>
                    </li>
                    <li class="nav-item">
                      <a class="nav-link" href="${pageContext.request.contextPath}/member/apply">훈련사 지원</a>
