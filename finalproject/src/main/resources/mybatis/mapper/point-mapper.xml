@@ -31,7 +31,7 @@
 	</select>
 	
 	
-	<!-- 승정 테스트 -->
+	<!-- 페이지네이션 -->
 	<select id="pageList" resultType="PointDto" parameterType="PointListVO">
 		select * from 
         (select rownum rn, TMP.* from 
