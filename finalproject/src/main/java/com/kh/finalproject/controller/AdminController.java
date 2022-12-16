@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.entity.AdminDto;
 import com.kh.finalproject.entity.ApplyDto;
 import com.kh.finalproject.entity.MemberDto;
-import com.kh.finalproject.entity.PetDto;
 import com.kh.finalproject.entity.TrainerDto;
 import com.kh.finalproject.repository.AdminDao;
 import com.kh.finalproject.repository.ApplyDao;
@@ -25,6 +25,8 @@ import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.PetDao;
 import com.kh.finalproject.repository.PointDao;
 import com.kh.finalproject.repository.TrainerDao;
+import com.kh.finalproject.repository.TrainingDao;
+import com.kh.finalproject.vo.ApplyDetailVO;
 import com.kh.finalproject.vo.MemberListSearchVO;
 import com.kh.finalproject.vo.PetInsertVO;
 import com.kh.finalproject.vo.PointListVO;
@@ -49,7 +51,6 @@ public class AdminController {
 	private ApplyDao applyDao;	
 	@Autowired
 	private AdminDao adminDao;
-
 	
 	//관리자 계정 로그인
 	@GetMapping("/login")
@@ -176,21 +177,7 @@ public class AdminController {
 	    return "admin/applyList";
 	}
 	
-	//관리자   훈련사-신청/전환 상세
-//	@GetMapping("/applyDetail")
-//	public String applyDetail(Model model,@RequestParam String memberId){
-//		//회원 정보
-//		MemberDto memberDto=memberDao.selectOne(memberId);
-//		model.addAttribute("memberDto",memberDto);
-//
-//		ApplyDto applyDto=applyDao.selectone(memberId);
-//		model.addAttribute("applyDto",applyDto);
-//		//여기까지가 상세임.....상태는 신청으로 된 상태
-//	
-//		return "admin/applyDetail";
-//	}
-	
-	//승정 테스트 - 훈련 지원 상세
+	//훈련 지원 상세
 	@GetMapping("/applyDetail")
 	public String applyDetail(Model model,@RequestParam int applyNo){
 		//model에 넘길 데이터
@@ -199,49 +186,34 @@ public class AdminController {
 		return "admin/applyDetail";
 	}
 	
-//	@PostMapping("/aaplyDetail")
-//	public String applyDetail(@ModelAttribute ApplyDto dto,RedirectAttributes attr) {
-//		
-//		attr.addAttribute("applyNo", dto.getApplyNo());
-//		return "redirect:applyList";
-//	
-//
-//	}
-
+	@PostMapping("/applyDetail")
+	public String applyDetail(
+			@ModelAttribute TrainerDto dto,RedirectAttributes attr) {
+		//훈련사 테이블 insert
+		System.out.println(dto);
+		TrainerDto trainerDto = TrainerDto.builder()
+				.memberId(dto.getMemberId())
+				.applyNo(dto.getApplyNo())
+				.trainerProfile(" ")
+				.trainerProfileContent(" ")
+				.trainerLike(0)
+				.build();
+		trainerDao.insert(trainerDto);
+		
+		//회원 테이블 회원상태 y로 변경
+		memberDao.statusChange(dto.getMemberId());
+		
+		//지원테이블 상태 변경(신청>승인)
+		applyDao.status1(dto.getMemberId());
+		
+		return "redirect:/admin/apply_success";
+	}
 
 	//지원 승인
 	@GetMapping("/apply_success")
-	public String applySuccess(@RequestParam String memberId) {
-		
-	
-	
+	public String applySuccess() {
 		return "admin/apply_success";
 	}
-	
-	@PostMapping("/apply_success")
-	public String applySuccess(@ModelAttribute ApplyDto applyDto,@ModelAttribute TrainerDto trainerDto) {
-		
-		
-		
-		//지원 상태를 승인으로 변경
-		applyDao.status1(applyDto.getMemberId());
-		
-		int trainerNo=trainerDao.sequence();
-		//trainer 훈련사 DB등록
-		TrainerDto a=TrainerDto.builder()
-				.trainerNo(trainerNo)
-				.memberId(trainerDto.getMemberId())
-                .applyNo(trainerDto.getApplyNo())
-                .trainerProfile(trainerDto.getTrainerProfile())
-                .trainerProfileContent(trainerDto.getTrainerProfileContent())
-                .trainerLike(trainerDto.getTrainerLike())
-                .build();
-		trainerDao.insert(a);
-		
-		return "redirect:/admin/applyList";
-	}
-	
-	
 	
 	//지원 반려
 	@GetMapping("/apply_fail")
@@ -250,20 +222,6 @@ public class AdminController {
 		return "admin/apply_fail";
 	}
 
-//	@PostMapping("/apply_fail")
-//	public String applyFail(RedirectAttributes attr, @ModelAttribute ApplyDto dto) {
-		
-//		boolean result=applyDao.update(dto);
-//		if(result) {
-//			attr.addAttribute("applyNo",dto.getApplyNo());
-//			return "redirect:applyList";
-//		}
-//		boolean result=applyDao.update2(dto);
-//		attr.addAttribute("applyNo",dto.getApplyNo());
-//		return "redirect:applyList";
-		
-		
-//	}
 
 }
 	
