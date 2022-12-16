@@ -355,6 +355,9 @@
                        - .active는 활성화된 메뉴(현재 메뉴), 상황에 따라 맞는 메뉴에 추가
                    -->
                    <li class="nav-item">
+                     <a class="nav-link" href="${pageContext.request.contextPath}/chat/list">채팅</a>
+                   </li>
+                   <li class="nav-item">
                      <a class="nav-link" href="${pageContext.request.contextPath}/trainer/list">훈련서비스</a>
                    </li>
                    <li class="nav-item">
