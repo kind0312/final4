@@ -57,13 +57,13 @@
 <tr >
 <c:forEach var="applyDto" items="${applyDto}">
 <tr class="table-default align-middle">
-<td>${applyDto.applyNo }</td>
+<td>${applyDto.applyNo}</td>
 <td>${applyDto.memberId}</td>
 <td>${applyDto.applyDate }</td>
 <td>${applyDto.applyStatus}</td>
 <td>
 		<a class="btn btn-blue2"
-		href="applyDetail?memberId=${applyDto.memberId}">상세</a>
+		href="applyDetail?applyNo=${applyDto.applyNo}">상세</a>
 </td>
 </tr>
 </c:forEach>

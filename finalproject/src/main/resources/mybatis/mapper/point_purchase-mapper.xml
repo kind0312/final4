@@ -38,5 +38,36 @@
 	</update>
 	
 	
+	<!-- 페이지네이션 -->
+	<select id="pageList" resultType="PayListVO" parameterType="PaginationListSearchVO">
+		select * from 
+        (select rownum rn, TMP.* from 
+        (select p.*, i.item_name from point_purchase p 
+		inner join item i on p.item_no=i.item_no 
+		where member_id=#{memberId} 
+		order by p.point_purchase_date desc)TMP ) 
+        where rn between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="pageSearch" resultType="PayListVO" parameterType="PaginationListSearchVO">
+		select * from 
+		(select rownum rn, TMP.* from 
+		(select p.*, i.item_name from point_purchase p 
+		inner join item i on p.item_no=i.item_no 
+		where member_id=#{memberId} 
+		and instr(#{type},#{keyword})>0 
+		order by point_purchase_no desc)TMP ) where rn between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="listCount" resultType="int" parameterType="String">
+		select count(*) from point_purchase where member_id=#{memberId}
+	</select>
+	
+	<select id="searchCount" resultType="int" parameterType="PaginationListSearchVO">
+		select count(*) from point_purchase where member_id=#{memberId} 
+		and instr(#{type},#{keyword})>0 
+	</select>
+	
+	
 	
 </mapper>

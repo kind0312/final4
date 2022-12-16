@@ -12,8 +12,6 @@
   	select*from apply
   </select>
 
-
-
   <!-- 훈련사 지원 상태>승인 변환 -->
     <select id="approval" parameterType="string">
     update apply set apply_status='승인' where member_id=#{memberId}
@@ -22,7 +20,6 @@
      <select id="reject" parameterType="string" >
      update apply set apply_status='반려' where member_id=#{memberId}
     </select>
-  
   
 
 	<select id="sequence" resultType="int">
@@ -36,6 +33,14 @@
 	
 	<select id="one" parameterType="String" resultType="ApplyDto">
 		select * from apply where member_id = #{memberId}
+	</select>
+	
+	<!-- 승정 테스트 - 지원 상세 -->
+	<select id="applyDetail" resultType="ApplyDetailVO" parameterType="int">
+		select a.*, m.member_name, m.member_gender, 
+		m.member_email, m.member_tel from apply a 
+		inner join member m on a.member_id=m.member_id 
+		where a.apply_no=#{applyNo}
 	</select>
 	
 </mapper>

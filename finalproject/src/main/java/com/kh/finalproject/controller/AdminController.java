@@ -163,17 +163,13 @@ public class AdminController {
 		
 		TrainerListVO trainerListVO=trainerDao.selectOne(memberId);
 		model.addAttribute("trainerListVO",trainerListVO);
-		
-		
 		return "admin/trainerDetail";
 	}
-		
+
 	//관리자 훈련사-신청/전환/목록
 	@GetMapping("/applyList")
-	public String applyList(Model model)
-	{
-//		
-//		
+	public String applyList(Model model){
+	
 		List<ApplyDto> applyDto=applyDao.selectList();
 	    model.addAttribute("applyDto",applyDto);
 		
@@ -181,23 +177,25 @@ public class AdminController {
 	}
 	
 	//관리자   훈련사-신청/전환 상세
-	@GetMapping("/applyDetail")
-	public String applyDetail(Model model,@RequestParam String memberId){
-		//회원 정보
-		MemberDto memberDto=memberDao.selectOne(memberId);
-		model.addAttribute("memberDto",memberDto);
-
-		List<PetDto> petDto= petDao.selectList(memberId);
-		model.addAttribute("petDto",petDto);
-	    
-		//회원 정보
-	    MemberDto memberDto1=memberDao.selectOne(memberId);
-		model.addAttribute("memberDto",memberDto1);		
-
-		ApplyDto applyDto=applyDao.selectone(memberId);
-		model.addAttribute("applyDto",applyDto);
-		//여기까지가 상세임.....상태는 신청으로 된 상태
+//	@GetMapping("/applyDetail")
+//	public String applyDetail(Model model,@RequestParam String memberId){
+//		//회원 정보
+//		MemberDto memberDto=memberDao.selectOne(memberId);
+//		model.addAttribute("memberDto",memberDto);
+//
+//		ApplyDto applyDto=applyDao.selectone(memberId);
+//		model.addAttribute("applyDto",applyDto);
+//		//여기까지가 상세임.....상태는 신청으로 된 상태
+//	
+//		return "admin/applyDetail";
+//	}
 	
+	//승정 테스트 - 훈련 지원 상세
+	@GetMapping("/applyDetail")
+	public String applyDetail(Model model,@RequestParam int applyNo){
+		//model에 넘길 데이터
+		model.addAttribute("detail", applyDao.detailOne(applyNo));
+		
 		return "admin/applyDetail";
 	}
 	

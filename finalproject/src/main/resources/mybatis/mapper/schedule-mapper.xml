@@ -8,7 +8,7 @@
 
 	<!-- 스케줄 insert -->
 	<insert id="insert" parameterType="ScheduleDto">
-		insert into schedule values (schedule_seq.nextval, #{trainerNo},#{scheduleDate})
+		insert into schedule values (schedule_seq.nextval, #{trainerNo},#{scheduleDate},#{trainingNo})
 	</insert>
 
 	<!-- 스케줄 삭제 -->
