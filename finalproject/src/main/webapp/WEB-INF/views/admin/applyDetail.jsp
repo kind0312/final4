@@ -29,6 +29,41 @@
 
 <script>
 	$(function(){
+		//스피너 숨기기
+		$("#spinner").hide();
+
+		//반려 버튼 이벤트(결과 메일 전송)
+		$(".reject-btn").click(function(){
+			$("#spinner").show();
+			$(".reject-btn").attr("disabled",true);
+			
+			var email = $(".email").text();
+			$.ajax({
+				url:"${pageContext.request.contextPath}/rest/member/applyResultMail/"+email,
+				method:"post",
+				data:email,
+				success:function(resp){
+					//console.log("메일 전송 완료");
+					$("#spinner").hide();
+					
+					//지원상태 반려로 변경
+					var memberId = $(".memberId").text();
+					$.ajax({
+						url:"${pageContext.request.contextPath}/rest/member/applyReject/"+memberId,
+						method:"patch",
+						data:memberId,
+						success:function(resp){
+							if(resp){
+								location.reload();
+								//location.href="${pageContext.request.contextPath}/admin/applyList";
+							}
+						}
+					});
+				}
+				
+			});
+		});
+		
 		
 	});
 </script>
@@ -89,7 +124,7 @@
 			    			</tr>
 			    			<tr>
 			    				<th width="30%">아이디</th>
-			    				<td>${detail.memberId}</td>
+			    				<td class="memberId">${detail.memberId}</td>
 			    			</tr>
 			    			<tr>
 			    				<th width="30%">성별</th>
@@ -97,7 +132,7 @@
 			    			</tr>
 			    			<tr>
 			    				<th width="30%">이메일</th>
-			    				<td>${detail.memberEmail}</td>
+			    				<td class="email">${detail.memberEmail}</td>
 			    			</tr>
 			    			<tr>
 			    				<th width="30%">연락처</th>
@@ -132,7 +167,11 @@
         			<div class="mt-4 text-center">
         				<c:if test="${detail.applyStatus=='신청'}">
         					<button type="submit" class="btn btn-blue2 approve-btn">승인</button>
-		        			<button class="btn btn-yellow reject-btn">반려</button>
+		        			<button class="btn btn-yellow reject-btn" type="button" >
+								<span class="spinner-border spinner-border-sm"  id="spinner" role="status" aria-hidden="true"></span>
+								  반려
+							</button>
+
 						</c:if>
 							<a class="btn btn-outline-blue" href="${pageContext.request.contextPath}/admin/applyList">목록</a>
 					</div>

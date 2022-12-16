@@ -1,9 +1,11 @@
 package com.kh.finalproject.service;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+import javax.activation.FileDataSource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
@@ -96,5 +98,40 @@ public class GmailService implements EmailService {
 		else {
 			return false;
 		}
+	}
+
+	//훈련사 지원 결과
+	@Override
+	public void ApplyResultMail(String email) throws MessagingException, FileNotFoundException, IOException {
+				
+		//1.메세지 생성
+		MimeMessage message = javaMailSender.createMimeMessage();//import할때 확인
+		
+		//2.헬퍼 생성
+		MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+		
+		//3.정보 설정
+		helper.setTo(email);
+		helper.setSubject("[CarePet] 훈련사 지원 결과 안내드립니다");
+		
+		ClassPathResource resource = new ClassPathResource("email/applyTemplate.html");//특정 경로를 찾기 위한 구문
+		StringBuffer buffer = new StringBuffer();
+		try(Scanner sc = new Scanner(resource.getFile())){
+			while(sc.hasNextLine()) {
+				buffer.append(sc.nextLine());
+			}
+		}
+		//Jsoup 라이브러리를 사용하여 ID와 Address를 설정한 뒤 전송
+		String text = buffer.toString();
+		Document doc = Jsoup.parse(text);//불러온 문자열을 HTML로 파싱(해석)
+		helper.setText(doc.toString(), true); //true 적으면 html 태그를 읽는다.
+		
+		//파일첨부
+		Element img = doc.getElementById("logo");
+		img.attr("src", "${pageContext.request.contextPath}/image/Logo.png");
+		
+		//4.전송
+		javaMailSender.send(message);
+
 	}
 }
