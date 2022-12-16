@@ -118,7 +118,7 @@
 			    			<c:if test="${detail.applyActive!=null}">
 			    				<tr>
 				    				<th width="30%">자격증</th>
-				    				<td>${detail.applyActive}</td>
+				    				<td>${detail.applyLicense}</td>
 				    			</tr>
 			    			</c:if>
 			    			<tr>
@@ -130,7 +130,7 @@
         			</table>
         			
         			<div class="mt-4 text-center">
-        				<c:if test="${detail.applyStatus!='신청' || detail.applyStatus!='반려'}">
+        				<c:if test="${detail.applyStatus=='신청'}">
         					<button type="submit" class="btn btn-blue2 approve-btn">승인</button>
 		        			<button class="btn btn-yellow reject-btn">반려</button>
 						</c:if>
@@ -141,7 +141,6 @@
 					<input type="hidden" name="memberId" value="${detail.memberId}">
 					<input type="hidden" name="applyNo" value="${detail.applyNo}">
 					<input type="hidden" name="trainerLike" value="0">
-					
 					
 				</form>
         	</div>
