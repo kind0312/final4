@@ -85,28 +85,44 @@
 		 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
 		 <!-- fullcalendar 언어 CDN -->
 		 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
-		<style>
-/* 			<!-- div 확인 점선 --> */
-/* 			div{ */
-/*          		border: 1px dotted gray; */
-/*       		} */
-    		/* 태그 스타일 */
-		    body {
-		     	height:3000px;
-		    }
-		    p {
-			  margin-top: 0;
-			  margin-bottom: 0;
-			}
-			a {
-				color: #f8f9fa;
-				text-decoration: none;
-			}
-			a:hover {
-				color: #dfe6e9;
-			}
-
-			 /* 클래스 스타일 */
+		 <style>
+      	
+/*          <!-- div 확인 점선 --> */
+/*            div{ */
+/*                  border: 1px dotted gray; */
+/*               } */
+          /* 태그 스타일 */
+        html,
+		body {
+                height:100%;
+        }
+        
+      	body {
+		  display: flex;
+		  flex-direction: column;
+		}
+		
+		section {
+		  flex: 1;
+		}
+        
+        p {
+           margin-top: 0;
+           margin-bottom: 0;
+           font-family: var(--bs-font-sans-serif);
+        }
+         a {
+            text-decoration: none;
+         }
+         a:hover {
+            color: #dfe6e9;
+         }
+        
+         /* 클래스 스타일 */
+         .rounded{
+         	border-radius: 10px !important;
+         }
+         
           .logo {
              width:80px;
           }
@@ -149,11 +165,17 @@
          .footer-link{
             color: #f8f9fa;
          }
+         .w-10{
+         	width: 10% !important;
+         }
          .w-30{
             width: 30%;
          }
          .w-70{
             width: 70%;
+         }
+         .w-90{
+         	width: 90% !important;
          }
          .mt-150{
             margin-top:150px;
@@ -166,6 +188,9 @@
          }
          .mt-80{
             margin-top:80px;
+         }
+         .mt-70{
+            margin-top:70px;
          }
          .mt-50{
             margin-top:50px;
@@ -188,10 +213,13 @@
          .blue-bolder{
             font-weight:bolder;
          }
+         .yellow{
+        	color:#FADE81;
+         }
          
         .btn{
-			border-radius: 10px !important;
-		}
+         border-radius: 10px !important;
+      }
          
          .btn-blue{
               background-color: #81BDF1;
@@ -220,6 +248,13 @@
            background-color: #cc9342;
            border-color: #c08a3e;
          }
+         
+         .btn-danger{
+              border:2px solid #d9534f;
+              color:#fff;
+              font-weight: bolder;
+              font-size:15px;
+           }
          
          .btn-outline-blue {
            color: #81BDF1;
@@ -272,8 +307,13 @@
             border-color: #81BDF1;
             box-shadow: 0 0 0 0.25rem rgba(69, 130, 236, 0.25);
          }
-
-		</style>
+         
+         /* 라벨 폰트 두껍게*/
+         .label-font-weight{
+         	font-weight:bold;
+         }
+         
+      </style>
 		
 		<script type="text/javascript"> 
 			
@@ -361,4 +401,4 @@
 	      </div>
 	    </div>
   </div> 
-  <main class="container-fluid">
+  <section class="container-fluid">

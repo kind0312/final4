@@ -14,8 +14,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.finalproject.entity.ChatDto;
 import com.kh.finalproject.entity.RoomDto;
 import com.kh.finalproject.repository.ChatDao;
+import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.vo.ReceiveVO;
 import com.kh.finalproject.vo.channel.Channel;
+import com.kh.finalproject.vo.channel.Chat;
 import com.kh.finalproject.vo.channel.Room;
 import com.kh.finalproject.vo.channel.User;
 
@@ -46,7 +48,8 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 		@Autowired
 		private ChatDao chatDao;
 		
-		
+		@Autowired
+		private MemberDao memberDao;
 		
 		
 		
@@ -91,6 +94,11 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 									.session(session)
 									.build();
 			
+			String memberId = user.getMemberId(); // 회원 아이디
+			int filesNo = memberDao.findFileNo(memberId); // 파일 넘버 찾아옴		
+			
+			
+			
 			//메세지 해석
 			ObjectMapper mapper = new ObjectMapper();
 			ReceiveVO receiveVO = mapper.readValue(  
@@ -115,7 +123,19 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 													.chatMessage(receiveVO.getText())
 													.chatCreateAt(new Date())
 												.build();
-				String json = mapper.writeValueAsString(chatDto);
+			
+			Chat chat = Chat.builder()
+					.filesNo(filesNo) // 파일 No 담기
+					.memberId(user.getMemberId())	
+					.roomNo(receiveVO.getRoom())
+					.chatMessage(receiveVO.getText())
+					.chatCreateAt(new Date())
+					.build();
+					
+			
+			
+			
+				String json = mapper.writeValueAsString(chat);
 				TextMessage msg = new TextMessage(json);
 				channel.send(user, msg);
 				
