@@ -23,6 +23,8 @@
     	border:none;
     	background-color:#81BDF1;
     	overflow: hidden;
+    	width : 45px;
+    	height : 45px;
 	}
 	#chattext {
 		font-size: 13px;
@@ -124,10 +126,8 @@ $(function(){
 		var data = JSON.parse(e.data);
 		console.log(data);  
 		
-		var fileNo = ${partner.filesNo};
-		
-		 var div = $("<div></div>");
-		
+			
+		var imgNo = data.filesNo; //이미지 파일 번호
 		
 		var p = $("<p>").addClass("chat-message");		
 		var time = moment(data.time).format("hh:mm");
@@ -135,9 +135,10 @@ $(function(){
 		var t = $("<span>").text("("+time+")");
 		var c = $("<span>").text(data.chatMessage);
 		
+		var img = $("<img>").addClass("img-circle").attr('id','imgID').attr( "src","http://localhost:8888/download/"+imgNo);
 		
 		p.append(w).append(c).append(t);  //작성자 내용 시간
-		$("#message-list").append(p).append(img);
+		$("#message-list").append(img).append(p);
 		
 		
 		//스크롤 하단으로 이동
