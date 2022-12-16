@@ -8,6 +8,19 @@
 </jsp:include>
 
 <style>
+	.blue-font{
+		color:#81BDF1;
+		font-weight:bolder;
+		font-size:16px;
+	}
+	.yellow-font{
+		color:#d9534f;
+		font-weight:bolder;
+		font-size:16px;
+	}
+	table>tbody>tr{
+		height:60px;
+	}
 	
 </style>
 <script>
@@ -35,6 +48,18 @@ $(function(){
 			}
 		});
 	});
+	
+	//결제 취소 버튼 이벤트
+	$(".cancel-btn").click(function(){
+		var pointPurchaseNo = $(this).next().val();
+		
+		$(".cancel-confirm-btn").click(function(){
+			location.href=
+				"${pageContext.request.contextPath}/pay/cancel?pointPurchaseNo="
+						+pointPurchaseNo;
+		});
+	});
+	
 });
 
 </script>
@@ -78,7 +103,7 @@ $(function(){
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-body">
-	        훈련사 전환이 불가능한 회원입니다.
+	        <span style="font-size:17px;">훈련사 전환이 불가능한 회원입니다.</span>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-yellow" data-bs-dismiss="modal">확인</button>
@@ -117,9 +142,23 @@ $(function(){
 	                 			</td>
 	                 			<td>${list.pointPurchaseDate}</td>
 	                 			<td>${list.pointPurchasePayment}</td>
-	                 			<td>${list.pointPurchaseStatus}</td>
 	                 			<td>
-	                 				<a href="${pageContext.request.contextPath}/pay/cancel?pointPurchaseNo=${list.pointPurchaseNo}" class="btn btn-yellow btn-sm">취소</a>
+	                 				<c:choose>
+	                 					<c:when test="${list.pointPurchaseStatus=='승인'}">
+	                 						<span class="blue-font">${list.pointPurchaseStatus}</span>
+	                 					</c:when>
+	                 					<c:otherwise>
+	                 						<span class="yellow-font">${list.pointPurchaseStatus}</span>
+	                 					</c:otherwise>
+	                 				</c:choose>
+	                 			</td>
+	                 			<td>
+	                 				<c:if test="${list.pointPurchaseStatus=='승인'}">
+	                 					<a href="#" class="btn btn-yellow btn-sm cancel-btn" 
+	                 				data-bs-toggle="modal" data-bs-target="#cancel-modal">취소</a>
+	                 				</c:if>
+	                 				<!-- 취소이벤트 처리위한 데이터 준비 -->
+									<input type="hidden" name="pointPurchaseNo" value="${list.pointPurchaseNo}">
 	                 			</td>
 	                 		</tr>
                  		</c:forEach>
@@ -127,7 +166,25 @@ $(function(){
                  </table>
             </div>
         </div>
-<%-- ${list} --%>
+		<!-- Modal -->
+		<div class="modal fade" id="cancel-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h6 class="modal-title" id="exampleModalLabel">카카오페이 결제가 취소됩니다.</h6>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+	      	  <div class="modal-body">
+		        	<span style="font-size:15px;">정말 취소하시겠습니까?</span>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-blue cancel-confirm-btn" data-bs-dismiss="modal">확인</button>
+		        <button type="button" class="btn btn-yellow" data-bs-dismiss="modal">취소</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
 
     </div>
 </body>

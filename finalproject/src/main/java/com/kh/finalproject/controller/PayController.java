@@ -185,7 +185,15 @@ public class PayController {
 		//pointPurchaseDto 테이블 거래상태 취소로 변경
 		pointPurchaseDao.update(pointPurchaseNo);
 		//point 테이블 환불금액만큼 포인트 증가처리
-		
+		int pointNo = pointDao.sequence();
+		PointDto pointDto = PointDto.builder()
+				.pointNo(pointNo)
+				.memberId(response.getPartner_user_id())
+				.pointStatus("환불")
+				.pointPrice(response.getAmount().getTotal())
+				.pointDate(response.getCanceled_at())
+				.build();
+		pointDao.insert(pointDto);
 		
 		return "redirect:list";
 	}
