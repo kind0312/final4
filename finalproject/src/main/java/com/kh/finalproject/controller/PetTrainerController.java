@@ -145,6 +145,7 @@ public class PetTrainerController {
 				.builder()
 				.trainerNo(trainerNo)
 				.scheduleDate(dto.getTrainingDate())
+				.trainingNo(trainingNo)
 				.build();
 		scheduleDao.insert(scheduleDto);
 		

@@ -1,6 +1,7 @@
 package com.kh.finalproject.controller;
 
 import java.net.URISyntaxException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -25,6 +26,7 @@ import com.kh.finalproject.repository.PointPurchaseDao;
 import com.kh.finalproject.service.PayService;
 import com.kh.finalproject.vo.PayApproveRequestVO;
 import com.kh.finalproject.vo.PayApproveResponseVO;
+import com.kh.finalproject.vo.PayListVO;
 import com.kh.finalproject.vo.PayReadyRequestVO;
 import com.kh.finalproject.vo.PayReadyResponseVO;
 import com.kh.finalproject.vo.PayVO;
@@ -151,6 +153,14 @@ public class PayController {
 	@GetMapping("/point_pay_fail")
 	public String pay_fail() {
 		return "pay/point_pay_fail";
+	}
+	
+	@GetMapping("/list")
+	public String list(HttpSession session, Model model) {
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+		List<PayListVO> list= pointPurchaseDao.selectList(memberId);
+		model.addAttribute("list", list);
+		return "pay/point_pay_list";
 	}
 	
 
