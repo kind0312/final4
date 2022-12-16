@@ -152,6 +152,13 @@ public class MemberDaoImpl implements MemberDao {
 	public boolean memberImgDelete(String memberId) {		
 		return sqlSession.delete("member.memberImgDelete", memberId) > 0;
 	}
+	
+	//훈련사로 전환 시 회원상태 변경
+	@Override
+	public boolean statusChange(String memberId) {
+		return sqlSession.update("member.statusChange",memberId)>0;
+	}
+	
 
 	//회원 탈퇴시 처리(삭제)
 	@Override
