@@ -19,6 +19,7 @@ import lombok.NoArgsConstructor;
 @Data @Builder @NoArgsConstructor @AllArgsConstructor
 public class User {
 
+	private int filesNo; // 프로필 이미지
 	private String memberId;
 	private String memberName;
 	private String memberStatus;
