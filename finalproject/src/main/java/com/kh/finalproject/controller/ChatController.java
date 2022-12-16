@@ -201,8 +201,8 @@ public class ChatController {
 		//chat테이블에도 메세지 null로 하나 넣어줘야함
 		chatDao.insertMessage(ChatDto.builder()
 				.roomNo(seqNo)
-				.memberId(memberId)
-				.chatMessage("안녕하세요! "+"훈련사 " + memberDto.getMemberName() +"입니다." + " 문의사항이 있으시다면 남겨주세요.")
+				.memberId(trainerId)
+				.chatMessage("안녕하세요! "+"훈련사 " + trainerDto.getMemberName() +"입니다." + " 문의사항이 있으시다면 남겨주세요.")
 				.build()				
 				);	
 		
