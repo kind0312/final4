@@ -4,6 +4,8 @@ import java.net.URISyntaxException;
 
 import com.kh.finalproject.vo.PayApproveRequestVO;
 import com.kh.finalproject.vo.PayApproveResponseVO;
+import com.kh.finalproject.vo.PayCancelResponseVO;
+import com.kh.finalproject.vo.PayCancelReuqestVO;
 import com.kh.finalproject.vo.PayOrderRequestVO;
 import com.kh.finalproject.vo.PayOrderResponseVO;
 import com.kh.finalproject.vo.PayReadyRequestVO;
@@ -14,8 +16,6 @@ public interface PayService {
 	PayReadyResponseVO ready(PayReadyRequestVO vo) throws URISyntaxException;
 	//결제 승인
 	PayApproveResponseVO approve(PayApproveRequestVO vo) throws URISyntaxException;
-	//결제 조회
-	PayOrderResponseVO order(PayOrderRequestVO vo) throws URISyntaxException;
 	//결제 취소
-
+	PayCancelResponseVO cancel(PayCancelReuqestVO vo) throws URISyntaxException;
 }

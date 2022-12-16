@@ -34,6 +34,12 @@ public class PointPurchaseDaoImpl implements PointPurchaseDao{
 	public PayListVO selectOne(int pointPurchaseNo) {
 		return sqlSession.selectOne("point_purchase.selectOne",pointPurchaseNo);
 	}
+
+	//수정
+	@Override
+	public boolean update(int pointPurchaseNo) {
+		return sqlSession.update("point_purchase.update",pointPurchaseNo)>0;
+	}
 	
 	
 
