@@ -34,7 +34,7 @@
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/admin/trainerList">훈련사 관리</a>
 	        </li>
 	         <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">훈련사 관리</a>
+	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/admin/itemList">훈련사 관리</a>
 	        </li>
 	      
      	 </ul>
