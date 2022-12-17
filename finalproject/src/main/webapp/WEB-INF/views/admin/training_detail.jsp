@@ -66,7 +66,27 @@
              </div>
         </div>
         
-       <p> ${trainingRequestListVO.trainingNo}</p>
+         <div class="row">
+            <div class="col-md-6 offset-md-3">   
+                 <table class="table table-hover pet-table text-center">
+             <thead>
+                <tr class="table-default align-middle">
+                <th width="50%">
+                <p class="font">주문번호 :  ${trainingRequestListVO.trainingNo}</p>
+                <p class="font">이용날짜    :  ${trainingRequestListVO.trainingDate}</p>
+               
+                </th>
+                 <th width="50%">
+                <p class="font">훈련사 :  ${trainingRequestListVO.}</p>
+                <p class="font">사용포인트    :  ${trainingRequestListVO.memberJoinDate}</p>
+             
+                </th>
+                </tr>   
+        
+        
+      
+        
+      
         
       </div>  
 
