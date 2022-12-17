@@ -8,7 +8,6 @@
 <style>
 	.pet-table>tbody{
 		height:130px;
-		
 	}
 
 	.font{
@@ -24,8 +23,10 @@
 	.pet-table {
 	    border-top:1px solid rgba(0, 0, 0, 0.1);
 	    height:130px;
-	   
 	}
+	.mypage-top-nav{
+      margin-top:0.1rem !important
+   }
 </style>
 
 <body>

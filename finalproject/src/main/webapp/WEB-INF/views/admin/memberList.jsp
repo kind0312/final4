@@ -10,6 +10,9 @@
    margin-bottom:10px;
    font-size:20px;
 }
+.mypage-top-nav{
+      margin-top:0.1rem !important
+   }
 </style>
 <body>
 

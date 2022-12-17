@@ -5,13 +5,14 @@
 	<jsp:param value="관리자페이지 홈" name="title"/>
 </jsp:include>
     
-    
+<style>
+	.mypage-top-nav{
+      margin-top:0.1rem !important
+   }
+</style>
     
     
  <body>
-
-
-
 	<nav class="navbar navbar-expand-lg navbar-expand-lg-re navbar-dark bg-black mypage-top-nav">
 	  <div class="container-fluid">
 	    <a class="navbar-brand-re footer-link" style="color:white;" href="${pageContext.request.contextPath}/adminHome">홈</a>
