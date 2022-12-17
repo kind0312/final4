@@ -5,13 +5,14 @@
 	<jsp:param value="관리자페이지 홈" name="title"/>
 </jsp:include>
     
-    
+<style>
+	.mypage-top-nav{
+      margin-top:0.1rem !important
+   }
+</style>
     
     
  <body>
-
-
-
 	<nav class="navbar navbar-expand-lg navbar-expand-lg-re navbar-dark bg-black mypage-top-nav">
 	  <div class="container-fluid">
 	    <a class="navbar-brand-re footer-link" style="color:white;" href="${pageContext.request.contextPath}/adminHome">홈</a>
@@ -30,7 +31,7 @@
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/admin/trainerList">훈련사 관리</a>
 	        </li>
 	         <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">포인트상품 관리</a>
+	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/admin/itemList">포인트상품 관리</a>
 	        </li>
 	      
      	 </ul>

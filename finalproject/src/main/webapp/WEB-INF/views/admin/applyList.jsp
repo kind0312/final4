@@ -5,7 +5,11 @@
 	<jsp:param value="훈련사 신청 목록" name="title"/>
 </jsp:include>
 
-
+<style>
+	.mypage-top-nav{
+      margin-top:0.1rem !important
+   }
+</style>
 
 <body>
 
@@ -27,7 +31,7 @@
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/admin/trainerList">훈련사 관리</a>
 	        </li>
 	         <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">포인트상품 관리</a>
+	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/admin/itemList">포인트상품 관리</a>
 	        </li>
 	      
      	 </ul>

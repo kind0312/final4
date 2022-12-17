@@ -218,8 +218,13 @@ public class AdminController {
 	//지원 반려
 	@GetMapping("/apply_fail")
 	public String applyFail(@RequestParam String memberId) {
-
 		return "admin/apply_fail";
+	}
+	
+	//포인트 상품권(item)
+	@RequestMapping("/itemList")
+	public String itemList() {
+		return "admin/itemList";
 	}
 
 
