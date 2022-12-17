@@ -147,7 +147,8 @@
 				</div>
 			</div>
 		</div>
-
+			${training}<br>
+			${trainer}
 		<div class="row mt-3">
 			<div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 ">   
 				<table class="table point-table text-center">
@@ -178,7 +179,7 @@
 			  					<div class="mt-4 mb-3">
 				  					<c:choose>
 				  						<c:when test="${training[0].trainingStatus=='이용완료'}">
-				  							<a href="${pageContext.request.contextPath}/trainer/detail?trainerNo=${training[0].trainingNo}" class="btn btn-blue" style="margin-right:10px;">프로필 보기</a>
+				  							<a href="${pageContext.request.contextPath}/trainer/detail?trainerNo=${training[0].trainerNo}" class="btn btn-blue" style="margin-right:10px;">프로필 보기</a>
 				  							<c:choose>
 				  								<c:when test="${reviewDto == null}">
 							  						<a href="${pageContext.request.contextPath}/review/write?trainingNo=${training[0].trainingNo}" class="btn btn-outline-yellow" style="margin-left:10px;">후기 작성</a>
@@ -189,8 +190,8 @@
 				  							</c:choose>
 				  						</c:when>
 				  						<c:otherwise>
-				  							<a href="${pageContext.request.contextPath}/trainer/detail?trainerNo=${training[0].trainingNo}" class="btn btn-blue" style="margin-right:10px;">프로필 보기</a>
-					  						<a href="#" class="btn btn-yellow" style="margin-left:10px;">연락 하기</a>
+				  							<a href="${pageContext.request.contextPath}/trainer/detail?trainerNo=${training[0].trainerNo}" class="btn btn-blue" style="margin-right:10px;">프로필 보기</a>
+					  						<a href="${pageContext.request.contextPath}/chat/enter?trainerNo=${training[0].trainerNo}" class="btn btn-yellow" style="margin-left:10px;">연락 하기</a>
 				  						</c:otherwise>
 				  					</c:choose>
 			  					</div>

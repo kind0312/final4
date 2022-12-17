@@ -8,6 +8,7 @@ import javax.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.finalproject.entity.EmailcertDto;
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.MemberImgDto;
+import com.kh.finalproject.repository.ApplyDao;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.service.EmailService;
 import com.kh.finalproject.vo.MemberEditVO;
@@ -35,6 +37,8 @@ public class MemberRestController {
 	
 	@Autowired
 	private EmailService emailService;
+	@Autowired
+	private ApplyDao applyDao;
 	
 	//아이디 중복검사
 	@GetMapping("/{memberId}")
@@ -102,5 +106,18 @@ public class MemberRestController {
 		else {
 			return "Y"; //훈련사 회원(훈련사 전환 가능)
 		}
+	}
+	
+	
+	//훈련사 지원 결과메일
+	//이메일 인증
+	@PostMapping("/applyResultMail/{email}")
+	public void applyResultMail(@PathVariable String email) throws FileNotFoundException, MessagingException, IOException {
+		emailService.ApplyResultMail(email);
+	}
+	
+	@PatchMapping("/applyReject/{memberId}")
+	public boolean applyReject(@PathVariable String memberId) {
+		return applyDao.status2(memberId);
 	}
 }
