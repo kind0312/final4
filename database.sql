@@ -295,6 +295,7 @@ chat_message VARCHAR2(3000) not null,
 chat_message_status CHAR(1) default null
 );
 ALTER TABLE chat MODIFY chat_message VARCHAR2(3000) NULL;
+ALTER TABLE chat MODIFY chat_message_status char(1) default 'N';
 
 
 drop SEQUENCE chat_seq;
