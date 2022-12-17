@@ -144,9 +144,10 @@ $(function(){
             </div>
         </div>			
 		
-		<div class="row mt-5">
+		<div class="row mt-3">
             <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-                 <table class="table table-hover text-center align-middle">
+            	<a href="${pageContext.request.contextPath}/mypage/point" class="btn btn-blue">&lt; 목록</a>
+                 <table class="table table-hover text-center align-middle mt-3">
                  	<thead>
                  		<tr>
                  			<th width="20%">상품명</th>
@@ -211,7 +212,7 @@ $(function(){
 		
 		<!-- 페이지네이션 -->
 		<div class="row mt-5 text-center mb-5">
-            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
               
 			  	<ul class="pagination justify-content-center">
 			  	
