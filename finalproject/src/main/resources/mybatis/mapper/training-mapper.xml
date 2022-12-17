@@ -208,13 +208,30 @@
  	</insert>
  	
  	<!-- 훈련 이용 내역 목록 -->
- 	<select id="traingUsage" resultType="TrainingUsageVO" parameterType="int">
-  	select
-    T.*,
-    M.member_name
-    from training T  inner join member M on T.member_id=M.member_id;
-    where traing_no=#{traingNo}
-
+ 	<select id="traingUsage" resultType="trainingUsageVO" parameterType="string">
+ 		select m.member_name, pro.trainer_no, li.training_no, 
+         t.training_date, t.training_starttime, t.training_status 
+         from member m 
+         inner join trainer pro on m.member_id=pro.member_id
+         inner join linked_list li on pro.trainer_no=li.trainer_no
+         inner join training t on li.training_no=t.training_no
+         where member_id=#{memberId}
+    </select>
+    
+    
+    <!-- 관리자/훈련 이용내역 상세 -->
+   
+    <select id="oneDetail"  resultType="TrainingRequestListVO" parameterType="string">    
+         select m.member_name,t.*, tp.training_purchase_price, 
+		td.training_detail_pet_name, p.*, img.files_no 
+		from member m 
+			inner join training t on m.member_id = t.member_id 
+			inner join training_purchase tp on t.training_no = tp.training_no
+           -- inner join trainer tr on m.member_id=tr.member_id
+			inner join training_detail td on tp.training_no = td.training_no
+			inner join pet p on td.training_detail_pet_name = p.pet_name
+			inner join pet_img img on p.pet_no = img.pet_no
+		    where t.training_no=#{trainingNo}
     </select>
   </mapper>
  

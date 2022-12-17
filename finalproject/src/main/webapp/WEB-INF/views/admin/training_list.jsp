@@ -3,7 +3,7 @@
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
-	<jsp:param value="훈련 이용 내역 "name="title"/>
+	<jsp:param value="훈련 이용내역" name="title"/>
 </jsp:include>
 
 <body>
@@ -39,28 +39,34 @@
                  <h4 class="text-center">훈련 이용 내역</h4>
              </div>
         </div>
-        
+ 
          <div class="row mb-3">
              <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
                  	<table class="table table-hover text-center align-middle">
 			    		<thead>
 			    			<tr>
-			    				<th width="25%">주문번호</th>
-			    				<th width="25%">이용날짜</th>
-			    				<th width="25%">훈련사</th>
-			    				<th width="25%">이용상태</th>
+			    				<th >주문번호</th>
+			    				<th >이용날짜</th>
+			    				<th >훈련사</th>
+			    				<th >이용상태</th>
 			    			</tr>
 			    		</thead>
 			    		<tbody>
-			    		<c:forEach var="traingUsageVO" items="${traingUsageVO}">
+			    		<c:forEach var="trainingUsageVO" items="${trainingUsageVO}">
 			    		<tr class="table-default align-middle">
-							<td>${applyDto.applyNo }</td>
-							<td>${applyDto.memberId}</td>
-							<td>${applyDto.applyDate }</td>
-							<td>${applyDto.applyStatus}</td>
+							<td>${trainingUsageVO.trainingNo}</td>
+							<td>${trainingUsageVO.trainingDate}</td>
+							<td>${trainingUsageVO.memberName }</td>
+							<td>${trainingUsageVO.trainingStatus}</td>
+							<td> <a class="btn btn-blue2"
+		                            href="training_detail?trainingNo=${trainingUsageVO.trainingNo}">상세 </td>
 						</tr>
 						</c:forEach>
 			    		</tbody>
 			    		</table>
 			    		</div>
 			    		</div>
+			    		
+			    		
+			    		
+	</div>

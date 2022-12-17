@@ -8,13 +8,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class TraingUsageVO {
+public class TrainingUsageVO {
 	
-	private int memberId;
+	private String memberId;
 	private String memberName;
-	private int traingNo;
-	private Date traingDate;
-	private String traingStatus;
+	private int trainingNo;
+	private Date trainingDate;
+	private String trainingStatus;
+	
+	
 	
 
 }

@@ -123,5 +123,5 @@
     </div>
 
 <a class="btn btn-blue2" href="${pageContext.request.contextPath}/admin/memberPoint?memberId=${memberDto.memberId}">포인트 이용내역</a>
-<a class="btn btn-blue2">훈련사 이용내역</a>
+<a class="btn btn-blue2" href="${pageContext.request.contextPath}/admin/training_list?memberId=${memberDto.memberId}">훈련사 이용내역</a>
 

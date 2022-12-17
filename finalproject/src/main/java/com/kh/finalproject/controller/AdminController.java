@@ -31,7 +31,8 @@ import com.kh.finalproject.vo.PetInsertVO;
 import com.kh.finalproject.vo.PointListVO;
 import com.kh.finalproject.vo.TrainerListSearchVO;
 import com.kh.finalproject.vo.TrainerListVO;
-import com.kh.finalproject.vo.TraingUsageVO;
+import com.kh.finalproject.vo.TrainingRequestListVO;
+import com.kh.finalproject.vo.TrainingUsageVO;
 
 
 @Controller
@@ -272,18 +273,44 @@ public class AdminController {
 	
 	
 	//관리자 회원/훈련이용내역
-	@GetMapping("/trainig_list")
-	public String trainingList(Model model,@RequestParam int trainingNo){
+	@GetMapping("/training_list")
+	public String trainingList(Model model, @RequestParam String memberId){
 		//훈련서비스고유번호, 훈련날짜,훈련사, 이용상태
 		//member_id는 중복이 당연히 될 수 있는 것임....traing_no만 안겹치면 됨....
 		
+		//member_id를 받아 와서 그 회원이 이용한 훈련 정보 출력
 	
-	    List<TraingUsageVO> traingUsageVO=trainingDao.selectList(trainingNo);
-	    model.addAttribute("traingUsageVO",traingUsageVO);
+	    List<TrainingUsageVO> trainingUsageVO=trainingDao.selectList(memberId);
+	    model.addAttribute("trainingUsageVO",trainingUsageVO);
 		
 	    return "admin/training_list";
 	}
+	
+	//관리자 회원/훈련 상세내역
+	@GetMapping("/training_detail")
+	public String trainingDetail(Model model, @RequestParam int trainingNo) {
+		//mapper로 출력 후 나머지 이름은 훈련사+회원으로 찾기...
+		
+		TrainingRequestListVO trainingRequestListVO=trainingDao.selectDetail(trainingNo);
+		model.addAttribute("trainingRequestListVO",trainingRequestListVO);
+		
+		//<주문번호,훈련사,이용날짜>
+		//<사용포인트>
+		//<반려동물 관련>
+		//첨부파일+pet
+		//해당 아이디의 반려동물 번호의 이미지 모두 출력
+		//inst<PetInsertVO> list=petDao.list(memberId);
+		//model.addAttribute("list",list);
+		
 
+		return "admin/training_detail";
+	}
+	
+	
+	
+	
+	
+	
 }
 	
 	

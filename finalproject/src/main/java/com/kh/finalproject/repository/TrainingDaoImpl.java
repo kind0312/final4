@@ -19,7 +19,7 @@ import com.kh.finalproject.vo.PetDetailListVO;
 import com.kh.finalproject.vo.ReservationDetailListVO;
 import com.kh.finalproject.vo.ReservationListVO;
 import com.kh.finalproject.vo.ScheduleVO;
-import com.kh.finalproject.vo.TraingUsageVO;
+import com.kh.finalproject.vo.TrainingUsageVO;
 import com.kh.finalproject.vo.TrainingRequestListVO;
 
 
@@ -162,10 +162,19 @@ public class TrainingDaoImpl implements TrainingDao{
 	}
 
 	@Override
-	public List<TraingUsageVO> selectList(int trainingNo) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("training.traingUsage",trainingNo);
+	public List<TrainingUsageVO> selectList(String memberId) {
+		return sqlSession.selectList("training.traingUsage",memberId);
 	}
+
+	@Override
+	public TrainingRequestListVO selectDetail(int traininNo) {
+		return sqlSession.selectOne("training.oneDetail",traininNo);
+
+	}
+
+	
+
+	
 
 	
 	
