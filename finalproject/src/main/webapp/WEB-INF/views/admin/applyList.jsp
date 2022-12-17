@@ -9,7 +9,9 @@
       margin-top:0.1rem !important
    }
 
+
 </style>
+
 
 
 <body>
@@ -32,7 +34,7 @@
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/admin/trainerList">훈련사 관리</a>
 	        </li>
 	         <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">포인트상품 관리</a>
+	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/admin/itemList">포인트상품 관리</a>
 	        </li>
 	      
      	 </ul>
@@ -62,13 +64,13 @@
 <tr >
 <c:forEach var="applyDto" items="${applyDto}">
 <tr class="table-default align-middle">
-<td>${applyDto.applyNo }</td>
+<td>${applyDto.applyNo}</td>
 <td>${applyDto.memberId}</td>
 <td>${applyDto.applyDate }</td>
 <td>${applyDto.applyStatus}</td>
 <td>
 		<a class="btn btn-blue2"
-		href="applyDetail?memberId=${applyDto.memberId}">상세</a>
+		href="applyDetail?applyNo=${applyDto.applyNo}">상세</a>
 </td>
 </tr>
 </c:forEach>

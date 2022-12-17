@@ -19,8 +19,10 @@ import com.kh.finalproject.entity.PointDto;
 import com.kh.finalproject.entity.PurchaseDetailDto;
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingPurchaseDto;
+import com.kh.finalproject.repository.ChatDao;
 import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.PointDao;
+import com.kh.finalproject.repository.ReviewDao;
 import com.kh.finalproject.repository.ScheduleDao;
 import com.kh.finalproject.repository.TrainerDao;
 import com.kh.finalproject.repository.TrainerLikeDao;
@@ -28,6 +30,8 @@ import com.kh.finalproject.repository.TrainingDao;
 import com.kh.finalproject.repository.TrainingPurchaseDao;
 import com.kh.finalproject.vo.OneTrainingVO;
 import com.kh.finalproject.vo.PointListVO;
+import com.kh.finalproject.vo.SearchRoomVO;
+import com.kh.finalproject.vo.TrainerOneVO;
 
 @Controller
 @RequestMapping("/mypage")
@@ -47,6 +51,10 @@ public class MypageController {
 	private TrainerLikeDao trainerLikeDao;
 	@Autowired
 	private ScheduleDao scheduleDao;
+	@Autowired
+	private ReviewDao reviewDao;
+	@Autowired
+	private ChatDao chatDao;
 	
 	//포인트 관리
 //	@RequestMapping("/point")
@@ -105,9 +113,12 @@ public class MypageController {
 		List<OneTrainingVO> dto = trainingDao.oneTraining(trainingNo);
 		model.addAttribute("training", dto);
 		//해당 훈련사 정보 단일조회
-		model.addAttribute("trainer", trainerDao.selectOnePro(dto.get(0).getTrainerNo()));
+		TrainerOneVO onevo = trainerDao.selectOnePro(dto.get(0).getTrainerNo());
+		model.addAttribute("trainer", onevo);
 		//결제내역 단일조회
 		model.addAttribute("purchase", trainingPurchaseDao.selectOne(trainingNo));
+		//리뷰 작성 여부
+		model.addAttribute("reviewDto", reviewDao.writed(trainingNo));
 		return "mypage/training_detail";
 	}
 	

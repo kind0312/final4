@@ -8,40 +8,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.ApplyDto;
+import com.kh.finalproject.vo.ApplyDetailVO;
 
 
 
 @Repository
 public class ApplyDaoImpl implements ApplyDao {
 
-	
 	@Autowired
 	private SqlSession sqlSession;
-	
-	
+
 	@Override
 	public List<ApplyDto> selectList() {
-		
 		return sqlSession.selectList("apply.list");
 	}
-
 
 	@Override
 	public ApplyDto selectOne(int applyNo) {
 		return sqlSession.selectOne("apply.one",applyNo);
 	}
 
-
-
-
-
-
-
-
-
-
-	      
-	
+	//지원자 상세(ApplyDetailVO로 반환)
+	@Override
+	public ApplyDetailVO detailOne(int applyNo) {
+		return sqlSession.selectOne("apply.applyDetail",applyNo);
+	}
 
 //시퀀스 생성
 	@Override

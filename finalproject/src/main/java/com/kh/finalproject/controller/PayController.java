@@ -1,7 +1,6 @@
 package com.kh.finalproject.controller;
 
 import java.net.URISyntaxException;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -24,8 +23,11 @@ import com.kh.finalproject.repository.MemberDao;
 import com.kh.finalproject.repository.PointDao;
 import com.kh.finalproject.repository.PointPurchaseDao;
 import com.kh.finalproject.service.PayService;
+import com.kh.finalproject.vo.PaginationListSearchVO;
 import com.kh.finalproject.vo.PayApproveRequestVO;
 import com.kh.finalproject.vo.PayApproveResponseVO;
+import com.kh.finalproject.vo.PayCancelResponseVO;
+import com.kh.finalproject.vo.PayCancelReuqestVO;
 import com.kh.finalproject.vo.PayListVO;
 import com.kh.finalproject.vo.PayReadyRequestVO;
 import com.kh.finalproject.vo.PayReadyResponseVO;
@@ -155,13 +157,61 @@ public class PayController {
 		return "pay/point_pay_fail";
 	}
 	
+	//결제내역 조회
 	@GetMapping("/list")
-	public String list(HttpSession session, Model model) {
+	public String list(HttpSession session, Model model,
+			@ModelAttribute(name="vo") PaginationListSearchVO vo ) {
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
-		List<PayListVO> list= pointPurchaseDao.selectList(memberId);
-		model.addAttribute("list", list);
+		
+		vo.setMemberId(memberId);
+		int count = pointPurchaseDao.count(vo);
+		vo.setCount(count);
+		
+		int endRow = vo.getP()*vo.getSize();
+		int startRow = endRow - (vo.getSize() - 1);
+		vo.setEndRow(endRow);
+		vo.setStartRow(startRow);
+		
+		//List<PayListVO> list= pointPurchaseDao.selectList(memberId);
+		model.addAttribute("list", pointPurchaseDao.listAll(vo));
+		
 		return "pay/point_pay_list";
 	}
+	
+	//결제취소
+	@GetMapping("/cancel")
+	public String cancelAll(@RequestParam int pointPurchaseNo) throws URISyntaxException {
+		//pointListVO로 만들어놓은 것 그냥 사용하기!
+		PayListVO dto = pointPurchaseDao.selectOne(pointPurchaseNo);
+		
+		PayCancelReuqestVO request = 
+				PayCancelReuqestVO.builder()
+				.tid(dto.getTid())
+				.cancel_amount(dto.getPointPurchasePrice())
+				.cancel_tax_free_amount(0)
+				.build();
+		PayCancelResponseVO response = 
+				payService.cancel(request);
+		System.out.println(response);
+		//pointPurchaseDto 테이블 거래상태 취소로 변경
+		pointPurchaseDao.update(pointPurchaseNo);
+		//point 테이블 환불금액만큼 포인트 증가처리
+		int pointNo = pointDao.sequence();
+		PointDto pointDto = PointDto.builder()
+				.pointNo(pointNo)
+				.memberId(response.getPartner_user_id())
+				.pointStatus("환불")
+				.pointPrice(response.getAmount().getTotal())
+				.pointDate(response.getCanceled_at())
+				.build();
+		pointDao.insert(pointDto);
+		
+		return "redirect:list";
+	}
+	
+	
+	
+	
 	
 
 }

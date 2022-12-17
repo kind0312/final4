@@ -68,30 +68,29 @@
 					<label class="label-font-weight">
 						활동 가능한 시간대
 						<i class="fa-solid fa-asterisk blue"></i>
-						<small class="text-muted">(중복 선택가능)</small>
 					</label>
 					<div class="form-check mt-3">
-						<input class="form-check-input" type="checkbox" name="applyActive" value="오전 8:00 ~ 오후 10:00" id="allable">
+						<input class="form-check-input" type="checkbox" name="applyActive" value="오전 08:00 ~ 오후 10:00" id="allable">
 						<label for="allable">
-							풀 타임(오전 8:00 ~ 오후 10:00)
+							풀 타임(오전 08:00 ~ 오후 10:00)
 						</label>
 					</div>
 					<div class="form-check">
-						<input class="form-check-input" type="checkbox" name="applyActive" value="오전 8:00 ~ 오후 12:00" id="morningTime">
+						<input class="form-check-input" type="checkbox" name="applyActive" value="오전 08:00 ~ 오후 12:00" id="morningTime">
 						<label for="morningTime">
-							오전 타임(오전 8:00 ~ 오후 12:00)
+							오전 타임(오전 08:00 ~ 오후 12:00)
 						</label>
 					</div>
 					<div class="form-check">
-						<input class="form-check-input" type="checkbox" name="applyActive" value="오후 12:00 ~ 오후 6:00" id="afternoonTime">
+						<input class="form-check-input" type="checkbox" name="applyActive" value="오후 12:00 ~ 오후 06:00" id="afternoonTime">
 						<label for="afternoonTime">
-							오후 타임(오후 12:00 ~ 오후 6:00)
+							오후 타임(오후 12:00 ~ 오후 06:00)
 						</label>
 					</div>
 					<div class="form-check">
-						<input class="form-check-input" type="checkbox" name="applyActive" value="오후 6:00 ~ 오후 10:00" id="eveningTime">
+						<input class="form-check-input" type="checkbox" name="applyActive" value="오후 06:00 ~ 오후 10:00" id="eveningTime">
 						<label for="eveningTime">
-							저녁 타임(오후 6:00 ~ 오후 10:00)
+							저녁 타임(오후 06:00 ~ 오후 10:00)
 						</label>
 					</div>
 					<div class="form-check">
@@ -181,9 +180,15 @@
 		
 		//활동시간 선택
 		$("[name=applyActive]").click(function(){
-			var active = $("[name=applyActive]:checked").val();
-			console.log(active);
-			if(active.length > 0){
+			var active = $("[name=applyActive]:checked");
+			var count = $("[name=applyActive]:checked").length;
+			if($(this).prop("checked")){
+				$("[name=applyActive]:checked").prop("checked", false);
+				$(this).prop("checked", true);
+			}
+			console.log(active.is(":checked"));
+			console.log(count);
+			if(active.is(":checked")){
                 validChecker.applyActiveValid = true;
             }
             else {

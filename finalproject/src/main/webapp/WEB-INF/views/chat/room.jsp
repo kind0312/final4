@@ -32,6 +32,9 @@
 	#chattext {
 		font-size: 13px;
 	}
+	.header {
+	text-align: center;
+	}
 	
 </style>
 
@@ -45,12 +48,13 @@
             </div>
         </div>
 
-<hr>
+
 
 
 <div class="chat_wrap">
         <div class="header">
           <h2>${partner.memberName} 펫시터</h2>
+          	<hr>
         </div>
         <div class="chat">
         
@@ -128,7 +132,7 @@ $(function(){
 		var data = JSON.parse(e.data);
 		console.log(data);  
 					
-		
+		var imgNo = data.filesNo; //이미지 파일 번호 
 		var p = $("<p>").addClass("chat-message");		
 		var time = moment(data.time).format("hh:mm");
 		var w = $("<p>").text(data.memberId); //콘솔에 key로 들어오는 값을 찍어줘야 나옴
@@ -139,27 +143,9 @@ $(function(){
 		//<img src="http://localhost:8888/download/${myimg}">
 	    
 	    
-// 		$(document).ready(function(){
-// 	    	//이미지 변경 함수 호출
-// 	    	changeIMG();
-// 	    });
-// 	    function changeIMG(){
-	    	
-// 	    	if(data.memberId == userId){
-// 	    	//img 태그의 아이디로 변경 할 때
-// 	    	$("#imgID").attr("src", "http://localhost:8888/download/${myimg}" );	        
-// 	       }
-// 	    	else {
-// 	    		$("#imgID").attr("src", "http://localhost:8888/download/$partner.filesNo}" );	     
-// 	    	}
-	    	
-// 	    }
-// 		var img = $("<img>").addClass("img-circle").attr('id','imgID').attr( "src","http://localhost:8888/download/${myimg}");
-		//$("#message-list").append(img);
+
+		var img = $("<img>").addClass("img-circle").attr('id','imgID').attr( "src","http://localhost:8888/download/"+imgNo);
 		
-		//img를 변경해줘야하는데 조건을 어떻게 걸지
-		//넘어오는 json의 memberId가 다르다 -> 내 세션과 동일하면 내 이미지
-		// 다르면 상대 이미지
 				
 		
 		p.append(w).append(c).append(t);  //작성자 내용 시간
