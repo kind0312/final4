@@ -11,27 +11,13 @@ import lombok.NoArgsConstructor;
 public class TrainingMemberVO {
 	
 	
-	//private String memberName;
-	//private String memberId;
-	
+	private String memberName;
 	private int trainingNo;
-    private String trainingDate;
-   
+	 private Date trainingDate;
+	private String trainingStatus;
 	private int trainingPurchasePrice;
 	
-
-	
-	private int petNo;
-	private String petType;
-	private String petName;
-	private String petGender;
-	private String petBreed;
-	private Date petBirth;
-	private String petNeutralization;
-	
-	private int filesNo;
 	
 	
-	
-
+  
 }

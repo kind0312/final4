@@ -33,8 +33,10 @@ import com.kh.finalproject.vo.ApplyDetailVO;
 import com.kh.finalproject.vo.MemberListSearchVO;
 import com.kh.finalproject.vo.PetInsertVO;
 import com.kh.finalproject.vo.PointListVO;
+import com.kh.finalproject.vo.ReservationDetailListVO;
 import com.kh.finalproject.vo.TrainerListSearchVO;
 import com.kh.finalproject.vo.TrainerListVO;
+import com.kh.finalproject.vo.TrainingMemberVO;
 import com.kh.finalproject.vo.TrainingRequestListVO;
 import com.kh.finalproject.vo.TrainingUsageVO;
 
@@ -256,19 +258,18 @@ public class AdminController {
 	//관리자 회원/훈련 상세내역
 	@GetMapping("/training_detail")
 	public String trainingDetail(Model model, @RequestParam int trainingNo) {
-		//mapper로 출력 후 나머지 이름은 훈련사+회원으로 찾기...
+	
+		//사진 제외 훈련 이용내역
+		TrainingMemberVO  trainingMemberVO =trainingDao.selectDetail(trainingNo);
+		model.addAttribute("trainingMemberVO",trainingMemberVO);
 		
-		TrainingRequestListVO trainingRequestListVO=trainingDao.selectDetail(trainingNo);
-		model.addAttribute("trainingRequestListVO",trainingRequestListVO);
+		//pet+사진 
 		
-		//<주문번호,훈련사,이용날짜>
-		//<사용포인트>
-		//<반려동물 관련>
-		//첨부파일+pet
-		//해당 아이디의 반려동물 번호의 이미지 모두 출력
-		//inst<PetInsertVO> list=petDao.list(memberId);
-		//model.addAttribute("list",list);
 		
+	
+		List<ReservationDetailListVO> list=trainingDao.usageDetail(trainingNo);
+		model.addAttribute("list",list);
+	
 
 
 		return "admin/training_detail";

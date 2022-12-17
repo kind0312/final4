@@ -66,29 +66,61 @@
              </div>
         </div>
         
+         
+         </div>
+          
          <div class="row">
             <div class="col-md-6 offset-md-3">   
                  <table class="table table-hover pet-table text-center">
-             <thead>
+          
+           
+            
                 <tr class="table-default align-middle">
                 <th width="50%">
-                <p class="font">주문번호 :  ${trainingRequestListVO.trainingNo}</p>
-                <p class="font">이용날짜    :  ${trainingRequestListVO.trainingDate}</p>
+                <p class="font">주문번호 :  {trainingMemberVO.trainingNo}</p>
+                <p class="font">이용날짜    :  {trainingMemberVO.trainingDate}</p>
                
                 </th>
                  <th width="50%">
-                <p class="font">훈련사 :  ${trainingRequestListVO.}</p>
-                <p class="font">사용포인트    :  ${trainingRequestListVO.memberJoinDate}</p>
-             
+                <p class="font">훈련사 :  {trainingMemberVO.memberName}</p>
+                <p class="font">사용포인트    :  {trainingMemberVO.trainingPurchasePrice}</p>
+              
                 </th>
+                
                 </tr>   
+                <tr class="table-default align-middle">
+                <c:forEach var="reservationDetailListVO" items="${list}">
+                <th width="50%">
+                
+    
+                
+                <p class="font">반려동물 :&nbsp;&nbsp;  ${reservationDetailListVO.petType}</p>
+                <p class="font">이름 :&nbsp;&nbsp;  ${reservationDetailListVO.petName}</p>
+                <p class="font">생일 :&nbsp; &nbsp; ${reservationDetailListVO.petBirth}</p>
+                <p class="font">중성화 : &nbsp;&nbsp; ${reservationDetailListVO.petNeutralization}</p>
+                 
+                
+                </th>
+                 <th width="50%">
+                
+                         
+           
+                    <img src="http://localhost:8888/download/${petInsertVO.filesNo}" class="img-circle" width="100" height="100">
+                    
+               </th> 
+               </c:forEach>  
+               </tr>
+               </table>
+               </div>
+               </div>
+               
+                
         
+    
         
       
         
-      
-        
-      </div>  
+    
 
 
 
