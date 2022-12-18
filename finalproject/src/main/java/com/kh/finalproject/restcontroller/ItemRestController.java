@@ -41,8 +41,8 @@ public class ItemRestController {
 	
 	//수정
 	@PutMapping("/item_edit")
-	public void edit() {
-		//보류
+	public boolean edit(@RequestBody ItemDto itemDto) {
+		return itemDao.edit(itemDto);
 	}
 	
 	//삭제

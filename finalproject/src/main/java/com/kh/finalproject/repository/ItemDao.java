@@ -13,6 +13,7 @@ public interface ItemDao {
 	ItemDto selectOne(int itemNo);
 	ItemDto selectOne(String itemName);
 	//수정
+	boolean edit(ItemDto itemDto);
 	//삭제
 	boolean delete(int itemNo);
 }

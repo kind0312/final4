@@ -23,6 +23,12 @@
 		select*from item where item_name=#{itemName}
 	</select>
 	
+	<update id="edit" parameterType="ItemDto">
+		update item set item_name=#{itemName}, item_price=#{itemPrice},
+		item_changedate=sysdate, item_disabled=#{itemDisabled}
+		where item_no=#{itemNo}
+	</update>
+	
 	<delete id="delete" parameterType="int">
 		delete item where item_no=#{itemNo}
 	</delete>

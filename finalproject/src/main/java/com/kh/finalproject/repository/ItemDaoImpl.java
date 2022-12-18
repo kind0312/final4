@@ -36,6 +36,12 @@ public class ItemDaoImpl implements ItemDao{
 			return sqlSession.selectOne("item.selectname", itemName);
 		}
 	
+	//수정
+	@Override
+	public boolean edit(ItemDto itemDto) {
+		return sqlSession.update("item.edit",itemDto)>0;
+	}
+	
 	//삭제
 	@Override
 	public boolean delete(int itemNo) {
