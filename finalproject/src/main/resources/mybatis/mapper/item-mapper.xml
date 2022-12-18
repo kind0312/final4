@@ -6,13 +6,13 @@
 
 <mapper namespace="item">
 	<insert id="insert" parameterType="ItemDto">
-		insert into point(item_no, item_name, item_price,
+		insert into item(item_no, item_name, item_price,
 		item_date, item_changedate, item_disabled) 
-		values(item_seq.nextval, #{itemName}, #{ItemPrice}, 'N')
+		values(item_seq.nextval, #{itemName}, #{itemPrice}, sysdate, sysdate, #{itemDisabled})
 	</insert>
 	
 	<select id="list" resultType="ItemDto">
-		select * from item
+		select * from item order by item_date desc
 	</select>
 	
 	<select id="selectone" resultType="ItemDto" parameterType="int">
@@ -22,4 +22,8 @@
 	<select id="selectname" resultType="ItemDto" parameterType="String">
 		select*from item where item_name=#{itemName}
 	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete item where item_no=#{itemNo}
+	</delete>
 </mapper>
