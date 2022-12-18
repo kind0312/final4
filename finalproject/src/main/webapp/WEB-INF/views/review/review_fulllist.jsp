@@ -121,6 +121,13 @@
 	                }
 	         });
 		});
+		
+		$(".container-fluid").infiniteScroll({
+			  // options
+			  path: '.pagination__next',
+			  append: '.post',
+			  history: false,
+		});
 	</script>
 
 </body>
