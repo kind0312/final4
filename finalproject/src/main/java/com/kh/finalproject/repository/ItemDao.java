@@ -14,4 +14,5 @@ public interface ItemDao {
 	ItemDto selectOne(String itemName);
 	//수정
 	//삭제
+	boolean delete(int itemNo);
 }
