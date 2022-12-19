@@ -305,7 +305,7 @@
 		</div>
 		</form>
 		
-		<div class="row  mt-5">
+		<div class="row  mt-5" style="margin-bottom:100px;">
 			<div class="col-md-6 offset-md-3 text-center">
 				<table class="table text-center align-middle">
 					<thead>
@@ -324,7 +324,6 @@
 				</table>
 			</div>
 		</div>
-    				
 
 </div>
 
