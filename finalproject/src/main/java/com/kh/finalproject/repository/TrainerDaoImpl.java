@@ -112,6 +112,12 @@ public class TrainerDaoImpl implements TrainerDao {
 		
 	}
 
+	@Override
+	public List<ReviewVO> selectTrainerReviewBad(int trainerNo) {
+		
+		 return sqlSession.selectList("trainer.selectReviewOneBad", trainerNo);
+	}
+
 
 	
 	
