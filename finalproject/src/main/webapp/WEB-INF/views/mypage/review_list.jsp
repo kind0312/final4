@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="포인트 내역" name="title"/>
+	<jsp:param value="후기 내역" name="title"/>
 </jsp:include>
 
 <style>
@@ -99,13 +99,13 @@
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/pet">반려동물</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" style="color:white;" href="${pageContext.request.contextPath}/mypage/point">포인트</a>
+	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/point">포인트</a>
 	        </li>
 	        <li class="nav-item">
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/like">찜관리</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/review">후기</a>
+	          <a class="nav-link mypage-nav" style="color:white;" href="${pageContext.request.contextPath}/mypage/review">후기</a>
 	        </li>
 	        <li class="nav-item">
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/profile">정보수정</a>
@@ -135,62 +135,33 @@
 	<div class="container-fluid">
         <div class="row mt-80">
             <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-                 <h4 class="text-center">포인트 내역</h4>
+                 <h4 class="text-center">후기 작성 내역</h4>
             </div>
         </div>
 
-		<div class="row mt-5">
-            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-            	 <h6 style="display:inline-block;">
-            	 	<img src="${pageContext.request.contextPath}/image/point_list.png" 
-            	 		style="width:35px; height:35px;">현재 보유 포인트 : 
-            	 </h6>
-                 <span class="mypoint" >
-                 	<fmt:formatNumber value="${point.memberPoint}" pattern="###,###"></fmt:formatNumber>P
-                 </span>
-                 <a href="${pageContext.request.contextPath}/pay/list" class="btn btn-yellow float-end" style="margin-left:5px;">구매내역</a>
-                 <a href="${pageContext.request.contextPath}/pay/point_select" class="btn btn-blue float-end">포인트 구매</a>
-                 <br>
-            </div>
-        </div>
         <div class="row mt-5">
             <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 ">   
                  <table class="table table-hover point-table text-center">
 					  <thead>
 					    <tr>
-					      <th scope="col" width="35%">날짜</th>
-					      <th scope="col" width="30%">사유/내용</th>
-					      <th scope="col" width="35%">포인트</th>
+					      <th scope="col" width="50%">제목</th>
+					      <th scope="col" width="30%">날짜</th>
+					      <th scope="col" width="20%">상세</th>
 					    </tr>
 					  </thead>
 					  <tbody>
 					  	<c:choose>
-					  		<c:when test="${page.size()==0}">
+					  		<c:when test="${list.size()==0}">
 					  			<tr class="table-default align-middle">
 					  				<td colspan="3" height="130px">내역이 존재하지 않습니다!</td>
 					  			</tr>
 					  		</c:when>
 					  		<c:otherwise>
-					  			<c:forEach var="page" items="${page}">
+					  			<c:forEach var="list" items="${list}">
 					  				<tr class="table-default align-middle">
-						  				<td>${page.pointDate}</td>
-						  				<td>${page.pointStatus}</td>
-						  				<c:choose>
-						  					<c:when test="${page.pointStatus=='구매'}">
-						  						<td class="price-font">
-						  							<span>
-						  								+<fmt:formatNumber value="${page.pointPrice}" pattern="###,###"></fmt:formatNumber>
-						  							</span>
-						  						</td>
-						  					</c:when>
-						  					<c:otherwise>
-						  						<td class="minus-price-font">
-						  							<span>
-						  								-<fmt:formatNumber value="${page.pointPrice}" pattern="###,###"></fmt:formatNumber>
-						  							</span>
-						  						</td>
-						  					</c:otherwise>
-						  				</c:choose>				  				
+						  				<td>${list.reviewTitle}</td>
+						  				<td>${list.reviewWriteTime}</td>
+						  				<td><a class="btn btn-yellow" href="${pageContext.request.contextPath}/review/detail?reviewNo=${list.reviewNo}">상세</a></td>	
 						  			</tr>
 					  			</c:forEach>	
 					  		</c:otherwise>
@@ -210,7 +181,7 @@
 				    <li class="page-item first-target">
 						<c:choose>
 							<c:when test = "${vo.isFirst()==false}"> <%-- 맨 처음 페이지가 아니라면 --%>
-								<a class="page-link" href = "point?p=${vo.firstBlock()}&${vo.parameter()}">&laquo;</a> <%-- 첫 번째 페이지로 이동 --%>
+								<a class="page-link" href = "review?p=${vo.firstBlock()}&${vo.parameter()}">&laquo;</a> <%-- 첫 번째 페이지로 이동 --%>
 							</c:when>
 							<c:otherwise> <%-- 그렇지 않다면 --%>
 								<a class="page-link" href = "">&laquo;</a> <%-- 아무런 페이지 변화가 없도록 --%>
@@ -222,7 +193,7 @@
 					    <%-- 이전 구간의 마지막 페이지로 이동 --%>
 						<c:choose>
 							<c:when test = "${vo.hasPrev()}"> <%-- 이전 페이지가 있다면 --%>
-								<a class="page-link" href = "point?p=${vo.prevBlock()}&${vo.parameter()}">&lt;</a> <%-- 이전 구간의 마지막 페이지로 이동 --%>
+								<a class="page-link" href = "review?p=${vo.prevBlock()}&${vo.parameter()}">&lt;</a> <%-- 이전 구간의 마지막 페이지로 이동 --%>
 							</c:when>
 							<c:otherwise> <%-- 그렇지 않다면 --%>
 								<a class="page-link" href = "">&lt;</a> <%-- 아무런 페이지 변화가 없도록 --%>
@@ -234,7 +205,7 @@
 					<%-- 변수명을 i로 하며 시작과 끝은 vo의 startBlock(), endBlock()의 반환값으로, 간격은 1로 한다  --%>
 					<c:forEach var = "i" begin = "${vo.startBlock()}" end = "${vo.endBlock()}" step = "1">
 						<li class="page-item blue-box">
-							<a class="page-link" href = "point?p=${i}&${vo.parameter()}">${i}</a>
+							<a class="page-link" href = "review?p=${i}&${vo.parameter()}">${i}</a>
 						</li>
 					</c:forEach>
 					
@@ -242,7 +213,7 @@
 					<li class="page-item last-target">
 						<c:choose>
 							<c:when test = "${vo.hasNext()}"> <%-- 다음 페이지가 있다면 --%>
-								<a class="page-link"  href = "point?p=${vo.nextBlock()}&${vo.parameter()}">&gt;</a> <%-- 다음 구간의 첫 번째 페이지로 이동 --%>
+								<a class="page-link"  href = "review?p=${vo.nextBlock()}&${vo.parameter()}">&gt;</a> <%-- 다음 구간의 첫 번째 페이지로 이동 --%>
 							</c:when>
 							<c:otherwise> <%-- 그렇지 않다면 --%>
 								<a class="page-link"  href = "">&gt;</a> <%-- 아무런 페이지 변화가 없도록 --%>
@@ -254,7 +225,7 @@
 				    <li class="page-item final-target">
 						<c:choose>
 							<c:when test = "${vo.isLast()==false}"> <%-- 맨 마지막 페이지가 아니라면 --%>
-								<a class="page-link" href = "point?p=${vo.lastBlock()}&${vo.parameter()}">&raquo;</a> <%-- 맨 마지막 페이지로 이동 --%>
+								<a class="page-link" href = "review?p=${vo.lastBlock()}&${vo.parameter()}">&raquo;</a> <%-- 맨 마지막 페이지로 이동 --%>
 							</c:when>
 							<c:otherwise>
 								<a class="page-link" href = "">&raquo;</a>
@@ -266,8 +237,9 @@
 			</div>
 		</div>
     </div>
+    
 	<!-- 비동기를 위한 회원id -->
-	<input type="hidden" value="${point.memberId}" name="memberId">
+	<input type="hidden" value="${list[0].memberId}" name="memberId">
 	<input type="hidden" value="${vo.p}" name="pageNo">
 </body>
 

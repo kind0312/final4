@@ -29,8 +29,8 @@ import com.kh.finalproject.repository.TrainerLikeDao;
 import com.kh.finalproject.repository.TrainingDao;
 import com.kh.finalproject.repository.TrainingPurchaseDao;
 import com.kh.finalproject.vo.OneTrainingVO;
+import com.kh.finalproject.vo.PaginationListSearchVO;
 import com.kh.finalproject.vo.PointListVO;
-import com.kh.finalproject.vo.SearchRoomVO;
 import com.kh.finalproject.vo.TrainerOneVO;
 
 @Controller
@@ -173,8 +173,7 @@ public class MypageController {
 		
 		//스케줄 테이블 DB삭제
 		scheduleDao.delete(trainingDetailDto.getTrainingNo());
-		
-		
+
 		return "redirect:/mypage/cancel_success";
 	}
 
@@ -183,13 +182,35 @@ public class MypageController {
 		return "mypage/training_cancel_success";
 	}
 	
+	//정보수정
 	@RequestMapping("/profile")
 	public String profile(HttpSession session, Model model) {
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
 		model.addAttribute("member", memberDao.selectOne(memberId));
 		model.addAttribute("filesNo", memberDao.findFileNo(memberId));
 		return "mypage/profile";
-	}	
+	}
+	
+	//후기작성내역
+	@RequestMapping("/review")
+	public String review(HttpSession session, Model model,
+			@ModelAttribute(name = "vo") PaginationListSearchVO vo) {
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
+
+		vo.setMemberId(memberId); //count구하기 위해 먼저 실행되어야함
+		int count = reviewDao.count(vo);
+		vo.setCount(count);
+		
+		int endRow = vo.getP()*vo.getSize();
+		int startRow = endRow - (vo.getSize() - 1);
+		vo.setEndRow(endRow);
+		vo.setStartRow(startRow);
+		
+		// model에 조회 유형에 따른 조회 결과를 첨부
+		model.addAttribute("list", reviewDao.listAll(vo));
+		
+		return "mypage/review_list";
+	}
 	
 	@GetMapping("/like")
 	public String like(Model model, HttpSession session) {

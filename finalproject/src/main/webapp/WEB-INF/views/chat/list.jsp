@@ -33,7 +33,29 @@
 	    border-top:1px solid rgba(0, 0, 0, 0.1);
 	    height:130px;
 	}
+	
+	.titleName {
+	font-size: 17px;
+	}
+	
+	.mess {	
+    margin-top: 10px;	
+	}
+	
 </style>
+
+<script >
+	
+$(document).ready(function(){
+	 
+
+
+});
+	
+	
+</script>
+
+
 
 
 
@@ -46,30 +68,82 @@
                  <h4 class="text-center">일반회원 채팅목록</h4>
             </div>
         </div>
-		test : ${chatList}
+	
         <div class="row">
             <div class="col-md-6 offset-md-3">   
                  <table class="table table-hover pet-table text-center">
                  		<thead>
               				<c:forEach var="chatList" items="${chatList}" >
-                				<tr class="table-default align-middle">
+              					<c:choose>              						
+
+              						<c:when test= "${chatList.memberId eq sessionId && chatList.chatMessageStatus eq 'N'}">
+              						<tr class="table-default align-middle">
 	                 				<th width="30%">
 	                 				<img src="http://localhost:8888/download/${chatList.filesNo}" class="img-circle" width="100" height="100"> 
 	                 				</th>
 	                 				<th width="40%">
 	                 					
-	                 					<p class="name-font">${chatList.memberName} 훈련사</p>
+	                 					<p class="name-font titleName">${chatList.memberName} 훈련사</p>
 	                 					
 	                 					<p class="gender-font">${chatList.chatMessage}</p>
 	                 					<p class="gender-font">${chatList.chatCreateAt}</p>
-	                 					<p class="gender-font" >new : ${chatList.chatMessageStatus}</p><!-- 마지막 채팅이 안읽은 상태면 null -->
-	                 					<p class="gender-font" >마지막 채팅 친사람 : ${chatList.memberId}</p>
-	                 					<p class ="newMessage" >★</p>
+	                 					
+	                 				
+	                 					
 	                 				</th>
 	                 				<th width="30%">
 	                 					<a href="${pageContext.request.contextPath}/chat/room?roomNo=${chatList.roomNo}" class="btn btn-blue">채팅</a>
 	                 				</th>
                  				</tr>
+              						</c:when>
+              						
+              						<c:when test= "${chatList.memberId ne sessionId && chatList.chatMessageStatus eq 'Y'}">
+              						<tr class="table-default align-middle">
+	                 				<th width="30%">
+	                 				<img src="http://localhost:8888/download/${chatList.filesNo}" class="img-circle" width="100" height="100"> 
+	                 				</th>
+	                 				<th width="40%">
+	                 					
+	                 					<p class="name-font titleName">${chatList.memberName} 훈련사</p>
+	                 					
+	                 					<p class="gender-font">${chatList.chatMessage}</p>
+	                 					<p class="gender-font">${chatList.chatCreateAt}</p>
+	                 					
+	                 				
+	                 					
+	                 				</th>
+	                 				<th width="30%">
+	                 					<a href="${pageContext.request.contextPath}/chat/room?roomNo=${chatList.roomNo}" class="btn btn-blue">채팅</a>
+	                 				</th>
+                 				</tr>
+              						</c:when>
+              						
+              						
+              					<c:otherwise>
+              						<tr class="table-default align-middle">
+	                 				<th width="30%">
+	                 				<img src="http://localhost:8888/download/${chatList.filesNo}" class="img-circle" width="100" height="100"> 
+	                 				</th>
+	                 				<th width="40%">
+	                 					
+	                 					<p class="name-font titleName">${chatList.memberName} 훈련사 <img class ="newMessage"  src="/image/circle.png"  style="width: 10px;height: 10px;margin-bottom: 8px;"></p>
+	                 					
+	                 					
+	                 					<p class="gender-font mess">${chatList.chatMessage}</p>
+	                 					<p class="gender-font">${chatList.chatCreateAt}</p>
+	                 					<!-- <p class="gender-font" >new : ${chatList.chatMessageStatus}</p><!-- 마지막 채팅이 안읽은 상태면 null -->
+	                 					<!-- <p class="gender-font"  hidden="">마지막 채팅 친사람 : ${chatList.memberId}</p> -->
+	                 				</th>
+	                 				<th width="30%">
+	                 					<a href="${pageContext.request.contextPath}/chat/room?roomNo=${chatList.roomNo}" class="btn btn-blue">채팅</a>
+	                 				</th>
+                 				</tr>
+              					</c:otherwise>
+              					
+              					
+              					</c:choose>
+              				
+                				
 		                	</c:forEach>
                  		</thead>					  	
 					  
@@ -85,41 +159,6 @@
 </body>
 
 
-<script >
-	
-$(document).ready(function(){
-	 
-var sessionId =  "<c:out value="${sessionId}"/>";
 
-
-
-let nameList = [];
-<c:forEach var="chatList" items="${chatList}" varStatus="status">
-nameList.push("${chatList.memberId}");
-</c:forEach>
-
-console.log(sessionId);
-console.log(nameList); 
-
-
-let statusList = [];
-<c:forEach var="chatList" items="${chatList}" varStatus="status">
-statusList.push("${chatList.chatMessageStatus}");
-</c:forEach>
-
-console.log(statusList); 
-
-for(var i = 0; i < nameList.length; i++){
-	console.log(nameList[i] == sessionId);
-	console.log(statusList[i] == 'N');
-	if(nameList[i] == sessionId && statusList[i] == 'N'){
-		 $(".newMessage").hide();
-	}
-}
-
-});
-	
-	
-</script>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

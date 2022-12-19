@@ -9,6 +9,7 @@ import com.kh.finalproject.vo.ChatListVO;
 import com.kh.finalproject.vo.ChatPartnerSearchVO;
 import com.kh.finalproject.vo.ChatPartnerVO;
 import com.kh.finalproject.vo.ChatRoomVO;
+import com.kh.finalproject.vo.ChatUpdateVO;
 import com.kh.finalproject.vo.SearchRoomVO;
 
 
@@ -44,8 +45,10 @@ public interface ChatDao {
 	//채팅방 상태 아이디,이름,프로필정보 -> 리스트 아님
 	ChatPartnerVO chatPartner(ChatPartnerSearchVO chatPartnerSearchVO);
 	
-	
+	//채팅방 들어갔을때 상대채팅 읽음으로 udpate
+	void chatUpdate (ChatUpdateVO chatUpdateVO);
 
-
+	//채팅방 & 내 아이디로 상대 아이디 찾기
+	String searchPartnerId(ChatUpdateVO chatUpdateVO);
 	
 }

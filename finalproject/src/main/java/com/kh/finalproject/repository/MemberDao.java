@@ -60,8 +60,6 @@ public interface MemberDao {
 	boolean delete(String memberId);
 	//member_img테이블 delete 메소드
 	boolean memberImgDelete(String memberId);
-	
-	
 
 	
 }

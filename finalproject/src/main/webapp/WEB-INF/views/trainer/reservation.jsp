@@ -91,7 +91,9 @@ h2{
    display: inline;
 }
 
-
+.gyul{
+margin-right: 10px;
+}
 
 
 input::placeholder{
@@ -258,6 +260,22 @@ input#check_btn:checked + label:before{
   background-repeat: no-repeat;
   background-position: 50%;
   }
+  
+.select {
+  -o-appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+    width: 150px;
+  height: 35px;
+  background: url('https://cdn-icons-png.flaticon.com/512/8313/8313541.png') calc(100% - 5px) center no-repeat;
+  background-size: 20px;
+  padding: 5px 30px 5px 10px;
+  border-radius: 4px;
+  outline: 0 none;
+   margin-left: 146px;
+}
+}
 
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -453,9 +471,10 @@ $(function(){
                        <input type="text" class="single-date-picker short-hover date-box" id="short-text-box" 
                         name="trainingDate" autocomplete="off">
                    </div>
-                    <div class="row">
+                    <div class="row mt-50">
                    <h6>시간을 선택해 주세요!</h6><br>
-                   <select name="trainingStartTime">
+                   <div class="row">
+                   <select name="trainingStartTime" class="select">
                    <option value="09:00">09시</option>
                    <option value="10:00">10시</option>
                    <option value="11:00">11시</option>
@@ -467,6 +486,7 @@ $(function(){
                    <option value="17:00">17시</option>
                    <option value="18:00">18시</option>
                    </select>
+                   </div>
 </div>
 
 <br><br><br>
@@ -490,7 +510,7 @@ $(function(){
 <div class="row">
  <div class="mt-20">
  
- <p class="p2"> 반려견 추가시 1마리당 50000포인트의 추가요금이 발생합니다.<br>(기본 100000포인트)</p>
+ <p class="p2" style="font-size:15px"> 반려견 추가시 1마리당 50000포인트의 추가요금이 발생합니다.<br>(기본 100000포인트)</p>
  </div>
   </div>
 <div class="row">
@@ -516,7 +536,7 @@ $(function(){
                 <span>결제 후 포인트</span>
                 <span class="price"></span>P
             </div>
-            <div class="invalid-feedback">결제할 포인트가 부족합니다!</div>
+            <span class="invalid-feedback gyul">결제할 포인트가 부족합니다!</span>
             </div>
             </div>
             </div>

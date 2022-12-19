@@ -10,6 +10,7 @@
 <body>
 
 	<div class="container-fluid">
+	
 		<div class="row mt-4">
 			<h1>펫훈련,</h1> 
 			<h1>와요에서 함께해요</h1> 
@@ -17,9 +18,13 @@
 		
 		<div class="row mt-4">
 		<p>훈련사의 체계적인 교육</p>
-		<p>반려견과 보호자님 모두의 행복한 동행을 위해 와요가 든든한 교육 파트너가 되어드립니다</p>
+		<p>반려견과 보호자님 모두의 행복한 동행을 위해 와요가 든든한 교육 파트너가 되어드립니다</p>		
 		</div>
-	
+		
+		<div>
+			<img class="mainimg" src="${pageContext.request.contextPath}/image/trainnerMain2.jpg">
+		</div>
+		
 	</div>
 
 
