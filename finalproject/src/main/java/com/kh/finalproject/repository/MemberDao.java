@@ -60,4 +60,6 @@ public interface MemberDao {
 	//회원 탈퇴시 처리(삭제)
 	boolean delete(String memberId);
 	
+
+	
 }

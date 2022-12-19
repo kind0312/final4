@@ -5,7 +5,10 @@
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
 	<jsp:param value="훈련 이용내역" name="title"/>
 </jsp:include>
+<style>
 
+
+</style>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-expand-lg-re navbar-dark bg-black mypage-top-nav">
@@ -26,7 +29,7 @@
              <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/admin/trainerList">훈련사 관리</a>
            </li>
             <li class="nav-item">
-             <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">포인트상품 관리</a>
+             <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/admin/itemList">포인트상품 관리</a>
            </li>
          </ul>
        </div>

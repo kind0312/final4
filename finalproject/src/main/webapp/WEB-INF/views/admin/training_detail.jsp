@@ -25,6 +25,7 @@
        height:130px;
       
    }
+  
 </style>
 <body>
 
@@ -51,7 +52,7 @@
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/admin/trainerList">훈련사 관리</a>
 	        </li>
 	         <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">포인트상품 관리</a>
+	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/admin/itemList">포인트상품 관리</a>
 	        </li>
      	 </ul>
     	</div>
@@ -83,11 +84,21 @@
                 </th>
                  <th width="50%">
                 <p class="font">훈련사 :  ${trainingMemberVO.memberName}</p>
-                <p class="font">사용포인트    :  ${trainingMemberVO.trainingPurchasePrice}</p>
+                <c:choose>
+                <c:when test="${trainingMemberVO.trainingStatus=='예약취소'}">
+                   <p class="font">환불포인트    :  ${trainingMemberVO.trainingPurchasePrice}</p>
+                 </c:when>
+                 <c:otherwise>
+                   <p class="font">사용포인트    :  ${trainingMemberVO.trainingPurchasePrice}</p>
+                 </c:otherwise>
+                 </c:choose>
+              
+                
               
                 </th>
                 
-                </tr>   
+                </tr> 
+                  
                 <tr class="table-default align-middle">
                 <c:forEach var="reservationDetailListVO" items="${list}">
                 <th width="50%">
@@ -108,11 +119,16 @@
                     <img src="http://localhost:8888/download/${reservationDetailListVO.filesNo}" class="img-circle" width="100" height="100">
                     
                </th> 
+               </tr>
+               
+               </th>
                </c:forEach>  
                </tr>
                </table>
                </div>
                </div>
+               
+   
                
                 
         

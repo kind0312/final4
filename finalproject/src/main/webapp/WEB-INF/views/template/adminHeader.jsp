@@ -193,6 +193,7 @@
               font-weight: bolder;
               color:#fff;
               font-size:15px;
+              margin-left:5px;
          
          
          }
@@ -205,7 +206,7 @@
            }
            .btn-blue3{
               background-color: #256BF3;
-              border:2px solid #256BF31;
+              /*border:2px solid #256BF31;*/
               font-weight: bolder;
               color:#fff;
              font-size:1px;

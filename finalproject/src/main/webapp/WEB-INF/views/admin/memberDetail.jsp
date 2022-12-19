@@ -7,6 +7,7 @@
    <jsp:param value="회원 상세" name="title"/>
 </jsp:include>
 <style>
+  
    .pet-table>tbody{
       height:130px;      
    }
@@ -27,9 +28,7 @@
        height:130px;
       
    }
-   .mypage-top-nav{
-      margin-top:0.1rem !important
-   }
+
 </style>
 
 
@@ -95,8 +94,7 @@
                 <c:forEach var="petInsertVO" items="${list}">
                 <th width="50%">
                 
-                <!-- 회원이 안나오는게 아니고 반려동물이 없는거같은데요 출력방법이 잘못됐네요  -->
-                <!-- ${petDto} -->
+              
                 
                 <p class="font">반려동물 :&nbsp;&nbsp;  ${petInsertVO.petType}</p>
                 <p class="font">이름 :&nbsp;&nbsp;  ${petInsertVO.petName}</p>
@@ -124,7 +122,11 @@
        </div>
     </div>
     </div>
-
-<a class="btn btn-blue2" href="${pageContext.request.contextPath}/admin/memberPoint?memberId=${memberDto.memberId}">포인트 이용내역</a>
-<a class="btn btn-blue2" href="${pageContext.request.contextPath}/admin/training_list?memberId=${memberDto.memberId}">훈련사 이용내역</a>
+    
+    		<div class="row mt-5 mb-5">
+			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
+			<a class="btn btn-blue" href="${pageContext.request.contextPath}/admin/memberPoint?memberId=${memberDto.memberId}">포인트 이용내역</a><span></span>
+            <a class="btn btn-blue" href="${pageContext.request.contextPath}/admin/training_list?memberId=${memberDto.memberId}">훈련사 이용내역</a>
+			</div>
+		    </div>
 

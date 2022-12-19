@@ -10,9 +10,7 @@
    margin-bottom:10px;
    font-size:20px;
 }
-.mypage-top-nav{
-      margin-top:0.1rem !important
-   }
+
 </style>
 <body>
 
@@ -34,7 +32,7 @@
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/admin/trainerList">훈련사 관리</a>
 	        </li>
 	         <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">포인트상품 관리</a>
+	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/admin/itemList">포인트상품 관리</a>
 	           </li>
 	      
      	 </ul>

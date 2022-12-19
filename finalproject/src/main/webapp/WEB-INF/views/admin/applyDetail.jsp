@@ -5,6 +5,7 @@
 	<jsp:param value="훈련사 지원 상세" name="title"/>
 </jsp:include>
 <style>
+
 	.pet-table>tbody{
 		height:130px;
 		

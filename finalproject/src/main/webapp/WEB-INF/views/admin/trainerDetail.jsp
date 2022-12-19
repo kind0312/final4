@@ -24,9 +24,7 @@
 	    border-top:1px solid rgba(0, 0, 0, 0.1);
 	    height:130px;
 	}
-	.mypage-top-nav{
-      margin-top:0.1rem !important
-   }
+
 </style>
 
 <body>
@@ -58,7 +56,7 @@
 	<div class="container-fluid">
         <div class="row mt-80 mb-3">
               <div class="col-md-6 offset-md-3">
-                 <h4 class="text-center">회원상세</h4>
+                 <h4 class="text-center">훈련사 상세</h4>
              </div>
         </div>
         
