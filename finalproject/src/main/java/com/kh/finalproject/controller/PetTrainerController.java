@@ -267,7 +267,6 @@ public class PetTrainerController {
 		
 		String memberId = (String) session.getAttribute(SessionConstant.ID);		
 		TrainerDto dto = trainerDao.selectOnePro(memberId);		
-		System.out.println("겟매핑 dto =" + dto);
 		model.addAttribute("trainerDto", dto );	
 		
 		//멤버 아이디로 파일 조회해 오는것도 추가해야함
@@ -283,37 +282,12 @@ public class PetTrainerController {
 	@PostMapping("/mypage_profile_edit")		
 	public String mypageProfileEdit(@ModelAttribute TrainerDto trainerDto, 
 														@ModelAttribute MemberImgDto memberImgDto,
-															HttpSession session) {  //동기로 처리
+															HttpSession session) {  //동기로 처리	
 		
-		//훈련사 Trainer 테이블 update					
 		
-		System.out.println("Post매핑 trainerDto=" + trainerDto);
-		Boolean result =trainerDao.updateTrainer(trainerDto);
-	
-		System.out.println(result);
-		
-		//첨부파일 연결 db등록 member_img (member Dao에 update 메소드 가져와야함)
-		//int filesNo = memberDao.findFileNo(SessionConstant.ID); //새로 넣은 filesNo를 가져와야하는데 이렇게 가져오면 예전걸 가져온단 말이지
-				
-		//member_img 테이블에 이전 데이터를 지우고 (memberId로)
-		String memberId = (String) session.getAttribute(SessionConstant.ID);
-		memberDao.memberImgDelete(memberId); // 이전 데이터 삭제
-		memberDao.memberProfileInsert(memberImgDto);	//이거 정상 작동함 
-		
-		if(result) {			
-			return "redirect:/trainer/mypage_profile";
-		}
-		else {
-			return "redirect:fail";		
-		}
+		 return "";
 	}
-	
-//	@RequestMapping("/chat_list")
-//	public String chatlist() {
-//		
-//		return "trainer/chat_list";
-//	}
-	
+
 	
 	@RequestMapping("/mypage_reservation")
 	public String reservation(HttpSession session, Model model) {

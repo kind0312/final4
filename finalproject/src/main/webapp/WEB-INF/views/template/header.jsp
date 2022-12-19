@@ -309,10 +309,19 @@
          
       </style>
       
-      <script type="text/javascript"> 
-         
-      
-      </script>
+      <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/639fc27eb0d6371309d50e06/1gkk2p64m';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
    </head>
    <body>
    
@@ -365,6 +374,10 @@
                    </li>
                    <li class="nav-item">
                      <a class="nav-link" href="${pageContext.request.contextPath}/member/apply">훈련사 지원</a>
+                   </li>
+                   
+                   <li class="nav-item">
+                     <a class="nav-link" href="javascript:void(Tawk_API.toggle())">문의하기</a>
                    </li>
                    <c:choose>
                       <c:when test="${loginId == null}">

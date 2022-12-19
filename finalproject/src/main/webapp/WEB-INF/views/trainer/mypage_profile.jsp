@@ -10,7 +10,7 @@
 <style>
 	.img-circle{
 		border-radius: 70%;
-    	/* overflow: hidden; 사진 첨부하고 주석풀기*/
+    	overflow: hidden;
 	}
 	.form-control{
 		display:inline;
@@ -77,106 +77,55 @@
 	  </div>
 	</div>
 
-
-
 <div class="container-fluid">
-    <div class="row mt-4">
-        <div class="col-md-10 offset-md-1 p-4 rounded">
 
-
-
-<form class="insert-form">
-  <fieldset>
-    <legend>훈련사 프로필 관리</legend>
-    
-    
-    <div class="row text-center mt-3">
-            <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">   
-            	 <img src="${pageContext.request.contextPath}/download/${filesDto.getFilesNo()}" 
-                 		width="120" height="120" class="img-circle">    
-			</div>
-	</div>
-    
-    <!-- 나중에 readonly 기능 시간 되면 넣어보기, 수정버튼 누르면 input창 활성화 기능 -->
-    <div class="form-group">
-      <label for="exampleInputEmail1" class="form-label mt-4">제목</label>
-      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" 
-      value="${trainerDto.getTrainerProfile()}" name="trainerProfile"  readonly>  
-      <div class="invalid-feedback">필수 항목입니다.</div>   
-    </div>
-
+	<fieldset>
 	
-    <div class="form-group">
-      <label for="exampleTextarea" class="form-label mt-4">내용</label>
-      <textarea  class="form-control" id="exampleTextarea" rows="5" 
-      name= "trainerProfileContenct"  readonly>${trainerDto.getTrainerProfileContent()}</textarea>
-      <div class="invalid-feedback">필수 항목입니다.</div>
-    </div>
-    
-   	<!-- input 으로 넘겨야 하는데 안써도 되는건 히든으로 넘겨야함 -->
-   <input type="hidden" value="${trainerDto.getTrainerNo()}" name="trainerNo">
-   <input type="hidden" value="${trainerDto.getMemberId()}" name="memberId"> 
-   <input type="hidden" value="${trainerDto.getApplyNo()}" name="applyNo">
-   
-   
-   
-   	<p></p>
-     <button type="button" class="btn btn-blue" onclick="location.href='http://localhost:8888/trainer/mypage_profile_edit' ">수정</button>        
-   
-    </fieldset>
-    </form>
-    
-
-   			</div>
-   	 </div>
-  </div>
-
-
-
+	    <div class="row text-center mt-5">
+	            <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">   
+	            	 <h3 class="text-center">프로필 수정</h3>
+	            	 <img src="${pageContext.request.contextPath}/download/${filesDto.getFilesNo()}" 
+	                 		width="120" height="120" class="img-circle mt-4">    
+				</div>
+		</div>
+	    
+	    <!-- 나중에 readonly 기능 시간 되면 넣어보기, 수정버튼 누르면 input창 활성화 기능 -->
+	    <div class="row mt-3">
+	            <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">   
+	            	 <div class="form-group">
+					      <label for="exampleInputEmail1" class="form-label mt-4">제목</label>
+					      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" 
+					      value="${trainerDto.getTrainerProfile()}" name="trainerProfile"  readonly>  
+					      <div class="invalid-feedback">필수 항목입니다.</div>   
+				    </div>   
+				</div>
+		</div>
+		
+		 <div class="row mt-3">
+	            <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">   
+	            	 <div class="form-group">
+					      <label for="exampleTextarea" class="form-label mt-4">내용</label>
+					      <textarea  class="form-control" id="exampleTextarea" rows="5" 
+					      name= "trainerProfileContenct"  readonly>${trainerDto.getTrainerProfileContent()}</textarea>
+					      <div class="invalid-feedback">필수 항목입니다.</div>
+		    		</div>
+				</div>
+		</div>
+		
+		<div class="row mt-4">
+	            <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">   
+	            	 <a class="btn btn-blue" href="${pageContext.request.contextPath}/trainer/mypage_profile_edit">수정</a>
+				</div>
+		</div>
+	  
+	</fieldset>
+</div>
 
 
 </body>
 <script>
 	$(function(){
-		//프로필 클릭 시 첨부파일 버튼 실행
-		$(".img-circle").click(function(){
-			$(".input-file").click();
-		});
 
-		//프로필 파일 저장 및 미리보기
-		$(".input-file").change(function(){
-			//console.log($(".input-file").val()); //선택된 파일 경로와 이름이 나옴
-			//console.log(this.files); //선택한 파일들(배열)이 나옴
-			//console.log(this.files[0].name); //선택한 파일의 첫번째 값의 이름
-			var value = $(this).val();
-			if(value.length>0){ //파일 있음(비동기화로 파일 불러오기)
-				//서버에 전송할 formdate 만들기
-				var formData = new FormData();
-				formData.append("files", this.files[0]);
-                
-				$.ajax({
-					url:"http://localhost:8888/upload",
-					method:"post",
-					data:formData,
-					//multipart 요청을 위해 아래 2가지 꼭 보내줘야함
-					processData:false, 
-                    contentType:false,
-                    success:function(resp){
-                    	//console.log(resp); //이미지 경로 반환
-                    	$(".img-circle").attr("src",resp);
-                    	var check = resp.lastIndexOf("/"); //경로에서 /위치 찾기
-                    	var filesNo = resp.substr(check+1); //fileNo 꺼내기
-                    	$("[name=filesNo]").val(filesNo); //하단 파일no input태그에 값 넣기
-                    }
-				});
-			}
-				
-				
-			
-			else	{ //파일 없거나 있던 파일 삭제
-				$(".img-circle").attr("src","${pageContext.request.contextPath}/image/profile_basic.jpg");
-			}
-		});
 		
 	});
 </script>
