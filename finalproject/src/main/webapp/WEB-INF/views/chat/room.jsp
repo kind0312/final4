@@ -80,11 +80,13 @@
 	                 				<th width="30%"> 
 	                 				<img src="${pageContext.request.contextPath}/download/${chatHistory.filesNo}" class="img-circle">
 	                 				</th>
-	                 				<th width="40%">             					
+	                 				<th width="40%">
+	                 				<div class="container-fluid">          					
 	                 					<span class="gender-font">${chatHistory.memberName}</span>	                 					
 	                 					<span class="gender-font">${chatHistory.chatMessage} </span>
 	                 					<span class="gender-font" id="chattext">${chatHistory.chatCreateAt}</span>
 	                 					<p> </p>
+	                 				</div>   
 	                 				</th>
 	                 				
                  				</tr>
