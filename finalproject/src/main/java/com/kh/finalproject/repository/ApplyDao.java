@@ -5,10 +5,13 @@ import java.util.List;
 
 import com.kh.finalproject.entity.ApplyDto;
 import com.kh.finalproject.vo.ApplyDetailVO;
+import com.kh.finalproject.vo.ApplyListSearchVO;
 
 public interface ApplyDao {
 	//지원자 목록보기
-	List<ApplyDto>selectList();
+	List<ApplyDto>selectList(ApplyListSearchVO vo);
+	//지원자 목록보기
+	//List<ApplyDto>selectList()
 	
 	//지원자 상세
 	ApplyDto selectOne(int applyNo);

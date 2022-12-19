@@ -6,9 +6,7 @@
 	<jsp:param value="훈련사 목록" name="title"/>
 </jsp:include>
 <style>
-	.mypage-top-nav{
-      margin-top:0.1rem !important
-   }
+	
 </style>
 <body>
 

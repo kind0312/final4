@@ -26,12 +26,19 @@ import com.kh.finalproject.repository.PetDao;
 import com.kh.finalproject.repository.PointDao;
 import com.kh.finalproject.repository.TrainerDao;
 import com.kh.finalproject.repository.TrainingDao;
+
+
 import com.kh.finalproject.vo.ApplyDetailVO;
+import com.kh.finalproject.vo.ApplyListSearchVO;
 import com.kh.finalproject.vo.MemberListSearchVO;
 import com.kh.finalproject.vo.PetInsertVO;
 import com.kh.finalproject.vo.PointListVO;
+import com.kh.finalproject.vo.ReservationDetailListVO;
 import com.kh.finalproject.vo.TrainerListSearchVO;
 import com.kh.finalproject.vo.TrainerListVO;
+import com.kh.finalproject.vo.TrainingMemberVO;
+import com.kh.finalproject.vo.TrainingRequestListVO;
+import com.kh.finalproject.vo.TrainingUsageVO;
 
 
 @Controller
@@ -51,6 +58,10 @@ public class AdminController {
 	private ApplyDao applyDao;	
 	@Autowired
 	private AdminDao adminDao;
+
+    @Autowired
+    private TrainingDao trainingDao;
+
 	
 	//관리자 계정 로그인
 	@GetMapping("/login")
@@ -90,8 +101,11 @@ public class AdminController {
 	//관리자 일반회원 목록과 검색
 	@GetMapping("/memberList")
 	public String memberList(Model model,
+			
 			@ModelAttribute(name="vo") MemberListSearchVO vo) {
 		model.addAttribute("memberList",memberDao.selectList(vo));
+		
+		
 		
 		return "admin/memberList";
 	}
@@ -146,18 +160,18 @@ public class AdminController {
 		return "admin/memberPoint";
 	}
 	
-		
 	//관리자 훈련서비스 신청 목록
-	@GetMapping("/trainingList")
-	public String trainingList(Model model)
-	{
-		List<ApplyDto> applyDto=applyDao.selectList();
-	    model.addAttribute("applyDto",applyDto);
-		
-	    return "admin/trainingList";
-	}
+	//@GetMapping("/trainingList")
+	//public String trainingList(Model model)
+	//{
+	//	List<ApplyDto> applyDto=applyDao.selectList();
+	 //   model.addAttribute("applyDto",applyDto);
+	//	
+	 //   return "admin/trainingList";
+	//}
 			
-		
+			
+
 	//훈련사-상세
 	@GetMapping("/trainerDetail")
 	public String trainerDetail(Model model, @RequestParam String memberId) {
@@ -169,11 +183,11 @@ public class AdminController {
 
 	//관리자 훈련사-신청/전환/목록
 	@GetMapping("/applyList")
-	public String applyList(Model model){
-	
-		List<ApplyDto> applyDto=applyDao.selectList();
-	    model.addAttribute("applyDto",applyDto);
-		
+	public String applyList(Model model, @ModelAttribute ApplyListSearchVO vo){
+	    
+		//List<ApplyDto> applyDto=applyDao.selectList();
+	   // model.addAttribute("applyDto",applyDto);
+		model.addAttribute("list",applyDao.selectList(vo));
 	    return "admin/applyList";
 	}
 	
@@ -228,6 +242,45 @@ public class AdminController {
 	}
 
 
+
+	
+	//관리자 회원/훈련이용내역
+	@GetMapping("/training_list")
+	public String trainingList(Model model, @RequestParam String memberId){
+		//훈련서비스고유번호, 훈련날짜,훈련사, 이용상태
+		//member_id는 중복이 당연히 될 수 있는 것임....traing_no만 안겹치면 됨....
+		
+		//member_id를 받아 와서 그 회원이 이용한 훈련 정보 출력
+	
+	    List<TrainingUsageVO> trainingUsageVO=trainingDao.selectList(memberId);
+	    model.addAttribute("trainingUsageVO",trainingUsageVO);
+		
+	    return "admin/training_list";
+	}
+	
+	//관리자 회원/훈련 상세내역
+	@GetMapping("/training_detail")
+	public String trainingDetail(Model model, @RequestParam int trainingNo) {
+	
+		//사진 제외 훈련 이용내역
+		TrainingMemberVO  trainingMemberVO =trainingDao.selectDetail(trainingNo);
+		model.addAttribute("trainingMemberVO",trainingMemberVO);
+		
+		//pet+사진 
+		
+		List<ReservationDetailListVO> list=trainingDao.usageDetail(trainingNo);
+		model.addAttribute("list",list);
+	
+
+
+		return "admin/training_detail";
+	}
+	
+	
+	
+	
+	
+	
 }
 	
 	

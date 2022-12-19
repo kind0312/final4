@@ -6,9 +6,8 @@
 </jsp:include>
 
 <style>
-	.mypage-top-nav{
-        margin-top:0.1rem !important
-   }
+
+
    .underline-out{
 		border-bottom:#fff;
 	}
@@ -247,7 +246,7 @@
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/admin/trainerList">훈련사 관리</a>
 	        </li>
 	         <li class="nav-item">
-	          <a class="nav-link mypage-nav" style="color:white;" href="${pageContext.request.contextPath}/admin/itemList">포인트상품 관리</a>
+	          <a class="nav-link mypage-nav" style="color:white;" href="${pageContext.request.contextPath}/admin/itemList"">포인트상품 관리</a>
 	        </li>
 	      
      	 </ul>

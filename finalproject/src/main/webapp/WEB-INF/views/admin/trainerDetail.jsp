@@ -24,9 +24,7 @@
 	    border-top:1px solid rgba(0, 0, 0, 0.1);
 	    height:130px;
 	}
-	.mypage-top-nav{
-      margin-top:0.1rem !important
-   }
+
 </style>
 
 <body>
@@ -55,32 +53,43 @@
     	</div>
   	</div>
 </nav>
-	<div class="container-fluid">
-        <div class="row mt-80 mb-3">
-              <div class="col-md-6 offset-md-3">
-                 <h4 class="text-center">회원상세</h4>
+        <div class="row mt-80">
+              <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
+                 <h4 class="text-center">훈련사 상세</h4>
              </div>
         </div>
         
             
      <div class="row">
-            <div class="col-md-6 offset-md-3">   
-                 <table class="table table-hover pet-table text-center">
-    			<thead>
-    				<tr class="table-default align-middle">
-    								<th width="50%">
-    				<p class="font">훈련사 번호 :  ${trainerListVO.trainerNo}</p>
-    				<p class="font">아이디   :  ${trainerListVO.memberId}</p>
-    				<p class="font">이메일   :  ${trainerListVO.memberEmail}</p>
-    				<p class="font">연락처   :  ${trainerListVO.memberTel}</p>
-    				</th>
-    			    <th width="50%">
-    				<p class="font">훈련사 이름 :  ${trainerListVO.memberName}</p>
-    				<p class="font">성별    :  ${trainerListVO.memberGender}</p>
+             <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
+                 <table class="table table-hover align-middle">
+    			<tbody>
+    			<tr>
+    				<th width="30%">훈련사 번호</th>
+    				<td>${trainerListVO.trainerNo}</td>
+    			</tr>
+    			<tr>
+    				<th width="30%">아이디</th>
+    				<td>${trainerListVO.memberId}</td>
+    			</tr>
+    			<tr>
+    				<th width="30%">이메일</th>
+    				<td> ${trainerListVO.memberEmail}</td>
+    			</tr>
+    			<tr>
+    				<th width="30%">연락처</th>
+    				<td> ${trainerListVO.memberTel}</td>
+    			</tr>
+    			<tr>
+    				<th width="30%">훈련사 이름</th>
+    				<td>${trainerListVO.memberName}</td>
+    			</tr>
+    			<tr>
+    				<th width="30%">성별</th>
+    				<td> ${trainerListVO.memberGender}</td>
+    			</tr>
     			
-    				</th>
-    				</tr>
-    				
+    			
     				</table>
     			 
     	</div>

@@ -15,6 +15,8 @@ import com.kh.finalproject.vo.PetDetailListVO;
 import com.kh.finalproject.vo.ReservationDetailListVO;
 import com.kh.finalproject.vo.ReservationListVO;
 import com.kh.finalproject.vo.ScheduleVO;
+import com.kh.finalproject.vo.TrainingMemberVO;
+import com.kh.finalproject.vo.TrainingUsageVO;
 import com.kh.finalproject.vo.TrainingRequestListVO;
 
 
@@ -77,4 +79,13 @@ public interface TrainingDao {
 	void insertLinkedList(LinkedListDto dto);
 	void insertPurchase(PointDto dto);
 	
+	//관리자 훈련 이용내역 목록
+	List<TrainingUsageVO>selectList(String memberId);
+	
+	//관리자 훈련 이용내역 상세
+	TrainingMemberVO  selectDetail(int trainingNo);
+	
+	
+	//관리자 훈련 이용내역 상세 pet+사진
+	List<ReservationDetailListVO> usageDetail(int trainingNo);
 }

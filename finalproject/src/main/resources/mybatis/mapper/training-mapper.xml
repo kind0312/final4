@@ -208,7 +208,45 @@
  	<insert id="linkedInsert" parameterType="LinkedListDto">
  	insert into linked_list(training_no, trainer_no) values(#{trainingNo}, #{trainerNo})
  	</insert>
-  	
-  
+ 	
+ 	<!-- 훈련 이용 내역 목록 -->
+ 	<select id="traingUsage" resultType="trainingUsageVO" parameterType="string">
+ 		select m.member_name, pro.trainer_no, li.training_no, 
+         t.training_date, t.training_starttime, t.training_status 
+         from member m 
+         inner join trainer pro on m.member_id=pro.member_id
+         inner join linked_list li on pro.trainer_no=li.trainer_no
+         inner join training t on li.training_no=t.training_no
+         where member_id=#{memberId}
+         
+    </select>
+    
+    
+    <!-- 관리자/훈련 이용내역 상세 pet+사진 -->
+   
+    <select id="oneDetail"  resultType="ReservationDetailListVO" parameterType="int">    
+         select m.member_name,t.*, tp.training_purchase_price, 
+		td.training_detail_pet_name, p.*, img.files_no 
+		from member m 
+			inner join training t on m.member_id = t.member_id 
+			inner join training_purchase tp on t.training_no = tp.training_no
+            inner join training_detail td on tp.training_no = td.training_no
+			inner join pet p on td.training_detail_pet_name = p.pet_name
+			inner join pet_img img on p.pet_no = img.pet_no
+		    where t.training_no=#{trainingNo}
+		    
+    </select>
+     <!-- 관리자/훈련 이용내역 상세 -->
+    <select id="oneDetail2"  resultType="trainingMemberVO" parameterType="int">    
+    select m.member_name,t.training_no,t.training_date,t.training_status, tp.training_purchase_price
+    from trainer tr
+    inner join member m on m.member_id=tr.member_id
+    inner join linked_list li on li.trainer_no=tr.trainer_no
+    inner join training t on t.training_no=li.training_no
+    inner join training_purchase tp on t.training_no=tp.training_no
+     where t.training_no=#{trainingNo}
+		    
+    </select>
+    
   </mapper>
  

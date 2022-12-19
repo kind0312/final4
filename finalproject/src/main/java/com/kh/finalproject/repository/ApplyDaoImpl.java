@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.ApplyDto;
 import com.kh.finalproject.vo.ApplyDetailVO;
+import com.kh.finalproject.vo.ApplyListSearchVO;
 
 
 
@@ -19,8 +20,9 @@ public class ApplyDaoImpl implements ApplyDao {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<ApplyDto> selectList() {
-		return sqlSession.selectList("apply.list");
+	public List<ApplyDto> selectList(ApplyListSearchVO vo) {
+		
+		return sqlSession.selectList("apply.list",vo);
 	}
 
 	@Override

@@ -7,6 +7,7 @@
    <jsp:param value="회원 상세" name="title"/>
 </jsp:include>
 <style>
+  
    .pet-table>tbody{
       height:130px;      
    }
@@ -27,13 +28,17 @@
        height:130px;
       
    }
-   .mypage-top-nav{
-      margin-top:0.1rem !important
-   }
+
 </style>
 
 
 <body>
+
+
+  
+
+
+
 	<nav class="navbar navbar-expand-lg navbar-expand-lg-re navbar-dark bg-black mypage-top-nav">
 	  <div class="container-fluid">
 	    <a class="navbar-brand-re footer-link" href="${pageContext.request.contextPath}/adminHome">홈</a>
@@ -57,39 +62,61 @@
      	 </ul>
     	</div>
   	</div>
+
 </nav>
 
-   <div class="container-fluid">
-        <div class="row mt-80 mb-3">
-              <div class="col-md-6 offset-md-3">
+	<div class="container-fluid">
+	
+        <div class="row mt-80">
+              <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
                  <h4 class="text-center">회원상세</h4>
              </div>
         </div>
         
         
-     <div class="row">
-            <div class="col-md-6 offset-md-3">   
-                 <table class="table table-hover pet-table text-center">
-             <thead>
-                <tr class="table-default align-middle">
-                <th width="50%">
-                <p class="font">회원아이디 :  ${memberDto.memberId}</p>
-                <p class="font">이메일    :  ${memberDto.memberEmail}</p>
-                <p class="font">연락처    :  ${memberDto.memberTel}</p>
-                </th>
-                 <th width="50%">
-                <p class="font">회원이름 :  ${memberDto.memberName}</p>
-                <p class="font">가입일    :  ${memberDto.memberJoinDate}</p>
-                <p class="font">성별    :  ${memberDto.memberGender}</p>
-                </th>
-                </tr>   
+   
+         <div class="row mb-3">
+             <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
+                 <table class="table table-hover align-middle">
+             <tbody>
+             	<tr>
+             	<th width="30%">회원아이디</th>
+			    <td>${memberDto.memberId}</td>
+             	</tr>
+             	<tr>
+             	<th width="30%">이메일</th>
+			    <td>${memberDto.memberEmail}</td>
+             	</tr>
+                <tr>
+                <th width="30%">연락처</th>
+			    <td>${memberDto.memberTel}</td>
+                </tr>
+                <tr>
+                <th width="30%">회원이름</th>
+			    <td>${memberDto.memberName}</td>
+                </tr>
+                <tr>
+                <th width="30%">가입일</th>
+			    <td> ${memberDto.memberJoinDate}</td>
+                </tr>
+                <tr>
+                <th width="30%">성별</th>
+			    <td>  ${memberDto.memberGender}</td>
+                </tr>
+                
+                
+             
+             
+             
+             
+             </tbody>
+          
                 
                 <tr class="table-default align-middle">
                 <c:forEach var="petInsertVO" items="${list}">
                 <th width="50%">
                 
-                <!-- 회원이 안나오는게 아니고 반려동물이 없는거같은데요 출력방법이 잘못됐네요  -->
-                <!-- ${petDto} -->
+              
                 
                 <p class="font">반려동물 :&nbsp;&nbsp;  ${petInsertVO.petType}</p>
                 <p class="font">이름 :&nbsp;&nbsp;  ${petInsertVO.petName}</p>
@@ -117,7 +144,11 @@
        </div>
     </div>
     </div>
-
-<a class="btn btn-blue2" href="${pageContext.request.contextPath}/admin/memberPoint?memberId=${memberDto.memberId}">포인트 이용내역</a>
-<a class="btn btn-blue2">훈련사 이용내역</a>
+    
+    		<div class="row mt-5 mb-5">
+			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
+			<a class="btn btn-blue" href="${pageContext.request.contextPath}/admin/memberPoint?memberId=${memberDto.memberId}">포인트 이용내역</a>
+            <a class="btn btn-blue" href="${pageContext.request.contextPath}/admin/training_list?memberId=${memberDto.memberId}">훈련사 이용내역</a>
+			</div>
+		    </div>
 
