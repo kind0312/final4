@@ -17,10 +17,14 @@
 
 <style>
 	.chat-message {
-		padding:1em;
-		border:1px solid black;
-		border-radius:1em;
-		width: 80%;
+		display: block;
+	    width: 70%;
+	    padding: 10px;
+	    margin-top: 7px;
+	    font-size: 13px;
+	    border-radius: 10px;
+	     margin-left: 20px;
+	    background-color: #ddd;
 		
 	}
 	.img-circle{
@@ -68,6 +72,13 @@
 
 	}
 	
+	.chat {
+	
+	}
+	.time {
+	font-size: 5px;
+	}
+	
 
 	
 </style>
@@ -90,41 +101,39 @@
           <h2>${partner.memberName} 펫시터</h2>
           	<hr>
         </div>
-        <div class="chat">
+        
+        <div class="chat row mt-60 mb-3">
+        	<div class="col-md-6 offset-md-3">
         
         	<ul id="it">
         	<c:forEach var="chatHistory" items="${chatHistory}">
         		<c:choose>          
         			<c:when test = "${myId eq chatHistory.memberId}">
-        				<tr class="table-default align-middle mine">
-	                 				<th width="30%"> 
-	                 				<img src="${pageContext.request.contextPath}/download/${chatHistory.filesNo}" class="img-circle">
-	                 				</th>
-	                 				<th width="40%">
-	                 				<div class="container-fluid  textbox">          					
-	                 					<span class="gender-font">${chatHistory.memberName}</span>	                 					
-	                 					<span class="gender-font">${chatHistory.chatMessage} </span>
-	                 					<span class="gender-font" >${chatHistory.chatCreateAt}</span>
-	                 					<p> </p>
-	                 				</div>   
-	                 				</th>
-	                 				
+        				<tr class="table-default align-middle mine" >
+        							<td width="30%">
+        								<img src="${pageContext.request.contextPath}/download/${chatHistory.filesNo}" class="img-circle">
+        							</td>
+								    <td width="40%">
+								    	<p class="gender-font textbox">${chatHistory.chatMessage} </p>
+								    </td>
+								    <td  width="30%">
+								    	<span class="gender-font time" >${chatHistory.chatCreateAt}</span>								    
+								    </td>   				
+	                 					                 				
                  				</tr>
         			</c:when>
         			
         			<c:otherwise>
         				<tr class="table-default align-middle your">
-	                 				<th width="30%"> 
-	                 				<img src="${pageContext.request.contextPath}/download/${chatHistory.filesNo}" class="img-circle">
-	                 				</th>
-	                 				<th width="40%">
-	                 				<div class="container-fluid textbox">          					
-	                 					<span class="gender-font">${chatHistory.memberName}</span>	                 					
-	                 					<span class="gender-font">${chatHistory.chatMessage} </span>
-	                 					<span class="gender-font" id="chattext">${chatHistory.chatCreateAt}</span>
-	                 					<p> </p>
-	                 				</div> 
-	                 				</th>
+	                 				<td width="30%">
+        								<img src="${pageContext.request.contextPath}/download/${chatHistory.filesNo}" class="img-circle">
+        							</td>
+								    <td width="40%">
+								    	<p class="gender-font textbox">${chatHistory.chatMessage} </p>
+								    </td>
+								    <td>
+								    	<span class="gender-font time" >${chatHistory.chatCreateAt}</span>								    
+								    </td>   	
 	                 				
                  				</tr>
         			</c:otherwise>
@@ -139,7 +148,11 @@
                 <!-- 동적 생성 -->
                 <div id="message-list" class="message-box"></div>
             </ul>
+            
+            </div>
         </div>
+        
+        
         <div class="input-div">
          <!-- <textarea placeholder="Press Enter for send message."></textarea> -->   
        
