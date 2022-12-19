@@ -70,34 +70,37 @@
          
          </div>
           
-         <div class="row">
-            <div class="col-md-6 offset-md-3">   
-                 <table class="table table-hover pet-table text-center">
-          
+         <div class="row mb-3">
+             <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
+                 <table class="table table-hover align-middle">
            
-            
-                <tr class="table-default align-middle">
-                <th width="50%">
-                <p class="font">주문번호 :  ${trainingMemberVO.trainingNo}</p>
-                <p class="font">이용날짜    :  ${trainingMemberVO.trainingDate}</p>
-               
-                </th>
-                 <th width="50%">
-                <p class="font">훈련사 :  ${trainingMemberVO.memberName}</p>
-                <c:choose>
-                <c:when test="${trainingMemberVO.trainingStatus=='예약취소'}">
-                   <p class="font">환불포인트    :  ${trainingMemberVO.trainingPurchasePrice}</p>
-                 </c:when>
-                 <c:otherwise>
-                   <p class="font">사용포인트    :  ${trainingMemberVO.trainingPurchasePrice}</p>
-                 </c:otherwise>
-                 </c:choose>
-              
+            <tr>
+            <th width="30%">주문번호</th>
+            <td>${trainingMemberVO.trainingNo}</td>
+            </tr>
+            <tr>
+            <th width="30%">이용날짜</th>
+            <td>${trainingMemberVO.trainingDate}</td>
+            </tr>
+            <tr>
+            <th width="30%">훈련사 </th>
+            <td>${trainingMemberVO.memberName}</td>
+            </tr>
+            <tr>
+             <c:choose>
+             <c:when test="${trainingMemberVO.trainingStatus=='예약취소'}">
+             <th width="30%">환불포인트 </th>
+             <td> ${trainingMemberVO.trainingPurchasePrice}</td>
+             </c:when>
+              <c:otherwise>
+              <th width="30%">사용포인트 </th>
+              <td> ${trainingMemberVO.trainingPurchasePrice}</td>
+             </c:otherwise>
+              </c:choose>
+           
+               </th>
                 
-              
-                </th>
-                
-                </tr> 
+               </tr> 
                   
                 <tr class="table-default align-middle">
                 <c:forEach var="reservationDetailListVO" items="${list}">

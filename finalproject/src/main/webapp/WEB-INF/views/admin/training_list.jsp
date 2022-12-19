@@ -55,6 +55,11 @@
 			    			</tr>
 			    		</thead>
 			    		<tbody>
+			    			<c:if test="${trainingUsageVO.size()==0}">
+			    				<tr>
+			    					<td colspan="4" style="height:70px;">내역이 없습니다.</td>
+			    				</tr>
+			    			</c:if>
 			    		<c:forEach var="trainingUsageVO" items="${trainingUsageVO}">
 			    		<tr class="table-default align-middle">
 							<td>${trainingUsageVO.trainingNo}</td>

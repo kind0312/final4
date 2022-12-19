@@ -72,16 +72,18 @@
        
         <!-- 검색창 -->
         <form method="get">
-        <fieldset>
+      
         <div class="col-md-6 offset-md-3">
                  <h4 class="text-center">훈련사 신청/전환</h4>
             </div>
-       
+            <div class="float-end">
+      <fieldset>
         <label></label><input type="checkbox"name="type" value="신청">신청</label>
         <label></label><input  type="checkbox"name="type" value="승인">승인</label>
         <label></label><input  type="checkbox"name="type" value="반려">반려</label>
         <button class="btn btn-neutral btn-blue3 " type="submit">검색</button>
-      
+      </fieldset>
+      </div>
         </fieldset>
         </form>
         </div>

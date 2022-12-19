@@ -209,9 +209,9 @@
               /*border:2px solid #256BF31;*/
               font-weight: bolder;
               color:#fff;
-             font-size:1px;
+             font-size:3px;
               width: 45px;
-              height: 20px;
+              height: 30px;
               padding:4px;
            }
            .btn-gray{
