@@ -55,6 +55,7 @@ public class ChatController {
 	@GetMapping("/list")
 	public String chatList( HttpSession session , Model model) {
 		String memberId = (String) session.getAttribute(SessionConstant.ID);
+		model.addAttribute("sessionId", memberId); // 로그인 한 사람 id
 		
 		List<ChatListVO> listVO = chatDao.chatRoomList(memberId); //아이디로 리스트 찾아오기(일반회원 기준)		
 		
@@ -106,6 +107,10 @@ public class ChatController {
 		int myfilesNo = memberDao.findFileNo(memberId);
 		model.addAttribute("myimg", myfilesNo);
 		
+		// 채팅방 들어갈때 상대 메시지 읽음 표시 update
+		String partnerId = partner.getMemberId(); //상대 아이디
+		//메소드 추가해야함 
+		
 		return "chat/room";
 	}
 	
@@ -116,6 +121,7 @@ public class ChatController {
 				) {
 			
 			String memberId = (String) session.getAttribute(SessionConstant.ID);  //트레이너 memberId
+			
 			
 			//파라미터에서 roomNo
 			model.addAttribute("roomNo", roomNo);
@@ -201,8 +207,8 @@ public class ChatController {
 		//chat테이블에도 메세지 null로 하나 넣어줘야함
 		chatDao.insertMessage(ChatDto.builder()
 				.roomNo(seqNo)
-				.memberId(memberId)
-				.chatMessage("안녕하세요! "+"훈련사 " + memberDto.getMemberName() +"입니다." + " 문의사항이 있으시다면 남겨주세요.")
+				.memberId(trainerId)
+				.chatMessage("안녕하세요! "+"훈련사 " + trainerDto.getMemberName() +"입니다." + " 문의사항이 있으시다면 남겨주세요.")				
 				.build()				
 				);	
 		
