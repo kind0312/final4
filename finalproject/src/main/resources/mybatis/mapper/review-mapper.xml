@@ -46,7 +46,7 @@
  	</select>
 	
 	<!-- 전체 이용 이용후기 목록 조회 -->
-	<select id="list" resultType="ReviewVO">
+	<select id="list" resultType="ReviewVO" parameterType="int">
 		<!-- 조인 -->
 <!-- 		select  -->
 <!-- 			m.member_name,t.*, tp.training_purchase_price,  -->
@@ -64,17 +64,29 @@
 		<!-- view -->
 <!-- 		select * from review_list_view order by review_writetime desc -->
 
-		<!-- row() over() -->
+		<!-- 페이지 네이션 위한 rownum -->
 		select * from 
-			(select r.*, row_number() over(partition by review_no order by pet_no) as rn 
-				from review_list_view r) where rn = 1 order by review_no desc
+			(select rownum rn, TMP.* from 
+				(select * from 
+					(select r.*, row_number() over(partition by review_no order by pet_no) as rno from review_list_view r) 
+					where rno = 1 order by review_no desc)       
+   			 TMP ) 
+		where rn between #{startRow} and #{endRow}		
+	</select>
+	
+	<!-- 전체 이용 이용후기 목록 조회 -->
+	<select id="infinite" resultType="ReviewVO">
+			<!-- row() over() -->
+		select * from 
+			(select r.*, row_number() over(partition by review_no order by pet_no) as rno 
+				from review_list_view r) where rno = 1 order by review_no desc
 	</select>
 	
 	<!-- 전체 이용후기 상세 -->
 	<select id="fulldetail" resultType="ReviewVO" parameterType="int">
 		select * from 
-			(select r.*, row_number() over(partition by review_no order by pet_no) as rn 
-				from review_list_view r) where rn = 1 and review_no = #{reviewNo}
+			(select r.*, row_number() over(partition by review_no order by pet_no) as rno 
+				from review_list_view r) where rno = 1 and review_no = #{reviewNo}
 	</select>
 	
 	<!-- 이용후기 수정 -->
@@ -97,6 +109,12 @@
 		delete review where review_no = #{reviewNo}
 	</delete>
 	
+	<!-- 전체 이용후기 개수 -->
+	<select id="count" resultType="int">
+		select count(*) from 
+			(select r.*, row_number() over(partition by review_no order by pet_no) as rno 
+				from review_list_view r) where rno = 1 order by review_no desc
+	</select>
 	
 	<!-- 페이지네이션(마이페이지>후기) -->
 	<select id="pageList" resultType="ReviewDto" parameterType="PaginationListSearchVO">

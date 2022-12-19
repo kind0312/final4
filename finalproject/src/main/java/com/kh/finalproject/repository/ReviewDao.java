@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.finalproject.entity.ReviewDto;
 import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.vo.PaginationListSearchVO;
+import com.kh.finalproject.vo.ReviewPaginationVO;
 import com.kh.finalproject.vo.ReviewVO;
 import com.kh.finalproject.vo.TrainingListVO;
 
@@ -32,10 +33,15 @@ public interface ReviewDao {
 	boolean delete(int reviewNo);
 	
 	//전체 이용후기 목록
-	List<ReviewVO> reviewList();
+	List<ReviewVO> reviewList(ReviewPaginationVO vo);
+	
+	List<ReviewVO> reviewInfinite();
 	
 	//전체 이용후기 상세
 	ReviewVO fullDetail(int reviewNo);
+	
+	//리뷰의 총 개수
+	int count();
 	
 	//페이지네이션
 	//통합조회

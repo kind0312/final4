@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="login" value="${loginId != null}"></c:set>
-<c:set var="admin" value="${mg == '관리자'}"></c:set>
+<c:set var="trainer" value="${memberStatus == 'Y'}"></c:set>
 <html>
    <head>
       <title>
@@ -77,7 +77,10 @@
        
        <!-- 카카오 지도-->
        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94efcfc3a2fb279ab90052c1c24e8cc6"></script>
-         
+       
+       <!-- 무한 스크롤 -->
+       <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
+   
       <style>
          
 /*          <!-- div 확인 점선 --> */
@@ -377,15 +380,13 @@ s0.parentNode.insertBefore(s1,s0);
                    <li class="nav-item">
                      <a class="nav-link" href="${pageContext.request.contextPath}/review/fulllist">이용후기</a>
                    </li>
-                   <li class="nav-item">
-                     <a class="nav-link" href="${pageContext.request.contextPath}/member/apply">훈련사 지원</a>
-                   </li>
-                   
-                   <li class="nav-item">
-                     <a class="nav-link" href="javascript:void(Tawk_API.toggle())">문의하기</a>
-                   </li>
+                   <c:if test="${!trainer}">
+	                   <li class="nav-item">
+	                     <a class="nav-link" href="${pageContext.request.contextPath}/member/apply">훈련사 지원</a>
+	                   </li>
+                   </c:if>
                    <c:choose>
-                      <c:when test="${loginId == null}">
+                      <c:when test="${!login}">
                          <li class="nav-item">
                             <a class="nav-link" href="${pageContext.request.contextPath}/member/insert">회원가입</a>
                          </li>
