@@ -46,7 +46,7 @@
                  <h4 class="text-center">일반회원 채팅목록</h4>
             </div>
         </div>
-		
+		test : ${chatList}
         <div class="row">
             <div class="col-md-6 offset-md-3">   
                  <table class="table table-hover pet-table text-center">
@@ -64,7 +64,7 @@
 	                 					<p class="gender-font">${chatList.chatCreateAt}</p>
 	                 					<p class="gender-font" >new : ${chatList.chatMessageStatus}</p><!-- 마지막 채팅이 안읽은 상태면 null -->
 	                 					<p class="gender-font" >마지막 채팅 친사람 : ${chatList.memberId}</p>
-	                 					<p id ="newMessage" >★</p>
+	                 					<p class ="newMessage" >★</p>
 	                 				</th>
 	                 				<th width="30%">
 	                 					<a href="${pageContext.request.contextPath}/chat/room?roomNo=${chatList.roomNo}" class="btn btn-blue">채팅</a>
@@ -99,7 +99,7 @@ nameList.push("${chatList.memberId}");
 </c:forEach>
 
 console.log(sessionId);
-console.log(nameList);
+console.log(nameList); 
 
 
 let statusList = [];
@@ -107,13 +107,13 @@ let statusList = [];
 statusList.push("${chatList.chatMessageStatus}");
 </c:forEach>
 
-
-console.log(statusList);
+console.log(statusList); 
 
 for(var i = 0; i < nameList.length; i++){
-	console.log(nameList[i]);	
+	console.log(nameList[i] == sessionId);
+	console.log(statusList[i] == 'N');
 	if(nameList[i] == sessionId && statusList[i] == 'N'){
-		 $("#newMessage").hide();
+		 $(".newMessage").hide();
 	}
 }
 

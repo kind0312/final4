@@ -8,7 +8,6 @@
 <style>
 	.pet-table>tbody{
 		height:130px;
-		
 	}
 
 	.font{
@@ -24,8 +23,10 @@
 	.pet-table {
 	    border-top:1px solid rgba(0, 0, 0, 0.1);
 	    height:130px;
-	   
 	}
+	.mypage-top-nav{
+      margin-top:0.1rem !important
+   }
 </style>
 
 <body>
@@ -47,7 +48,7 @@
 	          <a class="nav-link mypage-nav" style="color:white;" href="${pageContext.request.contextPath}/admin/trainerList">훈련사 관리</a>
 	        </li>
 	         <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">포인트상품 관리</a>
+	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/admin/itemList">포인트상품 관리</a>
 	        </li>
 	      
      	 </ul>

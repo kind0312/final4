@@ -51,7 +51,7 @@ public class PayController {
 	//포인트 금액 선택 화면
 	@GetMapping("/point_select")
 	public String selectPay(@ModelAttribute ItemDto itemDto, Model model) {
-		model.addAttribute("item", itemDao.selectList());
+		model.addAttribute("item", itemDao.PaySelectList());
 		return "pay/point_select";
 	}
 	
