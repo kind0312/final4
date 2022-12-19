@@ -4,11 +4,8 @@ import java.util.List;
 
 import com.kh.finalproject.entity.ReviewDto;
 import com.kh.finalproject.entity.TrainingDto;
-<<<<<<< HEAD
-import com.kh.finalproject.vo.ReviewPaginationVO;
-=======
 import com.kh.finalproject.vo.PaginationListSearchVO;
->>>>>>> refs/remotes/origin/main
+import com.kh.finalproject.vo.ReviewPaginationVO;
 import com.kh.finalproject.vo.ReviewVO;
 import com.kh.finalproject.vo.TrainingListVO;
 
