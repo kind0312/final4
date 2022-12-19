@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.finalproject.entity.ReviewDto;
 import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.vo.PaginationListSearchVO;
+import com.kh.finalproject.vo.ReviewPaginationVO;
 import com.kh.finalproject.vo.ReviewVO;
 import com.kh.finalproject.vo.TrainingListVO;
 
@@ -65,8 +66,20 @@ public class ReviewDaoImpl implements ReviewDao {
 	
 	//전체 이용후기 목록
 	@Override
-	public List<ReviewVO> reviewList() {
-		return sqlSession.selectList("review.list");
+	public List<ReviewVO> reviewList(ReviewPaginationVO vo) {
+		int count = count();
+		vo.setCount(count);
+		
+		int endRow = vo.getP()*vo.getSize();
+		int startRow = endRow - (vo.getSize() - 1);
+		vo.setEndRow(endRow);
+		vo.setStartRow(startRow);
+		return sqlSession.selectList("review.list", vo);
+	}
+	
+	@Override
+	public List<ReviewVO> reviewInfinite() {
+		return sqlSession.selectList("review.infinite");
 	}
 	
 	//전체 이용후기 상세
@@ -74,7 +87,12 @@ public class ReviewDaoImpl implements ReviewDao {
 	public ReviewVO fullDetail(int reviewNo) {
 		return sqlSession.selectOne("review.fulldetail", reviewNo);
 	}
-
+	
+	//리뷰의 총 개수
+	@Override
+	public int count() {
+		return sqlSession.selectOne("review.count");
+	}
 	
 	//페이지네이션
 	//통합조회

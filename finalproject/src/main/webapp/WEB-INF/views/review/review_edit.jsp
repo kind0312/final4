@@ -133,7 +133,8 @@ $(function(){
 	//후기 작성
 	$("[name=reviewContent]").summernote({
 		toolbar: [],
-		width:600,
+		//width:600,
+		width:"100%",
 		height: 250, // 높이
            minHeight: 250, // 최소 높이
            lang:"ko-KR", // 언어설정

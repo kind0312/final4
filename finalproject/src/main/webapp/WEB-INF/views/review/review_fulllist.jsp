@@ -36,12 +36,12 @@
 		<div class="row mt-100">
 			<div class="row mt-4">
 				<div class="col-xl-3 offset-xl-2 col-lg-3 offset-lg-2 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-					<h3>${reviewList.size()}개의 후기</h3>
+					<h3>${count}개의 후기</h3>
 				</div>
 			</div>
 			<div class="row mt-4">
 				<div class="col-md-10 offset-md-1">
-					<div class="row mt-4">
+					<div class="row mt-4 list">
 						<c:forEach var="reviewDto" items="${reviewList}">
 							<div class="col-xl-5 offset-xl-1 col-lg-5 offset-lg-1 col-md-10 offset-md-1 col-sm-10 offset-sm-1 mt-4 reviewborder">
 								<a href="${pageContext.request.contextPath}/review/fulldetail?reviewNo=${reviewDto.reviewNo}">
@@ -49,7 +49,7 @@
 									<img class="col-xl-1 offset-xl-0 col-lg-1 offset-lg-0 col-md-4 offset-md-0 col-sm-4 offset-sm-0 mt-4" src="${pageContext.request.contextPath}/download/${reviewDto.filesNo}" style="width:100px; height: 85px; border-radius: 70%;">
 									<div class="col-xl-8 offset-xl-0 col-lg-8 offset-lg-0 col-md-8 offset-md-0 col-sm-8 offset-sm-0 mt-4">
 
-									<h3 class="text-dark">${reviewDto.reviewTitle}</h3>
+									<h3 class="text-dark" style="word-break:break-all;">${reviewDto.reviewTitle}</h3>
 										<div class="row">
 											<div class="col">
 												<div class="star-score" data-max="5" data-rate="${reviewDto.reviewGood}"></div>
@@ -76,33 +76,67 @@
 		<div class="row mt-100">
             <div class="col-md-10 offset-md-1 d-flex justify-content-center">
 			  <ul class="pagination">
-			    <li class="page-item disabled">
-			      <a class="page-link" href="#">&laquo;</a>
+			    <%-- 맨 처음 페이지로 이동 --%>
+			    <li class="page-item first-target">
+					<c:choose>
+						<c:when test = "${vo.isFirst()==false}"> <%-- 맨 처음 페이지가 아니라면 --%>
+							<a class="page-link" href = "fulllist?p=${vo.firstBlock()}&${vo.parameter()}">&laquo;</a> <%-- 첫 번째 페이지로 이동 --%>
+						</c:when>
+						<c:otherwise> <%-- 그렇지 않다면 --%>
+							<a class="page-link" href = "">&laquo;</a> <%-- 아무런 페이지 변화가 없도록 --%>
+						</c:otherwise>
+					</c:choose>
 			    </li>
-			    <li class="page-item active">
-			      <a class="page-link" href="#">1</a>
+			    
+			    <li class="page-item second-target">
+				    <%-- 이전 구간의 마지막 페이지로 이동 --%>
+					<c:choose>
+						<c:when test = "${vo.hasPrev()}"> <%-- 이전 페이지가 있다면 --%>
+							<a class="page-link" href = "fulllist?p=${vo.prevBlock()}&${vo.parameter()}">&lt;</a> <%-- 이전 구간의 마지막 페이지로 이동 --%>
+						</c:when>
+						<c:otherwise> <%-- 그렇지 않다면 --%>
+							<a class="page-link" href = "">&lt;</a> <%-- 아무런 페이지 변화가 없도록 --%>
+						</c:otherwise>
+					</c:choose>
 			    </li>
-			    <li class="page-item">
-			      <a class="page-link" href="#">2</a>
-			    </li>
-			    <li class="page-item">
-			      <a class="page-link" href="#">3</a>
-			    </li>
-			    <li class="page-item">
-			      <a class="page-link" href="#">4</a>
-			    </li>
-			    <li class="page-item">
-			      <a class="page-link" href="#">5</a>
-			    </li>
-			    <li class="page-item">
-			      <a class="page-link" href="#">&raquo;</a>
+			    
+			    <%-- 현재 구간의 페이지 이동 --%>
+				<%-- 변수명을 i로 하며 시작과 끝은 vo의 startBlock(), endBlock()의 반환값으로, 간격은 1로 한다  --%>
+				<c:forEach var = "i" begin = "${vo.startBlock()}" end = "${vo.endBlock()}" step = "1">
+					<li class="page-item blue-box">
+						<a class="page-link" href = "fulllist?p=${i}&${vo.parameter()}">${i}</a>
+					</li>
+				</c:forEach>
+				
+				<%-- 다음 구간의 첫 번째 페이지로 이동 --%>
+				<li class="page-item last-target">
+					<c:choose>
+						<c:when test = "${vo.hasNext()}"> <%-- 다음 페이지가 있다면 --%>
+							<a class="page-link"  href = "fulllist?p=${vo.nextBlock()}&${vo.parameter()}">&gt;</a> <%-- 다음 구간의 첫 번째 페이지로 이동 --%>
+						</c:when>
+						<c:otherwise> <%-- 그렇지 않다면 --%>
+							<a class="page-link"  href = "">&gt;</a> <%-- 아무런 페이지 변화가 없도록 --%>
+						</c:otherwise>
+					</c:choose>
+				</li>
+				
+				<%-- 맨 마지막 페이지로 이동 --%>
+			    <li class="page-item final-target">
+					<c:choose>
+						<c:when test = "${vo.isLast()==false}"> <%-- 맨 마지막 페이지가 아니라면 --%>
+							<a class="page-link" href = "fulllist?p=${vo.lastBlock()}&${vo.parameter()}">&raquo;</a> <%-- 맨 마지막 페이지로 이동 --%>
+						</c:when>
+						<c:otherwise>
+							<a class="page-link" href = "">&raquo;</a>
+						</c:otherwise>
+					</c:choose>
 			    </li>
 			  </ul>
 		  	</div>
 		</div>
 	</div>
 	
-	<script>
+	<script type="text/javascript">
 		$(function(){
 			 $(".star-score").score({
 	                starColor: "#81BDF1",
@@ -121,6 +155,50 @@
 	                }
 	         });
 		});
+		
+// 		$(".container-fluid").infiniteScroll({
+// 			  // options
+// 			  path: '.pagination',
+// 			  append: '.post',
+// 			  history: false,
+// 		});
+
+		var page = 1;
+		
+		$(window).scroll(function(){
+
+            //퍼센트 = (현재스크롤위치) / (문서높이 - 창높이) * 100
+            var percent = $(window).scrollTop() / ($(document).height() - $(window).height()) * 100;
+//             console.log(percent >= 45);
+            console.log(percent);
+            
+            if($(window).scrollTop() == $(document).height() - $(window).height()){
+            	console.log(++page);
+            }
+            
+			if(percent >= 45){
+	            fulllist();
+			}
+//             $(".reviewborder").css("height", percent+"%");
+        });
+		
+		function fulllist(){
+			$.ajax({
+				url:"${pageContext.request.contextPath}/rest/review/fulllist",
+				method:"get",
+				data:{
+					
+				},
+				success:function(resp){
+					console.log(resp.length);
+					console.log(resp);
+					for(var i = 0; i < resp.length; i++){
+						$(".list").append($("<div>").attr());
+					}
+				}
+			});
+		}
+		
 	</script>
 
 </body>

@@ -90,9 +90,11 @@
 						내용
 					</label>
 					<div class="input-group mt-3">
-						<textarea id="review-content" name="reviewContent" class="form-control rounded" readonly></textarea>
-						<div class="valid-feedback"></div>
-	                    <div class="invalid-feedback"></div>
+<!-- 	 					<div class="rounded" style="word-break:break-all;"> -->
+							<textarea id="review-content" name="reviewContent" class="form-control rounded" readonly>
+								${reviewDto.reviewContent}
+							</textarea>
+<!-- 						</div> -->
 					</div>
 				</div>
 			</div>
@@ -112,10 +114,10 @@ $(function(){
 	//후기 작성
 	$("[name=reviewContent]").summernote({
 		toolbar: [],
-		width:600,
+		width:"100%",
 		height: 250, // 높이
            minHeight: 250, // 최소 높이
-           placeholder:"${reviewDto.reviewContent}", // 도움말
+           placeholder:"", // 도움말
            lang:"ko-KR", // 언어설정
        });
 	
