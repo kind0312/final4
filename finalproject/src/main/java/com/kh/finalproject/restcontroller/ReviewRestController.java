@@ -22,9 +22,9 @@ public class ReviewRestController {
 	@Autowired
 	private ReviewDao reviewDao;
 	
-//	//전체 이용후기 목록
-//	@GetMapping("/fulllist")
-//	public List<ReviewVO> list(@ModelAttribute(name="vo") ReviewPaginationVO vo ) {
-//		return reviewDao.reviewList(vo);
-//	}
+	//전체 이용후기 목록
+	@GetMapping("/fulllist")
+	public List<ReviewVO> list() {
+		return reviewDao.reviewInfinite();
+	}
 }

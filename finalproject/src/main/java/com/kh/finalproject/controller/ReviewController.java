@@ -92,6 +92,7 @@ public class ReviewController {
 	@GetMapping("/fulllist")
 	public String list(Model model, @ModelAttribute(name="vo") ReviewPaginationVO vo) {
 		model.addAttribute("reviewList", reviewDao.reviewList(vo));
+		model.addAttribute("count", reviewDao.count());
 		return "review/review_fulllist";
 	}
 	

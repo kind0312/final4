@@ -34,6 +34,8 @@ public interface ReviewDao {
 	//전체 이용후기 목록
 	List<ReviewVO> reviewList(ReviewPaginationVO vo);
 	
+	List<ReviewVO> reviewInfinite();
+	
 	//전체 이용후기 상세
 	ReviewVO fullDetail(int reviewNo);
 	

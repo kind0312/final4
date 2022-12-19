@@ -76,6 +76,11 @@ public class ReviewDaoImpl implements ReviewDao {
 		return sqlSession.selectList("review.list", vo);
 	}
 	
+	@Override
+	public List<ReviewVO> reviewInfinite() {
+		return sqlSession.selectList("review.infinite");
+	}
+	
 	//전체 이용후기 상세
 	@Override
 	public ReviewVO fullDetail(int reviewNo) {
