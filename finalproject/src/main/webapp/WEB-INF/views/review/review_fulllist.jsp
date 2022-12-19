@@ -102,7 +102,7 @@
 		</div>
 	</div>
 	
-	<script>
+	<script type="text/javascript">
 		$(function(){
 			 $(".star-score").score({
 	                starColor: "#81BDF1",
@@ -122,12 +122,51 @@
 	         });
 		});
 		
-		$(".container-fluid").infiniteScroll({
-			  // options
-			  path: '.pagination__next',
-			  append: '.post',
-			  history: false,
-		});
+// 		$(".container-fluid").infiniteScroll({
+// 			  // options
+// 			  path: '.pagination',
+// 			  append: '.post',
+// 			  history: false,
+// 		});
+		
+		$(window).scroll(function(){
+            // console.log("스크롤!");
+            // console.log($(window).scrollTop(), $(window).height(), $(document).height());
+
+            //퍼센트 = (현재스크롤위치) / (문서높이 - 창높이) * 100
+            var percent = $(window).scrollTop() / ($(document).height() - $(window).height()) * 100;
+            console.log(percent);
+
+            $(".reviewborder").css("height", percent+"%");
+        });
+		
+		function fulllist(){
+			$.ajax({
+				url:"${pageContext.request.contextPath}/rest/member/confirmcert",
+				method:"get",
+				data:{
+					emailcertEmail:email,
+					emailcertSerial:serial
+				},
+				success:function(resp){
+					console.log(resp);
+					if(resp){
+						$("[name=memberEmail]").attr("readonly", "readonly");
+						$("#confirm-input").attr("readonly", "readonly");
+						validChecker.emailConfirmValid = true;
+						emailbtn.prop("disabled", true);
+						confirmbtn.prop("disabled", true);
+						$(".confirmResult").removeClass("possible impossible").addClass("possible").text("인증이 완료되었습니다");
+                   		$("#confirm-input").removeClass("is-valid is-invalid able disable").addClass("is-valid").addClass("able");
+					}
+					else{
+						$(".confirmResult").removeClass("possible impossible").addClass("impossible").text("인증번호 다시 확인해주세요");
+                   		$("#confirm-input").removeClass("is-valid is-invalid able disable").addClass("is-invalid").addClass("disable");
+					}
+				}
+			});
+		}
+		
 	</script>
 
 </body>

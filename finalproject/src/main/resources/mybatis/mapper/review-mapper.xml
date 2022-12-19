@@ -66,15 +66,15 @@
 
 		<!-- row() over() -->
 		select * from 
-			(select r.*, row_number() over(partition by review_no order by pet_no) as rn 
-				from review_list_view r) where rn = 1 order by review_no desc
+			(select r.*, row_number() over(partition by review_no order by pet_no) as rno 
+				from review_list_view r) where rno = 1 order by review_no desc
 	</select>
 	
 	<!-- 전체 이용후기 상세 -->
 	<select id="fulldetail" resultType="ReviewVO" parameterType="int">
 		select * from 
-			(select r.*, row_number() over(partition by review_no order by pet_no) as rn 
-				from review_list_view r) where rn = 1 and review_no = #{reviewNo}
+			(select r.*, row_number() over(partition by review_no order by pet_no) as rno 
+				from review_list_view r) where rno = 1 and review_no = #{reviewNo}
 	</select>
 	
 	<!-- 이용후기 수정 -->

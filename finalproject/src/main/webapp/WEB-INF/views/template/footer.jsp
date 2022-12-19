@@ -26,6 +26,7 @@
 <%-- 	loginId : ${sessionScope.loginId} <br> --%>
 <%-- 	로그인 : ${sessionScope.loginId != null} <br> --%>
 <%-- 	훈련사번호 : ${sessionScope.trainingNo} <br> --%>
+		훈련사 여부 : ${sessionScope.memberStatus}
 	</body>
 </html>
 	

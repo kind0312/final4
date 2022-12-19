@@ -65,9 +65,11 @@ public class MemberController {
 	@PostMapping("/login")
 	public String login(HttpSession session, 
 			@ModelAttribute MemberDto memberDto) {
+		MemberDto findDto = memberDao.selectOne(memberDto.getMemberId());
 		boolean login = memberDao.login(memberDto);
 		if(login) {
 			session.setAttribute(SessionConstant.ID, memberDto.getMemberId());
+			session.setAttribute(SessionConstant.STATUS, findDto.getMemberStatus());
 //			//로그인 시간을 갱신시키는 작업
 //			memberDao.updateLoginTime(findDto.getMemberId());
 			
@@ -83,6 +85,7 @@ public class MemberController {
 	public String logout(HttpSession session) {
 		session.removeAttribute(SessionConstant.ID);
 		session.removeAttribute(SessionConstant.trainingNo);
+		session.removeAttribute(SessionConstant.STATUS);
 		return "redirect:/";
 	}
 	
