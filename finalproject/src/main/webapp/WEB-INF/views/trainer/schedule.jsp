@@ -168,7 +168,7 @@
 	        						calendar.addEvent({
 		        						 start: resp[i]['trainingDate'],
 		        						 display: ['background'],
-		        						 color : ['#303030']
+		        						 color : ['#FADE81']
 	                                 })
 	        					}
 	        				}
@@ -212,9 +212,9 @@
             <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4">
                  <div class="text-center" id="calendar"></div>
                  <div class="text-center mt-2">
-                 	<span class="margin-10"><i class="fa-solid fa-circle"  style="color:#fcee9a;"></i> 오늘</span>
+<!--                  	<span class="margin-10"><i class="fa-solid fa-circle"  style="color:#fcee9a;"></i> 오늘</span> -->
                  	<span class="margin-10"><i class="fa-solid fa-circle blue"></i> 훈련</span>
-                 	<span class="margin-10"><i class="fa-solid fa-circle blue"  style="color:#B0B0B0;"></i> 완료</span>
+                 	<span class="margin-10"><i class="fa-solid fa-circle blue"  style="color:#FADE81;"></i> 완료</span>
                  </div>
             </div>
         </div>
