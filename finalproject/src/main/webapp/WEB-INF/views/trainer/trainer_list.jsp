@@ -102,12 +102,16 @@ height: 200px;
 color : black;
 font-weight: bolder;
 }
+.timg{
+width: 50px;
+height: 50px;
+}
 
     </style>
 <body>
 
-    <div class="trainer">    
-        <h2>훈련사를 소개합니다</h2>
+    <div class="trainer">  
+        <h2>훈련사를 소개합니다<img src="/image/trainer.png" class="timg"></h2>
         <div class="text-end">
                  	<i class="fa-solid fa-arrow-up-9-1 fa-2xs ing-btn"></i><button class="training-btn ing-btn">후기순</button>
                  	<i class="fa-solid fa-arrow-down-9-1 fa-2xs end-btn"></i><button class="training-btn end-btn">평점순</button>
@@ -121,7 +125,7 @@ font-weight: bolder;
                     <div class="img_area"><img src="http://localhost:8888/download/${list.filesNo}" class="img0"></div>
                 </div>
                 <div class="textbox">
-                    <h2>${list.getMemberName()} 펫시터</h2>
+                    <h2>${list.getMemberName()} 훈련사</h2>
                     <h3>${list.getTrainerProfile()}</h3>
                     <div class="review">
                         <div class="scopebox">
@@ -155,7 +159,7 @@ font-weight: bolder;
                     <div class="img_area"><img src="http://localhost:8888/download/${listReview.filesNo}" class="img0"></div>
                 </div>
                 <div class="textbox">
-                    <h2>${listReview.getMemberName()} 펫시터</h2>
+                    <h2>${listReview.getMemberName()} 훈련사</h2>
                     <h3>${listReview.getTrainerProfile()}</h3>
                     <div class="review">
                         <div class="scopebox">
