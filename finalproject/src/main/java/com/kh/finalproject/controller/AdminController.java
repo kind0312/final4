@@ -101,6 +101,7 @@ public class AdminController {
 	//관리자 일반회원 목록과 검색
 	@GetMapping("/memberList")
 	public String memberList(Model model,
+			
 			@ModelAttribute(name="vo") MemberListSearchVO vo) {
 		model.addAttribute("memberList",memberDao.selectList(vo));
 		
