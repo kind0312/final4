@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.ReviewDto;
 import com.kh.finalproject.entity.TrainingDto;
+import com.kh.finalproject.vo.PaginationListSearchVO;
 import com.kh.finalproject.vo.ReviewVO;
 import com.kh.finalproject.vo.TrainingListVO;
 
@@ -72,5 +73,54 @@ public class ReviewDaoImpl implements ReviewDao {
 	@Override
 	public ReviewVO fullDetail(int reviewNo) {
 		return sqlSession.selectOne("review.fulldetail", reviewNo);
+	}
+
+	
+	//페이지네이션
+	//통합조회
+	@Override
+	public List<ReviewDto> listAll(PaginationListSearchVO vo) {
+		// 조회 유형
+		if(vo.isSearch()) {	// 검색 조회일 경우
+			return search(vo);
+		}
+		else {	// 그렇지 않다면
+			return list(vo);
+		}
+	}
+
+	//전체조회
+	@Override
+	public List<ReviewDto> list(PaginationListSearchVO vo) {
+		return sqlSession.selectList("review.pageList",vo);
+	}
+
+	//검색조회
+	@Override
+	public List<ReviewDto> search(PaginationListSearchVO vo) {
+		return sqlSession.selectList("review.pageSearch",vo);
+	}
+
+	//조회 유형에 따른 총 조회 결과 갯수
+	@Override
+	public int count(PaginationListSearchVO vo) {
+		if(vo.isSearch()) {	// 검색 조회일 경우
+			return searchCount(vo);	// 검색 조회의 조회 결과 총 갯수 반환
+		}
+		else {	// 그렇지 않을 경우(전체 조회)
+			return listCount(vo.getMemberId());
+		}
+	}
+	
+	//전체 조회시 총 조회 결과 갯수
+	@Override
+	public int listCount(String memberId) {
+		return sqlSession.selectOne("review.listCount",memberId);
+	}
+	
+	//검색 조회시 총 조회 결과 갯수
+	@Override
+	public int searchCount(PaginationListSearchVO vo) {
+		return sqlSession.selectOne("review.searchCount",vo);
 	}
 }

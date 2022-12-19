@@ -96,5 +96,31 @@
 	<delete id="delete" parameterType="int">
 		delete review where review_no = #{reviewNo}
 	</delete>
+	
+	
+	<!-- 페이지네이션(마이페이지>후기) -->
+	<select id="pageList" resultType="ReviewDto" parameterType="PaginationListSearchVO">
+		select * from 
+        (select rownum rn, TMP.* from 
+        (select * from review where member_id=#{memberId} order by review_writetime desc)TMP ) 
+        where rn between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="pageSearch" resultType="ReviewDto" parameterType="PaginationListSearchVO">
+		select * from 
+		(select rownum rn, TMP.* from 
+		(select * from review where member_id=#{memberId}
+		and instr(#{type},#{keyword})>0 
+		order by review_writetime desc)TMP ) where rn between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="listCount" resultType="int" parameterType="String">
+		select count(*) from review where member_id=#{memberId}
+	</select>
+	
+	<select id="searchCount" resultType="int" parameterType="PaginationListSearchVO">
+		select count(*) from review where member_id=#{memberId} 
+		and instr(#{type},#{keyword})>0 
+	</select>
 		
 </mapper>
