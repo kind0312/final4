@@ -19,9 +19,17 @@
       </title>
       
       <!-- 글꼴 cdn -->
-      <link rel="preconnect" href="//fonts.googleapis.com">
-      <link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
-      <link href="//fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet">
+     <!--  <link rel="preconnect" href="//fonts.googleapis.com">
+      <link rel="preconnect" href="//fonts.gstatic.com" crossorigin> -->
+      <!-- <link href="//fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet"> -->
+      
+      
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+      
+      
+      
 <!--        <link rel="stylesheet" type="text/css" href="/css/reset.css"> -->
 <!--        <link rel="stylesheet" type="text/css" href="/css/layout.css"> -->
 <!--        <link rel="stylesheet" type="text/css" href="/css/commons.css"> -->
@@ -85,6 +93,10 @@
 /*                  border: 1px dotted gray; */
 /*               } */
           /* 태그 스타일 */
+        *{
+			font-family: 'Jua', 산세리프;      
+        }
+        
         html,
 		body {
                 height:100%;

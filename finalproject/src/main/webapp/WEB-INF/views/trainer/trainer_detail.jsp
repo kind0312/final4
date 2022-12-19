@@ -112,6 +112,20 @@ margin-left: 9px;
 font-size: 15px;
 color: gray;
 }
+
+.text-end{
+    margin-top: -62px;
+}
+
+.hoo{
+margin-left: 190px;
+margin-right: auto;
+}
+
+.simg{
+
+    width: 60;
+}
     </style>
 <body>
     <div class="viewmore">    
@@ -161,22 +175,31 @@ color: gray;
                  	<i class="fa-solid fa-arrow-up-9-1 fa-2xs ing-btn"></i><button class="training-btn ing-btn">평점 높은순</button>
                  	<i class="fa-solid fa-arrow-down-9-1 fa-2xs end-btn"></i><button class="training-btn end-btn">평점 낮은순</button>
                  </div>
+                 <c:choose>
+                 <c:when test="${review.size()==0}">
+                 <div class="row hoo mt-5" >
+                 후기가 아직 없어요!<img src="/image/sad.png" class="simg">
+                 </div>
+                 </c:when>
+                 <c:otherwise>
                  <div class="row training-ing">
 <c:forEach var="review" items="${review}">
 <div class="sitro">
 <span>
 <div class="star-score blue" data-max="5" data-rate="${review.getReviewGood()}" ></div><br>
-<p class="writetime">
+<span class="writetime">
 <img src="${pageContext.request.contextPath}/download/${review.filesNo}" style="width:60px; height: 60px; border-radius: 70%;">
-${review.getReviewWriteTime()}</p>
-<p style="size: 12px; font-weight: bold">
+${review.getReviewWriteTime()}</span>
+<span style="font-size: 15px; font-weight: bold">
 ${review.getReviewContent()}<br>
-</p>
+</span>
 </span>
 </div>
 <br><br>
 </c:forEach>
                 </div>
+                </c:otherwise>
+                </c:choose>
                 </div>
                 <div class="cfcate">
                  <div class="row training-end">
@@ -184,13 +207,13 @@ ${review.getReviewContent()}<br>
 <div class="sitro">
 <span>
 <div class="star-score blue" data-max="5" data-rate="${reviewBad.getReviewGood()}" ></div><br>
-<p class="writetime">
+<span class="writetime">
 <img src="${pageContext.request.contextPath}/download/${reviewBad.filesNo}" style="width:60px; height: 60px; border-radius: 70%;">
 ${reviewBad.getReviewWriteTime()}
-</p>
-<p style="size: 12px; font-weight: bold">
+</span>
+<span style="font-size: 15px; font-weight: bold; margin-top: -21px;">
 ${reviewBad.getReviewContent()}<br>
-</p>
+</span>
 </span>
 </div>
 <br><br>

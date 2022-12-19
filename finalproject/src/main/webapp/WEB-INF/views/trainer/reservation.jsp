@@ -91,7 +91,9 @@ h2{
    display: inline;
 }
 
-
+.gyul{
+margin-right: 10px;
+}
 
 
 input::placeholder{
@@ -508,7 +510,7 @@ $(function(){
 <div class="row">
  <div class="mt-20">
  
- <p class="p2"> 반려견 추가시 1마리당 50000포인트의 추가요금이 발생합니다.<br>(기본 100000포인트)</p>
+ <p class="p2" style="font-size:15px"> 반려견 추가시 1마리당 50000포인트의 추가요금이 발생합니다.<br>(기본 100000포인트)</p>
  </div>
   </div>
 <div class="row">
@@ -534,7 +536,7 @@ $(function(){
                 <span>결제 후 포인트</span>
                 <span class="price"></span>P
             </div>
-            <div class="invalid-feedback">결제할 포인트가 부족합니다!</div>
+            <span class="invalid-feedback gyul">결제할 포인트가 부족합니다!</span>
             </div>
             </div>
             </div>
