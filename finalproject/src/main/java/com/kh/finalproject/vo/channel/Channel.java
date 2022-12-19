@@ -3,6 +3,7 @@ package com.kh.finalproject.vo.channel;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.socket.TextMessage;
@@ -31,7 +32,7 @@ public class Channel {
 			rooms.put(name, new Room());//방을 만든다
 		}
 		
-		rooms.get(name).enter(user); //유저 입장
+		rooms.get(name).enter(user); //유저 입장		
 	}
 	
 	

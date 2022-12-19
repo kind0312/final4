@@ -20,7 +20,7 @@
   </insert>
   
   <insert id="chatMessageInsert" parameterType="ChatDto">
-  insert into chat values (chat_seq.nextval, #{roomNo}, #{memberId}, sysdate, #{chatMessage}, null)
+  insert into chat values (chat_seq.nextval, #{roomNo}, #{memberId}, sysdate, #{chatMessage},'N')
   </insert>
   
   <select id="chatList" parameterType="String" resultType="ChatDto">
@@ -40,10 +40,10 @@
   
   <!-- 일반회원 기준에서 채팅리스트 뽑기 -->
   <select id="chatRoomList" parameterType="String" resultType="ChatListVO">
-  	select h.chat_no, h.room_no,h.chat_create_at,h.chat_message,p.member_name,p.files_no,h.chat_message_status
+  	select h.chat_no, h.room_no,h.chat_create_at,h.chat_message,p.member_name,p.files_no,h.chat_message_status, h.member_id
 	from
 	(
-	select chat.chat_no,chat.room_no,chat.chat_create_at,chat.chat_message,chat.chat_message_status
+	select chat.chat_no,chat.room_no,chat.chat_create_at,chat.chat_message,chat.chat_message_status,chat.member_id
 	,ROW_NUMBER() OVER (PARTITION BY chat.room_no ORDER BY chat.chat_no desc) AS emp_no
 	from chat chat
 	)H left join(select *
@@ -57,10 +57,10 @@
   
    <!-- 훈련사 기준에서 채팅리스트 뽑기 -->
    <select id="trainerchatRoomList" parameterType="String" resultType="ChatListVO">
-  	select h.chat_no, h.room_no,h.chat_create_at,h.chat_message,p.member_name,p.files_no,h.chat_message_status
+  	select h.chat_no, h.room_no,h.chat_create_at,h.chat_message,p.member_name,p.files_no,h.chat_message_status,h.member_id
 	from
 	(
-	select chat.chat_no,chat.room_no,chat.chat_create_at,chat.chat_message,chat.chat_message_status
+	select chat.chat_no,chat.room_no,chat.chat_create_at,chat.chat_message,chat.chat_message_status,chat.member_id
 	,ROW_NUMBER() OVER (PARTITION BY chat.room_no ORDER BY chat.chat_no desc) AS emp_no
 	from chat chat
 	)H left join(select *
