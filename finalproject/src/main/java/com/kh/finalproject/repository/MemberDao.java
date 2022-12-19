@@ -31,8 +31,9 @@ public interface MemberDao {
 	
 	
 	//조회
-    //회원 검색
+    //회원 통합 조회
 	List<MemberListVO>selectList(MemberListSearchVO vo);
+
 	//회원 조회
 	MemberDto selectOne(String memberId);
 	//회원 프로필 이미지 파일 번호 찾기
@@ -51,14 +52,15 @@ public interface MemberDao {
 	boolean profileImgEdit(MemberImgDto memberImgDto);
 	//회원 탈퇴시 처리(삭제아님)
 	boolean goodbye(String memberId);
-	//member_img테이블 delete 메소드
-	boolean memberImgDelete(String memberId);
 	//훈련사로 전환 시 회원상태 변경
 	boolean statusChange(String memberId);
 	
 	//삭제
 	//회원 탈퇴시 처리(삭제)
 	boolean delete(String memberId);
+	//member_img테이블 delete 메소드
+	boolean memberImgDelete(String memberId);
+	
 	
 
 	

@@ -105,6 +105,8 @@ public class AdminController {
 			@ModelAttribute(name="vo") MemberListSearchVO vo) {
 		model.addAttribute("memberList",memberDao.selectList(vo));
 		
+		
+		
 		return "admin/memberList";
 	}
 	//관리자 훈련사 목록과 검색

@@ -31,14 +31,9 @@
 				member_id = #{memberId}
 	</update>
     	
-	<select id="list" resultType="MemberDto">
+     <select id="list" resultType="MemberDto">
 	    select *from member order by member_joindate asc
-	 <!--  <if test="sort !=null">
-	 order by
-	 <foreach collection="sort" item="s" separator=",">
-	 	${s}
-	 </foreach>
-	</if>-->
+
 	</select> 
 	  
 	<select id="search" parameterType="map" resultType="MemberDto">
@@ -118,6 +113,7 @@
 	delete member_img where member_id = #{memberId}
 	</delete>
 	
+
 	
 	
 </mapper>

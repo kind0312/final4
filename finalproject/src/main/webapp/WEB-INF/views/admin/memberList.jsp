@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ 
+ <!-- 테스트용 데이터 출력 -->
+ 
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
 	<jsp:param value="회원 목록" name="title"/>
 </jsp:include>
@@ -96,7 +99,7 @@
 
 </tr>
 </div>
-
+<h3>${vo}</h3>
 </div>
 
 <!-- 정렬 
