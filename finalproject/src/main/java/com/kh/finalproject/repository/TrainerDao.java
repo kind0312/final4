@@ -54,5 +54,7 @@ public interface TrainerDao {
 	
 	//훈련사 생성
 	void insert(TrainerDto dto);
+	//후기순 정렬
+	List<TrainerListVO> selectTrainerListAvg();
 
 }

@@ -14,14 +14,22 @@ public class ItemDaoImpl implements ItemDao{
 	@Autowired
 	private SqlSession sqlSession;
 
+	//등록
 	@Override
 	public void insert(ItemDto itemDto) {
 		sqlSession.insert("item.insert",itemDto);
 	}
 
+	//전체조회
 	@Override
 	public List<ItemDto> selectList() {
 		return sqlSession.selectList("item.list");
+	}
+	
+	//포인트 구매 조회
+	@Override
+	public List<ItemDto> PaySelectList() {
+		return sqlSession.selectList("item.paySelectList");
 	}
 
 	@Override
@@ -29,9 +37,21 @@ public class ItemDaoImpl implements ItemDao{
 		return sqlSession.selectOne("item.selectone", itemNo);
 	}	
 	
-@Override
-	public ItemDto selectOne(String itemName) {
-	return sqlSession.selectOne("item.selectname", itemName);
+	@Override
+		public ItemDto selectOne(String itemName) {
+			return sqlSession.selectOne("item.selectname", itemName);
+		}
+	
+	//수정
+	@Override
+	public boolean edit(ItemDto itemDto) {
+		return sqlSession.update("item.edit",itemDto)>0;
+	}
+	
+	//삭제
+	@Override
+	public boolean delete(int itemNo) {
+		return sqlSession.delete("item.delete",itemNo)>0;
 	}
 	
 	
