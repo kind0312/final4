@@ -20,6 +20,8 @@
 		padding:1em;
 		border:1px solid black;
 		border-radius:1em;
+		width: 80%;
+		
 	}
 	.img-circle{
 		border-radius: 70%;
@@ -39,6 +41,16 @@
 	#message-input {
 	
 	}
+	
+	.mine {
+	
+	}
+	
+	.partner {
+	
+	}
+	
+
 	
 </style>
 
@@ -62,7 +74,7 @@
         </div>
         <div class="chat">
         
-        	<ul>
+        	<ul id="it">
         	<c:forEach var="chatHistory" items="${chatHistory}">
                 				<tr class="table-default align-middle">
 	                 				<th width="30%"> 
@@ -81,7 +93,7 @@
         
             <ul>
                 <!-- 동적 생성 -->
-                <div id="message-list"  data-bs-spy="scroll" data-bs-offset="0" class="scrollspy-example" tabindex="0"></div>
+                <div id="message-list" class="message-box"></div>
             </ul>
         </div>
         <div class="input-div">
@@ -156,7 +168,12 @@ $(function(){
 
 		var img = $("<img>").addClass("img-circle").attr('id','imgID').attr( "src","${pageContext.request.contextPath}/download/"+imgNo);
 		
-				
+		if(data.memberId == userId){
+			p.addClass("mine");
+		}
+		else {
+			p.addClass("partner");
+		}
 		
 		p.append(w).append(c).append(t);  //작성자 내용 시간
 		
@@ -197,14 +214,14 @@ $(function(){
 	});
 	
 	
-	
-// 	//4
-// 	$("#message-send").click(function(){
-// 		var file = $("img-input").val();
+	$("#it").function(){
 		
-// 		socket.send(JSON.stringify(file));
-// 		$("#img-input").val(""); //첨부파일 창 비우기 
-// 	});
+		
+	};
+	
+	
+	
+
 	
 	
 });

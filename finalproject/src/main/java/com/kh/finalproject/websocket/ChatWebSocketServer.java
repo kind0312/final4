@@ -78,6 +78,8 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 									.build();
 			waitingRoom.enter(user);
 			log.debug("대기실 입장 - 현재 {}명", waitingRoom.size());
+			
+			
 			}
 		
 		@Override
@@ -110,6 +112,9 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 			String memberId = user.getMemberId(); // 회원 아이디
 			int filesNo = memberDao.findFileNo(memberId); // 파일 넘버 찾아옴		
 			
+		
+			
+			
 			
 			
 			//메세지 해석
@@ -129,6 +134,10 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 			else if(receiveVO.getType() == 2) {
 				//사용자가 채팅을 보내는 경우(채팅내용을 사용자가 보냄)
 				//- 해당하는 방의 모든 사용자에게 메세지를 전송
+			
+			
+				
+				
 				
 			ChatDto chatDto = ChatDto.builder()
 													.memberId(user.getMemberId())	
@@ -143,16 +152,17 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 					.roomNo(receiveVO.getRoom())
 					.chatMessage(receiveVO.getText())
 					.chatCreateAt(new Date())
+					.chatMessageStatus("N")
 					.build();
 					
-			
+		
 			
 			
 				String json = mapper.writeValueAsString(chat);
 				TextMessage msg = new TextMessage(json);
 				channel.send(user, msg);
 				
-				System.out.println("채팅Dto " + chatDto); 
+				//System.out.println("채팅Dto " + chatDto); 
 				//chatNo는 실시간 소켓에서는 없음 디비 들어갈때 생성 
 				// roomNo는 가져올수있을거같은데 ...-> 가져왔음 Dto에 들어온다
 				
