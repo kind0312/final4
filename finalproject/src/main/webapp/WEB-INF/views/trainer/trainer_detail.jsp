@@ -15,6 +15,42 @@
     <title></title>
 </head>
 <script type="text/javascript">
+$(function(){
+	//시작시 진행예약화면 고정
+	ingClick();
+	
+	//진행 예약 버튼 이벤트
+	$(".ing-btn").click(function(){
+		ingClick();
+	});
+	
+	//지난 예약 버튼 이벤트
+	$(".end-btn").click(function(){
+		endClick();
+	});
+
+function ingClick(){
+	//버튼 색상 변경
+	$(".end-btn").removeClass("unselect-btn select-btn");
+	$(".ing-btn").removeClass("unselect-btn select-btn");
+	$(".end-btn").addClass("unselect-btn");
+	$(".ing-btn").addClass("select-btn");
+	//진행 예약만 출력
+	$(".training-end").children().hide();
+	$(".training-ing").children().show();
+}
+
+function endClick(){
+	//버튼 색상 변경
+	$(".ing-btn").removeClass("unselect-btn select-btn");
+	$(".end-btn").removeClass("unselect-btn select-btn");
+	$(".ing-btn").addClass("unselect-btn");
+	$(".end-btn").addClass("select-btn");
+	//지난 예약만 출력
+	$(".training-end").children().show();
+	$(".training-ing").children().hide();
+}
+});
         $(function(){
             $(".star-score").score({
                 starColor:"#81BDF1",//별 색상(기본 : 금색)
@@ -50,11 +86,36 @@ height: 200px;
 margin-left: -7px;
 margin-bottom: 7px;
 }
+.training-btn{
+		background-color:#fff;
+		border:none;
+		color:#303030;
+		font-size:17px;
+		
+	}
+	.unselect-btn{
+		color:#7B7B7B;
+		
+}
+.select-btn{
+color : black;
+font-weight: bolder;
+}
 
+.timg{
+width: 45px;
+height: 45px;
+margin-left: 9px;
+}
+
+.writetime{
+font-size: 15px;
+color: gray;
+}
     </style>
 <body>
     <div class="viewmore">    
-        <h2>훈련사를 소개합니다</h2>
+        <h2>훈련사를 소개합니다<img src="/image/trainer.png" class="timg"></h2>
         <div class="content">
             <div class="box">
                 <div class="imgbox">
@@ -88,27 +149,55 @@ margin-bottom: 7px;
                 <h2>${list.getMemberName()} 훈련사</h2>
 <br>
                 <div class="sitro">
-                    <h3>자기소개</h3>
+                    <h3>자기소개<img src="/image/documents.png" class="timg"></h3>
                     <span>
                        ${list.getTrainerProfileContent()}
                     </span>
                 </div>
 
-                <div class="cfcate">
-                    <h3>후기 목록</h3>
+                <div class="cfcate ">
+                    <h3>후기 목록   <img src="/image/reviews.png" class="timg"></h3>
+                    <div class="text-end">
+                 	<i class="fa-solid fa-arrow-up-9-1 fa-2xs ing-btn"></i><button class="training-btn ing-btn">평점 높은순</button>
+                 	<i class="fa-solid fa-arrow-down-9-1 fa-2xs end-btn"></i><button class="training-btn end-btn">평점 낮은순</button>
+                 </div>
+                 <div class="row training-ing">
 <c:forEach var="review" items="${review}">
 <div class="sitro">
 <span>
 <div class="star-score blue" data-max="5" data-rate="${review.getReviewGood()}" ></div><br>
-리뷰 제목 : ${review.getReviewTitle()}<br>
-리뷰 내용 : ${review.getReviewContent()}<br>
-작성 날짜 : ${review.getReviewWriteTime()}<br>
+<p class="writetime">
+<img src="${pageContext.request.contextPath}/download/${review.filesNo}" style="width:60px; height: 60px; border-radius: 70%;">
+${review.getReviewWriteTime()}</p>
+<p style="size: 12px; font-weight: bold">
+${review.getReviewContent()}<br>
+</p>
+</span>
+</div>
+<br><br>
+</c:forEach>
+                </div>
+                </div>
+                <div class="cfcate">
+                 <div class="row training-end">
+<c:forEach var="reviewBad" items="${reviewBad}">
+<div class="sitro">
+<span>
+<div class="star-score blue" data-max="5" data-rate="${reviewBad.getReviewGood()}" ></div><br>
+<p class="writetime">
+<img src="${pageContext.request.contextPath}/download/${reviewBad.filesNo}" style="width:60px; height: 60px; border-radius: 70%;">
+${reviewBad.getReviewWriteTime()}
+</p>
+<p style="size: 12px; font-weight: bold">
+${reviewBad.getReviewContent()}<br>
+</p>
 </span>
 </div>
 <br><br>
 </c:forEach>
                 </div>
             </div>  
+            </div>
         </div>  
         
     </div>

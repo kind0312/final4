@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
 	<jsp:param value="포인트 이용내역" name="title"/>
@@ -89,7 +90,10 @@
         <div class="row">
               <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
                  <h6 style="display:inline-block;">현재 보유 포인트 : </h6>
-                 <span class="mypoint" >${member.memberPoint} P</span>
+                 <span class="mypoint" >
+                 	<fmt:formatNumber value="${member.memberPoint}" pattern="###,###"></fmt:formatNumber>
+                 	 P
+                 </span>
              </div>
         </div>
  
@@ -112,18 +116,22 @@
 			    			</c:if>
 			    			<c:forEach var="list" items="${list}">
 			    				<c:choose>
-			    					<c:when test="${list.pointStatus=='사용'}">
+			    					<c:when test="${list.pointStatus=='사용' or list.pointStatus=='환불'}">
 			    						<tr>
 					    					<td>${list.pointDate}</td>
 					    					<td></td>
-					    					<td class="minus-font">- ${list.pointPrice}</td>
+					    					<td class="minus-font">-
+					    						 <fmt:formatNumber value="${list.pointPrice}" pattern="###,###"></fmt:formatNumber>
+					    					</td>
 					    					<td>${list.pointStatus}</td>
 					    				</tr>
 			    					</c:when>
 			    					<c:when test="${list.pointStatus=='구매'}">
 			    						<tr>
 					    					<td>${list.pointDate}</td>
-					    					<td class="plus-font">+ ${list.pointPrice}</td>
+					    					<td class="plus-font">+ 
+					    					 	<fmt:formatNumber value="${list.pointPrice}" pattern="###,###"></fmt:formatNumber>
+					    					</td>
 					    					<td></td>
 					    					<td>${list.pointStatus}</td>
 					    				</tr>

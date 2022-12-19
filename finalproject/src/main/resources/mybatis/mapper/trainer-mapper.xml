@@ -42,7 +42,7 @@
 	    (select trainer_no, count(*) cnt, avg(review_good) avg 
 	    from review group by trainer_no)
 	    R on R.trainer_no = T.trainer_no order by avg desc
-      </select>
+      </select> 
       
       <!-- 훈련사 단일 조회 mapper -->
       <select id="selectOne"  parameterType="int" resultType="TrainerListVO">
@@ -58,7 +58,15 @@
       
       <!-- 훈련사 단일 리뷰 조회 -->
       <select id="selectReviewOne" parameterType="int" resultType="ReviewVO">
-      select * from review where trainer_no = #{trainerNo}
+      select * from 
+			(select r.*, row_number() over(partition by review_no order by pet_no) as rn 
+				from review_list_view r) where rn = 1 order by review_good desc
+      </select>
+      
+      <select id="selectReviewOneBad" parameterType="int" resultType="ReviewVO">
+      select * from 
+			(select r.*, row_number() over(partition by review_no order by pet_no) as rn 
+				from review_list_view r) where rn = 1 order by review_good asc
       </select>
 
       <insert id="trainerProfileInsert" parameterType="TrainerDto"> 

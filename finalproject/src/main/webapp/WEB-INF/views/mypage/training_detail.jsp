@@ -112,7 +112,7 @@
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/like">찜관리</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">후기</a>
+	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/review">후기</a>
 	        </li>
 	        <li class="nav-item">
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/profile">정보수정</a>
@@ -147,8 +147,7 @@
 				</div>
 			</div>
 		</div>
-			${training}<br>
-			${trainer}
+
 		<div class="row mt-3">
 			<div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 ">   
 				<table class="table point-table text-center">

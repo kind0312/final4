@@ -22,7 +22,6 @@
       <link rel="preconnect" href="//fonts.googleapis.com">
       <link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
       <link href="//fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet">
-   
 <!--        <link rel="stylesheet" type="text/css" href="/css/reset.css"> -->
 <!--        <link rel="stylesheet" type="text/css" href="/css/layout.css"> -->
 <!--        <link rel="stylesheet" type="text/css" href="/css/commons.css"> -->
@@ -78,7 +77,7 @@
        
        <!-- 카카오 지도-->
        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94efcfc3a2fb279ab90052c1c24e8cc6"></script>
-   
+   		
       <style>
       	
 /*          <!-- div 확인 점선 --> */
@@ -306,13 +305,25 @@
          .label-font-weight{
          	font-weight:bold;
          }
+         .modal-body{
+         	font-size:16px;
+         }
          
       </style>
       
-      <script type="text/javascript"> 
-         
-      
-      </script>
+      <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/639fc27eb0d6371309d50e06/1gkk2p64m';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
    </head>
    <body>
    
@@ -365,6 +376,10 @@
                    </li>
                    <li class="nav-item">
                      <a class="nav-link" href="${pageContext.request.contextPath}/member/apply">훈련사 지원</a>
+                   </li>
+                   
+                   <li class="nav-item">
+                     <a class="nav-link" href="javascript:void(Tawk_API.toggle())">문의하기</a>
                    </li>
                    <c:choose>
                       <c:when test="${loginId == null}">

@@ -51,13 +51,14 @@ public interface MemberDao {
 	boolean profileImgEdit(MemberImgDto memberImgDto);
 	//회원 탈퇴시 처리(삭제아님)
 	boolean goodbye(String memberId);
-	//member_img테이블 delete 메소드
-	boolean memberImgDelete(String memberId);
 	//훈련사로 전환 시 회원상태 변경
 	boolean statusChange(String memberId);
 	
 	//삭제
 	//회원 탈퇴시 처리(삭제)
 	boolean delete(String memberId);
+	//member_img테이블 delete 메소드
+	boolean memberImgDelete(String memberId);
+	
 	
 }
