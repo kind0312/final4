@@ -48,7 +48,16 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">   
                  <table class="table table-hover pet-table text-center">
+                 
                  		<thead>
+                 		
+                 		<c:choose>
+                 			<c:when test="${requestList.size()==0}">
+					  			<tr class="table-default align-middle">
+					  				<td colspan="3" height="130px">내역이 존재하지 않습니다!</td>
+					  			</tr>
+					  		</c:when>
+                 		<c:otherwise>
               				<c:forEach var="request" items="${requestList}">
                 				<tr class="table-default align-middle">
 	                 				<th width="30%">
@@ -56,7 +65,7 @@
 	                 				</th>
 	                 				<th width="40%">
 	                 					
-	                 					<p class="name-font">${request.petName } 외 (숫자)</p>
+	                 					<p class="name-font">${request.petName }</p>
 	                 					<p class="gender-font">주소 : ${request.trainingBasicAddress}</p>
 	                 					<p class="gender-font">방문 일자 : ${request.trainingDate}</p>
 	                 					<p class="gender-font">방문시간 : ${request.trainingStartTime}</p>
@@ -66,6 +75,8 @@
 	                 				</th>
                  				</tr>
 		                	</c:forEach>
+		                	</c:otherwise>
+		                	</c:choose>
                  		</thead>					  	
 					  
                  </table>

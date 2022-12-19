@@ -24,7 +24,9 @@
 	    font-size: 13px;
 	    border-radius: 10px;
 	     margin-left: 20px;
-	    background-color: #ddd;
+	   
+	     
+	    
 		
 	}
 	.img-circle{
@@ -45,7 +47,7 @@
 	}
 	
 	#message-input {
-	
+	width: 80%;
 	}
 	
 	.mine {
@@ -62,13 +64,15 @@
 	.textbox {
 	
     display: inline-block;
-    width: 70%;
+    width: 500px;
     padding: 10px;
     margin-top: 7px;
     font-size: 13px;
     border-radius: 10px;
      margin-left: 20px;
-    background-color: #ddd;
+     border: 1px solid black;
+
+    
 
 	}
 	
@@ -78,7 +82,16 @@
 	.time {
 	font-size: 5px;
 	}
-	
+	.tb-mine {
+	 background-color: #81BDF1;
+	 color: white;
+	 
+	}
+	.tb-your {
+	 background-color:white;
+	 border-color: black;
+	 
+	}
 
 	
 </style>
@@ -106,42 +119,43 @@
         	<div class="col-md-6 offset-md-3">
         
         	<ul id="it">
+        	
         	<c:forEach var="chatHistory" items="${chatHistory}">
         		<c:choose>          
         			<c:when test = "${myId eq chatHistory.memberId}">
-        				<tr class="table-default align-middle mine" >
-        							<td width="30%">
-        								<img src="${pageContext.request.contextPath}/download/${chatHistory.filesNo}" class="img-circle">
-        							</td>
-								    <td width="40%">
-								    	<p class="gender-font textbox">${chatHistory.chatMessage} </p>
-								    </td>
-								    <td  width="30%">
+        				<div class="align-middle mine" >
+        						
+        							
 								    	<span class="gender-font time" >${chatHistory.chatCreateAt}</span>								    
-								    </td>   				
+								  
+								    	<span class="gender-font textbox tb-mine">${chatHistory.chatMessage} </span>								   
+								  
+        								<img src="${pageContext.request.contextPath}/download/${chatHistory.filesNo}" class="img-circle">
+								    			
 	                 					                 				
-                 				</tr>
+                 			</div>	
         			</c:when>
         			
         			<c:otherwise>
-        				<tr class="table-default align-middle your">
-	                 				<td width="30%">
+        				<div class=" align-middle your">
+	                 			
         								<img src="${pageContext.request.contextPath}/download/${chatHistory.filesNo}" class="img-circle">
-        							</td>
-								    <td width="40%">
-								    	<p class="gender-font textbox">${chatHistory.chatMessage} </p>
-								    </td>
-								    <td>
+        							
+								   
+								    	<span class="gender-font textbox tb-your">${chatHistory.chatMessage} </span>
+								  
+								   
 								    	<span class="gender-font time" >${chatHistory.chatCreateAt}</span>								    
-								    </td>   	
-	                 				
-                 				</tr>
+								   	
+	                 		</div>		
+                 				
         			</c:otherwise>
 	              
         			    						
         		</c:choose>
         	
 		       	</c:forEach>
+		       
         	</ul>
         
             <ul>
@@ -149,8 +163,6 @@
                 <div id="message-list" class="message-box"></div>
             </ul>
             
-            </div>
-        </div>
         
         
         <div class="input-div">
@@ -162,7 +174,11 @@
        
 			<button type="button" id="message-send" class="btn btn-blue text-center">전송</button>
 		
-        </div>
+        	</div>
+         </div>
+       </div>
+        
+        
 	</div>
 
 </div>
