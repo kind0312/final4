@@ -237,8 +237,8 @@
 		    
     </select>
      <!-- 관리자/훈련 이용내역 상세 -->
-     <select id="oneDetail2"  resultType="TrainingMemberVO" parameterType="int">    
-     select m.member_name,t.training_no,t.training_date,t.training_status, tp.training_purchase_price
+    <select id="oneDetail2"  resultType="trainingMemberVO" parameterType="int">    
+    select m.member_name,t.training_no,t.training_date,t.training_status, tp.training_purchase_price
     from trainer tr
     inner join member m on m.member_id=tr.member_id
     inner join linked_list li on li.trainer_no=tr.trainer_no

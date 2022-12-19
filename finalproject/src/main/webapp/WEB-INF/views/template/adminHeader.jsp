@@ -199,6 +199,16 @@
               color:#fff;
               font-size:15px;
            }
+           .btn-blue3{
+              background-color: #256BF3;
+              border:2px solid #256BF31;
+              font-weight: bolder;
+              color:#fff;
+             font-size:1px;
+              width: 45px;
+              height: 20px;
+              padding:4px;
+           }
            .btn-gray{
               background-color: #D9D9D9;
               border:2px solid #D9D9D9;

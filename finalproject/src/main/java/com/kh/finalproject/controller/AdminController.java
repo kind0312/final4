@@ -29,7 +29,7 @@ import com.kh.finalproject.repository.TrainingDao;
 
 
 import com.kh.finalproject.vo.ApplyDetailVO;
-
+import com.kh.finalproject.vo.ApplyListSearchVO;
 import com.kh.finalproject.vo.MemberListSearchVO;
 import com.kh.finalproject.vo.PetInsertVO;
 import com.kh.finalproject.vo.PointListVO;
@@ -180,11 +180,11 @@ public class AdminController {
 
 	//관리자 훈련사-신청/전환/목록
 	@GetMapping("/applyList")
-	public String applyList(Model model){
-	
-		List<ApplyDto> applyDto=applyDao.selectList();
-	    model.addAttribute("applyDto",applyDto);
-		
+	public String applyList(Model model, @ModelAttribute ApplyListSearchVO vo){
+	    
+		//List<ApplyDto> applyDto=applyDao.selectList();
+	   // model.addAttribute("applyDto",applyDto);
+		model.addAttribute("list",applyDao.selectList(vo));
 	    return "admin/applyList";
 	}
 	
@@ -265,8 +265,6 @@ public class AdminController {
 		
 		//pet+사진 
 		
-		
-	
 		List<ReservationDetailListVO> list=trainingDao.usageDetail(trainingNo);
 		model.addAttribute("list",list);
 	

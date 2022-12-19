@@ -77,13 +77,13 @@
             
                 <tr class="table-default align-middle">
                 <th width="50%">
-                <p class="font">주문번호 :  {trainingMemberVO.trainingNo}</p>
-                <p class="font">이용날짜    :  {trainingMemberVO.trainingDate}</p>
+                <p class="font">주문번호 :  ${trainingMemberVO.trainingNo}</p>
+                <p class="font">이용날짜    :  ${trainingMemberVO.trainingDate}</p>
                
                 </th>
                  <th width="50%">
-                <p class="font">훈련사 :  {trainingMemberVO.memberName}</p>
-                <p class="font">사용포인트    :  {trainingMemberVO.trainingPurchasePrice}</p>
+                <p class="font">훈련사 :  ${trainingMemberVO.memberName}</p>
+                <p class="font">사용포인트    :  ${trainingMemberVO.trainingPurchasePrice}</p>
               
                 </th>
                 
@@ -105,7 +105,7 @@
                 
                          
            
-                    <img src="http://localhost:8888/download/${petInsertVO.filesNo}" class="img-circle" width="100" height="100">
+                    <img src="http://localhost:8888/download/${reservationDetailListVO.filesNo}" class="img-circle" width="100" height="100">
                     
                </th> 
                </c:forEach>  
