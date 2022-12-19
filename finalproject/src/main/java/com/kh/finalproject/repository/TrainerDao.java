@@ -61,5 +61,8 @@ public interface TrainerDao {
 	
 	//후기순 정렬
 	List<TrainerListVO> selectTrainerListAvg();
+	
+	//홈화면 트레이너 정렬(후기개수 기준)
+	List<TrainerListVO> mainTrainerList();
 
 }

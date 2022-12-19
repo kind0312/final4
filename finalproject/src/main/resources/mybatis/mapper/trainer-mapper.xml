@@ -159,7 +159,18 @@
     )
         </insert>
         
-        
+        <!-- 홈화면 리뷰개수 기준 트레이너 1~3위까지 출력 -->
+        <select id="mainTrainerList" resultType="TrainerListVO">
+        	select * from 
+				(select rownum rn, TMP.* from 
+				(select c.*, t.member_id, m.member_name, mi.files_no from (select a.*, b.trainerLike 
+				from (select trainer_no, count(*) cnt from review group by trainer_no) a 
+				left outer join 
+				(select trainer_no, count(*) trainerLike from trainer_like group by trainer_no) b 
+				on a.trainer_no=b.trainer_no) c inner join trainer t on c.trainer_no=t.trainer_no
+				inner join member m on t.member_id=m.member_id
+				inner join member_img mi on m.member_id=mi.member_id order by c.cnt desc)TMP ) where rn between 1 and 3
+        </select>
         
 
 </mapper>
