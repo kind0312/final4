@@ -385,9 +385,6 @@ s0.parentNode.insertBefore(s1,s0);
 	                     <a class="nav-link" href="${pageContext.request.contextPath}/member/apply">훈련사 지원</a>
 	                   </li>
                    </c:if>
-                   <li class="nav-item">
-                     <a class="nav-link" href="javascript:void(Tawk_API.toggle())">문의하기</a>
-                   </li>
                    <c:choose>
                       <c:when test="${!login}">
                          <li class="nav-item">

@@ -29,12 +29,12 @@
                </p>
                 </div>
                 <div class="row mt-4">
-               <h5 class="text-muted">
-                  * 이용요금 : 돌봄 30분 (₩19,000) / 돌봄 60분 (₩27,000) / 돌봄 120분 (₩39,000)
+               <h5 class="text-dark">
+                  * 훈련 요금 : 한마리 이용 시 (₩100,000)
+	               <small class="text-muted">
+	                  * 반려동물 추가시 : 마리당 추가 요금 ₩50,000입니다.
+	               </small>
                </h5>
-               <p class="text-muted">
-                  * 반려동물 추가 또는 연휴 할증, 방문 시간 연장에 따라 추가요금이 발생할 수 있습니다
-               </p>
                 </div>
             </div>
         </div>
@@ -43,13 +43,13 @@
         </div>
         <div class="row mt-4">
             <div class="col-md-10 offset-md-1">
-               <h1 class="row">언제 어디서든 펫훈려사를 부르세요!</h1>
+               <h1 class="row">언제 어디서든 펫훈련사를 부르세요!</h1>
                <div class="row mt-4">
                   <p class="lead mt-4">
                      CarePet의 모든 훈련사는 신분증 사본, 등초본, 실제면접 몇 자격증까지 4단계로 까다롭게 신원을 검증하며,
                   </p>
                <p class="lead mt-3">
-                  펫시터로서 필요한 지식과 실력을 갖출 수 있도록 3주간의 교육 및 연수를 이행합니다.!
+                  훈련사로서 필요한 지식과 실력을 갖출 수 있도록 3주간의 교육 및 연수를 이행합니다.!
                </p>
                </div>
             </div>

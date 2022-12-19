@@ -13,8 +13,8 @@
 				<div class="row mt-2">위치 : 서울특별시 영등포구 선유동2로 57 이레빌딩(구관) 19F, 20F</div>
 			</div>
 			<div class="col-md-2 offset-md-1">
-				<div class="row mt-3"><a href="#" class="footer-link"><h5>자주하는 질문</h5></a></div>
-				<div class="row mt-5"><a href="#" class="footer-link"><h5>고객센터</h5></a></div>
+<!-- 				<div class="row mt-3"><a href="#" class="footer-link"><h5>자주하는 질문</h5></a></div> -->
+				<div class="row mt-5"><a href="javascript:void(Tawk_API.toggle())" class="footer-link"><h5>문의하기</h5></a></div>
 			</div>
 		</div>
 		<div class="row mt-4">
@@ -26,7 +26,7 @@
 <%-- 	loginId : ${sessionScope.loginId} <br> --%>
 <%-- 	로그인 : ${sessionScope.loginId != null} <br> --%>
 <%-- 	훈련사번호 : ${sessionScope.trainingNo} <br> --%>
-		훈련사 여부 : ${sessionScope.memberStatus}
+<%-- 		훈련사 여부 : ${sessionScope.memberStatus} --%>
 	</body>
 </html>
 	
