@@ -25,6 +25,12 @@ public class ItemDaoImpl implements ItemDao{
 	public List<ItemDto> selectList() {
 		return sqlSession.selectList("item.list");
 	}
+	
+	//포인트 구매 조회
+	@Override
+	public List<ItemDto> PaySelectList() {
+		return sqlSession.selectList("item.paySelectList");
+	}
 
 	@Override
 	public ItemDto selectOne(int itemNo) {
@@ -35,6 +41,12 @@ public class ItemDaoImpl implements ItemDao{
 		public ItemDto selectOne(String itemName) {
 			return sqlSession.selectOne("item.selectname", itemName);
 		}
+	
+	//수정
+	@Override
+	public boolean edit(ItemDto itemDto) {
+		return sqlSession.update("item.edit",itemDto)>0;
+	}
 	
 	//삭제
 	@Override

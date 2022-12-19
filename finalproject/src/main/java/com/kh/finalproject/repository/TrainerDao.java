@@ -24,6 +24,9 @@ public interface TrainerDao {
 	
 	//훈련사 리뷰 메소드
 	List<ReviewVO> selectTrainerReview(int trainerNo);
+	
+	//훈련사 리뷰 메소드 평점 낮은순
+    List<ReviewVO> selectTrainerReviewBad(int trainerNo);
 
 	//훈련사테이블(자기소개) insert 메소드
 	void insertTrainer(TrainerDto trainerDto);
@@ -54,5 +57,9 @@ public interface TrainerDao {
 	
 	//훈련사 생성
 	void insert(TrainerDto dto);
+	
+	
+	//후기순 정렬
+	List<TrainerListVO> selectTrainerListAvg();
 
 }

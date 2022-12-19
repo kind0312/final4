@@ -18,6 +18,45 @@
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.min.js"></script>
     <script type="text/javascript">
+    
+    $(function(){
+		//시작시 진행예약화면 고정
+		ingClick();
+		
+		//진행 예약 버튼 이벤트
+		$(".ing-btn").click(function(){
+			ingClick();
+		});
+		
+		//지난 예약 버튼 이벤트
+		$(".end-btn").click(function(){
+			endClick();
+		});
+
+	function ingClick(){
+		//버튼 색상 변경
+		$(".end-btn").removeClass("unselect-btn select-btn");
+		$(".ing-btn").removeClass("unselect-btn select-btn");
+		$(".end-btn").addClass("unselect-btn");
+		$(".ing-btn").addClass("select-btn");
+		//진행 예약만 출력
+		$(".training-end").children().hide();
+		$(".training-ing").children().show();
+	}
+	
+	function endClick(){
+		//버튼 색상 변경
+		$(".ing-btn").removeClass("unselect-btn select-btn");
+		$(".end-btn").removeClass("unselect-btn select-btn");
+		$(".ing-btn").addClass("unselect-btn");
+		$(".end-btn").addClass("select-btn");
+		//지난 예약만 출력
+		$(".training-end").children().show();
+		$(".training-ing").children().hide();
+	}
+    });
+    
+    
         $(function(){
             $(".star-score").score({
                 starColor:"#81BDF1",//별 색상(기본 : 금색)
@@ -48,11 +87,36 @@ border-radius: 50%;
 width: 200px;
 height: 200px;
 }
+.training-btn{
+		background-color:#fff;
+		border:none;
+		color:#303030;
+		font-size:17px;
+		
+	}
+.unselect-btn{
+		color:#7B7B7B;
+		
+}
+.select-btn{
+color : black;
+font-weight: bolder;
+}
+.timg{
+width: 50px;
+height: 50px;
+}
+
     </style>
 <body>
 
-    <div class="trainer">    
-        <h2>훈련사를 소개합니다</h2>
+    <div class="trainer">  
+        <h2>훈련사를 소개합니다<img src="/image/trainer.png" class="timg"></h2>
+        <div class="text-end">
+                 	<i class="fa-solid fa-arrow-up-9-1 fa-2xs ing-btn"></i><button class="training-btn ing-btn">후기순</button>
+                 	<i class="fa-solid fa-arrow-down-9-1 fa-2xs end-btn"></i><button class="training-btn end-btn">평점순</button>
+                 </div>
+                 <div class="row training-ing">
         <div class="content">
         <c:forEach var="list" items="${list}">
             <div class="box">
@@ -61,7 +125,7 @@ height: 200px;
                     <div class="img_area"><img src="http://localhost:8888/download/${list.filesNo}" class="img0"></div>
                 </div>
                 <div class="textbox">
-                    <h2>${list.getMemberName()} 펫시터</h2>
+                    <h2>${list.getMemberName()} 훈련사</h2>
                     <h3>${list.getTrainerProfile()}</h3>
                     <div class="review">
                         <div class="scopebox">
@@ -82,6 +146,41 @@ height: 200px;
                 <a href="/trainer/detail?trainerNo=${list.getTrainerNo()}" class="view">상세 보기</a>
             </div>
             </c:forEach>
+        </div>
+        </div>
+        
+        
+        <div class="row training-end">
+        <div class="content">
+        <c:forEach var="listReview" items="${listReview}">
+            <div class="box">
+                <div class="imgbox">
+                <!-- 이미지 경로 추가 여기 -->
+                    <div class="img_area"><img src="http://localhost:8888/download/${listReview.filesNo}" class="img0"></div>
+                </div>
+                <div class="textbox">
+                    <h2>${listReview.getMemberName()} 훈련사</h2>
+                    <h3>${listReview.getTrainerProfile()}</h3>
+                    <div class="review">
+                        <div class="scopebox">
+                            <div class="scope_area">
+                                <a href="javascript:void(0);" class="scope"></a>   
+                                <a href="javascript:void(0);" class="scope"></a>   
+                                <a href="javascript:void(0);" class="scope"></a>   
+                                <a href="javascript:void(0);" class="scope"></a>   
+                                <a href="javascript:void(0);" class="scope"></a>   
+                            </div>
+                            <span>
+            <div class="star-score blue" data-max="5" data-rate="${listReview.getAvg()}" ></div>
+        <br></span>
+                        </div>
+                        <span>후기 ${listReview.getCnt()}개</span>
+                    </div>
+                </div>
+                <a href="/trainer/detail?trainerNo=${listReview.getTrainerNo()}" class="view">상세 보기</a>
+            </div>
+            </c:forEach>
+        </div>
         </div>
         
     </div>

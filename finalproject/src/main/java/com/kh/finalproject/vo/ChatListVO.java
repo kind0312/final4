@@ -16,5 +16,6 @@ public class ChatListVO {
 	private String chatMessage;
 	private String memberName;
 	private int filesNo;
-	private String chatMessageStatus;
+	private String chatMessageStatus; 
+	private String memberId; //마지막 채팅친 사람 id
 }

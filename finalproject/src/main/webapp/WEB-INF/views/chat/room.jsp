@@ -20,6 +20,8 @@
 		padding:1em;
 		border:1px solid black;
 		border-radius:1em;
+		width: 80%;
+		
 	}
 	.img-circle{
 		border-radius: 70%;
@@ -35,6 +37,20 @@
 	.header {
 	text-align: center;
 	}
+	
+	#message-input {
+	
+	}
+	
+	.mine {
+	
+	}
+	
+	.partner {
+	
+	}
+	
+
 	
 </style>
 
@@ -58,14 +74,14 @@
         </div>
         <div class="chat">
         
-        	<ul>
+        	<ul id="it">
         	<c:forEach var="chatHistory" items="${chatHistory}">
                 				<tr class="table-default align-middle">
 	                 				<th width="30%"> 
-	                 				<img src="http://localhost:8888/download/${chatHistory.filesNo}" class="img-circle">
+	                 				<img src="${pageContext.request.contextPath}/download/${chatHistory.filesNo}" class="img-circle">
 	                 				</th>
 	                 				<th width="40%">             					
-	                 						                 					
+	                 					<span class="gender-font">${chatHistory.memberName}</span>	                 					
 	                 					<span class="gender-font">${chatHistory.chatMessage} </span>
 	                 					<span class="gender-font" id="chattext">${chatHistory.chatCreateAt}</span>
 	                 					<p> </p>
@@ -75,14 +91,20 @@
 		                	</c:forEach>
         	</ul>
         
-            <ul  id="message-list">
+            <ul>
                 <!-- 동적 생성 -->
+                <div id="message-list" class="message-box"></div>
             </ul>
         </div>
         <div class="input-div">
          <!-- <textarea placeholder="Press Enter for send message."></textarea> -->   
-         	<input type="text" id="message-input">
-			<button type="button" id="message-send">전송</button>
+       
+          <input type="text" id="message-input" class="form-control form-control-lg">       
+         	
+			<!--  <input type="file" id="img-input" class="form-control" >		 -->
+       
+			<button type="button" id="message-send" class="btn btn-blue text-center">전송</button>
+		
         </div>
 	</div>
 
@@ -144,9 +166,14 @@ $(function(){
 	    
 	    
 
-		var img = $("<img>").addClass("img-circle").attr('id','imgID').attr( "src","http://localhost:8888/download/"+imgNo);
+		var img = $("<img>").addClass("img-circle").attr('id','imgID').attr( "src","${pageContext.request.contextPath}/download/"+imgNo);
 		
-				
+		if(data.memberId == userId){
+			p.addClass("mine");
+		}
+		else {
+			p.addClass("partner");
+		}
 		
 		p.append(w).append(c).append(t);  //작성자 내용 시간
 		
@@ -169,7 +196,8 @@ $(function(){
 	$("#message-send").click(function(){
 		var text = $("#message-input").val();
 		
-		if(text.length == 0) return; //채팅 쓴거 없으면 return
+		
+		//if(text.length == 0) return; //채팅 쓴거 없으면 return
 		
 		//JSON으로 변환해서 전송
 		//- JSON.stringify(객체) : 객체를 문자열로
@@ -181,10 +209,24 @@ $(function(){
 			text : text
 		};
 		socket.send(JSON.stringify(data));
-		$("#message-input").val("");
+		$("#message-input").val("");  //텍스트 창 비우기
+		
 	});
 	
+	
+	$("#it").function(){
+		
+		
+	};
+	
+	
+	
+
+	
+	
 });
+
+
 </script>
 
 </html>

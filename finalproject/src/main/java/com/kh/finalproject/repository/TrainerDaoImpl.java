@@ -27,6 +27,12 @@ public class TrainerDaoImpl implements TrainerDao {
 	}
 	
 	@Override
+	public List<TrainerListVO> selectTrainerListAvg() {
+
+		return sqlSession.selectList("trainer.listAvg");
+	}
+	
+	@Override
 	public List<TrainingDto> requestList(int trainerNo) {
 		
 		return sqlSession.selectList("training.trainingRequestList", trainerNo);
@@ -104,6 +110,12 @@ public class TrainerDaoImpl implements TrainerDao {
 	public void insert(TrainerDto dto) {
 		sqlSession.insert("trainer.insert",dto);
 		
+	}
+
+	@Override
+	public List<ReviewVO> selectTrainerReviewBad(int trainerNo) {
+		
+		 return sqlSession.selectList("trainer.selectReviewOneBad", trainerNo);
 	}
 
 

@@ -66,6 +66,7 @@ public class TrainerController {
 		
 		model.addAttribute("list", trainerDao.selectOne(trainerListvo.getTrainerNo()));	
 		model.addAttribute("review", trainerDao.selectTrainerReview(reviewVo.getTrainerNo()));
+		model.addAttribute("reviewBad", trainerDao.selectTrainerReviewBad(reviewVo.getTrainerNo()));
 		
 		//좋아요 기록 조회
 				String memberId = (String) session.getAttribute(SessionConstant.ID);
@@ -92,7 +93,7 @@ public class TrainerController {
 		
 		
 	model.addAttribute("list", trainerDao.selectTrainerList());	
-		
+	model.addAttribute("listReview", trainerDao.selectTrainerListAvg());
 	return "trainer/trainer_list";
 		
 	}

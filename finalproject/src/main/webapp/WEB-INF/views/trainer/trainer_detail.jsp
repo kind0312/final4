@@ -15,6 +15,42 @@
     <title></title>
 </head>
 <script type="text/javascript">
+$(function(){
+	//시작시 진행예약화면 고정
+	ingClick();
+	
+	//진행 예약 버튼 이벤트
+	$(".ing-btn").click(function(){
+		ingClick();
+	});
+	
+	//지난 예약 버튼 이벤트
+	$(".end-btn").click(function(){
+		endClick();
+	});
+
+function ingClick(){
+	//버튼 색상 변경
+	$(".end-btn").removeClass("unselect-btn select-btn");
+	$(".ing-btn").removeClass("unselect-btn select-btn");
+	$(".end-btn").addClass("unselect-btn");
+	$(".ing-btn").addClass("select-btn");
+	//진행 예약만 출력
+	$(".training-end").children().hide();
+	$(".training-ing").children().show();
+}
+
+function endClick(){
+	//버튼 색상 변경
+	$(".ing-btn").removeClass("unselect-btn select-btn");
+	$(".end-btn").removeClass("unselect-btn select-btn");
+	$(".ing-btn").addClass("unselect-btn");
+	$(".end-btn").addClass("select-btn");
+	//지난 예약만 출력
+	$(".training-end").children().show();
+	$(".training-ing").children().hide();
+}
+});
         $(function(){
             $(".star-score").score({
                 starColor:"#81BDF1",//별 색상(기본 : 금색)
@@ -49,6 +85,21 @@ height: 200px;
 .like{
 margin-left: -7px;
 margin-bottom: 7px;
+}
+.training-btn{
+		background-color:#fff;
+		border:none;
+		color:#303030;
+		font-size:17px;
+		
+	}
+	.unselect-btn{
+		color:#7B7B7B;
+		
+}
+.select-btn{
+color : black;
+font-weight: bolder;
 }
 
     </style>
@@ -96,6 +147,11 @@ margin-bottom: 7px;
 
                 <div class="cfcate">
                     <h3>후기 목록</h3>
+                    <div class="text-end">
+                 	<i class="fa-solid fa-arrow-up-9-1 fa-2xs ing-btn"></i><button class="training-btn ing-btn">평점 높은순</button>
+                 	<i class="fa-solid fa-arrow-down-9-1 fa-2xs end-btn"></i><button class="training-btn end-btn">평점 낮은순</button>
+                 </div>
+                 <div class="row training-ing">
 <c:forEach var="review" items="${review}">
 <div class="sitro">
 <span>
@@ -108,7 +164,23 @@ margin-bottom: 7px;
 <br><br>
 </c:forEach>
                 </div>
+                </div>
+                <div class="cfcate">
+                 <div class="row training-end">
+<c:forEach var="reviewBad" items="${reviewBad}">
+<div class="sitro">
+<span>
+<div class="star-score blue" data-max="5" data-rate="${reviewBad.getReviewGood()}" ></div><br>
+리뷰 제목 : ${reviewBad.getReviewTitle()}<br>
+리뷰 내용 : ${reviewBad.getReviewContent()}<br>
+작성 날짜 : ${reviewBad.getReviewWriteTime()}<br>
+</span>
+</div>
+<br><br>
+</c:forEach>
+                </div>
             </div>  
+            </div>
         </div>  
         
     </div>

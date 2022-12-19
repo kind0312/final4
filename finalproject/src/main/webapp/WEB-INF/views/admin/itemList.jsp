@@ -34,7 +34,6 @@
    
 <script>
 	$(function(){
-		// 첫 화면 목록 출력
 		list();
 		
 		//상태 판정
@@ -83,7 +82,7 @@
 				check.itemDisabled = false;
 			}
 		});
-		
+
 		//등록
 		$(".form-btn").submit(function(e){
 			e.preventDefault();
@@ -92,11 +91,13 @@
 			$("[name=itemPrice]").blur();
 			$("[name=itemDisabled]").change();
 			
+			var btnType = $(".btn-type").text();
+			
 			var itemName = $("[name=itemName]").val();
 			var itemPrice = $("[name=itemPrice]").val();
 			var itemDisabled = $("[name=itemDisabled] option:selected").val();
 			
-			if(check.allValid()){
+			if(check.allValid() && btnType=='상품 등록'){
 				data={
 						itemName:itemName,
 						itemPrice:itemPrice,
@@ -128,7 +129,7 @@
 					for(var i=0; i<resp.length; i++){
 						var tr = $("<tr>");
 						var td1 = $("<td>").attr("class","ajaxItemNo").text(resp[i].itemNo);
-						var td2 = $("<td>").text(resp[i].itemName);
+						var td2 = $("<td>").attr("class","ajaxItemName").text(resp[i].itemName);
 						var td3 = $("<td>").text(resp[i].itemPrice);
 						var td4 = $("<td>").text(resp[i].itemDate);
 						var td5 = $("<td>").text(resp[i].itemDisabled);
@@ -143,21 +144,85 @@
 					//삭제
 					$(".delete-btn").click(function(){
 						var itemNo = $(this).parent().siblings(".ajaxItemNo").text();
-
-						$.ajax({
-							url:"http://localhost:8888/rest/item_delete/"+itemNo,
-							method:"delete",
-							data:itemNo,
-							success:function(resp){
-								if(resp){
-									list();
-								}
-							}
+						deleteBtn(itemNo);
+					});
+					
+					//수정
+					$(".ajaxItemName").click(function(){
+						//버튼 변경
+						$(".btn-type").text('상품 수정').attr("class","btn btn-yellow btn-type");
+						//기존 정보 띄우기
+						$("[name=itemName]").val($(this).text());
+						$("[name=itemPrice]").val($(this).next().text());
+						$("[name=itemDisabled]").val($(this).next().next().next().text());
+						
+						//수정버튼 클릭이벤트 전 데이터준비
+						var btnType = $(".btn-type").text();
+						var itemNo = $(this).prev().text();
+						$(".btn-type").click(function(){
+							if(btnType=='상품 수정'){
+								//입력 및 선택된 값 확인
+								var itemName = $("[name=itemName]").val();
+								var itemPrice = $("[name=itemPrice]").val();
+								var itemDisabled = $("[name=itemDisabled] option:selected").val();
+								edit(itemNo, itemName, itemPrice, itemDisabled);
+							}	
 						});
+						
+						//삭제버튼 누를 경우 처리
+						$(".delete-btn").click(function(){
+							$("[name=itemName]").val("");
+							$("[name=itemPrice]").val("");
+							$("[name=itemDisabled]").val("");
+							$(".btn-type").text('상품 등록').attr("class","btn btn-blue2 btn-type");
+						});
+						
 					});
 				}
 			});
 		}
+		
+		//수정
+		function edit(itemNo, itemName, itemPrice, itemDisabled){
+			data={
+					itemNo:itemNo,
+					itemName:itemName,
+					itemPrice:itemPrice,
+					itemDisabled:itemDisabled
+			}
+			$.ajax({
+				url:"http://localhost:8888/rest/item_edit",
+				method:"put",
+				contentType:"application/json",
+				data:JSON.stringify(data),
+				success:function(resp){
+					if(resp){
+						$("[name=itemName]").val("");
+						$("[name=itemPrice]").val("");
+						$("[name=itemDisabled]").val("");
+						$(".btn-type").text('상품 등록').attr("class","btn btn-blue2 btn-type");
+						//수정 2번씩 늘어나는 이유를 찾지 못해서 ㅠ 새로고침으로 변경
+						location.reload();
+					}
+				}
+			});	
+		}
+		
+		//삭제
+		function deleteBtn(itemNo){
+			$.ajax({
+				url:"http://localhost:8888/rest/item_delete/"+itemNo,
+				method:"delete",
+				data:itemNo,
+				success:function(resp){
+					if(resp){
+						list();
+					}
+				}
+			});
+		}
+		
+		
 		
 	});
 </script>
@@ -235,20 +300,20 @@
 		
 		<div class="row  mt-4">
 			<div class="col-md-6 offset-md-3 text-center">
-				<button type="submit" class="btn btn-blue2 btn-md">상품 추가</button>
+				<button type="submit" class="btn btn-blue2 btn-type">상품 등록</button>
 			</div>
 		</div>
 		</form>
 		
-		<div class="row  mt-5">
+		<div class="row  mt-5" style="margin-bottom:100px;">
 			<div class="col-md-6 offset-md-3 text-center">
 				<table class="table text-center align-middle">
 					<thead>
 						<tr class="table-default">
-							<th>상품번호</th>
+							<th>번호</th>
 							<th>상품명</th>
 							<th>가격</th>
-							<th>등록날짜</th>
+							<th>등록일</th>
 							<th>진열상태</th>
 							<th>삭제</th>
 						</tr>
@@ -259,7 +324,6 @@
 				</table>
 			</div>
 		</div>
-    				
 
 </div>
 
