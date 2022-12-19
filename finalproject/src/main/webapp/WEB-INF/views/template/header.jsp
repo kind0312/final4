@@ -305,6 +305,9 @@
          .label-font-weight{
          	font-weight:bold;
          }
+         .modal-body{
+         	font-size:16px;
+         }
          
       </style>
       
