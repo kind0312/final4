@@ -58,11 +58,15 @@
       
       <!-- 훈련사 단일 리뷰 조회 -->
       <select id="selectReviewOne" parameterType="int" resultType="ReviewVO">
-      select * from review where trainer_no = #{trainerNo} order by review_good desc
+      select * from 
+			(select r.*, row_number() over(partition by review_no order by pet_no) as rn 
+				from review_list_view r) where rn = 1 order by review_good desc
       </select>
       
       <select id="selectReviewOneBad" parameterType="int" resultType="ReviewVO">
-      select * from review where trainer_no = #{trainerNo} order by review_good asc
+      select * from 
+			(select r.*, row_number() over(partition by review_no order by pet_no) as rn 
+				from review_list_view r) where rn = 1 order by review_good asc
       </select>
 
       <insert id="trainerProfileInsert" parameterType="TrainerDto"> 

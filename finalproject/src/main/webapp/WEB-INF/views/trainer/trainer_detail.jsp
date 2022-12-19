@@ -102,10 +102,20 @@ color : black;
 font-weight: bolder;
 }
 
+.timg{
+width: 45px;
+height: 45px;
+margin-left: 9px;
+}
+
+.writetime{
+font-size: 15px;
+color: gray;
+}
     </style>
 <body>
     <div class="viewmore">    
-        <h2>훈련사를 소개합니다</h2>
+        <h2>훈련사를 소개합니다<img src="/image/trainer.png" class="timg"></h2>
         <div class="content">
             <div class="box">
                 <div class="imgbox">
@@ -139,14 +149,14 @@ font-weight: bolder;
                 <h2>${list.getMemberName()} 훈련사</h2>
 <br>
                 <div class="sitro">
-                    <h3>자기소개</h3>
+                    <h3>자기소개<img src="/image/documents.png" class="timg"></h3>
                     <span>
                        ${list.getTrainerProfileContent()}
                     </span>
                 </div>
 
-                <div class="cfcate">
-                    <h3>후기 목록</h3>
+                <div class="cfcate ">
+                    <h3>후기 목록   <img src="/image/reviews.png" class="timg"></h3>
                     <div class="text-end">
                  	<i class="fa-solid fa-arrow-up-9-1 fa-2xs ing-btn"></i><button class="training-btn ing-btn">평점 높은순</button>
                  	<i class="fa-solid fa-arrow-down-9-1 fa-2xs end-btn"></i><button class="training-btn end-btn">평점 낮은순</button>
@@ -156,9 +166,12 @@ font-weight: bolder;
 <div class="sitro">
 <span>
 <div class="star-score blue" data-max="5" data-rate="${review.getReviewGood()}" ></div><br>
-리뷰 제목 : ${review.getReviewTitle()}<br>
-리뷰 내용 : ${review.getReviewContent()}<br>
-작성 날짜 : ${review.getReviewWriteTime()}<br>
+<p class="writetime">
+<img src="${pageContext.request.contextPath}/download/${review.filesNo}" style="width:60px; height: 60px; border-radius: 70%;">
+${review.getReviewWriteTime()}</p>
+<p style="size: 12px; font-weight: bold">
+${review.getReviewContent()}<br>
+</p>
 </span>
 </div>
 <br><br>
@@ -171,9 +184,13 @@ font-weight: bolder;
 <div class="sitro">
 <span>
 <div class="star-score blue" data-max="5" data-rate="${reviewBad.getReviewGood()}" ></div><br>
-리뷰 제목 : ${reviewBad.getReviewTitle()}<br>
-리뷰 내용 : ${reviewBad.getReviewContent()}<br>
-작성 날짜 : ${reviewBad.getReviewWriteTime()}<br>
+<p class="writetime">
+<img src="${pageContext.request.contextPath}/download/${reviewBad.filesNo}" style="width:60px; height: 60px; border-radius: 70%;">
+${reviewBad.getReviewWriteTime()}
+</p>
+<p style="size: 12px; font-weight: bold">
+${reviewBad.getReviewContent()}<br>
+</p>
 </span>
 </div>
 <br><br>

@@ -22,7 +22,6 @@
       <link rel="preconnect" href="//fonts.googleapis.com">
       <link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
       <link href="//fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet">
-   
 <!--        <link rel="stylesheet" type="text/css" href="/css/reset.css"> -->
 <!--        <link rel="stylesheet" type="text/css" href="/css/layout.css"> -->
 <!--        <link rel="stylesheet" type="text/css" href="/css/commons.css"> -->
@@ -78,7 +77,7 @@
        
        <!-- 카카오 지도-->
        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94efcfc3a2fb279ab90052c1c24e8cc6"></script>
-   
+   		
       <style>
       	
 /*          <!-- div 확인 점선 --> */
