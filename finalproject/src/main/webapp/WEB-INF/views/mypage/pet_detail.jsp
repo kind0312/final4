@@ -11,7 +11,6 @@
 	.img-circle{
 		border-radius: 70%;
     	border:none;
-    	background-color:black;
     	overflow: hidden;
 	}
 	.form-control{
@@ -459,7 +458,7 @@
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/like">찜관리</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">후기</a>
+	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/review">후기</a>
 	        </li>
 	        <li class="nav-item">
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/profile">정보수정</a>

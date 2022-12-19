@@ -13,6 +13,7 @@ import com.kh.finalproject.vo.ChatListVO;
 import com.kh.finalproject.vo.ChatPartnerSearchVO;
 import com.kh.finalproject.vo.ChatPartnerVO;
 import com.kh.finalproject.vo.ChatRoomVO;
+import com.kh.finalproject.vo.ChatUpdateVO;
 import com.kh.finalproject.vo.SearchRoomVO;
 
 
@@ -81,6 +82,17 @@ public class ChatDaoImpl implements ChatDao{
 	@Override
 	public ChatPartnerVO chatPartner(ChatPartnerSearchVO chatPartnerSearchVO) {		
 		return sqlSession.selectOne("chat.searchPartner", chatPartnerSearchVO);
+	}
+
+	@Override
+	public void chatUpdate(ChatUpdateVO chatUpdateVO) {
+		sqlSession.insert("chat.chatUpdate", chatUpdateVO);
+		
+	}
+
+	@Override
+	public String searchPartnerId(ChatUpdateVO chatUpdateVO) {		
+		return sqlSession.selectOne("chat.partnerId", chatUpdateVO);
 	}
 
 
