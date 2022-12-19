@@ -141,7 +141,10 @@
 
 		<div class="row mt-5">
             <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-            	 <h6 style="display:inline-block;">현재 보유 포인트 : </h6>
+            	 <h6 style="display:inline-block;">
+            	 	<img src="${pageContext.request.contextPath}/image/point_list.png" 
+            	 		style="width:35px; height:35px;">현재 보유 포인트 : 
+            	 </h6>
                  <span class="mypoint" >
                  	<fmt:formatNumber value="${point.memberPoint}" pattern="###,###"></fmt:formatNumber>P
                  </span>
