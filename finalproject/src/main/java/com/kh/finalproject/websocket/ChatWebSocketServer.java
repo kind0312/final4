@@ -27,6 +27,7 @@ import com.kh.finalproject.entity.RoomDto;
 import com.kh.finalproject.repository.ChatDao;
 import com.kh.finalproject.repository.FilesDao;
 import com.kh.finalproject.repository.MemberDao;
+import com.kh.finalproject.vo.ChatUpdateVO;
 import com.kh.finalproject.vo.ReceiveVO;
 import com.kh.finalproject.vo.channel.Channel;
 import com.kh.finalproject.vo.channel.Chat;
@@ -137,7 +138,6 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 			
 			
 				
-				
 			//DB로 가는 데이터 	
 			ChatDto chatDto = ChatDto.builder()
 													.memberId(user.getMemberId())	
@@ -156,12 +156,25 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 					.chatMessageStatus("N")
 					.build();
 					
-		
-			
+					
 			
 				String json = mapper.writeValueAsString(chat);
 				TextMessage msg = new TextMessage(json);
 				channel.send(user, msg);
+				
+				//룸 번호, 그리고 내 아이디
+				ChatUpdateVO vo = ChatUpdateVO.builder().memberId(user.getMemberId()).roomNo(receiveVO.getRoom()).build();		
+				// 상대방 아이디 찾기
+				String partnerId = chatDao.searchPartnerId(vo);
+				//System.out.println("파트너 아이디 :" + partnerId);
+							
+				//메세지를 전송과 동시에 이전 메세지를 다 읽음으로 update 				
+				ChatUpdateVO chatUpdateVO = ChatUpdateVO
+						.builder()
+						.memberId(partnerId) // 상대 아이디를 가져와야함 
+						.roomNo(receiveVO.getRoom())
+						.build();
+				chatDao.chatUpdate(chatUpdateVO);				
 				
 				//System.out.println("채팅Dto " + chatDto); 
 				//chatNo는 실시간 소켓에서는 없음 디비 들어갈때 생성 

@@ -48,6 +48,7 @@ public interface ChatDao {
 	//채팅방 들어갔을때 상대채팅 읽음으로 udpate
 	void chatUpdate (ChatUpdateVO chatUpdateVO);
 
-
+	//채팅방 & 내 아이디로 상대 아이디 찾기
+	String searchPartnerId(ChatUpdateVO chatUpdateVO);
 	
 }

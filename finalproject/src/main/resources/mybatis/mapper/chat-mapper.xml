@@ -89,6 +89,10 @@
   	<select id = "chatUpdate" parameterType="ChatUpdateVO">
   	update chat set chat_message_status = 'Y' where member_id = #{memberId} and room_no = #{roomNo}
   	</select>
-  
+  	
+  	<select id="partnerId" parameterType ="ChatUpdateVO" resultType="String">
+  	select member_id from chat_user where room_no = #{roomNo} and member_id != #{memberId} 
+  	</select>
+ 
   
   </mapper>

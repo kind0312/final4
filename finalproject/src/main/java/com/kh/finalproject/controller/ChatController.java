@@ -212,7 +212,7 @@ public class ChatController {
 				.memberStatus(trainerDto.getMemberStatus())
 				.build());
 		
-		//chat테이블에도 메세지 null로 하나 넣어줘야함
+		//chat테이블에도 메세지 하나 넣어줘야함
 		chatDao.insertMessage(ChatDto.builder()
 				.roomNo(seqNo)
 				.memberId(trainerId)

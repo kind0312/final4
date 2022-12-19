@@ -90,6 +90,11 @@ public class ChatDaoImpl implements ChatDao{
 		
 	}
 
+	@Override
+	public String searchPartnerId(ChatUpdateVO chatUpdateVO) {		
+		return sqlSession.selectOne("chat.partnerId", chatUpdateVO);
+	}
+
 
 
 
