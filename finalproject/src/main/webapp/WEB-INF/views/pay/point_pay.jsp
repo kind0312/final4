@@ -23,16 +23,27 @@
             	<table class="table table-hover">
 					  <tbody>
 					  		<tr>
-					  			<th colspan="2"><h3><span class="blue">${item.itemPrice}</span> 포인트를 구매합니다</h3></th>
+					  			<th colspan="2">
+					  			<h3>
+					  				<span class="blue">
+					  					<fmt:formatNumber value="${item.itemPrice}" pattern="###,###"></fmt:formatNumber>
+					  				</span>
+					  			 포인트를 구매합니다</h3>
+					  			</th>
 					  		</tr>
 						    <tr>
 							      <th scope="col">
-							      		<p>현재 내 포인트</p>
-							      		<p>충전 예정 포인트</p>
+							      		<p class="mt-2">현재 내 포인트</p>
+							      		<p class="mt-2 mb-2">충전 예정 포인트</p>
 							      </th>
 							      <td scope="col" class="text-end">
-							      		<p>${point.memberPoint}P</p>
-							      		<p>(+) <span>${item.itemPrice}</span>P</p>
+							      		<p class="mt-2">
+							      			<fmt:formatNumber value="${point.memberPoint}" pattern="###,###"></fmt:formatNumber>
+							      			P
+							      		</p>
+							      		<p class="mt-2 mb-2">(+) <span>
+							      			<fmt:formatNumber value="${item.itemPrice}" pattern="###,###"></fmt:formatNumber>
+							      		</span>P</p>
 							      </td>
 						    </tr>
 					  </tbody>
@@ -42,8 +53,10 @@
 		
 		<div class="row mt-4">
          	<div class="col-md-6 offset-md-3">
-				<span>총 결제 금액</span>
-				<span class="blue blue-bolder float-end">${item.itemPrice}원</span>
+				<span style="font-weight:bolder;">총 결제 금액</span>
+				<span class="blue blue-bolder float-end">
+					<fmt:formatNumber value="${item.itemPrice}" pattern="###,###"></fmt:formatNumber>
+				원</span>
 			</div>
       	</div>
       	

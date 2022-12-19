@@ -15,6 +15,10 @@
 		select * from item order by item_date desc
 	</select>
 	
+	<select id="paySelectList" resultType="ItemDto">
+		select * from item where item_disabled='Y' order by item_price asc
+	</select>
+	
 	<select id="selectone" resultType="ItemDto" parameterType="int">
 		select*from item where item_no=#{itemNo}
 	</select>
@@ -22,6 +26,12 @@
 	<select id="selectname" resultType="ItemDto" parameterType="String">
 		select*from item where item_name=#{itemName}
 	</select>
+	
+	<update id="edit" parameterType="ItemDto">
+		update item set item_name=#{itemName}, item_price=#{itemPrice},
+		item_changedate=sysdate, item_disabled=#{itemDisabled}
+		where item_no=#{itemNo}
+	</update>
 	
 	<delete id="delete" parameterType="int">
 		delete item where item_no=#{itemNo}
