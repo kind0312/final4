@@ -46,7 +46,7 @@
  	</select>
 	
 	<!-- 전체 이용 이용후기 목록 조회 -->
-	<select id="list" resultType="ReviewVO">
+	<select id="list" resultType="ReviewVO" parameterType="int">
 		<!-- 조인 -->
 <!-- 		select  -->
 <!-- 			m.member_name,t.*, tp.training_purchase_price,  -->
@@ -65,9 +65,18 @@
 <!-- 		select * from review_list_view order by review_writetime desc -->
 
 		<!-- row() over() -->
+<!-- 		select * from  -->
+<!-- 			(select r.*, row_number() over(partition by review_no order by pet_no) as rno  -->
+<!-- 				from review_list_view r) where rno = 1 order by review_no desc -->
+				
+		<!-- 페이지 네이션 위한 rownum -->
 		select * from 
-			(select r.*, row_number() over(partition by review_no order by pet_no) as rno 
-				from review_list_view r) where rno = 1 order by review_no desc
+			(select rownum rn, TMP.* from 
+				(select * from 
+					(select r.*, row_number() over(partition by review_no order by pet_no) as rno from review_list_view r) 
+					where rno = 1 order by review_no desc)       
+   			 TMP ) 
+		where rn between #{startRow} and #{endRow}		
 	</select>
 	
 	<!-- 전체 이용후기 상세 -->
@@ -96,5 +105,12 @@
 	<delete id="delete" parameterType="int">
 		delete review where review_no = #{reviewNo}
 	</delete>
+	
+	<!-- 전체 이용후기 개수 -->
+	<select id="count" resultType="int">
+		select count(*) from 
+			(select r.*, row_number() over(partition by review_no order by pet_no) as rno 
+				from review_list_view r) where rno = 1 order by review_no desc
+	</select>
 		
 </mapper>

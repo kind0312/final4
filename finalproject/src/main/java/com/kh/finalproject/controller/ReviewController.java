@@ -16,6 +16,7 @@ import com.kh.finalproject.constant.SessionConstant;
 import com.kh.finalproject.entity.ReviewDto;
 import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.repository.ReviewDao;
+import com.kh.finalproject.vo.ReviewPaginationVO;
 import com.kh.finalproject.vo.TrainingListVO;
 
 @Controller
@@ -89,8 +90,8 @@ public class ReviewController {
 	
 	//전체 이용후기 목록
 	@GetMapping("/fulllist")
-	public String list(Model model) {
-		model.addAttribute("reviewList", reviewDao.reviewList());
+	public String list(Model model, @ModelAttribute(name="vo") ReviewPaginationVO vo) {
+		model.addAttribute("reviewList", reviewDao.reviewList(vo));
 		return "review/review_fulllist";
 	}
 	

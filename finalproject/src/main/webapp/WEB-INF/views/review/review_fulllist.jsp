@@ -77,7 +77,7 @@
             <div class="col-md-10 offset-md-1 d-flex justify-content-center">
 			  <ul class="pagination">
 			    <li class="page-item disabled">
-			      <a class="page-link" href="#">&laquo;</a>
+			      <a class="page-link" href="review_fullist?p=${vo.firstBlock()}&${vo.parameter()}">&laquo;</a>
 			    </li>
 			    <li class="page-item active">
 			      <a class="page-link" href="#">1</a>
@@ -140,32 +140,32 @@
             $(".reviewborder").css("height", percent+"%");
         });
 		
-		function fulllist(){
-			$.ajax({
-				url:"${pageContext.request.contextPath}/rest/member/confirmcert",
-				method:"get",
-				data:{
-					emailcertEmail:email,
-					emailcertSerial:serial
-				},
-				success:function(resp){
-					console.log(resp);
-					if(resp){
-						$("[name=memberEmail]").attr("readonly", "readonly");
-						$("#confirm-input").attr("readonly", "readonly");
-						validChecker.emailConfirmValid = true;
-						emailbtn.prop("disabled", true);
-						confirmbtn.prop("disabled", true);
-						$(".confirmResult").removeClass("possible impossible").addClass("possible").text("인증이 완료되었습니다");
-                   		$("#confirm-input").removeClass("is-valid is-invalid able disable").addClass("is-valid").addClass("able");
-					}
-					else{
-						$(".confirmResult").removeClass("possible impossible").addClass("impossible").text("인증번호 다시 확인해주세요");
-                   		$("#confirm-input").removeClass("is-valid is-invalid able disable").addClass("is-invalid").addClass("disable");
-					}
-				}
-			});
-		}
+// 		function fulllist(){
+// 			$.ajax({
+// 				url:"${pageContext.request.contextPath}/rest/member/confirmcert",
+// 				method:"get",
+// 				data:{
+// 					emailcertEmail:email,
+// 					emailcertSerial:serial
+// 				},
+// 				success:function(resp){
+// 					console.log(resp);
+// 					if(resp){
+// 						$("[name=memberEmail]").attr("readonly", "readonly");
+// 						$("#confirm-input").attr("readonly", "readonly");
+// 						validChecker.emailConfirmValid = true;
+// 						emailbtn.prop("disabled", true);
+// 						confirmbtn.prop("disabled", true);
+// 						$(".confirmResult").removeClass("possible impossible").addClass("possible").text("인증이 완료되었습니다");
+//                    		$("#confirm-input").removeClass("is-valid is-invalid able disable").addClass("is-valid").addClass("able");
+// 					}
+// 					else{
+// 						$(".confirmResult").removeClass("possible impossible").addClass("impossible").text("인증번호 다시 확인해주세요");
+//                    		$("#confirm-input").removeClass("is-valid is-invalid able disable").addClass("is-invalid").addClass("disable");
+// 					}
+// 				}
+// 			});
+// 		}
 		
 	</script>
 
