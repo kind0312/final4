@@ -11,7 +11,6 @@
 	.img-circle{
 		border-radius: 70%;
     	border:none;
-    	background-color:black;
     	overflow: hidden;
 	}
 	.form-control{
