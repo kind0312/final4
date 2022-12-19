@@ -62,18 +62,19 @@
                     	var check = resp.lastIndexOf("/"); //경로에서 /위치 찾기
                     	var filesNo = resp.substr(check+1); //fileNo 꺼내기
                     	$("[name=filesNo]").val(filesNo); //파일no input태그에 값 넣기
+
                     }
 				});
 			}			
 		});
-		
+
 		//form 상태 판정
 		check={
-				Profile:false,
+				profile:false,
 				title:false,
 				content:false,
 				allValid:function(){
-					return this.Profile && this.title && this.content;
+					return this.profile && this.title && this.content;
 				}
 		};
 		
@@ -103,7 +104,7 @@
 		});
 		
 		//내용체크 검사
-		$("[name=trainerContent]").blur(function(e){
+		$("[name=trainerProfileContent]").blur(function(e){
 			$(this).removeClass("is-valid is-invalid");
 			if($(this).val().length>0){
 				$(this).addClass("is-valid");
@@ -114,11 +115,17 @@
 			}	
 		});
 		
-		
+		//폼 검사 이벤트
 		$(".insert-form").submit(function(e){
 			e.preventDefault();
 			
+			profileCheck();
+			$("[name=trainerProfile]").blur();
+			$("[name=trainerProfileContent]").blur();
 			
+			if(check.allValid()){
+				this.submit();
+			}
 		});
 		
 		
@@ -168,10 +175,9 @@
 
 <div class="container-fluid">
 
-<form class="insert-form">
+<form class="insert-form" action="mypage_profile_edit" method="post">
 	<fieldset>
-	test:${trainerDto}<br>
-	test:${filesDto}<br>
+
 	    <div class="row text-center mt-5">
 	            <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">   
 	            	 <h3 class="text-center">프로필 수정</h3>
@@ -179,8 +185,7 @@
 	                 		width="120" height="120" class="img-circle mt-4">
 	                 <input type="file" style="display:none;" class="input-file form-control" name="profile" accept=".jpg, .png, .gif">
 	                 <div class="invalid-feedback">필수 항목입니다.</div>
-	                 <input type="hidden" value="${filesNo}" name="filesNo">
-					 <input type="hidden" value="${filesNo}" id="originFilesNo">
+	                 <input type="hidden" value="${filesDto.getFilesNo()}" name="filesNo">
 				</div>
 		</div>
 	    
@@ -200,7 +205,7 @@
 	            	 <div class="form-group">
 					      <label for="exampleTextarea" class="form-label mt-4">내용</label>
 					      <textarea  class="form-control" id="exampleTextarea" rows="5" 
-					      name= "trainerProfileContenct">${trainerDto.getTrainerProfileContent()}</textarea>
+					      name= "trainerProfileContent">${trainerDto.getTrainerProfileContent()}</textarea>
 					      <div class="invalid-feedback">필수 항목입니다.</div>
 		    		</div>
 				</div>
@@ -208,13 +213,13 @@
 		
 		<div class="row mt-4">
 	            <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">   
-	            	 <button type="submit" class="btn btn-blue" onclick="location.href='http://localhost:8888/trainer/mypage_profile_edit' ">수정</button>
+	            	 <button type="submit" class="btn btn-blue">수정</button>
 				</div>
 		</div>
 	
 	   	<!-- 넘겨야 될 데이터 준비 -->
 	   <input type="hidden" value="${trainerDto.getTrainerNo()}" name="trainerNo">
-   
+   	   <input type="hidden" value="${trainerDto.getMemberId()}" name="memberId">
 	</fieldset>
 </form>
     

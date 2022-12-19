@@ -78,7 +78,7 @@ public class TrainerDaoImpl implements TrainerDao {
 		return sqlSession.selectOne("trainer.selectOneProNo", trainingNo);
 	}
 
-
+	//프로필 업데이트
 	@Override
 	public boolean updateTrainer(TrainerDto trainerDto) {		
 		int count =sqlSession.update("trainer.trainerProfileUpdate", trainerDto);

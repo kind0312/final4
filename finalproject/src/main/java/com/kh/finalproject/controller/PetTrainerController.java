@@ -276,16 +276,26 @@ public class PetTrainerController {
 		return "trainer/mypage_profile_edit";
 	}
 	
-	
-	
-	
 	@PostMapping("/mypage_profile_edit")		
-	public String mypageProfileEdit(@ModelAttribute TrainerDto trainerDto, 
-														@ModelAttribute MemberImgDto memberImgDto,
-															HttpSession session) {  //동기로 처리	
+	public String mypageProfileEdit( //동기로 처리	
+			@ModelAttribute TrainerDto trainerDto, 
+			@ModelAttribute MemberImgDto memberImgDto,
+			HttpSession session) {  
 		
+		int originFilesNo = memberDao.findFileNo(trainerDto.getMemberId());
+		int newFilesNo = memberImgDto.getFilesNo();
 		
-		 return "";
+		// 기존 파일 번호와 새로운 파일번호가 같지 않다면
+		// 기존파일 삭제 후 새로운 파일번호 등록
+		if(originFilesNo!=newFilesNo) {
+			memberDao.memberImgDelete(trainerDto.getMemberId()); //삭제
+			memberDao.memberProfileInsert(memberImgDto); //등록
+		}
+		
+		//프로필 정보 수정
+		trainerDao.updateTrainer(trainerDto);
+		
+		 return "redirect:/trainer/mypage_profile";
 	}
 
 	
