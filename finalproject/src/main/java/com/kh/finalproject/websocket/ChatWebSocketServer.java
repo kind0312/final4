@@ -138,14 +138,15 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 			
 				
 				
-				
+			//DB로 가는 데이터 	
 			ChatDto chatDto = ChatDto.builder()
 													.memberId(user.getMemberId())	
 													.roomNo(receiveVO.getRoom())
 													.chatMessage(receiveVO.getText())
-													.chatCreateAt(new Date())
+													.chatCreateAt(new Date())													
 												.build();
 			
+			// roomjsp로 가는 데이터
 			Chat chat = Chat.builder()
 					.filesNo(filesNo) // 파일 No 담기
 					.memberId(user.getMemberId())	

@@ -30,6 +30,8 @@
     	overflow: hidden;
     	width : 45px;
     	height : 45px;
+    	
+    	
 	}
 	#chattext {
 		font-size: 13px;
@@ -43,11 +45,27 @@
 	}
 	
 	.mine {
+	float: right;
+	}
 	
+	.your {
+	float:left;
 	}
 	
 	.partner {
 	
+	}
+	.textbox {
+	
+    display: inline-block;
+    width: 70%;
+    padding: 10px;
+    margin-top: 7px;
+    font-size: 13px;
+    border-radius: 10px;
+     margin-left: 20px;
+    background-color: #ddd;
+
 	}
 	
 
@@ -76,21 +94,45 @@
         
         	<ul id="it">
         	<c:forEach var="chatHistory" items="${chatHistory}">
-                				<tr class="table-default align-middle">
+        		<c:choose>          
+        			<c:when test = "${myId eq chatHistory.memberId}">
+        				<tr class="table-default align-middle mine">
 	                 				<th width="30%"> 
 	                 				<img src="${pageContext.request.contextPath}/download/${chatHistory.filesNo}" class="img-circle">
 	                 				</th>
 	                 				<th width="40%">
-	                 				<div class="container-fluid">          					
+	                 				<div class="container-fluid  textbox">          					
 	                 					<span class="gender-font">${chatHistory.memberName}</span>	                 					
 	                 					<span class="gender-font">${chatHistory.chatMessage} </span>
-	                 					<span class="gender-font" id="chattext">${chatHistory.chatCreateAt}</span>
+	                 					<span class="gender-font" >${chatHistory.chatCreateAt}</span>
 	                 					<p> </p>
 	                 				</div>   
 	                 				</th>
 	                 				
                  				</tr>
-		                	</c:forEach>
+        			</c:when>
+        			
+        			<c:otherwise>
+        				<tr class="table-default align-middle your">
+	                 				<th width="30%"> 
+	                 				<img src="${pageContext.request.contextPath}/download/${chatHistory.filesNo}" class="img-circle">
+	                 				</th>
+	                 				<th width="40%">
+	                 				<div class="container-fluid textbox">          					
+	                 					<span class="gender-font">${chatHistory.memberName}</span>	                 					
+	                 					<span class="gender-font">${chatHistory.chatMessage} </span>
+	                 					<span class="gender-font" id="chattext">${chatHistory.chatCreateAt}</span>
+	                 					<p> </p>
+	                 				</div> 
+	                 				</th>
+	                 				
+                 				</tr>
+        			</c:otherwise>
+	              
+        			    						
+        		</c:choose>
+        	
+		       	</c:forEach>
         	</ul>
         
             <ul>
@@ -216,11 +258,7 @@ $(function(){
 	});
 	
 	
-	$("#it").function(){
-		
-		
-	};
-	
+
 	
 	
 

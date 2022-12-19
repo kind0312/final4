@@ -30,6 +30,7 @@ import com.kh.finalproject.vo.ChatListVO;
 import com.kh.finalproject.vo.ChatPartnerSearchVO;
 import com.kh.finalproject.vo.ChatPartnerVO;
 import com.kh.finalproject.vo.ChatRoomVO;
+import com.kh.finalproject.vo.ChatUpdateVO;
 import com.kh.finalproject.vo.SearchRoomVO;
 
 
@@ -110,6 +111,13 @@ public class ChatController {
 		// 채팅방 들어갈때 상대 메시지 읽음 표시 update
 		String partnerId = partner.getMemberId(); //상대 아이디
 		//메소드 추가해야함 
+		ChatUpdateVO chatUpdateVO = ChatUpdateVO
+				.builder()
+					.memberId(partnerId)
+					.roomNo(roomNo)
+				.build();
+		
+		chatDao.chatUpdate(chatUpdateVO);
 		
 		return "chat/room";
 	}
