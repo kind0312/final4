@@ -146,7 +146,10 @@ $(function(){
 		
 		<div class="row mt-3">
             <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-            	<a href="${pageContext.request.contextPath}/mypage/point" class="btn btn-blue">&lt; 목록</a>
+            	<a href="${pageContext.request.contextPath}/mypage/point">
+            		<img src="${pageContext.request.contextPath}/image/return-btn.png"
+            			width="35" height="35">
+            	</a>
                  <table class="table table-hover text-center align-middle mt-3">
                  	<thead>
                  		<tr>

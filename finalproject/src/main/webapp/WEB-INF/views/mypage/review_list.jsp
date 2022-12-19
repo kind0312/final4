@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp">
-	<jsp:param value="포인트 내역" name="title"/>
+	<jsp:param value="후기 내역" name="title"/>
 </jsp:include>
 
 <style>
@@ -99,13 +99,13 @@
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/pet">반려동물</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" style="color:white;" href="${pageContext.request.contextPath}/mypage/point">포인트</a>
+	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/point">포인트</a>
 	        </li>
 	        <li class="nav-item">
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/like">찜관리</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/review">후기</a>
+	          <a class="nav-link mypage-nav" style="color:white;" href="${pageContext.request.contextPath}/mypage/review">후기</a>
 	        </li>
 	        <li class="nav-item">
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/mypage/profile">정보수정</a>
