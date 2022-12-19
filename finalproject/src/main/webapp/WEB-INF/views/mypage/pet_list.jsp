@@ -116,7 +116,11 @@
 	<div class="container-fluid">
         <div class="row mt-80 mb-3">
             <div class="col-md-6 offset-md-3">
-                 <h4 class="text-center">반려동물</h4>
+                 <h4 class="text-center">
+                 	반려동물
+                 	<img src="${pageContext.request.contextPath}/image/pet_insert.png" 
+                 	width="30" height="30">
+                 </h4>
             </div>
         </div>
 		

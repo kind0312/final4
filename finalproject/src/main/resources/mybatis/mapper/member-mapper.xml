@@ -115,7 +115,7 @@
 	
 	
 	<delete id="memberImgDelete" parameterType="String">
-	delete member_img where member_id = #{memberId}
+		delete member_img where member_id = #{memberId}
 	</delete>
 	
 	
