@@ -164,36 +164,51 @@
 // 		});
 
 		var page = 1;
-		
+		var size = 6;
+	
 		$(window).scroll(function(){
 
             //퍼센트 = (현재스크롤위치) / (문서높이 - 창높이) * 100
             var percent = $(window).scrollTop() / ($(document).height() - $(window).height()) * 100;
 //             console.log(percent >= 45);
-            console.log(percent);
+//             console.log(percent);
             
             if($(window).scrollTop() == $(document).height() - $(window).height()){
             	console.log(++page);
             }
             
-			if(percent >= 45){
+			if($(document).height() <= $(window).scrollTop() + $(window).height() + 100){
 	            fulllist();
 			}
-//             $(".reviewborder").css("height", percent+"%");
         });
+		
 		
 		function fulllist(){
 			$.ajax({
-				url:"${pageContext.request.contextPath}/rest/review/fulllist",
+				url:"${pageContext.request.contextPath}/rest/review/fulllist?p"+2+"&size"+size,
 				method:"get",
 				data:{
 					
 				},
 				success:function(resp){
-					console.log(resp.length);
-					console.log(resp);
+// 					console.log(resp.length);
 					for(var i = 0; i < resp.length; i++){
-						$(".list").append($("<div>").attr());
+						$(".list").append($("<div>").attr("class","col-xl-5 offset-xl-1 col-lg-5 offset-lg-1 col-md-10 offset-md-1 col-sm-10 offset-sm-1 mt-4 reviewborder")
+								.append($("<a>").attr("href","${pageContext.request.contextPath}/review/fulldetail?reviewNo="+resp[i].reviewNo)
+										.append($("<div>").attr("class","row")
+												.append($("<img>").attr("class","col-xl-1 offset-xl-0 col-lg-1 offset-lg-0 col-md-4 offset-md-0 col-sm-4 offset-sm-0 mt-4")
+												.attr("src","${pageContext.request.contextPath}/download/"+resp[i].filesNo)
+												.attr("style","width:100px; height: 85px; border-radius: 70%;"))
+													.append($("<div>").attr("class","col-xl-8 offset-xl-0 col-lg-8 offset-lg-0 col-md-8 offset-md-0 col-sm-8 offset-sm-0 mt-4")
+															.append($("<h3>").attr("class","text-dark").attr("style","word-break:break-all;").append(resp[i].reviewTitle))
+																		.append($("<div>").attr("class","row")
+																				.append($("<div>").attr("class","col")
+																						.append($("<div>").attr("class","star-score").attr("data-max","5").attr("data-rate",resp[i].reviewGood))))
+																						.append($("<div>").attr("class","row mt-3 mb-4")
+																								.append($("<div>").attr("class","col")
+																										.append($("<div>")
+																												.append($("<h5>").attr("class","text-primary").append(resp[i].memberId)))))))));
+// 						console.log(resp[i]);
 					}
 				}
 			});
