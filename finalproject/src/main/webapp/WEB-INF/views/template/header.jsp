@@ -18,18 +18,10 @@
          </c:choose>
       </title>
       
-      <!-- 글꼴 cdn -->
-     <!--  <link rel="preconnect" href="//fonts.googleapis.com">
-      <link rel="preconnect" href="//fonts.gstatic.com" crossorigin> -->
-      <!-- <link href="//fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet"> -->
-      
-      
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-      
-      
-      
+   <!-- 글꼴 cdn -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 <!--        <link rel="stylesheet" type="text/css" href="/css/reset.css"> -->
 <!--        <link rel="stylesheet" type="text/css" href="/css/layout.css"> -->
 <!--        <link rel="stylesheet" type="text/css" href="/css/commons.css"> -->
@@ -85,31 +77,30 @@
        
        <!-- 카카오 지도-->
        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94efcfc3a2fb279ab90052c1c24e8cc6"></script>
-   		
+         
       <style>
-      	
+         
 /*          <!-- div 확인 점선 --> */
 /*            div{ */
 /*                  border: 1px dotted gray; */
 /*               } */
           /* 태그 스타일 */
-        *{
-			font-family: 'Jua', 산세리프;      
-        }
-        
+          *{
+             font-family: 'Noto Sans KR', 산세리프;
+          }
         html,
-		body {
+      body {
                 height:100%;
         }
         
-      	body {
-		  display: flex;
-		  flex-direction: column;
-		}
-		
-		section {
-		  flex: 1;
-		}
+         body {
+        display: flex;
+        flex-direction: column;
+      }
+      
+      section {
+        flex: 1;
+      }
         
         p {
            margin-top: 0;
@@ -125,7 +116,7 @@
         
          /* 클래스 스타일 */
          .rounded{
-         	border-radius: 10px !important;
+            border-radius: 10px !important;
          }
          
           .logo {
@@ -171,7 +162,7 @@
             color: #f8f9fa;
          }
          .w-10{
-         	width: 10% !important;
+            width: 10% !important;
          }
          .w-30{
             width: 30%;
@@ -180,7 +171,7 @@
             width: 70%;
          }
          .w-90{
-         	width: 90% !important;
+            width: 90% !important;
          }
          .mt-150{
             margin-top:150px;
@@ -219,7 +210,7 @@
             font-weight:bolder;
          }
          .yellow{
-        	color:#FADE81;
+           color:#FADE81;
          }
          
         .btn{
@@ -315,10 +306,10 @@
          
          /* 라벨 폰트 두껍게*/
          .label-font-weight{
-         	font-weight:bold;
+            font-weight:bold;
          }
          .modal-body{
-         	font-size:16px;
+            font-size:16px;
          }
          
       </style>

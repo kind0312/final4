@@ -134,7 +134,7 @@
 
 	<div class="container-fluid">
         <div class="row mt-80">
-            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 mt-4">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
                  <h4 class="text-center">포인트 내역</h4>
             </div>
         </div>
