@@ -17,13 +17,14 @@
 
 <style>
 	.chat-message {
-		display: block;
-	    width: 70%;
+		display: inline-block;
+	    width: 400px;
 	    padding: 10px;
 	    margin-top: 7px;
 	    font-size: 13px;
 	    border-radius: 10px;
-	     margin-left: 20px;
+	    margin-left: 10px;
+		
 	   
 	     
 	    
@@ -64,33 +65,38 @@
 	.textbox {
 	
     display: inline-block;
-    width: 500px;
+    width: 400px;
     padding: 10px;
     margin-top: 7px;
     font-size: 13px;
     border-radius: 10px;
-     margin-left: 20px;
-     border: 1px solid black;
-
-    
+    margin-left: 10px;
+      
 
 	}
 	
 	.chat {
-	
+		
 	}
 	.time {
 	font-size: 5px;
 	}
 	.tb-mine {
-	 background-color: #81BDF1;
+	 background-color: #AFDAFF;
 	 color: white;
 	 
 	}
 	.tb-your {
-	 background-color:white;
+	 background-color: E7E7E7;
 	 border-color: black;
 	 
+	}
+	.input-div {
+	    margin-right: 10px;
+	
+	}
+	body {
+	  position: relative;
 	}
 
 	
@@ -115,7 +121,7 @@
           	<hr>
         </div>
         
-        <div class="chat row mt-60 mb-3">
+        <div class="chat row mt-60 mb-3 "  >
         	<div class="col-md-6 offset-md-3">
         
         	<ul id="it">
@@ -130,7 +136,7 @@
 								  
 								    	<span class="gender-font textbox tb-mine">${chatHistory.chatMessage} </span>								   
 								  
-        								<img src="${pageContext.request.contextPath}/download/${chatHistory.filesNo}" class="img-circle">
+        						<!--  <img src="${pageContext.request.contextPath}/download/${chatHistory.filesNo}" class="img-circle"> -->	
 								    			
 	                 					                 				
                  			</div>	
@@ -157,24 +163,28 @@
 		       	</c:forEach>
 		       
         	</ul>
-        
+        <div class=" align-middle ">
             <ul>
-                <!-- 동적 생성 -->
-                <div id="message-list" class="message-box"></div>
+                <!-- 동적 생성 -->                
+               
+                <div id="message-list" class="message-box"></div>             
+                
             </ul>
-            
+         </div>   
         
         
-        <div class="input-div">
-         <!-- <textarea placeholder="Press Enter for send message."></textarea> -->   
-       
-          <input type="text" id="message-input" class="form-control form-control-lg">       
-         	
-			<!--  <input type="file" id="img-input" class="form-control" >		 -->
-       
-			<button type="button" id="message-send" class="btn btn-blue text-center">전송</button>
+     
+			
+			
+			<div class="input-group  input-div" >
+				  <input type="text" class="form-control input-div" id="message-input" placeholder="메세지를 입력해주세요" style="margin-top: 40px">
+				  <button class="btn btn-outline-secondary btn btn-blue" type="button" id="message-send" style="margin-top: 40px">전송</button>
+			</div>
+			
+			
+			
 		
-        	</div>
+        	
          </div>
        </div>
         
@@ -183,7 +193,6 @@
 
 </div>
 
-<span>방번호 : ${roomNo}</span>
 </body>
 
 <script>
@@ -226,31 +235,37 @@ $(function(){
 		//수신된 e.data는 JSON 문자열
 		var data = JSON.parse(e.data);
 		console.log(data);  
-					
+		
+	
 		var imgNo = data.filesNo; //이미지 파일 번호 
 		var p = $("<p>").addClass("chat-message");		
 		var time = moment(data.time).format("hh:mm");
 		var w = $("<p>").text(data.memberId); //콘솔에 key로 들어오는 값을 찍어줘야 나옴
-		var t = $("<span>").text("("+time+")");
+		var t = $("<p>").addClass("time").text(time);
 		var c = $("<span>").text(data.chatMessage);
 		
 		// 내 사진 번호만 가져와서 태그 만들어서 붙이면 될거같은데 
 		//<img src="http://localhost:8888/download/${myimg}">
 	    
-	    
 
 		var img = $("<img>").addClass("img-circle").attr('id','imgID').attr( "src","${pageContext.request.contextPath}/download/"+imgNo);
 		
+		p.append(c).append(t);  //메세지 텍스트			
+		
 		if(data.memberId == userId){
-			p.addClass("mine");
+			p.addClass("tb-mine").addClass("mine");
+			$("#message-list").append(p);	
 		}
 		else {
-			p.addClass("partner");
+			p.addClass("tb-your").addClass("your");	
+			p.append(img).append(p);
+			
+			$("#message-list").append(p);		
+			
 		}
-		
-		p.append(w).append(c).append(t);  //작성자 내용 시간
-		
-		$("#message-list").append(img).append(p);
+						
+			//선택한 요소를 감싼다 wrap 이미지랑 p랑 다 붙은걸 묶어야함 
+			//.wrap('<div class="align-middle"/>');
 		
 		
 		
@@ -270,7 +285,7 @@ $(function(){
 		var text = $("#message-input").val();
 		
 		
-		//if(text.length == 0) return; //채팅 쓴거 없으면 return
+		if(text.length == 0) return; //채팅 쓴거 없으면 return
 		
 		//JSON으로 변환해서 전송
 		//- JSON.stringify(객체) : 객체를 문자열로
