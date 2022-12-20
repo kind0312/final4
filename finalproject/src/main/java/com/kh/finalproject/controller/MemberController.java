@@ -30,12 +30,6 @@ public class MemberController {
 	@Autowired
 	private ApplyDao applyDao;
 	
-	@Autowired
-	private FilesDao filesDao;
-	
-	@Autowired
-	private TrainerDao trainerDao;
-	
 	//회원가입
 	@GetMapping("/insert")
 	public String insert() {
@@ -70,8 +64,6 @@ public class MemberController {
 		if(login) {
 			session.setAttribute(SessionConstant.ID, memberDto.getMemberId());
 			session.setAttribute(SessionConstant.STATUS, findDto.getMemberStatus());
-//			//로그인 시간을 갱신시키는 작업
-//			memberDao.updateLoginTime(findDto.getMemberId());
 			
 			return "redirect:/";
 		}

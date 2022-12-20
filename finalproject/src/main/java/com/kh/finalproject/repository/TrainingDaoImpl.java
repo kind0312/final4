@@ -18,6 +18,7 @@ import com.kh.finalproject.vo.OneTrainingVO;
 import com.kh.finalproject.vo.PetDetailListVO;
 import com.kh.finalproject.vo.ReservationDetailListVO;
 import com.kh.finalproject.vo.ReservationListVO;
+import com.kh.finalproject.vo.ReservationVO;
 import com.kh.finalproject.vo.ScheduleVO;
 import com.kh.finalproject.vo.TrainingMemberVO;
 import com.kh.finalproject.vo.TrainingUsageVO;
@@ -179,9 +180,11 @@ public class TrainingDaoImpl implements TrainingDao{
 		return sqlSession.selectList("training.oneDetail",trainingNo);
 	}
 
-
-
-	
+	//예약한 날짜인지 확인여부
+	@Override
+	public List<TrainingDto> check(ReservationVO reservationVO) {
+		return sqlSession.selectList("training.checkReservation", reservationVO);
+	}
 
 	
 	

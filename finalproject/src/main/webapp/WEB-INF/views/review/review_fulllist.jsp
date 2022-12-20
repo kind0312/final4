@@ -166,9 +166,6 @@
 	            
 				if($(document).height() <= $(window).scrollTop() + $(window).height() + 100){
 		            if(page > (count + size - 1) / size) return;
-		            if($(window).scrollTop()){
-		            	
-		            }
 					fulllist();
 		            page++;
 				}
