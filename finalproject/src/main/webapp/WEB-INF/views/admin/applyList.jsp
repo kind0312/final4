@@ -4,14 +4,38 @@
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
 	<jsp:param value="훈련사 신청 목록" name="title"/>
 </jsp:include>
-
 <style>
-	.mypage-top-nav{
-      margin-top:0.1rem !important
-   }
-</style>
 
-<body>
+
+
+.title{
+   margin-bottom:10px;
+   font-size:20px;
+}
+
+
+</style>
+<script>
+
+					$(function(){
+						var param = new URLSearchParams(location.search);
+						
+						var type = param.getAll("type"); 
+						for(var i=0; i < type.length; i++){
+							$("[name=type][value="+type[i]+"]").prop("checked", true);
+						}
+						
+						var sort = param.getAll("sort");
+						for(var i=0; i < sort.length; i++){
+							$("[name=sort]").eq(i).val(sort[i]);
+						}
+					});
+
+
+</script>
+
+
+
 
 	<nav class="navbar navbar-expand-lg navbar-expand-lg-re navbar-dark bg-black mypage-top-nav">
 	  <div class="container-fluid">
@@ -41,11 +65,32 @@
 
 
 	<div class="container-fluid">
-        <div class="row mt-80 mb-3">
-              <div class="col-md-6 offset-md-3">
+   <fieldset>
+        <div class="row mt-80">
+            <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4 mt-4">
+                 <div class="text-center">
+       
+        <!-- 검색창 -->
+        <form method="get">
+      
+        <div class="col-md-6 offset-md-3">
                  <h4 class="text-center">훈련사 신청/전환</h4>
-             </div>
+            </div>
+            <div class="float-end">
+      <fieldset>
+        <label></label><input type="checkbox"name="type" value="신청">신청</label>
+        <label></label><input  type="checkbox"name="type" value="승인">승인</label>
+        <label></label><input  type="checkbox"name="type" value="반려">반려</label>
+        <button class="btn btn-neutral btn-blue3 " type="submit">검색</button>
+      </fieldset>
+      </div>
+        </fieldset>
+        </form>
         </div>
+        </div>
+        </div>
+        
+     
      <div class="row mt-8 training-ing">
             <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4 mt-4">
 <table border="1" width="800" class="table table-hover training-table text-center">
@@ -59,7 +104,7 @@
 </thead>
 <tbody>
 <tr >
-<c:forEach var="applyDto" items="${applyDto}">
+<c:forEach var="applyDto" items="${list}">
 <tr class="table-default align-middle">
 <td>${applyDto.applyNo}</td>
 <td>${applyDto.memberId}</td>

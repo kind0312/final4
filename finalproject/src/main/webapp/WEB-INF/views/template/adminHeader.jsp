@@ -193,6 +193,7 @@
               font-weight: bolder;
               color:#fff;
               font-size:15px;
+              margin-left:5px;
          
          
          }
@@ -202,6 +203,16 @@
               font-weight: bolder;
               color:#fff;
               font-size:15px;
+           }
+           .btn-blue3{
+              background-color: #256BF3;
+              /*border:2px solid #256BF31;*/
+              font-weight: bolder;
+              color:#fff;
+             font-size:3px;
+              width: 45px;
+              height: 30px;
+              padding:4px;
            }
            .btn-gray{
               background-color: #D9D9D9;
@@ -313,7 +324,7 @@
    
       <div class="container-fluid">
 
-<<<<<<< HEAD
+
     	<div class="row mt-4">
 	      <div class="col-md-10 offset-md-1">
 	

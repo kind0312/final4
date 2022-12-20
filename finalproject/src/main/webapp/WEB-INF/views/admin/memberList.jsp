@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ 
+ <!-- 테스트용 데이터 출력 -->
+ 
 <jsp:include page="/WEB-INF/views/template/adminHeader.jsp">
 	<jsp:param value="회원 목록" name="title"/>
 </jsp:include>
@@ -10,9 +13,7 @@
    margin-bottom:10px;
    font-size:20px;
 }
-.mypage-top-nav{
-      margin-top:0.1rem !important
-   }
+
 </style>
 <body>
 
@@ -34,8 +35,8 @@
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/admin/trainerList">훈련사 관리</a>
 	        </li>
 	         <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/admin/itemList">훈련사 관리</a>
-	        </li>
+	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/admin/itemList">포인트상품 관리</a>
+	           </li>
 	      
      	 </ul>
     	</div>
@@ -101,17 +102,7 @@
 
 </div>
 
-<!-- 정렬 
-<select name="sort">
-	<option value="member_join desc">번호</option>
-</select>
--->
 
-</table>
-<!--  <div class="row mt-80">
-            <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4 mt-4">
-                 <div class="text-center">
-<h3>&laquo;&lt;  1 2 3 4 5 &gt;&raquo;</h3>-->
 </div>
 </div>
 </div>

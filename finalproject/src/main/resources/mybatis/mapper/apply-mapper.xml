@@ -8,8 +8,17 @@
   <mapper namespace="apply">
   
   <!-- 훈련사 지원 조회 -->
-  <select id="list" resultType="applyDto">
+  <select id="list" parameterType="ApplyListSearchVO"  resultType="applyDto">
   	select*from apply
+  		<if test="type !=null">
+		where apply_status in 
+				<foreach collection="type" separator="," 
+										item="t" open="(" close=")">
+					#{t}
+				</foreach>
+	   	
+	   
+	</if>
   </select>
 
   <!-- 훈련사 지원 상태>승인 변환 -->
@@ -41,6 +50,26 @@
 		m.member_email, m.member_tel from apply a 
 		inner join member m on a.member_id=m.member_id 
 		where a.apply_no=#{applyNo}
+	</select>
+	
+	<!-- 관리자-지원상태 검색(복합 검색) -->
+	<select  id="complex2" parameterType="map" resultType="applyDto">
+	select*from apply 
+	<!--체크박스 List<String>형태로 전달될 것이라고 예상 가능
+	-collection:데이터가 들어있는 항목
+	-seperator:데이터출력 사이마다의 구분기회
+	-->
+	
+	<if test="type !=null">
+		where type in 
+				<foreach collection="type" separator="," 
+										item="t" open="(" close=")">
+					#{t}
+				</foreach>
+	   	
+	   
+	</if>
+		
 	</select>
 	
 </mapper>

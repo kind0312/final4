@@ -21,9 +21,7 @@
 		color:#81BDF1;
 		font-size:20px;
 	}
-	.mypage-top-nav{
-		margin-top:0.1rem !important
-	}
+	
 </style>
 
 <script>

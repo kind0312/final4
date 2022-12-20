@@ -153,6 +153,7 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.delete("member.memberImgDelete", memberId) > 0;
 	}
 	
+	
 	//훈련사로 전환 시 회원상태 변경
 	@Override
 	public boolean statusChange(String memberId) {
@@ -167,3 +168,9 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 }
+
+
+
+
+
+

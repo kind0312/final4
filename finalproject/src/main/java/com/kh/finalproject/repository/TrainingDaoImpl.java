@@ -19,6 +19,8 @@ import com.kh.finalproject.vo.PetDetailListVO;
 import com.kh.finalproject.vo.ReservationDetailListVO;
 import com.kh.finalproject.vo.ReservationListVO;
 import com.kh.finalproject.vo.ScheduleVO;
+import com.kh.finalproject.vo.TrainingMemberVO;
+import com.kh.finalproject.vo.TrainingUsageVO;
 import com.kh.finalproject.vo.TrainingRequestListVO;
 
 
@@ -159,6 +161,28 @@ public class TrainingDaoImpl implements TrainingDao{
 	public void insertPurchase(PointDto dto) {
 		sqlSession.insert("training.pointInsert", dto);
 	}
+
+	@Override
+	public List<TrainingUsageVO> selectList(String memberId) {
+		return sqlSession.selectList("training.traingUsage",memberId);
+	}
+
+	@Override
+	public TrainingMemberVO selectDetail(int trainingNo) {
+		return sqlSession.selectOne("training.oneDetail2",trainingNo);
+		
+	}
+
+	@Override
+	public List<ReservationDetailListVO> usageDetail(int trainingNo) {
+	    
+		return sqlSession.selectList("training.oneDetail",trainingNo);
+	}
+
+
+
+	
+
 	
 	
 }
