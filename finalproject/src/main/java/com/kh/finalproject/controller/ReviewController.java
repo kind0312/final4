@@ -17,7 +17,6 @@ import com.kh.finalproject.entity.ReviewDto;
 import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.repository.ReviewDao;
 import com.kh.finalproject.vo.ReviewPaginationVO;
-import com.kh.finalproject.vo.TrainingListVO;
 
 @Controller
 @RequestMapping("/review")

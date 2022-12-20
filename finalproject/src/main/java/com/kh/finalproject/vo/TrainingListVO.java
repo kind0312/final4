@@ -17,6 +17,6 @@ public class TrainingListVO {
 	private String trainingStatus;
 	
 
-	
+	private int trainerNo;
 	private int filesNo;
 }
