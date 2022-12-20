@@ -147,9 +147,6 @@
 	        <li class="nav-item">
 	          <a class="nav-link mypage-nav" style="color:white;" href="${pageContext.request.contextPath}/trainer/mypage_profile">프로필관리</a>
 	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">정산관리</a>
-	        </li>
 	        <li>
 	          <a class="nav-link mypage-nav" href="#" data-bs-toggle="modal" data-bs-target="#change-modal">회원모드로 전환</a>
 	        </li>
