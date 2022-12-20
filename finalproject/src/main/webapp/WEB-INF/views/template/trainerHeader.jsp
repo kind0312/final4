@@ -146,7 +146,7 @@
          }
          /* 헤더크기에 맞춰 마이페이지 navbar 바깥으로 나오게 top 설정*/
          .mypage-top-nav{
-            margin-top: 2.7rem !important;
+            margin-top: 2.6rem !important;
          }
          /* 마이페이지 navbar 좌우 간격 수정 */
          .navbar-expand-lg-re{
