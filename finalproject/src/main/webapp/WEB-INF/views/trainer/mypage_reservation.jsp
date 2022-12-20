@@ -10,7 +10,7 @@
 <style>
 	.training-table {
 	    border-top:1px solid rgba(0, 0, 0, 0.1);
-
+		height:130px;
 	}
 	.training-zero-font{
 		color:#303030;
