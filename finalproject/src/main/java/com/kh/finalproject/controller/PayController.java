@@ -163,6 +163,11 @@ public class PayController {
 			@ModelAttribute(name="vo") PaginationListSearchVO vo ) {
 		String memberId = (String)session.getAttribute(SessionConstant.ID);
 		
+		//취소 버튼 이벤트 위한 데이터 준비
+		//현재 포인트 출력 후 model로 넘기기
+		MemberDto dto = memberDao.selectOne(memberId);
+		model.addAttribute("point",dto.getMemberPoint());
+		
 		vo.setMemberId(memberId);
 		int count = pointPurchaseDao.count(vo);
 		vo.setCount(count);
@@ -192,7 +197,7 @@ public class PayController {
 				.build();
 		PayCancelResponseVO response = 
 				payService.cancel(request);
-		System.out.println(response);
+		
 		//pointPurchaseDto 테이블 거래상태 취소로 변경
 		pointPurchaseDao.update(pointPurchaseNo);
 		//point 테이블 환불금액만큼 포인트 증가처리
@@ -205,6 +210,13 @@ public class PayController {
 				.pointDate(response.getCanceled_at())
 				.build();
 		pointDao.insert(pointDto);
+		
+		//회원테이블 포인트 증가처리
+		MemberDto memberDto = MemberDto.builder()
+				.memberId(response.getPartner_user_id())
+				.memberPoint((long)response.getAmount().getTotal())
+				.build();
+		memberDao.pointPlus(memberDto);
 		
 		return "redirect:list";
 	}
