@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
-   
+    pageEncoding="UTF-8"%>   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="login" value="${loginId != null}"></c:set>
@@ -20,9 +18,9 @@
 		</title>
 		
 		<!-- 글꼴 cdn -->
-		<link rel="preconnect" href="//fonts.googleapis.com">
-		<link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
-		<link href="//fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 	
 	    <link rel="stylesheet" type="text/css" href="/css/reset.css">
 	    <!-- <link rel="stylesheet" type="text/css" href="/css/layout.css"> -->
@@ -92,6 +90,9 @@
 /*                  border: 1px dotted gray; */
 /*               } */
           /* 태그 스타일 */
+          *{
+             font-family: 'Noto Sans KR', 산세리프;
+          }
         html,
 		body {
                 height:100%;
@@ -145,7 +146,7 @@
          }
          /* 헤더크기에 맞춰 마이페이지 navbar 바깥으로 나오게 top 설정*/
          .mypage-top-nav{
-            margin-top: 1.7rem !important;
+            margin-top: 2.7rem !important;
          }
          /* 마이페이지 navbar 좌우 간격 수정 */
          .navbar-expand-lg-re{
@@ -399,4 +400,4 @@
 	      </div>
 	    </div>
   </div> 
-  <section class="container-fluid">
+  <section class="">
