@@ -52,11 +52,37 @@ $(function(){
 	//결제 취소 버튼 이벤트
 	$(".cancel-btn").click(function(){
 		var pointPurchaseNo = $(this).next().val();
+		var myPoint = $("[name=myPoint]").val();
+		var purchasePrice = commaDelete($(this).parent().siblings('td.purchasePrice').text());
 		
-		$(".cancel-confirm-btn").click(function(){
-			location.href=
-				"${pageContext.request.contextPath}/pay/cancel?pointPurchaseNo="
-						+pointPurchaseNo;
+		//날짜 비교
+		//구매날짜에서 +7일까지 결제취소 가능
+		//현재날짜와 +7일 비교 후 지났을 경우 취소 불가
+		var date = $(this).parent().siblings('td.purchaseDate').text(); //구매날짜
+		
+		var purchase = new Date(date); //구매날짜
+		var now = new Date(); //현재날짜
+		var calcul = purchase.getTime()+(1000 * 60 * 60 * 24 * 7);
+		var plusDate = new Date(calcul); //구매날짜 +7일
+		
+		//구매날짜+7일보다 현재날짜가 더 크면 취소 불가
+		console.log("구매날짜+7일 : "+plusDate.getTime());
+		console.log("현재날짜 : "+now.getTime());
+
+		$(".cancel-confirm-btn").click(function(e){
+			// 결제일로부터 날짜가 7일 지난 경우 버튼 이벤트 막기
+			if(plusDate.getTime()<now.getTime()){
+				e.preventDefault();
+				$("#reject-modal2").modal('show');
+			// 보유 포인트 금액보다 취소금액이 큰 경우 버튼 이벤트 막기
+			}else if(myPoint<purchasePrice){
+				e.preventDefault();
+				$("#reject-modal1").modal('show');
+			}else{
+				location.href=
+					"${pageContext.request.contextPath}/pay/cancel?pointPurchaseNo="
+							+pointPurchaseNo;
+			}
 		});
 	});
 	
@@ -82,6 +108,28 @@ $(function(){
 			$(".first-target").addClass("disabled");
 			$(".second-target").addClass("disabled");
 		}
+	}
+	
+	//1000단위 콤마찍기
+	function comma(price){
+		return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	}
+	
+	//1000단위 콤마해제
+	function commaDelete(price){
+		return price.toString().replace(",","");
+	}
+	
+	//날짜 한자리수 앞에 0 붙이기
+	function addZero(n, digits) {
+	    var zero = '';
+	    n = n.toString();
+
+	    if (n.length < digits) { //자리수가 부족하다면
+	        for (i = 0; i < digits - n.length; i++)
+	            zero += '0';
+	    }
+	    return zero + n;
 	}
 	
 });
@@ -122,12 +170,40 @@ $(function(){
   	</div>
 </nav>
 	
-		<!-- Modal -->
+	<!-- 훈련사 전환 Modal -->
 	<div class="modal fade" id="change-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-body">
 	        <span style="font-size:17px;">훈련사 전환이 불가능한 회원입니다.</span>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-yellow" data-bs-dismiss="modal">확인</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<!-- 카카오페이 거래취소 거절 Modal1 -->
+	<div class="modal fade" id="reject-modal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-body">
+	        <span style="font-size:17px;">이미 사용한 포인트는 취소가 불가능합니다!</span>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-yellow" data-bs-dismiss="modal">확인</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<!-- 카카오페이 거래취소 거절 Modal2 -->
+	<div class="modal fade" id="reject-modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-body">
+	        <span style="font-size:17px;">결제일로부터 7일 경과된 결제건은 취소가 불가능합니다!</span>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-yellow" data-bs-dismiss="modal">확인</button>
@@ -165,10 +241,10 @@ $(function(){
                  		<c:forEach var="list" items="${list}">
                  			<tr>
 	                 			<td>${list.itemName}</td>
-	                 			<td>
+	                 			<td class="purchasePrice">
 	                 				<fmt:formatNumber value="${list.pointPurchasePrice}" pattern="###,###"></fmt:formatNumber>
 	                 			</td>
-	                 			<td>${list.pointPurchaseDate}</td>
+	                 			<td class="purchaseDate">${list.pointPurchaseDate}</td>
 	                 			<td>${list.pointPurchasePayment}</td>
 	                 			<td>
 	                 				<c:choose>
@@ -280,7 +356,7 @@ $(function(){
 		
 		<!-- 페이지네이션 버튼 막기 위한 데이터 준비 -->
 		<input type="hidden" value="${vo.p}" name="pageNo">
-		
+		<input type="hidden" value="${point}" name="myPoint">
     </div>
 </body>
 

@@ -102,7 +102,7 @@
 		<div class="row mt-100 mb-5">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
 				<a href="${pageContext.request.contextPath}/review/edit?reviewNo=${reviewDto.reviewNo}" class="btn btn-blue">수정</a>
-            	<a href="${pageContext.request.contextPath}/mypage/training" class="btn btn-yellow">목록</a>
+            	<a href="${pageContext.request.contextPath}/mypage/review" class="btn btn-yellow">목록</a>
             	<a href="${pageContext.request.contextPath}/review/delete?reviewNo=${reviewDto.reviewNo}" class="btn btn-danger">삭제</a>
 			</div>
 		</div>
