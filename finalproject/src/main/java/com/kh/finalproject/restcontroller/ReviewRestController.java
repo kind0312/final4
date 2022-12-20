@@ -24,7 +24,7 @@ public class ReviewRestController {
 	
 	//전체 이용후기 목록
 	@GetMapping("/fulllist")
-	public List<ReviewVO> list() {
-		return reviewDao.reviewInfinite();
+	public List<ReviewVO> list(@ModelAttribute(name="vo") ReviewPaginationVO vo) {
+		return reviewDao.reviewList(vo);
 	}
 }

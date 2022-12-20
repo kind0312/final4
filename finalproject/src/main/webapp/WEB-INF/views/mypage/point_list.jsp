@@ -8,6 +8,10 @@
 </jsp:include>
 
 <style>
+.himg{
+width: 35;
+margin-left: 5px;
+}
 	.page-item.active.page-blue .page-link {
 	    z-index: 3;
 	    color: #fff;
@@ -135,7 +139,7 @@
 	<div class="container-fluid">
         <div class="row mt-80">
             <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-                 <h4 class="text-center">포인트 내역</h4>
+                 <h4 class="text-center">포인트 내역<img src="/image/hand-gesture.png" class="himg"></h4>
             </div>
         </div>
 

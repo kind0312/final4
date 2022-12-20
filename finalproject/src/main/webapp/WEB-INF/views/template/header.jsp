@@ -77,9 +77,6 @@
        
        <!-- 카카오 지도-->
        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94efcfc3a2fb279ab90052c1c24e8cc6"></script>
-       
-       <!-- 무한 스크롤 -->
-       <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
    
       <style>
          
