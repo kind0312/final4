@@ -106,11 +106,12 @@ public class TrainerController {
 			HttpSession session) {
 		
 		String userId = (String)session.getAttribute(SessionConstant.ID);
-		reservationVO.setMemberId(userId);
-		List<TrainingDto> findDto = trainingDao.check(reservationVO);
-		if(findDto != null) {
-			model.addAttribute("reservation", findDto);
-		}
+		
+//		reservationVO.setMemberId(userId);
+//		List<TrainingDto> findDto = trainingDao.check(reservationVO);
+//		if(findDto != null) {
+//			model.addAttribute("reservation", findDto);
+//		}
 
 		model.addAttribute("member", memberDao.selectOne(userId));
 		model.addAttribute("pet", petDao.list(userId));

@@ -26,6 +26,14 @@
 			<input type="password" name="memberPw" class="form-control rounded" placeholder="비밀번호" style="width:400px;">
 			</div>
 		</div>
+		<!-- 이상인 경우만 나오는 화면 -->
+		<div class="row mt-2">
+			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2" align="center">
+			<c:if test="${param.error != null}">
+				<small style="color:red">입력한 정보가 맞지 않습니다</small>
+			</c:if>
+			</div>
+		</div>
 		<div class="row mt-5">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
 			<button type="submit" class="btn btn-blue btn-md">로그인</button>
