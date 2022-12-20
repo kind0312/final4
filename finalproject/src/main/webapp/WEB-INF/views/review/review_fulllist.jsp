@@ -49,7 +49,7 @@
 									<img class="col-xl-1 offset-xl-0 col-lg-1 offset-lg-0 col-md-4 offset-md-0 col-sm-4 offset-sm-0 mt-4" src="${pageContext.request.contextPath}/download/${reviewDto.filesNo}" style="width:100px; height: 85px; border-radius: 70%;">
 									<div class="col-xl-8 offset-xl-0 col-lg-8 offset-lg-0 col-md-8 offset-md-0 col-sm-8 offset-sm-0 mt-4">
 
-									<h3 class="text-dark" style="word-break:break-all;">${reviewDto.reviewTitle}</h3>
+									<h3 class="text-dark" style="word-break:break-word;">${reviewDto.reviewTitle}</h3>
 										<div class="row">
 											<div class="col">
 												<div class="star-score" data-max="5" data-rate="${reviewDto.reviewGood}"></div>
@@ -57,11 +57,7 @@
 										</div>
 										<div class="row mt-3 mb-4">
 											<div class="col">
-												<div>
-													
-														<h5 class="text-primary">${reviewDto.memberId}</h5>
-													
-												</div>
+												<h5 class="text-primary">${reviewDto.memberId}</h5>
 											</div>
 										</div>
 									</div>
@@ -73,67 +69,68 @@
 				</div>
 			</div>
 		</div>
-		<div class="row mt-100">
-            <div class="col-md-10 offset-md-1 d-flex justify-content-center">
-			  <ul class="pagination">
-			    <%-- 맨 처음 페이지로 이동 --%>
-			    <li class="page-item first-target">
-					<c:choose>
-						<c:when test = "${vo.isFirst()==false}"> <%-- 맨 처음 페이지가 아니라면 --%>
-							<a class="page-link" href = "fulllist?p=${vo.firstBlock()}&${vo.parameter()}">&laquo;</a> <%-- 첫 번째 페이지로 이동 --%>
-						</c:when>
-						<c:otherwise> <%-- 그렇지 않다면 --%>
-							<a class="page-link" href = "">&laquo;</a> <%-- 아무런 페이지 변화가 없도록 --%>
-						</c:otherwise>
-					</c:choose>
-			    </li>
+<!-- 		<div class="row mt-100"> -->
+<!--             <div class="col-md-10 offset-md-1 d-flex justify-content-center"> -->
+<!-- 			  <ul class="pagination"> -->
+<%-- 			    맨 처음 페이지로 이동 --%>
+<!-- 			    <li class="page-item first-target"> -->
+<%-- 					<c:choose> --%>
+<%-- 						<c:when test = "${vo.isFirst()==false}"> 맨 처음 페이지가 아니라면 --%>
+<%-- 							<a class="page-link" href = "fulllist?p=${vo.firstBlock()}&${vo.parameter()}">&laquo;</a> 첫 번째 페이지로 이동 --%>
+<%-- 						</c:when> --%>
+<%-- 						<c:otherwise> 그렇지 않다면 --%>
+<%-- 							<a class="page-link" href = "">&laquo;</a> 아무런 페이지 변화가 없도록 --%>
+<%-- 						</c:otherwise> --%>
+<%-- 					</c:choose> --%>
+<!-- 			    </li> -->
 			    
-			    <li class="page-item second-target">
-				    <%-- 이전 구간의 마지막 페이지로 이동 --%>
-					<c:choose>
-						<c:when test = "${vo.hasPrev()}"> <%-- 이전 페이지가 있다면 --%>
-							<a class="page-link" href = "fulllist?p=${vo.prevBlock()}&${vo.parameter()}">&lt;</a> <%-- 이전 구간의 마지막 페이지로 이동 --%>
-						</c:when>
-						<c:otherwise> <%-- 그렇지 않다면 --%>
-							<a class="page-link" href = "">&lt;</a> <%-- 아무런 페이지 변화가 없도록 --%>
-						</c:otherwise>
-					</c:choose>
-			    </li>
+<!-- 			    <li class="page-item second-target"> -->
+<%-- 				    이전 구간의 마지막 페이지로 이동 --%>
+<%-- 					<c:choose> --%>
+<%-- 						<c:when test = "${vo.hasPrev()}"> 이전 페이지가 있다면 --%>
+<%-- 							<a class="page-link" href = "fulllist?p=${vo.prevBlock()}&${vo.parameter()}">&lt;</a> 이전 구간의 마지막 페이지로 이동 --%>
+<%-- 						</c:when> --%>
+<%-- 						<c:otherwise> 그렇지 않다면 --%>
+<%-- 							<a class="page-link" href = "">&lt;</a> 아무런 페이지 변화가 없도록 --%>
+<%-- 						</c:otherwise> --%>
+<%-- 					</c:choose> --%>
+<!-- 			    </li> -->
 			    
-			    <%-- 현재 구간의 페이지 이동 --%>
-				<%-- 변수명을 i로 하며 시작과 끝은 vo의 startBlock(), endBlock()의 반환값으로, 간격은 1로 한다  --%>
-				<c:forEach var = "i" begin = "${vo.startBlock()}" end = "${vo.endBlock()}" step = "1">
-					<li class="page-item blue-box">
-						<a class="page-link" href = "fulllist?p=${i}&${vo.parameter()}">${i}</a>
-					</li>
-				</c:forEach>
+<%-- 			    현재 구간의 페이지 이동 --%>
+<%-- 				변수명을 i로 하며 시작과 끝은 vo의 startBlock(), endBlock()의 반환값으로, 간격은 1로 한다  --%>
+<%-- 				<c:forEach var = "i" begin = "${vo.startBlock()}" end = "${vo.endBlock()}" step = "1"> --%>
+<!-- 					<li class="page-item blue-box"> -->
+<%-- 						<a class="page-link" href = "fulllist?p=${i}&${vo.parameter()}">${i}</a> --%>
+<!-- 					</li> -->
+<%-- 				</c:forEach> --%>
 				
-				<%-- 다음 구간의 첫 번째 페이지로 이동 --%>
-				<li class="page-item last-target">
-					<c:choose>
-						<c:when test = "${vo.hasNext()}"> <%-- 다음 페이지가 있다면 --%>
-							<a class="page-link"  href = "fulllist?p=${vo.nextBlock()}&${vo.parameter()}">&gt;</a> <%-- 다음 구간의 첫 번째 페이지로 이동 --%>
-						</c:when>
-						<c:otherwise> <%-- 그렇지 않다면 --%>
-							<a class="page-link"  href = "">&gt;</a> <%-- 아무런 페이지 변화가 없도록 --%>
-						</c:otherwise>
-					</c:choose>
-				</li>
+<%-- 				다음 구간의 첫 번째 페이지로 이동 --%>
+<!-- 				<li class="page-item last-target"> -->
+<%-- 					<c:choose> --%>
+<%-- 						<c:when test = "${vo.hasNext()}"> 다음 페이지가 있다면 --%>
+<%-- 							<a class="page-link"  href = "fulllist?p=${vo.nextBlock()}&${vo.parameter()}">&gt;</a> 다음 구간의 첫 번째 페이지로 이동 --%>
+<%-- 						</c:when> --%>
+<%-- 						<c:otherwise> 그렇지 않다면 --%>
+<%-- 							<a class="page-link"  href = "">&gt;</a> 아무런 페이지 변화가 없도록 --%>
+<%-- 						</c:otherwise> --%>
+<%-- 					</c:choose> --%>
+<!-- 				</li> -->
 				
-				<%-- 맨 마지막 페이지로 이동 --%>
-			    <li class="page-item final-target">
-					<c:choose>
-						<c:when test = "${vo.isLast()==false}"> <%-- 맨 마지막 페이지가 아니라면 --%>
-							<a class="page-link" href = "fulllist?p=${vo.lastBlock()}&${vo.parameter()}">&raquo;</a> <%-- 맨 마지막 페이지로 이동 --%>
-						</c:when>
-						<c:otherwise>
-							<a class="page-link" href = "">&raquo;</a>
-						</c:otherwise>
-					</c:choose>
-			    </li>
-			  </ul>
-		  	</div>
-		</div>
+<%-- 				맨 마지막 페이지로 이동 --%>
+<!-- 			    <li class="page-item final-target"> -->
+<%-- 					<c:choose> --%>
+<%-- 						<c:when test = "${vo.isLast()==false}"> 맨 마지막 페이지가 아니라면 --%>
+<%-- 							<a class="page-link" href = "fulllist?p=${vo.lastBlock()}&${vo.parameter()}">&raquo;</a> 맨 마지막 페이지로 이동 --%>
+<%-- 						</c:when> --%>
+<%-- 						<c:otherwise> --%>
+<!-- 							<a class="page-link" href = "">&raquo;</a> -->
+<%-- 						</c:otherwise> --%>
+<%-- 					</c:choose> --%>
+<!-- 			    </li> -->
+<!-- 			  </ul> -->
+<!-- 		  	</div> -->
+<!-- 		</div> -->
+			<i class="fa-solid fa-circle-arrow-up fa-3x blue go_top" style="position: fixed; right: 30; bottom: 100; z-index: 1080;"></i>
 	</div>
 	
 	<script type="text/javascript">
@@ -154,65 +151,65 @@
 	                    rate: 0,//실제 점수(data-rate로 대체 가능)
 	                }
 	         });
-		});
 		
-// 		$(".container-fluid").infiniteScroll({
-// 			  // options
-// 			  path: '.pagination',
-// 			  append: '.post',
-// 			  history: false,
-// 		});
-
-		var page = 1;
-		var size = 6;
+		var page = 1 + ${vo.p};
+		var size = ${vo.size};
+		var count = ${count};
+		
+		
+			$(window).scroll(function(){
 	
-		$(window).scroll(function(){
-
-            //퍼센트 = (현재스크롤위치) / (문서높이 - 창높이) * 100
-            var percent = $(window).scrollTop() / ($(document).height() - $(window).height()) * 100;
-//             console.log(percent >= 45);
-//             console.log(percent);
-            
-            if($(window).scrollTop() == $(document).height() - $(window).height()){
-            	console.log(++page);
-            }
-            
-			if($(document).height() <= $(window).scrollTop() + $(window).height() + 100){
-	            fulllist();
-			}
-        });
-		
-		
-		function fulllist(){
-			$.ajax({
-				url:"${pageContext.request.contextPath}/rest/review/fulllist?p"+2+"&size"+size,
-				method:"get",
-				data:{
-					
-				},
-				success:function(resp){
-// 					console.log(resp.length);
-					for(var i = 0; i < resp.length; i++){
-						$(".list").append($("<div>").attr("class","col-xl-5 offset-xl-1 col-lg-5 offset-lg-1 col-md-10 offset-md-1 col-sm-10 offset-sm-1 mt-4 reviewborder")
-								.append($("<a>").attr("href","${pageContext.request.contextPath}/review/fulldetail?reviewNo="+resp[i].reviewNo)
-										.append($("<div>").attr("class","row")
-												.append($("<img>").attr("class","col-xl-1 offset-xl-0 col-lg-1 offset-lg-0 col-md-4 offset-md-0 col-sm-4 offset-sm-0 mt-4")
-												.attr("src","${pageContext.request.contextPath}/download/"+resp[i].filesNo)
-												.attr("style","width:100px; height: 85px; border-radius: 70%;"))
-													.append($("<div>").attr("class","col-xl-8 offset-xl-0 col-lg-8 offset-lg-0 col-md-8 offset-md-0 col-sm-8 offset-sm-0 mt-4")
-															.append($("<h3>").attr("class","text-dark").attr("style","word-break:break-all;").append(resp[i].reviewTitle))
-																		.append($("<div>").attr("class","row")
-																				.append($("<div>").attr("class","col")
-																						.append($("<div>").attr("class","star-score").attr("data-max","5").attr("data-rate",resp[i].reviewGood))))
-																						.append($("<div>").attr("class","row mt-3 mb-4")
-																								.append($("<div>").attr("class","col")
-																										.append($("<div>")
-																												.append($("<h5>").attr("class","text-primary").append(resp[i].memberId)))))))));
-// 						console.log(resp[i]);
-					}
+	//             퍼센트 = (현재스크롤위치) / (문서높이 - 창높이) * 100
+	//             var percent = $(window).scrollTop() / ($(document).height() - $(window).height()) * 100;
+	//             console.log(percent);
+					console.log(page > (count + size - 1) / size);
+	            
+				if($(document).height() <= $(window).scrollTop() + $(window).height() + 100){
+		            if(page > (count + size - 1) / size) return;
+		            if($(window).scrollTop()){
+		            	
+		            }
+					fulllist();
+		            page++;
 				}
+	        });
+		
+		
+			function fulllist(){
+				$.ajax({
+					url:"${pageContext.request.contextPath}/rest/review/fulllist?p="+page+"&size="+size,
+					method:"get",
+					data:{
+						
+					},
+					success:function(resp){
+	// 					console.log(resp.length);
+						for(var i = 0; i < resp.length; i++){
+							$(".list").append($("<div>").attr("class","col-xl-5 offset-xl-1 col-lg-5 offset-lg-1 col-md-10 offset-md-1 col-sm-10 offset-sm-1 mt-4 reviewborder")
+									.append($("<a>").attr("href","${pageContext.request.contextPath}/review/fulldetail?reviewNo="+resp[i].reviewNo)
+											.append($("<div>").attr("class","row")
+													.append($("<img>").attr("class","col-xl-1 offset-xl-0 col-lg-1 offset-lg-0 col-md-4 offset-md-0 col-sm-4 offset-sm-0 mt-4")
+													.attr("src","${pageContext.request.contextPath}/download/"+resp[i].filesNo)
+													.attr("style","width:100px; height: 85px; border-radius: 70%;"))
+														.append($("<div>").attr("class","col-xl-8 offset-xl-0 col-lg-8 offset-lg-0 col-md-8 offset-md-0 col-sm-8 offset-sm-0 mt-4")
+																.append($("<h3>").attr("class","text-dark").attr("style","word-break:break-word;").append(resp[i].reviewTitle))
+																			.append($("<div>").attr("class","row")
+																					.append($("<div>").attr("class","col")
+																							.append($("<div>").attr("class","star-score").attr("data-max","5").attr("data-rate",resp[i].reviewGood))))
+																							.append($("<div>").attr("class","row mt-3 mb-4")
+																									.append($("<div>").attr("class","col")
+																											.append($("<h5>").attr("class","text-primary").append(resp[i].memberId))))))));
+	// 						console.log(resp[i]);
+						}
+					}
+				});
+			}
+			
+			$(".go_top").click(function(){
+				$(window).scrollTop(0);
 			});
-		}
+		
+		});
 		
 	</script>
 
