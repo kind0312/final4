@@ -77,14 +77,7 @@ $(document).ready(function(){
                  		
               				<c:forEach var="chatList" items="${chatList}" >
               					<c:choose>   
-              						<c:when test="${listVO.size() == 0}">
-              							<tr class="table-default align-middle">
-			                 				<th width="30%">
-			                 					<p> 대화가 존재하지 않습니다</p>
-		                 					</th>
-              							</tr>
-              						</c:when>
-              						
+              						       						
               						
               						<c:when test= "${chatList.memberId eq sessionId && chatList.chatMessageStatus eq 'N'}">
               						<tr class="table-default align-middle">
