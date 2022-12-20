@@ -422,4 +422,4 @@ s0.parentNode.insertBefore(s1,s0);
          </div>
        </div>
         </div>
-        <section class="container-fluid">
+        <section class="">
