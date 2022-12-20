@@ -20,13 +20,11 @@ import com.kh.finalproject.entity.ChatDto;
 import com.kh.finalproject.entity.ChatUserDto;
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.MemberImgDto;
-
-import com.kh.finalproject.entity.PetDto;
 import com.kh.finalproject.entity.RoomDto;
 import com.kh.finalproject.entity.ScheduleDto;
-
 import com.kh.finalproject.entity.TrainerDto;
 import com.kh.finalproject.entity.TrainingDto;
+import com.kh.finalproject.entity.TrainingPurchaseDto;
 import com.kh.finalproject.repository.ChatDao;
 import com.kh.finalproject.repository.FilesDao;
 import com.kh.finalproject.repository.MemberDao;
@@ -99,8 +97,6 @@ public class PetTrainerController {
 		List<PetDetailListVO> list = trainingDao.requestDetail(trainingNo);
 		model.addAttribute("petList", list);
 
-		
-		
 		return "trainer/request_detail";
 	}
 	
@@ -235,8 +231,26 @@ public class PetTrainerController {
 	}
 	
 	@GetMapping("/training_reject")
-	public String reject(@RequestParam int trainingNo) {
+	public String reject(@RequestParam int trainingNo, HttpSession session) {
+		String memberId = (String)session.getAttribute(SessionConstant.ID);
 		trainingDao.statusChange(trainingNo); // 상태를 -> 예약취소로 변경
+		
+		//훈련서비스 총 금액 확인
+		TrainingPurchaseDto purchaseDto = trainingPurchaseDao.selectOne(trainingNo);
+		
+		//결제상세 거래상태 취소로 변경(결제상세 테이블)
+		
+		
+		// 결제금액분 포인트 증가처리(회원 테이블)
+		MemberDto memberDto = MemberDto.builder()
+				.memberId(memberId)
+				.memberPoint((long)purchaseDto.getTrainingPurchasePrice())
+				.build();
+		memberDao.pointPlus(memberDto);
+		
+		// 포인트 사용내역 상태 환불로 변경 및 포인트 금액 insert(포인트 테이블)
+		
+		
 		return "trainer/training_reject"; //예약거절(승인취소)
 	}
 	
