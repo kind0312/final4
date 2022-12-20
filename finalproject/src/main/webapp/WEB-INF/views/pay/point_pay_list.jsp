@@ -62,15 +62,15 @@ $(function(){
 		
 		var purchase = new Date(date); //구매날짜
 		var now = new Date(); //현재날짜
-		var calcul = purchase.getTime()+(1000 * 60 * 60 * 24 * 7);
+		var calcul = purchase.getTime()+(1000 * 60 * 60 * 24 * 5);
 		var plusDate = new Date(calcul); //구매날짜 +7일
 		
-		//구매날짜+7일보다 현재날짜가 더 크면 취소 불가
-		console.log("구매날짜+7일 : "+plusDate.getTime());
+		//구매날짜+5일보다 현재날짜가 더 크면 취소 불가
+		console.log("구매날짜+5일 : "+plusDate.getTime());
 		console.log("현재날짜 : "+now.getTime());
 
 		$(".cancel-confirm-btn").click(function(e){
-			// 결제일로부터 날짜가 7일 지난 경우 버튼 이벤트 막기
+			// 결제일로부터 날짜가 5일 지난 경우 버튼 이벤트 막기
 			if(plusDate.getTime()<now.getTime()){
 				e.preventDefault();
 				$("#reject-modal2").modal('show');
@@ -203,7 +203,7 @@ $(function(){
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-body">
-	        <span style="font-size:17px;">결제일로부터 7일 경과된 결제건은 취소가 불가능합니다!</span>
+	        <span style="font-size:17px;">결제일로부터 5일 경과된 결제건은 취소가 불가능합니다!</span>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-yellow" data-bs-dismiss="modal">확인</button>

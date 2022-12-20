@@ -167,7 +167,7 @@ public class MypageController {
 				trainingPurchaseDao.detailSelectOne(trainingPurchaseDto.getTrainingPurchaseNo());
 		
 		for(int i=0; i<purchaseDetailDto.size(); i++) {
-			int no = purchaseDetailDto.get(i).getTrainingPurchaseNo();
+			int no = purchaseDetailDto.get(i).getPurchaseDetailNo();
 			trainingPurchaseDao.statusChange(no);
 		}
 		

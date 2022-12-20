@@ -53,8 +53,8 @@
                  		
                  		<c:choose>
                  			<c:when test="${requestList.size()==0}">
-					  			<tr class="table-default align-middle">
-					  				<td colspan="3" height="130px">내역이 존재하지 않습니다!</td>
+					  			<tr class="table-default">
+					  				<td colspan="3" height="130px" class="align-middle">내역이 존재하지 않습니다!</td>
 					  			</tr>
 					  		</c:when>
                  		<c:otherwise>

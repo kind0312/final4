@@ -180,17 +180,17 @@ margin-left: 5px;
 						  				<td>${page.pointDate}</td>
 						  				<td>${page.pointStatus}</td>
 						  				<c:choose>
-						  					<c:when test="${page.pointStatus=='구매'}">
-						  						<td class="price-font">
+						  					<c:when test="${page.pointStatus=='구매' or page.pointStatus=='사용'}">
+						  						<td class="minus-price-font">
 						  							<span>
-						  								+<fmt:formatNumber value="${page.pointPrice}" pattern="###,###"></fmt:formatNumber>
+						  								-<fmt:formatNumber value="${page.pointPrice}" pattern="###,###"></fmt:formatNumber>
 						  							</span>
 						  						</td>
 						  					</c:when>
 						  					<c:otherwise>
-						  						<td class="minus-price-font">
+						  						<td class="price-font">
 						  							<span>
-						  								-<fmt:formatNumber value="${page.pointPrice}" pattern="###,###"></fmt:formatNumber>
+						  								+<fmt:formatNumber value="${page.pointPrice}" pattern="###,###"></fmt:formatNumber>
 						  							</span>
 						  						</td>
 						  					</c:otherwise>
