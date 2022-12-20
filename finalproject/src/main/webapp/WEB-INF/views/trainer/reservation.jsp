@@ -308,8 +308,15 @@ $(function(){
         numberOfMonths:1, //1개의 달씩 보여줘라 
     });
      // 오늘 날짜 기본값으로 자동 선택
-    picker1.setDate(moment()); 
+    picker1.setDate(moment());
      
+//  $("#short-text-box").val();
+ 	console.log($("#short-text-box").val());
+ 	
+ 	console.log(picker1);
+ 	$("#short-text-box").onChange(function(){
+ 		
+ 	});
 });
 
 $(function(){
@@ -427,7 +434,7 @@ $(function(){
 		
 		console.log(check.checkbox);
 		console.log(check.point);
-		
+	    console.log("[name=trainingDate]".value);
 		//폼 체크가 전부 true이면 전송하기
 		if(check.allValid()){
 			this.submit();
@@ -439,6 +446,7 @@ $(function(){
 <div class="container-450 mt-100">
 <div class="row">
 <h3>어디로 갈까요?</h3><br>
+${reservation}
 <div class="mt-20">
 <h6>주소를 입력해 주세요!</h6>
 </div>
