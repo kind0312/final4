@@ -171,13 +171,12 @@ public class PayController {
 		vo.setMemberId(memberId);
 		int count = pointPurchaseDao.count(vo);
 		vo.setCount(count);
-		
+
 		int endRow = vo.getP()*vo.getSize();
 		int startRow = endRow - (vo.getSize() - 1);
 		vo.setEndRow(endRow);
 		vo.setStartRow(startRow);
 		
-		//List<PayListVO> list= pointPurchaseDao.selectList(memberId);
 		model.addAttribute("list", pointPurchaseDao.listAll(vo));
 		
 		return "pay/point_pay_list";

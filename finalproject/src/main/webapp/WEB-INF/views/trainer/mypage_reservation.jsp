@@ -10,7 +10,7 @@
 <style>
 	.training-table {
 	    border-top:1px solid rgba(0, 0, 0, 0.1);
-
+		height:130px;
 	}
 	.training-zero-font{
 		color:#303030;
@@ -100,9 +100,6 @@
 	        </li>
 	        <li class="nav-item">
 	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/trainer/mypage_profile">프로필관리</a>
-	        </li>
-	        <li class="nav-item">
-	          <a class="nav-link mypage-nav" href="${pageContext.request.contextPath}/#">정산관리</a>
 	        </li>
 	        <li>
 	          <a class="nav-link mypage-nav" href="#" data-bs-toggle="modal" data-bs-target="#change-modal">회원모드로 전환</a>
