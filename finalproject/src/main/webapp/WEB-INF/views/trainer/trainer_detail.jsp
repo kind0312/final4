@@ -141,7 +141,7 @@ margin-right: auto;
                         <div class="scopebox">
                             <span><div class="star-score blue" data-max="5" data-rate="${list.getAvg()}" ></span>
                         </div>
-                        <span>후기 ${list.getCnt()}개</span>
+                        <span style="text-decoration: underline;">후기 ${list.getCnt()}개</span>
                         <div class="heart">
                             <c:if test="${isLike == null}">
             <a class="heart"><i class="fa-regular fa-heart"></i></a>  

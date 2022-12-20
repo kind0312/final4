@@ -39,7 +39,7 @@ margin-bottom: 17px;
 </style>
 <body>
 
-	<div class="mt-4">
+	<div class="mt-5">
 		<!-- 메인 슬라이더 시작 -->
 		<div class="main">
 			<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">	

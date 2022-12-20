@@ -11,7 +11,7 @@
 
 	<div class="container-fluid">
 	
-		<div class="row mt-4">
+		<div class="row mt-5">
 			<h1>펫훈련,</h1> 
 			<h1>와요에서 함께해요</h1> 
 	    </div>
