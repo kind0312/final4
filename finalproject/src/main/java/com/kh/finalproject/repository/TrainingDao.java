@@ -1,11 +1,9 @@
 package com.kh.finalproject.repository;
 
-import java.sql.Date;
 import java.util.List;
 
 import com.kh.finalproject.entity.LinkedListDto;
 import com.kh.finalproject.entity.PointDto;
-import com.kh.finalproject.entity.ScheduleDto;
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.vo.CalendarVO;
@@ -14,15 +12,19 @@ import com.kh.finalproject.vo.OneTrainingVO;
 import com.kh.finalproject.vo.PetDetailListVO;
 import com.kh.finalproject.vo.ReservationDetailListVO;
 import com.kh.finalproject.vo.ReservationListVO;
+import com.kh.finalproject.vo.ReservationVO;
 import com.kh.finalproject.vo.ScheduleVO;
 import com.kh.finalproject.vo.TrainingMemberVO;
-import com.kh.finalproject.vo.TrainingUsageVO;
 import com.kh.finalproject.vo.TrainingRequestListVO;
+import com.kh.finalproject.vo.TrainingUsageVO;
 
 
 public interface TrainingDao {
 	//등록
-	
+	void insert(TrainingDto dto);
+	//펫 상세 등록 
+	void insertDetail(TrainingDetailDto dto);
+		
 	//수정
 	//상태(예약취소) 변경
 	boolean statusChange(int trainingNo);
@@ -54,15 +56,9 @@ public interface TrainingDao {
 	int petCount(int trainingNo);
 	//훈련서비스 받은 펫 조회
 	List<TrainingDetailDto> trainingPet(int trainingNo);
-	
-	//예약 서비스
-	void insert(TrainingDto dto);
-	
+
 	//시퀀스 추출
 	int sequence();
-	
-	//펫 상세 등록 
-	void insertDetail(TrainingDetailDto dto);
 	
 	//삭제
 	boolean delete(int trainingNo);
@@ -88,4 +84,7 @@ public interface TrainingDao {
 	
 	//관리자 훈련 이용내역 상세 pet+사진
 	List<ReservationDetailListVO> usageDetail(int trainingNo);
+	
+	//예약한 날짜인지 확인여부
+	List<TrainingDto> check(ReservationVO reservationVO);
 }

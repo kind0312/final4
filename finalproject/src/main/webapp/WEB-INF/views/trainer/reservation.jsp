@@ -92,7 +92,7 @@ h2{
 }
 
 .gyul{
-margin-right: 10px;
+ width: 435px;
 }
 
 
@@ -308,7 +308,9 @@ $(function(){
         numberOfMonths:1, //1개의 달씩 보여줘라 
     });
      // 오늘 날짜 기본값으로 자동 선택
-    picker1.setDate(moment()); 
+    picker1.setDate(moment());
+     
+    console.log($("#short-text-box").val());
      
 });
 
@@ -427,7 +429,7 @@ $(function(){
 		
 		console.log(check.checkbox);
 		console.log(check.point);
-		
+	    console.log("[name=trainingDate]".value);
 		//폼 체크가 전부 true이면 전송하기
 		if(check.allValid()){
 			this.submit();

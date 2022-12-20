@@ -29,10 +29,17 @@
 		height:400px;
 		padding:100px;
 	}
+	
+	.timg{
+width: 50px;
+height: 50px;
+margin-left: 9px;
+margin-bottom: 17px;
+}
 </style>
 <body>
 
-	<div class="mt-4">
+	<div class="mt-5">
 		<!-- 메인 슬라이더 시작 -->
 		<div class="main">
 			<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">	
@@ -75,7 +82,7 @@
 		
 		<!-- 트레이너 정보 시작 -->
 		<div class="trainer-info">
-			<h2 class="mt-100 text-center">언제 어디서든 펫훈련사를 부르세요!</h2>
+			<h2 class="mt-100 text-center">언제 어디서든 펫훈련사를 부르세요!<img src="/image/trainer.png" class="timg"></h2>
 			<p class="mt-4 text-center" style="font-size:15px;">
 				CarePet의 모든 훈련사는 신분증 사본, 등초본, 실제면접 몇 자격증까지 4단계로 까다롭게 신원을 검증하며,<br>
 				훈련사로서 필요한 지식과 실력을 갖출 수 있도록 3주간의 교육 및 연수를 이행합니다!
@@ -117,10 +124,10 @@
 		<!-- 요금 정보 시작 -->
 		<div class="price-info mt-100 mb-3">
 			<div class="text-center">
-				<h2>포인트 구매 후 ‘CarePet’ 방문 서비스를 예약할 수 있어요!</h2>
+				<h2>포인트 구매 후 ‘CarePet’ 방문 서비스를 예약할 수 있어요!<img src="/image/booking.png" class="timg"></h2>
 				<p class="mt-5" style="font-size:15px; colof:#4D5055;">
 					<i class="fa-solid fa-check blue"></i><span style="font-weight:bolder;"> 이용 요금</span> : 하루 훈련 (₩100,000)<br>
-					<i class="fa-solid fa-check blue"></i> 반려동물 추가시 추가요금이 발생할 수 있습니다(1마리 추가 시 ₩50,000)
+					<i class="fa-solid fa-check blue"></i><span style="font-weight:bolder;"> 추가 요금</span> : 반려동물 추가시 추가요금이 발생할 수 있습니다(1마리 추가 시 ₩50,000)
 	            </p>
 	            
 	            <a class="btn btn-yellow btn-md mt-5" 

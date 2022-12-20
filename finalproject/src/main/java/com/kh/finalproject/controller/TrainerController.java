@@ -1,5 +1,7 @@
 package com.kh.finalproject.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -19,7 +21,6 @@ import com.kh.finalproject.entity.LinkedListDto;
 import com.kh.finalproject.entity.MemberDto;
 import com.kh.finalproject.entity.PointDto;
 import com.kh.finalproject.entity.PurchaseDetailDto;
-import com.kh.finalproject.entity.ScheduleDto;
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.entity.TrainingPurchaseDto;
@@ -101,10 +102,16 @@ public class TrainerController {
 	
 	@GetMapping("/reservation")
 	public String reservation(@ModelAttribute MemberDto memberDto,Model model,
-			@RequestParam int trainerNo,
+			@RequestParam int trainerNo,@ModelAttribute ReservationVO reservationVO,
 			HttpSession session) {
 		
 		String userId = (String)session.getAttribute(SessionConstant.ID);
+		
+//		reservationVO.setMemberId(userId);
+//		List<TrainingDto> findDto = trainingDao.check(reservationVO);
+//		if(findDto != null) {
+//			model.addAttribute("reservation", findDto);
+//		}
 
 		model.addAttribute("member", memberDao.selectOne(userId));
 		model.addAttribute("pet", petDao.list(userId));

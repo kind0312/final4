@@ -8,6 +8,10 @@
 </jsp:include>
 
 <style>
+.himg{
+width: 35;
+margin-left: 5px;
+}
 	.page-item.active.page-blue .page-link {
 	    z-index: 3;
 	    color: #fff;
@@ -135,7 +139,7 @@
 	<div class="container-fluid">
         <div class="row mt-80">
             <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-                 <h4 class="text-center">포인트 내역</h4>
+                 <h4 class="text-center">포인트 내역<img src="/image/hand-gesture.png" class="himg"></h4>
             </div>
         </div>
 
@@ -176,17 +180,17 @@
 						  				<td>${page.pointDate}</td>
 						  				<td>${page.pointStatus}</td>
 						  				<c:choose>
-						  					<c:when test="${page.pointStatus=='구매'}">
-						  						<td class="price-font">
+						  					<c:when test="${page.pointStatus=='구매' or page.pointStatus=='사용'}">
+						  						<td class="minus-price-font">
 						  							<span>
-						  								+<fmt:formatNumber value="${page.pointPrice}" pattern="###,###"></fmt:formatNumber>
+						  								-<fmt:formatNumber value="${page.pointPrice}" pattern="###,###"></fmt:formatNumber>
 						  							</span>
 						  						</td>
 						  					</c:when>
 						  					<c:otherwise>
-						  						<td class="minus-price-font">
+						  						<td class="price-font">
 						  							<span>
-						  								-<fmt:formatNumber value="${page.pointPrice}" pattern="###,###"></fmt:formatNumber>
+						  								+<fmt:formatNumber value="${page.pointPrice}" pattern="###,###"></fmt:formatNumber>
 						  							</span>
 						  						</td>
 						  					</c:otherwise>

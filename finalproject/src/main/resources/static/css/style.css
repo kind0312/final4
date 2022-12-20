@@ -20,13 +20,13 @@
 .viewmore .content .textbox h3 {width:311px; margin-bottom:30px;}
 .viewmore .content .textbox .review {width:265px; font-size:18px; font-weight:500; color:gray;}
 .viewmore .content .textbox .review > span {margin-right:10px;}
-.viewmore .content .textbox .review .heart {display:flex; align-items:center; float:right;}
+.viewmore .content .textbox .review .heart {display:flex; align-items:center; float:right;     margin-right: 9px;}
 .viewmore .content .textbox .review .heart a {display:block; width:30px; height:30px; margin-right:1px; margin-top: 7px;}
 .viewmore .content .textbox .scopebox {margin-right:10px;}
 .viewmore .content .textbox .scopebox a {display: block; width: 11px; height: 11px; margin-right: 7px;}
 .viewmore .content h2 {margin:30px 0;}
 .viewmore .content .sitro h3 {margin-bottom:30px; font-size:19px;}
-.viewmore .content .sitro span {display:block; margin-bottom:30px; font-weight:500; margin-top: 15px;}
+.viewmore .content .sitro span {display:block; margin-bottom:30px; font-weight:500; margin-top: 15px;     font-size: 14;}
 .viewmore .content .cfcate {font-size:19px;} 
 .viewmore .btn {position: absolute; width: 222px; height: 55px; text-align: center; top: 175px; border-radius: 10px; right: 0px; background: #7cbdff; line-height: 37px; font-size: 19px; color: #fff;}
 .viewmore .btn.inquiry {top:274px;}

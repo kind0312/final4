@@ -384,8 +384,6 @@
 	                    <div class="dropdown-divider"></div><!-- 중간 중간 선으로 구분하는 것-->
 	                    <a class="dropdown-item" href="${pageContext.request.contextPath}/trainer/mypage_profile">프로필관리</a>
 	                     <div class="dropdown-divider"></div><!-- 중간 중간 선으로 구분하는 것-->
-	                     <a class="dropdown-item" href="${pageContext.request.contextPath}/#">정산관리(뺄수있음)</a>
-	                     <div class="dropdown-divider"></div><!-- 중간 중간 선으로 구분하는 것-->
 	                     <a class="dropdown-item" href="${pageContext.request.contextPath}/#">회원모드로 전환</a>	                    
 	                  </div>
 	                </li>

@@ -8,6 +8,15 @@
 </jsp:include>
 
 <style>
+
+.himg{
+width: 35;
+margin-left: 5px;
+}
+.simg{
+
+    width: 60;
+}
 	.pet-table>tbody{
 		height:130px;
 	}
@@ -35,6 +44,11 @@
 	.fa-heart{
 	background-color: red;
 	}
+	
+	.hoo{
+margin-left: 260px;
+margin-right: auto;
+}
 </style>
 
 <script>
@@ -116,11 +130,18 @@
 	<div class="container-fluid">
         <div class="row mt-80 mb-3">
             <div class="col-md-6 offset-md-3">
-                 <h4 class="text-center">찜한 훈련사</h4>
+                 <h4 class="text-center">찜한 훈련사<img src="/image/heart.png" class="himg"></h4>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 offset-md-3">   
+            <div class="col-md-6 offset-md-3">
+            <c:choose>
+                 <c:when test="${like.size()==0}">
+                 <div class="row hoo mt-5" >
+                 찜한 훈련사가 아직 없어요!<img src="/image/sad.png" class="simg">
+                 </div>
+                 </c:when>
+                 <c:otherwise>   
                  <table class="table table-hover pet-table text-center">
                  		<thead>
               				<c:forEach var="like" items="${like}">
@@ -139,6 +160,8 @@
 		                	</c:forEach>
                  		</thead>
                  </table>
+                 </c:otherwise>
+                 </c:choose>
 			 </div>
 		</div>
     </div>

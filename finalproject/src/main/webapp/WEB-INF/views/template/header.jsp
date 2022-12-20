@@ -77,9 +77,6 @@
        
        <!-- 카카오 지도-->
        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94efcfc3a2fb279ab90052c1c24e8cc6"></script>
-       
-       <!-- 무한 스크롤 -->
-       <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
    
       <style>
          
@@ -352,11 +349,6 @@ s0.parentNode.insertBefore(s1,s0);
                <span class="visually-hidden">(current)</span>
                   <img class="logo" src="${pageContext.request.contextPath}/image/logo.png">
                </a>
-               <a class="navbar-brand" href="/">
-               <span class="visually-hidden">(current)</span>
-                  CarePet
-               </a>
-   
                <!-- 토글 버튼 -->
                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu-bar"
                  aria-controls="menu-bar" aria-expanded="false" aria-label="Toggle navigation">
