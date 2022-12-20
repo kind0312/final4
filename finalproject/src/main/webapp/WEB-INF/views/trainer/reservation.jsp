@@ -92,7 +92,7 @@ h2{
 }
 
 .gyul{
-margin-right: 10px;
+ width: 435px;
 }
 
 
