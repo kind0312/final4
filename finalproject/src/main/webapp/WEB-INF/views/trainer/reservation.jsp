@@ -15,7 +15,6 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="훈련사 예약" name="title"/>
 </jsp:include>
-
 <style>
 textarea::placeholder{
    font-size: 14px;
@@ -312,8 +311,13 @@ $(function(){
         	console.log(select);
         	var memberId = $("[name=memberId]").val();
         	console.log(memberId);
-        	var trainerNo = ${trainerNo};
+        	var trainerNo = $("[name=trainerNo]").val();
         	console.log(trainerNo);
+//         	var time = moment().format('HH:mm');
+        	$("[name=trainingDate]").attr("value", select);
+        	var today = ${date};
+        	console.log(today);
+        	
         	$.ajax({
                 url:"${pageContext.request.contextPath}/rest/reservation?memberId="+memberId+"&trainingDate="+select+"&trainerNo="+trainerNo,
                 method:"get",
@@ -334,6 +338,7 @@ $(function(){
     });
      // 오늘 날짜 기본값으로 자동 선택
 //     picker1.setDate(moment());
+//     console.log(picker1);
      
 });
 

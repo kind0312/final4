@@ -1,6 +1,6 @@
 package com.kh.finalproject.controller;
 
-import java.util.List;
+import java.time.LocalDate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -105,8 +105,12 @@ public class TrainerController {
 			@RequestParam int trainerNo,
 			HttpSession session) {
 		
+		LocalDate date = LocalDate.now();
+		System.out.println(date);
+		
 		String userId = (String)session.getAttribute(SessionConstant.ID);
 		
+		model.addAttribute("date", date);
 		model.addAttribute("member", memberDao.selectOne(userId));
 		model.addAttribute("pet", petDao.list(userId));
 		model.addAttribute("trainerNo", trainerNo);
