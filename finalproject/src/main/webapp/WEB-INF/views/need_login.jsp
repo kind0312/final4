@@ -65,12 +65,14 @@
             </div>
             
             <div class="row center">
-               <img src="${pageContext.request.contextPath}/image/join_success.png" width="200" height="200">
+               <img src="${pageContext.request.contextPath}/image/Logo.png" width="200" height="200">
             </div>
 
             <div class="row row-2 center">
-                <button class="largebtn btn1 login-btn"  id="largebutton1" onclick="location.href='${pageContext.request.contextPath}/user/login';">로그인</button>
-                <button class="largebtn btn1 join-btn" id="largebutton3"  onclick="location.href='${pageContext.request.contextPath}/user/join';">회원가입</button>
+                <a href="${pageContext.request.contextPath}/member/login"><button class="btn btn-blue">로그인</button></a>
+                <div class="mt-20">
+                <a href="${pageContext.request.contextPath}/member/insert"><button class="btn btn-blue">회원가입</button></a>
+                </div>
             </div>
         </div>
 </div>
