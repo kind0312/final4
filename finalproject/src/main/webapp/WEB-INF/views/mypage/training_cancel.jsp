@@ -223,7 +223,7 @@
 			  			</tr>
 			  			<tr class="table-default align-middle"  height="50px">
 			  				<td class="text-start pb-sm-3"  colspan="2">
-			  					<span class="ps-sm-4">위 금액은 포인트로 환불됩니다.	</span>
+			  					<span class="ps-sm-4" style="color:#DE0C0C;">! 위 금액은 포인트로 환불됩니다.	</span>
 			  				</td>
 			  			</tr>
 					</tbody>
