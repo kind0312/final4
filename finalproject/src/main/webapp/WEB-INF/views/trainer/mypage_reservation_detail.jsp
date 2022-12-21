@@ -62,7 +62,7 @@
 		$(".change-btn").click(function(){
 			var trainingNo = $("[name=trainingNo]").val();
 			$.ajax({
-				url:"http://localhost:8888/rest/training_status/"+trainingNo,
+				url:"${pageContext.request.contextPath}/rest/training_status/"+trainingNo,
 				method:"patch",
 				data:trainingNo,
 				success:function(resp){
@@ -144,7 +144,7 @@
 								<tr class="table-default align-middle">
 									<td class="py-3">
 										<div>
-					  						<img src="http://localhost:8888/download/${detail[0].filesNo}" class="img-circle" width="180" height="180">
+					  						<img src="${pageContext.request.contextPath}/download/${detail[0].filesNo}" class="img-circle" width="180" height="180">
 					  					</div>
 					  					<div class="mt-3" style="font-weight:bolder;">
 					  						<span>${detail[0].petName}(${detail[0].petGender}/${detail[0].petWeight}kg)</span>
@@ -162,7 +162,7 @@
 										 	<div class="carousel-inner">
 										 		<div class="carousel-item active">
 										 			<div class="">
-										 				<img src="http://localhost:8888/download/${detail[0].filesNo}" class="img-circle" width="180" height="180" alt="반려동물 사진">
+										 				<img src="${pageContext.request.contextPath}/download/${detail[0].filesNo}" class="img-circle" width="180" height="180" alt="반려동물 사진">
 										 			</div>
 											   		<div class="carousel-caption">
 												        <h6 style="color:white;">${detail[0].petName}(${detail[0].petGender}/${detail[0].petWeight}kg)</h6>
@@ -172,7 +172,7 @@
 									    		<c:forEach var="detail" begin="1" items="${detail}">
 											    	<div class="carousel-item">
 											    		<div class="">
-											    			<img src="http://localhost:8888/download/${detail.filesNo}" class="img-circle" width="180" height="180" alt="반려동물 사진">
+											    			<img src="${pageContext.request.contextPath}/download/${detail.filesNo}" class="img-circle" width="180" height="180" alt="반려동물 사진">
 											    		</div>
 											    		<div class="carousel-caption">
 													        <h6 style="color:white;">${detail.petName}(${detail.petGender}/${detail.petWeight}kg)</h6>

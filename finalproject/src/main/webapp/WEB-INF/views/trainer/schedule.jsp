@@ -112,7 +112,7 @@
 	            		trainerNo:trainerNo
 	            }
 	            $.ajax({
-		    		  url:"http://localhost:8888/rest/schedule/"+trainingDate+"/"+trainerNo,
+		    		  url:"${pageContext.request.contextPath}/rest/schedule/"+trainingDate+"/"+trainerNo,
 		    		  method:"get",
 		    		  date:data,
 		    		  success:function(resp){
@@ -153,7 +153,7 @@
 	        events: [
 	            
 	        	$.ajax({
-	        		url:"http://localhost:8888/rest/schedule/"+trainerNo,
+	        		url:"${pageContext.request.contextPath}/rest/schedule/"+trainerNo,
 	        		method:"get",
 	        		data:trainerNo,
 	        		success:function(resp){

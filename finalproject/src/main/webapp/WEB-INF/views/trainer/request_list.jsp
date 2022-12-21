@@ -31,6 +31,13 @@
 	    border-top:1px solid rgba(0, 0, 0, 0.1);
 	    height:130px;
 	}
+	
+	.icon {
+	width: 35px;
+	height: 35px;
+	margin-left: 10px;
+	}
+	
 </style>
 
 
@@ -41,7 +48,7 @@
 	<div class="container-fluid">
         <div class="row mt-80 mb-3">
             <div class="col-md-6 offset-md-3">
-                 <h4 class="text-center">훈련 요청 목록</h4>
+                 <h4 class="text-center">훈련 요청 목록<img src="${pageContext.request.contextPath}/image/request-list.png" class="icon"></h4>
             </div>
         </div>
 		
@@ -49,13 +56,12 @@
             <div class="col-md-6 offset-md-3">   
                  <table class="table table-hover pet-table text-center">
                  		<thead>
-                 		
                  		<c:choose>
                  			<c:when test="${requestList.size()==0}">
-					  			<tr class="table-default">
-					  				<td colspan="3" height="130px" class="align-middle">내역이 존재하지 않습니다!</td>
-					  			</tr>
-					  		</c:when>
+					  			      <tr class="table-default">
+					  				      <td colspan="3" height="130px" class="align-middle">내역이 존재하지 않습니다!</td>
+					  			      </tr>
+					  		      </c:when>
 	                 		<c:otherwise>
 	              				<c:forEach var="request" items="${requestList}">
 	                				<tr class="table-default">
@@ -73,14 +79,13 @@
 		                 				</th>
 	                 				</tr>
 			                	</c:forEach>
-			                	</c:otherwise>
-		                	</c:choose>
-                 		</thead>					  				  
-                 </table>
-			 </div>
-		</div>
+                       </c:otherwise>
+                    </c:choose>
+                 	</thead>					  				  
+                </table>
+			      </div>
+		    </div>
     </div>
-
 </body>
 
 

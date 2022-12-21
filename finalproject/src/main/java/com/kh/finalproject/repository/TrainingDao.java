@@ -10,6 +10,7 @@ import com.kh.finalproject.vo.CalendarVO;
 import com.kh.finalproject.vo.CheckRequestVO;
 import com.kh.finalproject.vo.OneTrainingVO;
 import com.kh.finalproject.vo.PetDetailListVO;
+import com.kh.finalproject.vo.ReservationCheckVO;
 import com.kh.finalproject.vo.ReservationDetailListVO;
 import com.kh.finalproject.vo.ReservationListVO;
 import com.kh.finalproject.vo.ReservationVO;
@@ -86,5 +87,5 @@ public interface TrainingDao {
 	List<ReservationDetailListVO> usageDetail(int trainingNo);
 	
 	//예약한 날짜인지 확인여부
-	List<TrainingDto> check(ReservationVO reservationVO);
+	ReservationCheckVO check(ReservationVO reservationVO);
 }

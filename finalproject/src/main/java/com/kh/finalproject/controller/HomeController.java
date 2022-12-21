@@ -42,4 +42,8 @@ public class HomeController {
 		
 		return "home";
 	}
+	@RequestMapping("/need_login")
+	public String needLogin() {
+		return "need_login";
+	}
 }
