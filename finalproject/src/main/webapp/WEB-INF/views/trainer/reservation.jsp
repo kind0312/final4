@@ -301,16 +301,31 @@ $(function(){
         //field는 datepicker은 적용 대상을 설정하는 공간 
         field:document.querySelector(".single-date-picker"),
         minDate:moment(), // 오늘자 선택 가능
-       format:"YYYY-MM-DD",
+		format:"YYYY-MM-DD",
         firstDay:0, // 시작일 일요일부터 
         singleDate:true, // 날짜 한개만 선택
         // (+옵션) 표시되는 달의 개수를 지정 
-        numberOfMonths:1, //1개의 달씩 보여줘라 
+        numberOfMonths:1, //1개의 달씩 보여줘라
+        onSelect : function(date){
+//         	var select = $("#short-text-box").text(date);
+        	var select = date;
+        	console.log(select);
+        	
+        }
     });
      // 오늘 날짜 기본값으로 자동 선택
-    picker1.setDate(moment());
+//     picker1.setDate(moment());
+		picker1.setDate(new Date());
      
-    console.log($("#short-text-box").val());
+		console.log($("#short-text-box").val());
+    
+//     console.log(picker1);
+    
+    $("#short-text-box").change(function(){
+    	picker1.getDate();
+    	console.log("변경");
+    	console.log(picker1.getDate());
+    });
      
 });
 
