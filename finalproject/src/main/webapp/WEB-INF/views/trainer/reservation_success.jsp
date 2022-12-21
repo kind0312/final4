@@ -65,13 +65,13 @@
             </div>
             
             <div class="row center">
-               <img src="${pageContext.request.contextPath}/image/logo.png" width="200" height="300">
+               <img src="${pageContext.request.contextPath}/image/Logo.png" style="height: 404px; width: 400px; margin-left: 85px; margin-top: -50px;">
             </div>
 
             <div class="row row-2 center">
-                <a href="${pageContext.request.contextPath}/mypage/training"><button class="btn btn-blue btn-md">예약 목록 보기</button></a>
+                <a href="${pageContext.request.contextPath}/mypage/training"><button class="btn btn-yellow btn-md">예약 목록 보기</button></a>
                 <div class="mt-10">
-                <a href="${pageContext.request.contextPath}/trainer/list"><button class="btn btn-blue btn-md" >훈련사 목록 보기</button></a>
+                <a href="${pageContext.request.contextPath}/trainer/list"><button class="btn btn-yellow btn-md" >훈련사 목록 보기</button></a>
                 </div>
             </div>
         </div>

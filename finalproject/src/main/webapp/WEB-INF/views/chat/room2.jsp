@@ -12,9 +12,6 @@
 	<jsp:param value="회원 채팅 방" name="title"/>
 </jsp:include>
 
-
-
-
 <style>
 	.chat-message {
 		display: inline-block;
@@ -145,11 +142,6 @@
         .message.my > .content > .time {
             text-align: left;
         }
-        
-        .chatBox {
-        min-height: 350px;
-        max-height: 500px;
-        }
 
 	
 </style>
@@ -168,6 +160,7 @@
 
 
 <div class="chat_wrap">
+
         <div class="header">
           	<div>
 	        	<div style="display:flex; flex-direction:row; align-items:center;">
@@ -215,9 +208,12 @@
         			</c:choose>
         		</c:forEach>
         	
-        		<!-- 새 채팅  -->	
-       		 <div class=" align-middle chatBox overflow-auto" id="live-message">    
-                  <!-- 동적생성 -->                 
+		       
+        	<!-- 새 채팅  -->	
+       		 <div class=" align-middle " id="live-message">
+                  
+                  <!-- 동적생성 -->       
+                       
          	</div>   
         
    

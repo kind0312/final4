@@ -93,7 +93,7 @@ public class AdminController {
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
-		session.removeAttribute("LoginId");
+		session.removeAttribute("loginId");
 		return "redirect:/admin/login";
 	}
 	
@@ -169,6 +169,8 @@ public class AdminController {
 	//	
 	 //   return "admin/trainingList";
 	//}
+	//
+	//
 			
 			
 

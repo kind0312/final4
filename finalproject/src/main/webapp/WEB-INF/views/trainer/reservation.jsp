@@ -15,7 +15,6 @@
 <jsp:include page="/WEB-INF/views/template/header.jsp">
 	<jsp:param value="훈련사 예약" name="title"/>
 </jsp:include>
-
 <style>
 textarea::placeholder{
    font-size: 14px;
@@ -301,16 +300,91 @@ $(function(){
         //field는 datepicker은 적용 대상을 설정하는 공간 
         field:document.querySelector(".single-date-picker"),
         minDate:moment(), // 오늘자 선택 가능
-       format:"YYYY-MM-DD",
+		format:"YYYY-MM-DD",
         firstDay:0, // 시작일 일요일부터 
         singleDate:true, // 날짜 한개만 선택
         // (+옵션) 표시되는 달의 개수를 지정 
-        numberOfMonths:1, //1개의 달씩 보여줘라 
+        numberOfMonths:1, //1개의 달씩 보여줘라
+        onSelect : function(date){
+//         	var select = $("#short-text-box").text(date);
+        	var select = date.format('YYYY-MM-DD');
+//         	console.log(select);
+        	var memberId = $("[name=memberId]").val();
+//         	console.log(memberId);
+        	var trainerNo = $("[name=trainerNo]").val();
+//         	console.log(trainerNo);
+        	var time = moment().format('HH');
+        	$("[name=trainingDate]").attr("value", select);
+        	var today = moment().format('YYYY-MM-DD');
+//         	console.log(today);
+        	console.log("현재 시각 : " + time);
+        	if(select == today){
+        		console.log("같은 날짜");
+        		$("[name=trainingStartTime]").empty();
+        		
+        		if(time >= 18){
+        			$("[name=trainingStartTime]").append($("<option>").text("현재 가능한 예약시간이 없습니다"));
+        			check.time=false;
+        			console.log("가능 시간 : " + check.time);
+        		}
+        		else if(time < 9){
+        			for(var i = 9; i <= 18; i++){
+        				if(i == 9){
+        					$("[name=trainingStartTime]").append($("<option>").attr("value", "0"+i+":00").text("0"+i+"시"));
+    	            		check.time=true;
+    	        			console.log("가능 시간 : " + check.time);
+    	        			i++;
+        				}
+    	        		$("[name=trainingStartTime]").append($("<option>").attr("value", i+":00").text(i+"시"));
+	            		check.time=true;
+	        			console.log("가능 시간 : " + check.time);
+            		}
+        		}
+        		else{
+        			for(var i = time; i < 18; i++){
+    	        		$("[name=trainingStartTime]").append($("<option>").attr("value", i+1+":00").text(i+1+"시"));
+    	        		check.time=true;
+    	    			console.log("가능 시간 : " + check.time);
+            		}
+        		}
+        	}
+        	else{
+        		console.log("다른 날짜");
+        		$("[name=trainingStartTime]").empty();
+        		for(var i = 9; i <= 18; i++){
+        			if(i == 9){
+    					$("[name=trainingStartTime]").append($("<option>").attr("value", "0"+i+":00").text("0"+i+"시"));
+	            		check.time=true;
+	        			console.log("가능 시간 : " + check.time);
+	        			i++;
+    				}
+	        		$("[name=trainingStartTime]").append($("<option>").attr("value", i+":00").text(i+"시"));
+	        		check.time=true;
+	    			console.log("가능 시간 : " + check.time);
+        		}
+        	}
+        	
+        	$.ajax({
+                url:"${pageContext.request.contextPath}/rest/reservation?memberId="+memberId+"&trainingDate="+select+"&trainerNo="+trainerNo,
+                method:"get",
+                success:function(resp){
+                    if(resp == "possible"){
+                    	check.date=true;
+                    	console.log("선택 날짜 : " + check.date);
+                    }
+                    else if(resp == "impossible"){
+                    	alert("이미 예약된 날짜입니다");
+                    	check.date=false;
+                    	console.log("선택 날짜 : " + check.date);
+                    }
+                }
+            });
+        	
+        }
     });
      // 오늘 날짜 기본값으로 자동 선택
-    picker1.setDate(moment());
-     
-    console.log($("#short-text-box").val());
+//     picker1.setDate(moment());
+//     console.log(picker1);
      
 });
 
@@ -355,8 +429,10 @@ $(function(){
 		// 2. 결제금액과 보유포인트 확인(결제금액>보유포인트) - pointCheck()
 		checkbox:false,
 		point:false,
+		time:false,
+		date:false,
 		allValid:function(){
-			return this.checkbox && this.point;
+			return this.checkbox && this.point && this.time && this.date;
 		}
 	};
 	
@@ -427,9 +503,10 @@ $(function(){
 		petSelectCheck();
 		pointCheck();
 		
-		console.log(check.checkbox);
-		console.log(check.point);
-	    console.log("[name=trainingDate]".value);
+		console.log("체크박스 :" + check.checkbox);
+		console.log("포인트 :" + check.point);
+		console.log("시간 :" + check.time);
+		console.log("날짜 :" + check.date);
 		//폼 체크가 전부 true이면 전송하기
 		if(check.allValid()){
 			this.submit();
@@ -448,7 +525,7 @@ $(function(){
 <form class="form-check" action="reservation" method="post">
 <input type="hidden" name="memberId"  value="${member.memberId}">
 <input type="hidden" name="trainingPurchasePrice" value="">
-<input type="hidden" name="trainerNo" value="${trainerno}">
+<input type="hidden" name="trainerNo" value="${trainerNo}">
 <div class="detailPrice">
 <!-- hidden으로 보낼 값 계산 name=purchaseDetailPrice -->
 </div>
@@ -545,8 +622,6 @@ $(function(){
 <div class="row">
 <button class="btn btn-blue" type="submit">신청하기!</button>
 </div>
-
-
 
 </form>
 </div>

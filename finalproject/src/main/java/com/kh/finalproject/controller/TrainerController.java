@@ -1,6 +1,6 @@
 package com.kh.finalproject.controller;
 
-import java.util.List;
+import java.time.LocalDate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -102,20 +102,18 @@ public class TrainerController {
 	
 	@GetMapping("/reservation")
 	public String reservation(@ModelAttribute MemberDto memberDto,Model model,
-			@RequestParam int trainerNo,@ModelAttribute ReservationVO reservationVO,
+			@RequestParam int trainerNo,
 			HttpSession session) {
+		
+		LocalDate date = LocalDate.now();
+//		System.out.println(date);
 		
 		String userId = (String)session.getAttribute(SessionConstant.ID);
 		
-//		reservationVO.setMemberId(userId);
-//		List<TrainingDto> findDto = trainingDao.check(reservationVO);
-//		if(findDto != null) {
-//			model.addAttribute("reservation", findDto);
-//		}
-
+		model.addAttribute("date", date);
 		model.addAttribute("member", memberDao.selectOne(userId));
 		model.addAttribute("pet", petDao.list(userId));
-		model.addAttribute("trainerno", trainerNo);
+		model.addAttribute("trainerNo", trainerNo);
 		
 		return "/trainer/reservation";
 	}
