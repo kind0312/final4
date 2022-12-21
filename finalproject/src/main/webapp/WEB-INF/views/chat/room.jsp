@@ -164,8 +164,17 @@
 
 <div class="chat_wrap">
         <div class="header">
-          <h2>${partner.memberName} 펫시터</h2>
-          	<hr>
+          	<div>
+	        	<div style="display:flex; flex-direction:row; align-items:center;">
+	        		<a href="${pageContext.request.contextPath}/chat/list" 
+	        			style="display:inline-block; position:absolute; margin-left:20px;">
+						<img src="${pageContext.request.contextPath}/image/return-btn.png"
+	            			width="36" height="36">
+	            	</a>
+	            	<h2 style="display:inline-block; margin-left:auto; margin-right:auto;">${partner.memberName} 펫시터</h2>
+	        	</div>
+            </div>
+            <hr>
         </div>
   
   <div class="message-wrapper">     
@@ -202,7 +211,7 @@
         		</c:forEach>
         	
 		       
-        		<!-- 새 채팅  -->	
+        	<!-- 새 채팅  -->	
        		 <div class=" align-middle " id="live-message">
                   
                   <!-- 동적생성 -->       
