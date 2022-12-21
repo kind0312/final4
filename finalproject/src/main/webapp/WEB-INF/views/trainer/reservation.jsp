@@ -308,15 +308,67 @@ $(function(){
         onSelect : function(date){
 //         	var select = $("#short-text-box").text(date);
         	var select = date.format('YYYY-MM-DD');
-        	console.log(select);
+//         	console.log(select);
         	var memberId = $("[name=memberId]").val();
-        	console.log(memberId);
+//         	console.log(memberId);
         	var trainerNo = $("[name=trainerNo]").val();
-        	console.log(trainerNo);
-//         	var time = moment().format('HH:mm');
+//         	console.log(trainerNo);
+        	var time = moment().format('HH');
         	$("[name=trainingDate]").attr("value", select);
-        	var today = ${date};
-        	console.log(today);
+        	var today = moment().format('YYYY-MM-DD');
+//         	console.log(today);
+        	console.log("현재 시각 : " + time);
+        	if(select == today){
+        		console.log("같은 날짜");
+        		$("[name=trainingStartTime]").empty();
+        		
+        		if(time >= 18){
+        			$("[name=trainingStartTime]").append($("<option>").text("현재 가능한 예약시간이 없습니다"));
+        			check.time=false;
+        			console.log("가능 시간 : " + check.time);
+        		}
+        		else if(time < 9){
+        			for(var i = 9; i <= 18; i++){
+        				if(i == 9){
+        					$("[name=trainingStartTime]").append($("<option>").attr("value", "0"+i+":00").text("0"+i+"시"));
+    	            		check.time=true;
+    	        			console.log("가능 시간 : " + check.time);
+    	        			i++;
+        				}
+    	        		$("[name=trainingStartTime]").append($("<option>").attr("value", i+":00").text(i+"시"));
+	            		check.time=true;
+	        			console.log("가능 시간 : " + check.time);
+            		}
+        		}
+        		else{
+        			for(var i = time; i < 18; i++){
+        				if(time == 9){
+        					$("[name=trainingStartTime]").append($("<option>").attr("value", "0"+i+":00").text("0"+i+"시"));
+    	            		check.time=true;
+    	        			console.log("가능 시간 : " + check.time);
+    	        			i++;
+        				}
+    	        		$("[name=trainingStartTime]").append($("<option>").attr("value", i+":00").text(i+"시"));
+    	        		check.time=true;
+    	    			console.log("가능 시간 : " + check.time);
+            		}
+        		}
+        	}
+        	else{
+        		console.log("다른 날짜");
+        		$("[name=trainingStartTime]").empty();
+        		for(var i = 09; i <= 18; i++){
+        			if(i == 9){
+    					$("[name=trainingStartTime]").append($("<option>").attr("value", "0"+i+":00").text("0"+i+"시"));
+	            		check.time=true;
+	        			console.log("가능 시간 : " + check.time);
+	        			i++;
+    				}
+	        		$("[name=trainingStartTime]").append($("<option>").attr("value", i+":00").text(i+"시"));
+	        		check.time=true;
+	    			console.log("가능 시간 : " + check.time);
+        		}
+        	}
         	
         	$.ajax({
                 url:"${pageContext.request.contextPath}/rest/reservation?memberId="+memberId+"&trainingDate="+select+"&trainerNo="+trainerNo,
@@ -324,12 +376,12 @@ $(function(){
                 success:function(resp){
                     if(resp == "possible"){
                     	check.date=true;
-                    	console.log(check.date);
+                    	console.log("선택 날짜 : " + check.date);
                     }
                     else if(resp == "impossible"){
                     	alert("이미 예약된 날짜입니다");
                     	check.date=false;
-                    	console.log(check.date);
+                    	console.log("선택 날짜 : " + check.date);
                     }
                 }
             });
@@ -383,9 +435,10 @@ $(function(){
 		// 2. 결제금액과 보유포인트 확인(결제금액>보유포인트) - pointCheck()
 		checkbox:false,
 		point:false,
+		time:false,
 		date:false,
 		allValid:function(){
-			return this.checkbox && this.point && this.date;
+			return this.checkbox && this.point && this.time && this.date;
 		}
 	};
 	
@@ -456,9 +509,10 @@ $(function(){
 		petSelectCheck();
 		pointCheck();
 		
-		console.log(check.checkbox);
-		console.log(check.point);
-		console.log(check.date);
+		console.log("체크박스 :" + check.checkbox);
+		console.log("포인트 :" + check.point);
+		console.log("시간 :" + check.time);
+		console.log("날짜 :" + check.date);
 		//폼 체크가 전부 true이면 전송하기
 		if(check.allValid()){
 			this.submit();

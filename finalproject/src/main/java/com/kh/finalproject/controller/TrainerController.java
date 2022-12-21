@@ -106,7 +106,7 @@ public class TrainerController {
 			HttpSession session) {
 		
 		LocalDate date = LocalDate.now();
-		System.out.println(date);
+//		System.out.println(date);
 		
 		String userId = (String)session.getAttribute(SessionConstant.ID);
 		
