@@ -80,7 +80,6 @@ public class PayController {
 							.build();
 		//결제요청 response
 		PayReadyResponseVO response = payService.ready(vo);
-		System.out.println("결제요청 response : "+response);
 		
 		//결제승인 요청때와 DB테이블 insert를 위해 세션에 값 저장
 		session.setAttribute("tid", response.getTid());
@@ -107,7 +106,6 @@ public class PayController {
 				.pg_token(pg_token)
 				.build();
 		PayApproveResponseVO response = payService.approve(vo);
-		System.out.println("결제승인 response : "+response);
 		
 		//DB테이블에 데이터 등록(point, point_purchase)
 		int pointNo = pointDao.sequence();
