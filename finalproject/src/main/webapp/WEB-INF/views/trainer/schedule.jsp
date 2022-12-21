@@ -71,9 +71,9 @@
   		background-color:#fcee9a;
   	}
   	.fc-event-today {
-	    background-color: #fff !important;
-  	}
-	
+	    background-color: #adf181 !important;
+	}
+
 
 </style>
 
