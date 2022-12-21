@@ -48,6 +48,12 @@
 		 text-align: right;
 	}
 	
+	.icon {
+	width: 35px;
+	height: 35px;
+	margin-left: 10px;
+	}
+	
 </style>
 
 
@@ -57,7 +63,7 @@
 	<div class="container-fluid">
         <div class="row mt-80 mb-3">
             <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-                 <h4 class="text-center">훈련 요청 목록</h4>
+                 <h4 class="text-center">훈련 요청 상세<img src ="${pageContext.request.contextPath}/image/owner.png" class="icon"></h4>
             </div>
         </div>
 		
@@ -68,7 +74,7 @@
 				<thead>
 				<c:forEach var="petList" items="${petList}">
 				  <tr  class="table-default align-middle underline-out">
-				    <td rowspan="3"><img src="http://localhost:8888/download/${petList.filesNo}" class="img-circle" width="100" height="100"></td>
+				    <td rowspan="3"><img src="${pageContext.request.contextPath}/download/${petList.filesNo}" class="img-circle" width="100" height="100"></td>
 				    <td >
 				    <p class="ps-sm-4 title" >${petList.petName} (${petList.petBirth }, ${petList.petGender})</p>
 				    </td>
@@ -118,10 +124,10 @@
                  
                 <div>
 				      <label for="exampleTextarea" class="form-label mt-4">요청사항</label>
-				      <textarea  class="form-control" rows="5"  readonly>${trainingDto.trainingMemo}</textarea>				      
+				      <textarea  class="form-control" rows="5"  readonly style="margin-bottom: 50px;">${trainingDto.trainingMemo}</textarea>				      
 				  </div>			
 				  
-				  <p class="gender-font">승인상태 : ${trainingDto.trainingStatus}</p>
+				  
 				  
 				  <div class="center">
 				 	 <button type="button" class="btn btn-blue" id="a-btn" >승인</button>	  
