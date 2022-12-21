@@ -190,8 +190,8 @@
 	            <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">   
 	            	 <div class="form-group">
 					      <label for="exampleInputEmail1" class="form-label mt-4">제목</label>
-					      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" 
-					      value="${trainerDto.getTrainerProfile()}" name="trainerProfile">  
+					      <textarea class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" 
+					       name="trainerProfile" style="resize:none;">${trainerDto.getTrainerProfile()}</textarea>
 					      <div class="invalid-feedback">필수 항목입니다.</div>   
 				    </div>   
 				</div>
