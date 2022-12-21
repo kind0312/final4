@@ -93,8 +93,8 @@ public class AdminController {
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
-		session.removeAttribute("LoginId");
-		return "redirect:/admin/login";
+		session.removeAttribute("loginId");
+		return "redirect:/admin/adminHome";
 	}
 	
 	
