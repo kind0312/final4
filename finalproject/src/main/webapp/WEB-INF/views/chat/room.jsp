@@ -101,7 +101,7 @@
             box-sizing: border-box;
         }
         .message-wrapper {
-           
+          
             padding: 15px;
         }
         .message::after {
@@ -215,6 +215,7 @@
 				  <input type="text" class="form-control input-div" id="message-input" placeholder="메세지를 입력해주세요" style="margin-top: 40px">
 				  <button class="btn btn-outline-secondary btn btn-blue" type="button" id="message-send" style="margin-top: 40px">전송</button>
 			</div>
+			
 			</div>         
          </div>
      </div>
@@ -338,6 +339,16 @@ $(function(){
 		$("#message-input").val("");  //텍스트 창 비우기
 		
 	});
+	
+	
+	//4 엔터키 이벤트
+	$("#message-input").on("keyup",function(key){
+        if(key.keyCode==13) {            
+	        $("#message-send").click();
+        }
+    });
+	
+	
 	
 	
 

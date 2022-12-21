@@ -58,6 +58,9 @@ public class ChatController {
 		String memberId = (String) session.getAttribute(SessionConstant.ID);
 		model.addAttribute("sessionId", memberId); // 로그인 한 사람 id
 		
+		MemberDto memDto = memberDao.selectOne(memberId); // 로그인한 회원 정보
+		model.addAttribute("memDto", memDto);
+		
 		List<ChatListVO> listVO = chatDao.chatRoomList(memberId); //아이디로 리스트 찾아오기(일반회원 기준)		
 		
 		model.addAttribute("chatList" , listVO);
