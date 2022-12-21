@@ -72,7 +72,7 @@
   	}
   	.fc-event-today {
 	    background-color: #adf181 !important;
-  }
+	}
 
 
 </style>

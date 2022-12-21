@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <jsp:include page="/WEB-INF/views/template/trainerHeader.jsp">
-	<jsp:param value="훈련요청디테일" name="title"/>
+	<jsp:param value="훈련요청 상세" name="title"/>
 </jsp:include>
 
 <style>
@@ -26,7 +26,6 @@
     	border:none;
     	background-color:#81BDF1;
     	overflow: hidden;    	
-   		margin-top: 20px;
     	
 	}
 	.pet-table {
@@ -56,8 +55,6 @@
 	
 </style>
 
-
-
 <body>
 
 	<div class="container-fluid">
@@ -69,76 +66,72 @@
 		
         <div class="row">
             <div class="col-md-6 offset-md-3">   
-            
-            <table class="table table-default pet-table text-center">
-				<thead>
-				<c:forEach var="petList" items="${petList}">
-				  <tr  class="table-default align-middle underline-out">
-				    <td rowspan="3"><img src="${pageContext.request.contextPath}/download/${petList.filesNo}" class="img-circle" width="100" height="100"></td>
-				    <td >
-				    <p class="ps-sm-4 title" >${petList.petName} (${petList.petBirth }, ${petList.petGender})</p>
-				    </td>
-				  </tr>
-				  <tr  class="table-default align-middle underline-out">
-				    <td>
-				    <p class="ps-sm-4 title">${petList.petBreed }</p>
-				    </td>
-				  </tr>
-				  <tr  class="table-default align-middle underline-out">
-				    <td>
-				    <p class="ps-sm-4 title">중성화 : ${petList.petNeutralization }</p>
-				    </td>
-				  </tr>
-			  	</c:forEach>
-				</thead>
-			</table>
-			
-			
+            <table class="table table-default pet-table text-center" style="margin-bottom:0px;">
+				      <thead>
+                <c:forEach var="petList" items="${petList}">
+                  <tr  class="table-default align-middle underline-out">
+                    <td rowspan="3"><img src="${pageContext.request.contextPath}/download/${petList.filesNo}" class="img-circle" width="100" height="100"></td>
+                    <td >
+                    <p class="ps-sm-4 title" >${petList.petName} (${petList.petBirth }, ${petList.petGender})</p>
+                    </td>
+                  </tr>
+                  <tr  class="table-default align-middle underline-out">
+                    <td>
+                    <p class="ps-sm-4 title">${petList.petBreed }</p>
+                    </td>
+                  </tr>
+                  <tr  class="table-default align-middle underline-out">
+                    <td>
+                    <p class="ps-sm-4 title">중성화 : ${petList.petNeutralization }</p>
+                    </td>
+                  </tr>
+                </c:forEach>
+				      </thead>
+			      </table>
+
            	<table class="table pet-table text-center">
-				<tbody>
-				
-				  <tr class="table-default align-middle underline-out">
-				    <td class="ps-sm-4 title">보호자</td>
-				    <td class="pe-sm-4 content">${trainingDto.memberId}</td>
-				  </tr>
-				
-				  <tr class="table-default align-middle underline-out">
-				    <td class="ps-sm-4 title">주소</td>
-				    <td class="pe-sm-4 content"> ${trainingDto.trainingBasicAddress}</td>
-				  </tr>
-				  <tr class="table-default align-middle underline-out">
-				    <td class="ps-sm-4 title">상세주소</td>
-				    <td class="pe-sm-4 content">${trainingDto.trainingDetailAddress}</td>
-				  </tr>
-				  <tr class="table-default align-middle underline-out">
-				    <td class="ps-sm-4 title">방문일자</td>
-				    <td class="pe-sm-4 content"> ${trainingDto.trainingDate}</td>
-				  </tr>
-				  <tr class="table-default align-middle ">
-				    <td class="ps-sm-4 title">방문시간</td>
-				    <td class="pe-sm-4 content"> ${trainingDto.trainingStartTime}</td>
-				  </tr>
-				</tbody>
-				</table>
+				      <tbody>
+                <tr class="table-default align-middle underline-out">
+                  <td class="ps-sm-4 title">보호자</td>
+                  <td class="pe-sm-4 content">${trainingDto.memberId}</td>
+                </tr>
+
+                <tr class="table-default align-middle underline-out">
+                  <td class="ps-sm-4 title">주소</td>
+                  <td class="pe-sm-4 content"> ${trainingDto.trainingBasicAddress}</td>
+                </tr>
+                <tr class="table-default align-middle underline-out">
+                  <td class="ps-sm-4 title">상세주소</td>
+                  <td class="pe-sm-4 content">${trainingDto.trainingDetailAddress}</td>
+                </tr>
+                <tr class="table-default align-middle underline-out">
+                  <td class="ps-sm-4 title">방문일자</td>
+                  <td class="pe-sm-4 content"> ${trainingDto.trainingDate}</td>
+                </tr>
+                <tr class="table-default align-middle ">
+                  <td class="ps-sm-4 title">방문시간</td>
+                  <td class="pe-sm-4 content"> ${trainingDto.trainingStartTime}</td>
+                </tr>
+              </tbody>
+            </table>
 
                  
-                <div>
+            <div>
 				      <label for="exampleTextarea" class="form-label mt-4">요청사항</label>
-				      <textarea  class="form-control" rows="5"  readonly style="margin-bottom: 50px;">${trainingDto.trainingMemo}</textarea>				      
-				  </div>			
+				      <textarea  class="form-control" rows="5" readonly 
+				      	style="background-color:white; font-size:16px;">${trainingDto.trainingMemo}</textarea>				      
+				    </div>			
 				  
+				    <p class="gender-font mt-3" style="font-size:16px; font-weight:bolder;">승인상태 : ${trainingDto.trainingStatus}</p>
 				  
-				  
-				  <div class="center">
-				 	 <button type="button" class="btn btn-blue" id="a-btn" >승인</button>	  
-				  	<button type="button" class="btn btn-outline-blue"  onclick="location.href='${pageContext.request.contextPath}/trainer/request_list'">목록</button>	  
-				  	<button type="button" class="btn btn-yellow"  id="r-btn" >거절</button>	  
-				  </div>
-				  
-				  
+				    <div class="center mt-4">
+              <button type="button" class="btn btn-blue" id="a-btn" >승인</button>	  
+              <button type="button" class="btn btn-outline-blue"  onclick="location.href='${pageContext.request.contextPath}/trainer/request_list'">목록</button>	  
+              <button type="button" class="btn btn-yellow"  id="r-btn" >거절</button>	  
+				    </div>
 			 </div>
 		</div>
-    </div>
+  </div>
 
 
 	<!-- Modal -->

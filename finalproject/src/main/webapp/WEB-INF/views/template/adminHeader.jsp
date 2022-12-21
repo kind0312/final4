@@ -349,6 +349,7 @@
 	
 	            <!-- 메뉴 영역 -->
 	            <div class="collapse navbar-collapse justify-content-end" id="menu-bar">
+	            ${loginId}
 	              <ul class="navbar-nav me-0">
 	
 	                <!-- 
@@ -356,15 +357,16 @@
 	                    - .active는 활성화된 메뉴(현재 메뉴), 상황에 따라 맞는 메뉴에 추가
 	                -->
 	               
+	               
 	                 <c:choose>
 	                     <c:when test="${loginId == null}">
 							<li class="nav-item">
-								<a class="nav-link" href="${pageContext.request.contextPath}/admin/logout">로그인</a>
+								<a class="nav-link" href="${pageContext.request.contextPath}/admin/login">로그인</a>
 							</li>
 			             </c:when>
 						<c:otherwise>
 			                <li class="nav-item">
-			                	<a class="nav-link" href="${pageContext.request.contextPath}/admin/login">로그아웃</a>
+			                	<a class="nav-link" href="${pageContext.request.contextPath}/admin/logout">로그아웃</a>
 			                </li>
 
 						</c:otherwise>
