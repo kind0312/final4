@@ -348,7 +348,7 @@
                     
                     if(regex.test(memberId) && memberId.length > 4){
 	                    $.ajax({
-	                        url:"http://localhost:8888/rest/member/"+memberId,
+	                        url:"http:${pageContext.request.contextPath}/rest/member/"+memberId,
 	                        method:"get",
 	                        success:function(resp){
 	                            //$("input[name=memberId]").next("span").text(resp);

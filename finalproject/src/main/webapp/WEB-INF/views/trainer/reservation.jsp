@@ -308,24 +308,32 @@ $(function(){
         numberOfMonths:1, //1개의 달씩 보여줘라
         onSelect : function(date){
 //         	var select = $("#short-text-box").text(date);
-        	var select = date;
+        	var select = date.format('YYYY-MM-DD');
         	console.log(select);
+        	var memberId = $("[name=memberId]").val();
+        	console.log(memberId);
+        	var trainerNo = ${trainerNo};
+        	console.log(trainerNo);
+        	$.ajax({
+                url:"${pageContext.request.contextPath}/rest/reservation?memberId="+memberId+"&trainingDate="+select+"&trainerNo="+trainerNo,
+                method:"get",
+                success:function(resp){
+                    if(resp == "possible"){
+                    	check.date=true;
+                    	console.log(check.date);
+                    }
+                    else if(resp == "impossible"){
+                    	alert("이미 예약된 날짜입니다");
+                    	check.date=false;
+                    	console.log(check.date);
+                    }
+                }
+            });
         	
         }
     });
      // 오늘 날짜 기본값으로 자동 선택
 //     picker1.setDate(moment());
-		picker1.setDate(new Date());
-     
-		console.log($("#short-text-box").val());
-    
-//     console.log(picker1);
-    
-    $("#short-text-box").change(function(){
-    	picker1.getDate();
-    	console.log("변경");
-    	console.log(picker1.getDate());
-    });
      
 });
 
@@ -370,8 +378,9 @@ $(function(){
 		// 2. 결제금액과 보유포인트 확인(결제금액>보유포인트) - pointCheck()
 		checkbox:false,
 		point:false,
+		date:false,
 		allValid:function(){
-			return this.checkbox && this.point;
+			return this.checkbox && this.point && this.date;
 		}
 	};
 	
@@ -444,7 +453,7 @@ $(function(){
 		
 		console.log(check.checkbox);
 		console.log(check.point);
-	    console.log("[name=trainingDate]".value);
+		console.log(check.date);
 		//폼 체크가 전부 true이면 전송하기
 		if(check.allValid()){
 			this.submit();
@@ -463,7 +472,7 @@ $(function(){
 <form class="form-check" action="reservation" method="post">
 <input type="hidden" name="memberId"  value="${member.memberId}">
 <input type="hidden" name="trainingPurchasePrice" value="">
-<input type="hidden" name="trainerNo" value="${trainerno}">
+<input type="hidden" name="trainerNo" value="${trainerNo}">
 <div class="detailPrice">
 <!-- hidden으로 보낼 값 계산 name=purchaseDetailPrice -->
 </div>
@@ -560,8 +569,6 @@ $(function(){
 <div class="row">
 <button class="btn btn-blue" type="submit">신청하기!</button>
 </div>
-
-
 
 </form>
 </div>
