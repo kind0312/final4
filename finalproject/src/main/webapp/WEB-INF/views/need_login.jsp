@@ -59,19 +59,19 @@
  <body>
  <div class="container-1200">
         <div class="container-590">
-            <div class="row center mt-92">
+            <div class="row center mt-50">
                 <p class="p-1">로그인이 필요한 서비스입니다.</p>
                 <p class="p-2">로그인하고 CarePet의 다양한 서비스를 즐겨보세요.</p>
             </div>
             
             <div class="row center">
-               <img src="${pageContext.request.contextPath}/image/Logo.png" width="200" height="200">
+               <img src="${pageContext.request.contextPath}/image/Logo.png" style="height: 404px; width: 400px; margin-left: 85px; margin-top: -50px;">
             </div>
 
             <div class="row row-2 center">
-                <a href="${pageContext.request.contextPath}/member/login"><button class="btn btn-blue">로그인</button></a>
+                <a href="${pageContext.request.contextPath}/member/login"><button class="btn btn-yellow btn-md mt-5">로그인</button></a>
                 <div class="mt-20">
-                <a href="${pageContext.request.contextPath}/member/insert"><button class="btn btn-blue">회원가입</button></a>
+                <a href="${pageContext.request.contextPath}/member/insert"><button class="btn btn-yellow btn-md">회원가입</button></a>
                 </div>
             </div>
         </div>
