@@ -69,6 +69,7 @@ public class ChatController {
 	@GetMapping("/list_trainer")
 	public String chatListTrainer(HttpSession session , Model model) {
 		String memberId = (String) session.getAttribute(SessionConstant.ID); //트레이너 아이디
+		model.addAttribute("sessionId", memberId); // 로그인 한 사람 id
 		
 		List<ChatListVO> listTrainerVO = chatDao.chatRoomListTrainer(memberId); //아이디로 리스트 찾아오기(일반회원 기준)
 		
@@ -129,7 +130,7 @@ public class ChatController {
 				) {
 			
 			String memberId = (String) session.getAttribute(SessionConstant.ID);  //트레이너 memberId
-			
+			model.addAttribute("myId", memberId);
 			
 			//파라미터에서 roomNo
 			model.addAttribute("roomNo", roomNo);

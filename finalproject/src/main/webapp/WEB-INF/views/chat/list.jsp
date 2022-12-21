@@ -72,10 +72,13 @@ $(document).ready(function(){
         <div class="row">
             <div class="col-md-6 offset-md-3">   
                  <table class="table table-hover pet-table text-center">
+                 
                  		<thead>
+                 		
               				<c:forEach var="chatList" items="${chatList}" >
-              					<c:choose>              						
-
+              					<c:choose>   
+              						       						
+              						
               						<c:when test= "${chatList.memberId eq sessionId && chatList.chatMessageStatus eq 'N'}">
               						<tr class="table-default align-middle">
 	                 				<th width="30%">
@@ -83,12 +86,10 @@ $(document).ready(function(){
 	                 				</th>
 	                 				<th width="40%">
 	                 					
-	                 					<p class="name-font titleName">${chatList.memberName} 훈련사</p>
-	                 					
+	                 					<p class="name-font titleName">${chatList.memberName} 훈련사</p>	                 					
 	                 					<p class="gender-font">${chatList.chatMessage}</p>
 	                 					<p class="gender-font">${chatList.chatCreateAt}</p>
-	                 					
-	                 				
+	                 						                 				
 	                 					
 	                 				</th>
 	                 				<th width="30%">
@@ -152,7 +153,7 @@ $(document).ready(function(){
 		</div>
     </div>
 
-<h4 id = "hh4">${sessionId}</h4>
+
 
 
 

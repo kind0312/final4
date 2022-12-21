@@ -17,13 +17,14 @@
 
 <style>
 	.chat-message {
-		display: block;
-	    width: 70%;
+		display: inline-block;
+	    width: 400px;
 	    padding: 10px;
 	    margin-top: 7px;
 	    font-size: 13px;
 	    border-radius: 10px;
-	     margin-left: 20px;
+	    margin-left: 10px;
+		
 	   
 	     
 	    
@@ -64,34 +65,86 @@
 	.textbox {
 	
     display: inline-block;
-    width: 500px;
+    width: 400px;
     padding: 10px;
     margin-top: 7px;
     font-size: 13px;
     border-radius: 10px;
-     margin-left: 20px;
-     border: 1px solid black;
-
-    
+    margin-left: 10px;
+      
 
 	}
 	
 	.chat {
-	
+		
 	}
 	.time {
 	font-size: 5px;
 	}
 	.tb-mine {
-	 background-color: #81BDF1;
+	 background-color: #AFDAFF;
 	 color: white;
 	 
 	}
 	.tb-your {
-	 background-color:white;
+	 background-color: E7E7E7;
 	 border-color: black;
 	 
 	}
+	.input-div {
+	    margin-right: 10px;
+	
+	}
+	
+
+       * {
+            box-sizing: border-box;
+        }
+        .message-wrapper {
+           
+            padding: 15px;
+        }
+        .message::after {
+            content:"";
+            display: block;
+            clear: both;
+        }
+        .message > div {
+            float:left;
+        }
+        .message > .profile {
+            overflow: hidden;
+            border-radius: 50%;
+        }
+        .message > .content {
+            max-width: 75%;
+        }
+        .message > .content > .text {
+            background-color: #E7E7E7;
+            padding: 10px;
+            margin-left: 10px;
+            border-radius: 10px;
+            word-break: break-all;
+        }
+        .message > .content > .time {
+            text-align: right;
+        }
+
+        .message.my > div {
+            float: right;
+        }
+        .message.my > .profile {
+            display: none;
+        }
+        .message.my > .content > .text {
+            background-color: #AFDAFF;
+            padding: 10px;
+            margin-right: 10px;
+            border-radius: 10px;
+        }
+        .message.my > .content > .time {
+            text-align: left;
+        }
 
 	
 </style>
@@ -114,76 +167,68 @@
           <h2>${partner.memberName} 펫시터</h2>
           	<hr>
         </div>
+  
+  <div class="message-wrapper">     
+	        <!-- 이전채팅 -->
+	        <div class="chat row mt-60 mb-3 "  >
+	        	<div class="col-md-6 offset-md-3">
         
-        <div class="chat row mt-60 mb-3">
-        	<div class="col-md-6 offset-md-3">
-        
-        	<ul id="it">
+       			 <c:forEach var="chatHistory" items="${chatHistory}">
+       			 	<c:choose>
+	       			 	<c:when test="${myId eq chatHistory.memberId}">
+	       			 	
+	       			 		<div class="message my">
+					            <div class="profile"><img src="${pageContext.request.contextPath}/download/${chatHistory.filesNo}" class="img-circle"></div>
+					            <div class="content">
+					                <div class="text">${chatHistory.chatMessage}</div>
+					                <div class="time">${chatHistory.chatCreateAt}</div>
+					            </div>
+					       </div>
+	       			 	
+	       			 	
+	       			 	</c:when>
+	       			 	<c:otherwise>
+	       			 	
+					 		<div class="message">
+					            <div class="profile"><img src="${pageContext.request.contextPath}/download/${chatHistory.filesNo}" class="img-circle"></div>
+					            <div class="content">
+					                <div class="text">${chatHistory.chatMessage}</div>
+					                <div class="time">${chatHistory.chatCreateAt}</div>
+					            </div>
+					       </div>
+					       
+					     </c:otherwise>
+        			</c:choose>
+        		</c:forEach>
         	
-        	<c:forEach var="chatHistory" items="${chatHistory}">
-        		<c:choose>          
-        			<c:when test = "${myId eq chatHistory.memberId}">
-        				<div class="align-middle mine" >
-        						
-        							
-								    	<span class="gender-font time" >${chatHistory.chatCreateAt}</span>								    
-								  
-								    	<span class="gender-font textbox tb-mine">${chatHistory.chatMessage} </span>								   
-								  
-        								<img src="${pageContext.request.contextPath}/download/${chatHistory.filesNo}" class="img-circle">
-								    			
-	                 					                 				
-                 			</div>	
-        			</c:when>
-        			
-        			<c:otherwise>
-        				<div class=" align-middle your">
-	                 			
-        								<img src="${pageContext.request.contextPath}/download/${chatHistory.filesNo}" class="img-circle">
-        							
-								   
-								    	<span class="gender-font textbox tb-your">${chatHistory.chatMessage} </span>
-								  
-								   
-								    	<span class="gender-font time" >${chatHistory.chatCreateAt}</span>								    
-								   	
-	                 		</div>		
-                 				
-        			</c:otherwise>
-	              
-        			    						
-        		</c:choose>
-        	
-		       	</c:forEach>
 		       
-        	</ul>
+        		<!-- 새 채팅  -->	
+       		 <div class=" align-middle " id="live-message">
+                  
+                  <!-- 동적생성 -->       
+                       
+         	</div>   
         
-            <ul>
-                <!-- 동적 생성 -->
-                <div id="message-list" class="message-box"></div>
-            </ul>
-            
-        
-        
-        <div class="input-div">
-         <!-- <textarea placeholder="Press Enter for send message."></textarea> -->   
-       
-          <input type="text" id="message-input" class="form-control form-control-lg">       
-         	
-			<!--  <input type="file" id="img-input" class="form-control" >		 -->
-       
-			<button type="button" id="message-send" class="btn btn-blue text-center">전송</button>
-		
-        	</div>
+   
+			
+			<div class="input-group  input-div" >
+				  <input type="text" class="form-control input-div" id="message-input" placeholder="메세지를 입력해주세요" style="margin-top: 40px">
+				  <button class="btn btn-outline-secondary btn btn-blue" type="button" id="message-send" style="margin-top: 40px">전송</button>
+			</div>
+			</div>         
          </div>
-       </div>
+     </div>
+			
+			
+			
+		
+        	
         
         
 	</div>
 
 </div>
 
-<span>방번호 : ${roomNo}</span>
 </body>
 
 <script>
@@ -226,33 +271,41 @@ $(function(){
 		//수신된 e.data는 JSON 문자열
 		var data = JSON.parse(e.data);
 		console.log(data);  
-					
+		
+	
 		var imgNo = data.filesNo; //이미지 파일 번호 
 		var p = $("<p>").addClass("chat-message");		
-		var time = moment(data.time).format("hh:mm");
+		var time = moment(data.time).format("hh:mm"); //남겨야함 
 		var w = $("<p>").text(data.memberId); //콘솔에 key로 들어오는 값을 찍어줘야 나옴
-		var t = $("<span>").text("("+time+")");
+		var t = $("<p>").addClass("time").text(time);
 		var c = $("<span>").text(data.chatMessage);
+		//
+		var newChat = $("<div>").addClass("message");
+		var imgbox = $("<div>").addClass("profile");
+		var innerbox = $("<div>").addClass("content");
+		var text = $("<div>").addClass("text").text(data.chatMessage);
+		var ttime = $("<div>").addClass("time").text(time);
+		
+		
 		
 		// 내 사진 번호만 가져와서 태그 만들어서 붙이면 될거같은데 
 		//<img src="http://localhost:8888/download/${myimg}">
 	    
-	    
 
 		var img = $("<img>").addClass("img-circle").attr('id','imgID').attr( "src","${pageContext.request.contextPath}/download/"+imgNo);
 		
-		if(data.memberId == userId){
-			p.addClass("mine");
-		}
-		else {
-			p.addClass("partner");
-		}
+			
+		var img = imgbox.append(img); 
+		var con = innerbox.append(text).append(ttime);
+		var newnew = newChat.append(img).append(con);
 		
-		p.append(w).append(c).append(t);  //작성자 내용 시간
+		if(userId == data.memberId){
+			newChat.addClass("my");
+		}		
 		
-		$("#message-list").append(img).append(p);
-		
-		
+		$("#live-message").append(newnew);
+			
+			
 		
 		//스크롤 하단으로 이동
 		var height = $(document).height();
@@ -270,7 +323,7 @@ $(function(){
 		var text = $("#message-input").val();
 		
 		
-		//if(text.length == 0) return; //채팅 쓴거 없으면 return
+		if(text.length == 0) return; //채팅 쓴거 없으면 return
 		
 		//JSON으로 변환해서 전송
 		//- JSON.stringify(객체) : 객체를 문자열로

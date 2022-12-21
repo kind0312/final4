@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
-   
+    pageEncoding="UTF-8"%>   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="login" value="${loginId != null}"></c:set>
@@ -19,10 +17,11 @@
 			</c:choose>
 		</title>
 		
+
 		<!-- 글꼴 cdn -->
-		<link rel="preconnect" href="//fonts.googleapis.com">
-		<link rel="preconnect" href="//fonts.gstatic.com" crossorigin>
-		<link href="//fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 	
 	    <link rel="stylesheet" type="text/css" href="/css/reset.css">
 	    <!-- <link rel="stylesheet" type="text/css" href="/css/layout.css"> -->
@@ -31,80 +30,82 @@
 	    <!-- 외곽 border 점선 -->
 <!-- 	    <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
 
-		<!-- Bootstrap CSS -->
-	    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-	
-	    <!-- Bootswatch CDN-->
-	    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.0.2/Litera/bootstrap.min.css">
-	
-	    <!-- 아이콘 -->
-	    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
-	
-	    <!-- lightpick 사용을 위한 CDN 추가-->
-	    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.css">
-	    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
-	    <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
-	
-	    <!-- chart CDN-->
-	    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	
-	    <!-- jquery를 사용하기 위하여 라이브러리 js 파일을 불러온다. -->
-	    <!-- 공부할때는 일반 버전으로-->
-	    <script src="https://code.jquery.com/jquery-3.6.1.js"></script> 
-	    <!-- 배포할때는 min 버전으로-->
-	    <!-- <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script> -->
-	    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
-	
-	    <!-- summernote 라이브러리(jquery 보다 뒤에 나와야 한다.)-->
-	    <!-- <link rel="stylesheet" type="text/css" href="./summernote/summernote-lite.css"/> -->
-	    <!-- <script src="./summernote/summernote-lite.js"></script> -->
-	    <!-- <script src="./summernote/lang/summernote-ko-KR.min.js"></script> -->
-	    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" >
-	    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
-	    <!-- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script> -->
-	    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.min.js"></script>
-	
-	    <!-- score (jquery 보다 뒤에 나와야 한다.)-->
-	    <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.min.js"></script>
-	
-	    <!-- 주소 검색 -->
-	    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	    <script src="./daum-post-api.js"></script>
-	
-	    <!-- 확인 창-->
-	    <script src="./confirm-link.js"></script><!-- 여기 사이에는 코드를 적으면 script를 고치는 것이다.-->
-	
-	    <!-- 체크박스-->
-	    <script src="./checkbox.js"></script>
-	    
-	    <!-- 카카오 지도-->
-	    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94efcfc3a2fb279ab90052c1c24e8cc6"></script>
-	
-		 <!-- fullcalendar CDN -->
-		 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
-		 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
-		 <!-- fullcalendar 언어 CDN -->
-		 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
-		 <style>
-      	
+      <!-- Bootstrap CSS -->
+       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+   
+       <!-- Bootswatch CDN-->
+       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.0.2/litera/bootstrap.css">
+   
+       <!-- 아이콘 -->
+       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+   
+       <!-- lightpick 사용을 위한 CDN 추가-->
+       <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.css">
+       <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
+   
+       <!-- chart CDN-->
+       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   
+       <!-- jquery를 사용하기 위하여 라이브러리 js 파일을 불러온다. -->
+       <!-- 공부할때는 일반 버전으로-->
+       <script src="https://code.jquery.com/jquery-3.6.1.js"></script> 
+       <!-- 배포할때는 min 버전으로-->
+       <!-- <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script> -->
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+   
+       <!-- summernote 라이브러리(jquery 보다 뒤에 나와야 한다.)-->
+       <!-- <link rel="stylesheet" type="text/css" href="./summernote/summernote-lite.css"/> -->
+       <!-- <script src="./summernote/summernote-lite.js"></script> -->
+       <!-- <script src="./summernote/lang/summernote-ko-KR.min.js"></script> -->
+       <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" >
+       <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
+       <!-- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script> -->
+       <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-ko-KR.min.js"></script>
+   
+       <!-- score (jquery 보다 뒤에 나와야 한다.)-->
+       <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@0.0.6/score.min.js"></script>
+   
+       <!-- 주소 검색 -->
+       <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+       <script src="${pageContext.request.contextPath}/js/daum-post-api.js"></script>
+   
+       <!-- 확인 창-->
+       <script src="${pageContext.request.contextPath}/js/confirm-link.js"></script><!-- 여기 사이에는 코드를 적으면 script를 고치는 것이다.-->
+   
+       <!-- 체크박스-->
+       <script src="${pageContext.request.contextPath}/js/checkbox.js"></script>
+       
+       <!-- 카카오 지도-->
+       <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94efcfc3a2fb279ab90052c1c24e8cc6"></script>
+       
+       <!-- 무한 스크롤 -->
+       <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
+		 
+		 
+		      <style>
+         
 /*          <!-- div 확인 점선 --> */
 /*            div{ */
 /*                  border: 1px dotted gray; */
 /*               } */
           /* 태그 스타일 */
+          *{
+             font-family: 'Noto Sans KR', 산세리프;
+          }
         html,
-		body {
+      body {
                 height:100%;
         }
         
-      	body {
-		  display: flex;
-		  flex-direction: column;
-		}
-		
-		section {
-		  flex: 1;
-		}
+         body {
+        display: flex;
+        flex-direction: column;
+      }
+      
+      section {
+        flex: 1;
+      }
         
         p {
            margin-top: 0;
@@ -120,7 +121,7 @@
         
          /* 클래스 스타일 */
          .rounded{
-         	border-radius: 10px !important;
+            border-radius: 10px !important;
          }
          
           .logo {
@@ -145,7 +146,7 @@
          }
          /* 헤더크기에 맞춰 마이페이지 navbar 바깥으로 나오게 top 설정*/
          .mypage-top-nav{
-            margin-top: 1.7rem !important;
+            margin-top: 2.6rem !important;
          }
          /* 마이페이지 navbar 좌우 간격 수정 */
          .navbar-expand-lg-re{
@@ -166,7 +167,7 @@
             color: #f8f9fa;
          }
          .w-10{
-         	width: 10% !important;
+            width: 10% !important;
          }
          .w-30{
             width: 30%;
@@ -175,7 +176,7 @@
             width: 70%;
          }
          .w-90{
-         	width: 90% !important;
+            width: 90% !important;
          }
          .mt-150{
             margin-top:150px;
@@ -214,12 +215,12 @@
             font-weight:bolder;
          }
          .yellow{
-        	color:#FADE81;
+           color:#FADE81;
          }
          
         .btn{
          border-radius: 10px !important;
-      }
+        }
          
          .btn-blue{
               background-color: #81BDF1;
@@ -310,7 +311,10 @@
          
          /* 라벨 폰트 두껍게*/
          .label-font-weight{
-         	font-weight:bold;
+            font-weight:bold;
+         }
+         .modal-body{
+            font-size:16px;
          }
          
       </style>
@@ -319,7 +323,8 @@
 			
 		
 		</script>
-	</head>
+		</head>
+	
 	<body>
 	
 	<!-- bootstrap -->
@@ -399,4 +404,4 @@
 	      </div>
 	    </div>
   </div> 
-  <section class="container-fluid">
+  <section class="">
