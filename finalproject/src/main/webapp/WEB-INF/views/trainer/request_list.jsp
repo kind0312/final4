@@ -31,6 +31,13 @@
 	    border-top:1px solid rgba(0, 0, 0, 0.1);
 	    height:130px;
 	}
+	
+	.icon {
+	width: 35px;
+	height: 35px;
+	margin-left: 10px;
+	}
+	
 </style>
 
 
@@ -41,7 +48,7 @@
 	<div class="container-fluid">
         <div class="row mt-80 mb-3">
             <div class="col-md-6 offset-md-3">
-                 <h4 class="text-center">훈련 요청 목록</h4>
+                 <h4 class="text-center">훈련 요청 목록<img src="${pageContext.request.contextPath}/image/request-list.png" class="icon"></h4>
             </div>
         </div>
 		
@@ -61,7 +68,7 @@
               				<c:forEach var="request" items="${requestList}">
                 				<tr class="table-default align-middle">
 	                 				<th width="30%">
-	                 					<img src="http://localhost:8888/download/${request.filesNo}" class="img-circle" width="100" height="100"><!-- 이미지에 번호들어가야함 -->
+	                 					<img src="${pageContext.request.contextPath}/download/${request.filesNo}" class="img-circle" width="100" height="100"><!-- 이미지에 번호들어가야함 -->
 	                 				</th>
 	                 				<th width="40%">
 	                 					

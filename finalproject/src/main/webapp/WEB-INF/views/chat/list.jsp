@@ -106,7 +106,7 @@ $(document).ready(function(){
               						<c:when test= "${chatList.memberId eq sessionId && chatList.chatMessageStatus eq 'N'}">
               						<tr class="table-default align-middle">
 	                 				<th width="30%">
-	                 				<img src="http://localhost:8888/download/${chatList.filesNo}" class="img-circle" width="100" height="100"> 
+	                 				<img src="${pageContext.request.contextPath}/download/${chatList.filesNo}" class="img-circle" width="100" height="100"> 
 	                 				</th>
 	                 				<th width="40%">
 	                 					
@@ -125,7 +125,7 @@ $(document).ready(function(){
               						<c:when test= "${chatList.memberId ne sessionId && chatList.chatMessageStatus eq 'Y'}">
               						<tr class="table-default align-middle">
 	                 				<th width="30%">
-	                 				<img src="http://localhost:8888/download/${chatList.filesNo}" class="img-circle" width="100" height="100"> 
+	                 				<img src="${pageContext.request.contextPath}/download/${chatList.filesNo}" class="img-circle" width="100" height="100"> 
 	                 				</th>
 	                 				<th width="40%">
 	                 					
@@ -147,7 +147,7 @@ $(document).ready(function(){
               					<c:otherwise>
               						<tr class="table-default align-middle">
 	                 				<th width="30%">
-	                 				<img src="http://localhost:8888/download/${chatList.filesNo}" class="img-circle" width="100" height="100"> 
+	                 				<img src="${pageContext.request.contextPath}/download/${chatList.filesNo}" class="img-circle" width="100" height="100"> 
 	                 				</th>
 	                 				<th width="40%">
 	                 					
