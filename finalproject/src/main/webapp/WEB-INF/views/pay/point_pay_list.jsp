@@ -238,6 +238,11 @@ $(function(){
                  		</tr>
                  	</thead>
                  	<tbody>
+                 		<c:if test="${list.size()==0}">
+                 			<tr class="table-default align-middle">
+				  				<td colspan="6" height="130px">내역이 존재하지 않습니다!</td>
+				  			</tr>
+                 		</c:if>
                  		<c:forEach var="list" items="${list}">
                  			<tr>
 	                 			<td>${list.itemName}</td>

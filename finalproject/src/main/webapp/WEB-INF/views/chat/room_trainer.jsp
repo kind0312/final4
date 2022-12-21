@@ -95,9 +95,55 @@
 	    margin-right: 10px;
 	
 	}
-	body {
-	  position: relative;
-	}
+	
+	* {
+            box-sizing: border-box;
+        }
+        .message-wrapper {
+           
+            padding: 15px;
+        }
+        .message::after {
+            content:"";
+            display: block;
+            clear: both;
+        }
+        .message > div {
+            float:left;
+        }
+        .message > .profile {
+            overflow: hidden;
+            border-radius: 50%;
+        }
+        .message > .content {
+            max-width: 75%;
+        }
+        .message > .content > .text {
+            background-color: #E7E7E7;
+            padding: 10px;
+            margin-left: 10px;
+            border-radius: 10px;
+            word-break: break-all;
+        }
+        .message > .content > .time {
+            text-align: right;
+        }
+
+        .message.my > div {
+            float: right;
+        }
+        .message.my > .profile {
+            display: none;
+        }
+        .message.my > .content > .text {
+            background-color: #AFDAFF;
+            padding: 10px;
+            margin-right: 10px;
+            border-radius: 10px;
+        }
+        .message.my > .content > .time {
+            text-align: left;
+        }
 
 	
 </style>
@@ -121,56 +167,48 @@
           	<hr>
         </div>
         
-        <div class="chat row mt-60 mb-3 "  >
-        	<div class="col-md-6 offset-md-3">
+          <div class="message-wrapper">     
+	        <!-- 이전채팅 -->
+	        <div class="chat row mt-60 mb-3 "  >
+	        	<div class="col-md-6 offset-md-3">
         
-        	<ul id="it">
+       			 <c:forEach var="chatHistory" items="${chatHistory}">
+       			 	<c:choose>
+	       			 	<c:when test="${myId eq chatHistory.memberId}">
+	       			 	
+	       			 		<div class="message my">
+					            <div class="profile"><img src="${pageContext.request.contextPath}/download/${chatHistory.filesNo}" class="img-circle"></div>
+					            <div class="content">
+					                <div class="text">${chatHistory.chatMessage}</div>
+					                <div class="time">${chatHistory.chatCreateAt}</div>
+					            </div>
+					       </div>
+	       			 	
+	       			 	
+	       			 	</c:when>
+	       			 	<c:otherwise>
+	       			 	
+					 		<div class="message">
+					            <div class="profile"><img src="${pageContext.request.contextPath}/download/${chatHistory.filesNo}" class="img-circle"></div>
+					            <div class="content">
+					                <div class="text">${chatHistory.chatMessage}</div>
+					                <div class="time">${chatHistory.chatCreateAt}</div>
+					            </div>
+					       </div>
+					       
+					     </c:otherwise>
+        			</c:choose>
+        		</c:forEach>
         	
-        	<c:forEach var="chatHistory" items="${chatHistory}">
-        		<c:choose>          
-        			<c:when test = "${myId eq chatHistory.memberId}">
-        				<div class="align-middle mine" >
-        						
-        							
-								    	<span class="gender-font time" >${chatHistory.chatCreateAt}</span>								    
-								  
-								    	<span class="gender-font textbox tb-mine">${chatHistory.chatMessage} </span>								   
-								  
-        						<!--  <img src="${pageContext.request.contextPath}/download/${chatHistory.filesNo}" class="img-circle"> -->	
-								    			
-	                 					                 				
-                 			</div>	
-        			</c:when>
-        			
-        			<c:otherwise>
-        				<div class=" align-middle your">
-	                 			
-        								<img src="${pageContext.request.contextPath}/download/${chatHistory.filesNo}" class="img-circle">
-        							
-								   
-								    	<span class="gender-font textbox tb-your">${chatHistory.chatMessage} </span>
-								  
-								   
-								    	<span class="gender-font time" >${chatHistory.chatCreateAt}</span>								    
-								   	
-	                 		</div>		
-                 				
-        			</c:otherwise>
-	              
-        			    						
-        		</c:choose>
-        	
-		       	</c:forEach>
 		       
-        	</ul>
-        <div class=" align-middle ">
-            <ul>
-                <!-- 동적 생성 -->                
-               
-                <div id="message-list" class="message-box"></div>             
-                
-            </ul>
-         </div>   
+        		<!-- 새 채팅  -->	
+       		 <div class=" align-middle " id="live-message">
+                  
+                  <!-- 동적생성 -->       
+                                 
+         	</div>   
+         	
+        
         
         
      
@@ -183,7 +221,7 @@
 			
 			
 			
-		
+			</div> 
         	
          </div>
        </div>
@@ -244,6 +282,12 @@ $(function(){
 		var w = $("<p>").text(data.memberId); //콘솔에 key로 들어오는 값을 찍어줘야 나옴
 		var t = $("<p>").addClass("time").text(time);
 		var c = $("<span>").text(data.chatMessage);
+		//
+		var newChat = $("<div>").addClass("message");
+		var imgbox = $("<div>").addClass("profile");
+		var innerbox = $("<div>").addClass("content");
+		var text = $("<div>").addClass("text").text(data.chatMessage);
+		var ttime = $("<div>").addClass("time").text(time);
 		
 		// 내 사진 번호만 가져와서 태그 만들어서 붙이면 될거같은데 
 		//<img src="http://localhost:8888/download/${myimg}">
@@ -251,22 +295,16 @@ $(function(){
 
 		var img = $("<img>").addClass("img-circle").attr('id','imgID').attr( "src","${pageContext.request.contextPath}/download/"+imgNo);
 		
-		p.append(c).append(t);  //메세지 텍스트			
+			
+		var img = imgbox.append(img); 
+		var con = innerbox.append(text).append(ttime);
+		var newnew = newChat.append(img).append(con);
 		
-		if(data.memberId == userId){
-			p.addClass("tb-mine").addClass("mine");
-			$("#message-list").append(p);	
-		}
-		else {
-			p.addClass("tb-your").addClass("your");	
-			img.append(p).wrap('<div class="align-middle"/>');  //???? 어떻게 묶지???
-			
-			$("#message-list").append(img).append(p);		
-			
-		}
-						
-			//선택한 요소를 감싼다 wrap 이미지랑 p랑 다 붙은걸 묶어야함 
-			//.wrap('<div class="align-middle"/>');
+		if(userId == data.memberId){
+			newChat.addClass("my");
+		}		
+		
+		$("#live-message").append(newnew);
 		
 		
 		
@@ -302,7 +340,12 @@ $(function(){
 		
 	});
 	
-	
+	//4 엔터키 이벤트
+	$("#message-input").on("keyup",function(key){
+        if(key.keyCode==13) {            
+	        $("#message-send").click();
+        }
+    });
 
 	
 	

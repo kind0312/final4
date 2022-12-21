@@ -151,7 +151,7 @@ margin-right: auto;
 	                 				</th>
 	                 				<th width="40%">
 	                 					<p class="name-font">${like.memberName}</p>
-	                 					<p class="gender-font">${like.trainerProfile} / ${like.trainerProfileContent}</p>
+	                 					<p class="gender-font">${like.trainerProfile}</p>
 	                 				</th>
 	                 				<th width="30%">
 	                 					<a href="/trainer/detail?trainerNo=${like.trainerNo}" class="btn btn-blue">상세</a>
