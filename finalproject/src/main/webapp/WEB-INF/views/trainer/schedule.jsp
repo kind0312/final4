@@ -67,12 +67,12 @@
 	.fc-theme-standard .fc-scrollgrid {
     	border: 1px solid #ddd; 
   	}
-  	
-  	
-  	
   	.fc-bg-event{
   		background-color:#fcee9a;
   	}
+  	.fc-event-today {
+	    background-color: #fff !important;
+  }
 
 
 </style>
@@ -88,6 +88,7 @@
 		var calendarEl = $('#calendar')[0];
 	      // full-calendar 생성하기
 	      var trainerNo = $("[name=trainerNo]").val();
+      
 	      var calendar = new FullCalendar.Calendar(calendarEl, {
 	        aspectRatio: 1.3, //달력의 가로 세로 비율 설정
 	       // height: '500px', // calendar 높이 설정
@@ -100,7 +101,7 @@
 	        },
 	        navLinkDayClick: function (date, jsEvent) {
 	           // console.log(date.toString()); //Sat Dec 03 2022 00:00:00 GMT+0900 (한국 표준시) 형태로 출력됨
-	           var careDate = moment(date).format('YYYY-MM-DD');;
+	           var careDate = moment(date).format('YYYY-MM-DD');
 	            //console.log(careDate); //2022-12-03 형식으로 변경
 	            $(".careDate").text(careDate);
 	            
@@ -150,6 +151,7 @@
 	        dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
 	        locale: 'ko', // 한국어 설정
 	        events: [
+	            
 	        	$.ajax({
 	        		url:"${pageContext.request.contextPath}/rest/schedule/"+trainerNo,
 	        		method:"get",
@@ -175,6 +177,7 @@
 	        			}
 	        		}
 	        	})
+	        	
            	]
 	      });
 	      // 캘린더 랜더링
