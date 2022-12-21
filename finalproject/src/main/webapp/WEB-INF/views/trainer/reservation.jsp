@@ -342,13 +342,7 @@ $(function(){
         		}
         		else{
         			for(var i = time; i < 18; i++){
-        				if(time == 9){
-        					$("[name=trainingStartTime]").append($("<option>").attr("value", "0"+i+":00").text("0"+i+"시"));
-    	            		check.time=true;
-    	        			console.log("가능 시간 : " + check.time);
-    	        			i++;
-        				}
-    	        		$("[name=trainingStartTime]").append($("<option>").attr("value", i+":00").text(i+"시"));
+    	        		$("[name=trainingStartTime]").append($("<option>").attr("value", i+1+":00").text(i+1+"시"));
     	        		check.time=true;
     	    			console.log("가능 시간 : " + check.time);
             		}
@@ -357,7 +351,7 @@ $(function(){
         	else{
         		console.log("다른 날짜");
         		$("[name=trainingStartTime]").empty();
-        		for(var i = 09; i <= 18; i++){
+        		for(var i = 9; i <= 18; i++){
         			if(i == 9){
     					$("[name=trainingStartTime]").append($("<option>").attr("value", "0"+i+":00").text("0"+i+"시"));
 	            		check.time=true;
