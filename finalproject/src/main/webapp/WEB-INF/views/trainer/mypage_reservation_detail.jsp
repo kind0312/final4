@@ -244,7 +244,7 @@
 					<h6>요청사항</h6>
 				</div>
 				<div class="row mt-2 justify-content-center">
-					<input type="text" class="memo-input" value="${detail[0].trainingMemo}" readonly>
+					<textarea class="memo-input" style="resize:none;" readonly>${detail[0].trainingMemo}</textarea>
 				</div>
 			</div>
 		</div>
