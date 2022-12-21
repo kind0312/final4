@@ -75,7 +75,7 @@ $(document).ready(function(){
 <div class="container-fluid">
         <div class="row mt-80 mb-3">
             <div class="col-md-6 offset-md-3">
-                 <h4 class="text-center">일반회원 채팅목록<img src="/image/chat-box.png" class="icon"></h4>
+                 <h4 class="text-center">일반회원 채팅목록<img src="${pageContext.request.contextPath}/image/chat-box.png" class="icon"></h4>
             </div>
         </div>
 	

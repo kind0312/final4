@@ -145,6 +145,11 @@
         .message.my > .content > .time {
             text-align: left;
         }
+        
+        .chatBox {
+        min-height: 350px;
+        max-height: 500px;
+        }
 
 	
 </style>
@@ -203,7 +208,7 @@
         	
 		       
         		<!-- 새 채팅  -->	
-       		 <div class=" align-middle " id="live-message">
+       		 <div class=" align-middle chatBox overflow-auto" id="live-message">
                   
                   <!-- 동적생성 -->       
                        
