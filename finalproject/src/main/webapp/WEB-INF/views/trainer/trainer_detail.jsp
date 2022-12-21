@@ -162,12 +162,14 @@ margin-right: auto;
                 <br>
                 <h2>${list.getMemberName()} 훈련사</h2>
 <br>
+<hr>
                 <div class="sitro">
                     <h3>자기소개<img src="/image/documents.png" class="timg"></h3>
                     <span>
                        ${list.getTrainerProfileContent()}
                     </span>
                 </div>
+                <hr>
 
                 <div class="cfcate ">
                     <h3>후기 목록   <img src="/image/reviews.png" class="timg"></h3>
