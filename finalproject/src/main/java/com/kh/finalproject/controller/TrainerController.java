@@ -95,7 +95,7 @@ public class TrainerController {
 		
 	model.addAttribute("list", trainerDao.selectTrainerList());	
 	model.addAttribute("listReview", trainerDao.selectTrainerListAvg());
-	return "trainer/trainer_list2";
+	return "trainer/trainer_list";
 		
 	}
 	
