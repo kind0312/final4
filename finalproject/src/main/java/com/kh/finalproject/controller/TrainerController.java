@@ -102,20 +102,14 @@ public class TrainerController {
 	
 	@GetMapping("/reservation")
 	public String reservation(@ModelAttribute MemberDto memberDto,Model model,
-			@RequestParam int trainerNo,@ModelAttribute ReservationVO reservationVO,
+			@RequestParam int trainerNo,
 			HttpSession session) {
 		
 		String userId = (String)session.getAttribute(SessionConstant.ID);
 		
-//		reservationVO.setMemberId(userId);
-//		List<TrainingDto> findDto = trainingDao.check(reservationVO);
-//		if(findDto != null) {
-//			model.addAttribute("reservation", findDto);
-//		}
-
 		model.addAttribute("member", memberDao.selectOne(userId));
 		model.addAttribute("pet", petDao.list(userId));
-		model.addAttribute("trainerno", trainerNo);
+		model.addAttribute("trainerNo", trainerNo);
 		
 		return "/trainer/reservation";
 	}
