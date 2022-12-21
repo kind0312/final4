@@ -82,7 +82,7 @@ public class PetTrainerController {
 		String memberId = (String) session.getAttribute(SessionConstant.ID);	
 		int trainerNo = trainerDao.selectOneTrainerNo(memberId); // trainerNo를 찾아옴
 		
-		System.out.println("트레이너 번호 : " + trainerNo);	
+		//System.out.println("트레이너 번호 : " + trainerNo);	
 				
 		List<TrainingRequestListVO> list = trainingDao.requestList(trainerNo);
 		model.addAttribute("requestList", list);		
