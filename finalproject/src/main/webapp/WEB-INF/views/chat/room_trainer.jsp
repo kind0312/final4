@@ -205,12 +205,10 @@
        		 <div class=" align-middle " id="live-message">
                   
                   <!-- 동적생성 -->       
-                       
-          
+                                 
          	</div>   
-         </div>
-       </div>
-</div>  
+         	
+        
         
         
      
@@ -223,7 +221,7 @@
 			
 			
 			
-		
+			</div> 
         	
          </div>
        </div>
@@ -342,7 +340,12 @@ $(function(){
 		
 	});
 	
-	
+	//4 엔터키 이벤트
+	$("#message-input").on("keyup",function(key){
+        if(key.keyCode==13) {            
+	        $("#message-send").click();
+        }
+    });
 
 	
 	

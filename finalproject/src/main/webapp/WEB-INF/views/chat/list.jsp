@@ -42,6 +42,16 @@
     margin-top: 10px;	
 	}
 	
+	.one-index {
+	display: none;
+	}
+	
+	.icon{
+		width: 40px;
+		height: 40px;
+		margin-left: 9px;
+		}
+	
 </style>
 
 <script >
@@ -65,7 +75,7 @@ $(document).ready(function(){
 <div class="container-fluid">
         <div class="row mt-80 mb-3">
             <div class="col-md-6 offset-md-3">
-                 <h4 class="text-center">일반회원 채팅목록</h4>
+                 <h4 class="text-center">일반회원 채팅목록<img src="/image/chat-box.png" class="icon"></h4>
             </div>
         </div>
 	
@@ -75,10 +85,24 @@ $(document).ready(function(){
                  
                  		<thead>
                  		
+                 		<c:if test="${chatList.size()==0}">
+                 				<tr class="table-default">
+					  				<td colspan="3" height="130px" class="align-middle">대화가 존재하지 않습니다!</td>
+					  			</tr>
+                 		</c:if>
+                 		
+                 		
               				<c:forEach var="chatList" items="${chatList}" >
-              					<c:choose>   
-              						       						
-              						
+              					<c:choose> 
+              					
+              						<c:when test="${chatList.memberName eq memDto.memberName}">
+	              						<tr class="table-default one-index" >
+							  				<td colspan="3" height="130px" class="align-middle">대화가 존재하지 않습니다!</td>
+							  			</tr>
+              						</c:when>
+              					
+              					     
+              					
               						<c:when test= "${chatList.memberId eq sessionId && chatList.chatMessageStatus eq 'N'}">
               						<tr class="table-default align-middle">
 	                 				<th width="30%">
