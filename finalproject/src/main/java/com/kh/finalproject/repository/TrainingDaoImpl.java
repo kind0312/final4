@@ -1,6 +1,5 @@
 package com.kh.finalproject.repository;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -9,20 +8,20 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.finalproject.entity.LinkedListDto;
 import com.kh.finalproject.entity.PointDto;
-import com.kh.finalproject.entity.ScheduleDto;
 import com.kh.finalproject.entity.TrainingDetailDto;
 import com.kh.finalproject.entity.TrainingDto;
 import com.kh.finalproject.vo.CalendarVO;
 import com.kh.finalproject.vo.CheckRequestVO;
 import com.kh.finalproject.vo.OneTrainingVO;
 import com.kh.finalproject.vo.PetDetailListVO;
+import com.kh.finalproject.vo.ReservationCheckVO;
 import com.kh.finalproject.vo.ReservationDetailListVO;
 import com.kh.finalproject.vo.ReservationListVO;
 import com.kh.finalproject.vo.ReservationVO;
 import com.kh.finalproject.vo.ScheduleVO;
 import com.kh.finalproject.vo.TrainingMemberVO;
-import com.kh.finalproject.vo.TrainingUsageVO;
 import com.kh.finalproject.vo.TrainingRequestListVO;
+import com.kh.finalproject.vo.TrainingUsageVO;
 
 
 @Repository
@@ -182,8 +181,8 @@ public class TrainingDaoImpl implements TrainingDao{
 
 	//예약한 날짜인지 확인여부
 	@Override
-	public List<TrainingDto> check(ReservationVO reservationVO) {
-		return sqlSession.selectList("training.checkReservation", reservationVO);
+	public ReservationCheckVO check(ReservationVO reservationVO) {
+		return sqlSession.selectOne("training.checkReservation", reservationVO);
 	}
 
 	

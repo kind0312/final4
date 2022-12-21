@@ -75,9 +75,10 @@
 <style>
 	.list-back{
 		width:100%;
-		height:100%;
-		margin-top:80px;
-		background-color:#F7F8FA;
+/* 		height:100%; */
+ 		margin-top:80px;
+ 		padding-bottom:80px;
+ 		background-color:#F7F8FA;
 	}
 	.info-box{
 		width:1000px;

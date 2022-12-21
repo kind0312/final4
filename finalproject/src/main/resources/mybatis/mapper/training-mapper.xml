@@ -249,8 +249,9 @@
     </select>
     
     <!-- 예약한 날짜인지 확인용 -->
-    <select id="checkReservation" resultType="trainingDto" parameterType="reservationVO">
-    	select * from training where member_id = #{memberId}
+    <select id="checkReservation" resultType="ReservationCheckVO" parameterType="reservationVO">
+    	select * from reservation_view 
+    		where trainer_no = #{trainerNo} and member_id = #{memberId} and training_date = #{trainingDate}
     </select>
     
   </mapper>
