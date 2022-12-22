@@ -314,10 +314,11 @@ $(function(){
         	var trainerNo = $("[name=trainerNo]").val();
 //         	console.log(trainerNo);
         	var time = moment().format('HH');
+        	var hour = parseInt(time);
         	$("[name=trainingDate]").attr("value", select);
         	var today = moment().format('YYYY-MM-DD');
 //         	console.log(today);
-        	console.log("현재 시각 : " + time);
+        	console.log("현재 시각 : " + hour);
         	if(select == today){
         		console.log("같은 날짜");
         		$("[name=trainingStartTime]").empty();
@@ -341,7 +342,7 @@ $(function(){
             		}
         		}
         		else{
-        			for(var i = time; i < 18; i++){
+        			for(var i = hour; i < 18; i++){
     	        		$("[name=trainingStartTime]").append($("<option>").attr("value", i+1+":00").text(i+1+"시"));
     	        		check.time=true;
     	    			console.log("가능 시간 : " + check.time);
