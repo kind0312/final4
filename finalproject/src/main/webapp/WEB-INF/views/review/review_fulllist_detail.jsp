@@ -33,7 +33,7 @@
 							<div class="row">
 								<img class="col-xl-2 offset-xl-1 col-lg-2 offset-lg-1 col-md-4 offset-md-0 col-sm-4 offset-sm-0 mt-4" src="${pageContext.request.contextPath}/download/${reviewDto.filesNo}" style="width:100px; height: 85px; border-radius: 70%;">
 								<div class="col-xl-9 offset-xl-0 col-lg-9 offset-lg-0 col-md-8 offset-md-0 col-sm-8 offset-sm-0 mt-4">
-								<h3 style="word-break:break-all;">${reviewDto.reviewTitle}</h3>
+								<h4 style="word-break:break-all;">${reviewDto.reviewTitle}</h4>
 									<div class="row">
 										<div class="col">
 											<div><h5 class="text-muted">${reviewDto.memberId}</h5></div>
