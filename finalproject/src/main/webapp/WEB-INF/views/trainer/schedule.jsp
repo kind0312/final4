@@ -71,9 +71,9 @@
   		background-color:#fcee9a;
   	}
   	.fc-event-today {
-	    background-color: #fff !important;
-  	}
-	
+	    background-color: #adf181 !important;
+	}
+
 
 </style>
 
@@ -215,7 +215,7 @@
             <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4">
                  <div class="text-center" id="calendar"></div>
                  <div class="text-center mt-2">
-<!--                  	<span class="margin-10"><i class="fa-solid fa-circle"  style="color:#fcee9a;"></i> 오늘</span> -->
+                  	<span class="margin-10"><i class="fa-solid fa-circle"  style="color:#adf181;"></i> 오늘</span>
                  	<span class="margin-10"><i class="fa-solid fa-circle blue"></i> 훈련</span>
                  	<span class="margin-10"><i class="fa-solid fa-circle blue"  style="color:#FADE81;"></i> 완료</span>
                  </div>

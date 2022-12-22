@@ -6,6 +6,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.kh.finalproject.interceptor.AdminIntercepter;
+import com.kh.finalproject.interceptor.MyAccountCheckInterceptor;
 import com.kh.finalproject.interceptor.UserInterceptor;
 
 
@@ -17,6 +18,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 	
 	@Autowired
 	private AdminIntercepter adminInterceptor; 
+	
+	@Autowired
+	private MyAccountCheckInterceptor myAccountCheckInterceptor; 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		// 비회원과 회원을 구분
@@ -25,7 +29,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 										"/trainer/reservation*", // 예약 전부 차단
 										"/trainer/like", // 좋아요 전부 차단
 										"/member/**",
-										"/chat/**"// 유저 전부 차단
+										"/chat/**",// 유저 전부 차단
+										"/pay/**"
 										)
 		
 		.excludePathPatterns(
@@ -43,6 +48,20 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 		.excludePathPatterns(
 				"/admin/login"// 로그인 가능
 				);
+		
+		registry.addInterceptor(myAccountCheckInterceptor)//유저 로그인 확인
+		.addPathPatterns(
+				"/mypage/**", // 마이페이지 차단
+				"/review/**" // 리뷰 작성 차단
+				
+				)
+		
+		.excludePathPatterns(
+				"/review/fulllist",
+				"/review/fulldetail"
+				);
+		
+		
 	}
 	
 }

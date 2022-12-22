@@ -155,6 +155,12 @@ height: 50px;
 margin-left: 9px;
 margin-bottom: 10px;
 }
+.wimg{
+width: 40px;
+height: 40px;
+margin-left: 9px;
+margin-bottom: 10px;
+}
 
 </style>
 <body>
@@ -190,14 +196,14 @@ margin-bottom: 10px;
 		                 		</div>
 		                 		<a class="box-content" href="${pageContext.request.contextPath}/trainer/detail?trainerNo=${list.trainerNo}">
 		                 			<div class="content-title">
-		                 				<h3 class="name-font">${list.memberName} 훈련사</h3>
+		                 				<h3 class="name-font">${list.memberName} 훈련사<img src="/image/whistle.png" class="wimg"></h3>
 		                 			</div>
 		                 			<div style="display:flex; justify-content:space-between; width:100%;height:100%;">
 		                 				<h4 class="title-font mt-3">${list.trainerProfile}</h4>
 		                 			</div>
 		                 			<div style="display:flex; margin-top:21px; margin-bottom:30px; width:100%;">
 			                 			<div style="display:flex; flex-direction:row; align-items:center; margin-right:18px;">
-											<p style="font-size:15px; font-weight:bolder; display:inline-block; margin-right:5px;" class="blue">★★★★★<span style="color:#303030; margin-left:5px;">${list.avg}</span></p>
+											<p style="font-size:15px; font-weight:bolder; display:inline-block; margin-right:5px;" class="blue">★★★★★<span style="color:#303030; margin-left:5px;">${list.avg}.00</span></p>
 											<p style="font-size:15px; display:inline-block; color: gray; margin-right:5px"> | </p>
 											<p style="font-size:15px; display:inline-block; color: gray; margin-right:5px;">후기 <span>${list.cnt}</span>개</p>
 										</div>
@@ -220,14 +226,14 @@ margin-bottom: 10px;
 		                 		</div>
 		                 		<a class="box-content" href="${pageContext.request.contextPath}/trainer/detail?trainerNo=${list.trainerNo}">
 		                 			<div class="content-title">
-		                 				<h3 class="name-font">${list.memberName} 훈련사</h3>
+		                 				<h3 class="name-font">${list.memberName} 훈련사<img src="/image/whistle.png" class="wimg"></h3>
 		                 			</div>	
 		                 			<div style="display:flex; justify-content:space-between; width:100%;height:100%;">
 		                 				<h4 class="title-font mt-3">${list.trainerProfile}</h4>
 		                 			</div>
 		                 			<div style="display:flex; margin-top:21px; margin-bottom:30px; width:100%;">
 			                 			<div style="display:flex; flex-direction:row; align-items:center; margin-right:18px;">
-											<p style="font-size:15px; font-weight:bolder; display:inline-block; margin-right:5px;" class="blue">★★★★★<span style="color:#303030; margin-left:5px;">${list.avg}</span></p>
+											<p style="font-size:15px; font-weight:bolder; display:inline-block; margin-right:5px;" class="blue">★★★★★<span style="color:#303030; margin-left:5px;">${list.avg}.00</span></p>
 											<p style="font-size:15px; display:inline-block; color: gray; margin-right:5px"> | </p>
 											<p style="font-size:15px; display:inline-block; color: gray; margin-right:5px;">후기 <span>${list.cnt}</span>개</p>
 										</div>

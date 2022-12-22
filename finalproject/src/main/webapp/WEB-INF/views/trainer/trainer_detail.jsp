@@ -194,6 +194,7 @@ margin-right: auto;
 ${review.getReviewWriteTime()}</span>
 <span style="font-size: 15px; font-weight: bold">
 ${review.getReviewContent()}<br>
+<hr>
 </span>
 </span>
 </div>
@@ -215,6 +216,7 @@ ${reviewBad.getReviewWriteTime()}
 </span>
 <span style="font-size: 15px; font-weight: bold; margin-top: -21px;">
 ${reviewBad.getReviewContent()}<br>
+<hr>
 </span>
 </span>
 </div>
