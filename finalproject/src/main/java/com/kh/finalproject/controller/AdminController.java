@@ -41,7 +41,7 @@ import com.kh.finalproject.vo.TrainingRequestListVO;
 import com.kh.finalproject.vo.TrainingUsageVO;
 
  
-@Controller
+@Controller 
 @RequestMapping("/admin")
 public class AdminController {
 	
