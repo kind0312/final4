@@ -137,8 +137,10 @@ margin-right: auto;
             <div class="col-md-6 offset-md-3">
             <c:choose>
                  <c:when test="${like.size()==0}">
-                 <div class="row hoo mt-5" >
-                 찜한 훈련사가 아직 없어요!<img src="/image/sad.png" class="simg">
+                 <div class="row mt-5 text-center">
+	                 <div class="col-md-6 offset-md-3">
+	                 찜한 훈련사가 아직 없어요! <img src="/image/sad.png" class="simg" style="width:30px">
+	                 </div>
                  </div>
                  </c:when>
                  <c:otherwise>   

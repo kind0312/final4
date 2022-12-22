@@ -192,7 +192,7 @@ margin-right: auto;
 <span class="writetime">
 <img src="${pageContext.request.contextPath}/download/${review.filesNo}" style="width:60px; height: 60px; border-radius: 70%;">
 ${review.getReviewWriteTime()}</span>
-<span style="font-size: 15px; font-weight: bold">
+<span style="font-size: 15px;">
 ${review.getReviewContent()}<br>
 </span>
 </span>
