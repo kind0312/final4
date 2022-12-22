@@ -52,8 +52,8 @@ $(function(){
 	//결제 취소 버튼 이벤트
 	$(".cancel-btn").click(function(){
 		var pointPurchaseNo = $(this).next().val();
-		var myPoint = $("[name=myPoint]").val();
-		var purchasePrice = commaDelete($(this).parent().siblings('td.purchasePrice').text());
+		var myPoint = parseInt($("[name=myPoint]").val());
+		var purchasePrice = parseInt(commaDelete($(this).parent().siblings('td.purchasePrice').text()));
 		
 		//날짜 비교
 		//구매날짜에서 +7일까지 결제취소 가능
@@ -68,6 +68,10 @@ $(function(){
 		//구매날짜+5일보다 현재날짜가 더 크면 취소 불가
 		console.log("구매날짜+5일 : "+plusDate.getTime());
 		console.log("현재날짜 : "+now.getTime());
+		console.log(plusDate.getTime()<now.getTime());
+		console.log("현재포인트 : "+myPoint);
+		console.log("구매금액 : "+purchasePrice);
+		console.log(myPoint<purchasePrice);
 
 		$(".cancel-confirm-btn").click(function(e){
 			// 결제일로부터 날짜가 5일 지난 경우 버튼 이벤트 막기
@@ -117,7 +121,7 @@ $(function(){
 	
 	//1000단위 콤마해제
 	function commaDelete(price){
-		return price.toString().replace(",","");
+		return price.toString().replace(/,/g,"");
 	}
 	
 	//날짜 한자리수 앞에 0 붙이기
@@ -231,7 +235,7 @@ $(function(){
                  		<tr>
                  			<th width="20%">상품명</th>
                  			<th width="15%">금액</th>
-                 			<th width="20%">날짜</th>
+                 			<th width="20%">결제일</th>
                  			<th width="20%">결제수단</th>
                  			<th width="10%">거래</th>
                  			<th width="15%"></th>
