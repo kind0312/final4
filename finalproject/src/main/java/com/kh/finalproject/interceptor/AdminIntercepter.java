@@ -19,7 +19,8 @@ public class AdminIntercepter implements HandlerInterceptor{
 			HttpSession session = request.getSession();
 			String loginId = (String) session.getAttribute(SessionConstant.ID);
 			// 미리 부여된 adminID와 현재 로그인된 세션의 아이디가 같은지 판정
-			boolean admin = loginId.equals("admin1");
+			
+			boolean admin = loginId != null && loginId.equals("admin1");
 			if(admin) {
 				return true;
 			} 
