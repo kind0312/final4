@@ -141,7 +141,40 @@ $(document).ready(function(){
 	                 					<a href="${pageContext.request.contextPath}/chat/room?roomNo=${chatList.roomNo}" class="btn btn-blue">채팅</a>
 	                 				</th>
                  				</tr>
+                 				
+                 				
               						</c:when>
+              						
+              						
+              						<c:when test= "${chatList.memberId eq sessionId && chatList.chatMessageStatus eq 'Y'}">
+              						<tr class="table-default align-middle">
+	                 				<th width="30%">
+	                 				<img src="${pageContext.request.contextPath}/download/${chatList.filesNo}" class="img-circle" width="100" height="100"> 
+	                 				</th>
+	                 				<th width="40%">
+	                 					
+	                 					<p class="name-font titleName">${chatList.memberName} 훈련사</p>
+	                 					
+	                 					<p class="gender-font">${chatList.chatMessage}</p>
+	                 					<p class="gender-font">${chatList.chatCreateAt}</p>
+	                 					
+	                 				
+	                 					
+	                 				</th>
+	                 				<th width="30%">
+	                 					<a href="${pageContext.request.contextPath}/chat/room?roomNo=${chatList.roomNo}" class="btn btn-blue">채팅</a>
+	                 				</th>
+                 				</tr>
+              						</c:when>
+              						
+              						
+              						
+              						
+              						
+              						
+              						
+              						
+              						
               						
               						
               					<c:otherwise>
