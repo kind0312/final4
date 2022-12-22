@@ -148,7 +148,7 @@
         
         .chatBox {
         min-height: 350px;
-        max-height: 500px;
+        
         }
 
 	
