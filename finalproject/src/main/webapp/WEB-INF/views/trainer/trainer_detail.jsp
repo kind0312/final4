@@ -187,14 +187,19 @@ margin-right: auto;
                  <div class="row training-ing">
 <c:forEach var="review" items="${review}">
 <div class="sitro">
-<span>
 <div class="star-score blue" data-max="5" data-rate="${review.getReviewGood()}" ></div><br>
 <span class="writetime">
+<div style="bold; color: black; font-weight: bold;">
 <img src="${pageContext.request.contextPath}/download/${review.filesNo}" style="width:60px; height: 60px; border-radius: 70%;">
-${review.getReviewWriteTime()}</span>
-<span class="summernote-font" style="font-size: 15px;">
-${review.getReviewContent()}<br>
+${review.memberName} 님의 후기
+</div>
+<div>
+${review.getReviewWriteTime()}
+</div>
 </span>
+<span style="font-size: 12px; font-weight: bold;  margin-top: -30px;">
+${review.getReviewContent()}
+<hr>
 </span>
 </div>
 <br><br>
@@ -207,15 +212,19 @@ ${review.getReviewContent()}<br>
                  <div class="row training-end">
 <c:forEach var="reviewBad" items="${reviewBad}">
 <div class="sitro">
-<span>
 <div class="star-score blue" data-max="5" data-rate="${reviewBad.getReviewGood()}" ></div><br>
 <span class="writetime">
+<div style="color: black; font-weight: bold;">
 <img src="${pageContext.request.contextPath}/download/${reviewBad.filesNo}" style="width:60px; height: 60px; border-radius: 70%;">
+${reviewBad.memberName} 님의 후기
+</div>
+<div>
 ${reviewBad.getReviewWriteTime()}
+</div>
 </span>
-<span class="summernote-font" style="font-size: 15px; font-weight: bold; margin-top: -21px;">
-${reviewBad.getReviewContent()}<br>
-</span>
+<span style="font-size: 12px; font-weight: bold; margin-top: -30px;">
+${reviewBad.getReviewContent()}
+<hr>
 </span>
 </div>
 <br><br>
