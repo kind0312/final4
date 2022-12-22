@@ -114,7 +114,7 @@
 			    			</c:if>
 			    			<c:forEach var="list" items="${list}">
 			    				<c:choose>
-			    					<c:when test="${list.pointStatus=='사용' or list.pointStatus=='환불'}">
+			    					<c:when test="${list.pointStatus=='사용'}">
 			    						<tr>
 					    					<td>${list.pointDate}</td>
 					    					<td></td>
@@ -124,21 +124,13 @@
 					    					<td>${list.pointStatus}</td>
 					    				</tr>
 			    					</c:when>
-			    					<c:when test="${list.pointStatus=='구매'}">
+			    					<c:otherwise>
 			    						<tr>
 					    					<td>${list.pointDate}</td>
 					    					<td class="plus-font">+ 
 					    					 	<fmt:formatNumber value="${list.pointPrice}" pattern="###,###"></fmt:formatNumber>
 					    					</td>
 					    					<td></td>
-					    					<td>${list.pointStatus}</td>
-					    				</tr>
-			    					</c:when>
-			    					<c:otherwise>
-			    						<tr>
-					    					<td>${list.pointDate}</td>
-					    					<td></td>
-					    					<td class="minus-font">- ${list.pointPrice}</td>
 					    					<td>${list.pointStatus}</td>
 					    				</tr>
 			    					</c:otherwise>
