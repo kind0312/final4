@@ -81,7 +81,7 @@
 		
 		//1000단위 콤마해제
 		function commaDelete(price){
-			return price.toString().replace(",","");
+			return price.toString().replace(/,/g,"");
 		}
 		
 	});
