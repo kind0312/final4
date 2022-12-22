@@ -57,7 +57,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 				)
 		
 		.excludePathPatterns(
-				"/review/fulllist"
+				"/review/fulllist",
+				"/review/fulldetail"
 				);
 		
 		
