@@ -197,7 +197,7 @@ ${review.memberName} 님의 후기
 ${review.getReviewWriteTime()}
 </div>
 </span>
-<span style="font-size: 12px; font-weight: bold;  margin-top: -30px;">
+<span class="summernote-font" style="font-size: 12px; font-weight: bold;  margin-top: -30px;">
 ${review.getReviewContent()}
 <hr>
 </span>
@@ -222,7 +222,7 @@ ${reviewBad.memberName} 님의 후기
 ${reviewBad.getReviewWriteTime()}
 </div>
 </span>
-<span style="font-size: 12px; font-weight: bold; margin-top: -30px;">
+<span class="summernote-font" style="font-size: 12px; font-weight: bold; margin-top: -30px;">
 ${reviewBad.getReviewContent()}
 <hr>
 </span>
