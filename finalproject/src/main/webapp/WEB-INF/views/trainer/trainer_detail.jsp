@@ -189,7 +189,7 @@ margin-right: auto;
 <div class="sitro">
 <div class="star-score blue" data-max="5" data-rate="${review.getReviewGood()}" ></div><br>
 <span class="writetime">
-<div style="bold; color: black;">
+<div style="bold; color: black; font-weight: bold;">
 <img src="${pageContext.request.contextPath}/download/${review.filesNo}" style="width:60px; height: 60px; border-radius: 70%;">
 ${review.memberName} 님의 후기
 </div>
@@ -214,7 +214,7 @@ ${review.getReviewContent()}
 <div class="sitro">
 <div class="star-score blue" data-max="5" data-rate="${reviewBad.getReviewGood()}" ></div><br>
 <span class="writetime">
-<div style="color: black;">
+<div style="color: black; font-weight: bold;">
 <img src="${pageContext.request.contextPath}/download/${reviewBad.filesNo}" style="width:60px; height: 60px; border-radius: 70%;">
 ${reviewBad.memberName} 님의 후기
 </div>
