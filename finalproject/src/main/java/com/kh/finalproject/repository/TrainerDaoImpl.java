@@ -51,10 +51,7 @@ public class TrainerDaoImpl implements TrainerDao {
 		
 	}
 
-	@Override
-	public List<ReviewVO> selectTrainerReview(int trainerNo) {
-		return sqlSession.selectList("trainer.selectReviewOne", trainerNo);
-	}
+
 
 	@Override
 	public List<TrainerListVO> selectList(TrainerListSearchVO vo) {
@@ -117,6 +114,12 @@ public class TrainerDaoImpl implements TrainerDao {
 		
 		 return sqlSession.selectList("trainer.selectReviewOneBad", trainerNo);
 	}
+	
+	@Override
+	public List<ReviewVO> selectTrainerReview(int trainerNo) {
+		return sqlSession.selectList("trainer.selectReviewOne", trainerNo);
+	}
+	
 
 	//홈화면 트레이너 정렬(후기개수 기준)
 	@Override

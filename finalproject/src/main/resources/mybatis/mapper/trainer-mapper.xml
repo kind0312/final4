@@ -58,15 +58,15 @@
       
       <!-- 훈련사 단일 리뷰 조회 -->
       <select id="selectReviewOne" parameterType="int" resultType="ReviewVO">
-      select * from 
+      select H.*, M.member_name from 
 			(select r.*, row_number() over(partition by review_no order by pet_no) as rn 
-				from review_list_view r) where rn = 1 and trainer_no = #{trainerNo} order by review_good desc
+				from review_list_view r) H inner join member M on M.member_id =  H.member_id where rn = 1 and trainer_no = #{trainerNo} order by review_good desc
       </select>
       
       <select id="selectReviewOneBad" parameterType="int" resultType="ReviewVO">
-      select * from 
+       select H.*, M.member_name from 
 			(select r.*, row_number() over(partition by review_no order by pet_no) as rn 
-				from review_list_view r) where rn = 1 and trainer_no = #{trainerNo} order by review_good asc
+				from review_list_view r) H inner join member M on M.member_id =  H.member_id where rn = 1 and trainer_no = #{trainerNo} order by review_good asc
       </select>
 
       <insert id="trainerProfileInsert" parameterType="TrainerDto"> 
