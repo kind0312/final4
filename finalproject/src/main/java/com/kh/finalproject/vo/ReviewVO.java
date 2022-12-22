@@ -19,6 +19,7 @@ public class ReviewVO {
 	private Date reviewWriteTime;
 	private Date reviewUpdateTime;
 	private int reviewGood;
+	private String memberName;
 	
 	//pet 이미지 첨부
 	private int filesNo;
