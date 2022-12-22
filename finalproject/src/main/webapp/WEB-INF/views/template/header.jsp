@@ -104,7 +104,7 @@
         p {
            margin-top: 0;
            margin-bottom: 0;
-           font-family: 'Noto Sans KR';
+           font-family: var(--bs-font-sans-serif);
         }
          a {
             text-decoration: none;
@@ -316,7 +316,8 @@
          	font-size: 15px !important;
          	font-weight: 300 !important;
          }
-         .summernote-font p span {
+         .summernote-font > p,
+         .summernote-font > p > span {
          	font-family: 'Noto Sans KR' !important;
          	font-size: 15px !important;
          	font-weight: 300 !important;
