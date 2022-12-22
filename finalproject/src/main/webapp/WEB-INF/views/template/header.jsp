@@ -104,7 +104,7 @@
         p {
            margin-top: 0;
            margin-bottom: 0;
-           font-family: var(--bs-font-sans-serif);
+           font-family: 'Noto Sans KR';
         }
          a {
             text-decoration: none;
@@ -309,6 +309,17 @@
          }
          .modal-body{
             font-size:16px;
+         }
+         
+         .summernote-font {
+         	font-family: 'Noto Sans KR' !important;
+         	font-size: 15px !important;
+         	font-weight: 300 !important;
+         }
+         .summernote-font p span {
+         	font-family: 'Noto Sans KR' !important;
+         	font-size: 15px !important;
+         	font-weight: 300 !important;
          }
          
       </style>

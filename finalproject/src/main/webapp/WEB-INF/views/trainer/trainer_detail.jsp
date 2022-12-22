@@ -192,7 +192,7 @@ margin-right: auto;
 <span class="writetime">
 <img src="${pageContext.request.contextPath}/download/${review.filesNo}" style="width:60px; height: 60px; border-radius: 70%;">
 ${review.getReviewWriteTime()}</span>
-<span style="font-size: 15px;">
+<span class="summernote-font" style="font-size: 15px;">
 ${review.getReviewContent()}<br>
 </span>
 </span>
@@ -213,7 +213,7 @@ ${review.getReviewContent()}<br>
 <img src="${pageContext.request.contextPath}/download/${reviewBad.filesNo}" style="width:60px; height: 60px; border-radius: 70%;">
 ${reviewBad.getReviewWriteTime()}
 </span>
-<span style="font-size: 15px; font-weight: bold; margin-top: -21px;">
+<span class="summernote-font" style="font-size: 15px; font-weight: bold; margin-top: -21px;">
 ${reviewBad.getReviewContent()}<br>
 </span>
 </span>
