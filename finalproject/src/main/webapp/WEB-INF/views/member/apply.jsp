@@ -111,7 +111,7 @@
 						<i class="fa-solid fa-asterisk blue"></i>
 					</label>
 					<div class="input-group mt-3">
-						<textarea id="applyMotive" name="applyMotive" class="form-control rounded"></textarea>
+						<textarea id="applyMotive" name="applyMotive" class="form-control rounded summernote-font"></textarea>
 						<div class="valid-feedback"></div>
 	                    <div class="invalid-feedback"></div>
 					</div>
@@ -209,6 +209,7 @@
             minHeight: 250, // 최소 높이
             placeholder:"지원동기에 대해 적어주세요", // 도움말
             lang:"ko-KR", // 언어설정
+            fontFamily:"Noto Sans KR",
         });
 		
 		$(".note-icon-bar").hide();

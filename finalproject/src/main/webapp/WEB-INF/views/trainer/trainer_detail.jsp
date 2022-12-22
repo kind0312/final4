@@ -189,7 +189,7 @@ margin-right: auto;
 <div class="sitro">
 <div class="star-score blue" data-max="5" data-rate="${review.getReviewGood()}" ></div><br>
 <span class="writetime">
-<div style="bold; color: black;">
+<div style="bold; color: black; font-weight: bold;">
 <img src="${pageContext.request.contextPath}/download/${review.filesNo}" style="width:60px; height: 60px; border-radius: 70%;">
 ${review.memberName} 님의 후기
 </div>
@@ -197,7 +197,7 @@ ${review.memberName} 님의 후기
 ${review.getReviewWriteTime()}
 </div>
 </span>
-<span style="font-size: 12px; font-weight: bold;  margin-top: -30px;">
+<span class="summernote-font" style="font-size: 12px; font-weight: bold;  margin-top: -30px;">
 ${review.getReviewContent()}
 <hr>
 </span>
@@ -214,7 +214,7 @@ ${review.getReviewContent()}
 <div class="sitro">
 <div class="star-score blue" data-max="5" data-rate="${reviewBad.getReviewGood()}" ></div><br>
 <span class="writetime">
-<div style="color: black;">
+<div style="color: black; font-weight: bold;">
 <img src="${pageContext.request.contextPath}/download/${reviewBad.filesNo}" style="width:60px; height: 60px; border-radius: 70%;">
 ${reviewBad.memberName} 님의 후기
 </div>
@@ -222,7 +222,7 @@ ${reviewBad.memberName} 님의 후기
 ${reviewBad.getReviewWriteTime()}
 </div>
 </span>
-<span style="font-size: 12px; font-weight: bold; margin-top: -30px;">
+<span class="summernote-font" style="font-size: 12px; font-weight: bold; margin-top: -30px;">
 ${reviewBad.getReviewContent()}
 <hr>
 </span>

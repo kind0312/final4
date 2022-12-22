@@ -87,7 +87,7 @@
 						내용
 					</label>
 					<div class="input-group mt-3">
-						<textarea id="review-content" name="reviewContent" class="form-control rounded"></textarea>
+						<textarea id="review-content" name="reviewContent" class="form-control rounded summernote-font"></textarea>
 						<div class="valid-feedback"></div>
 	                    <div class="invalid-feedback"></div>
 					</div>
@@ -135,9 +135,10 @@ $(function(){
 // 		width:600,
 		width:"100%",
 		height: 250, // 높이
-           minHeight: 250, // 최소 높이
-           placeholder:"후기를 작성해주세요", // 도움말
-           lang:"ko-KR", // 언어설정
+        minHeight: 250, // 최소 높이
+        placeholder:"후기를 작성해주세요", // 도움말
+        lang:"ko-KR", // 언어설정
+        fontFamily:"Noto Sans KR",
        });
 	
 	$(".note-icon-bar").hide();

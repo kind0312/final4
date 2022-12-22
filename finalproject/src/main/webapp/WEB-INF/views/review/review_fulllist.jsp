@@ -49,13 +49,13 @@
 									<img class="col-xl-1 offset-xl-0 col-lg-1 offset-lg-0 col-md-4 offset-md-0 col-sm-4 offset-sm-0 mt-4" src="${pageContext.request.contextPath}/download/${reviewDto.filesNo}" style="width:100px; height: 85px; border-radius: 70%;">
 									<div class="col-xl-8 offset-xl-0 col-lg-8 offset-lg-0 col-md-8 offset-md-0 col-sm-8 offset-sm-0 mt-4">
 
-									<h3 class="text-dark" style="word-break:break-word;">${reviewDto.reviewTitle}</h3>
+									<h4 class="text-dark mb-4" style="word-break:break-word;">${reviewDto.reviewTitle}</h4>
 										<div class="row">
 											<div class="col">
 												<div class="star-score" data-max="5" data-rate="${reviewDto.reviewGood}"></div>
 											</div>
 										</div>
-										<div class="row mt-3 mb-4">
+										<div class="row mt-1 mb-4">
 											<div class="col">
 												<h5 class="text-primary">${reviewDto.memberId}</h5>
 											</div>
@@ -182,21 +182,38 @@
 					success:function(resp){
 	// 					console.log(resp.length);
 						for(var i = 0; i < resp.length; i++){
-							$(".list").append($("<div>").attr("class","col-xl-5 offset-xl-1 col-lg-5 offset-lg-1 col-md-10 offset-md-1 col-sm-10 offset-sm-1 mt-4 reviewborder")
-									.append($("<a>").attr("href","${pageContext.request.contextPath}/review/fulldetail?reviewNo="+resp[i].reviewNo)
-											.append($("<div>").attr("class","row")
-													.append($("<img>").attr("class","col-xl-1 offset-xl-0 col-lg-1 offset-lg-0 col-md-4 offset-md-0 col-sm-4 offset-sm-0 mt-4")
-													.attr("src","${pageContext.request.contextPath}/download/"+resp[i].filesNo)
-													.attr("style","width:100px; height: 85px; border-radius: 70%;"))
-														.append($("<div>").attr("class","col-xl-8 offset-xl-0 col-lg-8 offset-lg-0 col-md-8 offset-md-0 col-sm-8 offset-sm-0 mt-4")
-																.append($("<h3>").attr("class","text-dark").attr("style","word-break:break-word;").append(resp[i].reviewTitle))
-																			.append($("<div>").attr("class","row")
-																					.append($("<div>").attr("class","col")
-																							.append($("<div>").attr("class","star-score").attr("data-max","5").attr("data-rate",resp[i].reviewGood))))
-																							.append($("<div>").attr("class","row mt-3 mb-4")
-																									.append($("<div>").attr("class","col")
-																											.append($("<h5>").attr("class","text-primary").append(resp[i].memberId))))))));
+							var div = $("<div>").attr("class","col-xl-5 offset-xl-1 col-lg-5 offset-lg-1 col-md-10 offset-md-1 col-sm-10 offset-sm-1 mt-4 reviewborder")
+							.append($("<a>").attr("href","${pageContext.request.contextPath}/review/fulldetail?reviewNo="+resp[i].reviewNo)
+									.append($("<div>").attr("class","row")
+											.append($("<img>").attr("class","col-xl-1 offset-xl-0 col-lg-1 offset-lg-0 col-md-4 offset-md-0 col-sm-4 offset-sm-0 mt-4")
+											.attr("src","${pageContext.request.contextPath}/download/"+resp[i].filesNo)
+											.attr("style","width:100px; height: 85px; border-radius: 70%;"))
+												.append($("<div>").attr("class","col-xl-8 offset-xl-0 col-lg-8 offset-lg-0 col-md-8 offset-md-0 col-sm-8 offset-sm-0 mt-4")
+														.append($("<h4>").attr("class","text-dark mb-4").attr("style","word-break:break-word;").append(resp[i].reviewTitle))
+																	.append($("<div>").attr("class","row")
+																			.append($("<div>").attr("class","col")
+																					.append($("<div>").attr("class","star-score").attr("data-max","5").attr("data-rate",resp[i].reviewGood))))
+																					.append($("<div>").attr("class","row mt-1 mb-4")
+																							.append($("<div>").attr("class","col")
+																									.append($("<h5>").attr("class","text-primary").append(resp[i].memberId)))))));
+							$(".list").append(div);
 	// 						console.log(resp[i]);
+							div.find(".star-score").score({
+								starColor: "#81BDF1",
+				                backgroundColor: "transparent", //배경 색상
+				                editable: false, //점수 변경 가능 여부
+				                integerOnly: false, //정수만 설정 가능 여부(false면 소수점 가능)
+				                zeroAvailable:true,//0 설정 가능 여부
+				                display: {
+				                    showNumber: true, //설정된 숫자 표시 가능 여부(false면 숫자 off, true면 숫자 on)
+				                    placeLimit: 1, //소수점 자리수 표시 길이
+				                    textColor:"#81BDF1",
+				                },
+				                point: {
+				                    max: 5,//최대 점수(data-max로 대체 가능)
+				                    rate: 0,//실제 점수(data-rate로 대체 가능)
+				                }
+							});
 						}
 					}
 				});
