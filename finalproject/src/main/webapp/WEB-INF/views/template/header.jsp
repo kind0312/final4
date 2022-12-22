@@ -311,6 +311,18 @@
             font-size:16px;
          }
          
+         .summernote-font {
+         	font-family: 'Noto Sans KR' !important;
+         	font-size: 15px !important;
+         	font-weight: 300 !important;
+         }
+         .summernote-font > p,
+         .summernote-font > p > span {
+         	font-family: 'Noto Sans KR' !important;
+         	font-size: 15px !important;
+         	font-weight: 300 !important;
+         }
+         
       </style>
       
       <!--Start of Tawk.to Script-->

@@ -42,7 +42,7 @@
 									</div>
 									<div class="row mt-3 mb-4">
 										<div class="col" style="word-break:break-all;">
-											<div>${reviewDto.reviewContent}</div>
+											<div class="summernote-font">${reviewDto.reviewContent}</div>
 										</div>
 									</div>
 								</div>

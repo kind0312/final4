@@ -91,7 +91,7 @@
 					</label>
 					<div class="input-group mt-3">
 <!-- 	 					<div class="rounded" style="word-break:break-all;"> -->
-							<textarea id="review-content" name="reviewContent" class="form-control rounded" readonly>
+							<textarea id="review-content" name="reviewContent" class="form-control rounded summernote-font" readonly>
 								${reviewDto.reviewContent}
 							</textarea>
 <!-- 						</div> -->
