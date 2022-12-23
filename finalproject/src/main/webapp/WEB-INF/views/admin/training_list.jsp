@@ -67,7 +67,7 @@
 							<td>${trainingUsageVO.memberName }</td>
 							<td>${trainingUsageVO.trainingStatus}</td>
 							<td> <a class="btn btn-blue2"
-		                            href="training_detail?trainingNo=${trainingUsageVO.trainingNo}">상세 </td>
+		                            href="${pageContext.request.contextPath}/admin/training_detail?trainingNo=${trainingUsageVO.trainingNo}">상세 </td>
 						</tr>
 						</c:forEach>
 			    		</tbody>
