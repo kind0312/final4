@@ -89,7 +89,7 @@
 <td>
 
 	<a class="btn btn-blue2"
-		href="${pageContext.request.contextPath}/memberDetail?memberId=${memberDto.memberId}">상세</a>
+		href="${pageContext.request.contextPath}/admin/memberDetail?memberId=${memberDto.memberId}">상세</a>
 </td>
 </tr>
 </c:forEach>
