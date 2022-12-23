@@ -287,9 +287,6 @@
 			var birth=$("[name=petBirth]").val();
 			var weight=$("[name=petWeight]").val();
 			var neutralization=$("[name=petNeutralization]:checked").val();
-			console.log(type);
-			console.log(gender);
-			console.log(neutralization);
 			
 			//data에 묶음
 			data={
@@ -334,7 +331,6 @@
 				method:"get",
 				data:memberId,
 				success:function(resp){
-					console.log(resp);
 					if(resp=='N'){
 						$("#change-modal").modal('show');
 					}else if(resp=='Y'){
@@ -374,7 +370,6 @@
 				dataType:"json",
 				data:petNo,
 				success:function(resp){
-					console.log(resp);
 					$("[name=petName]").val(resp.petName);
 					$("[name=petBreed]").val(resp.petBreed);
 					$("[name=petBirth]").val(resp.petBirth);

@@ -36,9 +36,6 @@
 		});
 		//프로필 파일 저장 및 미리보기
 		$(".input-file").change(function(){
-			//console.log($(".input-file").val()); //선택된 파일 경로와 이름이 나옴
-			//console.log(this.files); //선택한 파일들(배열)이 나옴
-			//console.log(this.files[0].name); //선택한 파일의 첫번째 값의 이름
 			var value = $(this).val();
 			if(value.length>0){ //파일 있음(비동기화로 파일 불러오기)
 				//서버에 전송할 formdate 만들기
@@ -53,7 +50,6 @@
 					processData:false, 
                     contentType:false,
                     success:function(resp){
-                    	//console.log(resp); //이미지 경로 반환
                     	$(".img-circle").attr("src",resp);
                     	var check = resp.lastIndexOf("/"); //경로에서 /위치 찾기
                     	var filesNo = resp.substr(check+1); //fileNo 꺼내기
@@ -168,7 +164,6 @@
 				method:"get",
 				data:memberId,
 				success:function(resp){
-					console.log(resp);
 					if(resp=='N'){
 						$("#change-modal").modal('show');
 					}else if(resp=='Y'){

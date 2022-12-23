@@ -186,6 +186,7 @@
 				$("[name=applyActive]:checked").prop("checked", false);
 				$(this).prop("checked", true);
 			}
+
 			if(active.is(":checked")){
                 validChecker.applyActiveValid = true;
             }
@@ -224,7 +225,6 @@
 		//흡연 여부
 		$("[name=applySmoke]").click(function(){
 			var check = $("[name=applySmoke]:checked").val();
-// 			console.log(check);
 			if(check){
                 validChecker.applySmokeValid = true;
                 $("#smokeYes").removeClass("is-valid is-invalid");
@@ -237,6 +237,7 @@
 	        e.preventDefault();
 	        
 	        emtpy();
+
 	        if(validChecker.isAllValid()){
 	        	this.submit();//전송
 	        }

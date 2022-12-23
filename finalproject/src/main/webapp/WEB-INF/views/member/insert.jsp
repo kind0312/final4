@@ -336,6 +336,7 @@
                 	var regex = validChecker.memberIdRegex;
                 	$("#memberIdCheck").attr("value", "y");
                 	$("#memberIdCheck").removeClass("is-valid is-invalid able disable").addClass("is-valid")
+
                     if(!memberId) return;
                     
                     if(regex.test(memberId) && memberId.length > 4){
@@ -492,7 +493,7 @@
 	
 	        profileCheck();
 	        idCheck();
-			
+
 	        if(validChecker.isAllValid()){
 	        	this.submit();//전송
 	        }
