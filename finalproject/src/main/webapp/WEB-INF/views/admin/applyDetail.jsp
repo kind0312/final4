@@ -45,7 +45,6 @@
 				method:"post",
 				data:email,
 				success:function(resp){
-					//console.log("메일 전송 완료");
 					$("#spinner").hide();
 					
 					//지원상태 반려로 변경

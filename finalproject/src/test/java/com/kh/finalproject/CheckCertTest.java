@@ -22,13 +22,9 @@ public class CheckCertTest {
 														.emailcertEmail(email)
 														.emailcertSerial(serial)
 													.build());
-		System.out.println(result);
+
 		if(result != null) {//인증 성공
-			System.out.println("인증 성공");
 			sqlSession.delete("emailcert.delete", email);
-		}
-		else {
-			System.out.println("인증 실패");
 		}
 	}
 }

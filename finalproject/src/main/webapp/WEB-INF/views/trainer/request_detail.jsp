@@ -66,13 +66,13 @@
 		
         <div class="row">
             <div class="col-md-6 offset-md-3">   
-            <table class="table table-default pet-table text-center" style="margin-bottom:0px;">
+            <table class="table  pet-table text-center" style="margin-bottom:0px;">
 				      <thead>
                 <c:forEach var="petList" items="${petList}">
                   <tr  class="table-default align-middle underline-out">
-                    <td rowspan="3"><img src="${pageContext.request.contextPath}/download/${petList.filesNo}" class="img-circle" width="100" height="100"></td>
+                    <td rowspan="3" class="align-middle"><img src="${pageContext.request.contextPath}/download/${petList.filesNo}" class="img-circle align-middle" width="100" height="100"></td>
                     <td >
-                    <p class="ps-sm-4 title" >${petList.petName} (${petList.petBirth }, ${petList.petGender})</p>
+                    <p class="ps-sm-4 title align-middle" >${petList.petName} (${petList.petBirth }, ${petList.petGender})</p>
                     </td>
                   </tr>
                   <tr  class="table-default align-middle underline-out">
@@ -122,7 +122,7 @@
 				      	style="background-color:white; font-size:16px;">${trainingDto.trainingMemo}</textarea>				      
 				    </div>			
 				  
-				    <p class="gender-font mt-3" style="font-size:16px; font-weight:bolder;">승인상태 : ${trainingDto.trainingStatus}</p>
+				<!--  <p class="gender-font mt-3" style="font-size:16px; font-weight:bolder;">승인상태 : ${trainingDto.trainingStatus}</p> -->   
 				  
 				    <div class="center mt-4">
               <button type="button" class="btn btn-blue" id="a-btn" >승인</button>	  

@@ -32,11 +32,9 @@ public class CreateCertTest {
 		//(1)
 		Random r = new Random();
 		int number = r.nextInt(1000000);
-		System.out.println("number = " + number);
 		
 		Format f = new DecimalFormat("000000");
 		String serial = f.format(number);
-		System.out.println("serial = " + serial);
 		
 		//(2)
 		SimpleMailMessage message = new SimpleMailMessage();

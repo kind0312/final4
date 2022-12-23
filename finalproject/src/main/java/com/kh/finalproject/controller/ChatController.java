@@ -74,6 +74,7 @@ public class ChatController {
 		String memberId = (String) session.getAttribute(SessionConstant.ID); //트레이너 아이디
 		model.addAttribute("sessionId", memberId); // 로그인 한 사람 id
 		
+				
 		List<ChatListVO> listTrainerVO = chatDao.chatRoomListTrainer(memberId); //아이디로 리스트 찾아오기(일반회원 기준)
 		
 		model.addAttribute("chatList", listTrainerVO);
@@ -148,6 +149,18 @@ public class ChatController {
 			ChatPartnerVO partner = chatDao.chatPartner(searchVO);		 
 			model.addAttribute("partner", partner);
 			
+			// 채팅방 들어갈때 상대 메시지 읽음 표시 update
+			String partnerId = partner.getMemberId(); //상대 아이디
+
+			//메소드 추가해야함 
+			ChatUpdateVO chatUpdateVO = ChatUpdateVO
+					.builder()
+						.memberId(partnerId)
+						.roomNo(roomNo)
+					.build();
+			
+			chatDao.chatUpdate(chatUpdateVO);
+			
 			return "chat/room_trainer";
 		}
 	
@@ -181,7 +194,6 @@ public class ChatController {
 										.build();
 		
 		String searchRoomNo = chatDao.searchRoomVO(vo);
-		System.out.println( " 룸 번호 " + searchRoomNo);
 		
 		//만약에 searchRoomNo가 null이 아니라면 방번호가 있는것 -> 해당 방으로 보내야함
 		//return "/chat/room/" + "searchRoomNo";
@@ -192,7 +204,6 @@ public class ChatController {
 		else {
 		
 		String seqNo = chatDao.createRoomSeq();  //채팅방 시퀀스번호 생성		
-		//System.out.println(seqNo);
 		
 		//채팅room 테이블에 생성된 테이블 정보 insert
 		chatDao.createRoom(roomDto.builder()
@@ -223,8 +234,6 @@ public class ChatController {
 				.chatMessage("안녕하세요! "+"훈련사 " + trainerDto.getMemberName() +"입니다." + " 문의사항이 있으시다면 남겨주세요.")				
 				.build()				
 				);	
-		
-		System.out.println("새로방만들기 성공");
 		return "redirect:/chat/room?roomNo="+seqNo;
 		}
 	}

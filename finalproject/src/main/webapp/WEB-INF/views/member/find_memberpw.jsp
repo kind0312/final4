@@ -138,7 +138,6 @@
 				data:{emailcertEmail:email},
 				success:function(resp){
 					//성공했다면 메일은 전송되었다고 볼 수 있다.
-					console.log("메일 전송 완료");
 					emailbtn.prop("disabled", false);
 					confirmbtn.prop("disabled", false);
 					
@@ -154,7 +153,6 @@
 								emailcertSerial:serial
 							},
 							success:function(resp){
-								console.log(resp);
 								if(resp){
 									$("[name=memberEmail]").attr("readonly", "readonly");
 									$("#confirm-input").attr("readonly", "readonly");
