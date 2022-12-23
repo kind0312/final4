@@ -324,7 +324,6 @@
 				method:"get",
 				data:memberId,
 				success:function(resp){
-					console.log(resp);
 					if(resp=='N'){
 						$("#change-modal").modal('show');
 					}else if(resp=='Y'){

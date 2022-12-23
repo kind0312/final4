@@ -308,60 +308,47 @@ $(function(){
         onSelect : function(date){
 //         	var select = $("#short-text-box").text(date);
         	var select = date.format('YYYY-MM-DD');
-//         	console.log(select);
         	var memberId = $("[name=memberId]").val();
-//         	console.log(memberId);
         	var trainerNo = $("[name=trainerNo]").val();
-//         	console.log(trainerNo);
         	var time = moment().format('HH');
         	var hour = parseInt(time);
         	$("[name=trainingDate]").attr("value", select);
         	var today = moment().format('YYYY-MM-DD');
-//         	console.log(today);
-        	console.log("현재 시각 : " + hour);
         	if(select == today){
-        		console.log("같은 날짜");
         		$("[name=trainingStartTime]").empty();
         		
         		if(time >= 18){
         			$("[name=trainingStartTime]").append($("<option>").text("현재 가능한 예약시간이 없습니다"));
         			check.time=false;
-        			console.log("가능 시간 : " + check.time);
         		}
         		else if(time < 9){
         			for(var i = 9; i <= 18; i++){
         				if(i == 9){
         					$("[name=trainingStartTime]").append($("<option>").attr("value", "0"+i+":00").text("0"+i+"시"));
     	            		check.time=true;
-    	        			console.log("가능 시간 : " + check.time);
     	        			i++;
         				}
     	        		$("[name=trainingStartTime]").append($("<option>").attr("value", i+":00").text(i+"시"));
 	            		check.time=true;
-	        			console.log("가능 시간 : " + check.time);
             		}
         		}
         		else{
         			for(var i = hour; i < 18; i++){
     	        		$("[name=trainingStartTime]").append($("<option>").attr("value", i+1+":00").text(i+1+"시"));
     	        		check.time=true;
-    	    			console.log("가능 시간 : " + check.time);
             		}
         		}
         	}
         	else{
-        		console.log("다른 날짜");
         		$("[name=trainingStartTime]").empty();
         		for(var i = 9; i <= 18; i++){
         			if(i == 9){
     					$("[name=trainingStartTime]").append($("<option>").attr("value", "0"+i+":00").text("0"+i+"시"));
 	            		check.time=true;
-	        			console.log("가능 시간 : " + check.time);
 	        			i++;
     				}
 	        		$("[name=trainingStartTime]").append($("<option>").attr("value", i+":00").text(i+"시"));
 	        		check.time=true;
-	    			console.log("가능 시간 : " + check.time);
         		}
         	}
         	
@@ -371,22 +358,16 @@ $(function(){
                 success:function(resp){
                     if(resp == "possible"){
                     	check.date=true;
-                    	console.log("선택 날짜 : " + check.date);
                     }
                     else if(resp == "impossible"){
                     	alert("이미 예약된 날짜입니다");
                     	check.date=false;
-                    	console.log("선택 날짜 : " + check.date);
                     }
                 }
             });
         	
         }
-    });
-     // 오늘 날짜 기본값으로 자동 선택
-//     picker1.setDate(moment());
-//     console.log(picker1);
-     
+    });     
 });
 
 $(function(){
@@ -401,7 +382,6 @@ $(function(){
 	      var cnt = 0;
 	      $("[name=trainingDetailPetName]").each(function(){
 	         //체크여부에 따라 ture/false 반환
-	         //console.log($(this).prop("checked"));  
 	         if($(this).prop("checked")){
 	            cnt++; // 체크되어있으면 cnt추가
 	         }
@@ -504,10 +484,6 @@ $(function(){
 		petSelectCheck();
 		pointCheck();
 		
-		console.log("체크박스 :" + check.checkbox);
-		console.log("포인트 :" + check.point);
-		console.log("시간 :" + check.time);
-		console.log("날짜 :" + check.date);
 		//폼 체크가 전부 true이면 전송하기
 		if(check.allValid()){
 			this.submit();

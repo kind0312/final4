@@ -57,7 +57,6 @@
 					processData:false, 
                     contentType:false,
                     success:function(resp){
-                    	//console.log(resp); //이미지 경로 반환
                     	$(".img-circle").attr("src",resp);
                     	var check = resp.lastIndexOf("/"); //경로에서 /위치 찾기
                     	var filesNo = resp.substr(check+1); //fileNo 꺼내기

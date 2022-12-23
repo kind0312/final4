@@ -161,8 +161,6 @@
 	
 	//             퍼센트 = (현재스크롤위치) / (문서높이 - 창높이) * 100
 	//             var percent = $(window).scrollTop() / ($(document).height() - $(window).height()) * 100;
-	//             console.log(percent);
-					console.log(page > (count + size - 1) / size);
 	            
 				if($(document).height() <= $(window).scrollTop() + $(window).height() + 100){
 		            if(page > (count + size - 1) / size) return;
@@ -180,7 +178,6 @@
 						
 					},
 					success:function(resp){
-	// 					console.log(resp.length);
 						for(var i = 0; i < resp.length; i++){
 							var div = $("<div>").attr("class","col-xl-5 offset-xl-1 col-lg-5 offset-lg-1 col-md-10 offset-md-1 col-sm-10 offset-sm-1 mt-4 reviewborder")
 							.append($("<a>").attr("href","${pageContext.request.contextPath}/review/fulldetail?reviewNo="+resp[i].reviewNo)
@@ -197,7 +194,6 @@
 																							.append($("<div>").attr("class","col")
 																									.append($("<h5>").attr("class","text-primary").append(resp[i].memberId)))))));
 							$(".list").append(div);
-	// 						console.log(resp[i]);
 							div.find(".star-score").score({
 								starColor: "#81BDF1",
 				                backgroundColor: "transparent", //배경 색상
