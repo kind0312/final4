@@ -186,8 +186,6 @@
 				$("[name=applyActive]:checked").prop("checked", false);
 				$(this).prop("checked", true);
 			}
-			console.log(active.is(":checked"));
-			console.log(count);
 			if(active.is(":checked")){
                 validChecker.applyActiveValid = true;
             }
@@ -216,11 +214,9 @@
 		
 		function emtpy() {
             if ($("[name=applyMotive]").summernote('isEmpty')) {
-                console.log("비어있음");
                 validChecker.applyMotiveValid = false;
             }
             else{
-            	console.log("내용있음");
             	validChecker.applyMotiveValid = true;
             }
         }
@@ -241,9 +237,6 @@
 	        e.preventDefault();
 	        
 	        emtpy();
-			console.log(validChecker.applyActiveValid);
-			console.log(validChecker.applyMotiveValid);
-			console.log(validChecker.applySmokeValid);
 	        if(validChecker.isAllValid()){
 	        	this.submit();//전송
 	        }
