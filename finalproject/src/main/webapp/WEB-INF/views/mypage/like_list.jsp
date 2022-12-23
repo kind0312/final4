@@ -62,11 +62,10 @@ margin-right: auto;
 			//3. n을 반환할 경우 훈련사 전환이 불가능한 회원입니다. 라는 문구 모달로 출력
 			var memberId = $("[name=memberId]").val();
 			$.ajax({
-				url:"http://localhost:8888/rest/member/trainer_change/"+memberId,
+				url:"${pageContext.request.contextPath}/rest/member/trainer_change/"+memberId,
 				method:"get",
 				data:memberId,
 				success:function(resp){
-					console.log(resp);
 					if(resp=='N'){
 						$("#change-modal").modal('show');
 					}else if(resp=='Y'){
@@ -156,7 +155,7 @@ margin-right: auto;
 	                 					<p class="gender-font">${like.trainerProfile}</p>
 	                 				</th>
 	                 				<th width="30%">
-	                 					<a href="/trainer/detail?trainerNo=${like.trainerNo}" class="btn btn-blue">상세</a>
+	                 					<a href="${pageContext.request.contextPath}/trainer/detail?trainerNo=${like.trainerNo}" class="btn btn-blue">상세</a>
 	                 				</th>
                  				</tr>
 		                	</c:forEach>

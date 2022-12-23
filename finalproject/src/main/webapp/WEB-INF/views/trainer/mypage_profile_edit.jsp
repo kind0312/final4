@@ -50,14 +50,13 @@
 				formData.append("files", this.files[0]);
                 
 				$.ajax({
-					url:"http://localhost:8888/upload",
+					url:"${pageContext.request.contextPath}/upload",
 					method:"post",
 					data:formData,
 					//multipart 요청을 위해 아래 2가지 꼭 보내줘야함
 					processData:false, 
                     contentType:false,
                     success:function(resp){
-                    	//console.log(resp); //이미지 경로 반환
                     	$(".img-circle").attr("src",resp);
                     	var check = resp.lastIndexOf("/"); //경로에서 /위치 찾기
                     	var filesNo = resp.substr(check+1); //fileNo 꺼내기

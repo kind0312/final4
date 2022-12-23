@@ -151,8 +151,7 @@ public class ChatController {
 			
 			// 채팅방 들어갈때 상대 메시지 읽음 표시 update
 			String partnerId = partner.getMemberId(); //상대 아이디
-			
-			System.out.println( "파트너 id :" + partnerId);
+
 			//메소드 추가해야함 
 			ChatUpdateVO chatUpdateVO = ChatUpdateVO
 					.builder()
@@ -161,8 +160,6 @@ public class ChatController {
 					.build();
 			
 			chatDao.chatUpdate(chatUpdateVO);
-			
-			
 			
 			return "chat/room_trainer";
 		}
@@ -197,7 +194,6 @@ public class ChatController {
 										.build();
 		
 		String searchRoomNo = chatDao.searchRoomVO(vo);
-		System.out.println( " 룸 번호 " + searchRoomNo);
 		
 		//만약에 searchRoomNo가 null이 아니라면 방번호가 있는것 -> 해당 방으로 보내야함
 		//return "/chat/room/" + "searchRoomNo";
@@ -208,7 +204,6 @@ public class ChatController {
 		else {
 		
 		String seqNo = chatDao.createRoomSeq();  //채팅방 시퀀스번호 생성		
-		//System.out.println(seqNo);
 		
 		//채팅room 테이블에 생성된 테이블 정보 insert
 		chatDao.createRoom(roomDto.builder()
@@ -239,8 +234,6 @@ public class ChatController {
 				.chatMessage("안녕하세요! "+"훈련사 " + trainerDto.getMemberName() +"입니다." + " 문의사항이 있으시다면 남겨주세요.")				
 				.build()				
 				);	
-		
-		System.out.println("새로방만들기 성공");
 		return "redirect:/chat/room?roomNo="+seqNo;
 		}
 	}

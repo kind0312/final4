@@ -206,7 +206,6 @@ public class AdminController {
 	public String applyDetail(
 			@ModelAttribute TrainerDto dto,RedirectAttributes attr) {
 		//훈련사 테이블 insert
-		System.out.println(dto);
 		TrainerDto trainerDto = TrainerDto.builder()
 				.memberId(dto.getMemberId())
 				.applyNo(dto.getApplyNo())

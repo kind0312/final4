@@ -27,22 +27,6 @@ public class MemberDetailTest {
 		param.put("type",List.of("신청","승인","반려"));
 		List<ApplyDto> list=sqlSession.selectList("apply.list",param);
 		
-		for(ApplyDto dto:list) {
-			System.out.println(dto);
-		}
 	}
-
-	
-//	
-//	@Test
-//	public void test() {
-//		String memberId="test1231";
-//		MemberDto memberDto=sqlSession.selectOne("member.one",memberId);
-//		System.out.println(memberDto);
-//	}
-//	
-	
-	
-
 
 }

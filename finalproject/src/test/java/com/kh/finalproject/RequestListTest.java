@@ -18,6 +18,5 @@ public class RequestListTest {
 		//파라미터 int로 숫자를 받는 단일 조회
 		int trainerNo = 1;
 		TrainingDto dto = sqlSession.selectOne("training.trainingRequestList", trainerNo);
-		System.out.println(dto);
 	}
 }

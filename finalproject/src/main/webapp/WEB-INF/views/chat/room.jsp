@@ -176,7 +176,7 @@
 						<img src="${pageContext.request.contextPath}/image/return-btn.png"
 	            			width="36" height="36">
 	            	</a>
-	            	<h2 style="display:inline-block; margin-left:auto; margin-right:auto;">${partner.memberName} 펫시터</h2>
+	            	<h2 style="display:inline-block; margin-left:auto; margin-right:auto;">${partner.memberName} 훈련사</h2>
 	        	</div>
             </div>
             <hr>
@@ -263,7 +263,6 @@ $(function(){
 	
 	//(+추가) 웹소켓이 연결되었는지 종료되었는지 어떻게 아나?
 	// - 웹소켓 객체가 기본 제공하는 4가지 이벤트를 설정해서 처리
-	//console.log(socket);
 	socket.onopen = function(){
 		//접속하자마자 서버로 입장메세지를 보냄
 		var data = {
@@ -274,16 +273,14 @@ $(function(){
 	};
 	
 	socket.onclose = function(){
-		//console.log("close");
+
 	};
 	socket.onerror = function(){
-		//console.log("error");
+
 	};
 	socket.onmessage = function(e){
 		//수신된 e.data는 JSON 문자열
 		var data = JSON.parse(e.data);
-		console.log(data);  
-		
 	
 		var imgNo = data.filesNo; //이미지 파일 번호 
 		var p = $("<p>").addClass("chat-message");		

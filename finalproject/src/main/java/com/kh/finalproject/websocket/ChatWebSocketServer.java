@@ -78,7 +78,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 									.session(session)
 									.build();
 			waitingRoom.enter(user);
-			log.debug("대기실 입장 - 현재 {}명", waitingRoom.size());
+			//log.debug("대기실 입장 - 현재 {}명", waitingRoom.size());
 			
 			
 			}
@@ -96,7 +96,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 									.build();
 			waitingRoom.leave(user);//대기실에서 사용자 삭제
 			channel.exit(user);//채널에서 사용자 삭제
-			log.debug("사용자 퇴장 - {}", user.getMemberId());
+			//log.debug("사용자 퇴장 - {}", user.getMemberId());
 		}
 		
 		@Override
@@ -122,7 +122,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 			ObjectMapper mapper = new ObjectMapper();
 			ReceiveVO receiveVO = mapper.readValue(  
 									message.getPayload(), ReceiveVO.class);
-			log.debug("receiveVO = {}", receiveVO);
+			//log.debug("receiveVO = {}", receiveVO);
 			
 			if(receiveVO.getType() == 1) {
 				//사용자가 입장하려고 하는 경우(방이름을 사용자가 보냄)
@@ -130,7 +130,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 				waitingRoom.leave(user);
 				//- 해당하는 방에 사용자(user)를 입장시킨다
 				channel.join(user, receiveVO.getRoom());
-				log.debug("{} 방에 {} 입장", receiveVO.getRoom(), user.getMemberId());
+				//log.debug("{} 방에 {} 입장", receiveVO.getRoom(), user.getMemberId());
 			}
 			else if(receiveVO.getType() == 2) {
 				//사용자가 채팅을 보내는 경우(채팅내용을 사용자가 보냄)
@@ -166,7 +166,6 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 				ChatUpdateVO vo = ChatUpdateVO.builder().memberId(user.getMemberId()).roomNo(receiveVO.getRoom()).build();		
 				// 상대방 아이디 찾기
 				String partnerId = chatDao.searchPartnerId(vo);
-				//System.out.println("파트너 아이디 :" + partnerId);
 							
 				//메세지를 전송과 동시에 이전 메세지를 다 읽음으로 update 				
 				ChatUpdateVO chatUpdateVO = ChatUpdateVO
@@ -176,7 +175,6 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 						.build();
 				chatDao.chatUpdate(chatUpdateVO);				
 				
-				//System.out.println("채팅Dto " + chatDto); 
 				//chatNo는 실시간 소켓에서는 없음 디비 들어갈때 생성 
 				// roomNo는 가져올수있을거같은데 ...-> 가져왔음 Dto에 들어온다
 				

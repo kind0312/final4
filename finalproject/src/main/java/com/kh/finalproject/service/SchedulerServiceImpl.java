@@ -16,7 +16,6 @@ public class SchedulerServiceImpl implements SchedulerService {
 	@Scheduled(cron = "0 0 * * * *")
 	@Override
 	public void clearCert() {
-//		System.out.println(LocalDateTime.now());
 		emailcertDao.clear();
 	}
 }
