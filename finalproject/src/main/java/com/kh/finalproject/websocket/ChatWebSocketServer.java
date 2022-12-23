@@ -78,7 +78,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 									.session(session)
 									.build();
 			waitingRoom.enter(user);
-			log.debug("대기실 입장 - 현재 {}명", waitingRoom.size());
+			//log.debug("대기실 입장 - 현재 {}명", waitingRoom.size());
 			
 			
 			}
@@ -96,7 +96,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 									.build();
 			waitingRoom.leave(user);//대기실에서 사용자 삭제
 			channel.exit(user);//채널에서 사용자 삭제
-			log.debug("사용자 퇴장 - {}", user.getMemberId());
+			//log.debug("사용자 퇴장 - {}", user.getMemberId());
 		}
 		
 		@Override
@@ -122,7 +122,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 			ObjectMapper mapper = new ObjectMapper();
 			ReceiveVO receiveVO = mapper.readValue(  
 									message.getPayload(), ReceiveVO.class);
-			log.debug("receiveVO = {}", receiveVO);
+			//log.debug("receiveVO = {}", receiveVO);
 			
 			if(receiveVO.getType() == 1) {
 				//사용자가 입장하려고 하는 경우(방이름을 사용자가 보냄)
@@ -130,7 +130,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 				waitingRoom.leave(user);
 				//- 해당하는 방에 사용자(user)를 입장시킨다
 				channel.join(user, receiveVO.getRoom());
-				log.debug("{} 방에 {} 입장", receiveVO.getRoom(), user.getMemberId());
+				//log.debug("{} 방에 {} 입장", receiveVO.getRoom(), user.getMemberId());
 			}
 			else if(receiveVO.getType() == 2) {
 				//사용자가 채팅을 보내는 경우(채팅내용을 사용자가 보냄)

@@ -184,7 +184,7 @@ $(document).ready(function(){
 	                 				</th>
 	                 				<th width="40%">
 	                 					
-	                 					<p class="name-font titleName">${chatList.memberName} 훈련사 <img class ="newMessage"  src="/image/circle.png"  style="width: 10px;height: 10px;margin-bottom: 8px;"></p>
+	                 					<p class="name-font titleName">${chatList.memberName} 훈련사 <img class ="newMessage"  src="${pageContext.request.contextPath}/image/circle.png"  style="width: 10px;height: 10px;margin-bottom: 8px;"></p>
 	                 					
 	                 					
 	                 					<p class="gender-font mess">${chatList.chatMessage}</p>

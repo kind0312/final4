@@ -176,7 +176,7 @@
 						<img src="${pageContext.request.contextPath}/image/return-btn.png"
 	            			width="36" height="36">
 	            	</a>
-	            	<h2 style="display:inline-block; margin-left:auto; margin-right:auto;">${partner.memberName} 펫시터</h2>
+	            	<h2 style="display:inline-block; margin-left:auto; margin-right:auto;">${partner.memberName} 훈련사</h2>
 	        	</div>
             </div>
             <hr>
