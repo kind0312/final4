@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.kh.finalproject.configuration.KakaoPayCofigurationProperties;
 import com.kh.finalproject.vo.PayApproveRequestVO;
@@ -40,6 +41,13 @@ public class PayServiceImpl implements PayService{
 		headers.add("Authorization", "KakaoAK "+kakaoPayCofigurationProperties.getKey());
 		headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 		
+		String approval_url = ServletUriComponentsBuilder.fromCurrentContextPath()
+				.path("/pay/success").toUriString();
+		String cancel_url = ServletUriComponentsBuilder.fromCurrentContextPath()
+				.path("/pay/point_pay_cancel").toUriString();
+		String fail_url = ServletUriComponentsBuilder.fromCurrentContextPath()
+				.path("/pay/point_pay_fail").toUriString();
+		
 		//바디 설정
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
 		body.add("cid",kakaoPayCofigurationProperties.getCid()); //가맹점번호(테스트용)
@@ -49,9 +57,9 @@ public class PayServiceImpl implements PayService{
 		body.add("quantity", "1"); //상품수량
 		body.add("total_amount", String.valueOf(vo.getTotal_amount())); //구매금액
 		body.add("tax_free_amount", "0"); //비과세(0원)
-		body.add("approval_url", "http://localhost:8888/pay/success"); //성공시 실행될 주소
-		body.add("cancel_url", "http://localhost:8888/pay/point_pay_cancel"); //취소 시 실행될 주소
-		body.add("fail_url", "http://localhost:8888/pay/point_pay_fail"); //실패 시 실행될 주소
+		body.add("approval_url", approval_url); //성공시 실행될 주소
+		body.add("cancel_url", cancel_url); //취소 시 실행될 주소
+		body.add("fail_url", fail_url); //실패 시 실행될 주소
 		
 		//보낼 내용 합체
 		HttpEntity<MultiValueMap<String, String>> entity = 

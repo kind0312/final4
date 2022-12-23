@@ -170,7 +170,7 @@ margin-bottom: 10px;
 		
 			<div style="width:1000px; margin:0px auto; margin-top:130px;">
 				<div>
-					<h1>훈련사를 소개합니다!<img src="/image/trainer.png" class="timg"></h1>
+					<h1>훈련사를 소개합니다!<img src="${pageContext.request.contextPath}/image/trainer.png" class="timg"></h1>
 					<p class="mt-4" style="font-size:15px; colof:#4D5055;">
 						나와 우리 반려견에 꼭 맞는 훈련사를 찾아보세요!
 		            </p>
@@ -196,7 +196,7 @@ margin-bottom: 10px;
 		                 		</div>
 		                 		<a class="box-content" href="${pageContext.request.contextPath}/trainer/detail?trainerNo=${list.trainerNo}">
 		                 			<div class="content-title">
-		                 				<h3 class="name-font">${list.memberName} 훈련사<img src="/image/whistle.png" class="wimg"></h3>
+		                 				<h3 class="name-font">${list.memberName} 훈련사<img src="${pageContext.request.contextPath}/image/whistle.png" class="wimg"></h3>
 		                 			</div>
 		                 			<div style="display:flex; justify-content:space-between; width:100%;height:100%;">
 		                 				<h4 class="title-font mt-3">${list.trainerProfile}</h4>
@@ -226,7 +226,7 @@ margin-bottom: 10px;
 		                 		</div>
 		                 		<a class="box-content" href="${pageContext.request.contextPath}/trainer/detail?trainerNo=${list.trainerNo}">
 		                 			<div class="content-title">
-		                 				<h3 class="name-font">${list.memberName} 훈련사<img src="/image/whistle.png" class="wimg"></h3>
+		                 				<h3 class="name-font">${list.memberName} 훈련사<img src="${pageContext.request.contextPath}/image/whistle.png" class="wimg"></h3>
 		                 			</div>	
 		                 			<div style="display:flex; justify-content:space-between; width:100%;height:100%;">
 		                 				<h4 class="title-font mt-3">${list.trainerProfile}</h4>

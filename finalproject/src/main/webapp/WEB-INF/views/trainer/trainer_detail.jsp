@@ -129,7 +129,7 @@ margin-right: auto;
     </style>
 <body>
     <div class="viewmore">    
-        <h2>훈련사를 소개합니다<img src="/image/trainer.png" class="timg"></h2>
+        <h2>훈련사를 소개합니다<img src="${pageContext.request.contextPath}/image/trainer.png" class="timg"></h2>
         <div class="content">
             <div class="box">
                 <div class="imgbox">
@@ -164,7 +164,7 @@ margin-right: auto;
 <br>
 <hr>
                 <div class="sitro">
-                    <h3>자기소개<img src="/image/documents.png" class="timg"></h3>
+                    <h3>자기소개<img src="${pageContext.request.contextPath}/image/documents.png" class="timg"></h3>
                     <span>
                        ${list.getTrainerProfileContent()}
                     </span>
@@ -172,7 +172,7 @@ margin-right: auto;
                 <hr>
 
                 <div class="cfcate ">
-                    <h3>후기 목록   <img src="/image/reviews.png" class="timg"></h3>
+                    <h3>후기 목록   <img src="${pageContext.request.contextPath}/image/reviews.png" class="timg"></h3>
                     <div class="text-end">
                  	<i class="fa-solid fa-arrow-up-9-1 fa-2xs ing-btn"></i><button class="training-btn ing-btn">평점 높은순</button>
                  	<i class="fa-solid fa-arrow-down-9-1 fa-2xs end-btn"></i><button class="training-btn end-btn">평점 낮은순</button>
@@ -180,7 +180,7 @@ margin-right: auto;
                  <c:choose>
                  <c:when test="${review.size()==0}">
                  <div class="row hoo mt-5" >
-                 후기가 아직 없어요!<img src="/image/sad.png" class="simg">
+                 후기가 아직 없어요!<img src="${pageContext.request.contextPath}/image/sad.png" class="simg">
                  </div>
                  </c:when>
                  <c:otherwise>
