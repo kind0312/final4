@@ -23,9 +23,9 @@
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 	
-	    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/reset.css">
 	    <!-- <link rel="stylesheet" type="text/css" href="/css/layout.css"> -->
-	    <link rel="stylesheet" type="text/css" href="/css/commons.css">
+	    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/commons.css">
 	
 	    <!-- 외곽 border 점선 -->
 <!-- 	    <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
@@ -342,11 +342,11 @@
 	          <div class="container-fluid">
 	
 	            <!-- Brand : 로고 이미지와 대표 상호를 적는 공간 -->
-	            <a class="navbar-brand" href="/">
+	            <a class="navbar-brand" href="${pageContext.request.contextPath}/">
                <span class="visually-hidden">(current)</span>
                   <img class="logo" src="${pageContext.request.contextPath}/image/logo.png">
                </a>
-               <a class="navbar-brand" href="/">
+               <a class="navbar-brand" href="${pageContext.request.contextPath}/">
                <span class="visually-hidden">(current)</span>
                   CarePet
                </a>

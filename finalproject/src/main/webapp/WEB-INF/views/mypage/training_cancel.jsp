@@ -229,7 +229,7 @@
 				</table>
 				
 				<!-- form 전송을 위한 값 준비 -->
-				<form action="/mypage/training_cancel" method="post">
+				<form action="${pageContext.request.contextPath}/mypage/training_cancel" method="post">
 					<div class="row mt-3">
 						<div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center mt-3">
 							<input type="hidden" name="trainingNo" value="${training[0].trainingNo}">  
