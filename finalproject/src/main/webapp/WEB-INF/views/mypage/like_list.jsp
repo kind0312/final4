@@ -149,7 +149,7 @@ margin-right: auto;
               				<c:forEach var="like" items="${like}">
                 				<tr class="table-default align-middle">
 	                 				<th width="30%">
-	                 					<img src="http://localhost:8888/download/${like.filesNo}" class="img-circle" width="100" height="100">
+	                 					<img src="${pageContext.request.contextPath}/download/${like.filesNo}" class="img-circle" width="100" height="100">
 	                 				</th>
 	                 				<th width="40%">
 	                 					<p class="name-font">${like.memberName}</p>

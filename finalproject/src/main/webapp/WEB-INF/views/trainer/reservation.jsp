@@ -578,7 +578,7 @@ $(function(){
 <div class="row">
 <c:forEach var="pet" items="${pet}">
 <div class="col basecol">
-<img src="http://localhost:8888/download/${pet.filesNo}" width="400" height="250" class="img0">
+<img src="${pageContext.request.contextPath}/download/${pet.filesNo}" width="400" height="250" class="img0">
 <p>${pet.petName}</p>
 <input type="checkbox" class ="petCheck" name="trainingDetailPetName" value="${pet.petName}">
 
