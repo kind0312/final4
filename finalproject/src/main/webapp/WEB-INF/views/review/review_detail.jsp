@@ -125,11 +125,9 @@ $(function(){
 	
 	function emtpy() {
 		if ($("[name=reviewContent]").summernote('isEmpty')) {
-			console.log("비어있음");
 			validChecker.applyMotiveValid = false;
 		}
 		else{
-			console.log("내용있음");
 			validChecker.applyMotiveValid = true;
 		}
      }
