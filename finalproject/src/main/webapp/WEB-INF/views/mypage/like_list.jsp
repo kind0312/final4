@@ -129,7 +129,7 @@ margin-right: auto;
 	<div class="container-fluid">
         <div class="row mt-80 mb-3">
             <div class="col-md-6 offset-md-3">
-                 <h4 class="text-center">찜한 훈련사<img src="/image/heart.png" class="himg"></h4>
+                 <h4 class="text-center">찜한 훈련사<img src="${pageContext.request.contextPath}/image/heart.png" class="himg"></h4>
             </div>
         </div>
         <div class="row">
@@ -138,7 +138,7 @@ margin-right: auto;
                  <c:when test="${like.size()==0}">
                  <div class="row mt-5 text-center">
 	                 <div class="col-md-6 offset-md-3">
-	                 찜한 훈련사가 아직 없어요! <img src="/image/sad.png" class="simg" style="width:30px">
+	                 찜한 훈련사가 아직 없어요! <img src="${pageContext.request.contextPath}/image/sad.png" class="simg" style="width:30px">
 	                 </div>
                  </div>
                  </c:when>

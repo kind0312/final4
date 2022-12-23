@@ -138,7 +138,7 @@ margin-left: 5px;
 	<div class="container-fluid">
         <div class="row mt-80">
             <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
-                 <h4 class="text-center">후기 작성 내역<img src="/image/reviewsmy.png" class="himg"></h4>
+                 <h4 class="text-center">후기 작성 내역<img src="${pageContext.request.contextPath}/image/reviewsmy.png" class="himg"></h4>
             </div>
         </div>
 
