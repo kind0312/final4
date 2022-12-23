@@ -85,7 +85,7 @@
 			var originFilesNo = $("#originFilesNo").val();
 			if(newFilesNo!=originFilesNo){
 				$.ajax({
-					url:"http://localhost:8888/delete/"+newFilesNo,
+					url:"${pageContext.request.contextPath}/delete/"+newFilesNo,
 					method:"delete",
 					data:newFilesNo,
 					success:function(resp){
@@ -112,7 +112,7 @@
 					var formData = new FormData();
 					formData.append("files", this.files[0]);
 					$.ajax({
-						url:"http://localhost:8888/upload",
+						url:"${pageContext.request.contextPath}/upload",
 						method:"post",
 						data:formData,
 						processData:false, 
@@ -279,7 +279,7 @@
 			
 			if(check.allValid()){//수정처리
 				$.ajax({
-					url:"http://localhost:8888/rest/member/profile_edit",
+					url:"${pageContext.request.contextPath}/rest/member/profile_edit",
 					method:"put",
 					async:false,
 					contentType:"application/json",
@@ -302,7 +302,7 @@
 		$(".goodbye-confirm").click(function(){
 			var memberId = $("[name=memberId]").val();
 			$.ajax({
-				url:"http://localhost:8888/rest/member/goodbye/"+memberId,
+				url:"${pageContext.request.contextPath}/rest/member/goodbye/"+memberId,
 				method:"put",
 				data:memberId,
 				success:function(resp){
@@ -320,7 +320,7 @@
 			//3. n을 반환할 경우 훈련사 전환이 불가능한 회원입니다. 라는 문구 모달로 출력
 			var memberId = $("[name=memberId]").val();
 			$.ajax({
-				url:"http://localhost:8888/rest/member/trainer_change/"+memberId,
+				url:"${pageContext.request.contextPath}/rest/member/trainer_change/"+memberId,
 				method:"get",
 				data:memberId,
 				success:function(resp){
@@ -395,7 +395,7 @@
 
 		<div class="row text-center mt-4">
             <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2">   
-                 <img src="http://localhost:8888/download/${filesNo}" width="120" height="120" class="img-circle">
+                 <img src="${pageContext.request.contextPath}/download/${filesNo}" width="120" height="120" class="img-circle">
                  <input type="file" style="display:none;" class="input-file form-control" name="memberImg" accept=".jpg, .png, .gif">
 			</div>
 		</div>

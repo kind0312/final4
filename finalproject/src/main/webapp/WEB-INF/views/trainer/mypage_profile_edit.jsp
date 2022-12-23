@@ -50,7 +50,7 @@
 				formData.append("files", this.files[0]);
                 
 				$.ajax({
-					url:"http://localhost:8888/upload",
+					url:"${pageContext.request.contextPath}/upload",
 					method:"post",
 					data:formData,
 					//multipart 요청을 위해 아래 2가지 꼭 보내줘야함

@@ -79,7 +79,7 @@
 		//3. n을 반환할 경우 훈련사 전환이 불가능한 회원입니다. 라는 문구 모달로 출력
 		var memberId = $("[name=memberId]").val();
 		$.ajax({
-			url:"http://localhost:8888/rest/member/trainer_change/"+memberId,
+			url:"${pageContext.request.contextPath}/rest/member/trainer_change/"+memberId,
 			method:"get",
 			data:memberId,
 			success:function(resp){
@@ -173,7 +173,7 @@
                  		<c:forEach var="ingList" items="${ingList}">
                  			<tr class="table-default align-middle">
 	                 			<td width="30%">
-	                 				<img src="http://localhost:8888/download/${ingList.filesNo}" class="img-circle" width="100" height="100">
+	                 				<img src="${pageContext.request.contextPath}/download/${ingList.filesNo}" class="img-circle" width="100" height="100">
 	                 			</td>
 	                 			<td width="40%">
 	                 				<fmt:formatDate value="${ingList.trainingDate}" pattern="yyyy-MM-dd (E)"/> ${ingList.trainingStartTime}
@@ -214,7 +214,7 @@
                  		<c:forEach var="endList" items="${endList}">
                  			<tr class="table-default align-middle">
 	                 			<td width="30%">
-	                 				<img src="http://localhost:8888/download/${endList.filesNo}" class="img-circle" width="100" height="100">
+	                 				<img src="${pageContext.request.contextPath}/download/${endList.filesNo}" class="img-circle" width="100" height="100">
 	                 			</td>
 	                 			<td width="40%">
 	                 				<fmt:formatDate value="${endList.trainingDate}" pattern="yyyy-MM-dd (E)"/>  ${endList.trainingStartTime}
