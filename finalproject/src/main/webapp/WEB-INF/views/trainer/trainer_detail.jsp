@@ -133,7 +133,7 @@ margin-right: auto;
         <div class="content">
             <div class="box">
                 <div class="imgbox">
-                    <img src="http://localhost:8888/download/${list.filesNo}" class="img0">
+                    <img src="${pageContext.request.contextPath}/download/${list.filesNo}" class="img0">
                 </div>
                 <div class="textbox">
                     <h3>${list.getTrainerProfile()}</h3>

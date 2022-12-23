@@ -43,7 +43,7 @@
 				formData.append("files", this.files[0]);
                 
 				$.ajax({
-					url:"http://localhost:8888/upload",
+					url:"${pageContext.request.contextPath}/upload",
 					method:"post",
 					data:formData,
 					//multipart 요청을 위해 아래 2가지 꼭 보내줘야함
@@ -160,7 +160,7 @@
 			//3. n을 반환할 경우 훈련사 전환이 불가능한 회원입니다. 라는 문구 모달로 출력
 			var memberId = $("[name=memberId]").val();
 			$.ajax({
-				url:"http://localhost:8888/rest/member/trainer_change/"+memberId,
+				url:"${pageContext.request.contextPath}/rest/member/trainer_change/"+memberId,
 				method:"get",
 				data:memberId,
 				success:function(resp){
