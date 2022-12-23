@@ -17,7 +17,7 @@
 	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 	      <span class="navbar-toggler-icon"></span>
 	    </button>
-	    <div class="collapse navbar-collapse justify-content-end" id="navbarColor01">
+	    <div class="collapse navbar-collapse justify-content-end" id="navbarColor01">                                                    
 	      <ul class="navbar-nav me-0">
 	        <li class="nav-item">
 	          <a class="nav-link mypage-nav"  href="${pageContext.request.contextPath}/admin/memberList">일반회원관리</a>
@@ -46,10 +46,4 @@
 	
 	
 	</div>
-	
-
-
-
-	
-
     </div>

@@ -20,7 +20,7 @@
 		</div>
 		<div class="row mt-50 mb-5">
 			<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 text-center">
-				<a href="/admin/applyList" class="btn btn-blue btn-md">목록으로</a><br>
+				<a href="${pageContext.request.contextPath}/admin/applyList" class="btn btn-blue btn-md">목록으로</a><br>
 			</div>
 		</div>
 

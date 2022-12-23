@@ -81,7 +81,7 @@
 <td>
 
 	<a class="btn btn-blue2"
-		href="trainerDetail?memberId=${trainerListVO.memberId}">상세</a>
+		href="${pageContext.request.contextPath}/admin/trainerDetail?memberId=${trainerListVO.memberId}">상세</a>
 </td>
 </tr>
 </c:forEach>
@@ -94,17 +94,7 @@
 
 </div>
 
-<!-- 정렬 
-<select name="sort">
-	<option value="member_join desc">번호</option>
-</select>
--->
 
-</table>
-<!--  <div class="row mt-80">
-            <div class="col-md-6 offset-md-3 col-sm-4 offset-sm-4 mt-4">
-                 <div class="text-center">
-<h3>&laquo;&lt;  1 2 3 4 5 &gt;&raquo;</h3>-->
 </div>
 </div>
 </div>
