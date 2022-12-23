@@ -166,7 +166,6 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 				ChatUpdateVO vo = ChatUpdateVO.builder().memberId(user.getMemberId()).roomNo(receiveVO.getRoom()).build();		
 				// 상대방 아이디 찾기
 				String partnerId = chatDao.searchPartnerId(vo);
-				//System.out.println("파트너 아이디 :" + partnerId);
 							
 				//메세지를 전송과 동시에 이전 메세지를 다 읽음으로 update 				
 				ChatUpdateVO chatUpdateVO = ChatUpdateVO
@@ -176,7 +175,6 @@ public class ChatWebSocketServer extends TextWebSocketHandler{
 						.build();
 				chatDao.chatUpdate(chatUpdateVO);				
 				
-				//System.out.println("채팅Dto " + chatDto); 
 				//chatNo는 실시간 소켓에서는 없음 디비 들어갈때 생성 
 				// roomNo는 가져올수있을거같은데 ...-> 가져왔음 Dto에 들어온다
 				

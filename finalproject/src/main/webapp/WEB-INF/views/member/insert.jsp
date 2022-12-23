@@ -248,11 +248,7 @@
 		
 		//프로필 파일 저장 및 미리보기
 		$(".input-file").change(function(){
-			//console.log($(".input-file").val()); //선택된 파일 경로와 이름이 나옴
-			//console.log(this.files); //선택한 파일들(배열)이 나옴
-			//console.log(this.files[0].name); //선택한 파일의 첫번째 값의 이름
 			var value = $(this).val();
-// 			console.log(value.length);
 			if(value.length>0){ //파일 있음(비동기화로 파일 불러오기)
 				//서버에 전송할 formdate 만들기
 				var formData = new FormData();
@@ -266,7 +262,6 @@
 					processData:false, 
                     contentType:false,
                     success:function(resp){
-                    	//console.log(resp); //이미지 경로 반환
                     	$(".img-circle").attr("src",resp);
                     	var check = resp.lastIndexOf("/"); //경로에서 /위치 찾기
                     	var filesNo = resp.substr(check+1); //fileNo 꺼내기
@@ -317,7 +312,6 @@
 		//아이디 중복검사 여부
 		function idCheck(){
 			var check = $("#memberIdCheck").attr("value");
-			console.log("중복검사 = " + check);
 			if(check == "y"){
 				validChecker.memberIdCheckValid = true;
 				$("#memberIdCheck").removeClass("is-valid is-invalid able disable").addClass("is-valid").addClass("able");
@@ -342,8 +336,7 @@
                 	var regex = validChecker.memberIdRegex;
                 	$("#memberIdCheck").attr("value", "y");
                 	$("#memberIdCheck").removeClass("is-valid is-invalid able disable").addClass("is-valid")
-                	console.log("중복검사 후 = " + $("#memberIdCheck").attr("value"));
-//                 	console.log(memberId.length);
+
                     if(!memberId) return;
                     
                     if(regex.test(memberId) && memberId.length > 4){
@@ -427,7 +420,6 @@
 				data:{emailcertEmail:email},
 				success:function(resp){
 					//성공했다면 메일은 전송되었다고 볼 수 있다.
-					console.log("메일 전송 완료");
 					emailbtn.prop("disabled", false);
 					confirmbtn.prop("disabled", false);
 					
@@ -443,7 +435,6 @@
 								emailcertSerial:serial
 							},
 							success:function(resp){
-								console.log(resp);
 								if(resp){
 									$("[name=memberEmail]").attr("readonly", "readonly");
 									$("#confirm-input").attr("readonly", "readonly");
@@ -506,11 +497,7 @@
 // 	        $(this).find("[name]").blur();
 	        profileCheck();
 	        idCheck();
-			
-	        console.log("[name=memberPost]".value);
-	        console.log(validChecker);
-			console.log(validChecker.memberBirthValid);
-	      	console.log(validChecker.isAllValid());
+
 	        if(validChecker.isAllValid()){
 	        	this.submit();//전송
 	        }

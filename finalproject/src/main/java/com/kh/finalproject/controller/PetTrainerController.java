@@ -81,8 +81,6 @@ public class PetTrainerController {
 	public String requestList(Model model, HttpSession session ) {
 		String memberId = (String) session.getAttribute(SessionConstant.ID);	
 		int trainerNo = trainerDao.selectOneTrainerNo(memberId); // trainerNo를 찾아옴
-		
-		//System.out.println("트레이너 번호 : " + trainerNo);	
 				
 		List<TrainingRequestListVO> list = trainingDao.requestList(trainerNo);
 		model.addAttribute("requestList", list);		
@@ -113,7 +111,6 @@ public class PetTrainerController {
 		
 		String trainerId = (String) session.getAttribute(SessionConstant.ID);	
 		
-		
 		int trainerNo = trainerDao.selectOneTrainerNo(trainerId); // trainerNo를 찾아옴
 		//Dao에 training 테이블의 status 상태 수정update 
 		//Dao에 상태수정 날짜 sysdate 들어가게 
@@ -128,10 +125,7 @@ public class PetTrainerController {
 				.trainerNo(trainerNo)
 				.build();
 		
-		
 		List<TrainingDto> list = trainingDao.checkRequest(checkReuqestVO); //훈련날짜에 확정된 예약이 있는지 검색 	지금 여기가 문제 
-		System.out.println("예약날짜 개수: " + list.size());		
-		
 		
 		if(list.size() > 0) { //이거 꼭 확인하기 로그인 안돼서 테스트 못함
 			return "trainer/training_disable"; //예약승인 불가 - 승인 불가한 경우 코드 넣어야함
@@ -165,7 +159,6 @@ public class PetTrainerController {
 				.trainerId(trainerId)
 				.build();
 		String searchRoomNo = chatDao.searchRoomVO(vo);
-		System.out.println( " 룸 번호 " + searchRoomNo);
 		
 		//만약에 searchRoomNo가 null이 아니라면 방번호가 있는것
 		// -> 해당 방으로 메세지를 보내야함
@@ -174,17 +167,13 @@ public class PetTrainerController {
 			
 			String message ="[ " + dto.getTrainingDate() +" ]" + "예약이 확정되었습니다. 감사합니다";
 			
-			
 			ChatDto insertApproveMessage1 = ChatDto
 					.builder()
 					.roomNo(searchRoomNo)
 					.memberId(trainerId)
 					.chatMessage(message)
 					.build();
-					
-					
 			chatDao.insertMessage(insertApproveMessage1);
-			//System.out.println("인서트 메세지" + insertApproveMessage1);
 			
 		}
 		else {
@@ -211,8 +200,6 @@ public class PetTrainerController {
 					.memberName(trainerDto.getMemberName())
 					.memberStatus(trainerDto.getMemberStatus())
 					.build());
-			
-			System.out.println("새로방만들기 성공");
 			
 			String message = "[ " + dto.getTrainingDate() +" ]" + "예약이 확정되었습니다. 감사합니다";
 			
