@@ -24,13 +24,11 @@ public class Room {
 	//입장
 	public void enter(User user) {
 		users.add(user);
-		log.debug("-->방 입장 : {}", user);
 	}
 	
 	//퇴장
 	public void leave(User user) {
 		users.remove(user);
-		log.debug("--> 방 퇴장 : {}", user);
 	}
 	
 	//검색
