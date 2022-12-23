@@ -66,7 +66,7 @@
 	              				<c:forEach var="request" items="${requestList}">
 	                				<tr class="table-default">
 		                 				<th width="30%" class="align-middle">
-		                 					<img src="http://localhost:8888/download/${request.filesNo}" class="img-circle" width="100" height="100"><!-- 이미지에 번호들어가야함 -->
+		                 					<img src="${pageContext.request.contextPath}/download/${request.filesNo}" class="img-circle" width="100" height="100"><!-- 이미지에 번호들어가야함 -->
 		                 				</th>
 		                 				<th width="40%" class="align-middle">
 		                 					<p class="name-font">${request.petName }</p>

@@ -61,7 +61,6 @@ private File dir = new File(System.getProperty("user.home"),"/carepet");//각자
 		
 //		return "redirect:/download/"+filesNo;
 		
-//		return "http://localhost:8888/download/"+filesNo;
 		return ServletUriComponentsBuilder.fromCurrentContextPath()
 				.path("/download/").path(String.valueOf(filesNo))
 				.toUriString();

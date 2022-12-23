@@ -61,7 +61,7 @@
 <div class="container-fluid">
         <div class="row mt-80 mb-3">
             <div class="col-md-6 offset-md-3">
-                 <h4 class="text-center">트레이너 채팅목록<img src="/image/chat-box.png" class="icon"></h4>
+                 <h4 class="text-center">트레이너 채팅목록<img src="${pageContext.request.contextPath}/image/chat-box.png" class="icon"></h4>
             </div>
         </div>
 	
@@ -135,7 +135,7 @@
 			                 					<img src="${pageContext.request.contextPath}/download/${chatList.filesNo}" class="img-circle" width="100" height="100"> 
 			                 				</th>
 			                 				<th width="40%" class="align-middle">	                 					
-			                 					<p class="name-font titleName">${chatList.memberName} 회원 <img class ="newMessage"  src="/image/circle.png"  style="width: 10px;height: 10px;margin-bottom: 8px;"></p>
+			                 					<p class="name-font titleName">${chatList.memberName} 회원 <img class ="newMessage"  src="${pageContext.request.contextPath}/image/circle.png"  style="width: 10px;height: 10px;margin-bottom: 8px;"></p>
 			                 					<p class="gender-font mess">${chatList.chatMessage}</p>
 			                 					<p class="gender-font">${chatList.chatCreateAt}</p>
 			                 					<!-- <p class="gender-font" >new : ${chatList.chatMessageStatus}</p><!-- 마지막 채팅이 안읽은 상태면 null -->

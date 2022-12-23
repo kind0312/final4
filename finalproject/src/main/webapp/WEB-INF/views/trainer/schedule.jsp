@@ -100,9 +100,7 @@
 	          right: 'next'
 	        },
 	        navLinkDayClick: function (date, jsEvent) {
-	           // console.log(date.toString()); //Sat Dec 03 2022 00:00:00 GMT+0900 (한국 표준시) 형태로 출력됨
 	           var careDate = moment(date).format('YYYY-MM-DD');
-	            //console.log(careDate); //2022-12-03 형식으로 변경
 	            $(".careDate").text(careDate);
 	            
 	            var trainingDate = $(".careDate").text();
@@ -116,7 +114,6 @@
 		    		  method:"get",
 		    		  date:data,
 		    		  success:function(resp){
-		    			 console.log(resp);
 		    			 var tbody = $(".ajax-content");
 		 	        	$(".ajax-content").empty();
 		    			 if(resp.length>0){
@@ -157,7 +154,6 @@
 	        		method:"get",
 	        		data:trainerNo,
 	        		success:function(resp){
-	        			console.log(resp);
 	        			if(resp.length!=0){
 	        				for(var i=0; i<resp.length; i++){
 	        					if(resp[i].trainingStatus=='예약확정'){

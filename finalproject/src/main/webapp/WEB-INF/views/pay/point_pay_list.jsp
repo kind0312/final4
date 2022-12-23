@@ -34,11 +34,10 @@ $(function(){
 		//3. n을 반환할 경우 훈련사 전환이 불가능한 회원입니다. 라는 문구 모달로 출력
 		var memberId = $("[name=memberId]").val();
 		$.ajax({
-			url:"http://localhost:8888/rest/member/trainer_change/"+memberId,
+			url:"${pageContext.request.contextPath}/rest/member/trainer_change/"+memberId,
 			method:"get",
 			data:memberId,
 			success:function(resp){
-				console.log(resp);
 				if(resp=='N'){
 					$("#change-modal").modal('show');
 				}else if(resp=='Y'){
@@ -66,13 +65,6 @@ $(function(){
 		var plusDate = new Date(calcul); //구매날짜 +7일
 		
 		//구매날짜+5일보다 현재날짜가 더 크면 취소 불가
-		console.log("구매날짜+5일 : "+plusDate.getTime());
-		console.log("현재날짜 : "+now.getTime());
-		console.log(plusDate.getTime()<now.getTime());
-		console.log("현재포인트 : "+myPoint);
-		console.log("구매금액 : "+purchasePrice);
-		console.log(myPoint<purchasePrice);
-
 		$(".cancel-confirm-btn").click(function(e){
 			// 결제일로부터 날짜가 5일 지난 경우 버튼 이벤트 막기
 			if(plusDate.getTime()<now.getTime()){
