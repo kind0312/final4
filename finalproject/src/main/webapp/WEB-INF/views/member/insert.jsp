@@ -255,7 +255,7 @@
 				formData.append("files", this.files[0]);
                 
 				$.ajax({
-					url:"http://localhost:8888/upload",
+					url:"${pageContext.request.contextPath}/upload",
 					method:"post",
 					data:formData,
 					//multipart 요청을 위해 아래 2가지 꼭 보내줘야함
@@ -341,10 +341,9 @@
                     
                     if(regex.test(memberId) && memberId.length > 4){
 	                    $.ajax({
-	                        url:"http:${pageContext.request.contextPath}/rest/member/"+memberId,
+	                        url:"${pageContext.request.contextPath}/rest/member/"+memberId,
 	                        method:"get",
 	                        success:function(resp){
-	                            //$("input[name=memberId]").next("span").text(resp);
 	                            if(resp == "possible"){
 	                                $(".idResult").removeClass("possible impossible").addClass("possible").text("사용할 수 있는 아이디입니다");
 	                                validChecker.memberIdValid = true;
@@ -471,7 +470,6 @@
             format:"YYYY-MM-DD",
 
             //(+옵션) 미래/과거를 선택하지 못하도록 설정(minDate, maxDate)
-            // minDate:"",//과거를 선택 못하게 할때 설정
             maxDate:moment(),//미래를 선택 못하게 할때 설정, moment에 아무것도 안적으면 sysdate 느낌이다.
 
             //(+옵션) 표시되는 달의 개수를 지정
@@ -493,8 +491,6 @@
 		$(".join-form").submit(function(e){
 	        e.preventDefault();
 	
-// 	        $(this).find("input, textarea, select").blur();//모든 입력창
-// 	        $(this).find("[name]").blur();
 	        profileCheck();
 	        idCheck();
 
