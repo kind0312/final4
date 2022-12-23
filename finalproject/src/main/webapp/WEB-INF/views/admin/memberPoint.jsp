@@ -151,10 +151,10 @@
 				    <li class="page-item first-target">
 						<c:choose>
 							<c:when test = "${vo.isFirst()==false}"> <%-- 맨 처음 페이지가 아니라면 --%>
-								<a class="page-link" href = "memberPoint?p=${vo.firstBlock()}&${vo.parameter()}&memberId=${member.memberId}">&laquo;</a> <%-- 첫 번째 페이지로 이동 --%>
+								<a class="page-link" href = "${pageContext.request.contextPath}/admin/memberPoint?p=${vo.firstBlock()}&${vo.parameter()}&memberId=${member.memberId}">&laquo;</a> <%-- 첫 번째 페이지로 이동 --%>
 							</c:when>
 							<c:otherwise> <%-- 그렇지 않다면 --%>
-								<a class="page-link" href = "memberPoint?memberId=${member.memberId}">&laquo;</a> <%-- 아무런 페이지 변화가 없도록 --%>
+								<a class="page-link" href = "${pageContext.request.contextPath}/admin/memberPoint?memberId=${member.memberId}">&laquo;</a> <%-- 아무런 페이지 변화가 없도록 --%>
 							</c:otherwise>
 						</c:choose>
 				    </li>
@@ -163,10 +163,10 @@
 					    <%-- 이전 구간의 마지막 페이지로 이동 --%>
 						<c:choose>
 							<c:when test = "${vo.hasPrev()}"> <%-- 이전 페이지가 있다면 --%>
-								<a class="page-link" href = "memberPoint?p=${vo.prevBlock()}&${vo.parameter()}&memberId=${member.memberId}">&lt;</a> <%-- 이전 구간의 마지막 페이지로 이동 --%>
+								<a class="page-link" href = "${pageContext.request.contextPath}/admin/memberPoint?p=${vo.prevBlock()}&${vo.parameter()}&memberId=${member.memberId}">&lt;</a> <%-- 이전 구간의 마지막 페이지로 이동 --%>
 							</c:when>
 							<c:otherwise> <%-- 그렇지 않다면 --%>
-								<a class="page-link" href = "memberPoint?memberId=${member.memberId}">&lt;</a> <%-- 아무런 페이지 변화가 없도록 --%>
+								<a class="page-link" href = "${pageContext.request.contextPath}/admin/memberPoint?memberId=${member.memberId}">&lt;</a> <%-- 아무런 페이지 변화가 없도록 --%>
 							</c:otherwise>
 						</c:choose>
 				    </li>
@@ -175,7 +175,7 @@
 					<%-- 변수명을 i로 하며 시작과 끝은 vo의 startBlock(), endBlock()의 반환값으로, 간격은 1로 한다  --%>
 					<c:forEach var = "i" begin = "${vo.startBlock()}" end = "${vo.endBlock()}" step = "1">
 						<li class="page-item blue-box">
-							<a class="page-link" href = "memberPoint?p=${i}&${vo.parameter()}&memberId=${member.memberId}">${i}</a>
+							<a class="page-link" href = "${pageContext.request.contextPath}/admin/memberPoint?p=${i}&${vo.parameter()}&memberId=${member.memberId}">${i}</a>
 						</li>
 					</c:forEach>
 					
@@ -183,10 +183,10 @@
 					<li class="page-item last-target">
 						<c:choose>
 							<c:when test = "${vo.hasNext()}"> <%-- 다음 페이지가 있다면 --%>
-								<a class="page-link"  href = "memberPoint?p=${vo.nextBlock()}&${vo.parameter()}&memberId=${member.memberId}">&gt;</a> <%-- 다음 구간의 첫 번째 페이지로 이동 --%>
+								<a class="page-link"  href = "${pageContext.request.contextPath}/admin/memberPoint?p=${vo.nextBlock()}&${vo.parameter()}&memberId=${member.memberId}">&gt;</a> <%-- 다음 구간의 첫 번째 페이지로 이동 --%>
 							</c:when>
 							<c:otherwise> <%-- 그렇지 않다면 --%>
-								<a class="page-link"  href = "memberPoint?memberId=${member.memberId}">&gt;</a> <%-- 아무런 페이지 변화가 없도록 --%>
+								<a class="page-link"  href = "${pageContext.request.contextPath}/admin/memberPoint?memberId=${member.memberId}">&gt;</a> <%-- 아무런 페이지 변화가 없도록 --%>
 							</c:otherwise>
 						</c:choose>
 					</li>
@@ -195,10 +195,10 @@
 				    <li class="page-item final-target">
 						<c:choose>
 							<c:when test = "${vo.isLast()==false}"> <%-- 맨 마지막 페이지가 아니라면 --%>
-								<a class="page-link" href = "memberPoint?p=${vo.lastBlock()}&${vo.parameter()}&memberId=${member.memberId}">&raquo;</a> <%-- 맨 마지막 페이지로 이동 --%>
+								<a class="page-link" href = "${pageContext.request.contextPath}/admin/memberPoint?p=${vo.lastBlock()}&${vo.parameter()}&memberId=${member.memberId}">&raquo;</a> <%-- 맨 마지막 페이지로 이동 --%>
 							</c:when>
 							<c:otherwise>
-								<a class="page-link" href = "memberPoint?memberId=${member.memberId}">&raquo;</a>
+								<a class="page-link" href = "${pageContext.request.contextPath}/admin/memberPoint?memberId=${member.memberId}">&raquo;</a>
 							</c:otherwise>
 						</c:choose>
 				    </li>
