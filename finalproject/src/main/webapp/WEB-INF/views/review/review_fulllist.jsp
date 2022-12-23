@@ -69,6 +69,7 @@
 				</div>
 			</div>
 		</div>
+		<!-- 페이지네이션으로 할 경우 -->
 <!-- 		<div class="row mt-100"> -->
 <!--             <div class="col-md-10 offset-md-1 d-flex justify-content-center"> -->
 <!-- 			  <ul class="pagination"> -->
@@ -161,7 +162,7 @@
 	
 	//             퍼센트 = (현재스크롤위치) / (문서높이 - 창높이) * 100
 	//             var percent = $(window).scrollTop() / ($(document).height() - $(window).height()) * 100;
-	            
+
 				if($(document).height() <= $(window).scrollTop() + $(window).height() + 100){
 		            if(page > (count + size - 1) / size) return;
 					fulllist();

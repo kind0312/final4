@@ -108,7 +108,6 @@ $(function(){
 	
 	//형식 검사를 위한 객체 생성
 	var validChecker = {
-			
 			reviewTitleValid : false,
 			reviewContentValid : false,
 			isAllValid : function(){
