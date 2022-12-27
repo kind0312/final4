@@ -112,7 +112,7 @@
 <td>${applyDto.applyStatus}</td>
 <td>
 		<a class="btn btn-blue2"
-		href="${pageContext.request.contextPath}/applyDetail?applyNo=${applyDto.applyNo}">상세</a>
+		href="${pageContext.request.contextPath}/admin/applyDetail?applyNo=${applyDto.applyNo}">상세</a>
 </td>
 </tr>
 </c:forEach>
