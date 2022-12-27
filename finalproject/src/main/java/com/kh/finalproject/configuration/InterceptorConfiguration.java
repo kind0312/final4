@@ -37,7 +37,11 @@ public class InterceptorConfiguration implements WebMvcConfigurer{
 				"/trainer/trainer_detail",// 디테일 조회 가능
 				"/member/insert", // 가입 가능
 				"/member/login", // 로그인 가능
-				"/member/find_id" // 아이디 찾기 가능
+				"/member/find_memberid", // 아이디 찾기 가능
+				"/member/find_memberid_success", // 아이디 찾기 성공
+				"/member/find_memberpw", // 비밀번호 찾기 가능
+				"/member/change_memberpw", // 비밀번호 변경
+				"/member/change_memberpw_success" //비밀번호 변경 성공
 				);
 		
 		registry.addInterceptor(adminInterceptor)
