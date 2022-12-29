@@ -22,7 +22,7 @@ public class UserInterceptor implements HandlerInterceptor{
 		String loginId = (String) session.getAttribute(SessionConstant.ID);
 		if (loginId == null) {
 			// 비로그인시 로그인 페이지로 보냄
-			response.sendRedirect("/need_login");
+			response.sendRedirect(request.getContextPath()+"/need_login");
 			return false;
 		} else {
 			return true;
