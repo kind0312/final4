@@ -336,11 +336,11 @@
 	          <div class="container-fluid">
 	
 	            <!-- Brand : 로고 이미지와 대표 상호를 적는 공간 -->
-	            <a class="navbar-brand" href="#">
+	            <a class="navbar-brand" href="${pageContext.request.contextPath}/adminHome">
 	            <span class="visually-hidden">(current)</span>
 	            	<img class="logo" src="${pageContext.request.contextPath}/image/logo.png">
 	            </a>
-	            <a class="navbar-brand" href="#">
+	            <a class="navbar-brand" href="${pageContext.request.contextPath}/adminHome"">
 	            <span class="visually-hidden">(current)</span>
 	            	관리자
 	            </a>
