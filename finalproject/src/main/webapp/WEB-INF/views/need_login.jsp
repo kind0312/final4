@@ -65,7 +65,7 @@
             </div>
             
             <div class="row center">
-               <img src="${pageContext.request.contextPath}/image/Logo.png" style="height: 404px; width: 400px; margin-left: 85px; margin-top: -50px;">
+               <img src="${pageContext.request.contextPath}/image/logo.png" style="height: 404px; width: 400px; margin-left: 85px; margin-top: -50px;">
             </div>
 
             <div class="row row-2 center">

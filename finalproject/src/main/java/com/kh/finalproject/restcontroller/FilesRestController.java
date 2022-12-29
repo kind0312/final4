@@ -34,8 +34,8 @@ public class FilesRestController {
 	private FilesDao filesDao;
 	
 	// 기준 경로
-	private File dir = new File(System.getProperty("user.home"),"/carepet");//각자 집에서 C드라이브용
-	//private File dir = new File("D:/upload/kh10i/carepet");//배포시 D드라이브용
+//	private File dir = new File(System.getProperty("user.home"),"/carepet");//각자 집에서 C드라이브용
+	private File dir = new File("D:/upload/kh10i/carepet");//배포시 D드라이브용
 	
 	//이미지 저장소 폴더 생성
 	@PostConstruct
