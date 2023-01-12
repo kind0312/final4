@@ -85,6 +85,33 @@
 			$(".plus-price").text(0);
 		}
 		
+		//예약취소 버튼이벤트(예약날짜 하루 전부터 취소 막기)
+		//예) 1월 17일 예약일 경우 1월 16일 9시부터 예약취소 불가
+		$(".cancel-btn").click(function(e){
+			e.preventDefault();
+			var trainingNo = $("[name=trainingNo]").val();
+			var now = new Date(); //현재날짜
+			var date = $("[name=trainingDate]").val(); //예약날짜
+			var reservation = new Date(date); //예약날짜
+			var calcul = reservation.getTime()-(1000 * 60 * 60 * 24 );
+			var minusDate = new Date(calcul); //구매날짜 -1일
+			
+			//구매날짜-1부터 취소불가
+			if(minusDate.getTime()<now.getTime()){
+				e.preventDefault();
+				alert('훈련 하루 전부터 예약 취소가 불가능합니다!');
+			}else{
+				location.href=
+					"${pageContext.request.contextPath}/mypage/training_cancel?trainingNo="+trainingNo;
+			}
+			
+		});
+		
+		
+		
+		
+		
+		
 
 	});
 </script>
@@ -237,7 +264,7 @@
 						  				<c:otherwise>
 						  					<tr class="table-default" height="50px">
 								  				<td colspan="2">
-								  					<a class="cancel-font pb-sm-2" 
+								  					<a class="cancel-font pb-sm-2 cancel-btn" 
 								  						href="${pageContext.request.contextPath}/mypage/training_cancel?trainingNo=${training[0].trainingNo}">예약 취소
 								  					</a>
 								  				</td>
@@ -351,6 +378,8 @@
 	<input type="hidden" name="petName" value="${training[0].trainingDetailPetName}">
 	<input type="hidden" name="cnt" value="${training.size()}">
 	<input type="hidden" name="memberId" value="${training[0].memberId}">
+	<input type="hidden" name="trainingDate" value="${training[0].trainingDate}">
+	<input type="hidden" name="trainingNo" value="${training[0].trainingNo}">
 </body>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

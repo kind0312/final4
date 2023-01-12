@@ -57,22 +57,36 @@
 		$(".minus-price").text(comma(minusPrice.text()));
 		$(".total-price").text(comma(totalPrice.text()));
 
-		
 		//완료 버튼 이벤트(해당 훈련서비스 상태를 이용완료로 변경처리)
-		$(".change-btn").click(function(){
+		$(".change-btn").click(function(e){
+			e.preventDefault();
 			var trainingNo = $("[name=trainingNo]").val();
-			$.ajax({
-				url:"${pageContext.request.contextPath}/rest/training_status/"+trainingNo,
-				method:"patch",
-				data:trainingNo,
-				success:function(resp){
-					if(resp){
-						$(".status").text('이용완료');
-						$(".modal-start-btn").hide(); //완료 버튼 숨김
+			
+			var now = new Date(); //현재날짜
+			var date = $(".trainingDate").text(); //예약날짜
+			var reservation = new Date(date); //예약날짜
+			
+			//예약일 전에는 이용완료 불가처리
+			if(reservation.getTime()>now.getTime()){
+				e.preventDefault();
+				alert('예약일 이후 변경이 가능합니다!');
+				$("#change-training").modal("hide");
+			}else{
+				$.ajax({
+					url:"${pageContext.request.contextPath}/rest/training_status/"+trainingNo,
+					method:"patch",
+					data:trainingNo,
+					success:function(resp){
+						if(resp){
+							$(".status").text('이용완료');
+							$(".modal-start-btn").hide(); //완료 버튼 숨김
+							$("#change-training").modal("hide");
+						}
 					}
-				}
-			});			
+				});
+			}			
 		});
+		
 		
 		//1000단위 콤마찍기
 		function comma(price){
@@ -222,7 +236,7 @@
 						</tr>	
 						<tr class="table-default align-middle underline-out">
 							<th>돌봄날짜</th>
-							<td>${detail[0].trainingDate}</td>
+							<td class="trainingDate">${detail[0].trainingDate}</td>
 						</tr>
 						<tr class="table-default align-middle underline-out">
 							<th>방문시간</th>
@@ -304,7 +318,7 @@
 		        훈련 상태를 이용완료로 변경하시겠습니까?
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-blue change-btn" data-bs-dismiss="modal">확인</button>
+		        <button type="button" class="btn btn-blue change-btn">확인</button>
 		      	<button type="button" class="btn btn-yellow" data-bs-dismiss="modal">취소</button>
 		      </div>
 		    </div>
