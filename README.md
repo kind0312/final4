@@ -1,17 +1,23 @@
-# TeamDang
+# CarePet
 
-<img src="dang/src/main/resources/static/images/logo.png" width="40%"/>
+<img src="dang/src/main/resources/static/image/logo.png" width="40%"/>
 
-:information_desk_person: TeamDang 소개
+:information_desk_person: CarePet 소개
 ------------------------------
 #### :bulb: 개발 목적   
-* 반려인들의 친목 댕모임 개설, 정기 모임장소 맞춤 콘텐츠 추천
+* 집으로 찾아가는 훈련사 서비스
 
-#### :moneybag: 시장 조사 
-  - 출처 : 
+#### :moneybag: 선정 배경
+  - 출처 : 1인 가구와 핵가족 증가 등 가족 형태가 변화하면서 반려동물을 키우는 인구가 늘고 있습니다.
+           이 같은 반려동물 증가는 의료·금융·미용·숙박 등 다양한 분야로 확장됐습니다.
+          ‘펫코노미(반려동물 산업)’라는 신조어가 이를 설명해줍니다.
+          
+          
+
+
 
 #### :calendar: 개발 일정   
-* 기간 : 12/31 ~ 2/1 (약 34일)
+* 기간 : 2022년 12월 02일 ~ 2022년 12월 23일 (3주)
 
 #### :computer: 개발 환경   
 * Windows 10, 11
@@ -21,16 +27,7 @@
 
 :clap: Contributor
 ---------------
-#### 엄현용 https://github.com/Luverduck
-* 
 
-#### 유지원 https://github.com/JENN-YOO
-*   
-
-#### 이승정 https://github.com/Lee-seungjung
-* 
-
-#### 이현재 https://github.com/hyunganom
-* 
+ 
 
  
