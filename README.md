@@ -25,14 +25,14 @@
 * HTML5 / CSS3 / JavaScript ES5 / jQuery 3 / Bootstrap 5
 * STS 4.15.3 / VS Code 1.68
 
-:clap: Use Case Diagram 및 ERD / DB Table
+### :clap: Use Case Diagram 및 ERD / DB Table
 ---------------
 :speech_balloon: ERD
 ![image06](https://user-images.githubusercontent.com/99001224/215043252-64f46470-5f8f-4713-b5c7-5bd3279f8333.png)
-:speech_balloon:  Use Case Diagram
-![KakaoTalk_20221222_174315130](https://user-images.githubusercontent.com/99001224/215043045-d0651865-7515-4104-b175-99f60cb1202f.jpg)
-![KakaoTalk_20221222_174315130_01](https://user-images.githubusercontent.com/99001224/215043056-fe73294f-c640-403f-a483-bdf5d08db7fc.jpg)
-![KakaoTalk_20221222_174315130_02](https://user-images.githubusercontent.com/99001224/215043082-5a7aa67c-92b6-4930-80b6-258dc1b08778.jpg)
+
+
+
+### :speech_balloon:  Use Case Diagram
 <img width="836" alt="유즈케이스1" src="https://user-images.githubusercontent.com/99001224/215043175-51c0f6a0-e484-495a-b598-85da89463c93.png">
 <img width="413" alt="관리자 유즈케이스" src="https://user-images.githubusercontent.com/99001224/215043103-9f7c9596-7135-4cb1-966f-39641f12f31a.png">
 <img width="487" alt="마이페이지 외 유즈케이스" src="https://user-images.githubusercontent.com/99001224/215043112-c68afaeb-bd53-4809-972b-bc65d45dcb98.png">
