@@ -38,7 +38,6 @@
 <img width="487" alt="마이페이지 외 유즈케이스" src="https://user-images.githubusercontent.com/99001224/215043112-c68afaeb-bd53-4809-972b-bc65d45dcb98.png">
 
 ### :zap: Test
-![test4](https://user-images.githubusercontent.com/99001224/215048596-85a70a1e-1f03-4bba-a8f3-8ef00d473dd8.PNG)
 
 ![test1](https://user-images.githubusercontent.com/99001224/215048026-747f0b63-8630-451b-9d53-7b43db9fa081.PNG)
 ![test2](https://user-images.githubusercontent.com/99001224/215048035-bac45fcc-7abd-45c5-b20e-2d7ebee25050.PNG)
