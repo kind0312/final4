@@ -1,6 +1,6 @@
 # CarePet
 
-<img src="dang/src/main/resources/static/image/logo.png" width="40%"/>
+<img src="finalproject/src/main/resources/static/image/logo.png" width="40%"/>
 
 :information_desk_person: CarePet 소개
 ------------------------------
