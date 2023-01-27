@@ -13,6 +13,7 @@
           ‘펫코노미(반려동물 산업)’라는 신조어가 이를 설명해줍니다.
           
           
+![202651_42141_3418](https://user-images.githubusercontent.com/99001224/215028531-cc50aaf6-bd66-4d3a-bec1-9fd474005774.jpg)
 
 
 
