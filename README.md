@@ -25,7 +25,7 @@
 * HTML5 / CSS3 / JavaScript ES5 / jQuery 3 / Bootstrap 5
 * STS 4.15.3 / VS Code 1.68
 
-:clap: Contributor
+:clap: Use Case Diagram 및 ERD / DB Table
 ---------------
 
  
